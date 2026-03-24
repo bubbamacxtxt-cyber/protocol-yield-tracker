@@ -97,7 +97,7 @@ tr:hover td { background: #161b22; }
             <label>Min $:</label>
             <input type="number" id="filterMin" placeholder="50000" value="50000" style="width:100px">
         </div>
-        <button class="download-btn" onclick="downloadCSV()">📥 Download CSV</button>
+        <button class="download-btn" onclick="downloadXLSX()">📥 Download XLSX</button>
     </div>
 
     <div class="table-wrap">
@@ -124,6 +124,7 @@ tr:hover td { background: #161b22; }
     <div class="footer" id="footer"></div>
 </div>
 
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <script>
 let DATA = null;
 let CSV_DATA = '';
@@ -144,9 +145,10 @@ function buildWhaleTabs() {
     const tabs = document.getElementById('whaleTabs');
     const whales = Object.keys(DATA.whales);
     whales.forEach((name, i) => {
+        const w = DATA.whales[name];
         const tab = document.createElement('div');
         tab.className = 'whale-tab' + (i === 0 ? ' active' : '');
-        tab.textContent = `${name} (${DATA.whales[name].wallets.length} wallets)`;
+        tab.textContent = `${name} (${w.active_wallets || w.wallets.length}/${w.total_wallets || w.wallets.length} active)`;
         tab.onclick = () => {
             document.querySelectorAll('.whale-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
@@ -179,12 +181,16 @@ function render() {
     const avgHF = filtered.filter(p => p.health_rate).reduce((s, p) => s + p.health_rate, 0) / filtered.filter(p => p.health_rate).length || 0;
     const chains = [...new Set(filtered.map(p => p.chain))];
     const protos = [...new Set(filtered.map(p => p.protocol_name))];
+    const whaleData = DATA.whales[whale] || {};
+    const totalWallets = whaleData.total_wallets || '?';
+    const activeWallets = whaleData.active_wallets || filtered.length;
 
     document.getElementById('summaryCards').innerHTML = `
         <div class="card"><div class="card-label">Net Value</div><div class="card-value green">$${fmt(totalNet)}</div></div>
         <div class="card"><div class="card-label">Total Assets</div><div class="card-value blue">$${fmt(totalAssets)}</div></div>
         <div class="card"><div class="card-label">Total Debt</div><div class="card-value red">$${fmt(totalDebt)}</div></div>
         <div class="card"><div class="card-label">Avg Health</div><div class="card-value ${avgHF < 1.05 ? 'red' : avgHF < 1.15 ? '' : 'green'}">${avgHF.toFixed(2)}</div></div>
+        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${activeWallets}/${totalWallets}</div><div class="card-sub">${activeWallets} active · ${totalWallets - activeWallets} below threshold</div></div>
         <div class="card"><div class="card-label">Positions</div><div class="card-value">${filtered.length}</div><div class="card-sub">${chains.length} chains · ${protos.length} protocols</div></div>
     `;
 
@@ -263,30 +269,48 @@ function fmt(n) {
     return n.toLocaleString(undefined, {maximumFractionDigits: 0});
 }
 
-function downloadCSV() {
+function downloadXLSX() {
     const whale = getActiveWhale();
     const positions = DATA.whales[whale]?.positions || [];
     const filtered = applyFilters(positions);
 
-    const header = 'Wallet,Chain,Protocol,Type,Strategy,Health Rate,Net USD,Asset USD,Debt USD,Supply Tokens,Borrow Tokens';
-    const rows = filtered.map(p => {
-        const supply = p.supply.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ');
-        const borrow = p.borrow.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ');
-        return [
-            p.wallet, p.chain, p.protocol_name, p.position_type, p.strategy,
-            p.health_rate || '', p.net_usd, p.asset_usd, p.debt_usd,
-            `"${supply}"`, `"${borrow}"`
-        ].join(',');
-    });
+    const rows = filtered.map(p => ({
+        'Wallet': p.wallet,
+        'Chain': p.chain,
+        'Protocol': p.protocol_name,
+        'Type': p.position_type,
+        'Strategy': p.strategy,
+        'Health Rate': p.health_rate || '',
+        'Net USD': p.net_usd,
+        'Asset USD': p.asset_usd,
+        'Debt USD': p.debt_usd,
+        'Supply Tokens': p.supply.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + '),
+        'Borrow Tokens': p.borrow.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ')
+    }));
 
-    const csv = [header, ...rows].join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${whale.toLowerCase()}-positions.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const ws = XLSX.utils.json_to_sheet(rows);
+
+    // Format currency columns
+    const currencyCols = ['G', 'H', 'I']; // Net, Asset, Debt
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for (let r = range.s.r + 1; r <= range.e.r; r++) {
+        for (const col of currencyCols) {
+            const cell = ws[col + (r + 1)];
+            if (cell && typeof cell.v === 'number') {
+                cell.z = '#,##0';
+            }
+        }
+    }
+
+    // Auto-width columns
+    ws['!cols'] = [
+        {wch: 44}, {wch: 8}, {wch: 15}, {wch: 10}, {wch: 8}, {wch: 10},
+        {wch: 15}, {wch: 15}, {wch: 15}, {wch: 50}, {wch: 50}
+    ];
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, whale);
+    XLSX.writeFile(wb, `${whale.toLowerCase()}-positions.xlsx`);
 }
 
 // Event listeners for filters

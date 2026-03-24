@@ -45,6 +45,8 @@ function main() {
 
     // Load wallets
     const wallets = db.prepare('SELECT DISTINCT wallet FROM positions').all().map(r => r.wallet);
+    const totalWallets = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'wallets.json'), 'utf8')).length;
+    const activeWallets = wallets.length;
 
     // Load token registry
     const tokenRegistry = db.prepare('SELECT * FROM token_registry').all();
@@ -54,6 +56,8 @@ function main() {
         'Avant': {
             name: 'Avant',
             wallets: wallets,
+            total_wallets: totalWallets,
+            active_wallets: activeWallets,
             positions: positions
         }
     };
