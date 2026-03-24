@@ -42,6 +42,33 @@ function classifyStrategy(item, supplyUsd, borrowUsd) {
     return type.toLowerCase().replace(/ /g, '_') || 'unknown';
 }
 
+// CoinGecko chain mapping
+const COINGECKO_CHAINS = {
+    eth: 'ethereum', arb: 'arbitrum-one', base: 'base', matic: 'polygon-pos',
+    bsc: 'binance-smart-chain', avax: 'avalanche', op: 'optimistic-ethereum',
+    mnt: 'mantle', plasma: 'plasma', ink: 'ink', xdai: 'xdai', mobm: 'moonbeam'
+};
+
+// Resolve token address to real symbol via CoinGecko (fallback for DeBank mislabels)
+async function resolveToken(chain, address) {
+    const cgChain = COINGECKO_CHAINS[chain];
+    if (!cgChain || !address || address.length < 10) return null;
+    try {
+        const res = await fetch(
+            `https://api.coingecko.com/api/v3/coins/${cgChain}/contract/${address.toLowerCase()}`,
+            { headers: { 'Accept': 'application/json' } }
+        );
+        if (!res.ok) return null;
+        const data = await res.json();
+        return {
+            cg_id: data.id,
+            real_symbol: data.symbol?.toUpperCase(),
+            real_name: data.name,
+            price_usd: data.market_data?.current_price?.usd
+        };
+    } catch { return null; }
+}
+
 function detectYieldSource(tokens) {
     const sources = new Set();
     for (const t of tokens) {
