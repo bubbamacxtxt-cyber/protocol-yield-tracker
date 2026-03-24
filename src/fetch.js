@@ -1,15 +1,25 @@
 #!/usr/bin/env node
 /**
- * Protocol Yield Tracker — DeBank Cloud Fetcher v2
- * Full position data: amounts, prices, health rate, strategy classification
+ * Protocol Yield Tracker — DeBank Cloud Fetcher v3
+ * Optimized: chain caching, balance pre-filter, CoinGecko token resolution
  */
 
 const fs = require('fs');
 const path = require('path');
+const Database = require('better-sqlite3');
 
 const DEBANK_API = 'https://pro-openapi.debank.com';
 const DEBANK_KEY = process.env.DEBANK_API_KEY;
 const MIN_NET_USD = 50000;
+
+// CoinGecko chain mapping
+const CG_CHAINS = {
+    eth: 'ethereum', arb: 'arbitrum-one', base: 'base', matic: 'polygon-pos',
+    bsc: 'binance-smart-chain', avax: 'avalanche', op: 'optimistic-ethereum',
+    mnt: 'mantle', plasma: 'plasma', ink: 'ink', xdai: 'xdai',
+    mobm: 'moonbeam', scrl: 'scroll', bera: 'berachain', flr: 'flare',
+    blast: 'blast', hyper: 'hyperevm', monad: 'monad'
+};
 
 function loadWallets() {
     const file = path.join(__dirname, '..', 'data', 'wallets.json');
@@ -25,34 +35,117 @@ async function api(endpoint) {
     return res.json();
 }
 
-function classifyStrategy(item, supplyUsd, borrowUsd) {
-    const type = item.name || '';
-    if (type === 'Lending') {
-        if (supplyUsd > 0 && borrowUsd > 0) {
-            const util = borrowUsd / supplyUsd;
-            return util > 0.7 ? 'loop' : 'borrow';
-        }
-        return 'lend';
-    }
-    if (type === 'Farming' || type === 'Leveraged Farming') return 'farm';
-    if (type === 'Staked' || type === 'Locked') return 'stake';
-    if (type === 'Liquidity Pool') return 'lp';
-    if (type === 'Yield' || type === 'Deposit') return 'yield';
-    if (type === 'Vesting') return 'vesting';
-    return type.toLowerCase().replace(/ /g, '_') || 'unknown';
+// --- Database ---
+function initDB(dbPath) {
+    const db = new Database(dbPath);
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS wallet_chains (
+            address TEXT NOT NULL,
+            chain TEXT NOT NULL,
+            discovered_at TEXT DEFAULT (datetime('now')),
+            refreshed_at TEXT DEFAULT (datetime('now')),
+            PRIMARY KEY (address, chain)
+        );
+        CREATE TABLE IF NOT EXISTS positions (
+            id INTEGER PRIMARY KEY,
+            wallet TEXT NOT NULL,
+            chain TEXT NOT NULL,
+            protocol_id TEXT NOT NULL,
+            protocol_name TEXT,
+            position_type TEXT,
+            strategy TEXT,
+            yield_source TEXT,
+            health_rate REAL,
+            net_usd REAL,
+            asset_usd REAL,
+            debt_usd REAL,
+            position_index TEXT,
+            debank_updated_at TEXT,
+            scanned_at TEXT DEFAULT (datetime('now')),
+            UNIQUE(wallet, chain, protocol_id, position_index)
+        );
+        CREATE TABLE IF NOT EXISTS position_tokens (
+            id INTEGER PRIMARY KEY,
+            position_id INTEGER REFERENCES positions(id),
+            role TEXT NOT NULL, -- supply, borrow, reward
+            symbol TEXT,
+            real_symbol TEXT, -- from CoinGecko (fixes DeBank mislabels)
+            real_name TEXT, -- from CoinGecko
+            cg_id TEXT, -- CoinGecko ID
+            address TEXT,
+            amount REAL,
+            price_usd REAL,
+            value_usd REAL
+        );
+        CREATE TABLE IF NOT EXISTS token_registry (
+            address TEXT PRIMARY KEY,
+            chain TEXT NOT NULL,
+            symbol TEXT,
+            real_symbol TEXT,
+            real_name TEXT,
+            cg_id TEXT,
+            cg_price_usd REAL,
+            last_checked TEXT DEFAULT (datetime('now'))
+        );
+    `);
+    return db;
 }
 
-// CoinGecko chain mapping
-const COINGECKO_CHAINS = {
-    eth: 'ethereum', arb: 'arbitrum-one', base: 'base', matic: 'polygon-pos',
-    bsc: 'binance-smart-chain', avax: 'avalanche', op: 'optimistic-ethereum',
-    mnt: 'mantle', plasma: 'plasma', ink: 'ink', xdai: 'xdai', mobm: 'moonbeam'
-};
+// --- Chain Caching ---
+async function getWalletChains(db, wallet, forceRefresh = false) {
+    // Check cache first
+    if (!forceRefresh) {
+        const cached = db.prepare(
+            "SELECT chain FROM wallet_chains WHERE address = ? AND refreshed_at > datetime('now', '-30 days')"
+        ).all(wallet);
+        if (cached.length > 0) return cached.map(r => r.chain);
+    }
 
-// Resolve token address to real symbol via CoinGecko (fallback for DeBank mislabels)
+    // Fetch from DeBank
+    try {
+        const chains = await api(`/v1/user/used_chain_list?id=${wallet}`);
+        const chainIds = chains.map(c => c.id);
+
+        // Store in cache
+        const stmt = db.prepare(
+            'INSERT OR REPLACE INTO wallet_chains (address, chain, refreshed_at) VALUES (?, ?, datetime(\'now\'))'
+        );
+        const txn = db.transaction((chains) => {
+            for (const c of chains) stmt.run(wallet, c);
+        });
+        txn(chainIds);
+
+        return chainIds;
+    } catch (e) {
+        // Fall back to cache even if expired
+        const cached = db.prepare('SELECT chain FROM wallet_chains WHERE address = ?').all(wallet);
+        return cached.map(r => r.chain);
+    }
+}
+
+// --- Balance Pre-Filter ---
+async function getChainBalance(wallet, chain) {
+    try {
+        const data = await api(`/v1/user/chain_balance?id=${wallet}&chain_id=${chain}`);
+        return data.usd_value || 0;
+    } catch { return 0; }
+}
+
+// --- CoinGecko Token Resolution ---
 async function resolveToken(chain, address) {
-    const cgChain = COINGECKO_CHAINS[chain];
+    const cgChain = CG_CHAINS[chain];
     if (!cgChain || !address || address.length < 10) return null;
+
+    // Check registry first
+    const db = global._db;
+    if (db) {
+        const cached = db.prepare(
+            "SELECT * FROM token_registry WHERE address = ? AND chain = ? AND last_checked > datetime('now', '-7 days')"
+        ).get(address.toLowerCase(), chain);
+        if (cached) return { real_symbol: cached.real_symbol, real_name: cached.real_name, cg_id: cached.cg_id, cg_price_usd: cached.cg_price_usd };
+    }
+
+    // Query CoinGecko
     try {
         const res = await fetch(
             `https://api.coingecko.com/api/v3/coins/${cgChain}/contract/${address.toLowerCase()}`,
@@ -60,19 +153,45 @@ async function resolveToken(chain, address) {
         );
         if (!res.ok) return null;
         const data = await res.json();
-        return {
+        const result = {
             cg_id: data.id,
             real_symbol: data.symbol?.toUpperCase(),
             real_name: data.name,
-            price_usd: data.market_data?.current_price?.usd
+            cg_price_usd: data.market_data?.current_price?.usd || null
         };
+
+        // Cache in registry
+        if (db) {
+            db.prepare(
+                `INSERT OR REPLACE INTO token_registry (address, chain, symbol, real_symbol, real_name, cg_id, cg_price_usd, last_checked)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))`
+            ).run(address.toLowerCase(), chain, null, result.real_symbol, result.real_name, result.cg_id, result.cg_price_usd);
+        }
+
+        return result;
     } catch { return null; }
+}
+
+// --- Strategy Classification ---
+function classifyStrategy(item, supplyUsd, borrowUsd) {
+    const type = item.name || '';
+    if (type === 'Lending') {
+        if (supplyUsd > 0 && borrowUsd > 0) {
+            return borrowUsd / supplyUsd > 0.7 ? 'loop' : 'borrow';
+        }
+        return 'lend';
+    }
+    if (type === 'Farming' || type === 'Leveraged Farming') return 'farm';
+    if (type === 'Staked' || type === 'Locked') return 'stake';
+    if (type === 'Liquidity Pool') return 'lp';
+    if (type === 'Yield' || type === 'Deposit') return 'yield';
+    return type.toLowerCase().replace(/ /g, '_') || 'unknown';
 }
 
 function detectYieldSource(tokens) {
     const sources = new Set();
     for (const t of tokens) {
-        const sym = (t.symbol || '').toUpperCase();
+        const sym = (t.symbol || t.real_symbol || '').toUpperCase();
         if (sym.includes('USDE') || sym.includes('SUSDE')) sources.add('ethena');
         if (sym.includes('SYRUP') || sym.includes('MAPLE')) sources.add('maple');
         if (sym.includes('PT-') || sym.includes('PENDLE')) sources.add('pendle');
@@ -83,124 +202,192 @@ function detectYieldSource(tokens) {
     return [...sources].join(', ') || 'unknown';
 }
 
+// --- Main Scan ---
 async function scanAll() {
     if (!DEBANK_KEY) { console.error('Missing DEBANK_API_KEY'); process.exit(1); }
 
-    console.log('=== Protocol Yield Tracker (DeBank v2) ===\n');
+    console.log('=== Protocol Yield Tracker v3 ===\n');
 
     const unitsBefore = await api('/v1/account/units');
-    console.log(`Units: ${unitsBefore.balance.toLocaleString()} available\n`);
+    console.log(`Units: ${unitsBefore.balance.toLocaleString()}\n`);
+
+    const db = initDB(path.join(__dirname, '..', 'yield-tracker.db'));
+    global._db = db;
 
     const wallets = loadWallets();
     console.log(`Loaded ${wallets.length} wallets\n`);
 
-    // Phase 1: Discover chains
-    console.log('Phase 1: Discovering chains...\n');
+    // Phase 1: Discover chains (cached)
+    console.log('Phase 1: Discovering chains (cached)...\n');
+    let chainDiscoveries = 0;
     const walletChains = {};
     for (const w of wallets) {
-        const short = w.address.slice(0, 10) + '...' + w.address.slice(-4);
-        try {
-            const chains = await api(`/v1/user/used_chain_list?id=${w.address}`);
-            walletChains[w.address] = chains.map(c => c.id);
-            console.log(`  ${short}: ${chains.length} chains`);
-        } catch (e) {
-            console.error(`  ${short}: ERROR`);
-            walletChains[w.address] = [];
+        const chains = await getWalletChains(db, w.address);
+        walletChains[w.address] = chains;
+        if (chains.length > 0) {
+            console.log(`  ${w.address.slice(0,10)}...: ${chains.length} chains`);
         }
-        await new Promise(r => setTimeout(r, 100));
+        await new Promise(r => setTimeout(r, 50));
     }
+    console.log(`  (chain data cached in DB — refreshes monthly)\n`);
 
-    // Phase 2: Scan positions
-    console.log('\nPhase 2: Scanning positions...\n');
+    // Phase 2: Balance pre-filter
+    console.log('Phase 2: Balance pre-filtering...\n');
+    const walletChainPairs = [];
+    for (const [addr, chains] of Object.entries(walletChains)) {
+        for (const chain of chains) {
+            const balance = await getChainBalance(addr, chain);
+            if (balance >= MIN_NET_USD) {
+                walletChainPairs.push({ wallet: addr, chain, balance });
+            }
+            await new Promise(r => setTimeout(r, 50));
+        }
+    }
+    console.log(`  ${walletChainPairs.length} wallet×chain pairs above $${(MIN_NET_USD/1000).toFixed(0)}K threshold\n`);
+
+    // Phase 3: Full position scan
+    console.log('Phase 3: Scanning positions...\n');
     const positions = [];
+    const tokenRegistry = {}; // address → CoinGecko data (batch resolve)
     let calls = 0;
 
-    for (const [addr, chains] of Object.entries(walletChains)) {
-        const short = addr.slice(0, 10) + '...' + addr.slice(-4);
-        let count = 0;
+    for (const { wallet, chain } of walletChainPairs) {
+        const short = wallet.slice(0, 10) + '...' + wallet.slice(-4);
+        try {
+            const data = await api(`/v1/user/complex_protocol_list?id=${wallet}&chain_id=${chain}`);
+            calls++;
 
-        for (const chain of chains) {
-            try {
-                const data = await api(`/v1/user/complex_protocol_list?id=${addr}&chain_id=${chain}`);
-                calls++;
+            if (!Array.isArray(data)) continue;
 
-                if (!Array.isArray(data)) continue;
+            for (const protocol of data) {
+                for (const item of protocol.portfolio_item_list || []) {
+                    const stats = item.stats || {};
+                    const netUsd = stats.net_usd_value || 0;
+                    if (netUsd < MIN_NET_USD) continue;
 
-                for (const protocol of data) {
-                    for (const item of protocol.portfolio_item_list || []) {
-                        const stats = item.stats || {};
-                        const netUsd = stats.net_usd_value || 0;
-                        if (netUsd < MIN_NET_USD) continue;
+                    const detail = item.detail || {};
+                    const assetTokens = item.asset_token_list || [];
+                    const healthRate = detail.health_rate || null;
 
-                        const detail = item.detail || {};
-                        const assetTokens = item.asset_token_list || [];
-                        const healthRate = detail.health_rate || null;
+                    // Build supply/borrow from asset_token_list
+                    const supplyTokens = [];
+                    const borrowTokens = [];
+                    for (const t of assetTokens) {
+                        const amount = Math.abs(t.amount || 0);
+                        const price = t.price || 0;
+                        const addr = (t.id || '').toLowerCase();
 
-                        // Build supply/borrow from asset_token_list (has amounts + prices)
-                        const supplyTokens = [];
-                        const borrowTokens = [];
-                        for (const t of assetTokens) {
-                            const token = {
-                                symbol: t.symbol || '?',
-                                address: t.id || '',
-                                amount: Math.abs(t.amount || 0),
-                                price: t.price || 0,
-                                usd: Math.abs(t.amount || 0) * (t.price || 0)
-                            };
-                            if ((t.amount || 0) > 0) supplyTokens.push(token);
-                            else borrowTokens.push(token);
+                        // Check if we already resolved this token
+                        let resolved = tokenRegistry[`${chain}:${addr}`];
+                        if (!resolved) {
+                            resolved = await resolveToken(chain, addr);
+                            if (resolved) tokenRegistry[`${chain}:${addr}`] = resolved;
+                            await new Promise(r => setTimeout(r, 100)); // CoinGecko rate limit
                         }
 
-                        const supplyUsd = supplyTokens.reduce((s, t) => s + t.usd, 0);
-                        const borrowUsd = borrowTokens.reduce((s, t) => s + t.usd, 0);
+                        const token = {
+                            symbol: t.symbol || '?',
+                            real_symbol: resolved?.real_symbol || t.symbol || '?',
+                            real_name: resolved?.real_name || t.name || '?',
+                            cg_id: resolved?.cg_id || null,
+                            address: addr,
+                            amount,
+                            price,
+                            cg_price: resolved?.cg_price_usd || null,
+                            usd: amount * price
+                        };
 
-                        // Reward tokens
-                        const rewardTokens = [];
-                        for (const rt of (detail.reward_token_list || [])) {
-                            rewardTokens.push({
-                                symbol: rt.symbol || '?',
-                                amount: rt.amount || 0,
-                                usd: rt.amount * (rt.price || 0)
-                            });
-                        }
-
-                        const strategy = classifyStrategy(item, supplyUsd, borrowUsd);
-                        const yieldSource = detectYieldSource([...supplyTokens, ...rewardTokens]);
-
-                        positions.push({
-                            wallet: addr,
-                            chain,
-                            protocol: protocol.name || '?',
-                            protocol_id: protocol.id || '?',
-                            type: item.name || '?',
-                            strategy,
-                            yield_source: yieldSource,
-                            health_rate: healthRate ? Math.round(healthRate * 1000) / 1000 : null,
-                            net_usd: Math.round(netUsd * 100) / 100,
-                            asset_usd: Math.round(supplyUsd * 100) / 100,
-                            debt_usd: Math.round(borrowUsd * 100) / 100,
-                            supply: supplyTokens,
-                            borrow: borrowTokens,
-                            rewards: rewardTokens,
-                            position_index: item.position_index || null,
-                            updated_at: item.update_at ? new Date(item.update_at * 1000).toISOString() : null
-                        });
-                        count++;
+                        if ((t.amount || 0) > 0) supplyTokens.push(token);
+                        else borrowTokens.push(token);
                     }
-                }
-                await new Promise(r => setTimeout(r, 100));
-            } catch (e) {
-                calls++;
-            }
-        }
 
-        if (count > 0) console.log(`  ${short}: ${count} positions`);
+                    // Reward tokens
+                    const rewardTokens = [];
+                    for (const rt of (detail.reward_token_list || [])) {
+                        const addr = (rt.id || '').toLowerCase();
+                        let resolved = tokenRegistry[`${chain}:${addr}`];
+                        if (!resolved && addr.length > 10) {
+                            resolved = await resolveToken(chain, addr);
+                            if (resolved) tokenRegistry[`${chain}:${addr}`] = resolved;
+                            await new Promise(r => setTimeout(r, 100));
+                        }
+                        rewardTokens.push({
+                            symbol: rt.symbol || '?',
+                            real_symbol: resolved?.real_symbol || rt.symbol || '?',
+                            cg_id: resolved?.cg_id || null,
+                            amount: rt.amount || 0,
+                            usd: rt.amount * (rt.price || 0)
+                        });
+                    }
+
+                    const supplyUsd = supplyTokens.reduce((s, t) => s + t.usd, 0);
+                    const borrowUsd = borrowTokens.reduce((s, t) => s + t.usd, 0);
+                    const strategy = classifyStrategy(item, supplyUsd, borrowUsd);
+                    const yieldSource = detectYieldSource([...supplyTokens, ...rewardTokens]);
+
+                    // Save to DB
+                    const posStmt = db.prepare(`
+                        INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type,
+                            strategy, yield_source, health_rate, net_usd, asset_usd, debt_usd,
+                            position_index, debank_updated_at)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        ON CONFLICT(wallet, chain, protocol_id, position_index)
+                        DO UPDATE SET
+                            strategy=excluded.strategy, yield_source=excluded.yield_source,
+                            health_rate=excluded.health_rate, net_usd=excluded.net_usd,
+                            asset_usd=excluded.asset_usd, debt_usd=excluded.debt_usd,
+                            scanned_at=datetime('now')
+                    `);
+
+                    const result = posStmt.run(
+                        wallet, chain, protocol.id || '?', protocol.name || '?',
+                        item.name || '?', strategy, yieldSource,
+                        healthRate ? Math.round(healthRate * 1000) / 1000 : null,
+                        Math.round(netUsd * 100) / 100,
+                        Math.round(supplyUsd * 100) / 100,
+                        Math.round(borrowUsd * 100) / 100,
+                        item.position_index || null,
+                        item.update_at ? new Date(item.update_at * 1000).toISOString() : null
+                    );
+
+                    const posId = result.lastInsertRowid;
+
+                    // Save tokens
+                    const tokStmt = db.prepare(`
+                        INSERT INTO position_tokens (position_id, role, symbol, real_symbol, real_name, cg_id, address, amount, price_usd, value_usd)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    `);
+                    const saveTokens = db.transaction((tokens, role) => {
+                        for (const t of tokens) {
+                            tokStmt.run(posId, role, t.symbol, t.real_symbol, t.real_name, t.cg_id, t.address, t.amount, t.price, t.usd);
+                        }
+                    });
+                    saveTokens(supplyTokens, 'supply');
+                    saveTokens(borrowTokens, 'borrow');
+                    saveTokens(rewardTokens, 'reward');
+
+                    positions.push({
+                        wallet, chain,
+                        protocol: protocol.name || '?',
+                        type: item.name || '?',
+                        strategy,
+                        yield_source: yieldSource,
+                        health_rate: healthRate,
+                        net_usd: Math.round(netUsd * 100) / 100,
+                        supply: supplyTokens.map(t => `${t.real_symbol}(${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}=$${(t.usd/1e6).toFixed(1)}M)`),
+                        borrow: borrowTokens.map(t => `${t.real_symbol}(${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}=$${(t.usd/1e6).toFixed(1)}M)`)
+                    });
+                }
+            }
+            await new Promise(r => setTimeout(r, 100));
+        } catch (e) {
+            calls++;
+        }
     }
 
-    // Save
-    const output = { positions, api_calls: calls, scanned_at: new Date().toISOString() };
-    const outPath = path.join(__dirname, '..', 'data', 'debank-scan.json');
-    fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
+    // Save scan results
+    const output = { positions, api_calls: calls, tokens_resolved: Object.keys(tokenRegistry).length, scanned_at: new Date().toISOString() };
+    fs.writeFileSync(path.join(__dirname, '..', 'data', 'debank-scan.json'), JSON.stringify(output, null, 2));
 
     // Summary
     printSummary(positions);
@@ -209,7 +396,10 @@ async function scanAll() {
     const used = unitsBefore.balance - unitsAfter.balance;
     console.log(`\nUnits used: ${used} (remaining: ${unitsAfter.balance.toLocaleString()})`);
     console.log(`Cost: $${(used / 1000000 * 200).toFixed(2)}`);
-    console.log(`\nDone. Saved to data/debank-scan.json`);
+    console.log(`CoinGecko lookups: ${Object.keys(tokenRegistry).length}`);
+    console.log(`\nDone. Saved to yield-tracker.db + data/debank-scan.json`);
+
+    db.close();
 }
 
 function printSummary(positions) {
@@ -217,7 +407,6 @@ function printSummary(positions) {
     console.log(`FOUND ${positions.length} positions >$${(MIN_NET_USD/1000).toFixed(0)}K`);
     console.log(`${'='.repeat(60)}\n`);
 
-    // By protocol
     const byProto = {};
     for (const p of positions) {
         if (!byProto[p.protocol]) byProto[p.protocol] = { count: 0, total: 0 };
@@ -229,28 +418,11 @@ function printSummary(positions) {
         console.log(`  ${proto.padEnd(25)} ${info.count.toString().padStart(3)} positions  $${(info.total / 1e6).toFixed(1)}M`);
     }
 
-    // By chain
-    const byChain = {};
-    for (const p of positions) {
-        if (!byChain[p.chain]) byChain[p.chain] = { count: 0, total: 0 };
-        byChain[p.chain].count++;
-        byChain[p.chain].total += p.net_usd;
-    }
-    console.log('\nBY CHAIN:');
-    for (const [chain, info] of Object.entries(byChain).sort((a, b) => b[1].total - a[1].total)) {
-        console.log(`  ${chain.padEnd(12)} ${info.count.toString().padStart(3)} positions  $${(info.total / 1e6).toFixed(1)}M`);
-    }
-
-    // Top positions
-    console.log(`\n${'='.repeat(60)}`);
-    console.log('ALL POSITIONS');
-    console.log(`${'='.repeat(60)}`);
+    console.log('\nALL POSITIONS:');
     for (const p of positions.sort((a, b) => b.net_usd - a.net_usd)) {
         const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
-        const sup = p.supply.map(t => `${t.symbol}(${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}=$${(t.usd/1e6).toFixed(1)}M)`).join('+') || '-';
-        const bor = p.borrow.map(t => `${t.symbol}(${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}=$${(t.usd/1e6).toFixed(1)}M)`).join('+') || '-';
         const hf = p.health_rate ? ` HF:${p.health_rate}` : '';
-        console.log(`  ${w} | ${p.protocol.padEnd(15)} | ${p.chain.padEnd(8)} | ${p.type.padEnd(10)} ${p.strategy.padEnd(8)} | ${sup} → ${bor}${hf}`);
+        console.log(`  ${w} | ${p.protocol.padEnd(15)} | ${p.chain.padEnd(8)} | ${p.type.padEnd(10)} ${p.strategy.padEnd(8)} | ${p.supply.join('+')} → ${p.borrow.join('+')}${hf}`);
     }
 }
 
