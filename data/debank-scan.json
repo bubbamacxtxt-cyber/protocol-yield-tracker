@@ -6,11 +6,11 @@
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "lend",
-      "yield_source": "unknown",
+      "yield_source": "Aave V3",
       "health_rate": 1.0282978872677895,
-      "net_usd": 3613665.79,
+      "net_usd": 3614035.45,
       "supply": [
-        "USDT(3,615,257=$3.6M)"
+        "USDT(3,615,409=$3.6M)"
       ],
       "borrow": []
     },
@@ -20,9 +20,9 @@
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "loop",
-      "yield_source": "maple",
+      "yield_source": "Aave V3",
       "health_rate": 1.0235614495334595,
-      "net_usd": 12817681.48,
+      "net_usd": 12821011.93,
       "supply": [
         "SYRUPUSDT(114,384,266=$128.0M)"
       ],
@@ -32,43 +32,11 @@
     },
     {
       "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
-      "chain": "arb",
-      "protocol": "Morpho",
-      "type": "Lending",
-      "strategy": "loop",
-      "yield_source": "maple",
-      "health_rate": 1.0696713198098258,
-      "net_usd": 324570.56,
-      "supply": [
-        "SYRUPUSDC(1,930,001=$2.2M)"
-      ],
-      "borrow": [
-        "USDT(1,910,004=$1.9M)"
-      ]
-    },
-    {
-      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
-      "chain": "arb",
-      "protocol": "Morpho",
-      "type": "Lending",
-      "strategy": "loop",
-      "yield_source": "maple",
-      "health_rate": 1.0556994446362407,
-      "net_usd": 1166809.23,
-      "supply": [
-        "SYRUPUSDC(7,555,303=$8.7M)"
-      ],
-      "borrow": [
-        "USDC(7,574,314=$7.6M)"
-      ]
-    },
-    {
-      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
       "chain": "base",
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "loop",
-      "yield_source": "maple",
+      "yield_source": "Aave V3",
       "health_rate": 1.031379497923418,
       "net_usd": 4822228.58,
       "supply": [
@@ -84,11 +52,11 @@
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "loop",
-      "yield_source": "ethena",
+      "yield_source": "Aave V3",
       "health_rate": 1.0223995635188015,
-      "net_usd": 4039997.3,
+      "net_usd": 4038001.97,
       "supply": [
-        "USDe(40,304,102=$40.3M)"
+        "USDe(40,304,207=$40.3M)"
       ],
       "borrow": [
         "USDC(1,276,324=$1.3M)",
@@ -101,9 +69,9 @@
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "loop",
-      "yield_source": "ethena",
+      "yield_source": "Aave V3",
       "health_rate": 1.0241970309910196,
-      "net_usd": 5619864.98,
+      "net_usd": 5614135.66,
       "supply": [
         "sUSDe(45,399,846=$55.5M)"
       ],
@@ -118,11 +86,11 @@
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "loop",
-      "yield_source": "ethena",
+      "yield_source": "Aave V3",
       "health_rate": 1.0232305720414239,
-      "net_usd": 18681617.22,
+      "net_usd": 18684957.03,
       "supply": [
-        "sUSDe(151,640,170=$185.6M)"
+        "SUSDE(151,640,170=$185.6M)"
       ],
       "borrow": [
         "USDT0(166,990,718=$166.9M)",
@@ -135,15 +103,15 @@
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "loop",
-      "yield_source": "ethena",
-      "health_rate": 1.0336891653607294,
-      "net_usd": 26499421.62,
+      "yield_source": "Aave V3",
+      "health_rate": 1.0336851106100453,
+      "net_usd": 26491992.92,
       "supply": [
-        "USDe(264,610,455=$264.5M)"
+        "USDe(264,610,909=$264.5M)"
       ],
       "borrow": [
-        "USDC(129,008,434=$129.1M)",
-        "USDT(109,006,643=$109.0M)"
+        "USDC(129,009,188=$129.1M)",
+        "USDT(109,007,231=$109.0M)"
       ]
     },
     {
@@ -152,7 +120,7 @@
       "protocol": "Ethena",
       "type": "Locked",
       "strategy": "stake",
-      "yield_source": "ethena",
+      "yield_source": "Ethena",
       "health_rate": null,
       "net_usd": 6244702.06,
       "supply": [
@@ -166,18 +134,208 @@
       "protocol": "Aave V3",
       "type": "Lending",
       "strategy": "loop",
-      "yield_source": "ethena",
-      "health_rate": 1.035200548372159,
-      "net_usd": 13248465.65,
+      "yield_source": "Aave V3",
+      "health_rate": 1.0351821574346804,
+      "net_usd": 13239433.17,
       "supply": [
-        "USDe(130,246,198=$130.2M)"
+        "USDe(130,246,848=$130.2M)"
       ],
       "borrow": [
-        "USDT0(117,010,143=$117.0M)"
+        "USDT0(117,012,806=$117.0M)"
       ]
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "arb",
+      "protocol": "Revert",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Revert",
+      "health_rate": null,
+      "net_usd": 942847.12,
+      "supply": [
+        "USDC(942,376=$0.9M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Aave V3",
+      "type": "Staked",
+      "strategy": "stake",
+      "yield_source": "Aave V3",
+      "health_rate": null,
+      "net_usd": 2540731.18,
+      "supply": [
+        "GHO(2,540,223=$2.5M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Aave V3",
+      "type": "Lending",
+      "strategy": "lend",
+      "yield_source": "Aave V3",
+      "health_rate": 1.157920892373162e+59,
+      "net_usd": 499348.93,
+      "supply": [
+        "RLUSD(82=$0.0M)",
+        "USDG(499,296=$0.5M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Aura Finance",
+      "type": "Farming",
+      "strategy": "farm",
+      "yield_source": "Aura Finance",
+      "health_rate": null,
+      "net_usd": 1423107.86,
+      "supply": [
+        "USDT(330,138=$0.3M)",
+        "GHO(884,933=$0.9M)",
+        "USDC(207,874=$0.2M)",
+        "BAL(36=$0.0M)",
+        "AURA(58=$0.0M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Euler",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Euler",
+      "health_rate": null,
+      "net_usd": 1344956.77,
+      "supply": [
+        "PYUSD(1,344,957=$1.3M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Fluid",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Fluid",
+      "health_rate": null,
+      "net_usd": 2102929.08,
+      "supply": [
+        "USDC(2,101,878=$2.1M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Morpho",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Morpho",
+      "health_rate": null,
+      "net_usd": 2542978.89,
+      "supply": [
+        "USDT(2,543,946=$2.5M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Morpho",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Morpho",
+      "health_rate": null,
+      "net_usd": 2310545.53,
+      "supply": [
+        "RLUSD(2,309,853=$2.3M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Morpho",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Morpho",
+      "health_rate": null,
+      "net_usd": 9244781.06,
+      "supply": [
+        "PYUSD(9,244,781=$9.2M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "eth",
+      "protocol": "Morpho",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Morpho",
+      "health_rate": null,
+      "net_usd": 9927524.9,
+      "supply": [
+        "USDC(9,922,561=$9.9M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "uni",
+      "protocol": "Morpho",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Morpho",
+      "health_rate": null,
+      "net_usd": 302154.39,
+      "supply": [
+        "USDC(302,003=$0.3M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "base",
+      "protocol": "Aura Finance",
+      "type": "Farming",
+      "strategy": "farm",
+      "yield_source": "Aura Finance",
+      "health_rate": null,
+      "net_usd": 2412201.77,
+      "supply": [
+        "GHO(1,719,392=$1.7M)",
+        "USDC(693,999=$0.7M)",
+        "BAL(25=$0.0M)",
+        "AURA(30=$0.0M)"
+      ],
+      "borrow": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "chain": "base",
+      "protocol": "Avantis",
+      "type": "Yield",
+      "strategy": "yield",
+      "yield_source": "Avantis",
+      "health_rate": null,
+      "net_usd": 2310166.39,
+      "supply": [
+        "USDC(2,309,011=$2.3M)"
+      ],
+      "borrow": []
     }
   ],
-  "api_calls": 12,
-  "coingecko_calls": 8,
-  "scanned_at": "2026-03-24T21:57:22.211Z"
+  "api_calls": 17,
+  "coingecko_calls": 4,
+  "scanned_at": "2026-03-24T22:53:55.820Z"
 }
