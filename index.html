@@ -16,14 +16,14 @@ h1 { font-size: 32px; margin-bottom: 8px; }
 .card-value { font-size: 28px; font-weight: 700; color: #58a6ff; }
 
 .whale-list { display: grid; gap: 16px; }
-.whale-item { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; cursor: pointer; transition: border-color 0.2s; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; gap: 16px; }
+.whale-item { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; cursor: pointer; transition: border-color 0.2s; display: grid; grid-template-columns: 1fr 160px 24px; align-items: center; text-decoration: none; color: inherit; gap: 16px; }
 .whale-item:hover { border-color: #58a6ff; }
 .whale-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-.whale-meta { color: #8b949e; font-size: 13px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.whale-stats { text-align: right; min-width: 160px; flex-shrink: 0; }
+.whale-meta { color: #8b949e; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.whale-stats { text-align: right; }
 .whale-value { font-size: 22px; font-weight: 700; color: #3fb950; font-variant-numeric: tabular-nums; }
 .whale-detail { color: #8b949e; font-size: 12px; }
-.arrow { color: #484f58; font-size: 24px; margin-left: 16px; flex-shrink: 0; }
+.arrow { color: #484f58; font-size: 24px; text-align: center; }
 
 .footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 60px; padding: 20px; }
 </style>
