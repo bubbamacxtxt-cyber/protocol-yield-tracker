@@ -43,12 +43,16 @@ h1 { font-size: 32px; margin-bottom: 8px; }
 
 <script>
 async function init() {
+    console.log('Loading protocol tracker...');
     let DATA;
     try {
-        const res = await fetch('data.json');
+        const res = await fetch('data.json?v=' + Date.now());
+        console.log('Fetch status:', res.status);
         DATA = await res.json();
+        console.log('Data loaded:', Object.keys(DATA.whales).length, 'whales');
     } catch (e) {
-        document.getElementById('whaleList').innerHTML = '<div style="text-align:center;padding:40px;color:#f85149">Failed to load data.json. Run <code>node src/export.js</code> first.</div>';
+        console.error('Load failed:', e);
+        document.getElementById('whaleList').innerHTML = '<div style="text-align:center;padding:40px;color:#f85149">Failed to load data.json: ' + e.message + '</div>';
         return;
     }
 
