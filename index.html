@@ -16,10 +16,10 @@ h1 { font-size: 32px; margin-bottom: 8px; }
 .card-value { font-size: 28px; font-weight: 700; color: #58a6ff; }
 
 .whale-list { display: grid; gap: 16px; }
-.whale-item { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; cursor: pointer; transition: border-color 0.2s; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; }
+.whale-item { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; cursor: pointer; transition: border-color 0.2s; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; gap: 16px; }
 .whale-item:hover { border-color: #58a6ff; }
 .whale-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-.whale-meta { color: #8b949e; font-size: 13px; }
+.whale-meta { color: #8b949e; font-size: 13px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .whale-stats { text-align: right; min-width: 160px; flex-shrink: 0; }
 .whale-value { font-size: 22px; font-weight: 700; color: #3fb950; font-variant-numeric: tabular-nums; }
 .whale-detail { color: #8b949e; font-size: 12px; }
@@ -57,21 +57,24 @@ async function init() {
     }
 
     const whales = Object.entries(DATA.whales);
+    console.log('Whale entries:', whales.length);
     let totalNet = 0, totalAssets = 0, totalDebt = 0, totalPositions = 0, totalWallets = 0, totalActive = 0;
     const allChains = new Set(), allProtos = new Set();
 
     whales.forEach(([name, w]) => {
-        w.positions.forEach(p => {
-            totalNet += p.net_usd;
-            totalAssets += p.asset_usd;
-            totalDebt += p.debt_usd;
+        (w.positions || []).forEach(p => {
+            totalNet += (p.net_usd || 0);
+            totalAssets += (p.asset_usd || 0);
+            totalDebt += (p.debt_usd || 0);
             allChains.add(p.chain);
             allProtos.add(p.protocol_name);
         });
-        totalPositions += w.positions.length;
+        totalPositions += (w.positions || []).length;
         totalWallets += w.total_wallets || w.wallets.length;
         totalActive += w.active_wallets || w.wallets.length;
     });
+
+    console.log('Total net:', totalNet, 'positions:', totalPositions);
 
     // Summary cards
     document.getElementById('summaryCards').innerHTML = `
@@ -82,6 +85,7 @@ async function init() {
         <div class="card"><div class="card-label">Chains</div><div class="card-value">${allChains.size}</div></div>
         <div class="card"><div class="card-label">DeFi Protocols</div><div class="card-value">${allProtos.size}</div></div>
     `;
+    console.log('Summary cards rendered');
 
     // Whale list
     const listHtml = whales.map(([name, w]) => {
