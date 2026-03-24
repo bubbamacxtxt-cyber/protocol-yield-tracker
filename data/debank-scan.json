@@ -1,0 +1,228 @@
+{
+  "positions": [
+    {
+      "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
+      "chain": "eth",
+      "protocol": "Aave V3",
+      "protocol_id": "aave3",
+      "type": "Lending",
+      "net_usd": 3613588.25,
+      "asset_usd": 34294783.72,
+      "debt_usd": 30681195.48,
+      "supply": [
+        "USDT"
+      ],
+      "borrow": [
+        "USDT"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
+      "chain": "plasma",
+      "protocol": "Aave V3",
+      "protocol_id": "plasma_aave3",
+      "type": "Lending",
+      "net_usd": 12819090.21,
+      "asset_usd": 127993534.56,
+      "debt_usd": 115174444.35,
+      "supply": [
+        "syrupUSDT"
+      ],
+      "borrow": [
+        "USDT0"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+      "chain": "arb",
+      "protocol": "Morpho",
+      "protocol_id": "arb_morphoblue",
+      "type": "Lending",
+      "net_usd": 324704.26,
+      "asset_usd": 2233886.68,
+      "debt_usd": 1909182.42,
+      "supply": [
+        "syrupUSDC"
+      ],
+      "borrow": [
+        "USD\u20ae0"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+      "chain": "arb",
+      "protocol": "Morpho",
+      "protocol_id": "arb_morphoblue",
+      "type": "Lending",
+      "net_usd": 1166809.23,
+      "asset_usd": 8744912.67,
+      "debt_usd": 7578103.43,
+      "supply": [
+        "syrupUSDC"
+      ],
+      "borrow": [
+        "USDC"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+      "chain": "eth",
+      "protocol": "Morpho",
+      "protocol_id": "morphoblue",
+      "type": "Lending",
+      "net_usd": 1666222.78,
+      "asset_usd": 12092330.03,
+      "debt_usd": 10426107.25,
+      "supply": [
+        "USDC"
+      ],
+      "borrow": [
+        "USDC"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+      "chain": "eth",
+      "protocol": "Morpho",
+      "protocol_id": "morphoblue",
+      "type": "Lending",
+      "net_usd": 1689590.01,
+      "asset_usd": 12337983.75,
+      "debt_usd": 10648393.74,
+      "supply": [
+        "USDC"
+      ],
+      "borrow": [
+        "PYUSD"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+      "chain": "base",
+      "protocol": "Aave V3",
+      "protocol_id": "base_aave3",
+      "type": "Lending",
+      "net_usd": 4822228.58,
+      "asset_usd": 44590226.74,
+      "debt_usd": 39767998.16,
+      "supply": [
+        "syrupUSDC"
+      ],
+      "borrow": [
+        "USDC"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
+      "chain": "eth",
+      "protocol": "Aave V3",
+      "protocol_id": "aave3",
+      "type": "Lending",
+      "net_usd": 4727130.33,
+      "asset_usd": 46531832.37,
+      "debt_usd": 41804702.04,
+      "supply": [
+        "USDe"
+      ],
+      "borrow": [
+        "USDC",
+        "USDT"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
+      "chain": "ink",
+      "protocol": "Aave V3",
+      "protocol_id": "ink_aave3",
+      "type": "Lending",
+      "net_usd": 5622368.81,
+      "asset_usd": 55548962.5,
+      "debt_usd": 49926593.69,
+      "supply": [
+        "sUSDe"
+      ],
+      "borrow": [
+        "USD\u20ae0",
+        "USDC"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
+      "chain": "mnt",
+      "protocol": "Aave V3",
+      "protocol_id": "mnt_aave3",
+      "type": "Lending",
+      "net_usd": 18693306.57,
+      "asset_usd": 185612238.54,
+      "debt_usd": 166918931.97,
+      "supply": [
+        "sUSDe"
+      ],
+      "borrow": [
+        "USDT0",
+        "USDC"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
+      "chain": "eth",
+      "protocol": "Aave V3",
+      "protocol_id": "aave3",
+      "type": "Lending",
+      "net_usd": 25690297.44,
+      "asset_usd": 256423662.9,
+      "debt_usd": 230733365.45,
+      "supply": [
+        "USDe"
+      ],
+      "borrow": [
+        "USDC",
+        "USDT"
+      ],
+      "rewards": []
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
+      "chain": "eth",
+      "protocol": "Ethena",
+      "protocol_id": "ethena",
+      "type": "Locked",
+      "net_usd": 8079791.18,
+      "asset_usd": 8079791.18,
+      "debt_usd": 0,
+      "supply": [
+        "USDe"
+      ],
+      "borrow": [],
+      "rewards": []
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
+      "chain": "plasma",
+      "protocol": "Aave V3",
+      "protocol_id": "plasma_aave3",
+      "type": "Lending",
+      "net_usd": 13226080.22,
+      "asset_usd": 130194099.4,
+      "debt_usd": 116968019.18,
+      "supply": [
+        "USDe"
+      ],
+      "borrow": [
+        "USDT0"
+      ],
+      "rewards": []
+    }
+  ],
+  "api_calls": 258
+}
