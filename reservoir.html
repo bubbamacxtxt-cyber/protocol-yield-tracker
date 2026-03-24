@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol Yield Tracker — Reservoir</title>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e17; color: #e1e4e8; }
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+.header { display: flex; align-items: center; gap: 16px; margin-bottom: 5px; }
+.home-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #8b949e; text-decoration: none; font-size: 13px; cursor: pointer; }
+.home-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+h1 { font-size: 28px; }
+.subtitle { color: #8b949e; margin-bottom: 30px; font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; }
+.card-label { color: #8b949e; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.card-value.green { color: #3fb950; }
+.card-value.red { color: #f85149; }
+.card-value.blue { color: #58a6ff; }
+.card-sub { color: #8b949e; font-size: 12px; margin-top: 4px; }
+.proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.proto-chip { padding: 6px 12px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; font-size: 13px; }
+.proto-chip strong { color: #58a6ff; }
+.filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+.filter-group { display: flex; align-items: center; gap: 6px; }
+.filter-group label { color: #8b949e; font-size: 13px; }
+.filter-group select, .filter-group input { background: #161b22; border: 1px solid #30363d; color: #e1e4e8; padding: 6px 10px; border-radius: 6px; font-size: 13px; }
+.download-btn { margin-left: auto; padding: 8px 16px; background: #238636; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 13px; font-weight: 600; }
+.download-btn:hover { background: #2ea043; }
+.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #30363d; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: #161b22; padding: 12px 16px; text-align: left; color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; position: sticky; top: 0; }
+th:nth-child(n+9) { text-align: right; }
+td { padding: 12px 16px; border-top: 1px solid #21262d; }
+td:nth-child(n+9) { text-align: right; font-variant-numeric: tabular-nums; }
+tr:hover td { background: #161b22; }
+.badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+.badge-loop { background: #1f6feb22; color: #58a6ff; }
+.badge-lend { background: #23863622; color: #3fb950; }
+.badge-stake { background: #a371f722; color: #bc8cff; }
+.badge-farm { background: #d2992222; color: #e3b341; }
+.badge-lp { background: #f8514922; color: #ff7b72; }
+.hf { font-weight: 600; }
+.hf-safe { color: #3fb950; }
+.hf-warn { color: #e3b341; }
+.hf-danger { color: #f85149; }
+.token-list { display: flex; flex-direction: column; gap: 2px; }
+.token { white-space: nowrap; }
+.token-amount { color: #8b949e; font-size: 12px; }
+.token-supply { color: #3fb950; }
+.token-borrow { color: #f85149; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a class="home-btn" href="index.html">← Home</a>
+        <h1>Reservoir</h1>
+    </div>
+    <p class="subtitle">Wallet positions and yield strategies</p>
+
+    <div class="cards" id="summaryCards"></div>
+    <div class="proto-summary" id="protoSummary"></div>
+
+    <div class="filters">
+        <div class="filter-group">
+            <label>Protocol:</label>
+            <select id="filterProtocol"><option value="">All</option></select>
+        </div>
+        <div class="filter-group">
+            <label>Chain:</label>
+            <select id="filterChain"><option value="">All</option></select>
+        </div>
+        <div class="filter-group">
+            <label>Strategy:</label>
+            <select id="filterStrategy"><option value="">All</option></select>
+        </div>
+        <div class="filter-group">
+            <label>Min $:</label>
+            <input type="number" id="filterMin" placeholder="50000" value="50000" style="width:100px">
+        </div>
+        <button class="download-btn" onclick="downloadXLSX()">📥 Download XLSX</button>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Wallet</th>
+                    <th>Chain</th>
+                    <th>Protocol</th>
+                    <th>Type</th>
+                    <th>Strategy</th>
+                    <th>HF</th>
+                    <th>Supply</th>
+                    <th>Borrow</th>
+                    <th>Net USD</th>
+                    <th>Assets</th>
+                    <th>Debt</th>
+                </tr>
+            </thead>
+            <tbody id="positionsBody"></tbody>
+        </table>
+    </div>
+
+    <div class="footer" id="footer"></div>
+</div>
+
+<script>
+let DATA = null;
+
+async function init() {
+    try {
+        const res = await fetch('data.json');
+        DATA = await res.json();
+    } catch (e) {
+        document.getElementById('positionsBody').innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px">Failed to load data.json.</td></tr>';
+        return;
+    }
+    render();
+}
+
+function getWhale() {
+    return DATA.whales['Reservoir'] || Object.values(DATA.whales)[0] || { positions: [], wallets: [], total_wallets: 0, active_wallets: 0 };
+}
+
+function render() {
+    const whale = getWhale();
+    const positions = whale.positions || [];
+
+    populateFilters(positions);
+    const filtered = applyFilters(positions);
+
+    const totalNet = filtered.reduce((s, p) => s + p.net_usd, 0);
+    const totalAssets = filtered.reduce((s, p) => s + p.asset_usd, 0);
+    const totalDebt = filtered.reduce((s, p) => s + p.debt_usd, 0);
+    const avgHF = filtered.filter(p => p.health_rate).reduce((s, p) => s + p.health_rate, 0) / filtered.filter(p => p.health_rate).length || 0;
+    const chains = [...new Set(filtered.map(p => p.chain))];
+    const protos = [...new Set(filtered.map(p => p.protocol_name))];
+    const totalWallets = whale.total_wallets || '?';
+    const activeWallets = whale.active_wallets || filtered.length;
+
+    document.getElementById('summaryCards').innerHTML = `
+        <div class="card"><div class="card-label">Net Value</div><div class="card-value green">$${fmt(totalNet)}</div></div>
+        <div class="card"><div class="card-label">Total Assets</div><div class="card-value blue">$${fmt(totalAssets)}</div></div>
+        <div class="card"><div class="card-label">Total Debt</div><div class="card-value red">$${fmt(totalDebt)}</div></div>
+        <div class="card"><div class="card-label">Avg Health</div><div class="card-value ${avgHF < 1.05 ? 'red' : avgHF < 1.15 ? '' : 'green'}">${avgHF.toFixed(2)}</div></div>
+        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${activeWallets}/${totalWallets}</div><div class="card-sub">${activeWallets} active · ${totalWallets - activeWallets} below threshold</div></div>
+        <div class="card"><div class="card-label">Positions</div><div class="card-value">${filtered.length}</div><div class="card-sub">${chains.length} chains · ${protos.length} protocols</div></div>
+    `;
+
+    const byProto = {};
+    filtered.forEach(p => {
+        if (!byProto[p.protocol_name]) byProto[p.protocol_name] = { count: 0, total: 0 };
+        byProto[p.protocol_name].count++;
+        byProto[p.protocol_name].total += p.net_usd;
+    });
+    document.getElementById('protoSummary').innerHTML = Object.entries(byProto)
+        .sort((a, b) => b[1].total - a[1].total)
+        .map(([name, d]) => `<div class="proto-chip"><strong>${name}</strong> ${d.count} pos · $${fmt(d.total)}</div>`)
+        .join('');
+
+    const rows = filtered.map(p => {
+        const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
+        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${p.health_rate.toFixed(3)}</span>` : '-';
+        const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
+        const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
+        return `<tr>
+            <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
+            <td>${p.chain}</td>
+            <td>${p.protocol_name}</td>
+            <td>${p.position_type}</td>
+            <td><span class="badge badge-${p.strategy}">${p.strategy}</span></td>
+            <td>${hf}</td>
+            <td><div class="token-list">${supply || '-'}</div></td>
+            <td><div class="token-list">${borrow || '-'}</div></td>
+            <td>$${fmt(p.net_usd)}</td>
+            <td>$${fmt(p.asset_usd)}</td>
+            <td>$${fmt(p.debt_usd)}</td>
+        </tr>`;
+    }).join('');
+    document.getElementById('positionsBody').innerHTML = rows || '<tr><td colspan="11" style="text-align:center;padding:40px">No positions match filters</td></tr>';
+
+    document.getElementById('footer').innerHTML = `Generated ${new Date(DATA.generated_at).toLocaleString()} · ${DATA.token_registry_count} tokens in registry`;
+}
+
+function populateFilters(positions) {
+    const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+    const chains = [...new Set(positions.map(p => p.chain))].sort();
+    const strats = [...new Set(positions.map(p => p.strategy))].sort();
+    setOptions('filterProtocol', protos);
+    setOptions('filterChain', chains);
+    setOptions('filterStrategy', strats);
+}
+
+function setOptions(id, values) {
+    const sel = document.getElementById(id);
+    const current = sel.value;
+    sel.innerHTML = '<option value="">All</option>' + values.map(v => `<option value="${v}">${v}</option>`).join('');
+    sel.value = current;
+}
+
+function applyFilters(positions) {
+    const proto = document.getElementById('filterProtocol').value;
+    const chain = document.getElementById('filterChain').value;
+    const strat = document.getElementById('filterStrategy').value;
+    const min = parseFloat(document.getElementById('filterMin').value) || 0;
+    return positions.filter(p => {
+        if (proto && p.protocol_name !== proto) return false;
+        if (chain && p.chain !== chain) return false;
+        if (strat && p.strategy !== strat) return false;
+        if (p.net_usd < min) return false;
+        return true;
+    }).sort((a, b) => b.net_usd - a.net_usd);
+}
+
+function fmt(n) {
+    if (n >= 1e9) return (n/1e9).toFixed(2) + 'B';
+    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
+    return n.toLocaleString(undefined, {maximumFractionDigits: 0});
+}
+
+function downloadXLSX() {
+    const whale = getWhale();
+    const positions = whale.positions || [];
+    const filtered = applyFilters(positions);
+
+    const rows = filtered.map(p => ({
+        'Wallet': p.wallet,
+        'Chain': p.chain,
+        'Protocol': p.protocol_name,
+        'Type': p.position_type,
+        'Strategy': p.strategy,
+        'Health Rate': p.health_rate || '',
+        'Net USD': p.net_usd,
+        'Asset USD': p.asset_usd,
+        'Debt USD': p.debt_usd,
+        'Supply Tokens': p.supply.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + '),
+        'Borrow Tokens': p.borrow.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ')
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws['!cols'] = [{wch:44},{wch:8},{wch:15},{wch:10},{wch:8},{wch:10},{wch:15},{wch:15},{wch:15},{wch:50},{wch:50}];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Reservoir');
+    XLSX.writeFile(wb, 'reservoir-positions.xlsx');
+}
+
+['filterProtocol', 'filterChain', 'filterStrategy', 'filterMin'].forEach(id => {
+    document.getElementById(id).addEventListener('change', render);
+    document.getElementById(id).addEventListener('input', render);
+});
+
+init();
+</script>
+</body>
+</html>
