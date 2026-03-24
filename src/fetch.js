@@ -91,35 +91,13 @@ function initDB(dbPath) {
     return db;
 }
 
-// --- Chain Caching ---
-async function getWalletChains(db, wallet, forceRefresh = false) {
-    // Check cache first
-    if (!forceRefresh) {
-        const cached = db.prepare(
-            "SELECT chain FROM wallet_chains WHERE address = ? AND refreshed_at > datetime('now', '-30 days')"
-        ).all(wallet);
-        if (cached.length > 0) return cached.map(r => r.chain);
-    }
-
-    // Fetch from DeBank
+// --- Get Wallet Chains (always fresh, no caching) ---
+async function getWalletChains(wallet) {
     try {
         const chains = await api(`/v1/user/used_chain_list?id=${wallet}`);
-        const chainIds = chains.map(c => c.id);
-
-        // Store in cache
-        const stmt = db.prepare(
-            'INSERT OR REPLACE INTO wallet_chains (address, chain, refreshed_at) VALUES (?, ?, datetime(\'now\'))'
-        );
-        const txn = db.transaction((chains) => {
-            for (const c of chains) stmt.run(wallet, c);
-        });
-        txn(chainIds);
-
-        return chainIds;
-    } catch (e) {
-        // Fall back to cache even if expired
-        const cached = db.prepare('SELECT chain FROM wallet_chains WHERE address = ?').all(wallet);
-        return cached.map(r => r.chain);
+        return chains.map(c => c.id);
+    } catch {
+        return [];
     }
 }
 
@@ -211,19 +189,8 @@ function classifyStrategy(item, supplyUsd, borrowUsd) {
     return type.toLowerCase().replace(/ /g, '_') || 'unknown';
 }
 
-function detectYieldSource(tokens) {
-    const sources = new Set();
-    for (const t of tokens) {
-        const sym = (t.symbol || t.real_symbol || '').toUpperCase();
-        if (sym.includes('USDE') || sym.includes('SUSDE')) sources.add('ethena');
-        if (sym.includes('SYRUP') || sym.includes('MAPLE')) sources.add('maple');
-        if (sym.includes('PT-') || sym.includes('PENDLE')) sources.add('pendle');
-        if (sym.includes('STETH') || sym.includes('WSTETH')) sources.add('lido');
-        if (sym.includes('RETH')) sources.add('rocket-pool');
-        if (sym.includes('GHO')) sources.add('aave');
-    }
-    return [...sources].join(', ') || 'unknown';
-}
+// Yield source = protocol name from DeBank (Ethena, Maple, Aave V3, etc.)
+// No hardcoded token matching needed — DeBank identifies the protocol
 
 // --- Main Scan ---
 async function scanAll() {
@@ -245,7 +212,7 @@ async function scanAll() {
     let chainDiscoveries = 0;
     const walletChains = {};
     for (const w of wallets) {
-        const chains = await getWalletChains(db, w.address);
+        const chains = await getWalletChains(w.address);
         walletChains[w.address] = chains;
         if (chains.length > 0) {
             console.log(`  ${w.address.slice(0,10)}...: ${chains.length} chains`);
@@ -337,7 +304,7 @@ async function scanAll() {
                     const supplyUsd = supplyTokens.reduce((s, t) => s + t.usd, 0);
                     const borrowUsd = borrowTokens.reduce((s, t) => s + t.usd, 0);
                     const strategy = classifyStrategy(item, supplyUsd, borrowUsd);
-                    const yieldSource = detectYieldSource([...supplyTokens, ...rewardTokens]);
+                    const yieldSource = protocol.name || '?';
 
                     // Save to DB
                     const posStmt = db.prepare(`
