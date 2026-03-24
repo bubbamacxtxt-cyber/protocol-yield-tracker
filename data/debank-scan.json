@@ -8,9 +8,9 @@
       "strategy": "lend",
       "yield_source": "unknown",
       "health_rate": 1.0282978872677895,
-      "net_usd": 3613705.41,
+      "net_usd": 3613665.79,
       "supply": [
-        "USDT(3,615,188=$3.6M)"
+        "USDT(3,615,257=$3.6M)"
       ],
       "borrow": []
     },
@@ -22,7 +22,7 @@
       "strategy": "loop",
       "yield_source": "maple",
       "health_rate": 1.0235614495334595,
-      "net_usd": 12796297.96,
+      "net_usd": 12817681.48,
       "supply": [
         "SYRUPUSDT(114,384,266=$128.0M)"
       ],
@@ -38,12 +38,12 @@
       "strategy": "loop",
       "yield_source": "maple",
       "health_rate": 1.0696713198098258,
-      "net_usd": 324786.39,
+      "net_usd": 324570.56,
       "supply": [
         "SYRUPUSDC(1,930,001=$2.2M)"
       ],
       "borrow": [
-        "USDT0(1,910,004=$1.9M)"
+        "USDT(1,910,004=$1.9M)"
       ]
     },
     {
@@ -54,42 +54,12 @@
       "strategy": "loop",
       "yield_source": "maple",
       "health_rate": 1.0556994446362407,
-      "net_usd": 1165934.39,
+      "net_usd": 1166809.23,
       "supply": [
         "SYRUPUSDC(7,555,303=$8.7M)"
       ],
       "borrow": [
         "USDC(7,574,314=$7.6M)"
-      ]
-    },
-    {
-      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
-      "chain": "eth",
-      "protocol": "Morpho",
-      "type": "Lending",
-      "strategy": "lend",
-      "yield_source": "unknown",
-      "health_rate": 1.0611932537270239,
-      "net_usd": 1666242.07,
-      "supply": [
-        "USDC(1,665,409=$1.7M)"
-      ],
-      "borrow": []
-    },
-    {
-      "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
-      "chain": "eth",
-      "protocol": "Morpho",
-      "type": "Lending",
-      "strategy": "loop",
-      "yield_source": "unknown",
-      "health_rate": 1.0597249512323028,
-      "net_usd": 1689609.69,
-      "supply": [
-        "USDC(12,331,834=$12.3M)"
-      ],
-      "borrow": [
-        "PYUSD(10,647,329=$10.6M)"
       ]
     },
     {
@@ -100,9 +70,9 @@
       "strategy": "loop",
       "yield_source": "maple",
       "health_rate": 1.031379497923418,
-      "net_usd": 4817767.77,
+      "net_usd": 4822228.58,
       "supply": [
-        "syrupUSDC(38,524,417=$44.6M)"
+        "SYRUPUSDC(38,524,417=$44.6M)"
       ],
       "borrow": [
         "USDC(39,748,114=$39.8M)"
@@ -116,9 +86,9 @@
       "strategy": "loop",
       "yield_source": "ethena",
       "health_rate": 1.0223995635188015,
-      "net_usd": 4038812.18,
+      "net_usd": 4039997.3,
       "supply": [
-        "USDe(40,303,967=$40.3M)"
+        "USDe(40,304,102=$40.3M)"
       ],
       "borrow": [
         "USDC(1,276,324=$1.3M)",
@@ -133,12 +103,12 @@
       "strategy": "loop",
       "yield_source": "ethena",
       "health_rate": 1.0241970309910196,
-      "net_usd": 5617839.62,
+      "net_usd": 5619864.98,
       "supply": [
         "sUSDe(45,399,846=$55.5M)"
       ],
       "borrow": [
-        "USD₮0(38,429,930=$38.4M)",
+        "USDT0(38,429,930=$38.4M)",
         "USDC(11,515,449=$11.5M)"
       ]
     },
@@ -150,7 +120,7 @@
       "strategy": "loop",
       "yield_source": "ethena",
       "health_rate": 1.0232305720414239,
-      "net_usd": 18671399.96,
+      "net_usd": 18681617.22,
       "supply": [
         "sUSDe(151,640,170=$185.6M)"
       ],
@@ -167,7 +137,7 @@
       "strategy": "loop",
       "yield_source": "ethena",
       "health_rate": 1.0336891653607294,
-      "net_usd": 26496151.42,
+      "net_usd": 26499421.62,
       "supply": [
         "USDe(264,610,455=$264.5M)"
       ],
@@ -198,7 +168,7 @@
       "strategy": "loop",
       "yield_source": "ethena",
       "health_rate": 1.035200548372159,
-      "net_usd": 13244955.34,
+      "net_usd": 13248465.65,
       "supply": [
         "USDe(130,246,198=$130.2M)"
       ],
@@ -208,6 +178,6 @@
     }
   ],
   "api_calls": 12,
-  "tokens_resolved": 5,
-  "scanned_at": "2026-03-24T21:21:25.990Z"
+  "coingecko_calls": 8,
+  "scanned_at": "2026-03-24T21:57:22.211Z"
 }

@@ -131,45 +131,68 @@ async function getChainBalance(wallet, chain) {
     } catch { return 0; }
 }
 
-// --- CoinGecko Token Resolution ---
-async function resolveToken(chain, address) {
+// --- CoinGecko Token Resolution (fallback for unknowns) ---
+let cgCalls = 0; // module-level counter
+
+async function resolveToken(chain, address, symbol) {
     const cgChain = CG_CHAINS[chain];
     if (!cgChain || !address || address.length < 10) return null;
 
-    // Check registry first
-    const db = global._db;
-    if (db) {
-        const cached = db.prepare(
-            "SELECT * FROM token_registry WHERE address = ? AND chain = ? AND last_checked > datetime('now', '-7 days')"
-        ).get(address.toLowerCase(), chain);
-        if (cached) return { real_symbol: cached.real_symbol, real_name: cached.real_name, cg_id: cached.cg_id, cg_price_usd: cached.cg_price_usd };
-    }
-
-    // Query CoinGecko
     try {
         const res = await fetch(
             `https://api.coingecko.com/api/v3/coins/${cgChain}/contract/${address.toLowerCase()}`,
-            { headers: { 'Accept': 'application/json' } }
+            { headers: { 'Accept': 'application/json' }, signal: AbortSignal.timeout(10000) }
         );
         if (!res.ok) return null;
         const data = await res.json();
-        const result = {
+        return {
             cg_id: data.id,
             real_symbol: data.symbol?.toUpperCase(),
             real_name: data.name,
             cg_price_usd: data.market_data?.current_price?.usd || null
         };
-
-        // Cache in registry
-        if (db) {
-            db.prepare(
-                `INSERT OR REPLACE INTO token_registry (address, chain, symbol, real_symbol, real_name, cg_id, cg_price_usd, last_checked)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))`
-            ).run(address.toLowerCase(), chain, null, result.real_symbol, result.real_name, result.cg_id, result.cg_price_usd);
-        }
-
-        return result;
     } catch { return null; }
+}
+
+// Look up token in registry. If not found, try CoinGecko and add to registry.
+async function lookupToken(db, chain, address, symbol) {
+    if (!address || address.length < 10) return null;
+
+    // Check registry first
+    const cached = db.prepare(
+        'SELECT * FROM token_registry WHERE address = ? AND chain = ?'
+    ).get(address.toLowerCase(), chain);
+    if (cached) return cached;
+
+    // Also check symbol-level match
+    if (symbol) {
+        const symMatch = db.prepare(
+            "SELECT * FROM token_registry WHERE address = ? AND chain = 'global'"
+        ).get(`sym:${symbol.toUpperCase()}`);
+        if (symMatch) return symMatch;
+    }
+
+    // Unknown — ask CoinGecko
+    cgCalls++;
+    console.log(`    CoinGecko: ${symbol || address.slice(0,10)} (${chain})`);
+    await new Promise(r => setTimeout(r, 3000)); // CoinGecko free tier: ~20/min
+    const resolved = await resolveToken(chain, address, symbol);
+    if (resolved) {
+        // Add to registry
+        db.prepare(`
+            INSERT OR REPLACE INTO token_registry (address, chain, symbol, real_symbol, real_name, cg_id, cg_price_usd, source)
+            VALUES (?, ?, ?, ?, ?, ?, ?, 'coingecko')
+        `).run(address.toLowerCase(), chain, symbol, resolved.real_symbol, resolved.real_name, resolved.cg_id, resolved.cg_price_usd);
+        return {
+            address: address.toLowerCase(), chain,
+            symbol: symbol, real_symbol: resolved.real_symbol,
+            real_name: resolved.real_name, cg_id: resolved.cg_id,
+            cg_price_usd: resolved.cg_price_usd, source: 'coingecko'
+        };
+    }
+
+    // CoinGecko failed too — use DeBank's symbol as-is
+    return { address: address.toLowerCase(), chain, symbol, real_symbol: symbol, real_name: symbol, cg_id: null, source: 'debank' };
 }
 
 // --- Strategy Classification ---
@@ -207,12 +230,12 @@ async function scanAll() {
     if (!DEBANK_KEY) { console.error('Missing DEBANK_API_KEY'); process.exit(1); }
 
     console.log('=== Protocol Yield Tracker v3 ===\n');
+    cgCalls = 0;
 
     const unitsBefore = await api('/v1/account/units');
     console.log(`Units: ${unitsBefore.balance.toLocaleString()}\n`);
 
     const db = initDB(path.join(__dirname, '..', 'yield-tracker.db'));
-    global._db = db;
 
     const wallets = loadWallets();
     console.log(`Loaded ${wallets.length} wallets\n`);
@@ -248,7 +271,6 @@ async function scanAll() {
     // Phase 3: Full position scan
     console.log('Phase 3: Scanning positions...\n');
     const positions = [];
-    const tokenRegistry = {}; // address → CoinGecko data (batch resolve)
     let calls = 0;
 
     for (const { wallet, chain } of walletChainPairs) {
@@ -277,13 +299,8 @@ async function scanAll() {
                         const price = t.price || 0;
                         const addr = (t.id || '').toLowerCase();
 
-                        // Check if we already resolved this token
-                        let resolved = tokenRegistry[`${chain}:${addr}`];
-                        if (!resolved) {
-                            resolved = await resolveToken(chain, addr);
-                            if (resolved) tokenRegistry[`${chain}:${addr}`] = resolved;
-                            await new Promise(r => setTimeout(r, 100)); // CoinGecko rate limit
-                        }
+                        // Lookup in registry, fallback to CoinGecko for unknowns
+                        const resolved = await lookupToken(db, chain, addr, t.symbol);
 
                         const token = {
                             symbol: t.symbol || '?',
@@ -294,7 +311,8 @@ async function scanAll() {
                             amount,
                             price,
                             cg_price: resolved?.cg_price_usd || null,
-                            usd: amount * price
+                            usd: amount * price,
+                            source: resolved?.source || 'debank'
                         };
 
                         if ((t.amount || 0) > 0) supplyTokens.push(token);
@@ -305,12 +323,8 @@ async function scanAll() {
                     const rewardTokens = [];
                     for (const rt of (detail.reward_token_list || [])) {
                         const addr = (rt.id || '').toLowerCase();
-                        let resolved = tokenRegistry[`${chain}:${addr}`];
-                        if (!resolved && addr.length > 10) {
-                            resolved = await resolveToken(chain, addr);
-                            if (resolved) tokenRegistry[`${chain}:${addr}`] = resolved;
-                            await new Promise(r => setTimeout(r, 100));
-                        }
+                        const resolved = addr.length > 10 ? await lookupToken(db, chain, addr, rt.symbol) : null;
+                        await new Promise(r => setTimeout(r, 100)); // Rate limit CoinGecko if needed
                         rewardTokens.push({
                             symbol: rt.symbol || '?',
                             real_symbol: resolved?.real_symbol || rt.symbol || '?',
@@ -382,11 +396,12 @@ async function scanAll() {
             await new Promise(r => setTimeout(r, 100));
         } catch (e) {
             calls++;
+            console.error(`    ERROR ${wallet.slice(0,8)} ${chain}: ${e.message}`);
         }
     }
 
     // Save scan results
-    const output = { positions, api_calls: calls, tokens_resolved: Object.keys(tokenRegistry).length, scanned_at: new Date().toISOString() };
+    const output = { positions, api_calls: calls, coingecko_calls: cgCalls, scanned_at: new Date().toISOString() };
     fs.writeFileSync(path.join(__dirname, '..', 'data', 'debank-scan.json'), JSON.stringify(output, null, 2));
 
     // Summary
@@ -396,7 +411,7 @@ async function scanAll() {
     const used = unitsBefore.balance - unitsAfter.balance;
     console.log(`\nUnits used: ${used} (remaining: ${unitsAfter.balance.toLocaleString()})`);
     console.log(`Cost: $${(used / 1000000 * 200).toFixed(2)}`);
-    console.log(`CoinGecko lookups: ${Object.keys(tokenRegistry).length}`);
+    console.log(`CoinGecko lookups: ${cgCalls} (${cgCalls === 0 ? 'all tokens in registry' : 'new tokens discovered'})`);
     console.log(`\nDone. Saved to yield-tracker.db + data/debank-scan.json`);
 
     db.close();
