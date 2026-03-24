@@ -213,7 +213,7 @@ function render() {
         const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         return `<tr>
-            <td>${w}</td>
+            <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
             <td>${p.chain}</td>
             <td>${p.protocol_name}</td>
             <td>${p.position_type}</td>
