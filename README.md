@@ -88,7 +88,12 @@ protocol-yield-tracker/
     └── fetch.js              # Main fetcher (Aave + Morpho GraphQL)
 ```
 
-## How It Works
+## Troubleshooting
+
+**Whale list not showing on home page:**
+- GitHub Pages caches aggressively. The dashboard uses `data.json?v=` cache-busting on the fetch URL.
+- If whales don't appear, hard refresh (Ctrl+Shift+R / Cmd+Shift+R).
+- Check browser console (F12) for "Loading protocol tracker..." messages.
 
 1. **Chain discovery** — DeBank tells us which chains each wallet is active on
 2. **Position scan** — Get all protocol positions per chain (supply, borrow, rewards)
