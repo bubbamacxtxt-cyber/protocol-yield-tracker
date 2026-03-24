@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-03-24T23:18:15.553Z",
+  "generated_at": "2026-03-24T23:44:35.245Z",
   "summary": {
-    "total_positions": 82,
-    "total_value": 432646080.16,
-    "total_assets": 3063623926.109998,
+    "total_positions": 91,
+    "total_value": 554150335.8100001,
+    "total_assets": 3185128181.7599983,
     "total_debt": 2630977845.929999,
-    "total_whales": 3,
-    "total_wallets": 31,
-    "total_active": 11,
+    "total_whales": 4,
+    "total_wallets": 40,
+    "total_active": 20,
     "chains": [
       "eth",
       "mnt",
@@ -28,7 +28,16 @@
       "Revert",
       "Maple",
       "Pendle V2",
-      "Curve"
+      "Curve",
+      "Fasanara mGLOBAL (GDADF)",
+      "Morpho infiniFi Ecosystem Vault",
+      "FalconX Institutional",
+      "Sentora PYUSD",
+      "Fasanara Genesis Fund",
+      "sGHO",
+      "Spark sUSDC",
+      "Aave Horizon USDC",
+      "Aave USDC"
     ]
   },
   "whales": {
@@ -3412,6 +3421,321 @@
               "value_usd": 0.102551901137423
             }
           ]
+        }
+      ]
+    },
+    "InfiniFi": {
+      "name": "InfiniFi",
+      "wallets": [
+        "0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f",
+        "0x76D2E84009dAE457f8667D823c7c96e9A7c35B78",
+        "0xe919C66475f2F30d285c768853E6B5b23ef181Cf",
+        "0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE",
+        "0x9E5efC5F387D8661C1AFB2469B7EeF6972451852",
+        "0x7E9AA426abC2D9006E8C9881754BAA00a392158d",
+        "0xd880D7C5CaFdbE2AEc281250995abF612235e563",
+        "0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032",
+        "0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580"
+      ],
+      "total_wallets": 9,
+      "active_wallets": 9,
+      "positions": [
+        {
+          "wallet": "0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f",
+          "chain": "eth",
+          "protocol_name": "Fasanara mGLOBAL (GDADF)",
+          "protocol_id": "fasanara-gdadf",
+          "position_type": "Illiquid",
+          "strategy": "rwa",
+          "yield_source": "fasanara",
+          "health_rate": null,
+          "net_usd": 30236065.05,
+          "asset_usd": 30236065.05,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "amount": 30236065.05,
+              "price_usd": 1,
+              "value_usd": 30236065.05
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 8.5,
+          "apy_avg": 8.5,
+          "apy_base": 8.5,
+          "apy_rewards": 0,
+          "maturity": "2026-04-21",
+          "bucket_weeks": 4,
+          "underlying": "USDC",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0x76D2E84009dAE457f8667D823c7c96e9A7c35B78",
+          "chain": "eth",
+          "protocol_name": "Morpho infiniFi Ecosystem Vault",
+          "protocol_id": "morpho-infinifi",
+          "position_type": "Illiquid",
+          "strategy": "rwa",
+          "yield_source": "morpho",
+          "health_rate": null,
+          "net_usd": 7128813.87,
+          "asset_usd": 7128813.87,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "steakUSDCinfinifi",
+              "real_symbol": "steakUSDCinfinifi",
+              "amount": 7128813.87,
+              "price_usd": 1,
+              "value_usd": 7128813.87
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 6.98,
+          "apy_avg": 6.53,
+          "apy_base": 6.98,
+          "apy_rewards": 0,
+          "maturity": "2026-03-31",
+          "bucket_weeks": 1,
+          "underlying": "steakUSDCinfinifi",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0xe919C66475f2F30d285c768853E6B5b23ef181Cf",
+          "chain": "eth",
+          "protocol_name": "FalconX Institutional",
+          "protocol_id": "falconx-institutional",
+          "position_type": "Illiquid",
+          "strategy": "rwa",
+          "yield_source": "falconx",
+          "health_rate": null,
+          "net_usd": 25087810.84,
+          "asset_usd": 25087810.84,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "amount": 25087810.84,
+              "price_usd": 1,
+              "value_usd": 25087810.84
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 6.25,
+          "apy_avg": 6.25,
+          "apy_base": 6.25,
+          "apy_rewards": 0,
+          "maturity": "2026-03-31",
+          "bucket_weeks": 1,
+          "underlying": "USDC",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE",
+          "chain": "eth",
+          "protocol_name": "Sentora PYUSD",
+          "protocol_id": "sentora-pyusd",
+          "position_type": "Illiquid",
+          "strategy": "rwa",
+          "yield_source": "sentora",
+          "health_rate": null,
+          "net_usd": 30133431.66,
+          "asset_usd": 30133431.66,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "senPYUSDmain",
+              "real_symbol": "senPYUSDmain",
+              "amount": 30133431.66,
+              "price_usd": 1,
+              "value_usd": 30133431.66
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 6.23,
+          "apy_avg": 6.23,
+          "apy_base": 6.23,
+          "apy_rewards": 0,
+          "maturity": "2026-03-31",
+          "bucket_weeks": 1,
+          "underlying": "senPYUSDmain",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0x9E5efC5F387D8661C1AFB2469B7EeF6972451852",
+          "chain": "eth",
+          "protocol_name": "Fasanara Genesis Fund",
+          "protocol_id": "fasanara-genesis",
+          "position_type": "Illiquid",
+          "strategy": "rwa",
+          "yield_source": "fasanara",
+          "health_rate": null,
+          "net_usd": 5042844.33,
+          "asset_usd": 5042844.33,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "amount": 5042844.33,
+              "price_usd": 1,
+              "value_usd": 5042844.33
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 5.2,
+          "apy_avg": 5.2,
+          "apy_base": 5.2,
+          "apy_rewards": 0,
+          "maturity": "2026-04-21",
+          "bucket_weeks": 4,
+          "underlying": "USDC",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0x7E9AA426abC2D9006E8C9881754BAA00a392158d",
+          "chain": "eth",
+          "protocol_name": "sGHO",
+          "protocol_id": "sgho",
+          "position_type": "Illiquid",
+          "strategy": "rwa",
+          "yield_source": "aave",
+          "health_rate": null,
+          "net_usd": 1549009.08,
+          "asset_usd": 1549009.08,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "sGHO",
+              "real_symbol": "sGHO",
+              "amount": 1549009.08,
+              "price_usd": 1,
+              "value_usd": 1549009.08
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 4.87,
+          "apy_avg": 4.87,
+          "apy_base": 4.87,
+          "apy_rewards": 0,
+          "maturity": "2026-03-31",
+          "bucket_weeks": 1,
+          "underlying": "sGHO",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0xd880D7C5CaFdbE2AEc281250995abF612235e563",
+          "chain": "eth",
+          "protocol_name": "Spark sUSDC",
+          "protocol_id": "spark-susdc",
+          "position_type": "Liquid",
+          "strategy": "lend",
+          "yield_source": "spark",
+          "health_rate": null,
+          "net_usd": 18993481.69,
+          "asset_usd": 18993481.69,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "sUSDC",
+              "real_symbol": "sUSDC",
+              "amount": 18993481.69,
+              "price_usd": 1,
+              "value_usd": 18993481.69
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 3.77,
+          "apy_avg": 3.77,
+          "apy_base": 3.77,
+          "apy_rewards": 0,
+          "maturity": null,
+          "bucket_weeks": null,
+          "underlying": "sUSDC",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032",
+          "chain": "eth",
+          "protocol_name": "Aave Horizon USDC",
+          "protocol_id": "aave-horizon-usdc",
+          "position_type": "Liquid",
+          "strategy": "lend",
+          "yield_source": "aave",
+          "health_rate": null,
+          "net_usd": 2178351.31,
+          "asset_usd": 2178351.31,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "amount": 2178351.31,
+              "price_usd": 1,
+              "value_usd": 2178351.31
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 2.6,
+          "apy_avg": 2.42,
+          "apy_base": 2.6,
+          "apy_rewards": 0,
+          "maturity": null,
+          "bucket_weeks": null,
+          "underlying": "USDC",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580",
+          "chain": "eth",
+          "protocol_name": "Aave USDC",
+          "protocol_id": "aave-usdc",
+          "position_type": "Liquid",
+          "strategy": "lend",
+          "yield_source": "aave",
+          "health_rate": null,
+          "net_usd": 1154447.82,
+          "asset_usd": 1154447.82,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "amount": 1154447.82,
+              "price_usd": 1,
+              "value_usd": 1154447.82
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 2.2,
+          "apy_avg": 2.1,
+          "apy_base": 2.2,
+          "apy_rewards": 0,
+          "maturity": null,
+          "bucket_weeks": null,
+          "underlying": "USDC",
+          "paused": false,
+          "manual": true
         }
       ]
     }

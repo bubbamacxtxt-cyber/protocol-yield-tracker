@@ -48,11 +48,29 @@ const WHALES = {
         '0xDAeF005ae017Be5B938A2b321Db3dEC96e684f68',
         '0x6695c0f8706C5ACe3Bdf8995073179cCA47926dc',
         '0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a'
+    ],
+    'InfiniFi': [
+        '0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f',
+        '0x76D2E84009dAE457f8667D823c7c96e9A7c35B78',
+        '0xe919C66475f2F30d285c768853E6B5b23ef181Cf',
+        '0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE',
+        '0x9E5efC5F387D8661C1AFB2469B7EeF6972451852',
+        '0x7E9AA426abC2D9006E8C9881754BAA00a392158d',
+        '0xd880D7C5CaFdbE2AEc281250995abF612235e563',
+        '0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032',
+        '0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580'
     ]
 };
 
 function main() {
     const db = new Database(DB_PATH, { readonly: true });
+
+    // Load manual positions (RWAs, off-chain, etc.)
+    const manualPath = path.join(__dirname, '..', 'data', 'manual-positions.json');
+    let manualPositions = {};
+    if (fs.existsSync(manualPath)) {
+        manualPositions = JSON.parse(fs.readFileSync(manualPath, 'utf8'));
+    }
 
     // Load all positions with token data
     const allPositions = db.prepare(`
@@ -87,6 +105,11 @@ function main() {
     for (const [name, walletList] of Object.entries(WHALES)) {
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
         const positions = allPositions.filter(p => walletSet.has(p.wallet.toLowerCase()));
+
+        // Merge manual positions if they exist for this whale
+        if (manualPositions[name]) {
+            positions.push(...manualPositions[name]);
+        }
 
         whales[name] = {
             name,
