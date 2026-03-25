@@ -48,16 +48,21 @@ async function scanWallets(wallets, label) {
 
         for (const c of chains) {
             const bal = await api(`/v1/user/chain_balance?id=${addr}&chain_id=${c.id}`);
-            if ((bal.usd_value || 0) < 50000) continue;
+            const chainBalance = bal.usd_value || 0;
+            if (chainBalance < 50000) continue;
 
             const data = await api(`/v1/user/complex_protocol_list?id=${addr}&chain_id=${c.id}`);
             if (!Array.isArray(data)) continue;
+
+            let chainPositionsUsd = 0;
 
             for (const proto of data) {
                 for (const item of proto.portfolio_item_list || []) {
                     const stats = item.stats || {};
                     const net = stats.net_usd_value || 0;
                     if (net < 50000) continue;
+
+                    chainPositionsUsd += net;
 
                     const detail = item.detail || {};
                     const assetTokens = item.asset_token_list || [];
@@ -71,7 +76,7 @@ async function scanWallets(wallets, label) {
                     const displayType = getDisplayType(item, proto.name);
                     const strategy = classifyStrategy(displayType, supplyUsd, borrowUsd, hf);
 
-                    // Generate unique position_index from token addresses (DeBank often returns undefined)
+                    // Generate unique position_index from token addresses
                     const tokenAddrs = assetTokens.map(t => t.id || '').sort().join(',');
                     const uniqueIndex = item.position_index || tokenAddrs || `pos_${Date.now()}`;
 
@@ -106,6 +111,33 @@ async function scanWallets(wallets, label) {
 
                     walletPositions++;
                 }
+            }
+
+            // Balance verification: if chain_balance is >5% higher than positions, check for wallet-held tokens
+            const gap = chainBalance - chainPositionsUsd;
+            if (gap > 50000 && chainPositionsUsd > 0 && (gap / chainBalance) > 0.05) {
+                console.log(`  ⚠️ ${c.id}: balance=$${chainBalance.toLocaleString()} positions=$${chainPositionsUsd.toLocaleString()} gap=$${gap.toLocaleString()}`);
+                
+                // Check token list for wallet-held tokens
+                try {
+                    const tokens = await api(`/v1/user/token_list?id=${addr}&chain_id=${c.id}&is_all=false`);
+                    if (Array.isArray(tokens)) {
+                        for (const t of tokens) {
+                            const usd = (t.amount || 0) * (t.price || 0);
+                            if (usd >= 50000 && !t.protocol_id) {
+                                // Wallet-held token (not in any protocol)
+                                const existingWallet = db.prepare('SELECT id FROM positions WHERE wallet = ? AND chain = ? AND protocol_id = ? AND position_index = ?').get(addr, c.id, 'wallet-held', t.id || '');
+                                if (existingWallet) {
+                                    db.prepare('DELETE FROM position_tokens WHERE position_id = ?').run(existingWallet.id);
+                                }
+                                const result = posStmt.run(addr, c.id, 'wallet-held', 'Wallet', 'Holding', 'hold', 'wallet', null, Math.round(usd * 100) / 100, Math.round(usd * 100) / 100, 0, t.id || '');
+                                tokStmt.run(result.lastInsertRowid, 'supply', t.symbol || '?', t.symbol || '?', t.name || '', t.id || '', t.amount || 0, t.price || 0, usd);
+                                walletPositions++;
+                                console.log(`    + ${t.symbol}: $${usd.toLocaleString()} (wallet-held)`);
+                            }
+                        }
+                    }
+                } catch (e) {}
             }
             await new Promise(r => setTimeout(r, 150));
         }

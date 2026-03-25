@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-03-25T02:37:01.815Z",
+  "generated_at": "2026-03-25T03:00:34.326Z",
   "summary": {
-    "total_positions": 87,
-    "total_value": 578137834.73,
-    "total_assets": 1790188559.6699996,
-    "total_debt": 1212050724.9000003,
+    "total_positions": 101,
+    "total_value": 694695160.8999999,
+    "total_assets": 1906793020.7999995,
+    "total_debt": 1212097859.8799996,
     "total_whales": 6,
     "total_wallets": 50,
     "total_active": 25,
@@ -16,8 +16,8 @@
       "base",
       "arb",
       "uni",
-      "botanix",
-      "bera"
+      "bera",
+      "botanix"
     ],
     "protocols": [
       "Aave V3",
@@ -26,6 +26,7 @@
       "Aura Finance",
       "Avantis",
       "Fluid",
+      "Wallet",
       "Euler",
       "Revert",
       "Maple",
@@ -80,7 +81,7 @@
       "active_wallets": 4,
       "positions": [
         {
-          "id": 11,
+          "id": 25,
           "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -89,12 +90,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.034,
-          "net_usd": 26488888.63,
+          "net_usd": 26471615.64,
           "asset_usd": 264505850.41,
-          "debt_usd": 238016961.78,
+          "debt_usd": 238034234.78,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:36",
+          "scanned_at": "2026-03-25 02:56:40",
           "supply": [
             {
               "symbol": "USDe",
@@ -113,8 +114,8 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 129010502.429091,
-              "price_usd": 1.00040016006403,
-              "value_usd": 129062127.280003
+              "price_usd": 1.00050025012506,
+              "value_usd": 129075039.949066
             },
             {
               "symbol": "USDT",
@@ -122,14 +123,14 @@
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "amount": 109008248.538557,
-              "price_usd": 0.99951,
-              "value_usd": 108954834.496773
+              "price_usd": 0.99955,
+              "value_usd": 108959194.826715
             }
           ],
           "rewards": []
         },
         {
-          "id": 10,
+          "id": 24,
           "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
           "chain": "mnt",
           "protocol_id": "mnt_aave3",
@@ -138,12 +139,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 18702987.17,
+          "net_usd": 18696308.27,
           "asset_usd": 185593671.75,
-          "debt_usd": 166890684.58,
+          "debt_usd": 166897363.48,
           "position_index": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9,0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x779ded0c9e1022225f8e0630b35a9b54be713736",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:08",
+          "scanned_at": "2026-03-25 02:56:11",
           "supply": [
             {
               "symbol": "sUSDe",
@@ -162,8 +163,8 @@
               "real_name": "USDT0",
               "address": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
               "amount": 166972481.052458,
-              "price_usd": 0.99951,
-              "value_usd": 166890664.536742
+              "price_usd": 0.99955,
+              "value_usd": 166897343.435984
             },
             {
               "symbol": "USDC",
@@ -171,14 +172,14 @@
               "real_name": "USD Coin",
               "address": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9",
               "amount": 20.033316,
-              "price_usd": 1.00040016006403,
-              "value_usd": 20.0413325330132
+              "price_usd": 1.00050025012506,
+              "value_usd": 20.0433376688344
             }
           ],
           "rewards": []
         },
         {
-          "id": 13,
+          "id": 27,
           "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
           "chain": "plasma",
           "protocol_id": "plasma_aave3",
@@ -187,12 +188,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.035,
-          "net_usd": 13243531.89,
+          "net_usd": 13238851.54,
           "asset_usd": 130195047.64,
-          "debt_usd": 116951515.75,
+          "debt_usd": 116956196.1,
           "position_index": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:41",
+          "scanned_at": "2026-03-25 02:56:46",
           "supply": [
             {
               "symbol": "USDe",
@@ -211,14 +212,14 @@
               "real_name": "USDT0",
               "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
               "amount": 117008850.086003,
-              "price_usd": 0.99951,
-              "value_usd": 116951515.749461
+              "price_usd": 0.99955,
+              "value_usd": 116956196.103464
             }
           ],
           "rewards": []
         },
         {
-          "id": 2,
+          "id": 16,
           "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
           "chain": "plasma",
           "protocol_id": "plasma_aave3",
@@ -227,12 +228,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 12834811.19,
-          "asset_usd": 128005058.93,
-          "debt_usd": 115170247.74,
+          "net_usd": 12810994.83,
+          "asset_usd": 127985851.64,
+          "debt_usd": 115174856.81,
           "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xc4374775489cb9c56003bf2c9b12495fc64f0771",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:33:55",
+          "scanned_at": "2026-03-25 02:55:58",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -240,8 +241,8 @@
               "real_name": "Syrup USDT",
               "address": "0xc4374775489cb9c56003bf2c9b12495fc64f0771",
               "amount": 114384265.553795,
-              "price_usd": 1.11907925721398,
-              "value_usd": 128005058.932908
+              "price_usd": 1.11891133823294,
+              "value_usd": 127985851.643589
             }
           ],
           "borrow": [
@@ -251,14 +252,14 @@
               "real_name": "USDT0",
               "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
               "amount": 115226708.827914,
-              "price_usd": 0.99951,
-              "value_usd": 115170247.740588
+              "price_usd": 0.99955,
+              "value_usd": 115174856.808941
             }
           ],
           "rewards": []
         },
         {
-          "id": 12,
+          "id": 26,
           "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
           "chain": "eth",
           "protocol_id": "ethena",
@@ -272,7 +273,7 @@
           "debt_usd": 0,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:36",
+          "scanned_at": "2026-03-25 02:56:40",
           "supply": [
             {
               "symbol": "USDe",
@@ -288,7 +289,7 @@
           "rewards": []
         },
         {
-          "id": 9,
+          "id": 23,
           "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
           "chain": "ink",
           "protocol_id": "ink_aave3",
@@ -297,12 +298,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 5612337.32,
+          "net_usd": 5615588.58,
           "asset_usd": 55543399.75,
-          "debt_usd": 49931062.43,
+          "debt_usd": 49927811.17,
           "position_index": "0x0200c29006150606b650577bbe7b6248f58470c1,0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x2d270e6886d130d724215a266106e6832161eaed",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:07",
+          "scanned_at": "2026-03-25 02:56:10",
           "supply": [
             {
               "symbol": "sUSDe",
@@ -321,8 +322,8 @@
               "real_name": "USD₮0",
               "address": "0x0200c29006150606b650577bbe7b6248f58470c1",
               "amount": 38430737.608664,
-              "price_usd": 0.99964,
-              "value_usd": 38416902.5431249
+              "price_usd": 0.99955,
+              "value_usd": 38413443.7767401
             },
             {
               "symbol": "USDC",
@@ -330,14 +331,14 @@
               "real_name": "USDC",
               "address": "0x2d270e6886d130d724215a266106e6832161eaed",
               "amount": 11515697.227767,
-              "price_usd": 0.999866500266564,
-              "value_usd": 11514159.8852568
+              "price_usd": 0.999884519774814,
+              "value_usd": 11514367.392458
             }
           ],
           "rewards": []
         },
         {
-          "id": 7,
+          "id": 21,
           "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
           "chain": "base",
           "protocol_id": "base_aave3",
@@ -346,12 +347,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.031,
-          "net_usd": 4820011.59,
-          "asset_usd": 44585765.93,
-          "debt_usd": 39765754.34,
+          "net_usd": 4820493.84,
+          "asset_usd": 44590226.74,
+          "debt_usd": 39769732.9,
           "position_index": "0x660975730059246a68521a3e2fbd4740173100f5,0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:00",
+          "scanned_at": "2026-03-25 02:56:02",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -359,8 +360,8 @@
               "real_name": "Syrup USDC",
               "address": "0x660975730059246a68521a3e2fbd4740173100f5",
               "amount": 38524417.032089,
-              "price_usd": 1.15733784872351,
-              "value_usd": 44585765.9312454
+              "price_usd": 1.15745364040423,
+              "value_usd": 44590226.738242
             }
           ],
           "borrow": [
@@ -370,14 +371,14 @@
               "real_name": "USD Coin",
               "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
               "amount": 39749848.035862,
-              "price_usd": 1.00040016006403,
-              "value_usd": 39765754.337597
+              "price_usd": 1.00050025012506,
+              "value_usd": 39769732.9023132
             }
           ],
           "rewards": []
         },
         {
-          "id": 8,
+          "id": 22,
           "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -386,21 +387,21 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.022,
-          "net_usd": 4036089.42,
-          "asset_usd": 40289057.07,
-          "debt_usd": 36252967.65,
+          "net_usd": 4043194.16,
+          "asset_usd": 40293140.17,
+          "debt_usd": 36249946.01,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:06",
+          "scanned_at": "2026-03-25 02:56:09",
           "supply": [
             {
               "symbol": "USDe",
               "real_symbol": "USDe",
               "real_name": "USDe",
               "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-              "amount": 40305179.1461605,
-              "price_usd": 0.9996,
-              "value_usd": 40289057.074502
+              "amount": 40305231.7431618,
+              "price_usd": 0.9997,
+              "value_usd": 40293140.1736389
             }
           ],
           "borrow": [
@@ -410,8 +411,8 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 1274220.671316,
-              "price_usd": 1.00040016006403,
-              "value_usd": 1274730.56354142
+              "price_usd": 1.00050025012506,
+              "value_usd": 1274858.10036618
             },
             {
               "symbol": "USDT",
@@ -419,14 +420,14 @@
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "amount": 34990833.789517,
-              "price_usd": 0.99964,
-              "value_usd": 34978237.0893528
+              "price_usd": 0.99955,
+              "value_usd": 34975087.9143117
             }
           ],
           "rewards": []
         },
         {
-          "id": 1,
+          "id": 15,
           "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -435,28 +436,28 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.028,
-          "net_usd": 3612713.63,
-          "asset_usd": 34297963.31,
-          "debt_usd": 30685249.68,
+          "net_usd": 3612432.32,
+          "asset_usd": 34294919.33,
+          "debt_usd": 30682487.01,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:33:50",
+          "scanned_at": "2026-03-25 02:55:53",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 3614014.67588677,
-              "price_usd": 0.99964,
-              "value_usd": 3612713.63060345
+              "amount": 3614058.64432797,
+              "price_usd": 0.99955,
+              "value_usd": 3612432.31793802
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 6,
+          "id": 20,
           "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -465,21 +466,21 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.06,
-          "net_usd": 1688322.63,
-          "asset_usd": 12337090.59,
-          "debt_usd": 10648767.95,
+          "net_usd": 1690641.41,
+          "asset_usd": 12338344.59,
+          "debt_usd": 10647703.18,
           "position_index": "0xc9629945524f3fde56c7e8854a6c3d48e76b9d97236abbe73c750fcc7aeb8501",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:33:58",
+          "scanned_at": "2026-03-25 02:56:01",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 12332155.7509205,
-              "price_usd": 1.00040016006403,
-              "value_usd": 12337090.5871554
+              "amount": 12332175.4208935,
+              "price_usd": 1.00050025012506,
+              "value_usd": 12338344.5931901
             }
           ],
           "borrow": [
@@ -489,14 +490,14 @@
               "real_name": "PayPal USD",
               "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
               "amount": 10647703.1825074,
-              "price_usd": 1.0001,
-              "value_usd": 10648767.9528256
+              "price_usd": 1,
+              "value_usd": 10647703.1825074
             }
           ],
           "rewards": []
         },
         {
-          "id": 5,
+          "id": 19,
           "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -505,28 +506,28 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.061,
-          "net_usd": 1665662.95,
-          "asset_usd": 12091454.65,
-          "debt_usd": 10425791.7,
+          "net_usd": 1665848.89,
+          "asset_usd": 12092683.69,
+          "debt_usd": 10426834.8,
           "position_index": "0x729badf297ee9f2f6b3f717b96fd355fc6ec00422284ce1968e76647b258cf44",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:33:58",
+          "scanned_at": "2026-03-25 02:56:01",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 1664996.68724977,
-              "price_usd": 1.00040016006403,
-              "value_usd": 1665662.95243074
+              "amount": 1665015.96558645,
+              "price_usd": 1.00050025012506,
+              "value_usd": 1665848.89003147
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 4,
+          "id": 18,
           "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
           "chain": "arb",
           "protocol_id": "arb_morphoblue",
@@ -535,12 +536,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.056,
-          "net_usd": 1166395.8,
-          "asset_usd": 8744037.83,
-          "debt_usd": 7577642.03,
+          "net_usd": 1166512.5,
+          "asset_usd": 8744912.67,
+          "debt_usd": 7578400.17,
           "position_index": "0xf86f3edd6f16cd8211f4d206866dc4ecd41be6211063ac11f8508e1b7112ef40",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:33:56",
+          "scanned_at": "2026-03-25 02:55:59",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -548,8 +549,8 @@
               "real_name": "Syrup USDC",
               "address": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
               "amount": 7555302.746291,
-              "price_usd": 1.15733784872351,
-              "value_usd": 8744037.82684729
+              "price_usd": 1.15745364040423,
+              "value_usd": 8744912.66805057
             }
           ],
           "borrow": [
@@ -559,14 +560,14 @@
               "real_name": "USD Coin",
               "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
               "amount": 7574610.97154311,
-              "price_usd": 1.00040016006403,
-              "value_usd": 7577642.02835445
+              "price_usd": 1.00050025012506,
+              "value_usd": 7578400.17162892
             }
           ],
           "rewards": []
         },
         {
-          "id": 3,
+          "id": 17,
           "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
           "chain": "arb",
           "protocol_id": "arb_morphoblue",
@@ -575,12 +576,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.07,
-          "net_usd": 324278.92,
-          "asset_usd": 2233663.21,
-          "debt_usd": 1909384.29,
+          "net_usd": 324674.3,
+          "asset_usd": 2233886.68,
+          "debt_usd": 1909212.38,
           "position_index": "0x571cb3ac535d61d92026c071ef1df4794d0bbbe1755f916ff640746f81b52af4",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:33:56",
+          "scanned_at": "2026-03-25 02:55:59",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -588,8 +589,8 @@
               "real_name": "Syrup USDC",
               "address": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
               "amount": 1930001,
-              "price_usd": 1.15733784872351,
-              "value_usd": 2233663.20537423
+              "price_usd": 1.15745364040423,
+              "value_usd": 2233886.6834338
             }
           ],
           "borrow": [
@@ -599,8 +600,8 @@
               "real_name": "USD₮0",
               "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
               "amount": 1910071.91570779,
-              "price_usd": 0.99964,
-              "value_usd": 1909384.28981813
+              "price_usd": 0.99955,
+              "value_usd": 1909212.38334572
             }
           ],
           "rewards": []
@@ -618,7 +619,7 @@
       "active_wallets": 1,
       "positions": [
         {
-          "id": 23,
+          "id": 10,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -627,28 +628,28 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 9926832.78,
-          "asset_usd": 9926832.78,
+          "net_usd": 9927859.92,
+          "asset_usd": 9927859.92,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
+          "scanned_at": "2026-03-25 02:54:52",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 9922862.043919,
-              "price_usd": 1.00040016006403,
-              "value_usd": 9926832.77702981
+              "amount": 9922895.986248,
+              "price_usd": 1.00050025012506,
+              "value_usd": 9927859.9162061
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 22,
+          "id": 9,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -657,28 +658,28 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 9245730.31,
-          "asset_usd": 9245730.31,
+          "net_usd": 9244808.62,
+          "asset_usd": 9244808.62,
           "debt_usd": 0,
           "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
+          "scanned_at": "2026-03-25 02:54:52",
           "supply": [
             {
               "symbol": "PYUSD",
               "real_symbol": "PYUSD",
               "real_name": "PayPal USD",
               "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
-              "amount": 9244805.831169,
-              "price_usd": 1.0001,
-              "value_usd": 9245730.31175212
+              "amount": 9244808.620366,
+              "price_usd": 1,
+              "value_usd": 9244808.620366
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 20,
+          "id": 7,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -687,28 +688,28 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 2542731.85,
-          "asset_usd": 2542731.85,
+          "net_usd": 2542837.23,
+          "asset_usd": 2542837.23,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
+          "scanned_at": "2026-03-25 02:54:52",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 2543978.395811,
-              "price_usd": 0.99951,
-              "value_usd": 2542731.84639705
+              "amount": 2543982.023092,
+              "price_usd": 0.99955,
+              "value_usd": 2542837.23118161
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 15,
+          "id": 2,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -722,7 +723,7 @@
           "debt_usd": 0,
           "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
+          "scanned_at": "2026-03-25 02:54:52",
           "supply": [
             {
               "symbol": "GHO",
@@ -738,7 +739,7 @@
           "rewards": []
         },
         {
-          "id": 25,
+          "id": 12,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "base",
           "protocol_id": "base_aurafinance",
@@ -747,55 +748,55 @@
           "strategy": "farm",
           "yield_source": "Aura Finance",
           "health_rate": null,
-          "net_usd": 2412164.48,
-          "asset_usd": 2412164.48,
+          "net_usd": 2412274.1,
+          "asset_usd": 2412274.1,
           "debt_usd": 0,
           "position_index": "0x1509706a6c66ca549ff0cb464de88231ddbe213b,0x4158734d47fc9692176b5085e0f52ee0da5d47f1,0x6bb7a212910682dcfdbd5bcbb3e28fb4e8da10ee,0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:57",
+          "scanned_at": "2026-03-25 02:54:55",
           "supply": [
             {
               "symbol": "GHO",
               "real_symbol": "GHO",
               "real_name": "Gho Token",
               "address": "0x6bb7a212910682dcfdbd5bcbb3e28fb4e8da10ee",
-              "amount": 1726169.79000949,
-              "price_usd": 0.999093470766335,
-              "value_usd": 1724604.96663258
+              "amount": 1726174.82172812,
+              "price_usd": 0.999113754760786,
+              "value_usd": 1724645.00751031
             },
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
-              "amount": 687278.168779845,
-              "price_usd": 1.00040016006403,
-              "value_usd": 687553.190055867
+              "amount": 687278.752091164,
+              "price_usd": 1.00050025012506,
+              "value_usd": 687622.56337285
             },
             {
               "symbol": "BAL",
               "real_symbol": "BAL",
               "real_name": "Balancer",
               "address": "0x4158734d47fc9692176b5085e0f52ee0da5d47f1",
-              "amount": 34.5914018933859,
-              "price_usd": 0.152877523529661,
-              "value_usd": 5.28824785688007
+              "amount": 35.6780006326886,
+              "price_usd": 0.153051608621181,
+              "value_usd": 5.46057538922052
             },
             {
               "symbol": "AURA",
               "real_symbol": "AURA",
               "real_name": "Aura",
               "address": "0x1509706a6c66ca549ff0cb464de88231ddbe213b",
-              "amount": 40.9505581233165,
-              "price_usd": 0.0253728152276492,
-              "value_usd": 1.03903094473202
+              "amount": 42.2369131825211,
+              "price_usd": 0.0253841295192948,
+              "value_usd": 1.07214727472033
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 21,
+          "id": 8,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -804,28 +805,28 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 2311033.01,
-          "asset_usd": 2311033.01,
+          "net_usd": 2311035.87,
+          "asset_usd": 2311035.87,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
+          "scanned_at": "2026-03-25 02:54:52",
           "supply": [
             {
               "symbol": "RLUSD",
               "real_symbol": "RLUSD",
               "real_name": "RLUSD",
               "address": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
-              "amount": 2309878.06804786,
+              "amount": 2309880.92936369,
               "price_usd": 1.0005,
-              "value_usd": 2311033.00708189
+              "value_usd": 2311035.86982838
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 26,
+          "id": 13,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "base",
           "protocol_id": "base_avantisfi",
@@ -834,12 +835,12 @@
           "strategy": "lend",
           "yield_source": "Avantis",
           "health_rate": null,
-          "net_usd": 2310021.88,
-          "asset_usd": 2310021.88,
+          "net_usd": 2310253,
+          "asset_usd": 2310253,
           "debt_usd": 0,
           "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:57",
+          "scanned_at": "2026-03-25 02:54:55",
           "supply": [
             {
               "symbol": "USDC",
@@ -847,15 +848,15 @@
               "real_name": "USD Coin",
               "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
               "amount": 2309097.869118,
-              "price_usd": 1.00040016006403,
-              "value_usd": 2310021.87786915
+              "price_usd": 1.00050025012506,
+              "value_usd": 2310252.99561581
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 19,
+          "id": 6,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "fluid",
@@ -864,117 +865,21 @@
           "strategy": "lend",
           "yield_source": "Fluid",
           "health_rate": null,
-          "net_usd": 2102812.91,
-          "asset_usd": 2102812.91,
+          "net_usd": 2103033.89,
+          "asset_usd": 2103033.89,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
+          "scanned_at": "2026-03-25 02:54:52",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 2101971.785809,
-              "price_usd": 1.00040016006403,
-              "value_usd": 2102812.91097339
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 17,
-          "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
-          "chain": "eth",
-          "protocol_id": "aurafinance",
-          "protocol_name": "Aura Finance",
-          "position_type": "Farming",
-          "strategy": "farm",
-          "yield_source": "Aura Finance",
-          "health_rate": null,
-          "net_usd": 1422899.07,
-          "asset_usd": 1422899.07,
-          "debt_usd": 0,
-          "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xba100000625a3754423978a60c9317c58a424e3d,0xc0c293ce456ff0ed870add98a0828dd4d2903dbf,0xdac17f958d2ee523a2206206994597c13d831ec7",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
-          "supply": [
-            {
-              "symbol": "USDT",
-              "real_symbol": "USDT",
-              "real_name": "Tether USD",
-              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 354289.439437085,
-              "price_usd": 0.99951,
-              "value_usd": 354115.837611761
-            },
-            {
-              "symbol": "GHO",
-              "real_symbol": "GHO",
-              "real_name": "Gho Token",
-              "address": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
-              "amount": 857588.144355076,
-              "price_usd": 1,
-              "value_usd": 857588.144355076
-            },
-            {
-              "symbol": "USDC",
-              "real_symbol": "USDC",
-              "real_name": "USD Coin",
-              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 211100.837715767,
-              "price_usd": 1.00040016006403,
-              "value_usd": 211185.311840503
-            },
-            {
-              "symbol": "BAL",
-              "real_symbol": "BAL",
-              "real_name": "Balancer",
-              "address": "0xba100000625a3754423978a60c9317c58a424e3d",
-              "amount": 50.5534657697165,
-              "price_usd": 0.153070582930783,
-              "value_usd": 7.73824847454192
-            },
-            {
-              "symbol": "AURA",
-              "real_symbol": "AURA",
-              "real_name": "Aura",
-              "address": "0xc0c293ce456ff0ed870add98a0828dd4d2903dbf",
-              "amount": 80.3089642735219,
-              "price_usd": 0.0253728152276492,
-              "value_usd": 2.03766451163595
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 18,
-          "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
-          "chain": "eth",
-          "protocol_id": "euler2",
-          "protocol_name": "Euler",
-          "position_type": "Lending",
-          "strategy": "lend",
-          "yield_source": "Euler",
-          "health_rate": null,
-          "net_usd": 1345091.29,
-          "asset_usd": 1345091.29,
-          "debt_usd": 0,
-          "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
-          "supply": [
-            {
-              "symbol": "PYUSD",
-              "real_symbol": "PYUSD",
-              "real_name": "PayPal USD",
-              "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
-              "amount": 1344956.790133,
-              "price_usd": 1.0001,
-              "value_usd": 1345091.28581201
+              "amount": 2101982.368284,
+              "price_usd": 1.00050025012506,
+              "value_usd": 2103033.88522661
             }
           ],
           "borrow": [],
@@ -983,6 +888,132 @@
         {
           "id": 14,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+          "chain": "base",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 1645115.77,
+          "asset_usd": 1645115.77,
+          "debt_usd": 0,
+          "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:54:55",
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "amount": 1644293.216134,
+              "price_usd": 1.00050025012506,
+              "value_usd": 1645115.77402101
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 4,
+          "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+          "chain": "eth",
+          "protocol_id": "aurafinance",
+          "protocol_name": "Aura Finance",
+          "position_type": "Farming",
+          "strategy": "farm",
+          "yield_source": "Aura Finance",
+          "health_rate": null,
+          "net_usd": 1422942.15,
+          "asset_usd": 1422942.15,
+          "debt_usd": 0,
+          "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xba100000625a3754423978a60c9317c58a424e3d,0xc0c293ce456ff0ed870add98a0828dd4d2903dbf,0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:54:52",
+          "supply": [
+            {
+              "symbol": "USDT",
+              "real_symbol": "USDT",
+              "real_name": "Tether USD",
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "amount": 349551.610567277,
+              "price_usd": 0.99955,
+              "value_usd": 349394.312342522
+            },
+            {
+              "symbol": "GHO",
+              "real_symbol": "GHO",
+              "real_name": "Gho Token",
+              "address": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
+              "amount": 858813.727177553,
+              "price_usd": 1,
+              "value_usd": 858813.727177553
+            },
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": 214616.667422034,
+              "price_usd": 1.00050025012506,
+              "value_usd": 214724.029436753
+            },
+            {
+              "symbol": "BAL",
+              "real_symbol": "BAL",
+              "real_name": "Balancer",
+              "address": "0xba100000625a3754423978a60c9317c58a424e3d",
+              "amount": 52.1517425733155,
+              "price_usd": 0.153051608621181,
+              "value_usd": 7.98190809324368
+            },
+            {
+              "symbol": "AURA",
+              "real_symbol": "AURA",
+              "real_name": "Aura",
+              "address": "0xc0c293ce456ff0ed870add98a0828dd4d2903dbf",
+              "amount": 82.8479782217261,
+              "price_usd": 0.0253841295192948,
+              "value_usd": 2.10302380959201
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 5,
+          "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+          "chain": "eth",
+          "protocol_id": "euler2",
+          "protocol_name": "Euler",
+          "position_type": "Lending",
+          "strategy": "lend",
+          "yield_source": "Euler",
+          "health_rate": null,
+          "net_usd": 1344956.79,
+          "asset_usd": 1344956.79,
+          "debt_usd": 0,
+          "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:54:52",
+          "supply": [
+            {
+              "symbol": "PYUSD",
+              "real_symbol": "PYUSD",
+              "real_name": "PayPal USD",
+              "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+              "amount": 1344956.79204,
+              "price_usd": 1,
+              "value_usd": 1344956.79204
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 1,
+          "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "arb",
           "protocol_id": "arb_revert",
           "protocol_name": "Revert",
@@ -990,28 +1021,28 @@
           "strategy": "lend",
           "yield_source": "Revert",
           "health_rate": null,
-          "net_usd": 942776.49,
-          "asset_usd": 942776.49,
+          "net_usd": 942873.47,
+          "asset_usd": 942873.47,
           "debt_usd": 0,
           "position_index": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:52",
+          "scanned_at": "2026-03-25 02:54:50",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
-              "amount": 942399.374792,
-              "price_usd": 1.00040016006403,
-              "value_usd": 942776.485386154
+              "amount": 942402.032728,
+              "price_usd": 1.00050025012506,
+              "value_usd": 942873.469462731
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 16,
+          "id": 3,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -1020,37 +1051,37 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.157920892373162e+59,
-          "net_usd": 499393.37,
-          "asset_usd": 499393.37,
+          "net_usd": 499387.11,
+          "asset_usd": 499387.11,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed,0xe343167631d89b6ffc58b88d6b7fb0228795491d",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:54",
+          "scanned_at": "2026-03-25 02:54:52",
           "supply": [
             {
               "symbol": "RLUSD",
               "real_symbol": "RLUSD",
               "real_name": "RLUSD",
               "address": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
-              "amount": 81.7975316498312,
+              "amount": 81.7975781269807,
               "price_usd": 1.0005,
-              "value_usd": 81.8384304156561
+              "value_usd": 81.8384769160442
             },
             {
               "symbol": "USDG",
               "real_symbol": "USDG",
               "real_name": "Global Dollar",
               "address": "0xe343167631d89b6ffc58b88d6b7fb0228795491d",
-              "amount": 499311.527818,
-              "price_usd": 1,
-              "value_usd": 499311.527818
+              "amount": 499313.259158,
+              "price_usd": 0.999984,
+              "value_usd": 499305.270145853
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 24,
+          "id": 11,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "uni",
           "protocol_id": "uni_morphoblue",
@@ -1059,21 +1090,21 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 302138.22,
-          "asset_usd": 302138.22,
+          "net_usd": 302169.93,
+          "asset_usd": 302169.93,
           "debt_usd": 0,
           "position_index": "0x078d782b760474a361dda0af3839290b0ef57ad6",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:34:56",
+          "scanned_at": "2026-03-25 02:54:53",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USDC",
               "address": "0x078d782b760474a361dda0af3839290b0ef57ad6",
-              "amount": 302017.361205,
-              "price_usd": 1.00040016006403,
-              "value_usd": 302138.216491597
+              "amount": 302018.840267,
+              "price_usd": 1.00050025012506,
+              "value_usd": 302169.925229615
             }
           ],
           "borrow": [],
@@ -1101,7 +1132,7 @@
       "active_wallets": 6,
       "positions": [
         {
-          "id": 32,
+          "id": 33,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "maple",
@@ -1110,12 +1141,12 @@
           "strategy": "lend",
           "yield_source": "Maple",
           "health_rate": null,
-          "net_usd": 8394472,
-          "asset_usd": 8394472,
+          "net_usd": 8395311.87,
+          "asset_usd": 8395311.87,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:05",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDC",
@@ -1123,15 +1154,15 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 8391114.212217,
-              "price_usd": 1.00040016006403,
-              "value_usd": 8394472.00101741
+              "price_usd": 1.00050025012506,
+              "value_usd": 8395311.86815107
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 42,
+          "id": 43,
           "wallet": "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -1140,21 +1171,21 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 6929154.49,
-          "asset_usd": 68389783.11,
-          "debt_usd": 61460628.62,
+          "net_usd": 6925486.8,
+          "asset_usd": 68389804.86,
+          "debt_usd": 61464318.06,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3,0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:18",
+          "scanned_at": "2026-03-25 02:58:42",
           "supply": [
             {
               "symbol": "USDe",
               "real_symbol": "USDe",
               "real_name": "USDe",
               "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-              "amount": 68417149.9679715,
+              "amount": 68417171.7275003,
               "price_usd": 0.9996,
-              "value_usd": 68389783.1079843
+              "value_usd": 68389804.8588093
             }
           ],
           "borrow": [
@@ -1164,54 +1195,14 @@
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "amount": 61490759.089587,
-              "price_usd": 0.99951,
-              "value_usd": 61460628.6176331
+              "price_usd": 0.99957,
+              "value_usd": 61464318.0631785
             }
           ],
           "rewards": []
         },
         {
-          "id": 47,
-          "wallet": "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
-          "chain": "plasma",
-          "protocol_id": "plasma_aave3",
-          "protocol_name": "Aave V3",
-          "position_type": "Lending",
-          "strategy": "loop",
-          "yield_source": "Aave V3",
-          "health_rate": 1.168,
-          "net_usd": 6897928.53,
-          "asset_usd": 20755456.66,
-          "debt_usd": 13857528.13,
-          "position_index": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:27",
-          "supply": [
-            {
-              "symbol": "USDT0",
-              "real_symbol": "USDT0",
-              "real_name": "USDT0",
-              "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
-              "amount": 20765631.823829,
-              "price_usd": 0.99951,
-              "value_usd": 20755456.6642353
-            }
-          ],
-          "borrow": [
-            {
-              "symbol": "USDe",
-              "real_symbol": "USDe",
-              "real_name": "USDe",
-              "address": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
-              "amount": 13863073.358917,
-              "price_usd": 0.9996,
-              "value_usd": 13857528.1295735
-            }
-          ],
-          "rewards": []
-        },
-        {
-          "id": 39,
+          "id": 40,
           "wallet": "0x015CC48cC8bC37D80AAFf4e43061dbaF94192308",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -1220,21 +1211,21 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 6490418.59,
-          "asset_usd": 64554929.61,
-          "debt_usd": 58064511.02,
+          "net_usd": 6491030.03,
+          "asset_usd": 64558844.91,
+          "debt_usd": 58067814.88,
           "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f,0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:12",
+          "scanned_at": "2026-03-25 02:58:36",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 9522207.86165441,
-              "price_usd": 0.99951,
-              "value_usd": 9517541.9798022
+              "amount": 9522247.99150819,
+              "price_usd": 0.99957,
+              "value_usd": 9518153.42487185
             }
           ],
           "borrow": [
@@ -1251,7 +1242,47 @@
           "rewards": []
         },
         {
-          "id": 38,
+          "id": 48,
+          "wallet": "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
+          "chain": "plasma",
+          "protocol_id": "plasma_aave3",
+          "protocol_name": "Aave V3",
+          "position_type": "Lending",
+          "strategy": "loop",
+          "yield_source": "Aave V3",
+          "health_rate": 1.04,
+          "net_usd": 4613763.04,
+          "asset_usd": 18471306.48,
+          "debt_usd": 13857543.44,
+          "position_index": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:58:51",
+          "supply": [
+            {
+              "symbol": "USDT0",
+              "real_symbol": "USDT0",
+              "real_name": "USDT0",
+              "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
+              "amount": 18479252.563167,
+              "price_usd": 0.99957,
+              "value_usd": 18471306.4845648
+            }
+          ],
+          "borrow": [
+            {
+              "symbol": "USDe",
+              "real_symbol": "USDe",
+              "real_name": "USDe",
+              "address": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
+              "amount": 13863088.6770105,
+              "price_usd": 0.9996,
+              "value_usd": 13857543.4415397
+            }
+          ],
+          "rewards": []
+        },
+        {
+          "id": 39,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "plasma",
           "protocol_id": "plasma_aave3",
@@ -1260,12 +1291,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 4440045.01,
-          "asset_usd": 44482584.17,
-          "debt_usd": 40042539.16,
+          "net_usd": 4430966.62,
+          "asset_usd": 44475909.51,
+          "debt_usd": 40044942.89,
           "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xc4374775489cb9c56003bf2c9b12495fc64f0771",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:10",
+          "scanned_at": "2026-03-25 02:58:33",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -1273,8 +1304,8 @@
               "real_name": "Syrup USDT",
               "address": "0xc4374775489cb9c56003bf2c9b12495fc64f0771",
               "amount": 39749270.55846,
-              "price_usd": 1.11907925721398,
-              "value_usd": 44482584.171359
+              "price_usd": 1.11891133823294,
+              "value_usd": 44475909.5143499
             }
           ],
           "borrow": [
@@ -1284,14 +1315,14 @@
               "real_name": "USDT0",
               "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
               "amount": 40062169.623996,
-              "price_usd": 0.99951,
-              "value_usd": 40042539.1608802
+              "price_usd": 0.99957,
+              "value_usd": 40044942.8910577
             }
           ],
           "rewards": []
         },
         {
-          "id": 40,
+          "id": 41,
           "wallet": "0x015CC48cC8bC37D80AAFf4e43061dbaF94192308",
           "chain": "eth",
           "protocol_id": "pendle2",
@@ -1300,12 +1331,12 @@
           "strategy": "lp",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 4228221.64,
-          "asset_usd": 4228221.64,
+          "net_usd": 4228220.86,
+          "asset_usd": 4228220.86,
           "debt_usd": 0,
           "position_index": "0x67aeeed39c1675e0df93ad8bab543b17992d433b,0x808507121b80c02388fad14726482e061b8da827,0x8238884ec9668ef77b90c6dff4d1a9f4f4823bfe",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:12",
+          "scanned_at": "2026-03-25 02:58:36",
           "supply": [
             {
               "symbol": "USDO",
@@ -1322,8 +1353,8 @@
               "real_name": "PT Compounding Open Dollar 28MAY2026",
               "address": "0x67aeeed39c1675e0df93ad8bab543b17992d433b",
               "amount": 542791.64484458,
-              "price_usd": 0.989079135084305,
-              "value_usd": 536863.890613864
+              "price_usd": 0.989078670949536,
+              "value_usd": 536863.63868539
             },
             {
               "symbol": "PENDLE",
@@ -1331,15 +1362,15 @@
               "real_name": "Pendle",
               "address": "0x808507121b80c02388fad14726482e061b8da827",
               "amount": 106.432957908157,
-              "price_usd": 1.238,
-              "value_usd": 131.764001890298
+              "price_usd": 1.233,
+              "value_usd": 131.231837100757
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 44,
+          "id": 45,
           "wallet": "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
           "chain": "plasma",
           "protocol_id": "plasma_aave3",
@@ -1348,12 +1379,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.01,
-          "net_usd": 4036487.75,
-          "asset_usd": 45540980.4,
-          "debt_usd": 41504492.65,
+          "net_usd": 4032404.94,
+          "asset_usd": 45539389.08,
+          "debt_usd": 41506984.14,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:22",
+          "scanned_at": "2026-03-25 02:58:46",
           "supply": [
             {
               "symbol": "USDe",
@@ -1370,8 +1401,8 @@
               "real_name": "Staked USDe",
               "address": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
               "amount": 18578743.5636888,
-              "price_usd": 1.22316917698461,
-              "value_usd": 22724946.4742053
+              "price_usd": 1.22308352430725,
+              "value_usd": 22723355.1550772
             }
           ],
           "borrow": [
@@ -1381,14 +1412,14 @@
               "real_name": "USDT0",
               "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
               "amount": 41524839.821232,
-              "price_usd": 0.99951,
-              "value_usd": 41504492.6497196
+              "price_usd": 0.99957,
+              "value_usd": 41506984.1401089
             }
           ],
           "rewards": []
         },
         {
-          "id": 43,
+          "id": 44,
           "wallet": "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
           "chain": "mnt",
           "protocol_id": "mnt_aave3",
@@ -1397,12 +1428,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 3907423.18,
+          "net_usd": 3905338.96,
           "asset_usd": 38620708.94,
-          "debt_usd": 34713285.76,
+          "debt_usd": 34715369.98,
           "position_index": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9,0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0x779ded0c9e1022225f8e0630b35a9b54be713736",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:19",
+          "scanned_at": "2026-03-25 02:58:43",
           "supply": [
             {
               "symbol": "USDe",
@@ -1430,8 +1461,8 @@
               "real_name": "USDT0",
               "address": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
               "amount": 34720290.798131,
-              "price_usd": 0.99951,
-              "value_usd": 34703277.8556399
+              "price_usd": 0.99957,
+              "value_usd": 34705361.0730878
             },
             {
               "symbol": "USDC",
@@ -1439,14 +1470,14 @@
               "real_name": "USD Coin",
               "address": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9",
               "amount": 10003.902499,
-              "price_usd": 1.00040016006403,
-              "value_usd": 10007.9056612645
+              "price_usd": 1.00050025012506,
+              "value_usd": 10008.9069524762
             }
           ],
           "rewards": []
         },
         {
-          "id": 41,
+          "id": 42,
           "wallet": "0x015CC48cC8bC37D80AAFf4e43061dbaF94192308",
           "chain": "mnt",
           "protocol_id": "mnt_aave3",
@@ -1455,12 +1486,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.026,
-          "net_usd": 3865256.54,
+          "net_usd": 3863224.77,
           "asset_usd": 37711510,
-          "debt_usd": 33846253.46,
+          "debt_usd": 33848285.23,
           "position_index": "0x051665f2455116e929b9972c36d23070f5054ce0,0x779ded0c9e1022225f8e0630b35a9b54be713736",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:12",
+          "scanned_at": "2026-03-25 02:58:36",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -1479,14 +1510,14 @@
               "real_name": "USDT0",
               "address": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
               "amount": 33862846.257023,
-              "price_usd": 0.99951,
-              "value_usd": 33846253.4623571
+              "price_usd": 0.99957,
+              "value_usd": 33848285.2331325
             }
           ],
           "rewards": []
         },
         {
-          "id": 35,
+          "id": 36,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -1495,21 +1526,21 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.053,
-          "net_usd": 2704659.64,
-          "asset_usd": 32479605.55,
-          "debt_usd": 29774945.91,
+          "net_usd": 2709391.33,
+          "asset_usd": 32486124.61,
+          "debt_usd": 29776733.29,
           "position_index": "0x3274643db77a064abd3bc851de77556a4ad2e2f502f4f0c80845fa8f909ecf0b",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:05",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDS",
               "real_symbol": "USDS",
               "real_name": "USDS Stablecoin",
               "address": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
-              "amount": 32486102.7691581,
-              "price_usd": 0.9998,
-              "value_usd": 32479605.5486043
+              "amount": 32486124.6128643,
+              "price_usd": 1,
+              "value_usd": 32486124.6128643
             }
           ],
           "borrow": [
@@ -1519,14 +1550,14 @@
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "amount": 29789542.7889004,
-              "price_usd": 0.99951,
-              "value_usd": 29774945.9129338
+              "price_usd": 0.99957,
+              "value_usd": 29776733.2855011
             }
           ],
           "rewards": []
         },
         {
-          "id": 46,
+          "id": 47,
           "wallet": "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -1535,21 +1566,21 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.055,
-          "net_usd": 2176711.35,
-          "asset_usd": 16365714.39,
-          "debt_usd": 14189003.04,
+          "net_usd": 2177161.96,
+          "asset_usd": 16365724.74,
+          "debt_usd": 14188562.78,
           "position_index": "0x88a18b2f4d94e7ad27a381b15531c06abf05a7c99dd5d3c3679875fed6f7e742",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:24",
+          "scanned_at": "2026-03-25 02:58:48",
           "supply": [
             {
               "symbol": "USDe",
               "real_symbol": "USDe",
               "real_name": "USDe",
               "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-              "amount": 16372263.2953701,
+              "amount": 16372273.6543002,
               "price_usd": 0.9996,
-              "value_usd": 16365714.390052
+              "value_usd": 16365724.7448385
             }
           ],
           "borrow": [
@@ -1559,14 +1590,14 @@
               "real_name": "USDtb",
               "address": "0xc139190f447e929f090edeb554d95abb8b18ac1c",
               "amount": 14201983.6554439,
-              "price_usd": 0.999086,
-              "value_usd": 14189003.0423828
+              "price_usd": 0.999055,
+              "value_usd": 14188562.7808895
             }
           ],
           "rewards": []
         },
         {
-          "id": 36,
+          "id": 37,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "pendle2",
@@ -1575,12 +1606,12 @@
           "strategy": "lp",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 2015803.98,
-          "asset_usd": 2015803.98,
+          "net_usd": 2015803.6,
+          "asset_usd": 2015803.6,
           "debt_usd": 0,
           "position_index": "0x67aeeed39c1675e0df93ad8bab543b17992d433b,0x808507121b80c02388fad14726482e061b8da827,0x8238884ec9668ef77b90c6dff4d1a9f4f4823bfe",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:05",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDO",
@@ -1597,8 +1628,8 @@
               "real_name": "PT Compounding Open Dollar 28MAY2026",
               "address": "0x67aeeed39c1675e0df93ad8bab543b17992d433b",
               "amount": 258775.821438247,
-              "price_usd": 0.989079135084305,
-              "value_usd": 255949.765648872
+              "price_usd": 0.989078670949536,
+              "value_usd": 255949.645542016
             },
             {
               "symbol": "PENDLE",
@@ -1606,15 +1637,15 @@
               "real_name": "Pendle",
               "address": "0x808507121b80c02388fad14726482e061b8da827",
               "amount": 50.7825933887597,
-              "price_usd": 1.238,
-              "value_usd": 62.8688506152845
+              "price_usd": 1.233,
+              "value_usd": 62.6149376483407
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 27,
+          "id": 28,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "arb",
           "protocol_id": "arb_morphoblue",
@@ -1623,12 +1654,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.053,
-          "net_usd": 1472388.81,
-          "asset_usd": 11192769.42,
-          "debt_usd": 9720380.61,
+          "net_usd": 1472925.14,
+          "asset_usd": 11193889.26,
+          "debt_usd": 9720964.12,
           "position_index": "0x571cb3ac535d61d92026c071ef1df4794d0bbbe1755f916ff640746f81b52af4",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:03",
+          "scanned_at": "2026-03-25 02:58:26",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -1636,8 +1667,8 @@
               "real_name": "Syrup USDC",
               "address": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
               "amount": 9671134.003104,
-              "price_usd": 1.15733784872351,
-              "value_usd": 11192769.4218692
+              "price_usd": 1.15745364040423,
+              "value_usd": 11193889.2587298
             }
           ],
           "borrow": [
@@ -1647,14 +1678,14 @@
               "real_name": "USD₮0",
               "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
               "amount": 9725145.93424748,
-              "price_usd": 0.99951,
-              "value_usd": 9720380.6127397
+              "price_usd": 0.99957,
+              "value_usd": 9720964.12149575
             }
           ],
           "rewards": []
         },
         {
-          "id": 28,
+          "id": 29,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "euler2",
@@ -1663,21 +1694,21 @@
           "strategy": "loop",
           "yield_source": "Euler",
           "health_rate": 1.028,
-          "net_usd": 1046026.45,
-          "asset_usd": 9138517.41,
+          "net_usd": 1046952.35,
+          "asset_usd": 9139443.31,
           "debt_usd": 8092490.95,
           "position_index": "0x815f5bb257e88b67216a344c7c83a3ea4ee7474d",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:04",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 9134861.99857112,
-              "price_usd": 1.00040016006403,
-              "value_usd": 9138517.40553333
+              "amount": 9134873.5858015,
+              "price_usd": 1.00050025012506,
+              "value_usd": 9139443.30745522
             }
           ],
           "borrow": [
@@ -1694,7 +1725,7 @@
           "rewards": []
         },
         {
-          "id": 34,
+          "id": 35,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -1703,21 +1734,21 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.018,
-          "net_usd": 971696.23,
-          "asset_usd": 9572915.84,
+          "net_usd": 972661.41,
+          "asset_usd": 9573881.02,
           "debt_usd": 8601219.61,
           "position_index": "0xc0ae375fd761ff19b3f04de5534c0f1ec110f80e1c2ede27c42c1c43c3040394",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:05",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 9569086.67606986,
-              "price_usd": 1.00040016006403,
-              "value_usd": 9572915.84240682
+              "amount": 9569094.08081135,
+              "price_usd": 1.00050025012506,
+              "value_usd": 9573881.02132201
             }
           ],
           "borrow": [
@@ -1734,7 +1765,7 @@
           "rewards": []
         },
         {
-          "id": 29,
+          "id": 30,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "euler2",
@@ -1743,21 +1774,21 @@
           "strategy": "loop",
           "yield_source": "Euler",
           "health_rate": 1.054,
-          "net_usd": 897571.84,
-          "asset_usd": 5775016.38,
+          "net_usd": 898163.32,
+          "asset_usd": 5775607.86,
           "debt_usd": 4877444.54,
           "position_index": "0x815f5bb257e88b67216a344c7c83a3ea4ee74749",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:04",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 5772706.37718624,
-              "price_usd": 1.00040016006403,
-              "value_usd": 5775016.38373973
+              "amount": 5772720.05178665,
+              "price_usd": 1.00050025012506,
+              "value_usd": 5775607.85571451
             }
           ],
           "borrow": [
@@ -1774,7 +1805,7 @@
           "rewards": []
         },
         {
-          "id": 30,
+          "id": 31,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "euler2",
@@ -1783,21 +1814,21 @@
           "strategy": "loop",
           "yield_source": "Euler",
           "health_rate": 1.021,
-          "net_usd": 838579.4,
-          "asset_usd": 7713785.59,
-          "debt_usd": 6875206.19,
+          "net_usd": 837127.93,
+          "asset_usd": 7713021.99,
+          "debt_usd": 6875894.06,
           "position_index": "0x815f5bb257e88b67216a344c7c83a3ea4ee7474b",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:04",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "PYUSD",
               "real_symbol": "PYUSD",
               "real_name": "PayPal USD",
               "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
-              "amount": 7713014.2872217,
-              "price_usd": 1.0001,
-              "value_usd": 7713785.58865042
+              "amount": 7713021.98751898,
+              "price_usd": 1,
+              "value_usd": 7713021.98751898
             }
           ],
           "borrow": [
@@ -1807,14 +1838,14 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 6872456.110469,
-              "price_usd": 1.00040016006403,
-              "value_usd": 6875206.19294618
+              "price_usd": 1.00050025012506,
+              "value_usd": 6875894.05749775
             }
           ],
           "rewards": []
         },
         {
-          "id": 49,
+          "id": 50,
           "wallet": "0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a",
           "chain": "plasma",
           "protocol_id": "plasma_curve",
@@ -1823,28 +1854,28 @@
           "strategy": "lp",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 799837.61,
-          "asset_usd": 799837.61,
+          "net_usd": 799888.22,
+          "asset_usd": 799888.22,
           "debt_usd": 0,
           "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:45",
+          "scanned_at": "2026-03-25 02:59:09",
           "supply": [
             {
               "symbol": "USDT0",
               "real_symbol": "USDT0",
               "real_name": "USDT0",
               "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
-              "amount": 800229.723751129,
-              "price_usd": 0.99951,
-              "value_usd": 799837.611186491
+              "amount": 800232.319740037,
+              "price_usd": 0.99957,
+              "value_usd": 799888.219842549
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 45,
+          "id": 46,
           "wallet": "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -1853,28 +1884,28 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 639508.99,
-          "asset_usd": 6324726.91,
-          "debt_usd": 5685217.91,
+          "net_usd": 639506.13,
+          "asset_usd": 6324730.91,
+          "debt_usd": 5685224.77,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:24",
+          "scanned_at": "2026-03-25 02:58:48",
           "supply": [
             {
               "symbol": "USDe",
               "real_symbol": "USDe",
               "real_name": "USDe",
               "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-              "amount": 639764.898236642,
+              "amount": 639762.039308251,
               "price_usd": 0.9996,
-              "value_usd": 639508.992277347
+              "value_usd": 639506.134492528
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 48,
+          "id": 49,
           "wallet": "0xDAeF005ae017Be5B938A2b321Db3dEC96e684f68",
           "chain": "plasma",
           "protocol_id": "plasma_aave3",
@@ -1883,12 +1914,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.157920892373162e+59,
-          "net_usd": 507541.37,
-          "asset_usd": 507541.37,
+          "net_usd": 507571.83,
+          "asset_usd": 507571.83,
           "debt_usd": 0,
           "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:40",
+          "scanned_at": "2026-03-25 02:59:04",
           "supply": [
             {
               "symbol": "USDT0",
@@ -1896,15 +1927,15 @@
               "real_name": "USDT0",
               "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
               "amount": 507790.182341,
-              "price_usd": 0.99951,
-              "value_usd": 507541.365151653
+              "price_usd": 0.99957,
+              "value_usd": 507571.832562593
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 37,
+          "id": 38,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "base",
           "protocol_id": "base_aave3",
@@ -1913,12 +1944,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 475647.7,
-          "asset_usd": 4741600.86,
-          "debt_usd": 4265953.16,
+          "net_usd": 475695.29,
+          "asset_usd": 4742075.26,
+          "debt_usd": 4266379.97,
           "position_index": "0x660975730059246a68521a3e2fbd4740173100f5,0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:06",
+          "scanned_at": "2026-03-25 02:58:30",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -1926,8 +1957,8 @@
               "real_name": "Syrup USDC",
               "address": "0x660975730059246a68521a3e2fbd4740173100f5",
               "amount": 4096989.367548,
-              "price_usd": 1.15733784872351,
-              "value_usd": 4741600.86088112
+              "price_usd": 1.15745364040423,
+              "value_usd": 4742075.25816585
             }
           ],
           "borrow": [
@@ -1937,14 +1968,14 @@
               "real_name": "USD Coin",
               "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
               "amount": 4264246.775532,
-              "price_usd": 1.00040016006403,
-              "value_usd": 4265953.15679472
+              "price_usd": 1.00050025012506,
+              "value_usd": 4266379.96551476
             }
           ],
           "rewards": []
         },
         {
-          "id": 31,
+          "id": 32,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "euler2",
@@ -1953,21 +1984,21 @@
           "strategy": "loop",
           "yield_source": "Euler",
           "health_rate": 1.032,
-          "net_usd": 392133.18,
-          "asset_usd": 3972455.33,
-          "debt_usd": 3580322.15,
+          "net_usd": 392902.12,
+          "asset_usd": 3972866.28,
+          "debt_usd": 3579964.15,
           "position_index": "0x815f5bb257e88b67216a344c7c83a3ea4ee7474c",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:04",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 3970866.34662829,
-              "price_usd": 1.00040016006403,
-              "value_usd": 3972455.32875979
+              "amount": 3970879.84450725,
+              "price_usd": 1.00050025012506,
+              "value_usd": 3972866.27764607
             }
           ],
           "borrow": [
@@ -1977,14 +2008,14 @@
               "real_name": "PayPal USD",
               "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
               "amount": 3579964.153119,
-              "price_usd": 1.0001,
-              "value_usd": 3580322.14953431
+              "price_usd": 1,
+              "value_usd": 3579964.153119
             }
           ],
           "rewards": []
         },
         {
-          "id": 33,
+          "id": 34,
           "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -1993,21 +2024,21 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.021,
-          "net_usd": 381470.09,
-          "asset_usd": 3674358.77,
-          "debt_usd": 3292888.67,
+          "net_usd": 382169.81,
+          "asset_usd": 3674729.23,
+          "debt_usd": 3292559.42,
           "position_index": "0xc9629945524f3fde56c7e8854a6c3d48e76b9d97236abbe73c750fcc7aeb8501",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:05",
+          "scanned_at": "2026-03-25 02:58:28",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 3672889.02200483,
-              "price_usd": 1.00040016006403,
-              "value_usd": 3674358.76551103
+              "amount": 3672891.86415629,
+              "price_usd": 1.00050025012506,
+              "value_usd": 3674729.22877068
             }
           ],
           "borrow": [
@@ -2017,58 +2048,10 @@
               "real_name": "PayPal USD",
               "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
               "amount": 3292559.41655326,
-              "price_usd": 1.0001,
-              "value_usd": 3292888.67249491
+              "price_usd": 1,
+              "value_usd": 3292559.41655326
             }
           ],
-          "rewards": []
-        },
-        {
-          "id": 50,
-          "wallet": "0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a",
-          "chain": "plasma",
-          "protocol_id": "plasma_pendle2",
-          "protocol_name": "Pendle V2",
-          "position_type": "Liquidity Pool",
-          "strategy": "lp",
-          "yield_source": "Pendle V2",
-          "health_rate": null,
-          "net_usd": 198772.57,
-          "asset_usd": 198772.57,
-          "debt_usd": 0,
-          "position_index": "0x17bac5f906c9a0282ac06a59958d85796c831f24,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xd2e8488b8aa076db8227a459d47288b0bbcf9779",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:45",
-          "supply": [
-            {
-              "symbol": "USDT0",
-              "real_symbol": "USDT0",
-              "real_name": "USDT0",
-              "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
-              "amount": 163926.7426852,
-              "price_usd": 0.99951,
-              "value_usd": 163846.418581285
-            },
-            {
-              "symbol": "PT-yzUSD-30JUL2026",
-              "real_symbol": "PT-yzUSD-30JUL2026",
-              "real_name": "PT Yuzu USD 30JUL2026",
-              "address": "0xd2e8488b8aa076db8227a459d47288b0bbcf9779",
-              "amount": 35814.5053560256,
-              "price_usd": 0.975158676292633,
-              "value_usd": 34924.8256350574
-            },
-            {
-              "symbol": "PENDLE",
-              "real_symbol": "PENDLE",
-              "real_name": "Pendle",
-              "address": "0x17bac5f906c9a0282ac06a59958d85796c831f24",
-              "amount": 1.07324809509659,
-              "price_usd": 1.237,
-              "value_usd": 1.32760789363449
-            }
-          ],
-          "borrow": [],
           "rewards": []
         },
         {
@@ -2081,21 +2064,69 @@
           "strategy": "lp",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 50084.44,
-          "asset_usd": 50084.44,
+          "net_usd": 198781.63,
+          "asset_usd": 198781.63,
           "debt_usd": 0,
-          "position_index": "0x17bac5f906c9a0282ac06a59958d85796c831f24,0x58674ec29dd0742dddee721c5a6783c6bc417016,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
+          "position_index": "0x17bac5f906c9a0282ac06a59958d85796c831f24,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xd2e8488b8aa076db8227a459d47288b0bbcf9779",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:45",
+          "scanned_at": "2026-03-25 02:59:09",
           "supply": [
             {
               "symbol": "USDT0",
               "real_symbol": "USDT0",
               "real_name": "USDT0",
               "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
-              "amount": 43416.7057346739,
-              "price_usd": 0.99951,
-              "value_usd": 43395.4315488639
+              "amount": 163926.7426852,
+              "price_usd": 0.99957,
+              "value_usd": 163856.254185846
+            },
+            {
+              "symbol": "PT-yzUSD-30JUL2026",
+              "real_symbol": "PT-yzUSD-30JUL2026",
+              "real_name": "PT Yuzu USD 30JUL2026",
+              "address": "0xd2e8488b8aa076db8227a459d47288b0bbcf9779",
+              "amount": 35814.5053560256,
+              "price_usd": 0.975137207746307,
+              "value_usd": 34924.05674969
+            },
+            {
+              "symbol": "PENDLE",
+              "real_symbol": "PENDLE",
+              "real_name": "Pendle",
+              "address": "0x17bac5f906c9a0282ac06a59958d85796c831f24",
+              "amount": 1.07324809509659,
+              "price_usd": 1.233,
+              "value_usd": 1.3233149012541
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 52,
+          "wallet": "0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a",
+          "chain": "plasma",
+          "protocol_id": "plasma_pendle2",
+          "protocol_name": "Pendle V2",
+          "position_type": "Liquidity Pool",
+          "strategy": "lp",
+          "yield_source": "Pendle V2",
+          "health_rate": null,
+          "net_usd": 50087.08,
+          "asset_usd": 50087.08,
+          "debt_usd": 0,
+          "position_index": "0x17bac5f906c9a0282ac06a59958d85796c831f24,0x58674ec29dd0742dddee721c5a6783c6bc417016,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:09",
+          "supply": [
+            {
+              "symbol": "USDT0",
+              "real_symbol": "USDT0",
+              "real_name": "USDT0",
+              "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
+              "amount": 43416.8872475116,
+              "price_usd": 0.99957,
+              "value_usd": 43398.2179859952
             },
             {
               "symbol": "PT-syzUSD-30APR2026",
@@ -2103,8 +2134,8 @@
               "real_name": "PT Staked Yuzu USD 30APR2026",
               "address": "0x58674ec29dd0742dddee721c5a6783c6bc417016",
               "amount": 6737.60922625822,
-              "price_usd": 0.992771150659179,
-              "value_usd": 6688.90406424428
+              "price_usd": 0.992749211242914,
+              "value_usd": 6688.75624503083
             },
             {
               "symbol": "PENDLE",
@@ -2112,8 +2143,8 @@
               "real_name": "Pendle",
               "address": "0x17bac5f906c9a0282ac06a59958d85796c831f24",
               "amount": 0.0826365037368437,
-              "price_usd": 1.237,
-              "value_usd": 0.102221355122476
+              "price_usd": 1.233,
+              "value_usd": 0.101890809107528
             }
           ],
           "borrow": [],
@@ -2456,7 +2487,7 @@
       "active_wallets": 3,
       "positions": [
         {
-          "id": 53,
+          "id": 54,
           "wallet": "0xBEEF01735c132Ada46AA9aA4c54623cAA92A64CB",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -2465,12 +2496,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 179378053.05,
-          "asset_usd": 179378053.05,
+          "net_usd": 179395999.82,
+          "asset_usd": 179395999.82,
           "debt_usd": 0,
           "position_index": "0x64d65c9a2d91c36d56fbc42d69e979335320169b3df63bf92789e2c8883fcc64",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:56",
+          "scanned_at": "2026-03-25 02:59:19",
           "supply": [
             {
               "symbol": "USDC",
@@ -2478,8 +2509,128 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 179306301.823929,
-              "price_usd": 1.00040016006403,
-              "value_usd": 179378053.045147
+              "price_usd": 1.00050025012506,
+              "value_usd": 179395999.823841
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 63,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "eth",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 75254580.62,
+          "asset_usd": 75254580.62,
+          "debt_usd": 0,
+          "position_index": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:31",
+          "supply": [
+            {
+              "symbol": "USD1",
+              "real_symbol": "USD1",
+              "real_name": "World Liberty Financial USD",
+              "address": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+              "amount": 75277163.7712144,
+              "price_usd": 0.9997,
+              "value_usd": 75254580.6220831
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 56,
+          "wallet": "0xBEEF01735c132Ada46AA9aA4c54623cAA92A64CB",
+          "chain": "eth",
+          "protocol_id": "morphoblue",
+          "protocol_name": "Morpho",
+          "position_type": "Lending",
+          "strategy": "lend",
+          "yield_source": "Morpho",
+          "health_rate": null,
+          "net_usd": 21467506.82,
+          "asset_usd": 21467506.82,
+          "debt_usd": 0,
+          "position_index": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:19",
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": 21456773.0639282,
+              "price_usd": 1.00050025012506,
+              "value_usd": 21467506.8173369
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 76,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 17413326.26,
+          "asset_usd": 17413326.26,
+          "debt_usd": 0,
+          "position_index": "0xf6718b2701d4a6498ef77d7c152b2137ab28b8a3",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "stBTC",
+              "real_symbol": "stBTC",
+              "real_name": "Lorenzo stBTC",
+              "address": "0xf6718b2701d4a6498ef77d7c152b2137ab28b8a3",
+              "amount": 247.229050532267,
+              "price_usd": 70433.9810461999,
+              "value_usd": 17413326.2592597
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 57,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "eth",
+          "protocol_id": "etherfi",
+          "protocol_name": "ether.fi",
+          "position_type": "Staked",
+          "strategy": "stake",
+          "yield_source": "ether.fi",
+          "health_rate": null,
+          "net_usd": 13502854.77,
+          "asset_usd": 13502854.77,
+          "debt_usd": 0,
+          "position_index": "eth",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:31",
+          "supply": [
+            {
+              "symbol": "ETH",
+              "real_symbol": "ETH",
+              "real_name": "ETH",
+              "address": "eth",
+              "amount": 6265.33163226727,
+              "price_usd": 2155.17,
+              "value_usd": 13502854.7739134
             }
           ],
           "borrow": [],
@@ -2495,72 +2646,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 21465359.21,
-          "asset_usd": 21465359.21,
-          "debt_usd": 0,
-          "position_index": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:56",
-          "supply": [
-            {
-              "symbol": "USDC",
-              "real_symbol": "USDC",
-              "real_name": "USD Coin",
-              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 21456773.0639282,
-              "price_usd": 1.00040016006403,
-              "value_usd": 21465359.2076112
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 56,
-          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
-          "chain": "eth",
-          "protocol_id": "etherfi",
-          "protocol_name": "ether.fi",
-          "position_type": "Staked",
-          "strategy": "stake",
-          "yield_source": "ether.fi",
-          "health_rate": null,
-          "net_usd": 13324125.57,
-          "asset_usd": 13324125.57,
-          "debt_usd": 0,
-          "position_index": "eth",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:07",
-          "supply": [
-            {
-              "symbol": "ETH",
-              "real_symbol": "ETH",
-              "real_name": "ETH",
-              "address": "eth",
-              "amount": 6176.95557923077,
-              "price_usd": 2157.07,
-              "value_usd": 13324125.5712913
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 54,
-          "wallet": "0xBEEF01735c132Ada46AA9aA4c54623cAA92A64CB",
-          "chain": "eth",
-          "protocol_id": "morphoblue",
-          "protocol_name": "Morpho",
-          "position_type": "Lending",
-          "strategy": "lend",
-          "yield_source": "Morpho",
-          "health_rate": null,
-          "net_usd": 11452145.3,
-          "asset_usd": 11452145.3,
+          "net_usd": 11453291.09,
+          "asset_usd": 11453291.09,
           "debt_usd": 0,
           "position_index": "0xb323495f7e4148be5643a4ea4a8221eef163e4bccfdedc2a6f4696baacbc86cc",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:56",
+          "scanned_at": "2026-03-25 02:59:19",
           "supply": [
             {
               "symbol": "USDC",
@@ -2568,8 +2659,248 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 11447564.4424227,
-              "price_usd": 1.00040016006403,
-              "value_usd": 11452145.300543
+              "price_usd": 1.00050025012506,
+              "value_usd": 11453291.0879667
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 64,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "eth",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 11062178.39,
+          "asset_usd": 11062178.39,
+          "debt_usd": 0,
+          "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:31",
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": 11056647.304169,
+              "price_usd": 1.00050025012506,
+              "value_usd": 11062178.3933657
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 75,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 5395233.49,
+          "asset_usd": 5395233.49,
+          "debt_usd": 0,
+          "position_index": "0xa744fe3688291ac3a4a7ec917678783ad9946a1e",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "savUSD",
+              "real_symbol": "savUSD",
+              "real_name": "Staked avUSD",
+              "address": "0xa744fe3688291ac3a4a7ec917678783ad9946a1e",
+              "amount": 4659286.90681526,
+              "price_usd": 1.15795262266584,
+              "value_usd": 5395233.49349936
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 59,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "eth",
+          "protocol_id": "mnteth",
+          "protocol_name": "MantleETH",
+          "position_type": "Staked",
+          "strategy": "stake",
+          "yield_source": "MantleETH",
+          "health_rate": null,
+          "net_usd": 3234626.67,
+          "asset_usd": 3234626.67,
+          "debt_usd": 0,
+          "position_index": "eth",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:31",
+          "supply": [
+            {
+              "symbol": "ETH",
+              "real_symbol": "ETH",
+              "real_name": "ETH",
+              "address": "eth",
+              "amount": 1500.86845810773,
+              "price_usd": 2155.17,
+              "value_usd": 3234626.67486003
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 78,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "botanix",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 2148946.69,
+          "asset_usd": 2148946.69,
+          "debt_usd": 0,
+          "position_index": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:38",
+          "supply": [
+            {
+              "symbol": "pBTC",
+              "real_symbol": "pBTC",
+              "real_name": "Pegged Bitcoin",
+              "address": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
+              "amount": 30.4412358920821,
+              "price_usd": 70593.28,
+              "value_usd": 2148946.6888758
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 62,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "eth",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 2120048.15,
+          "asset_usd": 2120048.15,
+          "debt_usd": 0,
+          "position_index": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:31",
+          "supply": [
+            {
+              "symbol": "WBTC",
+              "real_symbol": "WBTC",
+              "real_name": "Wrapped BTC",
+              "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+              "amount": 30.06734015,
+              "price_usd": 70510,
+              "value_usd": 2120048.1539765
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 69,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 1425043.25,
+          "asset_usd": 1425043.25,
+          "debt_usd": 0,
+          "position_index": "0x0555e30da8f98308edb960aa94c0db47230d2b9c",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "WBTC",
+              "real_symbol": "WBTC",
+              "real_name": "Wrapped BTC",
+              "address": "0x0555e30da8f98308edb960aa94c0db47230d2b9c",
+              "amount": 20.21051267,
+              "price_usd": 70510,
+              "value_usd": 1425043.2483617
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 73,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 990515.13,
+          "asset_usd": 990515.13,
+          "debt_usd": 0,
+          "position_index": "0x6969696969696969696969696969696969696969",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "WBERA",
+              "real_symbol": "WBERA",
+              "real_name": "Wrapped Bera",
+              "address": "0x6969696969696969696969696969696969696969",
+              "amount": 1981030.26832908,
+              "price_usd": 0.5,
+              "value_usd": 990515.134164541
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 77,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "botanix",
+          "protocol_id": "botanix_botanixyield",
+          "protocol_name": "Botanix stBTC",
+          "position_type": "Yield",
+          "strategy": "lend",
+          "yield_source": "Botanix stBTC",
+          "health_rate": null,
+          "net_usd": 951091.03,
+          "asset_usd": 951091.03,
+          "debt_usd": 0,
+          "position_index": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:38",
+          "supply": [
+            {
+              "symbol": "pBTC",
+              "real_symbol": "pBTC",
+              "real_name": "Pegged Bitcoin",
+              "address": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
+              "amount": 13.4728267699201,
+              "price_usd": 70593.28,
+              "value_usd": 951091.032560468
             }
           ],
           "borrow": [],
@@ -2579,78 +2910,18 @@
           "id": 58,
           "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
           "chain": "eth",
-          "protocol_id": "mnteth",
-          "protocol_name": "MantleETH",
-          "position_type": "Staked",
-          "strategy": "stake",
-          "yield_source": "MantleETH",
-          "health_rate": null,
-          "net_usd": 3237478.32,
-          "asset_usd": 3237478.32,
-          "debt_usd": 0,
-          "position_index": "eth",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:07",
-          "supply": [
-            {
-              "symbol": "ETH",
-              "real_symbol": "ETH",
-              "real_name": "ETH",
-              "address": "eth",
-              "amount": 1500.86845810773,
-              "price_usd": 2157.07,
-              "value_usd": 3237478.32493044
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 64,
-          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
-          "chain": "botanix",
-          "protocol_id": "botanix_botanixyield",
-          "protocol_name": "Botanix stBTC",
-          "position_type": "Yield",
-          "strategy": "lend",
-          "yield_source": "Botanix stBTC",
-          "health_rate": null,
-          "net_usd": 950603.32,
-          "asset_usd": 950603.32,
-          "debt_usd": 0,
-          "position_index": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:12",
-          "supply": [
-            {
-              "symbol": "pBTC",
-              "real_symbol": "pBTC",
-              "real_name": "Pegged Bitcoin",
-              "address": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
-              "amount": 13.4728267699201,
-              "price_usd": 70557.08,
-              "value_usd": 950603.316231397
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 57,
-          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
-          "chain": "eth",
           "protocol_id": "lido",
           "protocol_name": "LIDO",
           "position_type": "Staked",
           "strategy": "stake",
           "yield_source": "LIDO",
           "health_rate": null,
-          "net_usd": 842853.69,
-          "asset_usd": 842853.69,
+          "net_usd": 841846.62,
+          "asset_usd": 841846.62,
           "debt_usd": 0,
           "position_index": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:07",
+          "scanned_at": "2026-03-25 02:59:31",
           "supply": [
             {
               "symbol": "stETH",
@@ -2658,15 +2929,45 @@
               "real_name": "Liquid staked Ether 2.0",
               "address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
               "amount": 390.872760960226,
-              "price_usd": 2156.337756,
-              "value_usd": 842853.692250498
+              "price_usd": 2153.761283,
+              "value_usd": 841846.619135449
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 63,
+          "id": 71,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 755060.51,
+          "asset_usd": 755060.51,
+          "debt_usd": 0,
+          "position_index": "0x549943e04f40284185054145c6e4e9568c1d3241",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "USDC.e",
+              "real_symbol": "USDC.e",
+              "real_name": "Bridged USDC (Stargate)",
+              "address": "0x549943e04f40284185054145c6e4e9568c1d3241",
+              "amount": 754682.975933,
+              "price_usd": 1.00050025012506,
+              "value_usd": 755060.506186093
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 68,
           "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
           "chain": "bera",
           "protocol_id": "bera_origami",
@@ -2675,12 +2976,12 @@
           "strategy": "lend",
           "yield_source": "Origami Finance",
           "health_rate": null,
-          "net_usd": 660261.2,
-          "asset_usd": 660261.2,
+          "net_usd": 658940.75,
+          "asset_usd": 658940.75,
           "debt_usd": 0,
           "position_index": "0xac03caba51e17c86c921e1f6cbfbdc91f8bb2e6b",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:09",
+          "scanned_at": "2026-03-25 02:59:33",
           "supply": [
             {
               "symbol": "iBGT",
@@ -2688,15 +2989,15 @@
               "real_name": "Infrared BGT",
               "address": "0xac03caba51e17c86c921e1f6cbfbdc91f8bb2e6b",
               "amount": 1287184.8660887,
-              "price_usd": 0.512949787902443,
-              "value_usd": 660261.204051432
+              "price_usd": 0.511923943838087,
+              "value_usd": 658940.753096826
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 61,
+          "id": 66,
           "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
           "chain": "bera",
           "protocol_id": "bera_berahub",
@@ -2705,12 +3006,12 @@
           "strategy": "lend",
           "yield_source": "BeraHub",
           "health_rate": null,
-          "net_usd": 426333.7,
-          "asset_usd": 426333.7,
+          "net_usd": 425482.74,
+          "asset_usd": 425482.74,
           "debt_usd": 0,
           "position_index": "0x6969696969696969696969696969696969696969",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:09",
+          "scanned_at": "2026-03-25 02:59:33",
           "supply": [
             {
               "symbol": "WBERA",
@@ -2718,15 +3019,15 @@
               "real_name": "Wrapped Bera",
               "address": "0x6969696969696969696969696969696969696969",
               "amount": 850965.472778004,
-              "price_usd": 0.501,
-              "value_usd": 426333.70186178
+              "price_usd": 0.5,
+              "value_usd": 425482.736389002
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 60,
+          "id": 61,
           "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
           "chain": "eth",
           "protocol_id": "reservoirxyz",
@@ -2735,12 +3036,12 @@
           "strategy": "lend",
           "yield_source": "Reservoir",
           "health_rate": null,
-          "net_usd": 330017.4,
-          "asset_usd": 330017.4,
+          "net_usd": 330050.42,
+          "asset_usd": 330050.42,
           "debt_usd": 0,
           "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:07",
+          "scanned_at": "2026-03-25 02:59:31",
           "supply": [
             {
               "symbol": "rUSD",
@@ -2748,15 +3049,45 @@
               "real_name": "Reservoir Stablecoin",
               "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
               "amount": 329885.39388744,
-              "price_usd": 1.00040016006403,
-              "value_usd": 330017.400847779
+              "price_usd": 1.00050025012506,
+              "value_usd": 330050.419096989
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 62,
+          "id": 74,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 278428.63,
+          "asset_usd": 278428.63,
+          "debt_usd": 0,
+          "position_index": "0x7dcc39b4d1c53cb31e1abc0e358b43987fef80f7",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "weETH",
+              "real_symbol": "weETH",
+              "real_name": "Wrapped eETH",
+              "address": "0x7dcc39b4d1c53cb31e1abc0e358b43987fef80f7",
+              "amount": 118.304721157346,
+              "price_usd": 2353.48702423345,
+              "value_usd": 278428.626149369
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 67,
           "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
           "chain": "bera",
           "protocol_id": "bera_dinero",
@@ -2765,12 +3096,12 @@
           "strategy": "lend",
           "yield_source": "Dinero",
           "health_rate": null,
-          "net_usd": 233697.11,
-          "asset_usd": 233697.11,
+          "net_usd": 233491.26,
+          "asset_usd": 233491.26,
           "debt_usd": 0,
           "position_index": "0x2f6f07cdcf3588944bf4c42ac74ff24bf56e7590",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:09",
+          "scanned_at": "2026-03-25 02:59:33",
           "supply": [
             {
               "symbol": "WETH",
@@ -2778,15 +3109,75 @@
               "real_name": "WETH",
               "address": "0x2f6f07cdcf3588944bf4c42ac74ff24bf56e7590",
               "amount": 108.34006589197,
-              "price_usd": 2157.07,
-              "value_usd": 233697.105933591
+              "price_usd": 2155.17,
+              "value_usd": 233491.259808397
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 52,
+          "id": 65,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "eth",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 89271.5,
+          "asset_usd": 89271.5,
+          "debt_usd": 0,
+          "position_index": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:31",
+          "supply": [
+            {
+              "symbol": "cbBTC",
+              "real_symbol": "cbBTC",
+              "real_name": "Coinbase Wrapped BTC",
+              "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+              "amount": 1.2667296,
+              "price_usd": 70474,
+              "value_usd": 89271.5018304
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 72,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 66780.02,
+          "asset_usd": 66780.02,
+          "debt_usd": 0,
+          "position_index": "0x688e72142674041f8f6af4c808a4045ca1d6ac82",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "BYUSD",
+              "real_symbol": "BYUSD",
+              "real_name": "BYUSD",
+              "address": "0x688e72142674041f8f6af4c808a4045ca1d6ac82",
+              "amount": 66733.866561,
+              "price_usd": 1.00069159956017,
+              "value_usd": 66780.0196737618
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 53,
           "wallet": "0xBeEf11eCb698f4B5378685C05A210bdF71093521",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -2795,12 +3186,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 58645.79,
-          "asset_usd": 58645.79,
+          "net_usd": 58651.66,
+          "asset_usd": 58651.66,
           "debt_usd": 0,
           "position_index": "0xc84cdb5a63207d8c2e7251f758a435c6bd10b4eaefdaf36d7650159bf035962e",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:35:47",
+          "scanned_at": "2026-03-25 02:59:11",
           "supply": [
             {
               "symbol": "rUSD",
@@ -2808,8 +3199,38 @@
               "real_name": "Reservoir Stablecoin",
               "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
               "amount": 58622.3362126213,
-              "price_usd": 1.00040016006403,
-              "value_usd": 58645.7945304335
+              "price_usd": 1.00050025012506,
+              "value_usd": 58651.6620436432
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 70,
+          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
+          "chain": "bera",
+          "protocol_id": "wallet-held",
+          "protocol_name": "Wallet",
+          "position_type": "Holding",
+          "strategy": "hold",
+          "yield_source": "wallet",
+          "health_rate": null,
+          "net_usd": 50650.92,
+          "asset_usd": 50650.92,
+          "debt_usd": 0,
+          "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 02:59:34",
+          "supply": [
+            {
+              "symbol": "sUSDe",
+              "real_symbol": "sUSDe",
+              "real_name": "Staked USDe",
+              "address": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
+              "amount": 41408.8962175512,
+              "price_usd": 1.22318944290217,
+              "value_usd": 50650.9246955402
             }
           ],
           "borrow": [],
@@ -2829,7 +3250,7 @@
       "active_wallets": 2,
       "positions": [
         {
-          "id": 66,
+          "id": 80,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -2838,28 +3259,28 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 4037001.72,
-          "asset_usd": 4037001.72,
+          "net_usd": 4037407.28,
+          "asset_usd": 4037407.28,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 4035386.91467553,
-              "price_usd": 1.00040016006403,
-              "value_usd": 4037001.71536168
+              "amount": 4035388.5803443,
+              "price_usd": 1.00050025012506,
+              "value_usd": 4037407.28398629
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 75,
+          "id": 89,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -2868,12 +3289,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 3388160.77,
-          "asset_usd": 3388160.77,
+          "net_usd": 3388499.76,
+          "asset_usd": 3388499.76,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "USDC",
@@ -2881,15 +3302,15 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 3386805.51017,
-              "price_usd": 1.00040016006403,
-              "value_usd": 3388160.77447979
+              "price_usd": 1.00050025012506,
+              "value_usd": 3388499.76005002
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 78,
+          "id": 92,
           "wallet": "0xbeef123217647014429b7670329782e210884e89",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -2898,12 +3319,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 3252257.41,
-          "asset_usd": 3252257.41,
+          "net_usd": 3252582.79,
+          "asset_usd": 3252582.79,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:23",
+          "scanned_at": "2026-03-25 02:59:49",
           "supply": [
             {
               "symbol": "USDC",
@@ -2911,15 +3332,15 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 3250956.502169,
-              "price_usd": 1.00040016006403,
-              "value_usd": 3252257.40513105
+              "price_usd": 1.00050025012506,
+              "value_usd": 3252582.79356578
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 65,
+          "id": 79,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -2933,7 +3354,7 @@
           "debt_usd": 0,
           "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "GHO",
@@ -2949,7 +3370,7 @@
           "rewards": []
         },
         {
-          "id": 79,
+          "id": 93,
           "wallet": "0xbeef123217647014429b7670329782e210884e89",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -2963,7 +3384,7 @@
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:23",
+          "scanned_at": "2026-03-25 02:59:49",
           "supply": [
             {
               "symbol": "AUSD",
@@ -2979,7 +3400,7 @@
           "rewards": []
         },
         {
-          "id": 80,
+          "id": 94,
           "wallet": "0xbeef123217647014429b7670329782e210884e89",
           "chain": "base",
           "protocol_id": "base_morphoblue",
@@ -2988,12 +3409,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1502728.81,
-          "asset_usd": 1502728.81,
+          "net_usd": 1502879.16,
+          "asset_usd": 1502879.16,
           "debt_usd": 0,
           "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:24",
+          "scanned_at": "2026-03-25 02:59:50",
           "supply": [
             {
               "symbol": "USDC",
@@ -3001,15 +3422,15 @@
               "real_name": "USD Coin",
               "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
               "amount": 1502127.720165,
-              "price_usd": 1.00040016006403,
-              "value_usd": 1502728.81168968
+              "price_usd": 1.00050025012506,
+              "value_usd": 1502879.15974487
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 67,
+          "id": 81,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "aave3",
@@ -3018,28 +3439,28 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 1008002.29,
-          "asset_usd": 1008002.29,
+          "net_usd": 1007952.21,
+          "asset_usd": 1007952.21,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 1008496.45414612,
-              "price_usd": 0.99951,
-              "value_usd": 1008002.29088359
+              "amount": 1008496.8009243,
+              "price_usd": 0.99946,
+              "value_usd": 1007952.2126518
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 69,
+          "id": 83,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "curve",
@@ -3048,12 +3469,12 @@
           "strategy": "farm",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 1002116.93,
-          "asset_usd": 1002116.93,
+          "net_usd": 1002186.15,
+          "asset_usd": 1002186.15,
           "debt_usd": 0,
           "position_index": "0x01791f726b4103694969820be083196cc7c045ff,0x6c3ea9036406852006290770bedfcaba0e23a0e8,0xd533a949740bb3306d119cc777fa900ba034cd52,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -3070,8 +3491,8 @@
               "real_name": "Curve.Fi USD Stablecoin",
               "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
               "amount": 676459.927202525,
-              "price_usd": 0.999865642518139,
-              "value_usd": 676369.039750126
+              "price_usd": 0.999966216146536,
+              "value_usd": 676437.07377947
             },
             {
               "symbol": "CRV",
@@ -3079,8 +3500,8 @@
               "real_name": "Curve DAO Token",
               "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
               "amount": 117.991678583506,
-              "price_usd": 0.2281,
-              "value_usd": 26.9139018848977
+              "price_usd": 0.228,
+              "value_usd": 26.9021027170394
             },
             {
               "symbol": "YB",
@@ -3088,15 +3509,15 @@
               "real_name": "Yield Basis",
               "address": "0x01791f726b4103694969820be083196cc7c045ff",
               "amount": 752.009036716259,
-              "price_usd": 0.1161,
-              "value_usd": 87.3082491627576
+              "price_usd": 0.1177,
+              "value_usd": 88.5114636215037
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 76,
+          "id": 90,
           "wallet": "0xbeef123217647014429b7670329782e210884e89",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -3105,12 +3526,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 719820.22,
-          "asset_usd": 719820.22,
+          "net_usd": 719784.21,
+          "asset_usd": 719784.21,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:23",
+          "scanned_at": "2026-03-25 02:59:49",
           "supply": [
             {
               "symbol": "USDT",
@@ -3118,15 +3539,15 @@
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "amount": 720173.100994,
-              "price_usd": 0.99951,
-              "value_usd": 719820.216174513
+              "price_usd": 0.99946,
+              "value_usd": 719784.207519463
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 71,
+          "id": 85,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -3140,7 +3561,7 @@
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "RLUSD",
@@ -3156,7 +3577,7 @@
           "rewards": []
         },
         {
-          "id": 73,
+          "id": 87,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -3165,28 +3586,28 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.068,
-          "net_usd": 596983.57,
-          "asset_usd": 4174806.12,
-          "debt_usd": 3577822.54,
+          "net_usd": 596956.3,
+          "asset_usd": 4174599.87,
+          "debt_usd": 3577643.57,
           "position_index": "0xa4774e3e693fff2ebd1dcbbd69b1b0a5b9bb0ccc753bfda5dd07bdac97c4818a",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 597276.236251188,
-              "price_usd": 0.99951,
-              "value_usd": 596983.570895424
+              "amount": 597278.831472962,
+              "price_usd": 0.99946,
+              "value_usd": 596956.300903967
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 72,
+          "id": 86,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -3200,7 +3621,7 @@
           "debt_usd": 0,
           "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -3216,7 +3637,7 @@
           "rewards": []
         },
         {
-          "id": 68,
+          "id": 82,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "convex",
@@ -3225,30 +3646,30 @@
           "strategy": "stake",
           "yield_source": "Convex",
           "health_rate": null,
-          "net_usd": 500449.27,
-          "asset_usd": 500449.27,
+          "net_usd": 500471.38,
+          "asset_usd": 500471.38,
           "debt_usd": 0,
           "position_index": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b,0xd533a949740bb3306d119cc777fa900ba034cd52,0xdac17f958d2ee523a2206206994597c13d831ec7,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 185899.081973031,
-              "price_usd": 0.99951,
-              "value_usd": 185807.991422865
+              "amount": 186193.756060386,
+              "price_usd": 0.99946,
+              "value_usd": 186093.211432114
             },
             {
               "symbol": "crvUSD",
               "real_symbol": "crvUSD",
               "real_name": "Curve.Fi USD Stablecoin",
               "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
-              "amount": 314640.904935557,
-              "price_usd": 0.999865642518139,
-              "value_usd": 314598.63057588
+              "amount": 314346.15926947,
+              "price_usd": 0.999966216146536,
+              "value_usd": 314335.539444888
             },
             {
               "symbol": "CRV",
@@ -3256,8 +3677,8 @@
               "real_name": "Curve DAO Token",
               "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
               "amount": 186.383900732468,
-              "price_usd": 0.2281,
-              "value_usd": 42.514167757076
+              "price_usd": 0.228,
+              "value_usd": 42.4955293670028
             },
             {
               "symbol": "CVX",
@@ -3265,15 +3686,15 @@
               "real_name": "Convex Token",
               "address": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b",
               "amount": 0.076320695574001,
-              "price_usd": 1.78963634166589,
-              "value_usd": 0.136586290420451
+              "price_usd": 1.79191787017318,
+              "value_usd": 0.1367604182631
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 70,
+          "id": 84,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "curve",
@@ -3282,30 +3703,30 @@
           "strategy": "farm",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 500355.11,
-          "asset_usd": 500355.11,
+          "net_usd": 500382.27,
+          "asset_usd": 500382.27,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xd533a949740bb3306d119cc777fa900ba034cd52",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 271241.316322663,
-              "price_usd": 1.00040016006403,
-              "value_usd": 271349.856265169
+              "amount": 271275.31685595,
+              "price_usd": 1.00050025012506,
+              "value_usd": 271411.022367133
             },
             {
               "symbol": "RLUSD",
               "real_symbol": "RLUSD",
               "real_name": "RLUSD",
               "address": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
-              "amount": 228890.809704156,
+              "amount": 228856.815499716,
               "price_usd": 1.0005,
-              "value_usd": 229005.255109008
+              "value_usd": 228971.243907466
             },
             {
               "symbol": "CRV",
@@ -3313,15 +3734,15 @@
               "real_name": "Curve DAO Token",
               "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
               "amount": 0.00061333316176333,
-              "price_usd": 0.2281,
-              "value_usd": 0.000139901294198216
+              "price_usd": 0.228,
+              "value_usd": 0.000139839960882039
             }
           ],
           "borrow": [],
           "rewards": []
         },
         {
-          "id": 74,
+          "id": 88,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "morphoblue",
@@ -3330,21 +3751,21 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.105,
-          "net_usd": 304883.74,
-          "asset_usd": 2107444.63,
-          "debt_usd": 1802560.9,
+          "net_usd": 304917.96,
+          "asset_usd": 2107659.21,
+          "debt_usd": 1802741.24,
           "position_index": "0x1590cb22d797e226df92ebc6e0153427e207299916e7e4e53461389ad68272fb",
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:36:18",
+          "scanned_at": "2026-03-25 02:59:44",
           "supply": [
             {
               "symbol": "rUSD",
               "real_symbol": "rUSD",
               "real_name": "Reservoir Stablecoin",
               "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
-              "amount": 2106601.65638403,
-              "price_usd": 1.00040016006403,
-              "value_usd": 2107444.63423773
+              "amount": 2106605.37631663,
+              "price_usd": 1.00050025012506,
+              "value_usd": 2107659.20591959
             }
           ],
           "borrow": [
@@ -3354,8 +3775,8 @@
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "amount": 1801839.87415325,
-              "price_usd": 1.00040016006403,
-              "value_usd": 1802560.89851266
+              "price_usd": 1.00050025012506,
+              "value_usd": 1802741.24477564
             }
           ],
           "rewards": []
@@ -3372,7 +3793,7 @@
           "active_wallets": 1,
           "positions": [
             {
-              "id": 66,
+              "id": 80,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "aave3",
@@ -3381,28 +3802,28 @@
               "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
-              "net_usd": 4037001.72,
-              "asset_usd": 4037001.72,
+              "net_usd": 4037407.28,
+              "asset_usd": 4037407.28,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "USDC",
                   "real_symbol": "USDC",
                   "real_name": "USD Coin",
                   "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-                  "amount": 4035386.91467553,
-                  "price_usd": 1.00040016006403,
-                  "value_usd": 4037001.71536168
+                  "amount": 4035388.5803443,
+                  "price_usd": 1.00050025012506,
+                  "value_usd": 4037407.28398629
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 75,
+              "id": 89,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3411,12 +3832,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 3388160.77,
-              "asset_usd": 3388160.77,
+              "net_usd": 3388499.76,
+              "asset_usd": 3388499.76,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -3424,15 +3845,15 @@
                   "real_name": "USD Coin",
                   "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
                   "amount": 3386805.51017,
-                  "price_usd": 1.00040016006403,
-                  "value_usd": 3388160.77447979
+                  "price_usd": 1.00050025012506,
+                  "value_usd": 3388499.76005002
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 65,
+              "id": 79,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "aave3",
@@ -3446,7 +3867,7 @@
               "debt_usd": 0,
               "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "GHO",
@@ -3462,7 +3883,7 @@
               "rewards": []
             },
             {
-              "id": 67,
+              "id": 81,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "aave3",
@@ -3471,28 +3892,28 @@
               "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
-              "net_usd": 1008002.29,
-              "asset_usd": 1008002.29,
+              "net_usd": 1007952.21,
+              "asset_usd": 1007952.21,
               "debt_usd": 0,
               "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "USDT",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-                  "amount": 1008496.45414612,
-                  "price_usd": 0.99951,
-                  "value_usd": 1008002.29088359
+                  "amount": 1008496.8009243,
+                  "price_usd": 0.99946,
+                  "value_usd": 1007952.2126518
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 69,
+              "id": 83,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "curve",
@@ -3501,12 +3922,12 @@
               "strategy": "farm",
               "yield_source": "Curve",
               "health_rate": null,
-              "net_usd": 1002116.93,
-              "asset_usd": 1002116.93,
+              "net_usd": 1002186.15,
+              "asset_usd": 1002186.15,
               "debt_usd": 0,
               "position_index": "0x01791f726b4103694969820be083196cc7c045ff,0x6c3ea9036406852006290770bedfcaba0e23a0e8,0xd533a949740bb3306d119cc777fa900ba034cd52,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "PYUSD",
@@ -3523,8 +3944,8 @@
                   "real_name": "Curve.Fi USD Stablecoin",
                   "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
                   "amount": 676459.927202525,
-                  "price_usd": 0.999865642518139,
-                  "value_usd": 676369.039750126
+                  "price_usd": 0.999966216146536,
+                  "value_usd": 676437.07377947
                 },
                 {
                   "symbol": "CRV",
@@ -3532,8 +3953,8 @@
                   "real_name": "Curve DAO Token",
                   "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
                   "amount": 117.991678583506,
-                  "price_usd": 0.2281,
-                  "value_usd": 26.9139018848977
+                  "price_usd": 0.228,
+                  "value_usd": 26.9021027170394
                 },
                 {
                   "symbol": "YB",
@@ -3541,15 +3962,15 @@
                   "real_name": "Yield Basis",
                   "address": "0x01791f726b4103694969820be083196cc7c045ff",
                   "amount": 752.009036716259,
-                  "price_usd": 0.1161,
-                  "value_usd": 87.3082491627576
+                  "price_usd": 0.1177,
+                  "value_usd": 88.5114636215037
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 71,
+              "id": 85,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3563,7 +3984,7 @@
               "debt_usd": 0,
               "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "RLUSD",
@@ -3579,7 +4000,7 @@
               "rewards": []
             },
             {
-              "id": 73,
+              "id": 87,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3588,28 +4009,28 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.068,
-              "net_usd": 596983.57,
-              "asset_usd": 4174806.12,
-              "debt_usd": 3577822.54,
+              "net_usd": 596956.3,
+              "asset_usd": 4174599.87,
+              "debt_usd": 3577643.57,
               "position_index": "0xa4774e3e693fff2ebd1dcbbd69b1b0a5b9bb0ccc753bfda5dd07bdac97c4818a",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "USDT",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-                  "amount": 597276.236251188,
-                  "price_usd": 0.99951,
-                  "value_usd": 596983.570895424
+                  "amount": 597278.831472962,
+                  "price_usd": 0.99946,
+                  "value_usd": 596956.300903967
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 72,
+              "id": 86,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3623,7 +4044,7 @@
               "debt_usd": 0,
               "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "PYUSD",
@@ -3639,7 +4060,7 @@
               "rewards": []
             },
             {
-              "id": 68,
+              "id": 82,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "convex",
@@ -3648,30 +4069,30 @@
               "strategy": "stake",
               "yield_source": "Convex",
               "health_rate": null,
-              "net_usd": 500449.27,
-              "asset_usd": 500449.27,
+              "net_usd": 500471.38,
+              "asset_usd": 500471.38,
               "debt_usd": 0,
               "position_index": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b,0xd533a949740bb3306d119cc777fa900ba034cd52,0xdac17f958d2ee523a2206206994597c13d831ec7,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "USDT",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-                  "amount": 185899.081973031,
-                  "price_usd": 0.99951,
-                  "value_usd": 185807.991422865
+                  "amount": 186193.756060386,
+                  "price_usd": 0.99946,
+                  "value_usd": 186093.211432114
                 },
                 {
                   "symbol": "crvUSD",
                   "real_symbol": "crvUSD",
                   "real_name": "Curve.Fi USD Stablecoin",
                   "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
-                  "amount": 314640.904935557,
-                  "price_usd": 0.999865642518139,
-                  "value_usd": 314598.63057588
+                  "amount": 314346.15926947,
+                  "price_usd": 0.999966216146536,
+                  "value_usd": 314335.539444888
                 },
                 {
                   "symbol": "CRV",
@@ -3679,8 +4100,8 @@
                   "real_name": "Curve DAO Token",
                   "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
                   "amount": 186.383900732468,
-                  "price_usd": 0.2281,
-                  "value_usd": 42.514167757076
+                  "price_usd": 0.228,
+                  "value_usd": 42.4955293670028
                 },
                 {
                   "symbol": "CVX",
@@ -3688,15 +4109,15 @@
                   "real_name": "Convex Token",
                   "address": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b",
                   "amount": 0.076320695574001,
-                  "price_usd": 1.78963634166589,
-                  "value_usd": 0.136586290420451
+                  "price_usd": 1.79191787017318,
+                  "value_usd": 0.1367604182631
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 70,
+              "id": 84,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "curve",
@@ -3705,30 +4126,30 @@
               "strategy": "farm",
               "yield_source": "Curve",
               "health_rate": null,
-              "net_usd": 500355.11,
-              "asset_usd": 500355.11,
+              "net_usd": 500382.27,
+              "asset_usd": 500382.27,
               "debt_usd": 0,
               "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xd533a949740bb3306d119cc777fa900ba034cd52",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "USDC",
                   "real_symbol": "USDC",
                   "real_name": "USD Coin",
                   "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-                  "amount": 271241.316322663,
-                  "price_usd": 1.00040016006403,
-                  "value_usd": 271349.856265169
+                  "amount": 271275.31685595,
+                  "price_usd": 1.00050025012506,
+                  "value_usd": 271411.022367133
                 },
                 {
                   "symbol": "RLUSD",
                   "real_symbol": "RLUSD",
                   "real_name": "RLUSD",
                   "address": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
-                  "amount": 228890.809704156,
+                  "amount": 228856.815499716,
                   "price_usd": 1.0005,
-                  "value_usd": 229005.255109008
+                  "value_usd": 228971.243907466
                 },
                 {
                   "symbol": "CRV",
@@ -3736,15 +4157,15 @@
                   "real_name": "Curve DAO Token",
                   "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
                   "amount": 0.00061333316176333,
-                  "price_usd": 0.2281,
-                  "value_usd": 0.000139901294198216
+                  "price_usd": 0.228,
+                  "value_usd": 0.000139839960882039
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 74,
+              "id": 88,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3753,21 +4174,21 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.105,
-              "net_usd": 304883.74,
-              "asset_usd": 2107444.63,
-              "debt_usd": 1802560.9,
+              "net_usd": 304917.96,
+              "asset_usd": 2107659.21,
+              "debt_usd": 1802741.24,
               "position_index": "0x1590cb22d797e226df92ebc6e0153427e207299916e7e4e53461389ad68272fb",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:18",
+              "scanned_at": "2026-03-25 02:59:44",
               "supply": [
                 {
                   "symbol": "rUSD",
                   "real_symbol": "rUSD",
                   "real_name": "Reservoir Stablecoin",
                   "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
-                  "amount": 2106601.65638403,
-                  "price_usd": 1.00040016006403,
-                  "value_usd": 2107444.63423773
+                  "amount": 2106605.37631663,
+                  "price_usd": 1.00050025012506,
+                  "value_usd": 2107659.20591959
                 }
               ],
               "borrow": [
@@ -3777,8 +4198,8 @@
                   "real_name": "USD Coin",
                   "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
                   "amount": 1801839.87415325,
-                  "price_usd": 1.00040016006403,
-                  "value_usd": 1802560.89851266
+                  "price_usd": 1.00050025012506,
+                  "value_usd": 1802741.24477564
                 }
               ],
               "rewards": []
@@ -3795,7 +4216,7 @@
           "active_wallets": 1,
           "positions": [
             {
-              "id": 78,
+              "id": 92,
               "wallet": "0xbeef123217647014429b7670329782e210884e89",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3804,12 +4225,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 3252257.41,
-              "asset_usd": 3252257.41,
+              "net_usd": 3252582.79,
+              "asset_usd": 3252582.79,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:23",
+              "scanned_at": "2026-03-25 02:59:49",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -3817,15 +4238,15 @@
                   "real_name": "USD Coin",
                   "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
                   "amount": 3250956.502169,
-                  "price_usd": 1.00040016006403,
-                  "value_usd": 3252257.40513105
+                  "price_usd": 1.00050025012506,
+                  "value_usd": 3252582.79356578
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 79,
+              "id": 93,
               "wallet": "0xbeef123217647014429b7670329782e210884e89",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3839,7 +4260,7 @@
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:23",
+              "scanned_at": "2026-03-25 02:59:49",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -3855,7 +4276,7 @@
               "rewards": []
             },
             {
-              "id": 80,
+              "id": 94,
               "wallet": "0xbeef123217647014429b7670329782e210884e89",
               "chain": "base",
               "protocol_id": "base_morphoblue",
@@ -3864,12 +4285,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 1502728.81,
-              "asset_usd": 1502728.81,
+              "net_usd": 1502879.16,
+              "asset_usd": 1502879.16,
               "debt_usd": 0,
               "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:24",
+              "scanned_at": "2026-03-25 02:59:50",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -3877,15 +4298,15 @@
                   "real_name": "USD Coin",
                   "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
                   "amount": 1502127.720165,
-                  "price_usd": 1.00040016006403,
-                  "value_usd": 1502728.81168968
+                  "price_usd": 1.00050025012506,
+                  "value_usd": 1502879.15974487
                 }
               ],
               "borrow": [],
               "rewards": []
             },
             {
-              "id": 76,
+              "id": 90,
               "wallet": "0xbeef123217647014429b7670329782e210884e89",
               "chain": "eth",
               "protocol_id": "morphoblue",
@@ -3894,12 +4315,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 719820.22,
-              "asset_usd": 719820.22,
+              "net_usd": 719784.21,
+              "asset_usd": 719784.21,
               "debt_usd": 0,
               "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 02:36:23",
+              "scanned_at": "2026-03-25 02:59:49",
               "supply": [
                 {
                   "symbol": "USDT",
@@ -3907,8 +4328,8 @@
                   "real_name": "Tether USD",
                   "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
                   "amount": 720173.100994,
-                  "price_usd": 0.99951,
-                  "value_usd": 719820.216174513
+                  "price_usd": 0.99946,
+                  "value_usd": 719784.207519463
                 }
               ],
               "borrow": [],
