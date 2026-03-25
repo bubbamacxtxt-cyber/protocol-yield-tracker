@@ -174,19 +174,25 @@ async function lookupToken(db, chain, address, symbol) {
 }
 
 // --- Strategy Classification ---
-function classifyStrategy(item, supplyUsd, borrowUsd) {
+function classifyStrategy(item, supplyUsd, borrowUsd, healthRate, protocolName) {
+    const MONEY_MARKETS = ['aave', 'morpho', 'euler', 'spark', 'compound', 'fluid', 'venus'];
+    const isMoneyMarket = MONEY_MARKETS.some(mm => (protocolName || '').toLowerCase().includes(mm));
+
     const type = item.name || '';
-    if (type === 'Lending') {
-        if (supplyUsd > 0 && borrowUsd > 0) {
-            return borrowUsd / supplyUsd > 0.7 ? 'loop' : 'borrow';
-        }
-        return 'lend';
+    if (type === 'Lending' || isMoneyMarket) {
+        return (borrowUsd > 0 || healthRate) ? 'loop' : 'lend';
     }
     if (type === 'Farming' || type === 'Leveraged Farming') return 'farm';
     if (type === 'Staked' || type === 'Locked') return 'stake';
     if (type === 'Liquidity Pool') return 'lp';
-    if (type === 'Yield' || type === 'Deposit') return borrowUsd > 0 ? 'loop' : 'lend';
     return type.toLowerCase().replace(/ /g, '_') || 'unknown';
+}
+
+function getDisplayType(item, protocolName) {
+    const MONEY_MARKETS = ['aave', 'morpho', 'euler', 'spark', 'compound', 'fluid', 'venus'];
+    const isMoneyMarket = MONEY_MARKETS.some(mm => (protocolName || '').toLowerCase().includes(mm));
+    if (isMoneyMarket) return 'Lending';
+    return item.name || '?';
 }
 
 // Yield source = protocol name from DeBank (Ethena, Maple, Aave V3, etc.)
@@ -303,7 +309,8 @@ async function scanAll() {
 
                     const supplyUsd = supplyTokens.reduce((s, t) => s + t.usd, 0);
                     const borrowUsd = borrowTokens.reduce((s, t) => s + t.usd, 0);
-                    const strategy = classifyStrategy(item, supplyUsd, borrowUsd);
+                    const strategy = classifyStrategy(item, supplyUsd, borrowUsd, healthRate, protocol.name);
+                    const displayType = getDisplayType(item, protocol.name);
                     const yieldSource = protocol.name || '?';
 
                     // Save to DB
@@ -322,7 +329,7 @@ async function scanAll() {
 
                     const result = posStmt.run(
                         wallet, chain, protocol.id || '?', protocol.name || '?',
-                        item.name || '?', strategy, yieldSource,
+                        displayType, strategy, yieldSource,
                         healthRate ? Math.round(healthRate * 1000) / 1000 : null,
                         Math.round(netUsd * 100) / 100,
                         Math.round(supplyUsd * 100) / 100,

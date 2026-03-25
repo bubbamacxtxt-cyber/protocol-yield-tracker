@@ -49,22 +49,28 @@ async function main() {
                     const assets = stats.asset_usd_value || 0;
                     const debt = stats.debt_usd_value || 0;
 
+                    // Override type for money market protocols
+                    const MONEY_MARKETS = ['aave', 'morpho', 'euler', 'spark', 'compound', 'fluid', 'venus'];
+                    const protoName = (proto.name || proto.id || '').toLowerCase();
+                    const isMoneyMarket = MONEY_MARKETS.some(mm => protoName.includes(mm));
+                    let displayType = item.name || '?';
+                    if (isMoneyMarket) displayType = 'Lending';
+
                     // Classify strategy
                     const supplyUsd = assetTokens.filter(t => (t.amount||0) > 0).reduce((s,t) => s + Math.abs(t.amount||0) * (t.price||0), 0);
                     const borrowUsd = assetTokens.filter(t => (t.amount||0) < 0).reduce((s,t) => s + Math.abs(t.amount||0) * (t.price||0), 0);
                     let strategy = 'unknown';
-                    const posType = item.name || '';
-                    if (posType === 'Lending') {
-                        strategy = supplyUsd > 0 && borrowUsd > 0 && borrowUsd/supplyUsd > 0.7 ? 'loop' : borrowUsd > 0 ? 'borrow' : 'lend';
-                    } else if (posType === 'Yield' || posType === 'Deposit') { strategy = borrowUsd > 0 ? 'loop' : 'lend'; }
-                    else if (posType === 'Staked' || posType === 'Locked') { strategy = 'stake'; }
-                    else if (posType === 'Farming' || posType === 'Leveraged Farming') { strategy = 'farm'; }
-                    else if (posType === 'Liquidity Pool') { strategy = 'lp'; }
+                    if (displayType === 'Lending') {
+                        strategy = (borrowUsd > 0 || hf) ? 'loop' : 'lend';
+                    } else if (displayType === 'Staked' || displayType === 'Locked') { strategy = 'stake'; }
+                    else if (displayType === 'Staked' || displayType === 'Locked') { strategy = 'stake'; }
+                    else if (displayType === 'Farming' || displayType === 'Leveraged Farming') { strategy = 'farm'; }
+                    else if (displayType === 'Liquidity Pool') { strategy = 'lp'; }
 
                     // Save position
                     const result = posStmt.run(
                         addr, c.id, proto.id || '?', proto.name || '?',
-                        item.name || '?', strategy, proto.name || '?',
+                        displayType, strategy, proto.name || '?',
                         hf ? Math.round(hf*1000)/1000 : null,
                         Math.round(net*100)/100, Math.round(assets*100)/100, Math.round(debt*100)/100
                     );
