@@ -71,8 +71,12 @@ async function scanWallets(wallets, label) {
                     const displayType = getDisplayType(item, proto.name);
                     const strategy = classifyStrategy(displayType, supplyUsd, borrowUsd, hf);
 
+                    // Generate unique position_index from token addresses (DeBank often returns undefined)
+                    const tokenAddrs = assetTokens.map(t => t.id || '').sort().join(',');
+                    const uniqueIndex = item.position_index || tokenAddrs || `pos_${Date.now()}`;
+
                     // Delete old tokens for this position (if replacing)
-                    const existingPos = db.prepare('SELECT id FROM positions WHERE wallet = ? AND chain = ? AND protocol_id = ? AND position_index = ?').get(addr, c.id, proto.id || '?', item.position_index || '');
+                    const existingPos = db.prepare('SELECT id FROM positions WHERE wallet = ? AND chain = ? AND protocol_id = ? AND position_index = ?').get(addr, c.id, proto.id || '?', uniqueIndex);
                     if (existingPos) {
                         db.prepare('DELETE FROM position_tokens WHERE position_id = ?').run(existingPos.id);
                     }
@@ -85,7 +89,7 @@ async function scanWallets(wallets, label) {
                         Math.round(net * 100) / 100,
                         Math.round(assets * 100) / 100,
                         Math.round(debt * 100) / 100,
-                        item.position_index || ''
+                        uniqueIndex
                     );
                     const posId = result.lastInsertRowid;
 
