@@ -116,7 +116,7 @@ let DATA = null;
 
 async function init() {
     try {
-        const res = await fetch('data.json');
+        const res = await fetch('../data.json');
         DATA = await res.json();
     } catch (e) {
         document.getElementById('positionsBody').innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px">Failed to load data.json.</td></tr>';
