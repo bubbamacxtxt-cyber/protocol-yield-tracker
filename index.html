@@ -91,13 +91,11 @@ async function init() {
     const listHtml = whales.map(([name, w]) => {
         const net = w.positions.reduce((s, p) => s + p.net_usd, 0);
         const chains = [...new Set(w.positions.map(p => p.chain))];
-        const protos = [...new Set(w.positions.map(p => p.protocol_name))];
-        const slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
         return `
             <a class="whale-item" href="${slug}.html">
                 <div>
                     <div class="whale-name">${name}</div>
-                    <div class="whale-meta">${w.active_wallets || w.wallets.length}/${w.total_wallets || w.wallets.length} wallets active · ${w.positions.length} positions · ${chains.join(', ')} · ${protos.join(', ')}</div>
+                    <div class="whale-meta">${w.active_wallets || w.wallets.length}/${w.total_wallets || w.wallets.length} wallets active · ${w.positions.length} positions · ${chains.join(', ')}</div>
                 </div>
                 <div class="whale-stats">
                     <div class="whale-value">$${fmt(net)}</div>
