@@ -78,7 +78,7 @@ async function scanWallets(wallets, label) {
 
                     // Generate unique position_index from token addresses
                     const tokenAddrs = assetTokens.map(t => t.id || '').sort().join(',');
-                    const uniqueIndex = item.position_index || tokenAddrs || `pos_${Date.now()}`;
+                    const uniqueIndex = item.position_index || `${tokenAddrs}_${Math.round(net)}` || `pos_${Date.now()}`;
 
                     // Delete old tokens for this position (if replacing)
                     const existingPos = db.prepare('SELECT id FROM positions WHERE wallet = ? AND chain = ? AND protocol_id = ? AND position_index = ?').get(addr, c.id, proto.id || '?', uniqueIndex);
@@ -113,18 +113,29 @@ async function scanWallets(wallets, label) {
                 }
             }
 
-            // Balance verification: if chain_balance is >5% higher than positions, check for wallet-held tokens
+            // Balance verification: ALWAYS check token_list for chains >$50K
             const gap = chainBalance - chainPositionsUsd;
-            if (gap > 50000 && chainPositionsUsd > 0 && (gap / chainBalance) > 0.05) {
-                console.log(`  ⚠️ ${c.id}: balance=$${chainBalance.toLocaleString()} positions=$${chainPositionsUsd.toLocaleString()} gap=$${gap.toLocaleString()}`);
+            if (gap > 50000) {
+                if (chainPositionsUsd > 0 && (gap / chainBalance) > 0.05) {
+                    console.log(`  ⚠️ ${c.id}: balance=$${chainBalance.toLocaleString()} positions=$${chainPositionsUsd.toLocaleString()} gap=$${gap.toLocaleString()}`);
+                } else if (chainPositionsUsd === 0) {
+                    console.log(`  ⚠️ ${c.id}: balance=$${chainBalance.toLocaleString()} no protocol positions`);
+                }
                 
-                // Check token list for wallet-held tokens
+                // Check token list for wallet-held AND protocol tokens not detected by complex_protocol_list
                 try {
                     const tokens = await api(`/v1/user/token_list?id=${addr}&chain_id=${c.id}&is_all=false`);
                     if (Array.isArray(tokens)) {
+                        // Track which protocol_ids we already have in DB
+                        const existingProtocols = db.prepare('SELECT DISTINCT protocol_id FROM positions WHERE wallet = ? AND chain = ?').all(addr, c.id).map(r => r.protocol_id);
+                        
                         for (const t of tokens) {
                             const usd = (t.amount || 0) * (t.price || 0);
-                            if (usd >= 50000 && !t.protocol_id) {
+                            if (usd < 50000) continue;
+                            
+                            const protoId = t.protocol_id || '';
+                            
+                            if (!protoId) {
                                 // Wallet-held token (not in any protocol)
                                 const existingWallet = db.prepare('SELECT id FROM positions WHERE wallet = ? AND chain = ? AND protocol_id = ? AND position_index = ?').get(addr, c.id, 'wallet-held', t.id || '');
                                 if (existingWallet) {
@@ -134,6 +145,16 @@ async function scanWallets(wallets, label) {
                                 tokStmt.run(result.lastInsertRowid, 'supply', t.symbol || '?', t.symbol || '?', t.name || '', t.id || '', t.amount || 0, t.price || 0, usd);
                                 walletPositions++;
                                 console.log(`    + ${t.symbol}: $${usd.toLocaleString()} (wallet-held)`);
+                            } else if (!existingProtocols.includes(protoId)) {
+                                // Protocol token not detected by complex_protocol_list
+                                const existingProto = db.prepare('SELECT id FROM positions WHERE wallet = ? AND chain = ? AND protocol_id = ? AND position_index = ?').get(addr, c.id, protoId, t.id || '');
+                                if (existingProto) {
+                                    db.prepare('DELETE FROM position_tokens WHERE position_id = ?').run(existingProto.id);
+                                }
+                                const result = posStmt.run(addr, c.id, protoId, protoId.replace(/[_-]/g, ' '), 'Lending', 'lend', protoId, null, Math.round(usd * 100) / 100, Math.round(usd * 100) / 100, 0, t.id || '');
+                                tokStmt.run(result.lastInsertRowid, 'supply', t.symbol || '?', t.symbol || '?', t.name || '', t.id || '', t.amount || 0, t.price || 0, usd);
+                                walletPositions++;
+                                console.log(`    + ${t.symbol}: $${usd.toLocaleString()} (${protoId})`);
                             }
                         }
                     }
@@ -175,6 +196,33 @@ async function main() {
     }
 
     await scanWallets(wallets, label);
+
+    // Balance verification: compare chain_balance with DB total
+    console.log('\n=== Balance Verification ===');
+    let totalBalance = 0;
+    for (const addr of wallets) {
+        const chains = await api(`/v1/user/used_chain_list?id=${addr}`);
+        for (const c of chains) {
+            const bal = await api(`/v1/user/chain_balance?id=${addr}&chain_id=${c.id}`);
+            if ((bal.usd_value || 0) >= 50000) totalBalance += bal.usd_value;
+            await new Promise(r => setTimeout(r, 100));
+        }
+    }
+
+    const dbTotal = db.prepare('SELECT COALESCE(SUM(net_usd), 0) as total FROM positions WHERE wallet IN (' + wallets.map(() => '?').join(',') + ')').get(...wallets).total;
+    const gap = totalBalance - dbTotal;
+    const gapPct = totalBalance > 0 ? (gap / totalBalance * 100) : 0;
+
+    console.log(`  Chain balance (>$50K): $${totalBalance.toLocaleString()}`);
+    console.log(`  DB total:              $${dbTotal.toLocaleString()}`);
+    console.log(`  Gap:                   $${gap.toLocaleString()} (${gapPct.toFixed(1)}%)`);
+
+    if (gapPct > 5) {
+        console.log(`  ⚠️ Gap > 5% — check for missing positions or wallet-held tokens`);
+    } else {
+        console.log(`  ✅ Within tolerance`);
+    }
+
     db.close();
 }
 
