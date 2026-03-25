@@ -247,7 +247,7 @@ function downloadXLSX() {
     const ws = XLSX.utils.json_to_sheet(rows);
     ws['!cols'] = [{wch:44},{wch:8},{wch:15},{wch:10},{wch:8},{wch:10},{wch:15},{wch:15},{wch:15},{wch:50},{wch:50}];
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'WHALE_KEY');
+    XLSX.utils.book_append_sheet(wb, ws, 'Steakhouse USD');
     XLSX.writeFile(wb, 'steakhouse-usd-positions.xlsx');
 }
 
