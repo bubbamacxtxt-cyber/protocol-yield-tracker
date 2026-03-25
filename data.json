@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-03-25T03:00:34.326Z",
+  "generated_at": "2026-03-25T07:24:08.048Z",
   "summary": {
-    "total_positions": 101,
-    "total_value": 694695160.8999999,
-    "total_assets": 1906793020.7999995,
+    "total_positions": 98,
+    "total_value": 689910583.3099997,
+    "total_assets": 1902008443.2099993,
     "total_debt": 1212097859.8799996,
     "total_whales": 6,
     "total_wallets": 50,
@@ -26,7 +26,6 @@
       "Aura Finance",
       "Avantis",
       "Fluid",
-      "Wallet",
       "Euler",
       "Revert",
       "Maple",
@@ -41,6 +40,7 @@
       "Spark sUSDC",
       "Aave Horizon USDC",
       "Aave USDC",
+      "Wallet",
       "ether.fi",
       "MantleETH",
       "Botanix stBTC",
@@ -880,36 +880,6 @@
               "amount": 2101982.368284,
               "price_usd": 1.00050025012506,
               "value_usd": 2103033.88522661
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 14,
-          "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
-          "chain": "base",
-          "protocol_id": "wallet-held",
-          "protocol_name": "Wallet",
-          "position_type": "Holding",
-          "strategy": "hold",
-          "yield_source": "wallet",
-          "health_rate": null,
-          "net_usd": 1645115.77,
-          "asset_usd": 1645115.77,
-          "debt_usd": 0,
-          "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:54:55",
-          "supply": [
-            {
-              "symbol": "USDC",
-              "real_symbol": "USDC",
-              "real_name": "USD Coin",
-              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
-              "amount": 1644293.216134,
-              "price_usd": 1.00050025012506,
-              "value_usd": 1645115.77402101
             }
           ],
           "borrow": [],
@@ -2757,36 +2727,6 @@
           "rewards": []
         },
         {
-          "id": 78,
-          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
-          "chain": "botanix",
-          "protocol_id": "wallet-held",
-          "protocol_name": "Wallet",
-          "position_type": "Holding",
-          "strategy": "hold",
-          "yield_source": "wallet",
-          "health_rate": null,
-          "net_usd": 2148946.69,
-          "asset_usd": 2148946.69,
-          "debt_usd": 0,
-          "position_index": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:59:38",
-          "supply": [
-            {
-              "symbol": "pBTC",
-              "real_symbol": "pBTC",
-              "real_name": "Pegged Bitcoin",
-              "address": "0x0d2437f93fed6ea64ef01ccde385fb1263910c56",
-              "amount": 30.4412358920821,
-              "price_usd": 70593.28,
-              "value_usd": 2148946.6888758
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
           "id": 62,
           "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
           "chain": "eth",
@@ -2841,36 +2781,6 @@
               "amount": 20.21051267,
               "price_usd": 70510,
               "value_usd": 1425043.2483617
-            }
-          ],
-          "borrow": [],
-          "rewards": []
-        },
-        {
-          "id": 73,
-          "wallet": "0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D",
-          "chain": "bera",
-          "protocol_id": "wallet-held",
-          "protocol_name": "Wallet",
-          "position_type": "Holding",
-          "strategy": "hold",
-          "yield_source": "wallet",
-          "health_rate": null,
-          "net_usd": 990515.13,
-          "asset_usd": 990515.13,
-          "debt_usd": 0,
-          "position_index": "0x6969696969696969696969696969696969696969",
-          "debank_updated_at": null,
-          "scanned_at": "2026-03-25 02:59:34",
-          "supply": [
-            {
-              "symbol": "WBERA",
-              "real_symbol": "WBERA",
-              "real_name": "Wrapped Bera",
-              "address": "0x6969696969696969696969696969696969696969",
-              "amount": 1981030.26832908,
-              "price_usd": 0.5,
-              "value_usd": 990515.134164541
             }
           ],
           "borrow": [],
