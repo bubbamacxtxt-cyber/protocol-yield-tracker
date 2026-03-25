@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-03-25T01:24:05.093Z",
+  "generated_at": "2026-03-25T01:41:53.448Z",
   "summary": {
     "total_positions": 201,
-    "total_value": 1185181416.2900002,
-    "total_assets": 5813155390.48,
+    "total_value": 1185181434.7500002,
+    "total_assets": 5813155408.929998,
     "total_debt": 4627973974.190001,
     "total_whales": 6,
     "total_wallets": 50,
@@ -7409,24 +7409,24 @@
           "protocol_id": "aave3",
           "protocol_name": "Aave V3",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 4036986.43,
-          "asset_usd": 4036986.43,
+          "net_usd": 4036990.03,
+          "asset_usd": 4036990.03,
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
               "real_name": "USD Coin",
               "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 4035371.63403482,
+              "amount": 4035375.23126955,
               "price_usd": 1.00040016006403,
-              "value_usd": 4036986.42860626
+              "value_usd": 4036990.02728046
             }
           ],
           "borrow": [],
@@ -7439,7 +7439,7 @@
           "protocol_id": "morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 3388160.77,
@@ -7447,7 +7447,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "USDC",
@@ -7469,7 +7469,7 @@
           "protocol_id": "morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 3252257.41,
@@ -7477,7 +7477,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:36",
+          "scanned_at": "2026-03-25 01:41:51",
           "supply": [
             {
               "symbol": "USDC",
@@ -7499,7 +7499,7 @@
           "protocol_id": "aave3",
           "protocol_name": "Aave V3",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
           "net_usd": 1623401.74,
@@ -7507,7 +7507,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "GHO",
@@ -7529,7 +7529,7 @@
           "protocol_id": "morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 1591932.21,
@@ -7537,7 +7537,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:36",
+          "scanned_at": "2026-03-25 01:41:51",
           "supply": [
             {
               "symbol": "AUSD",
@@ -7545,8 +7545,8 @@
               "real_name": "AUSD",
               "address": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "amount": 1591295.192117,
-              "price_usd": 1.00040031664844,
-              "value_usd": 1591932.21407498
+              "price_usd": 1.0004003165284,
+              "value_usd": 1591932.21388396
             }
           ],
           "borrow": [],
@@ -7559,7 +7559,7 @@
           "protocol_id": "base_morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 1502728.81,
@@ -7567,7 +7567,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:37",
+          "scanned_at": "2026-03-25 01:41:52",
           "supply": [
             {
               "symbol": "USDC",
@@ -7589,24 +7589,24 @@
           "protocol_id": "aave3",
           "protocol_name": "Aave V3",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 1008069.63,
-          "asset_usd": 1008069.63,
+          "net_usd": 1008070.4,
+          "asset_usd": 1008070.4,
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 1008493.19775481,
+              "amount": 1008493.9627834,
               "price_usd": 0.99958,
-              "value_usd": 1008069.63061175
+              "value_usd": 1008070.39531904
             }
           ],
           "borrow": [],
@@ -7622,12 +7622,12 @@
           "strategy": "farm",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 1002091.28,
-          "asset_usd": 1002091.28,
+          "net_usd": 1002090.97,
+          "asset_usd": 1002090.97,
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -7644,8 +7644,8 @@
               "real_name": "Curve.Fi USD Stablecoin",
               "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
               "amount": 699728.747245945,
-              "price_usd": 0.99986309185913,
-              "value_usd": 699632.948684046
+              "price_usd": 0.999863175661349,
+              "value_usd": 699633.007322868
             },
             {
               "symbol": "CRV",
@@ -7653,8 +7653,8 @@
               "real_name": "Curve DAO Token",
               "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
               "amount": 117.991678583506,
-              "price_usd": 0.2294,
-              "value_usd": 27.0672910670563
+              "price_usd": 0.2288,
+              "value_usd": 26.9964960599062
             },
             {
               "symbol": "YB",
@@ -7662,8 +7662,8 @@
               "real_name": "Yield Basis",
               "address": "0x01791f726b4103694969820be083196cc7c045ff",
               "amount": 752.009036716259,
-              "price_usd": 0.1149,
-              "value_usd": 86.4058383186981
+              "price_usd": 0.1145,
+              "value_usd": 86.1050347040116
             }
           ],
           "borrow": [],
@@ -7676,7 +7676,7 @@
           "protocol_id": "morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 1001490.45,
@@ -7684,7 +7684,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:36",
+          "scanned_at": "2026-03-25 01:41:51",
           "supply": [
             {
               "symbol": "AUSD",
@@ -7692,8 +7692,8 @@
               "real_name": "AUSD",
               "address": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "amount": 1001089.701998,
-              "price_usd": 1.00040031664844,
-              "value_usd": 1001490.45487229
+              "price_usd": 1.0004003165284,
+              "value_usd": 1001490.45475212
             }
           ],
           "borrow": [],
@@ -7706,7 +7706,7 @@
           "protocol_id": "morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 719870.63,
@@ -7714,7 +7714,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:36",
+          "scanned_at": "2026-03-25 01:41:51",
           "supply": [
             {
               "symbol": "USDT",
@@ -7736,7 +7736,7 @@
           "protocol_id": "morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 606171.33,
@@ -7744,7 +7744,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "RLUSD",
@@ -7769,21 +7769,21 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": 1.068,
-          "net_usd": 596998.79,
-          "asset_usd": 4175071.91,
+          "net_usd": 597009.33,
+          "asset_usd": 4175082.44,
           "debt_usd": 3578073.11,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 597249.635748489,
+              "amount": 597260.178500025,
               "price_usd": 0.99958,
-              "value_usd": 596998.790901475
+              "value_usd": 597009.329225055
             }
           ],
           "borrow": [],
@@ -7796,7 +7796,7 @@
           "protocol_id": "morphoblue",
           "protocol_name": "Morpho",
           "position_type": "Yield",
-          "strategy": "yield",
+          "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
           "net_usd": 537759.25,
@@ -7804,7 +7804,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -7829,30 +7829,30 @@
           "strategy": "stake",
           "yield_source": "Convex",
           "health_rate": null,
-          "net_usd": 500461.96,
-          "asset_usd": 500461.96,
+          "net_usd": 500461.88,
+          "asset_usd": 500461.88,
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "USDT",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-              "amount": 185432.49522503,
+              "amount": 185440.595126813,
               "price_usd": 0.99958,
-              "value_usd": 185354.613577035
+              "value_usd": 185362.71007686
             },
             {
               "symbol": "crvUSD",
               "real_symbol": "crvUSD",
               "real_name": "Curve.Fi USD Stablecoin",
               "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
-              "amount": 315107.597620589,
-              "price_usd": 0.99986309185913,
-              "value_usd": 315064.456825225
+              "amount": 315099.500746083,
+              "price_usd": 0.999863175661349,
+              "value_usd": 315056.387465284
             },
             {
               "symbol": "CRV",
@@ -7860,8 +7860,8 @@
               "real_name": "Curve DAO Token",
               "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
               "amount": 186.383900732468,
-              "price_usd": 0.2294,
-              "value_usd": 42.7564668280282
+              "price_usd": 0.2288,
+              "value_usd": 42.6446364875888
             },
             {
               "symbol": "CVX",
@@ -7869,8 +7869,8 @@
               "real_name": "Convex Token",
               "address": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b",
               "amount": 0.076320695574001,
-              "price_usd": 1.79507848827899,
-              "value_usd": 0.137001638835379
+              "price_usd": 1.79444448432542,
+              "value_usd": 0.136953251212646
             }
           ],
           "borrow": [],
@@ -7891,7 +7891,7 @@
           "debt_usd": 0,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "USDC",
@@ -7917,8 +7917,8 @@
               "real_name": "Curve DAO Token",
               "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
               "amount": 0.00061333316176333,
-              "price_usd": 0.2294,
-              "value_usd": 0.000140698627308508
+              "price_usd": 0.2288,
+              "value_usd": 0.00014033062741145
             }
           ],
           "borrow": [],
@@ -7934,21 +7934,21 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.105,
-          "net_usd": 304866.99,
-          "asset_usd": 2107427.89,
+          "net_usd": 304870.93,
+          "asset_usd": 2107431.83,
           "debt_usd": 1802560.9,
           "position_index": null,
           "debank_updated_at": null,
-          "scanned_at": "2026-03-25 01:23:30",
+          "scanned_at": "2026-03-25 01:41:47",
           "supply": [
             {
               "symbol": "rUSD",
               "real_symbol": "rUSD",
               "real_name": "Reservoir Stablecoin",
               "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
-              "amount": 2106584.91676866,
+              "amount": 2106588.85986608,
               "price_usd": 1.00040016006403,
-              "value_usd": 2107427.88792383
+              "value_usd": 2107431.83259912
             }
           ],
           "borrow": [
@@ -7982,24 +7982,24 @@
               "protocol_id": "aave3",
               "protocol_name": "Aave V3",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
-              "net_usd": 4036986.43,
-              "asset_usd": 4036986.43,
+              "net_usd": 4036990.03,
+              "asset_usd": 4036990.03,
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "USDC",
                   "real_symbol": "USDC",
                   "real_name": "USD Coin",
                   "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-                  "amount": 4035371.63403482,
+                  "amount": 4035375.23126955,
                   "price_usd": 1.00040016006403,
-                  "value_usd": 4036986.42860626
+                  "value_usd": 4036990.02728046
                 }
               ],
               "borrow": [],
@@ -8012,7 +8012,7 @@
               "protocol_id": "morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 3388160.77,
@@ -8020,7 +8020,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -8042,7 +8042,7 @@
               "protocol_id": "aave3",
               "protocol_name": "Aave V3",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
               "net_usd": 1623401.74,
@@ -8050,7 +8050,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "GHO",
@@ -8072,24 +8072,24 @@
               "protocol_id": "aave3",
               "protocol_name": "Aave V3",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
-              "net_usd": 1008069.63,
-              "asset_usd": 1008069.63,
+              "net_usd": 1008070.4,
+              "asset_usd": 1008070.4,
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "USDT",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-                  "amount": 1008493.19775481,
+                  "amount": 1008493.9627834,
                   "price_usd": 0.99958,
-                  "value_usd": 1008069.63061175
+                  "value_usd": 1008070.39531904
                 }
               ],
               "borrow": [],
@@ -8105,12 +8105,12 @@
               "strategy": "farm",
               "yield_source": "Curve",
               "health_rate": null,
-              "net_usd": 1002091.28,
-              "asset_usd": 1002091.28,
+              "net_usd": 1002090.97,
+              "asset_usd": 1002090.97,
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "PYUSD",
@@ -8127,8 +8127,8 @@
                   "real_name": "Curve.Fi USD Stablecoin",
                   "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
                   "amount": 699728.747245945,
-                  "price_usd": 0.99986309185913,
-                  "value_usd": 699632.948684046
+                  "price_usd": 0.999863175661349,
+                  "value_usd": 699633.007322868
                 },
                 {
                   "symbol": "CRV",
@@ -8136,8 +8136,8 @@
                   "real_name": "Curve DAO Token",
                   "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
                   "amount": 117.991678583506,
-                  "price_usd": 0.2294,
-                  "value_usd": 27.0672910670563
+                  "price_usd": 0.2288,
+                  "value_usd": 26.9964960599062
                 },
                 {
                   "symbol": "YB",
@@ -8145,8 +8145,8 @@
                   "real_name": "Yield Basis",
                   "address": "0x01791f726b4103694969820be083196cc7c045ff",
                   "amount": 752.009036716259,
-                  "price_usd": 0.1149,
-                  "value_usd": 86.4058383186981
+                  "price_usd": 0.1145,
+                  "value_usd": 86.1050347040116
                 }
               ],
               "borrow": [],
@@ -8159,7 +8159,7 @@
               "protocol_id": "morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 606171.33,
@@ -8167,7 +8167,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "RLUSD",
@@ -8192,21 +8192,21 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": 1.068,
-              "net_usd": 596998.79,
-              "asset_usd": 4175071.91,
+              "net_usd": 597009.33,
+              "asset_usd": 4175082.44,
               "debt_usd": 3578073.11,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "USDT",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-                  "amount": 597249.635748489,
+                  "amount": 597260.178500025,
                   "price_usd": 0.99958,
-                  "value_usd": 596998.790901475
+                  "value_usd": 597009.329225055
                 }
               ],
               "borrow": [],
@@ -8219,7 +8219,7 @@
               "protocol_id": "morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 537759.25,
@@ -8227,7 +8227,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "PYUSD",
@@ -8252,30 +8252,30 @@
               "strategy": "stake",
               "yield_source": "Convex",
               "health_rate": null,
-              "net_usd": 500461.96,
-              "asset_usd": 500461.96,
+              "net_usd": 500461.88,
+              "asset_usd": 500461.88,
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "USDT",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-                  "amount": 185432.49522503,
+                  "amount": 185440.595126813,
                   "price_usd": 0.99958,
-                  "value_usd": 185354.613577035
+                  "value_usd": 185362.71007686
                 },
                 {
                   "symbol": "crvUSD",
                   "real_symbol": "crvUSD",
                   "real_name": "Curve.Fi USD Stablecoin",
                   "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
-                  "amount": 315107.597620589,
-                  "price_usd": 0.99986309185913,
-                  "value_usd": 315064.456825225
+                  "amount": 315099.500746083,
+                  "price_usd": 0.999863175661349,
+                  "value_usd": 315056.387465284
                 },
                 {
                   "symbol": "CRV",
@@ -8283,8 +8283,8 @@
                   "real_name": "Curve DAO Token",
                   "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
                   "amount": 186.383900732468,
-                  "price_usd": 0.2294,
-                  "value_usd": 42.7564668280282
+                  "price_usd": 0.2288,
+                  "value_usd": 42.6446364875888
                 },
                 {
                   "symbol": "CVX",
@@ -8292,8 +8292,8 @@
                   "real_name": "Convex Token",
                   "address": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b",
                   "amount": 0.076320695574001,
-                  "price_usd": 1.79507848827899,
-                  "value_usd": 0.137001638835379
+                  "price_usd": 1.79444448432542,
+                  "value_usd": 0.136953251212646
                 }
               ],
               "borrow": [],
@@ -8314,7 +8314,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -8340,8 +8340,8 @@
                   "real_name": "Curve DAO Token",
                   "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
                   "amount": 0.00061333316176333,
-                  "price_usd": 0.2294,
-                  "value_usd": 0.000140698627308508
+                  "price_usd": 0.2288,
+                  "value_usd": 0.00014033062741145
                 }
               ],
               "borrow": [],
@@ -8357,21 +8357,21 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.105,
-              "net_usd": 304866.99,
-              "asset_usd": 2107427.89,
+              "net_usd": 304870.93,
+              "asset_usd": 2107431.83,
               "debt_usd": 1802560.9,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:30",
+              "scanned_at": "2026-03-25 01:41:47",
               "supply": [
                 {
                   "symbol": "rUSD",
                   "real_symbol": "rUSD",
                   "real_name": "Reservoir Stablecoin",
                   "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
-                  "amount": 2106584.91676866,
+                  "amount": 2106588.85986608,
                   "price_usd": 1.00040016006403,
-                  "value_usd": 2107427.88792383
+                  "value_usd": 2107431.83259912
                 }
               ],
               "borrow": [
@@ -8405,7 +8405,7 @@
               "protocol_id": "morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 3252257.41,
@@ -8413,7 +8413,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:36",
+              "scanned_at": "2026-03-25 01:41:51",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -8435,7 +8435,7 @@
               "protocol_id": "morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 1591932.21,
@@ -8443,7 +8443,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:36",
+              "scanned_at": "2026-03-25 01:41:51",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -8451,8 +8451,8 @@
                   "real_name": "AUSD",
                   "address": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
                   "amount": 1591295.192117,
-                  "price_usd": 1.00040031664844,
-                  "value_usd": 1591932.21407498
+                  "price_usd": 1.0004003165284,
+                  "value_usd": 1591932.21388396
                 }
               ],
               "borrow": [],
@@ -8465,7 +8465,7 @@
               "protocol_id": "base_morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 1502728.81,
@@ -8473,7 +8473,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:37",
+              "scanned_at": "2026-03-25 01:41:52",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -8495,7 +8495,7 @@
               "protocol_id": "morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 1001490.45,
@@ -8503,7 +8503,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:36",
+              "scanned_at": "2026-03-25 01:41:51",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -8511,8 +8511,8 @@
                   "real_name": "AUSD",
                   "address": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
                   "amount": 1001089.701998,
-                  "price_usd": 1.00040031664844,
-                  "value_usd": 1001490.45487229
+                  "price_usd": 1.0004003165284,
+                  "value_usd": 1001490.45475212
                 }
               ],
               "borrow": [],
@@ -8525,7 +8525,7 @@
               "protocol_id": "morphoblue",
               "protocol_name": "Morpho",
               "position_type": "Yield",
-              "strategy": "yield",
+              "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
               "net_usd": 719870.63,
@@ -8533,7 +8533,7 @@
               "debt_usd": 0,
               "position_index": null,
               "debank_updated_at": null,
-              "scanned_at": "2026-03-25 01:23:36",
+              "scanned_at": "2026-03-25 01:41:51",
               "supply": [
                 {
                   "symbol": "USDT",

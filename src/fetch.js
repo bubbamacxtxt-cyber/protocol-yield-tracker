@@ -185,7 +185,7 @@ function classifyStrategy(item, supplyUsd, borrowUsd) {
     if (type === 'Farming' || type === 'Leveraged Farming') return 'farm';
     if (type === 'Staked' || type === 'Locked') return 'stake';
     if (type === 'Liquidity Pool') return 'lp';
-    if (type === 'Yield' || type === 'Deposit') return 'yield';
+    if (type === 'Yield' || type === 'Deposit') return borrowUsd > 0 ? 'loop' : 'lend';
     return type.toLowerCase().replace(/ /g, '_') || 'unknown';
 }
 

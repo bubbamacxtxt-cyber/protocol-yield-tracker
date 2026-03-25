@@ -56,7 +56,7 @@ async function main() {
                     const posType = item.name || '';
                     if (posType === 'Lending') {
                         strategy = supplyUsd > 0 && borrowUsd > 0 && borrowUsd/supplyUsd > 0.7 ? 'loop' : borrowUsd > 0 ? 'borrow' : 'lend';
-                    } else if (posType === 'Yield' || posType === 'Deposit') { strategy = 'yield'; }
+                    } else if (posType === 'Yield' || posType === 'Deposit') { strategy = borrowUsd > 0 ? 'loop' : 'lend'; }
                     else if (posType === 'Staked' || posType === 'Locked') { strategy = 'stake'; }
                     else if (posType === 'Farming' || posType === 'Leveraged Farming') { strategy = 'farm'; }
                     else if (posType === 'Liquidity Pool') { strategy = 'lp'; }
