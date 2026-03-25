@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-03-25T08:59:48.597Z",
+  "generated_at": "2026-03-25T09:27:47.328Z",
   "summary": {
-    "total_positions": 87,
-    "total_value": 534326148.05000013,
-    "total_assets": 1744263988.0499997,
-    "total_debt": 1209937840.0000002,
-    "total_whales": 6,
-    "total_wallets": 46,
-    "total_active": 26,
+    "total_positions": 90,
+    "total_value": 547134358.2700001,
+    "total_assets": 1765410024.7299995,
+    "total_debt": 1218275666.4600003,
+    "total_whales": 7,
+    "total_wallets": 47,
+    "total_active": 27,
     "chains": [
       "eth",
       "mnt",
@@ -40,7 +40,8 @@
       "sGHO",
       "Spark sUSDC",
       "Aave Horizon USDC",
-      "Aave USDC"
+      "Aave USDC",
+      "Upshift"
     ]
   },
   "whales": {
@@ -3936,6 +3937,230 @@
       ],
       "is_multi_vault": false,
       "vaults": null
+    },
+    "Upshift": {
+      "name": "Upshift",
+      "wallets": [
+        "0xf014ef13a3e0372582f44a667e144a4f2e439ea7"
+      ],
+      "total_wallets": 1,
+      "active_wallets": 1,
+      "positions": [
+        {
+          "id": 162,
+          "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
+          "chain": "eth",
+          "protocol_id": "upshift",
+          "protocol_name": "Upshift",
+          "position_type": "Yield",
+          "strategy": "lend",
+          "yield_source": "Upshift",
+          "health_rate": null,
+          "net_usd": 6870454.07,
+          "asset_usd": 6870454.07,
+          "debt_usd": 0,
+          "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_6870454",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 09:22:04",
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": 6869079.983135,
+              "price_usd": 1.000200040008,
+              "value_usd": 6870454.07394979
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        },
+        {
+          "id": 161,
+          "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
+          "chain": "eth",
+          "protocol_id": "morphoblue",
+          "protocol_name": "Morpho",
+          "position_type": "Lending",
+          "strategy": "loop",
+          "yield_source": "Morpho",
+          "health_rate": 1.604,
+          "net_usd": 4347905.04,
+          "asset_usd": 10121530.87,
+          "debt_usd": 5773625.83,
+          "position_index": "0xe9d96a2f8042486bfd8cfd22692e49cd355e8a51da2f427bdb2d3671fbe978ea",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 09:22:04",
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": 10119506.5673859,
+              "price_usd": 1.000200040008,
+              "value_usd": 10121530.8735606
+            }
+          ],
+          "borrow": [
+            {
+              "symbol": "AUSD",
+              "real_symbol": "AUSD",
+              "real_name": "AUSD",
+              "address": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
+              "amount": 5773039.91671,
+              "price_usd": 1.00010149145745,
+              "value_usd": 5773625.83094504
+            }
+          ],
+          "rewards": []
+        },
+        {
+          "id": 160,
+          "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
+          "chain": "eth",
+          "protocol_id": "morphoblue",
+          "protocol_name": "Morpho",
+          "position_type": "Lending",
+          "strategy": "loop",
+          "yield_source": "Morpho",
+          "health_rate": 1.482,
+          "net_usd": 1589851.11,
+          "asset_usd": 4154051.74,
+          "debt_usd": 2564200.63,
+          "position_index": "0xa0c6499787a7d046f91f2687558c021e2baae5a378885280a448183a926ef5f7",
+          "debank_updated_at": null,
+          "scanned_at": "2026-03-25 09:22:04",
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": 1589533.13629768,
+              "price_usd": 1.000200040008,
+              "value_usd": 1589851.10651899
+            }
+          ],
+          "borrow": [],
+          "rewards": []
+        }
+      ],
+      "is_multi_vault": true,
+      "vaults": {
+        "Upshift Core USDC": {
+          "name": "Upshift Core USDC",
+          "wallets": [
+            "0xf014ef13a3e0372582f44a667e144a4f2e439ea7"
+          ],
+          "total_wallets": 1,
+          "active_wallets": 1,
+          "positions": [
+            {
+              "id": 162,
+              "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
+              "chain": "eth",
+              "protocol_id": "upshift",
+              "protocol_name": "Upshift",
+              "position_type": "Yield",
+              "strategy": "lend",
+              "yield_source": "Upshift",
+              "health_rate": null,
+              "net_usd": 6870454.07,
+              "asset_usd": 6870454.07,
+              "debt_usd": 0,
+              "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_6870454",
+              "debank_updated_at": null,
+              "scanned_at": "2026-03-25 09:22:04",
+              "supply": [
+                {
+                  "symbol": "USDC",
+                  "real_symbol": "USDC",
+                  "real_name": "USD Coin",
+                  "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                  "amount": 6869079.983135,
+                  "price_usd": 1.000200040008,
+                  "value_usd": 6870454.07394979
+                }
+              ],
+              "borrow": [],
+              "rewards": []
+            },
+            {
+              "id": 161,
+              "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
+              "chain": "eth",
+              "protocol_id": "morphoblue",
+              "protocol_name": "Morpho",
+              "position_type": "Lending",
+              "strategy": "loop",
+              "yield_source": "Morpho",
+              "health_rate": 1.604,
+              "net_usd": 4347905.04,
+              "asset_usd": 10121530.87,
+              "debt_usd": 5773625.83,
+              "position_index": "0xe9d96a2f8042486bfd8cfd22692e49cd355e8a51da2f427bdb2d3671fbe978ea",
+              "debank_updated_at": null,
+              "scanned_at": "2026-03-25 09:22:04",
+              "supply": [
+                {
+                  "symbol": "USDC",
+                  "real_symbol": "USDC",
+                  "real_name": "USD Coin",
+                  "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                  "amount": 10119506.5673859,
+                  "price_usd": 1.000200040008,
+                  "value_usd": 10121530.8735606
+                }
+              ],
+              "borrow": [
+                {
+                  "symbol": "AUSD",
+                  "real_symbol": "AUSD",
+                  "real_name": "AUSD",
+                  "address": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
+                  "amount": 5773039.91671,
+                  "price_usd": 1.00010149145745,
+                  "value_usd": 5773625.83094504
+                }
+              ],
+              "rewards": []
+            },
+            {
+              "id": 160,
+              "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
+              "chain": "eth",
+              "protocol_id": "morphoblue",
+              "protocol_name": "Morpho",
+              "position_type": "Lending",
+              "strategy": "loop",
+              "yield_source": "Morpho",
+              "health_rate": 1.482,
+              "net_usd": 1589851.11,
+              "asset_usd": 4154051.74,
+              "debt_usd": 2564200.63,
+              "position_index": "0xa0c6499787a7d046f91f2687558c021e2baae5a378885280a448183a926ef5f7",
+              "debank_updated_at": null,
+              "scanned_at": "2026-03-25 09:22:04",
+              "supply": [
+                {
+                  "symbol": "USDC",
+                  "real_symbol": "USDC",
+                  "real_name": "USD Coin",
+                  "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                  "amount": 1589533.13629768,
+                  "price_usd": 1.000200040008,
+                  "value_usd": 1589851.10651899
+                }
+              ],
+              "borrow": [],
+              "rewards": []
+            }
+          ],
+          "slug": "upshift-core-usdc"
+        }
+      }
     }
   }
 }
