@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Protocol Yield Tracker — Midas MF-One</title>
+<title>Protocol Yield Tracker — Midas mHyper</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -60,7 +60,7 @@ tr:hover td { background: #161b22; }
 <div class="container">
     <div class="header">
         <a class="home-btn" href="../midas.html">← Home</a>
-        <h1>Midas MF-One</h1>
+        <h1>Midas mHyper</h1>
     </div>
     <p class="subtitle">Wallet positions and yield strategies</p>
 
@@ -125,7 +125,7 @@ async function init() {
     render();
 }
 
-function getWhale() { const whale = DATA.whales["Midas"] || {}; return whale.vaults ? whale.vaults["Midas MF-One"] || {positions:[],wallets:[],total_wallets:0,active_wallets:0} : whale; }
+function getWhale() { const whale = DATA.whales["Midas"] || {}; return whale.vaults ? whale.vaults["Midas mHyper"] || {positions:[],wallets:[],total_wallets:0,active_wallets:0} : whale; }
 
 function render() {
     const whale = getWhale();
@@ -247,7 +247,7 @@ function downloadXLSX() {
     ws['!cols'] = [{wch:44},{wch:8},{wch:15},{wch:10},{wch:8},{wch:10},{wch:15},{wch:15},{wch:15},{wch:50},{wch:50}];
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Midas');
-    XLSX.writeFile(wb, 'midas-mf-one-positions.xlsx');
+    XLSX.writeFile(wb, 'midas-mhyper-positions.xlsx');
 }
 
 ['filterProtocol', 'filterChain', 'filterStrategy', 'filterMin'].forEach(id => {
