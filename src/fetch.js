@@ -334,7 +334,7 @@ async function scanAll() {
                         Math.round(netUsd * 100) / 100,
                         Math.round(supplyUsd * 100) / 100,
                         Math.round(borrowUsd * 100) / 100,
-                        item.position_index || null,
+                        item.position_index || '',
                         item.update_at ? new Date(item.update_at * 1000).toISOString() : null
                     );
 
