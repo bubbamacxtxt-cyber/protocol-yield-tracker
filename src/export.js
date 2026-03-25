@@ -10,7 +10,7 @@ const Database = require('better-sqlite3');
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const OUT_PATH = path.join(__dirname, '..', 'data.json');
 
-// Whale definitions: name → wallet addresses
+// Whale definitions: name → wallet list OR { vaults: { vaultName: [wallets] } }
 const WHALES = {
     'Avant': [
         '0x020c5bB0d81b8cf539Ca06364Ece4a41631995b4',
@@ -69,7 +69,13 @@ const WHALES = {
         '0x003Ca23Fd5F0ca87D01F6eC6CD14A8AE60c2b97D',
         '0xAd571979b4245E163A7E2119EB4dFd94AfDaebC5',
         '0x8917d4eE4609f991b559DAF8D0aD1b892c13B127'
-    ]
+    ],
+    'Makina': {
+        vaults: {
+            'Dialectic USD': ['0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc'],
+            'Steakhouse USD': ['0xbeef123217647014429b7670329782e210884e89']
+        }
+    }
 };
 
 function main() {
@@ -112,7 +118,18 @@ function main() {
 
     // Build whale data
     const whales = {};
-    for (const [name, walletList] of Object.entries(WHALES)) {
+    for (const [name, definition] of Object.entries(WHALES)) {
+        // Handle both formats: simple wallet list or multi-vault
+        let walletList, vaults = null;
+        if (Array.isArray(definition)) {
+            walletList = definition;
+        } else if (definition.vaults) {
+            vaults = definition.vaults;
+            walletList = Object.values(vaults).flat();
+        } else {
+            continue;
+        }
+
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
         const positions = allPositions.filter(p => walletSet.has(p.wallet.toLowerCase()));
 
@@ -121,12 +138,32 @@ function main() {
             positions.push(...manualPositions[name]);
         }
 
+        // If multi-vault, build vault breakdown
+        let vaultData = null;
+        if (vaults) {
+            vaultData = {};
+            for (const [vaultName, vaultWallets] of Object.entries(vaults)) {
+                const vWalletSet = new Set(vaultWallets.map(w => w.toLowerCase()));
+                const vPositions = positions.filter(p => vWalletSet.has(p.wallet.toLowerCase()));
+                vaultData[vaultName] = {
+                    name: vaultName,
+                    wallets: vaultWallets,
+                    total_wallets: vaultWallets.length,
+                    active_wallets: [...new Set(vPositions.map(p => p.wallet))].length,
+                    positions: vPositions,
+                    slug: vaultName.toLowerCase().replace(/[^a-z0-9]/g, '-')
+                };
+            }
+        }
+
         whales[name] = {
             name,
             wallets: walletList,
             total_wallets: walletList.length,
             active_wallets: [...new Set(positions.map(p => p.wallet))].length,
-            positions
+            positions,
+            is_multi_vault: !!vaults,
+            vaults: vaultData
         };
     }
 
