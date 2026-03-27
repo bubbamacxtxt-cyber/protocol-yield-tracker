@@ -1,6 +1,6 @@
 # Protocol Yield Tracker
 
-Wallet position analyzer — give it addresses, it finds what they're farming.
+Wallet position analyzer — tracks mezzanine DeFi protocols (vaults, yield-bearing stables) and their underlying yield sources.
 
 **GitHub:** bubbamacxtxt-cyber/protocol-yield-tracker
 **Live:** https://bubbamacxtxt-cyber.github.io/protocol-yield-tracker/
@@ -57,17 +57,46 @@ After scanning positions, the scanner:
 | Liquidity Pool | Keep | LP |
 | Wallet-held token | "Holding" | Hold |
 
-## Current Whales
+## Current Whales (Mezzanine Protocols)
 
-| Whale | Type | Positions | Value |
-|-------|------|-----------|-------|
-| Avant | Single | 13 | $100M |
-| yoUSD | Single | 14 | $40M |
-| Yuzu | Single | 25 | $63M |
-| InfiniFi | Single (manual) | 9 | $122M |
-| Reservoir | Single | 25 | $350M |
-| Makina | Multi-vault | 16 | $21M |
-| **Total** | | **101** | **$695M** |
+These are DeFi platforms with vaults or yield-bearing stables that return interest to depositors. We call them "whales" to distinguish from the underlying protocols they deposit into.
+
+| Whale | Type | Vaults | Value |
+|-------|------|--------|-------|
+| Avant | Single | — | $100M |
+| yoUSD | Single | — | $40M |
+| Yuzu | Single | — | $63M |
+| InfiniFi | Single (manual RWA) | — | $122M |
+| Reservoir | Single | — | $350M |
+| Makina | Multi-vault | Dialectic USD, Steakhouse USD | $21M |
+| Upshift | Multi-vault | Core USDC, earnAUSD, singularV | — |
+| Midas | Multi-vault | mHyper, mMev, mAPOLLO | — |
+| Superform | Multi-vault | Flagship USDC SuperVault | — |
+
+## Roadmap
+
+### Phase 1 — Yield Data ✅ (in progress)
+- [x] On-chain position scanner (DeBank API)
+- [x] Token registry (1inch + DeFiLlama + CoinGecko)
+- [x] Manual RWA positions (InfiniFi CSV format)
+- [x] Multi-vault support (Makina, Upshift, Midas, Superform)
+- [ ] Yield-bearing stablecoin page (Portals APR data)
+- [ ] Add yields to dashboard (APY display, multi-API math)
+
+### Phase 2 — Automation
+- [ ] GitHub Actions auto-update (daily scans + export)
+- [ ] Cost tracking & monitoring (DeBank + Portals API budget)
+- [ ] Client pricing model (daily delivery)
+
+### Phase 3 — Whale Discovery
+- [ ] Research & add more mezzanine protocols (DeFiLlama, on-chain)
+- [ ] RWA yield tracking (APIs where available, manual CSV fallback)
+- [ ] RWA protocol research (Centrifuge, Maple, Ondo, etc.)
+
+### Phase 4 — Dashboard Polish
+- [ ] Central yield view (all whales, all rates, sortable)
+- [ ] Historical rate tracking (SQLite time series)
+- [ ] Alerts / notifications on rate changes
 
 ## Setup
 
@@ -81,7 +110,8 @@ npm install
 # Scan one whale at a time (recommended)
 DEBANK_API_KEY="<key>" node src/scan-whale.js <whale-name>
 
-# Available whales: Avant, yoUSD, Yuzu, Reservoir, Makina
+# Available whales: Avant, yoUSD, Yuzu, Reservoir, Makina, Upshift, Midas, Superform
+# Multi-vault whales: scan-makina.js, scan-vault.js (see Add New Whale section)
 ```
 
 ## Export
