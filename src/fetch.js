@@ -6,6 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const Database = require('better-sqlite3');
 
 const DEBANK_API = 'https://pro-openapi.debank.com';

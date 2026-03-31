@@ -9,6 +9,7 @@
     "analyze": "node src/analyze-wallets.js"
   },
   "dependencies": {
-    "better-sqlite3": "^11.0.0"
+    "better-sqlite3": "^11.0.0",
+    "dotenv": "^17.3.1"
   }
 }
