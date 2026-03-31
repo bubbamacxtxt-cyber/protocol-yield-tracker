@@ -140,16 +140,21 @@ async function main() {
   const totalUsd = allPositions.reduce((sum, p) => sum + p.net_usd, 0);
   console.log(`\nTotal: ${allPositions.length} positions, $${totalUsd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
 
-  // Read existing manual-positions.json to preserve non-InfiniFi entries
+  // 6. Write to separate file (don't clobber other whales)
+  const whalesDir = path.join(__dirname, '..', 'data', 'whales');
+  if (!fs.existsSync(whalesDir)) fs.mkdirSync(whalesDir, { recursive: true });
+  const outFile = path.join(whalesDir, 'infinifi.json');
+  fs.writeFileSync(outFile, JSON.stringify({ InfiniFi: allPositions }, null, 2));
+  console.log(`\nWrote ${outFile}`);
+  console.log(`  InfiniFi: ${allPositions.length} positions`);
+
+  // Also update manual-positions.json (merge all whales)
   const manualPath = path.join(__dirname, '..', 'data', 'manual-positions.json');
   let existing = {};
   if (fs.existsSync(manualPath)) {
     existing = JSON.parse(fs.readFileSync(manualPath, 'utf8'));
   }
-
-  // Update InfiniFi section
   existing.InfiniFi = allPositions;
-
   fs.writeFileSync(manualPath, JSON.stringify(existing, null, 2));
   console.log(`\nWrote ${manualPath}`);
   console.log(`  InfiniFi: ${allPositions.length} positions`);
