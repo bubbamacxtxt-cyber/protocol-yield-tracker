@@ -175,7 +175,7 @@ function render() {
             <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
             <td>${p.chain}</td>
             <td>${p.protocol_name}</td>
-            <td>${p.position_type}</td>
+            <td>${p.asset_type || p.position_type}</td>
             <td><span class="badge badge-${p.strategy}">${p.strategy}</span></td>
             <td>${hf}</td>
             <td><div class="token-list">${supply || '-'}</div></td>
@@ -236,7 +236,7 @@ function downloadXLSX() {
         'Wallet': p.wallet,
         'Chain': p.chain,
         'Protocol': p.protocol_name,
-        'Type': p.position_type,
+        'Type': p.asset_type || p.position_type,
         'Strategy': p.strategy,
         'Health Rate': p.health_rate || '',
         'Net USD': p.net_usd,
