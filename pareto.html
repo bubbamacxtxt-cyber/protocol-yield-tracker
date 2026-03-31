@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Protocol Yield Tracker — InfiniFi</title>
+<title>Protocol Yield Tracker — Pareto</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -61,7 +61,7 @@ tr:hover td { background: #161b22; }
 <div class="container">
     <div class="header">
         <a class="home-btn" href="index.html">← Home</a>
-        <h1>InfiniFi</h1>
+        <h1>Pareto</h1>
     </div>
     <p class="subtitle">Wallet positions and yield strategies</p>
 
@@ -129,7 +129,7 @@ async function init() {
 }
 
 function getWhale() {
-    return DATA.whales['InfiniFi'] || Object.values(DATA.whales)[0] || { positions: [], wallets: [], total_wallets: 0, active_wallets: 0 };
+    return DATA.whales['Pareto'] || Object.values(DATA.whales)[0] || { positions: [], wallets: [], total_wallets: 0, active_wallets: 0 };
 }
 
 function render() {
@@ -177,7 +177,7 @@ function render() {
             <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
             <td>${p.chain}</td>
             <td>${p.protocol_name}</td>
-            <td>${p.position_type}</td>
+            <td>${p.asset_type || p.position_type}</td>
             <td><span class="badge badge-${p.strategy}">${p.strategy}</span></td>
             <td>${hf}</td>
             <td><div class="token-list">${supply || '-'}</div></td>
@@ -240,7 +240,7 @@ function downloadXLSX() {
         'Wallet': p.wallet,
         'Chain': p.chain,
         'Protocol': p.protocol_name,
-        'Type': p.position_type,
+        'Type': p.asset_type || p.position_type,
         'Strategy': p.strategy,
         'Health Rate': p.health_rate || '',
         'Net USD': p.net_usd,
@@ -255,8 +255,8 @@ function downloadXLSX() {
     const ws = XLSX.utils.json_to_sheet(rows);
     ws['!cols'] = [{wch:44},{wch:8},{wch:15},{wch:10},{wch:8},{wch:10},{wch:15},{wch:15},{wch:15},{wch:50},{wch:50}];
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'InfiniFi');
-    XLSX.writeFile(wb, 'infinifi-positions.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, 'Pareto');
+    XLSX.writeFile(wb, 'pareto-positions.xlsx');
 }
 
 ['filterProtocol', 'filterChain', 'filterStrategy', 'filterMin'].forEach(id => {

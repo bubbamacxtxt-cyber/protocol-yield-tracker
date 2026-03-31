@@ -649,5 +649,155 @@
       "deal_type": "Amortizing",
       "preference": "Senior"
     }
+  ],
+  "Pareto": [
+    {
+      "wallet": "off-chain",
+      "chain": "eth",
+      "protocol_name": "RockawayX",
+      "protocol_id": "687e1219e1d966cdc7a5d64a",
+      "position_type": "Illiquid",
+      "strategy": "rwa",
+      "yield_source": "rockawayx",
+      "health_rate": null,
+      "net_usd": 20748022.06535,
+      "asset_usd": 20748022.06535,
+      "debt_usd": 0,
+      "supply": [
+        {
+          "symbol": "AA_idle_RockawayX",
+          "real_symbol": "AA_idle_RockawayX",
+          "amount": 20748022.06535,
+          "price_usd": 1,
+          "value_usd": 20748022.06535
+        }
+      ],
+      "borrow": [],
+      "rewards": [],
+      "apy_current": 7.45,
+      "apy_gross": 8.31,
+      "apy_avg": 7.45,
+      "apy_base": 8.31,
+      "apy_rewards": 0,
+      "apy_fee": 10,
+      "maturity": null,
+      "bucket_weeks": null,
+      "underlying": "USDC",
+      "paused": false,
+      "manual": true,
+      "asset_type": "CDO_EPOCH",
+      "vault_description": "The vault is a fixed-rate credit facility with a 14-day notice period for redemptions. All liabilities are fully backed by the RockawayX Credit Fund’s diversified pool of on-chain and off-chain assets."
+    },
+    {
+      "wallet": "off-chain",
+      "chain": "eth",
+      "protocol_name": "Fasanara Digital",
+      "protocol_id": "6703f887115a372bcf5936ea",
+      "position_type": "Illiquid",
+      "strategy": "rwa",
+      "yield_source": "fasanara",
+      "health_rate": null,
+      "net_usd": 11756553.313306,
+      "asset_usd": 11756553.313306,
+      "debt_usd": 0,
+      "supply": [
+        {
+          "symbol": "AA_idle_Fasanara",
+          "real_symbol": "AA_idle_Fasanara",
+          "amount": 11756553.313306,
+          "price_usd": 1,
+          "value_usd": 11756553.313306
+        }
+      ],
+      "borrow": [],
+      "rewards": [],
+      "apy_current": 0,
+      "apy_gross": 0,
+      "apy_avg": 0,
+      "apy_base": 0,
+      "apy_rewards": 0,
+      "apy_fee": 20,
+      "maturity": null,
+      "bucket_weeks": null,
+      "underlying": "USDC",
+      "paused": false,
+      "manual": true,
+      "asset_type": "CDO_EPOCH",
+      "vault_description": "Variable-rate loan channeling funds into delta-neutral yield strategies overperforming the BTC funding rate."
+    },
+    {
+      "wallet": "off-chain",
+      "chain": "eth",
+      "protocol_name": "Bastion Trading",
+      "protocol_id": "6825b4363ac7644d17e2bffd",
+      "position_type": "Illiquid",
+      "strategy": "rwa",
+      "yield_source": "bastion",
+      "health_rate": null,
+      "net_usd": 10343644.491122,
+      "asset_usd": 10343644.491122,
+      "debt_usd": 0,
+      "supply": [
+        {
+          "symbol": "AA_idle_Bastion",
+          "real_symbol": "AA_idle_Bastion",
+          "amount": 10343644.491122,
+          "price_usd": 1,
+          "value_usd": 10343644.491122
+        }
+      ],
+      "borrow": [],
+      "rewards": [],
+      "apy_current": 10.76,
+      "apy_gross": 12.01,
+      "apy_avg": 10.76,
+      "apy_base": 12.01,
+      "apy_rewards": 0,
+      "apy_fee": 10,
+      "maturity": null,
+      "bucket_weeks": null,
+      "underlying": "USDC",
+      "paused": false,
+      "manual": true,
+      "asset_type": "CDO_EPOCH",
+      "vault_description": "Fixed-rate loan channeling funds into derivatives trading and systematic strategies."
+    },
+    {
+      "wallet": "off-chain",
+      "chain": "eth",
+      "protocol_name": "Adaptive Frontier",
+      "protocol_id": "684149d45a56723ad4eff591",
+      "position_type": "Illiquid",
+      "strategy": "rwa",
+      "yield_source": "adaptive",
+      "health_rate": null,
+      "net_usd": 2745945.196791,
+      "asset_usd": 2745945.196791,
+      "debt_usd": 0,
+      "supply": [
+        {
+          "symbol": "AA_idle_Adaptive",
+          "real_symbol": "AA_idle_Adaptive",
+          "amount": 2745945.196791,
+          "price_usd": 1,
+          "value_usd": 2745945.196791
+        }
+      ],
+      "borrow": [],
+      "rewards": [],
+      "apy_current": 7.46,
+      "apy_gross": 8.32,
+      "apy_avg": 7.46,
+      "apy_base": 8.32,
+      "apy_rewards": 0,
+      "apy_fee": 10,
+      "maturity": null,
+      "bucket_weeks": null,
+      "underlying": "USDC",
+      "paused": false,
+      "manual": true,
+      "asset_type": "CDO_EPOCH",
+      "vault_description": "Fixed-rate loan channeling funds into delta neutral arbitrage and market making strategies"
+    }
   ]
 }

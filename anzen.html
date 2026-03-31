@@ -103,6 +103,8 @@ tr:hover td { background: #161b22; }
                     <th>Net USD</th>
                     <th>Assets</th>
                     <th>Debt</th>
+                    <th>APY Net</th>
+                    <th>APY Gross</th>
                 </tr>
             </thead>
             <tbody id="positionsBody"></tbody>
@@ -167,15 +169,15 @@ function render() {
         .join('');
 
     const rows = filtered.map(p => {
-        const w = p.wallet.length > 20 ? p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4) : p.wallet;
+        const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
         const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${p.health_rate.toFixed(3)}</span>` : '-';
         const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         return `<tr>
-            <td>${p.wallet.length > 20 ? `<a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a>` : w}</td>
+            <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
             <td>${p.chain}</td>
             <td>${p.protocol_name}</td>
-            <td>${p.asset_type || p.position_type}</td>
+            <td>${p.position_type}</td>
             <td><span class="badge badge-${p.strategy}">${p.strategy}</span></td>
             <td>${hf}</td>
             <td><div class="token-list">${supply || '-'}</div></td>
@@ -183,6 +185,8 @@ function render() {
             <td>$${fmt(p.net_usd)}</td>
             <td>$${fmt(p.asset_usd)}</td>
             <td>$${fmt(p.debt_usd)}</td>
+            <td>${p.apy_current ? p.apy_current + '%' : '-'}</td>
+            <td>${p.apy_gross ? p.apy_gross + '%' : '-'}</td>
         </tr>`;
     }).join('');
     document.getElementById('positionsBody').innerHTML = rows || '<tr><td colspan="11" style="text-align:center;padding:40px">No positions match filters</td></tr>';
@@ -236,12 +240,14 @@ function downloadXLSX() {
         'Wallet': p.wallet,
         'Chain': p.chain,
         'Protocol': p.protocol_name,
-        'Type': p.asset_type || p.position_type,
+        'Type': p.position_type,
         'Strategy': p.strategy,
         'Health Rate': p.health_rate || '',
         'Net USD': p.net_usd,
         'Asset USD': p.asset_usd,
         'Debt USD': p.debt_usd,
+        'APY Net': p.apy_current || '',
+        'APY Gross': p.apy_gross || '',
         'Supply Tokens': p.supply.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + '),
         'Borrow Tokens': p.borrow.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ')
     }));
