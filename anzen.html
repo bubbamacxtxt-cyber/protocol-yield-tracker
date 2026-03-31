@@ -167,12 +167,12 @@ function render() {
         .join('');
 
     const rows = filtered.map(p => {
-        const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
+        const w = p.wallet.length > 20 ? p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4) : p.wallet;
         const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${p.health_rate.toFixed(3)}</span>` : '-';
         const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         return `<tr>
-            <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
+            <td>${p.wallet.length > 20 ? `<a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a>` : w}</td>
             <td>${p.chain}</td>
             <td>${p.protocol_name}</td>
             <td>${p.asset_type || p.position_type}</td>
