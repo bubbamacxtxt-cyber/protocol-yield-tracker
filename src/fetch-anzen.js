@@ -75,7 +75,7 @@ function mapApiCollateral(c) {
   const apyPct = apyBps / 100; // basis points -> %
 
   return {
-    wallet: a.ticker, // Use ticker as identifier (no on-chain address for RWAs)
+    wallet: 'off-chain',
     chain: 'eth',
     protocol_name: a.ticker,
     protocol_id: a.ticker.toLowerCase(),
@@ -121,7 +121,7 @@ function buildMmzPosition(usdzSupply, apiCommitments) {
   const maturityStr = maturity.toISOString().split('T')[0];
 
   return {
-    wallet: 'MMZ20240501ZZZ500',
+    wallet: 'off-chain',
     chain: 'eth',
     protocol_name: 'MMZ20240501ZZZ500',
     protocol_id: 'mmz-blended-note',

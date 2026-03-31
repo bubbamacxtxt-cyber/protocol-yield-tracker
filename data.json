@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-03-31T22:13:16.363Z",
+  "generated_at": "2026-03-31T22:29:07.108Z",
   "summary": {
     "total_positions": 156,
-    "total_value": 687977051.1800004,
-    "total_assets": 2150416010.0700016,
+    "total_value": 695521254.4954284,
+    "total_assets": 2157960213.38543,
     "total_debt": 1462438958.8900003,
     "total_whales": 10,
-    "total_wallets": 61,
-    "total_active": 49,
+    "total_wallets": 57,
+    "total_active": 45,
     "chains": [
       "eth",
       "mnt",
@@ -8351,17 +8351,13 @@
     "Anzen": {
       "name": "Anzen",
       "wallets": [
-        "MMZ20240501ZZZ500",
-        "HLF20270521ZZZ1300",
-        "BYZ20260506ZZZ1675",
-        "ICM260627BBB2000",
-        "SPR20260501ZZZ1300"
+        "off-chain"
       ],
-      "total_wallets": 5,
-      "active_wallets": 5,
+      "total_wallets": 1,
+      "active_wallets": 1,
       "positions": [
         {
-          "wallet": "MMZ20240501ZZZ500",
+          "wallet": "off-chain",
           "chain": "eth",
           "protocol_name": "MMZ20240501ZZZ500",
           "protocol_id": "mmz-blended-note",
@@ -8369,16 +8365,16 @@
           "strategy": "rwa",
           "yield_source": "institutional",
           "health_rate": null,
-          "net_usd": 5309487.213395029,
-          "asset_usd": 5309487.213395029,
+          "net_usd": 12853690.528822992,
+          "asset_usd": 12853690.528822992,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDz",
               "real_symbol": "USDz",
-              "amount": 5309487.213395029,
+              "amount": 12853690.528822992,
               "price_usd": 1,
-              "value_usd": 5309487.213395029
+              "value_usd": 12853690.528822992
             }
           ],
           "borrow": [],
@@ -8398,7 +8394,7 @@
           "preference": "Senior"
         },
         {
-          "wallet": "HLF20270521ZZZ1300",
+          "wallet": "off-chain",
           "chain": "eth",
           "protocol_name": "HLF20270521ZZZ1300",
           "protocol_id": "hlf20270521zzz1300",
@@ -8435,7 +8431,7 @@
           "preference": "Senior"
         },
         {
-          "wallet": "BYZ20260506ZZZ1675",
+          "wallet": "off-chain",
           "chain": "eth",
           "protocol_name": "BYZ20260506ZZZ1675",
           "protocol_id": "byz20260506zzz1675",
@@ -8472,7 +8468,7 @@
           "preference": "Junior"
         },
         {
-          "wallet": "ICM260627BBB2000",
+          "wallet": "off-chain",
           "chain": "eth",
           "protocol_name": "ICM260627BBB2000",
           "protocol_id": "icm260627bbb2000",
@@ -8509,7 +8505,7 @@
           "preference": "Junior"
         },
         {
-          "wallet": "SPR20260501ZZZ1300",
+          "wallet": "off-chain",
           "chain": "eth",
           "protocol_name": "SPR20260501ZZZ1300",
           "protocol_id": "spr20260501zzz1300",
