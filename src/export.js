@@ -102,6 +102,22 @@ function main() {
         };
     }
 
+    // Add manual-only whales (no on-chain wallets, entirely manual positions)
+    for (const [name, positions] of Object.entries(manualPositions)) {
+        if (!whales[name] && positions.length > 0) {
+            const uniqueWallets = [...new Set(positions.map(p => p.wallet))];
+            whales[name] = {
+                name,
+                wallets: uniqueWallets,
+                total_wallets: uniqueWallets.length,
+                active_wallets: uniqueWallets.length,
+                positions,
+                is_multi_vault: false,
+                vaults: null
+            };
+        }
+    }
+
     // Global summary
     let totalPositions = 0, totalValue = 0, totalAssets = 0, totalDebt = 0, totalWallets = 0, totalActive = 0;
     const allChains = new Set(), allProtos = new Set();
