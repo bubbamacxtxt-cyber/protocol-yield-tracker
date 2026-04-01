@@ -40,19 +40,8 @@ jobs:
       - name: Export to data.json
         run: node src/export.js
 
-      - name: Debug git state
-        run: |
-          echo "Remote URL:"
-          git remote -v
-          echo "Status:"
-          git status
-          echo "Diff staged:"
-          git diff --staged --stat || echo "No staged changes"
-
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update whale data ${{ github.run_number }}"
           file_pattern: data/whales/ data/manual-positions.json data.json yield-tracker.db
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
