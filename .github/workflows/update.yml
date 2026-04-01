@@ -40,6 +40,11 @@ jobs:
       - name: Export to data.json
         run: node src/export.js
 
+      - name: Validate data (5% threshold)
+        run: node src/validate.js
+        env:
+          DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
+
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
