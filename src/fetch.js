@@ -316,6 +316,13 @@ async function scanAll() {
                     const displayType = getDisplayType(item, protocol.name);
                     const yieldSource = protocol.name || '?';
 
+                    // Generate stable position_index from sorted supply token addresses
+                    const stableIndex = supplyTokens
+                        .map(t => t.address)
+                        .filter(a => a && a.length > 10)
+                        .sort()
+                        .join(',') || `${wallet}_${chain}_${protocol.id}`;
+
                     // Save to DB
                     const posStmt = db.prepare(`
                         INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type,
@@ -337,7 +344,7 @@ async function scanAll() {
                         Math.round(netUsd * 100) / 100,
                         Math.round(supplyUsd * 100) / 100,
                         Math.round(borrowUsd * 100) / 100,
-                        item.position_index || `${wallet}_${chain}_${protocol.id}_${Math.round(netUsd)}`,
+                        stableIndex,
                         item.update_at ? new Date(item.update_at * 1000).toISOString() : null
                     );
 
