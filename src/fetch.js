@@ -337,7 +337,7 @@ async function scanAll() {
                         Math.round(netUsd * 100) / 100,
                         Math.round(supplyUsd * 100) / 100,
                         Math.round(borrowUsd * 100) / 100,
-                        item.position_index || '',
+                        item.position_index || `${wallet}_${chain}_${protocol.id}_${Math.round(netUsd)}`,
                         item.update_at ? new Date(item.update_at * 1000).toISOString() : null
                     );
 
