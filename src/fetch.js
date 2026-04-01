@@ -79,14 +79,16 @@ function initDB(dbPath) {
             value_usd REAL
         );
         CREATE TABLE IF NOT EXISTS token_registry (
-            address TEXT PRIMARY KEY,
+            address TEXT NOT NULL,
             chain TEXT NOT NULL,
             symbol TEXT,
             real_symbol TEXT,
             real_name TEXT,
             cg_id TEXT,
             cg_price_usd REAL,
-            last_checked TEXT DEFAULT (datetime('now'))
+            source TEXT,
+            last_checked TEXT DEFAULT (datetime('now')),
+            PRIMARY KEY (address, chain)
         );
     `);
     return db;
