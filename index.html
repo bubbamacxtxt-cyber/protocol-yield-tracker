@@ -299,7 +299,19 @@ body {
 </div>
 
 <script>
-const DATA = {"whales": {}, "summary": {"total_value": 0, "total_positions": 0, "generated_at": ""}};
+let DATA = {whales: {}, summary: {}};
+
+async function loadData() {
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    DATA = await res.json();
+    console.log('Data loaded:', Object.keys(DATA.whales).length, 'whales');
+    render();
+  } catch (e) {
+    console.error('Load failed:', e);
+    document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data.json</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
+  }
+}
 
 function fmt(n) {
   if (n >= 1e9) return '$' + (n/1e9).toFixed(2) + 'B';
@@ -470,7 +482,7 @@ function render() {
   });
 }
 
-render();
+loadData();
 </script>
 </body>
 </html>
