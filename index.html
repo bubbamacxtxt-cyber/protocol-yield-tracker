@@ -105,7 +105,7 @@ body {
 /* Charts Section */
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-bottom: 32px;
 }
@@ -115,6 +115,9 @@ body {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-card h3 {
@@ -122,6 +125,59 @@ body {
   font-weight: 600;
   margin-bottom: 16px;
   color: var(--text-primary);
+}
+
+.chart-card canvas {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Yield Bearing Stables Table */
+.stables-table {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+.stables-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.stables-table th {
+  background: var(--bg-secondary);
+  padding: 10px 12px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+}
+
+.stables-table td {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.stables-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  color: var(--accent-green);
+}
+
+.stables-table tr:hover td {
+  background: var(--bg-secondary);
+}
+
+.stables-placeholder {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px 20px;
+  font-size: 14px;
 }
 
 /* Whales Grid */
@@ -243,9 +299,13 @@ body {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .charts-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 768px) {
   .container { padding: 16px; }
   .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .charts-grid { grid-template-columns: 1fr; }
   .whales-grid { grid-template-columns: 1fr; }
   .header h1 { font-size: 22px; }
 }
@@ -289,6 +349,22 @@ body {
       <h3>Value by Chain</h3>
       <canvas id="chainChart"></canvas>
     </div>
+    <div class="chart-card">
+      <h3>Yield Bearing Stables</h3>
+      <div class="stables-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>APR</th>
+            </tr>
+          </thead>
+          <tbody id="stablesList">
+            <tr><td colspan="2" class="stables-placeholder">Data coming soon...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <!-- Whales Grid -->
@@ -309,10 +385,31 @@ async function loadData() {
     DATA = await res.json();
     console.log('Data loaded:', Object.keys(DATA.whales).length, 'whales');
     render();
+    renderStables();
   } catch (e) {
     console.error('Load failed:', e);
     document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data.json</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
   }
+}
+
+function renderStables() {
+  // Placeholder data - will be populated from API later
+  const stables = [
+    { name: 'sUSDe', apr: '8.50%' },
+    { name: 'syrupUSDT', apr: '3.78%' },
+    { name: 'syrupUSDC', apr: '4.57%' },
+    { name: 'USDz', apr: '5.00%' },
+  ];
+  
+  const tbody = document.getElementById('stablesList');
+  if (!tbody) return;
+  
+  tbody.innerHTML = stables.map(s => `
+    <tr>
+      <td>${s.name}</td>
+      <td>${s.apr}</td>
+    </tr>
+  `).join('');
 }
 
 function fmt(n) {
