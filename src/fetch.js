@@ -265,9 +265,7 @@ async function scanAll() {
 
                     const detail = item.detail || {};
                     const assetTokens = item.asset_token_list || [];
-                    let healthRate = detail.health_rate || null;
-                    // Cap extreme values (max uint256 on-chain = no risk)
-                    if (healthRate > 100) healthRate = 100;
+                    const healthRate = detail.health_rate || null;
 
                     // Build supply/borrow from asset_token_list
                     const supplyTokens = [];
