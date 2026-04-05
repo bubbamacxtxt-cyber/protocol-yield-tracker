@@ -131,7 +131,7 @@ function getWhale() { const whale = DATA.whales["Midas"] || {}; return whale.vau
 
 function fmtHF(n) {
     if (!n) return "-";
-    return Number(n).toExponential(2).split("e")[0];
+    return Number(n).toExponential(3).split("e")[0];
 }
 
 function render() {
