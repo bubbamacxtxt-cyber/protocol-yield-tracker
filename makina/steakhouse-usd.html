@@ -129,11 +129,6 @@ async function init() {
 
 function getWhale() { const whale = DATA.whales["Makina"] || {}; return whale.vaults ? whale.vaults["Steakhouse USD"] || {positions:[],wallets:[],total_wallets:0,active_wallets:0} : whale; }
 
-function fmtHF(n) {
-    if (!n) return "-";
-    return Number(n).toExponential(2).split("e")[0];
-}
-
 function render() {
     const whale = getWhale();
     const positions = whale.positions || [];
@@ -172,7 +167,7 @@ function render() {
 
     const rows = filtered.map(p => {
         const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
-        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${fmtHF(p.health_rate)}</span>` : '-';
+        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${p.health_rate.toFixed(3)}</span>` : '-';
         const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         return `<tr>
