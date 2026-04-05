@@ -394,26 +394,27 @@ async function loadData() {
 }
 
 function renderStables() {
-  const stables = [
-    { name: 'sUSDe', apr: '3.52%', chain: 'Ethereum', tvl: '$2.8B' },
-    { name: 'syrupUSDT', apr: '3.78%', chain: 'Ethereum', tvl: '$894M' },
-    { name: 'syrupUSDC', apr: '4.57%', chain: 'Arbitrum', tvl: '$56M' },
-    { name: 'OUSG', apr: '3.40%', chain: 'Ethereum', tvl: 'N/A' },
-    { name: 'eUSDC', apr: '3.80%', chain: 'Ethereum', tvl: 'N/A' },
-    { name: 'USDG', apr: '3.09%', chain: 'Base', tvl: 'N/A' },
-    { name: 'hyUSD', apr: '3.56%', chain: 'Ethereum', tvl: 'N/A' },
-    { name: 'crvUSD', apr: '5.15%', chain: 'Ethereum', tvl: 'N/A' },
-  ];
-  
   const tbody = document.getElementById('stablesList');
   if (!tbody) return;
   
-  tbody.innerHTML = stables.map(s => `
-    <tr>
-      <td><strong>${s.name}</strong> <span style="color:#8b949e;font-size:11px">(${s.chain})</span></td>
-      <td>${s.apr}</td>
-    </tr>
-  `).join('');
+  fetch('data/stables.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      const stables = data.stables || [];
+      if (stables.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="2" class="stables-placeholder">No data available</td></tr>';
+        return;
+      }
+      tbody.innerHTML = stables.map(s => `
+        <tr>
+          <td><strong>${s.name}</strong> <span style="color:#8b949e;font-size:11px">(${s.chain})</span></td>
+          <td>${s.apr}</td>
+        </tr>
+      `).join('');
+    })
+    .catch(() => {
+      tbody.innerHTML = '<tr><td colspan="2" class="stables-placeholder">Failed to load stables data</td></tr>';
+    });
 }
 
 function fmt(n) {
