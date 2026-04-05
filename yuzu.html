@@ -4,205 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Protocol Yield Tracker — Yuzu</title>
-<link rel="icon" href="favicon.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
-:root {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-card: #1c2128;
-  --border: #30363d;
-  --text-primary: #f0f6fc;
-  --text-secondary: #8b949e;
-  --accent-blue: #58a6ff;
-  --accent-green: #3fb950;
-  --accent-purple: #a371f7;
-  --accent-orange: #d29922;
-  --gradient-blue: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%);
-  --gradient-teal: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --gradient-btn: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
-}
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-
-.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
-
-.header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
-.home-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.home-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-
-h1 {
-  font-size: 28px;
-  font-weight: 700;
-  background: var(--gradient-teal);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 30px;
-}
-
-.card {
-  background: var(--gradient-blue);
-  border: 1px solid #5a8ac4;
-  border-top: 1px solid rgba(140,180,230,0.4);
-  border-bottom: 1px solid #1a3a6a;
-  border-radius: 12px;
-  padding: 20px;
-  inset-shadow: 0 1px 0 rgba(200,220,255,0.25), 0 2px 2px rgba(100,160,230,0.1), 0 -2px 6px rgba(0,0,0,0.5);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-
-.card-label {
-  color: var(--text-secondary);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.card-value {
-  font-size: 28px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.card-value.green { color: var(--accent-green); }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e17; color: #e1e4e8; }
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+.header { display: flex; align-items: center; gap: 16px; margin-bottom: 5px; }
+.home-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #8b949e; text-decoration: none; font-size: 13px; cursor: pointer; }
+.home-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+h1 { font-size: 28px; }
+.subtitle { color: #8b949e; margin-bottom: 30px; font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; }
+.card-label { color: #8b949e; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.card-value.green { color: #3fb950; }
 .card-value.red { color: #f85149; }
-.card-value.blue { color: var(--accent-blue); }
-.card-value.purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-.card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
-
+.card-value.blue { color: #58a6ff; }
+.card-sub { color: #8b949e; font-size: 12px; margin-top: 4px; }
 .proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.proto-chip {
-  padding: 6px 12px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-}
-.proto-chip strong { color: var(--accent-blue); }
-
-.filters {
-  display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
-}
+.proto-chip { padding: 6px 12px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; font-size: 13px; }
+.proto-chip strong { color: #58a6ff; }
+.filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
 .filter-group { display: flex; align-items: center; gap: 6px; }
-.filter-group label { color: var(--text-secondary); font-size: 13px; }
-.filter-group select, .filter-group input {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-}
-
-.download-btn {
-  margin-left: auto;
-  padding: 8px 16px;
-  background: var(--gradient-btn);
-  border: 1px solid #2d4a6f;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  transition: background 0.2s, border-color 0.2s;
-}
-.download-btn:hover {
-  background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%);
-  border-color: #3d6a9f;
-}
-
-.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+.filter-group label { color: #8b949e; font-size: 13px; }
+.filter-group select, .filter-group input { background: #161b22; border: 1px solid #30363d; color: #e1e4e8; padding: 6px 10px; border-radius: 6px; font-size: 13px; }
+.download-btn { margin-left: auto; padding: 8px 16px; background: #238636; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 13px; font-weight: 600; }
+.download-btn:hover { background: #2ea043; }
+.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #30363d; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th {
-  background: var(--bg-secondary);
-  padding: 12px 16px;
-  text-align: left;
-  color: var(--text-secondary);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: sticky;
-  top: 0;
-}
+th { background: #161b22; padding: 12px 16px; text-align: left; color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; position: sticky; top: 0; }
 th:nth-child(n+9) { text-align: right; }
 td { padding: 12px 16px; border-top: 1px solid #21262d; }
 td:nth-child(n+9) { text-align: right; font-variant-numeric: tabular-nums; }
-tr:hover td { background: var(--bg-secondary); }
-
+tr:hover td { background: #161b22; }
 .badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.badge-loop { background: #1f6feb22; color: var(--accent-blue); }
-.badge-lend { background: #23863622; color: var(--accent-green); }
+.badge-loop { background: #1f6feb22; color: #58a6ff; }
+.badge-lend { background: #23863622; color: #3fb950; }
 .badge-stake { background: #a371f722; color: #bc8cff; }
-.badge-farm { background: #d2992222; color: var(--accent-orange); }
+.badge-farm { background: #d2992222; color: #e3b341; }
 .badge-lp { background: #f8514922; color: #ff7b72; }
-.badge-illiquid { background: #a371f722; color: #bc8cff; }
-.badge-liquid { background: #4facfe22; color: #4facfe; }
-
 .hf { font-weight: 600; }
-.hf-safe { color: var(--accent-green); }
-.hf-warn { color: var(--accent-orange); }
+.hf-safe { color: #3fb950; }
+.hf-warn { color: #e3b341; }
 .hf-danger { color: #f85149; }
-
-@media (max-width: 768px) {
-  .container { padding: 16px; }
-  .cards { grid-template-columns: repeat(2, 1fr); }
-  .table-wrap { font-size: 12px; }
-  th, td { padding: 8px 10px; }
-}
+.token-list { display: flex; flex-direction: column; gap: 2px; }
+.token { white-space: nowrap; }
+.token-amount { color: #8b949e; font-size: 12px; }
+.token-supply { color: #3fb950; }
+.token-borrow { color: #f85149; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding: 20px; }
 </style>
+<link rel="icon" href="favicon.jpg">
 </head>
 <body>
 <div class="container">
     <div class="header">
         <a class="home-btn" href="index.html">← Home</a>
-        <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
         <h1>Yuzu</h1>
     </div>
     <p class="subtitle">Wallet positions and yield strategies</p>
@@ -212,247 +70,195 @@ tr:hover td { background: var(--bg-secondary); }
 
     <div class="filters">
         <div class="filter-group">
-            <label>Chain:</label>
-            <select id="chainFilter"><option value="all">All chains</option></select>
-        </div>
-        <div class="filter-group">
             <label>Protocol:</label>
-            <select id="protoFilter"><option value="all">All protocols</option></select>
+            <select id="filterProtocol"><option value="">All</option></select>
         </div>
         <div class="filter-group">
-            <label>Search:</label>
-            <input type="text" id="searchFilter" placeholder="Token, wallet, or protocol...">
+            <label>Chain:</label>
+            <select id="filterChain"><option value="">All</option></select>
         </div>
-        <button class="download-btn" onclick="downloadXLSX()">↓ Download XLSX</button>
+        <div class="filter-group">
+            <label>Strategy:</label>
+            <select id="filterStrategy"><option value="">All</option></select>
+        </div>
+        <div class="filter-group">
+            <label>Min $:</label>
+            <input type="number" id="filterMin" placeholder="50000" value="50000" style="width:100px">
+        </div>
+        <button class="download-btn" onclick="downloadXLSX()">📥 Download XLSX</button>
     </div>
 
     <div class="table-wrap">
-        <table id="positionsTable">
+        <table>
             <thead>
                 <tr>
                     <th>Wallet</th>
                     <th>Chain</th>
                     <th>Protocol</th>
+                    <th>Type</th>
                     <th>Strategy</th>
-                    <th>Asset Type</th>
-                    <th>Supply Tokens</th>
-                    <th>Borrow Tokens</th>
-                    <th>Position Index</th>
-                    <th>Supply USD</th>
-                    <th>Borrow USD</th>
+                    <th>HF</th>
+                    <th>Supply</th>
+                    <th>Borrow</th>
                     <th>Net USD</th>
-                    <th>APY Gross</th>
-                    <th>APY Net</th>
-                    <th>Utilization</th>
-                    <th>Health Factor</th>
-                    <th>Last Scan</th>
+                    <th>Assets</th>
+                    <th>Debt</th>
                 </tr>
             </thead>
             <tbody id="positionsBody"></tbody>
         </table>
     </div>
+
+    <div class="footer" id="footer"></div>
 </div>
 
 <script>
-const WHALE_DATA = [{"id":316,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"maple","protocol_name":"Maple","position_type":"Yield","strategy":"lend","yield_source":"Maple","health_rate":null,"net_usd":7456651.4,"asset_usd":7456651.4,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_7456651","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":7452177.405189,"price_usd":1.00060036021613,"value_usd":7456651.39602662}],"borrow":[],"rewards":[]},{"id":327,"wallet":"0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.024,"net_usd":6975120.81,"asset_usd":68450173.91,"debt_usd":61475053.1,"position_index":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3,0xdac17f958d2ee523a2206206994597c13d831ec7_6975121","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:12","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"USDe","address":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3","amount":68463866.6796472,"price_usd":0.9998,"value_usd":68450173.9063113}],"borrow":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":61524272.514491,"price_usd":0.9992,"value_usd":61475053.0964794}],"rewards":[]},{"id":324,"wallet":"0x015CC48cC8bC37D80AAFf4e43061dbaF94192308","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.023,"net_usd":6499554.72,"asset_usd":64577642.39,"debt_usd":58078087.66,"position_index":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f,0xdac17f958d2ee523a2206206994597c13d831ec7_6499555","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:07","supply":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":9535017.07115519,"price_usd":0.9992,"value_usd":9527389.05749827}],"borrow":[{"symbol":"GHO","real_symbol":"GHO","real_name":"Gho Token","address":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f","amount":3028742.95579345,"price_usd":0.9997,"value_usd":3027834.33290671}],"rewards":[]},{"id":329,"wallet":"0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3","chain":"mnt","protocol_id":"mnt_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.023,"net_usd":4992120.68,"asset_usd":49556154.08,"debt_usd":44564033.4,"position_index":"0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9,0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0x779ded0c9e1022225f8e0630b35a9b54be713736_4992121","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:14","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"USDe","address":"0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34","amount":1476.61475327712,"price_usd":0.9998,"value_usd":1476.31943032647},{"symbol":"sUSDe","real_symbol":"sUSDe","real_name":"Staked USDe","address":"0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2","amount":40480779.823561,"price_usd":1.22415323942929,"value_usd":49554677.7556362}],"borrow":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0x779ded0c9e1022225f8e0630b35a9b54be713736","amount":44587905.172598,"price_usd":0.99924,"value_usd":44554018.3646668},{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9","amount":10009.023671,"price_usd":1.00060036021613,"value_usd":10015.0326906144}],"rewards":[]},{"id":323,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"plasma","protocol_id":"plasma_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.023,"net_usd":4406810.38,"asset_usd":44461225.27,"debt_usd":40054414.88,"position_index":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xc4374775489cb9c56003bf2c9b12495fc64f0771_4406810","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:04","supply":[{"symbol":"syrupUSDT","real_symbol":"syrupUSDT","real_name":"Syrup USDT","address":"0xc4374775489cb9c56003bf2c9b12495fc64f0771","amount":39749270.55846,"price_usd":1.11854191647467,"value_usd":44461225.2689299}],"borrow":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":40084879.392366,"price_usd":0.99924,"value_usd":40054414.8840278}],"rewards":[]},{"id":325,"wallet":"0x015CC48cC8bC37D80AAFf4e43061dbaF94192308","chain":"eth","protocol_id":"pendle2","protocol_name":"Pendle V2","position_type":"Liquidity Pool","strategy":"lp","yield_source":"Pendle V2","health_rate":null,"net_usd":4238434.28,"asset_usd":4238434.28,"debt_usd":0,"position_index":"0x67aeeed39c1675e0df93ad8bab543b17992d433b,0x808507121b80c02388fad14726482e061b8da827,0x8238884ec9668ef77b90c6dff4d1a9f4f4823bfe_4238434","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:07","supply":[{"symbol":"USDO","real_symbol":"USDO","real_name":"OpenEden Open Dollar","address":"0x8238884ec9668ef77b90c6dff4d1a9f4f4823bfe","amount":3707762.06086458,"price_usd":0.998746670486736,"value_usd":3703115.01324553},{"symbol":"PT-cUSDO-28MAY2026","real_symbol":"PT-cUSDO-28MAY2026","real_name":"PT Compounding Open Dollar 28MAY2026","address":"0x67aeeed39c1675e0df93ad8bab543b17992d433b","amount":540377.212129851,"price_usd":0.990094496529946,"value_usd":535024.503779961},{"symbol":"PENDLE","real_symbol":"PENDLE","real_name":"Pendle","address":"0x808507121b80c02388fad14726482e061b8da827","amount":264.123899141781,"price_usd":1.116,"value_usd":294.762271442227}],"borrow":[],"rewards":[]},{"id":326,"wallet":"0x015CC48cC8bC37D80AAFf4e43061dbaF94192308","chain":"mnt","protocol_id":"mnt_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.026,"net_usd":3847785.37,"asset_usd":37699059.1,"debt_usd":33851273.73,"position_index":"0x051665f2455116e929b9972c36d23070f5054ce0,0x779ded0c9e1022225f8e0630b35a9b54be713736_3847785","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:08","supply":[{"symbol":"syrupUSDT","real_symbol":"syrupUSDT","real_name":"Syrup USDT","address":"0x051665f2455116e929b9972c36d23070f5054ce0","amount":33703751.776375,"price_usd":1.11854191647467,"value_usd":37699059.1043329}],"borrow":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0x779ded0c9e1022225f8e0630b35a9b54be713736","amount":33877020.268834,"price_usd":0.99924,"value_usd":33851273.7334297}],"rewards":[]},{"id":319,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.053,"net_usd":2725411.71,"asset_usd":32504138.86,"debt_usd":29778727.15,"position_index":"0x3274643db77a064abd3bc851de77556a4ad2e2f502f4f0c80845fa8f909ecf0b","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDS","real_symbol":"USDS","real_name":"USDS Stablecoin","address":"0xdc035d45d973e3ec169d2276ddab16f1e407384f","amount":32507389.5987243,"price_usd":0.9999,"value_usd":32504138.8597645}],"borrow":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":29802569.2098505,"price_usd":0.9992,"value_usd":29778727.1544826}],"rewards":[]},{"id":332,"wallet":"0xCf0a12CBd8088fc5f84ad431E71787157041cD69","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.062,"net_usd":2268908.63,"asset_usd":16369046.09,"debt_usd":14100137.47,"position_index":"0x88a18b2f4d94e7ad27a381b15531c06abf05a7c99dd5d3c3679875fed6f7e742","debank_updated_at":null,"scanned_at":"2026-04-01 12:08:32","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"USDe","address":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3","amount":16382388.9433658,"price_usd":0.9998,"value_usd":16379112.4655771}],"borrow":[{"symbol":"USDtb","real_symbol":"USDtb","real_name":"USDtb","address":"0xc139190f447e929f090edeb554d95abb8b18ac1c","amount":14117306.9434371,"price_usd":0.998451,"value_usd":14095439.2349817}],"rewards":[]},{"id":321,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"tether","protocol_name":"tether","position_type":"Lending","strategy":"lend","yield_source":"tether","health_rate":null,"net_usd":2136966.04,"asset_usd":2136966.04,"debt_usd":0,"position_index":"0xdac17f958d2ee523a2206206994597c13d831ec7","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":2138676.979293,"price_usd":0.9992,"value_usd":2136966.03770957}],"borrow":[],"rewards":[]},{"id":320,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"wallet-held","protocol_name":"Wallet","position_type":"Holding","strategy":"hold","yield_source":"wallet","health_rate":null,"net_usd":1702735.51,"asset_usd":1702735.51,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":1701713.871049,"price_usd":1.00060036021613,"value_usd":1702735.51235641}],"borrow":[],"rewards":[]},{"id":328,"wallet":"0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.053,"net_usd":1664722.89,"asset_usd":12778306.25,"debt_usd":11113583.36,"position_index":"0x90ef0c5a0dc7c4de4ad4585002d44e9d411d212d2f6258e94948beecf8b4c0d5","debank_updated_at":null,"scanned_at":"2026-04-01 12:08:31","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"USDe","address":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3","amount":12788722.1925313,"price_usd":0.9998,"value_usd":12786164.4480928}],"borrow":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"PayPal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":11108696.9552062,"price_usd":1.0004,"value_usd":11113140.4339883}],"rewards":[]},{"id":318,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.034,"net_usd":1532948.99,"asset_usd":13318460.98,"debt_usd":11785512,"position_index":"0xc0ae375fd761ff19b3f04de5534c0f1ec110f80e1c2ede27c42c1c43c3040394","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":13310469.906753,"price_usd":1.00060036021613,"value_usd":13318460.983343}],"borrow":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"RLUSD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":11777267.909786,"price_usd":1.0007,"value_usd":11785511.9973229}],"rewards":[]},{"id":311,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"arb","protocol_id":"arb_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.053,"net_usd":1514628.27,"asset_usd":11598567.1,"debt_usd":10083938.84,"position_index":"0x571cb3ac535d61d92026c071ef1df4794d0bbbe1755f916ff640746f81b52af4","debank_updated_at":null,"scanned_at":"2026-04-01 12:08:23","supply":[{"symbol":"syrupUSDC","real_symbol":"syrupUSDC","real_name":"Syrup USDC","address":"0x41ca7586cc1311807b4605fbb748a3b8862b42b5","amount":11641134.003104,"price_usd":1.15800668566176,"value_usd":13480511.0042788}],"borrow":[{"symbol":"USD₮0","real_symbol":"USD₮0","real_name":"USD₮0","address":"0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9","amount":11868887.1376301,"price_usd":0.9992,"value_usd":11859392.02792}],"rewards":[]},{"id":330,"wallet":"0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3","chain":"plasma","protocol_id":"plasma_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.01,"net_usd":1268627.95,"asset_usd":14239961.77,"debt_usd":12971333.83,"position_index":"0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb_1268628","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:17","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"USDe","address":"0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34","amount":7127181.67515565,"price_usd":0.9998,"value_usd":7125756.23882062},{"symbol":"sUSDe","real_symbol":"sUSDe","real_name":"Staked USDe","address":"0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2","amount":5812841.55898375,"price_usd":1.22387742097823,"value_usd":7114205.53576412}],"borrow":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":12981199.539841,"price_usd":0.99924,"value_usd":12971333.8281907}],"rewards":[]},{"id":322,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"base","protocol_id":"base_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.01,"net_usd":1099132.32,"asset_usd":12373053.85,"debt_usd":11273921.54,"position_index":"0x660975730059246a68521a3e2fbd4740173100f5,0x833589fcd6edb6e08f4c7c32d4f71b54bda02913_1099132","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:01","supply":[{"symbol":"syrupUSDC","real_symbol":"syrupUSDC","real_name":"Syrup USDC","address":"0x660975730059246a68521a3e2fbd4740173100f5","amount":10684786.199569,"price_usd":1.15800668566176,"value_usd":12373053.8539674}],"borrow":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":11267157.183828,"price_usd":1.00060036021613,"value_usd":11273921.5367501}],"rewards":[]},{"id":312,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"euler2","protocol_name":"Euler","position_type":"Lending","strategy":"loop","yield_source":"Euler","health_rate":1.028,"net_usd":1051038.42,"asset_usd":9143985.69,"debt_usd":8092947.27,"position_index":"0x815f5bb257e88b67216a344c7c83a3ea4ee7474d","debank_updated_at":null,"scanned_at":"2026-04-01 12:08:23","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":9140468.79909165,"price_usd":1.00060036021613,"value_usd":9145956.3729154}],"borrow":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"RLUSD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":8092023.16454013,"price_usd":1.0007,"value_usd":8097687.58075531}],"rewards":[]},{"id":313,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"euler2","protocol_name":"Euler","position_type":"Lending","strategy":"loop","yield_source":"Euler","health_rate":1.054,"net_usd":900173.51,"asset_usd":5780750.12,"debt_usd":4880576.61,"position_index":"0x815f5bb257e88b67216a344c7c83a3ea4ee74749","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":5777281.66889636,"price_usd":1.00060036021613,"value_usd":5780750.11896774}],"borrow":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"RLUSD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":4877162.59747854,"price_usd":1.0007,"value_usd":4880576.61129678}],"rewards":[]},{"id":314,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"euler2","protocol_name":"Euler","position_type":"Lending","strategy":"loop","yield_source":"Euler","health_rate":1.02,"net_usd":835344.42,"asset_usd":7718382.69,"debt_usd":6883038.28,"position_index":"0x815f5bb257e88b67216a344c7c83a3ea4ee7474b","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"PayPal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":7715296.57391422,"price_usd":1.0004,"value_usd":7718382.69254379}],"borrow":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":6878908.453703,"price_usd":1.00060036021613,"value_usd":6883038.276669}],"rewards":[]},{"id":336,"wallet":"0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a","chain":"plasma","protocol_id":"plasma_curve","protocol_name":"Curve","position_type":"Liquidity Pool","strategy":"lp","yield_source":"Curve","health_rate":null,"net_usd":799706.26,"asset_usd":799706.26,"debt_usd":0,"position_index":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb_799706","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:40","supply":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":800314.494502715,"price_usd":0.99924,"value_usd":799706.255486893}],"borrow":[],"rewards":[]},{"id":310,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"arb","protocol_id":"arb_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.053,"net_usd":745000.98,"asset_usd":5708972.96,"debt_usd":4963971.98,"position_index":"0xf86f3edd6f16cd8211f4d206866dc4ecd41be6211063ac11f8508e1b7112ef40","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:57","supply":[{"symbol":"syrupUSDC","real_symbol":"syrupUSDC","real_name":"Syrup USDC","address":"0x41ca7586cc1311807b4605fbb748a3b8862b42b5","amount":4930000,"price_usd":1.15800668566176,"value_usd":5708972.96031246}],"borrow":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xaf88d065e77c8cc2239327c5edb3a432268e5831","amount":4960993.60078917,"price_usd":1.00060036021613,"value_usd":4963971.98397956}],"rewards":[]},{"id":333,"wallet":"0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.033,"net_usd":641642.27,"asset_usd":5002064.43,"debt_usd":4360422.16,"position_index":"0x43415eb6ff9db7e26a15b704e7a3edce97d31c4e,0x8292bb45bf1ee4d140127049757c2e0ff06317ed_641642","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:24","supply":[{"symbol":"USTB","real_symbol":"USTB","real_name":"Superstate Short Duration US Government Securities Fund","address":"0x43415eb6ff9db7e26a15b704e7a3edce97d31c4e","amount":453215.516873,"price_usd":11.036834,"value_usd":5002064.4259515}],"borrow":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"RLUSD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":4357371.9951664,"price_usd":1.0007,"value_usd":4360422.15556302}],"rewards":[]},{"id":331,"wallet":"0xCf0a12CBd8088fc5f84ad431E71787157041cD69","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.024,"net_usd":641085.02,"asset_usd":6329904.75,"debt_usd":5688819.74,"position_index":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3_641085","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:20","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"USDe","address":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3","amount":641213.259462717,"price_usd":0.9998,"value_usd":641085.016810825}],"borrow":[],"rewards":[]},{"id":317,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.042,"net_usd":567269.28,"asset_usd":4630697.92,"debt_usd":4063428.64,"position_index":"0xc9629945524f3fde56c7e8854a6c3d48e76b9d97236abbe73c750fcc7aeb8501","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":4627919.50373972,"price_usd":1.00060036021613,"value_usd":4630697.92249322}],"borrow":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"PayPal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":4061803.9186064,"price_usd":1.0004,"value_usd":4063428.64017384}],"rewards":[]},{"id":334,"wallet":"0xDAeF005ae017Be5B938A2b321Db3dEC96e684f68","chain":"plasma","protocol_id":"plasma_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.157920892373162e+59,"net_usd":507675.62,"asset_usd":507675.62,"debt_usd":0,"position_index":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb_507676","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:35","supply":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":508061.746612,"price_usd":0.99924,"value_usd":507675.619684575}],"borrow":[],"rewards":[]},{"id":315,"wallet":"0x815f5BB257e88b67216a344C7C83a3eA4EE74748","chain":"eth","protocol_id":"euler2","protocol_name":"Euler","position_type":"Lending","strategy":"loop","yield_source":"Euler","health_rate":1.032,"net_usd":392554.89,"asset_usd":3975864.78,"debt_usd":3583309.89,"position_index":"0x815f5bb257e88b67216a344c7c83a3ea4ee7474c","debank_updated_at":null,"scanned_at":"2026-03-31 14:37:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":3973479.2588576,"price_usd":1.00060036021613,"value_usd":3975864.77772423}],"borrow":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"PayPal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":3581877.141056,"price_usd":1.0004,"value_usd":3583309.89191242}],"rewards":[]},{"id":337,"wallet":"0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a","chain":"plasma","protocol_id":"plasma_pendle2","protocol_name":"Pendle V2","position_type":"Liquidity Pool","strategy":"lp","yield_source":"Pendle V2","health_rate":null,"net_usd":198705.29,"asset_usd":198705.29,"debt_usd":0,"position_index":"0x17bac5f906c9a0282ac06a59958d85796c831f24,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xd2e8488b8aa076db8227a459d47288b0bbcf9779_198705","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:40","supply":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":160364.557772261,"price_usd":0.99924,"value_usd":160242.680708354},{"symbol":"PT-yzUSD-30JUL2026","real_symbol":"PT-yzUSD-30JUL2026","real_name":"PT Yuzu USD 30JUL2026","address":"0xd2e8488b8aa076db8227a459d47288b0bbcf9779","amount":39468.6249660648,"price_usd":0.974007456860415,"value_usd":38442.7350289743},{"symbol":"PENDLE","real_symbol":"PENDLE","real_name":"Pendle","address":"0x17bac5f906c9a0282ac06a59958d85796c831f24","amount":17.8106484079256,"price_usd":1.116,"value_usd":19.876683623245}],"borrow":[],"rewards":[]},{"id":335,"wallet":"0x6695c0f8706C5ACe3Bdf8995073179cCA47926dc","chain":"plasma","protocol_id":"plasma_usdt0","protocol_name":"plasma usdt0","position_type":"Lending","strategy":"lend","yield_source":"plasma_usdt0","health_rate":null,"net_usd":87775.11,"asset_usd":87775.11,"debt_usd":0,"position_index":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:38","supply":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":87841.868881,"price_usd":0.99924,"value_usd":87775.1090606504}],"borrow":[],"rewards":[]},{"id":338,"wallet":"0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a","chain":"plasma","protocol_id":"plasma_pendle2","protocol_name":"Pendle V2","position_type":"Liquidity Pool","strategy":"lp","yield_source":"Pendle V2","health_rate":null,"net_usd":50130.94,"asset_usd":50130.94,"debt_usd":0,"position_index":"0x17bac5f906c9a0282ac06a59958d85796c831f24,0x58674ec29dd0742dddee721c5a6783c6bc417016,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb_50131","debank_updated_at":null,"scanned_at":"2026-03-31 14:38:40","supply":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":42347.6487722386,"price_usd":0.99924,"value_usd":42315.4645591717},{"symbol":"PT-syzUSD-30APR2026","real_symbol":"PT-syzUSD-30APR2026","real_name":"PT Staked Yuzu USD 30APR2026","address":"0x58674ec29dd0742dddee721c5a6783c6bc417016","amount":7869.88085229362,"price_usd":0.992824957639624,"value_usd":7813.4141238073},{"symbol":"PENDLE","real_symbol":"PENDLE","real_name":"Pendle","address":"0x17bac5f906c9a0282ac06a59958d85796c831f24","amount":1.84353698036681,"price_usd":1.116,"value_usd":2.05738727008936}],"borrow":[],"rewards":[]}];
+let DATA = null;
 
-const positions = WHALE_DATA;
-const chains = [...new Set(positions.map(p => p.chain))].sort();
-const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+async function init() {
+    try {
+        const res = await fetch('data.json');
+        DATA = await res.json();
+    } catch (e) {
+        document.getElementById('positionsBody').innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px">Failed to load data.json.</td></tr>';
+        return;
+    }
+    render();
+}
 
-function buildFilters() {
-    const chainEl = document.getElementById('chainFilter');
-    const protoEl = document.getElementById('protoFilter');
-    chains.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c; opt.textContent = c.toUpperCase();
-        chainEl.appendChild(opt);
+function getWhale() {
+    return DATA.whales['Yuzu'] || Object.values(DATA.whales)[0] || { positions: [], wallets: [], total_wallets: 0, active_wallets: 0 };
+}
+
+function render() {
+    const whale = getWhale();
+    const positions = whale.positions || [];
+
+    populateFilters(positions);
+    const filtered = applyFilters(positions);
+
+    const totalNet = filtered.reduce((s, p) => s + p.net_usd, 0);
+    const totalAssets = filtered.reduce((s, p) => s + p.asset_usd, 0);
+    const totalDebt = filtered.reduce((s, p) => s + p.debt_usd, 0);
+    const avgHF = filtered.filter(p => p.health_rate).reduce((s, p) => s + p.health_rate, 0) / filtered.filter(p => p.health_rate).length || 0;
+    const chains = [...new Set(filtered.map(p => p.chain))];
+    const protos = [...new Set(filtered.map(p => p.protocol_name))];
+    const totalWallets = whale.total_wallets || '?';
+    const activeWallets = whale.active_wallets || filtered.length;
+
+    document.getElementById('summaryCards').innerHTML = `
+        <div class="card"><div class="card-label">Net Value</div><div class="card-value green">$${fmt(totalNet)}</div></div>
+        <div class="card"><div class="card-label">Total Assets</div><div class="card-value blue">$${fmt(totalAssets)}</div></div>
+        <div class="card"><div class="card-label">Total Debt</div><div class="card-value red">$${fmt(totalDebt)}</div></div>
+        <div class="card"><div class="card-label">Avg Health</div><div class="card-value ${avgHF < 1.05 ? 'red' : avgHF < 1.15 ? '' : 'green'}">${avgHF.toFixed(2)}</div></div>
+        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${activeWallets}/${totalWallets}</div><div class="card-sub">${activeWallets} active · ${totalWallets - activeWallets} below threshold</div></div>
+        <div class="card"><div class="card-label">Positions</div><div class="card-value">${filtered.length}</div><div class="card-sub">${chains.length} chains · ${protos.length} protocols</div></div>
+    `;
+
+    const byProto = {};
+    filtered.forEach(p => {
+        if (!byProto[p.protocol_name]) byProto[p.protocol_name] = { count: 0, total: 0 };
+        byProto[p.protocol_name].count++;
+        byProto[p.protocol_name].total += p.net_usd;
     });
-    protos.forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p; opt.textContent = p;
-        protoEl.appendChild(opt);
-    });
+    document.getElementById('protoSummary').innerHTML = Object.entries(byProto)
+        .sort((a, b) => b[1].total - a[1].total)
+        .map(([name, d]) => `<div class="proto-chip"><strong>${name}</strong> ${d.count} pos · $${fmt(d.total)}</div>`)
+        .join('');
+
+    const rows = filtered.map(p => {
+        const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
+        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${p.health_rate.toFixed(3)}</span>` : '-';
+        const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
+        const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
+        return `<tr>
+            <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
+            <td>${p.chain}</td>
+            <td>${p.protocol_name}</td>
+            <td>${p.position_type}</td>
+            <td><span class="badge badge-${p.strategy}">${p.strategy}</span></td>
+            <td>${hf}</td>
+            <td><div class="token-list">${supply || '-'}</div></td>
+            <td><div class="token-list">${borrow || '-'}</div></td>
+            <td>$${fmt(p.net_usd)}</td>
+            <td>$${fmt(p.asset_usd)}</td>
+            <td>$${fmt(p.debt_usd)}</td>
+        </tr>`;
+    }).join('');
+    document.getElementById('positionsBody').innerHTML = rows || '<tr><td colspan="11" style="text-align:center;padding:40px">No positions match filters</td></tr>';
+
+    document.getElementById('footer').innerHTML = `Generated ${new Date(DATA.generated_at).toLocaleString()} · ${DATA.token_registry_count} tokens in registry`;
+}
+
+function populateFilters(positions) {
+    const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+    const chains = [...new Set(positions.map(p => p.chain))].sort();
+    const strats = [...new Set(positions.map(p => p.strategy))].sort();
+    setOptions('filterProtocol', protos);
+    setOptions('filterChain', chains);
+    setOptions('filterStrategy', strats);
+}
+
+function setOptions(id, values) {
+    const sel = document.getElementById(id);
+    const current = sel.value;
+    sel.innerHTML = '<option value="">All</option>' + values.map(v => `<option value="${v}">${v}</option>`).join('');
+    sel.value = current;
+}
+
+function applyFilters(positions) {
+    const proto = document.getElementById('filterProtocol').value;
+    const chain = document.getElementById('filterChain').value;
+    const strat = document.getElementById('filterStrategy').value;
+    const min = parseFloat(document.getElementById('filterMin').value) || 0;
+    return positions.filter(p => {
+        if (proto && p.protocol_name !== proto) return false;
+        if (chain && p.chain !== chain) return false;
+        if (strat && p.strategy !== strat) return false;
+        if (p.net_usd < min) return false;
+        return true;
+    }).sort((a, b) => b.net_usd - a.net_usd);
 }
 
 function fmt(n) {
-    if (n === null || n === undefined) return '-';
-    return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-function fmtShort(n) {
-    if (n === null || n === undefined) return '-';
-    if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
-    if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
-    if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
-    return '$' + n.toFixed(2);
-}
-
-function hfClass(hf) {
-    if (!hf || hf === 0) return '';
-    if (hf >= 1.5) return 'hf-safe';
-    if (hf >= 1.1) return 'hf-warn';
-    return 'hf-danger';
-}
-
-function strategyBadge(s) {
-    if (!s) return '';
-    const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
-    return `<span class="badge ${cls}">${s}</span>`;
-}
-
-function shortWallet(addr) {
-    if (!addr) return '-';
-    return addr.slice(0, 6) + '...' + addr.slice(-4);
-}
-
-function shortAddr(addr) {
-    if (!addr) return '-';
-    return addr.slice(0, 8) + '...';
-}
-
-function renderTable(data) {
-    const body = document.getElementById('positionsBody');
-    if (data.length === 0) {
-        body.innerHTML = '<tr><td colspan="16" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
-        return;
-    }
-    body.innerHTML = data.map(p => {
-        const supplyTokens = p.supply_tokens ? p.supply_tokens.filter(t => t && t !== 'null').map(shortAddr).join(', ') : '-';
-        const borrowTokens = p.borrow_tokens ? p.borrow_tokens.filter(t => t && t !== 'null').map(shortAddr).join(', ') : '-';
-        const util = p.supply_usd > 0 ? ((Math.abs(p.borrow_usd || 0) / p.supply_usd) * 100).toFixed(1) + '%' : '-';
-        const hf = p.health_factor ? p.health_factor.toFixed(2) : '-';
-        return `<tr>
-            <td title="${p.wallet_address || ''}"><a href="https://debank.com/profile/${p.wallet_address}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet_address)}</a></td>
-            <td>${(p.chain || '').toUpperCase()}</td>
-            <td>${p.protocol_name || '-'}</td>
-            <td>${strategyBadge(p.strategy)}</td>
-            <td>${p.asset_type || '-'}</td>
-            <td>${supplyTokens}</td>
-            <td>${borrowTokens}</td>
-            <td>${p.position_index ?? '-'}</td>
-            <td>${fmtShort(p.supply_usd)}</td>
-            <td>${fmtShort(p.borrow_usd)}</td>
-            <td style="font-weight:600;color:var(--accent-green)">${fmtShort(p.net_usd)}</td>
-            <td>${p.apy_gross != null ? p.apy_gross.toFixed(2) + '%' : '-'}</td>
-            <td style="font-weight:600;color:var(--accent-green)">${p.apy_current != null ? p.apy_current.toFixed(2) + '%' : '-'}</td>
-            <td>${util}</td>
-            <td class="${hfClass(p.health_factor)}">${hf}</td>
-            <td style="color:var(--text-secondary);font-size:11px">${p.debank_updated_at ? new Date(p.debank_updated_at).toLocaleDateString() : '-'}</td>
-        </tr>`;
-    }).join('');
-}
-
-function filterPositions() {
-    const chain = document.getElementById('chainFilter').value;
-    const proto = document.getElementById('protoFilter').value;
-    const search = document.getElementById('searchFilter').value.toLowerCase().trim();
-
-    let data = positions;
-    if (chain !== 'all') data = data.filter(p => p.chain === chain);
-    if (proto !== 'all') data = data.filter(p => p.protocol_name === proto);
-    if (search) {
-        data = data.filter(p =>
-            (p.wallet_address || '').toLowerCase().includes(search) ||
-            (p.protocol_name || '').toLowerCase().includes(search) ||
-            (p.supply_tokens || []).some(t => t.toLowerCase().includes(search)) ||
-            (p.borrow_tokens || []).some(t => t.toLowerCase().includes(search)) ||
-            (p.asset_type || '').toLowerCase().includes(search) ||
-            (p.strategy || '').toLowerCase().includes(search)
-        );
-    }
-    return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
-}
-
-function updateSummary(data) {
-    const total = data.reduce((s, p) => s + (p.net_usd || 0), 0);
-    const supply = data.reduce((s, p) => s + (p.supply_usd || 0), 0);
-    const borrow = data.reduce((s, p) => s + (Math.abs(p.borrow_usd) || 0), 0);
-    const wallets = new Set(data.map(p => p.wallet_address)).size;
-    const avgApy = supply > 0 ? (data.reduce((s, p) => s + ((p.apy_current || 0) * (p.supply_usd || 0)), 0) / supply) : 0;
-    const avgUtil = supply > 0 ? (borrow / supply * 100) : 0;
-
-    const avgHf = positions.filter(p => p.health_factor > 0).reduce((s, p, _, arr) => s + p.health_factor / arr.length, 0);
-
-    const chainsUsed = [...new Set(data.map(p => p.chain))].length;
-    const protocolList = [...new Set(data.map(p => p.protocol_name))];
-    const protosUsed = protocolList.length;
-    const topProto = [...new Map(data.map(p => [p.protocol_name, (p.net_usd || 0)])).entries()]
-        .sort((a, b) => b[1] - a[1])[0];
-    const topChain = [...new Map(data.map(p => [p.chain, (p.net_usd || 0)])).entries()]
-        .sort((a, b) => b[1] - a[1])[0];
-
-    document.getElementById('summaryCards').innerHTML = `
-        <div class="card"><div class="card-label">Total Value</div><div class="card-value green">${fmtShort(total)}</div><div class="card-sub">${data.length} positions</div></div>
-        <div class="card"><div class="card-label">Net APY</div><div class="card-value blue">${avgApy.toFixed(2)}%</div><div class="card-sub">weighted avg</div></div>
-        <div class="card"><div class="card-label">Utilization</div><div class="card-value">${avgUtil.toFixed(1)}%</div><div class="card-sub">${fmtShort(borrow)} borrowed</div></div>
-        <div class="card"><div class="card-label">Health Factor</div><div class="card-value purple ${hfClass(avgHf)}">${avgHf.toFixed(2)}</div><div class="card-sub">${avgHf >= 1.1 ? 'Safe' : '⚠️ Below 1.1'}</div></div>
-        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${wallets}</div><div class="card-sub">active</div></div>
-        <div class="card"><div class="card-label">Top Protocol</div><div class="card-value blue">${topProto ? topProto[0] : '-'}</div><div class="card-sub">${topProto ? fmtShort(topProto[1]) : ''}</div></div>
-        <div class="card"><div class="card-label">Top Chain</div><div class="card-value blue">${topChain ? topChain[0].toUpperCase() : '-'}</div><div class="card-sub">${topChain ? fmtShort(topChain[1]) : ''}</div></div>
-        <div class="card"><div class="card-label">Distribution</div><div class="card-value">${chainsUsed} chains</div><div class="card-sub">${protosUsed} protocols</div></div>
-    `;
-
-    const protoHtml = protocolList.map(p => {
-        const count = data.filter(d => d.protocol_name === p).length;
-        const val = data.filter(d => d.protocol_name === p).reduce((s, d) => s + (d.net_usd || 0), 0);
-        return `<div class="proto-chip"><strong>${p}</strong> ${count} pos · ${fmtShort(val)}</div>`;
-    }).join('');
-    document.getElementById('protoSummary').innerHTML = protoHtml;
+    if (n >= 1e9) return (n/1e9).toFixed(2) + 'B';
+    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
+    return n.toLocaleString(undefined, {maximumFractionDigits: 0});
 }
 
 function downloadXLSX() {
-    const rows = positions.map(p => ({
-        Wallet: p.wallet_address,
-        Chain: p.chain,
-        Protocol: p.protocol_name,
-        Strategy: p.strategy,
-        AssetType: p.asset_type,
-        SupplyTokens: (p.supply_tokens || []).join(', '),
-        BorrowTokens: (p.borrow_tokens || []).join(', '),
-        PositionIndex: p.position_index,
-        SupplyUSD: p.supply_usd,
-        BorrowUSD: p.borrow_usd,
-        NetUSD: p.net_usd,
-        APYGross: p.apy_gross,
-        APYNet: p.apy_current,
-        Utilization: p.supply_usd > 0 ? (Math.abs(p.borrow_usd || 0) / p.supply_usd) : 0,
-        HealthFactor: p.health_factor,
-        DeBankUpdated: p.debank_updated_at,
+    const whale = getWhale();
+    const positions = whale.positions || [];
+    const filtered = applyFilters(positions);
+
+    const rows = filtered.map(p => ({
+        'Wallet': p.wallet,
+        'Chain': p.chain,
+        'Protocol': p.protocol_name,
+        'Type': p.position_type,
+        'Strategy': p.strategy,
+        'Health Rate': p.health_rate || '',
+        'Net USD': p.net_usd,
+        'Asset USD': p.asset_usd,
+        'Debt USD': p.debt_usd,
+        'Supply Tokens': p.supply.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + '),
+        'Borrow Tokens': p.borrow.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ')
     }));
+
     const ws = XLSX.utils.json_to_sheet(rows);
+    ws['!cols'] = [{wch:44},{wch:8},{wch:15},{wch:10},{wch:8},{wch:10},{wch:15},{wch:15},{wch:15},{wch:50},{wch:50}];
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Positions');
-    ws['!cols'] = [
-        { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 }, { wch: 14 },
-        { wch: 40 }, { wch: 40 }, { wch: 12 }, { wch: 16 }, { wch: 16 },
-        { wch: 16 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
-        { wch: 14 },
-    ];
-    XLSX.writeFile(wb, 'yuzu_positions.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, 'Yuzu');
+    XLSX.writeFile(wb, 'yuzu-positions.xlsx');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    buildFilters();
-    const data = filterPositions();
-    updateSummary(data);
-    renderTable(data);
-    document.getElementById('chainFilter').addEventListener('change', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-    document.getElementById('protoFilter').addEventListener('change', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-    document.getElementById('searchFilter').addEventListener('input', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
+['filterProtocol', 'filterChain', 'filterStrategy', 'filterMin'].forEach(id => {
+    document.getElementById(id).addEventListener('change', render);
+    document.getElementById(id).addEventListener('input', render);
 });
+
+init();
 </script>
 </body>
 </html>
