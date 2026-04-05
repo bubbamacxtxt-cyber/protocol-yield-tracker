@@ -22,9 +22,6 @@ h1 { font-size: 28px; }
 .card-value.red { color: #f85149; }
 .card-value.blue { color: #58a6ff; }
 .card-sub { color: #8b949e; font-size: 12px; margin-top: 4px; }
-.proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.proto-chip { padding: 6px 12px; background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; border-radius: 8px; font-size: 13px; }
-.proto-chip strong { color: #58a6ff; }
 .filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
 .filter-group { display: flex; align-items: center; gap: 6px; }
 .filter-group label { color: #8b949e; font-size: 13px; }
@@ -66,13 +63,6 @@ tr:hover td { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #24488
     <p class="subtitle">Wallet positions and yield strategies</p>
 
     <div class="cards" id="summaryCards"></div>
-    <div class="proto-summary" id="protoSummary"></div>
-
-    <div class="filters">
-        <div class="filter-group">
-            <label>Protocol:</label>
-            <select id="filterProtocol"><option value="">All</option></select>
-        </div>
         <div class="filter-group">
             <label>Chain:</label>
             <select id="filterChain"><option value="">All</option></select>
