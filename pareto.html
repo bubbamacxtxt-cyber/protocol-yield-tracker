@@ -133,6 +133,10 @@ function getWhale() {
     return DATA.whales['Pareto'] || Object.values(DATA.whales)[0] || { positions: [], wallets: [], total_wallets: 0, active_wallets: 0 };
 }
 
+function fmtHF(n) {
+    if (!n) return "-";
+    return Number(n).toExponential(3).split("e")[0];
+}
 function render() {
     const whale = getWhale();
     const positions = whale.positions || [];
@@ -143,7 +147,8 @@ function render() {
     const totalNet = filtered.reduce((s, p) => s + p.net_usd, 0);
     const totalAssets = filtered.reduce((s, p) => s + p.asset_usd, 0);
     const totalDebt = filtered.reduce((s, p) => s + p.debt_usd, 0);
-    const avgHF = filtered.filter(p => p.health_rate).reduce((s, p) => s + p.health_rate, 0) / filtered.filter(p => p.health_rate).length || 0;
+    const validHF = filtered.filter(p => p.health_rate && p.health_rate < 1000);
+    const avgHF = validHF.length ? validHF.reduce((s, p) => s + p.health_rate, 0) / validHF.length : 0;
     const chains = [...new Set(filtered.map(p => p.chain))];
     const protos = [...new Set(filtered.map(p => p.protocol_name))];
     const totalWallets = whale.total_wallets || '?';
@@ -153,7 +158,7 @@ function render() {
         <div class="card"><div class="card-label">Net Value</div><div class="card-value green">$${fmt(totalNet)}</div></div>
         <div class="card"><div class="card-label">Total Assets</div><div class="card-value blue">$${fmt(totalAssets)}</div></div>
         <div class="card"><div class="card-label">Total Debt</div><div class="card-value red">$${fmt(totalDebt)}</div></div>
-        <div class="card"><div class="card-label">Avg Health</div><div class="card-value ${avgHF < 1.05 ? 'red' : avgHF < 1.15 ? '' : 'green'}">${avgHF.toFixed(2)}</div></div>
+        <div class="card"><div class="card-label">Avg Health</div><div class="card-value ${avgHF < 1.05 ? 'red' : avgHF < 1.15 ? '' : 'green'}">${fmtHF(avgHF)}</div></div>
         <div class="card"><div class="card-label">Wallets</div><div class="card-value">${activeWallets}/${totalWallets}</div><div class="card-sub">${activeWallets} active · ${totalWallets - activeWallets} below threshold</div></div>
         <div class="card"><div class="card-label">Positions</div><div class="card-value">${filtered.length}</div><div class="card-sub">${chains.length} chains · ${protos.length} protocols</div></div>
     `;
@@ -171,7 +176,7 @@ function render() {
 
     const rows = filtered.map(p => {
         const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
-        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${p.health_rate.toFixed(3)}</span>` : '-';
+        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${fmtHF(p.health_rate)}</span>` : '-';
         const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
         return `<tr>
