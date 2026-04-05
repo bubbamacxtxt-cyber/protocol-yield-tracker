@@ -2,7 +2,7 @@ name: Update Whale Data
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # 10:00 UTC daily
+    - cron: '30 7 * * *'  # 7:30 AM UTC daily
   workflow_dispatch:  # Manual trigger
 
 jobs:
@@ -41,9 +41,17 @@ jobs:
         run: node src/export.js
 
       - name: Validate data (5% threshold)
+        id: validate
         run: node src/validate.js
         env:
           DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
+
+      - name: Alert on failure
+        if: failure() && steps.validate.outcome == 'failure'
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -d text="⚠️ Whale data validation failed! Run #${{ github.run_number }} drifted >5% from live sources. Check: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v5
