@@ -167,6 +167,7 @@ body {
   text-align: right;
   font-weight: 600;
   color: var(--accent-green);
+  font-variant-numeric: tabular-nums;
 }
 
 .stables-table tr:hover td {
@@ -356,7 +357,7 @@ body {
           <thead>
             <tr>
               <th>Token</th>
-              <th>APR</th>
+              <th style="text-align:right">APR</th>
             </tr>
           </thead>
           <tbody id="stablesList">
@@ -393,12 +394,15 @@ async function loadData() {
 }
 
 function renderStables() {
-  // Placeholder data - will be populated from API later
   const stables = [
-    { name: 'sUSDe', apr: '8.50%' },
-    { name: 'syrupUSDT', apr: '3.78%' },
-    { name: 'syrupUSDC', apr: '4.57%' },
-    { name: 'USDz', apr: '5.00%' },
+    { name: 'sUSDe', apr: '3.52%', chain: 'Ethereum', tvl: '$2.8B' },
+    { name: 'syrupUSDT', apr: '3.78%', chain: 'Ethereum', tvl: '$894M' },
+    { name: 'syrupUSDC', apr: '4.57%', chain: 'Arbitrum', tvl: '$56M' },
+    { name: 'OUSG', apr: '3.40%', chain: 'Ethereum', tvl: 'N/A' },
+    { name: 'eUSDC', apr: '3.80%', chain: 'Ethereum', tvl: 'N/A' },
+    { name: 'USDG', apr: '3.09%', chain: 'Base', tvl: 'N/A' },
+    { name: 'hyUSD', apr: '3.56%', chain: 'Ethereum', tvl: 'N/A' },
+    { name: 'crvUSD', apr: '5.15%', chain: 'Ethereum', tvl: 'N/A' },
   ];
   
   const tbody = document.getElementById('stablesList');
@@ -406,7 +410,7 @@ function renderStables() {
   
   tbody.innerHTML = stables.map(s => `
     <tr>
-      <td>${s.name}</td>
+      <td><strong>${s.name}</strong> <span style="color:#8b949e;font-size:11px">(${s.chain})</span></td>
       <td>${s.apr}</td>
     </tr>
   `).join('');
