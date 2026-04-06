@@ -368,7 +368,7 @@ body {
         <table id="stablesTable">
           <thead>
             <tr>
-              <th>Token</th>
+              <th style="cursor:pointer" onclick="sortStables('name')">Token</th>
               <th style="text-align:right;cursor:pointer" onclick="sortStables('aprValue')">APR</th>
               <th style="text-align:right;cursor:pointer" onclick="sortStables('tvlNum')">TVL</th>
             </tr>
@@ -432,15 +432,19 @@ function sortStables(field) {
   const sort = window._stablesSort;
   if (sort.field === field) sort.dir *= -1;
   else { sort.field = field; sort.dir = -1; }
-  data.sort((a, b) => (b[field] || 0) - (a[field] || 0) * sort.dir);
+  const isStr = field === 'name';
+  data.sort((a, b) => {
+    const av = a[field] || 0;
+    const bv = b[field] || 0;
+    return isStr ? sort.dir * av.localeCompare(bv) : sort.dir * (bv - av);
+  });
   const tbody = document.getElementById('stablesList');
-  tbody.innerHTML = data.map(s => `
-    <tr>
-      <td><strong>${s.name}</strong></td>
-      <td>${s.apr}</td>
-      <td style="text-align:right;color:#8b949e">${s.tvl}</td>
-    </tr>
-  `).join('');
+  let h = '';
+  for (let i = 0; i < data.length; i++) {
+    const s = data[i];
+    h += '<tr><td><strong>' + s.name + '</strong></td><td>' + s.apr + '</td><td style="text-align:right;color:#8b949e">' + s.tvl + '</td></tr>';
+  }
+  tbody.innerHTML = h;
 }
 
 function fmt(n) {
