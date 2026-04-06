@@ -365,15 +365,16 @@ body {
     <div class="chart-card">
       <h3>Yield Bearing Stables</h3>
       <div class="stables-table">
-        <table>
+        <table id="stablesTable">
           <thead>
             <tr>
               <th>Token</th>
-              <th style="text-align:right">APR</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortStables('apr')">APR ↕</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortStables('tvlNum')">TVL ↕</th>
             </tr>
           </thead>
           <tbody id="stablesList">
-            <tr><td colspan="2" class="stables-placeholder">Data coming soon...</td></tr>
+            <tr><td colspan="3" class="stables-placeholder">Data coming soon...</td></tr>
           </tbody>
         </table>
       </div>
@@ -414,19 +415,32 @@ function renderStables() {
     .then(data => {
       const stables = data.stables || [];
       if (stables.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" class="stables-placeholder">No data available</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" class="stables-placeholder">No data available</td></tr>';
         return;
       }
-      tbody.innerHTML = stables.map(s => `
-        <tr>
-          <td><strong>${s.name}</strong></td>
-          <td>${s.apr}</td>
-        </tr>
-      `).join('');
+      window._stablesData = stables;
+      window._stablesSort = { field: 'aprValue', dir: -1 };
+      sortStables('aprValue');
     })
     .catch(() => {
-      tbody.innerHTML = '<tr><td colspan="2" class="stables-placeholder">Failed to load stables data</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="3" class="stables-placeholder">Failed to load stables data</td></tr>';
     });
+}
+
+function sortStables(field) {
+  const data = window._stablesData || [];
+  const sort = window._stablesSort;
+  if (sort.field === field) sort.dir *= -1;
+  else { sort.field = field; sort.dir = -1; }
+  data.sort((a, b) => (b[field] || 0) - (a[field] || 0) * sort.dir);
+  const tbody = document.getElementById('stablesList');
+  tbody.innerHTML = data.map(s => `
+    <tr>
+      <td><strong>${s.name}</strong></td>
+      <td>${s.apr}</td>
+      <td style="text-align:right;color:#8b949e">${s.tvl}</td>
+    </tr>
+  `).join('');
 }
 
 function fmt(n) {
