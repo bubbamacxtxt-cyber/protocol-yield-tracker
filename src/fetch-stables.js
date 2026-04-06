@@ -57,7 +57,7 @@ async function main() {
         apr: pool.apy.toFixed(2) + '%',
         aprValue: pool.apy,
         chain: pool.chain || 'N/A',
-        tvl: pool.tvlUsd ? '$' + (pool.tvlUsd / 1e6).toFixed(0) + 'M' : 'N/A',
+        tvl: pool.tvlUsd >= 1e6 ? "$" + (pool.tvlUsd / 1e6).toFixed(0) + "M" : pool.tvlUsd >= 1e3 ? "$" + (pool.tvlUsd / 1e3).toFixed(0) + "K" : "N/A",
         tvlNum: pool.tvlUsd || 0,
       });
       console.log(`  ✅ ${target.name}: ${pool.apy.toFixed(2)}% (${pool.chain}, $${(pool.tvlUsd / 1e6).toFixed(0)}M)`);
