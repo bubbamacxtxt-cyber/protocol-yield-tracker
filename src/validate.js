@@ -72,7 +72,7 @@ async function main() {
     warnings.push(`InfiniFi: ${e.message}`);
   }
 
-  // --- Pareto (on-chain) ---
+  // --- Pareto (on-chain, wider threshold due to unallocated funds) ---
   try {
     const QUEUE = '0xA7780086ab732C110E9E71950B9Fb3cb2ea50D89';
     const provider = new ethers.JsonRpcProvider('https://ethereum-rpc.publicnode.com');
@@ -81,7 +81,11 @@ async function main() {
     const total = await contract.getTotalCollateralsScaled();
     const liveTotal = Number(total) / 1e18;
     const dbTotal = (data.whales.Pareto?.positions || []).reduce((s, p) => s + (p.net_usd || 0), 0);
-    check('Pareto', liveTotal, dbTotal);
+    // On-chain includes unallocated funds, so allow 15% tolerance
+    const diff = pctDiff(dbTotal, liveTotal);
+    const status = diff > 0.15 ? '❌' : '✅';
+    console.log(`${status} Pareto: data=$${dbTotal.toLocaleString('en-US', {maximumFractionDigits: 0})} live=$${liveTotal.toLocaleString('en-US', {maximumFractionDigits: 0})} (${(diff * 100).toFixed(1)}%)`);
+    if (diff > 0.15) errors.push(`Pareto: ${(diff * 100).toFixed(1)}% off`);
   } catch (e) {
     warnings.push(`Pareto: ${e.message}`);
   }
