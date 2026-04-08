@@ -351,19 +351,34 @@ async function scanAll() {
 
                     const posId = result.lastInsertRowid;
 
-                    // Save tokens
+                    // Verify position exists before inserting tokens
+                    if (!posId || posId <= 0) {
+                        console.log(`    ERROR: Invalid posId ${posId} for ${wallet.slice(0,10)} ${chain} ${protocol.name}`);
+                        continue;
+                    }
+                    const posExists = db.prepare('SELECT id FROM positions WHERE id = ?').get(posId);
+                    if (!posExists) {
+                        console.log(`    ERROR: Position ${posId} not found for ${wallet.slice(0,10)} ${chain} ${protocol.name}`);
+                        continue;
+                    }
+
+                    // Save tokens (wrapped in try-catch for FK safety)
                     const tokStmt = db.prepare(`
                         INSERT INTO position_tokens (position_id, role, symbol, real_symbol, real_name, cg_id, address, amount, price_usd, value_usd)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     `);
-                    const saveTokens = db.transaction((tokens, role) => {
-                        for (const t of tokens) {
-                            tokStmt.run(posId, role, t.symbol, t.real_symbol, t.real_name, t.cg_id, t.address, t.amount, t.price, t.usd);
-                        }
-                    });
-                    saveTokens(supplyTokens, 'supply');
-                    saveTokens(borrowTokens, 'borrow');
-                    saveTokens(rewardTokens, 'reward');
+                    try {
+                      const saveTokens = db.transaction((tokens, role) => {
+                          for (const t of tokens) {
+                              tokStmt.run(posId, role, t.symbol, t.real_symbol, t.real_name, t.cg_id, t.address, t.amount, t.price, t.usd);
+                          }
+                      });
+                      saveTokens(supplyTokens, 'supply');
+                      saveTokens(borrowTokens, 'borrow');
+                      saveTokens(rewardTokens, 'reward');
+                    } catch (e) {
+                      console.log(`    WARN: Token insert failed for posId ${posId}: ${e.message}`);
+                    }
 
                     positions.push({
                         wallet, chain,
