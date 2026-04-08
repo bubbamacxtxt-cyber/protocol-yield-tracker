@@ -390,8 +390,16 @@ async function scanAll() {
     fs.writeFileSync(path.join(__dirname, '..', 'data', 'debank-scan.json'), JSON.stringify(output, null, 2));
 
     // Clean up old positions (only after successful scan)
-    const deleted = db.prepare('DELETE FROM positions WHERE scanned_at < ?').run(scanStart).changes;
-    console.log(`Cleaned ${deleted} old position entries\n`);
+    // Must delete position_tokens first (foreign key constraint)
+    const oldIds = db.prepare('SELECT id FROM positions WHERE scanned_at < ?').all(scanStart).map(r => r.id);
+    if (oldIds.length > 0) {
+      const idPlaceholders = oldIds.map(() => '?').join(',');
+      db.prepare(`DELETE FROM position_tokens WHERE position_id IN (${idPlaceholders})`).run(...oldIds);
+      const deleted = db.prepare('DELETE FROM positions WHERE scanned_at < ?').run(scanStart).changes;
+      console.log(`Cleaned ${deleted} old position entries (${oldIds.length} IDs, tokens deleted first)\n`);
+    } else {
+      console.log('No old positions to clean\n');
+    }
 
     // Summary
     printSummary(positions);
