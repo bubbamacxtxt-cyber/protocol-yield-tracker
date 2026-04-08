@@ -42,16 +42,16 @@
       "strategy": "rwa",
       "yield_source": "sentora",
       "health_rate": null,
-      "net_usd": 30194511.070353,
-      "asset_usd": 30194511.070353,
+      "net_usd": 30194556.31285,
+      "asset_usd": 30194556.31285,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "senPYUSDmain",
           "real_symbol": "senPYUSDmain",
-          "amount": 30194511.070353,
+          "amount": 30194556.31285,
           "price_usd": 1,
-          "value_usd": 30194511.070353
+          "value_usd": 30194556.31285
         }
       ],
       "borrow": [],
@@ -108,16 +108,16 @@
       "strategy": "lend",
       "yield_source": "spark",
       "health_rate": null,
-      "net_usd": 13747186.407378,
-      "asset_usd": 13747186.407378,
+      "net_usd": 13747225.885423,
+      "asset_usd": 13747225.885423,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "sUSDC",
           "real_symbol": "sUSDC",
-          "amount": 13747186.407378,
+          "amount": 13747225.885423,
           "price_usd": 1,
-          "value_usd": 13747186.407378
+          "value_usd": 13747225.885423
         }
       ],
       "borrow": [],
@@ -174,23 +174,23 @@
       "strategy": "rwa",
       "yield_source": "morpho",
       "health_rate": null,
-      "net_usd": 5000400.414244,
-      "asset_usd": 5000400.414244,
+      "net_usd": 5000428.164195,
+      "asset_usd": 5000428.164195,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "steakUSDCinfinifi",
           "real_symbol": "steakUSDCinfinifi",
-          "amount": 5000400.414244,
+          "amount": 5000428.164195,
           "price_usd": 1,
-          "value_usd": 5000400.414244
+          "value_usd": 5000428.164195
         }
       ],
       "borrow": [],
       "rewards": [],
-      "apy_current": 3.72,
-      "apy_avg": 4.38,
-      "apy_base": 3.72,
+      "apy_current": 3.82,
+      "apy_avg": 4.41,
+      "apy_base": 3.82,
       "apy_rewards": 0,
       "maturity": "2026-04-15",
       "bucket_weeks": 1,
@@ -207,16 +207,16 @@
       "strategy": "rwa",
       "yield_source": "gho",
       "health_rate": null,
-      "net_usd": 1551908.630654,
-      "asset_usd": 1551908.630654,
+      "net_usd": 1551914.612513,
+      "asset_usd": 1551914.612513,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "sGHO",
           "real_symbol": "sGHO",
-          "amount": 1551908.630654,
+          "amount": 1551914.612513,
           "price_usd": 1,
-          "value_usd": 1551908.630654
+          "value_usd": 1551914.612513
         }
       ],
       "borrow": [],
@@ -240,16 +240,16 @@
       "strategy": "rwa",
       "yield_source": "maple",
       "health_rate": null,
-      "net_usd": 1001747.958862,
-      "asset_usd": 1001747.958862,
+      "net_usd": 1001751.801398,
+      "asset_usd": 1001751.801398,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "MPLhysUSDC1",
           "real_symbol": "MPLhysUSDC1",
-          "amount": 1001747.958862,
+          "amount": 1001751.801398,
           "price_usd": 1,
-          "value_usd": 1001747.958862
+          "value_usd": 1001751.801398
         }
       ],
       "borrow": [],
@@ -273,23 +273,23 @@
       "strategy": "lend",
       "yield_source": "aave",
       "health_rate": null,
-      "net_usd": 747129.053404,
-      "asset_usd": 747129.053404,
+      "net_usd": 747130.699742,
+      "asset_usd": 747130.699742,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "USDC",
           "real_symbol": "USDC",
-          "amount": 747129.053404,
+          "amount": 747130.699742,
           "price_usd": 1,
-          "value_usd": 747129.053404
+          "value_usd": 747130.699742
         }
       ],
       "borrow": [],
       "rewards": [],
-      "apy_current": 2.87,
+      "apy_current": 2.97,
       "apy_avg": 2.38,
-      "apy_base": 2.87,
+      "apy_base": 2.97,
       "apy_rewards": 0,
       "maturity": null,
       "bucket_weeks": null,
@@ -306,23 +306,23 @@
       "strategy": "lend",
       "yield_source": "aave",
       "health_rate": null,
-      "net_usd": 448277.220207,
-      "asset_usd": 448277.220207,
+      "net_usd": 448278.106587,
+      "asset_usd": 448278.106587,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "USDC",
           "real_symbol": "USDC",
-          "amount": 448277.220207,
+          "amount": 448278.106587,
           "price_usd": 1,
-          "value_usd": 448277.220207
+          "value_usd": 448278.106587
         }
       ],
       "borrow": [],
       "rewards": [],
-      "apy_current": 2.51,
-      "apy_avg": 2.61,
-      "apy_base": 2.51,
+      "apy_current": 2.5,
+      "apy_avg": 2.6,
+      "apy_base": 2.5,
       "apy_rewards": 0,
       "maturity": null,
       "bucket_weeks": null,
@@ -339,23 +339,23 @@
       "strategy": "rwa",
       "yield_source": "euler",
       "health_rate": null,
-      "net_usd": 402347.451275,
-      "asset_usd": 402347.451275,
+      "net_usd": 402348.600921,
+      "asset_usd": 402348.600921,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "USDC",
           "real_symbol": "USDC",
-          "amount": 402347.451275,
+          "amount": 402348.600921,
           "price_usd": 1,
-          "value_usd": 402347.451275
+          "value_usd": 402348.600921
         }
       ],
       "borrow": [],
       "rewards": [],
-      "apy_current": 3.78,
+      "apy_current": 3.77,
       "apy_avg": 3.75,
-      "apy_base": 3.78,
+      "apy_base": 3.77,
       "apy_rewards": 0,
       "maturity": null,
       "bucket_weeks": null,
@@ -372,16 +372,16 @@
       "strategy": "rwa",
       "yield_source": "cap",
       "health_rate": null,
-      "net_usd": 5713.760041,
-      "asset_usd": 5713.760041,
+      "net_usd": 5713.78199,
+      "asset_usd": 5713.78199,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "stcUSD",
           "real_symbol": "stcUSD",
-          "amount": 5713.760041,
+          "amount": 5713.78199,
           "price_usd": 1,
-          "value_usd": 5713.760041
+          "value_usd": 5713.78199
         }
       ],
       "borrow": [],
@@ -405,23 +405,23 @@
       "strategy": "rwa",
       "yield_source": "tokemak",
       "health_rate": null,
-      "net_usd": 4932.732452,
-      "asset_usd": 4932.732452,
+      "net_usd": 4932.750059,
+      "asset_usd": 4932.750059,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "infinifiUSD",
           "real_symbol": "infinifiUSD",
-          "amount": 4932.732452,
+          "amount": 4932.750059,
           "price_usd": 1,
-          "value_usd": 4932.732452
+          "value_usd": 4932.750059
         }
       ],
       "borrow": [],
       "rewards": [],
-      "apy_current": 5.26,
-      "apy_avg": 5.29,
-      "apy_base": 5.26,
+      "apy_current": 5.32,
+      "apy_avg": 5.27,
+      "apy_base": 5.32,
       "apy_rewards": 0,
       "maturity": "2026-04-15",
       "bucket_weeks": 1,
@@ -438,16 +438,16 @@
       "strategy": "lend",
       "yield_source": "aave",
       "health_rate": null,
-      "net_usd": 209.256004,
-      "asset_usd": 209.256004,
+      "net_usd": 209.256213,
+      "asset_usd": 209.256213,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "RLUSD",
           "real_symbol": "RLUSD",
-          "amount": 209.256004,
+          "amount": 209.256213,
           "price_usd": 1,
-          "value_usd": 209.256004
+          "value_usd": 209.256213
         }
       ],
       "borrow": [],
@@ -768,16 +768,16 @@
       "strategy": "rwa",
       "yield_source": "sky",
       "health_rate": null,
-      "net_usd": 136196.98007904767,
-      "asset_usd": 136196.98007904767,
+      "net_usd": 136197.40363272605,
+      "asset_usd": 136197.40363272605,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "USDC",
           "real_symbol": "USDC",
-          "amount": 136196.98007904767,
+          "amount": 136197.40363272605,
           "price_usd": 1,
-          "value_usd": 136196.98007904767
+          "value_usd": 136197.40363272605
         }
       ],
       "borrow": [],
