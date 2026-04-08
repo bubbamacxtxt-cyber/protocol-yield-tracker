@@ -504,9 +504,19 @@ function render() {
   document.getElementById('totalPositions').textContent = fmtNum(totalPositions);
   document.getElementById('activeWhales').textContent = activeWhales;
   
-  // Last updated
+  // Last updated + daily change
   const genAt = DATA.summary?.generated_at || new Date().toISOString();
-  document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date(genAt).toLocaleString();
+  let changeText = 'Last updated: ' + new Date(genAt).toLocaleString();
+  try {
+    const prev = JSON.parse(await (await fetch('data/last-total.json?t=' + Date.now())).text());
+    if (prev.total > 0) {
+      const change = ((totalValue - prev.total) / prev.total * 100);
+      const sign = change >= 0 ? '+' : '';
+      const color = change >= 0 ? '#3fb950' : '#f85149';
+      changeText += ` · <span style="color:${color}">${sign}${change.toFixed(2)}%</span>`;
+    }
+  } catch(e) {}
+  document.getElementById('lastUpdated').innerHTML = changeText;
   
   // Allocation Chart
   const allocCtx = document.getElementById('allocationChart').getContext('2d');

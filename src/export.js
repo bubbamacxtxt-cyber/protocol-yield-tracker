@@ -164,6 +164,12 @@ function main() {
     };
 
     fs.writeFileSync(OUT_PATH, JSON.stringify(data, null, 2));
+
+    // Save previous total for daily change tracking
+    const prevPath = path.join(__dirname, '..', 'data', 'last-total.json');
+    let prevTotal = 0;
+    try { prevTotal = JSON.parse(fs.readFileSync(prevPath, 'utf8')).total || 0; } catch(e) {}
+    fs.writeFileSync(prevPath, JSON.stringify({ date: data.generated_at, total: Math.round(totalValue), prev: prevTotal }, null, 2));
     console.log(`Exported ${totalPositions} positions across ${Object.keys(whales).length} whales`);
 
     for (const [name, w] of Object.entries(whales)) {

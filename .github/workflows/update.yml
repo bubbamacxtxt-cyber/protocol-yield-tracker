@@ -60,4 +60,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update whale data ${{ github.run_number }}"
-          file_pattern: data/whales/ data/manual-positions.json data/stables.json data.json yield-tracker.db
+          file_pattern: data/whales/ data/manual-positions.json data/stables.json data/last-total.json data.json yield-tracker.db
