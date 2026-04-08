@@ -249,6 +249,11 @@ async function scanAll() {
     const positions = [];
     let calls = 0;
 
+    // Clean up old positions before fresh scan
+    for (const { wallet, chain } of walletChainPairs) {
+        db.prepare('DELETE FROM positions WHERE wallet = ? AND chain = ?').run(wallet, chain);
+    }
+
     for (const { wallet, chain } of walletChainPairs) {
         const short = wallet.slice(0, 10) + '...' + wallet.slice(-4);
         try {

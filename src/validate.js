@@ -94,6 +94,48 @@ async function main() {
   // Skipped: USDz supply fluctuates too much for 5% threshold
   // Sanity check (positions > 0) is sufficient
 
+  // --- Source validation: does data.json match what the DB has? ---
+  console.log('\n--- Source Validation (data.json vs DB) ---');
+  try {
+    const Database = require('better-sqlite3');
+    const dbPath = path.join(__dirname, '..', 'yield-tracker.db');
+    const db = new Database(dbPath, { readonly: true });
+    const WHALES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
+
+    for (const [name, definition] of Object.entries(WHALES)) {
+      let wallets = [];
+      if (Array.isArray(definition)) {
+        wallets = definition;
+      } else if (definition.wallets) {
+        wallets = definition.wallets;
+      } else if (definition.vaults) {
+        for (const vaultWallets of Object.values(definition.vaults)) {
+          wallets.push(...vaultWallets);
+        }
+      }
+      const walletLower = wallets.map(w => w.toLowerCase());
+      if (walletLower.length === 0) continue;
+
+      // Skip whales with manual-only data (not in DB)
+      if (['InfiniFi', 'Anzen', 'Pareto'].includes(name)) {
+        console.log(`  ⏭️  ${name} (source): manual-only, skipped`);
+        continue;
+      }
+      const placeholders = walletLower.map(() => '?').join(',');
+      const dbTotal = db.prepare(
+        `SELECT SUM(net_usd) as total FROM positions WHERE LOWER(wallet) IN (${placeholders})`
+      ).get(...walletLower)?.total || 0;
+
+      // data.json total
+      const exportTotal = (data.whales[name]?.positions || []).reduce((s, p) => s + (p.net_usd || 0), 0);
+
+      check(name + ' (source)', dbTotal, exportTotal);
+    }
+    db.close();
+  } catch (e) {
+    warnings.push(`Source validation: ${e.message}`);
+  }
+
   // Report
   report();
 }

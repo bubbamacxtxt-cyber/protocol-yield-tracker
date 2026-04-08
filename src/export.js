@@ -51,21 +51,15 @@ function main() {
         delete p.reward_json;
     }
 
-    // Remove near-duplicates: old scan entries superseded by newer ones with overlapping supply tokens
+    // Remove near-duplicates as safety net (shouldn't be needed with clean DB)
     const deduped = [];
-    const seen = new Map(); // key: wallet|chain|protocol|supplyTokens -> latest position
+    const seen = new Set();
     for (const p of allPositions) {
         const supplyAddrs = (p.supply || []).map(t => t.address).filter(Boolean).sort().join(',') || 'none';
         const key = p.wallet + '|' + p.chain + '|' + p.protocol_id + '|' + supplyAddrs;
         if (!seen.has(key)) {
-            seen.set(key, p);
+            seen.add(key);
             deduped.push(p);
-        }
-        // If seen before, keep the one with the latest scanned_at date
-        else if (p.scanned_at > seen.get(key).scanned_at) {
-            const idx = deduped.indexOf(seen.get(key));
-            deduped[idx] = p;
-            seen.set(key, p);
         }
     }
 
