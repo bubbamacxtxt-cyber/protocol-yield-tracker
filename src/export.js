@@ -51,17 +51,7 @@ function main() {
         delete p.reward_json;
     }
 
-    // Remove near-duplicates as safety net (shouldn't be needed with clean DB)
-    const deduped = [];
-    const seen = new Set();
-    for (const p of allPositions) {
-        const supplyAddrs = (p.supply || []).map(t => t.address).filter(Boolean).sort().join(',') || 'none';
-        const key = p.wallet + '|' + p.chain + '|' + p.protocol_id + '|' + supplyAddrs;
-        if (!seen.has(key)) {
-            seen.add(key);
-            deduped.push(p);
-        }
-    }
+    const deduped = allPositions; // DB is cleaned at scan time, no dedup needed
 
     // Build whale data
     const whales = {};
