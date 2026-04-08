@@ -61,8 +61,8 @@ function main() {
             seen.set(key, p);
             deduped.push(p);
         }
-        // If seen before, keep the one with higher net_usd (likely the more complete scan)
-        else if (p.net_usd > seen.get(key).net_usd) {
+        // If seen before, keep the one with the latest scanned_at date
+        else if (p.scanned_at > seen.get(key).scanned_at) {
             const idx = deduped.indexOf(seen.get(key));
             deduped[idx] = p;
             seen.set(key, p);
