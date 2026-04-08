@@ -504,16 +504,24 @@ function render() {
   document.getElementById('totalPositions').textContent = fmtNum(totalPositions);
   document.getElementById('activeWhales').textContent = activeWhales;
   
-  // Last updated + daily change
+  // Last updated + daily/weekly change
   const genAt = DATA.summary?.generated_at || new Date().toISOString();
   let changeText = 'Last updated: ' + new Date(genAt).toLocaleString();
   try {
-    const prev = JSON.parse(await (await fetch('data/last-total.json?t=' + Date.now())).text());
-    if (prev.total > 0) {
-      const change = ((totalValue - prev.total) / prev.total * 100);
-      const sign = change >= 0 ? '+' : '';
-      const color = change >= 0 ? '#3fb950' : '#f85149';
-      changeText += ` · <span style="color:${color}">${sign}${change.toFixed(2)}%</span>`;
+    const history = JSON.parse(await (await fetch('data/total-history.json?t=' + Date.now())).text());
+    if (history.length >= 2) {
+      const prev = history[history.length - 2];
+      const dailyChange = ((totalValue - prev.total) / prev.total * 100);
+      const dailySign = dailyChange >= 0 ? '+' : '';
+      const dailyColor = dailyChange >= 0 ? '#3fb950' : '#f85149';
+      changeText += ` · <span style="color:${dailyColor}">${dailySign}${dailyChange.toFixed(2)}% day</span>`;
+    }
+    if (history.length >= 7) {
+      const weekAgo = history[history.length - 7];
+      const weeklyChange = ((totalValue - weekAgo.total) / weekAgo.total * 100);
+      const weeklySign = weeklyChange >= 0 ? '+' : '';
+      const weeklyColor = weeklyChange >= 0 ? '#3fb950' : '#f85149';
+      changeText += ` · <span style="color:${weeklyColor}">${weeklySign}${weeklyChange.toFixed(2)}% week</span>`;
     }
   } catch(e) {}
   document.getElementById('lastUpdated').innerHTML = changeText;
