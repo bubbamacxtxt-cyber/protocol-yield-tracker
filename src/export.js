@@ -51,6 +51,24 @@ function main() {
         delete p.reward_json;
     }
 
+    // Remove near-duplicates: old scan entries superseded by newer ones with overlapping supply tokens
+    const deduped = [];
+    const seen = new Map(); // key: wallet|chain|protocol|supplyTokens -> latest position
+    for (const p of allPositions) {
+        const supplyAddrs = (p.supply || []).map(t => t.address).filter(Boolean).sort().join(',') || 'none';
+        const key = p.wallet + '|' + p.chain + '|' + p.protocol_id + '|' + supplyAddrs;
+        if (!seen.has(key)) {
+            seen.set(key, p);
+            deduped.push(p);
+        }
+        // If seen before, keep the one with higher net_usd (likely the more complete scan)
+        else if (p.net_usd > seen.get(key).net_usd) {
+            const idx = deduped.indexOf(seen.get(key));
+            deduped[idx] = p;
+            seen.set(key, p);
+        }
+    }
+
     // Build whale data
     const whales = {};
     for (const [name, definition] of Object.entries(WHALES)) {
@@ -66,7 +84,7 @@ function main() {
         }
 
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
-        const positions = allPositions.filter(p => walletSet.has(p.wallet.toLowerCase()));
+        const positions = deduped.filter(p => walletSet.has(p.wallet.toLowerCase()));
 
         // Merge manual positions if they exist for this whale
         if (manualPositions[name]) {
