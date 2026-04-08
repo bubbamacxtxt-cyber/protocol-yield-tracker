@@ -248,7 +248,7 @@ async function scanAll() {
     console.log('Phase 3: Scanning positions...\n');
     const positions = [];
     let calls = 0;
-    const scanStart = new Date().toISOString();
+    const scanStart = db.prepare("SELECT datetime('now') as t").get().t;
 
     for (const { wallet, chain } of walletChainPairs) {
         const short = wallet.slice(0, 10) + '...' + wallet.slice(-4);
