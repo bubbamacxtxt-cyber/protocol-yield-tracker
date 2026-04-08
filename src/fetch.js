@@ -248,11 +248,7 @@ async function scanAll() {
     console.log('Phase 3: Scanning positions...\n');
     const positions = [];
     let calls = 0;
-
-    // Clean up old positions before fresh scan
-    for (const { wallet, chain } of walletChainPairs) {
-        db.prepare('DELETE FROM positions WHERE wallet = ? AND chain = ?').run(wallet, chain);
-    }
+    const scanStart = new Date().toISOString();
 
     for (const { wallet, chain } of walletChainPairs) {
         const short = wallet.slice(0, 10) + '...' + wallet.slice(-4);
@@ -392,6 +388,10 @@ async function scanAll() {
     // Save scan results
     const output = { positions, api_calls: calls, coingecko_calls: cgCalls, scanned_at: new Date().toISOString() };
     fs.writeFileSync(path.join(__dirname, '..', 'data', 'debank-scan.json'), JSON.stringify(output, null, 2));
+
+    // Clean up old positions (only after successful scan)
+    const deleted = db.prepare('DELETE FROM positions WHERE scanned_at < ?').run(scanStart).changes;
+    console.log(`Cleaned ${deleted} old position entries\n`);
 
     // Summary
     printSummary(positions);
