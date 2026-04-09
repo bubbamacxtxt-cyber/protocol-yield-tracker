@@ -40,10 +40,9 @@ const POOLS = [
   { name: 'USTB', pool: '1910847a-f8b5-40ce-a1ab-1dafdded5fbb' },
 ];
 
-// Tokens not properly tracked on DeFiLlama — manual APY entries
-// NOTE: verify these periodically against official sources
-const MANUAL_STABLES = [
-  { name: 'upGAMMAusdc', apr: 4.37, chain: 'Ethereum', tvl: 16650000 },  // Upshift GAMMA USDC vault — source: upshift app, unverified
+// Tokens not properly tracked on DeFiLlama — fetched from alternative APIs
+const AUGUST_DIGITAL_VAULTS = [
+  { name: 'upGAMMAusdc', address: '0x998D7b14c123c1982404562b68edDB057b0477cB', chain: 'Ethereum' },
 ];
 
 async function main() {
@@ -73,18 +72,31 @@ async function main() {
     }
   }
   
-  // Add manual entries
-  for (const m of MANUAL_STABLES) {
-    stables.push({
-      name: m.name,
-      apr: m.apr.toFixed(2) + '%',
-      aprValue: m.apr,
-      chain: m.chain,
-      tvl: m.tvl >= 1e6 ? "$" + (m.tvl / 1e6).toFixed(0) + "M" : m.tvl >= 1e3 ? "$" + (m.tvl / 1e3).toFixed(0) + "K" : "N/A",
-      tvlNum: m.tvl,
-      manual: true,
-    });
-    console.log(`  📝 ${m.name}: ${m.apr.toFixed(2)}% (manual, ${m.chain})`);
+  // Add August Digital vault entries (Upshift etc.)
+  for (const v of AUGUST_DIGITAL_VAULTS) {
+    try {
+      const res = await fetch(`https://api.augustdigital.io/api/v1/tokenized_vault/${v.address}`);
+      if (res.ok) {
+        const data = await res.json();
+        const apy30 = (data.historical_apy?.['30'] || 0) * 100;  // API returns decimal (0.05 = 5%)
+        const tvl = data.latest_reported_tvl || 0;
+        stables.push({
+          name: v.name,
+          apr: apy30.toFixed(2) + '%',
+          aprValue: apy30,
+          chain: v.chain,
+          tvl: tvl >= 1e6 ? "$" + (tvl / 1e6).toFixed(0) + "M" : tvl >= 1e3 ? "$" + (tvl / 1e3).toFixed(0) + "K" : "N/A",
+          tvlNum: tvl,
+          source: 'augustdigital',
+          apy_7d: data.historical_apy?.['7'] ? (data.historical_apy['7'] * 100).toFixed(2) + '%' : null,
+        });
+        console.log(`  📡 ${v.name}: ${apy30.toFixed(2)}% (augustdigital, ${v.chain}, 7d: ${data.historical_apy?.['7'] ? (data.historical_apy['7']*100).toFixed(2)+'%' : 'N/A'})`);
+      } else {
+        console.log(`  ❌ ${v.name}: augustdigital API ${res.status}`);
+      }
+    } catch(e) {
+      console.log(`  ❌ ${v.name}: ${e.message}`);
+    }
   }
   
   const outPath = path.join(__dirname, '..', 'data', 'stables.json');
