@@ -37,6 +37,13 @@ const POOLS = [
   { name: 'cUSDO', pool: 'b2ebf3c0-a173-4d61-959b-23405b7d4edb' },
   { name: 'alUSD', pool: '7565527d-6925-4e8d-8678-794999db45a5' },
   { name: 'sFRAX', pool: '55de30c3-bf9f-4d4e-9e0b-536a8ef5ab35' },
+  { name: 'USTB', pool: '1910847a-f8b5-40ce-a1ab-1dafdded5fbb' },
+];
+
+// Tokens not properly tracked on DeFiLlama — manual APY entries
+const MANUAL_STABLES = [
+  { name: 'USDai', apr: 4.50, chain: 'Arbitrum', tvl: 0 },  // USD.AI base yield (PayPal PYUSD integration)
+  { name: 'upGAMMAusdc', apr: 4.37, chain: 'Ethereum', tvl: 16650000 },  // Upshift GAMMA USDC vault
 ];
 
 async function main() {
@@ -64,6 +71,20 @@ async function main() {
     } else {
       console.log(`  ❌ ${target.name}: pool not found or no APY`);
     }
+  }
+  
+  // Add manual entries
+  for (const m of MANUAL_STABLES) {
+    stables.push({
+      name: m.name,
+      apr: m.apr.toFixed(2) + '%',
+      aprValue: m.apr,
+      chain: m.chain,
+      tvl: m.tvl >= 1e6 ? "$" + (m.tvl / 1e6).toFixed(0) + "M" : m.tvl >= 1e3 ? "$" + (m.tvl / 1e3).toFixed(0) + "K" : "N/A",
+      tvlNum: m.tvl,
+      manual: true,
+    });
+    console.log(`  📝 ${m.name}: ${m.apr.toFixed(2)}% (manual, ${m.chain})`);
   }
   
   const outPath = path.join(__dirname, '..', 'data', 'stables.json');
