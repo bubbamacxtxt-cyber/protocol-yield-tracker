@@ -41,9 +41,9 @@ const POOLS = [
 ];
 
 // Tokens not properly tracked on DeFiLlama — manual APY entries
+// NOTE: verify these periodically against official sources
 const MANUAL_STABLES = [
-  { name: 'USDai', apr: 4.50, chain: 'Arbitrum', tvl: 0 },  // USD.AI base yield (PayPal PYUSD integration)
-  { name: 'upGAMMAusdc', apr: 4.37, chain: 'Ethereum', tvl: 16650000 },  // Upshift GAMMA USDC vault
+  { name: 'upGAMMAusdc', apr: 4.37, chain: 'Ethereum', tvl: 16650000 },  // Upshift GAMMA USDC vault — source: upshift app, unverified
 ];
 
 async function main() {
