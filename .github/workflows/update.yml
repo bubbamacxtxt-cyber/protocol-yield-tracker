@@ -37,6 +37,9 @@ jobs:
       - name: Fetch Pareto data
         run: node src/fetch-pareto.js
 
+      - name: Fix Morpho collateral labels
+        run: node src/fix-morpho-tokens.js yield-tracker.db --apply
+
       - name: Fetch stables yields
         run: node src/fetch-stables.js
 
