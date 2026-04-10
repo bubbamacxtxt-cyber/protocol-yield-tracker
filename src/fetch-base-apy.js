@@ -148,8 +148,11 @@ async function fetchMorphoApy() {
       for (const m of items) {
         const symbol = m.loanAsset?.symbol;
         if (!symbol) continue;
-        const sApy = (m.state?.supplyApy || 0) * 100;
-        const bApy = (m.state?.borrowApy || 0) * 100;
+        const rawSApy = (m.state?.supplyApy || 0) * 100;
+        const rawBApy = (m.state?.borrowApy || 0) * 100;
+        // Skip obviously bogus APYs (>100% = bad data)
+        const sApy = rawSApy > 100 ? 0 : rawSApy;
+        const bApy = rawBApy > 100 ? 0 : rawBApy;
         if (sApy > 0) {
           if (!supplyMap[symbol]) supplyMap[symbol] = {};
           supplyMap[symbol][cid] = Math.max(supplyMap[symbol][cid] || 0, sApy);
