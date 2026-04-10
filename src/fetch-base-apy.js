@@ -95,11 +95,12 @@ async function fetchPendleApy() {
   return map;
 }
 
-// ─── Source 4: Aave V3 Supply APY ──────────────────────────────────
-async function fetchAaveSupplyApy() {
-  const apyMap = {};
+// ─── Source 4: Aave V3 APY ────────────────────────────────────────
+async function fetchAaveApy() {
+  const supplyMap = {};
+  const borrowMap = {};
   for (const cid of AAVE_CHAINS) {
-    const query = `{ markets(request: { chainIds: [${cid}] }) { reserves { underlyingToken { symbol } supplyInfo { apy { formatted } } } } }`;
+    const query = `{ markets(request: { chainIds: [${cid}] }) { reserves { underlyingToken { symbol } supplyInfo { apy { formatted } } borrowInfo { apy { formatted } } } } }`;
     try {
       const res = await fetch('https://api.v3.aave.com/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -110,25 +111,33 @@ async function fetchAaveSupplyApy() {
       const allReserves = mkts.flatMap(m => m.reserves || []);
       for (const r of allReserves) {
         const symbol = r.underlyingToken?.symbol;
-        const apy = parseFloat(r.supplyInfo?.apy?.formatted || '0');
-        if (!symbol || apy <= 0) continue;
-        if (!apyMap[symbol]) apyMap[symbol] = {};
-        apyMap[symbol][cid] = Math.max(apyMap[symbol][cid] || 0, apy);
+        if (!symbol) continue;
+        const sApy = parseFloat(r.supplyInfo?.apy?.formatted || '0');
+        const bApy = parseFloat(r.borrowInfo?.apy?.formatted || '0');
+        if (sApy > 0) {
+          if (!supplyMap[symbol]) supplyMap[symbol] = {};
+          supplyMap[symbol][cid] = Math.max(supplyMap[symbol][cid] || 0, sApy);
+        }
+        if (bApy > 0) {
+          if (!borrowMap[symbol]) borrowMap[symbol] = {};
+          borrowMap[symbol][cid] = Math.max(borrowMap[symbol][cid] || 0, bApy);
+        }
       }
       process.stdout.write(`  Aave chain ${cid}: ${allReserves.length} reserves\r`);
     } catch (e) {
       console.log(`  ❌ Aave chain ${cid}: ${e.message}`);
     }
   }
-  console.log(`  Aave: ${Object.keys(apyMap).length} tokens with supply APY       `);
-  return apyMap;
+  console.log(`  Aave: ${Object.keys(supplyMap).length} supply, ${Object.keys(borrowMap).length} borrow tokens       `);
+  return { supply: supplyMap, borrow: borrowMap };
 }
 
-// ─── Source 5: Morpho Supply APY ───────────────────────────────────
-async function fetchMorphoSupplyApy() {
-  const apyMap = {};
+// ─── Source 5: Morpho APY ─────────────────────────────────────────
+async function fetchMorphoApy() {
+  const supplyMap = {};
+  const borrowMap = {};
   for (const cid of MORPHO_CHAINS) {
-    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 100) { items { loanAsset { symbol } state { supplyApy } } } }`;
+    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 100) { items { loanAsset { symbol } state { supplyApy borrowApy } } } }`;
     try {
       const res = await fetch('https://api.morpho.org/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -138,18 +147,25 @@ async function fetchMorphoSupplyApy() {
       const items = d?.data?.markets?.items || [];
       for (const m of items) {
         const symbol = m.loanAsset?.symbol;
-        const apy = (m.state?.supplyApy || 0) * 100;
-        if (!symbol || apy <= 0) continue;
-        if (!apyMap[symbol]) apyMap[symbol] = {};
-        apyMap[symbol][cid] = Math.max(apyMap[symbol][cid] || 0, apy);
+        if (!symbol) continue;
+        const sApy = (m.state?.supplyApy || 0) * 100;
+        const bApy = (m.state?.borrowApy || 0) * 100;
+        if (sApy > 0) {
+          if (!supplyMap[symbol]) supplyMap[symbol] = {};
+          supplyMap[symbol][cid] = Math.max(supplyMap[symbol][cid] || 0, sApy);
+        }
+        if (bApy > 0) {
+          if (!borrowMap[symbol]) borrowMap[symbol] = {};
+          borrowMap[symbol][cid] = Math.max(borrowMap[symbol][cid] || 0, bApy);
+        }
       }
       process.stdout.write(`  Morpho chain ${cid}: ${items.length} markets\r`);
     } catch (e) {
       console.log(`  ❌ Morpho chain ${cid}: ${e.message}`);
     }
   }
-  console.log(`  Morpho: ${Object.keys(apyMap).length} tokens with supply APY      `);
-  return apyMap;
+  console.log(`  Morpho: ${Object.keys(supplyMap).length} supply, ${Object.keys(borrowMap).length} borrow tokens      `);
+  return { supply: supplyMap, borrow: borrowMap };
 }
 
 // ─── Main ──────────────────────────────────────────────────────────
@@ -173,14 +189,14 @@ async function main() {
   console.log('3. Pendle PT/YT...');
   const pendleApy = await fetchPendleApy();
 
-  console.log('4. Aave V3 supply APY...');
-  const aaveApy = await fetchAaveSupplyApy();
+  console.log('4. Aave V3 APY...');
+  const aaveApy = await fetchAaveApy();
 
-  console.log('5. Morpho supply APY...');
-  const morphoApy = await fetchMorphoSupplyApy();
+  console.log('5. Morpho APY...');
+  const morphoApy = await fetchMorphoApy();
 
-  // ── Apply base APY ─────────────────────────────────────────────
-  console.log('\n6. Applying base APY...');
+  // ── Apply supply APY ──────────────────────────────────────────
+  console.log('\n6. Applying supply APY...');
 
   const nonYieldStables = new Set(['USDC', 'USDT', 'PYUSD', 'GHO', 'USDT0', 'AUSD', 'USDS', 'RLUSD', 'USDe', 'NUSD', 'rUSD', 'USD1', 'VBILL', 'USDai']);
   const staticApy = {
@@ -224,16 +240,16 @@ async function main() {
 
     if (staticApy[row.symbol] != null) {
       apy = staticApy[row.symbol]; source = 'static'; staticApplied++;
-    } else if (row.protocol_name === 'Aave V3' && aaveApy[row.symbol]?.[cid] != null) {
-      apy = aaveApy[row.symbol][cid]; source = 'aave_supply'; aaveApplied++;
-    } else if (row.protocol_name === 'Morpho' && morphoApy[row.symbol]?.[cid] != null) {
-      apy = morphoApy[row.symbol][cid]; source = 'morpho_supply'; morphoApplied++;
+    } else if (row.protocol_name === 'Aave V3' && aaveApy.supply[row.symbol]?.[cid] != null) {
+      apy = aaveApy.supply[row.symbol][cid]; source = 'aave_supply'; aaveApplied++;
+    } else if (row.protocol_name === 'Morpho' && morphoApy.supply[row.symbol]?.[cid] != null) {
+      apy = morphoApy.supply[row.symbol][cid]; source = 'morpho_supply'; morphoApplied++;
     } else if (nonYieldStables.has(row.symbol)) {
       // Try Aave reference rate first
-      if (aaveApy[row.symbol]?.[cid] != null) {
-        apy = aaveApy[row.symbol][cid]; source = 'aave_supply_ref'; aaveApplied++;
-      } else if (aaveApy[row.symbol]?.[1] != null) {
-        apy = aaveApy[row.symbol][1]; source = 'aave_supply_ref'; aaveApplied++;
+      if (aaveApy.supply[row.symbol]?.[cid] != null) {
+        apy = aaveApy.supply[row.symbol][cid]; source = 'aave_supply_ref'; aaveApplied++;
+      } else if (aaveApy.supply[row.symbol]?.[1] != null) {
+        apy = aaveApy.supply[row.symbol][1]; source = 'aave_supply_ref'; aaveApplied++;
       } else {
         apy = 0; source = 'non-yield'; zeroCount++;
       }
@@ -247,23 +263,67 @@ async function main() {
   }
   console.log(`   Protocol-level: Static: ${staticApplied}, Aave: ${aaveApplied}, Morpho: ${morphoApplied}, Zero: ${zeroCount}, Missing: ${stillMissing}`);
 
+  // ── Apply borrow APY (cost) ───────────────────────────────────
+  console.log('\n7. Applying borrow APY...');
+  const borrowTokens = db.prepare("SELECT DISTINCT symbol FROM position_tokens WHERE role='borrow' AND apy_base IS NULL").all();
+  let borrowAave = 0, borrowMorpho = 0, borrowRef = 0, borrowZero = 0, borrowMiss = 0;
+
+  // Token-level: same as supply but for borrow role
+  for (const t of borrowTokens) {
+    // Non-yield stables still have borrow rates
+    // Try Aave borrow rate
+    // For now, assign per-position
+  }
+
+  const borrowPending = db.prepare(`
+    SELECT pt.id, pt.symbol, p.protocol_name, p.chain
+    FROM position_tokens pt JOIN positions p ON pt.position_id = p.id
+    WHERE pt.role='borrow' AND pt.apy_base IS NULL
+  `).all();
+
+  for (const row of borrowPending) {
+    const cid = CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
+    let apy = null, source = null;
+
+    if (row.protocol_name === 'Aave V3' && aaveApy.borrow[row.symbol]?.[cid] != null) {
+      apy = aaveApy.borrow[row.symbol][cid]; source = 'aave_borrow'; borrowAave++;
+    } else if (row.protocol_name === 'Morpho' && morphoApy.borrow[row.symbol]?.[cid] != null) {
+      apy = morphoApy.borrow[row.symbol][cid]; source = 'morpho_borrow'; borrowMorpho++;
+    } else if (aaveApy.borrow[row.symbol]?.[cid] != null) {
+      // Use Aave as reference for other protocols
+      apy = aaveApy.borrow[row.symbol][cid]; source = 'aave_borrow_ref'; borrowRef++;
+    } else if (aaveApy.borrow[row.symbol]?.[1] != null) {
+      apy = aaveApy.borrow[row.symbol][1]; source = 'aave_borrow_ref'; borrowRef++;
+    } else {
+      borrowMiss++;
+    }
+
+    if (apy != null) {
+      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ? WHERE id = ?").run(apy, source, row.id);
+    }
+  }
+  console.log(`   Borrow: Aave: ${borrowAave}, Morpho: ${borrowMorpho}, Ref: ${borrowRef}, Missing: ${borrowMiss}`);
+
   // ── Summary ────────────────────────────────────────────────────
   console.log('\n=== Summary ===');
-  const total = db.prepare("SELECT COUNT(*) as c FROM position_tokens WHERE role='supply'").get();
-  const covered = db.prepare("SELECT COUNT(*) as c FROM position_tokens WHERE role='supply' AND apy_base IS NOT NULL").get();
-  const bySource = db.prepare("SELECT apy_base_source, COUNT(*) as c FROM position_tokens WHERE role='supply' AND apy_base IS NOT NULL GROUP BY apy_base_source ORDER BY c DESC").all();
-  console.log(`Coverage: ${covered.c}/${total.c} (${(covered.c / total.c * 100).toFixed(1)}%)`);
-  bySource.forEach(s => console.log(`  ${s.apy_base_source || 'null'}: ${s.c}`));
+  const totalSupply = db.prepare("SELECT COUNT(*) as c FROM position_tokens WHERE role='supply'").get();
+  const coveredSupply = db.prepare("SELECT COUNT(*) as c FROM position_tokens WHERE role='supply' AND apy_base IS NOT NULL").get();
+  const totalBorrow = db.prepare("SELECT COUNT(*) as c FROM position_tokens WHERE role='borrow'").get();
+  const coveredBorrow = db.prepare("SELECT COUNT(*) as c FROM position_tokens WHERE role='borrow' AND apy_base IS NOT NULL").get();
+  console.log(`Supply APY: ${coveredSupply.c}/${totalSupply.c} (${(coveredSupply.c / totalSupply.c * 100).toFixed(1)}%)`);
+  console.log(`Borrow APY: ${coveredBorrow.c}/${totalBorrow.c} (${(coveredBorrow.c / totalBorrow.c * 100).toFixed(1)}%)`);
+  const bySource = db.prepare("SELECT apy_base_source, role, COUNT(*) as c FROM position_tokens WHERE apy_base IS NOT NULL GROUP BY apy_base_source, role ORDER BY c DESC").all();
+  bySource.forEach(s => console.log(`  ${s.apy_base_source || 'null'} (${s.role}): ${s.c}`));
 
-  if (stillMissing > 0) {
-    console.log('\nStill missing base APY:');
+  if (stillMissing > 0 || borrowMiss > 0) {
+    console.log('\nStill missing APY:');
     const missing = db.prepare(`
-      SELECT pt.symbol, p.protocol_name, p.chain, SUM(pt.value_usd) as total_usd
+      SELECT pt.symbol, pt.role, p.protocol_name, p.chain, SUM(pt.value_usd) as total_usd
       FROM position_tokens pt JOIN positions p ON pt.position_id = p.id
-      WHERE pt.role='supply' AND pt.apy_base IS NULL
-      GROUP BY pt.symbol, p.protocol_name ORDER BY total_usd DESC LIMIT 20
+      WHERE pt.apy_base IS NULL
+      GROUP BY pt.symbol, pt.role, p.protocol_name ORDER BY total_usd DESC LIMIT 20
     `).all();
-    missing.forEach(m => console.log(`  ${m.symbol.padEnd(20)} ${m.protocol_name.padEnd(15)} ${m.chain.padEnd(10)} $${(m.total_usd / 1e6).toFixed(2)}M`));
+    missing.forEach(m => console.log(`  ${m.symbol.padEnd(20)} ${m.role.padEnd(8)} ${m.protocol_name.padEnd(15)} ${m.chain.padEnd(10)} $${(m.total_usd / 1e6).toFixed(2)}M`));
   }
 
   db.close();

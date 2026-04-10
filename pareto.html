@@ -4,273 +4,599 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Protocol Yield Tracker — Pareto</title>
+<link rel="icon" href="favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card: #1c2128;
+  --border: #30363d;
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --accent-blue: #58a6ff;
+  --accent-green: #3fb950;
+  --accent-purple: #a371f7;
+  --accent-orange: #d29922;
+  --gradient-blue: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%);
+  --gradient-teal: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-btn: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #f0f6fc; }
-.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-.header { display: flex; align-items: center; gap: 16px; margin-bottom: 5px; }
-.home-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; border-radius: 8px; color: #8b949e; text-decoration: none; font-size: 13px; cursor: pointer; }
-.home-btn:hover { border-color: #58a6ff; color: #58a6ff; }
-h1 { font-size: 28px; }
-.subtitle { color: #8b949e; margin-bottom: 30px; font-size: 14px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
-.card { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; border-radius: 12px; padding: 20px; }
-.card-label { color: #8b949e; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.card-value.green { color: #3fb950; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.home-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  background: var(--gradient-teal);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: var(--gradient-blue);
+  border: 1px solid #5a8ac4;
+  border-top: 1px solid rgba(140,180,230,0.4);
+  border-bottom: 1px solid #1a3a6a;
+  border-radius: 12px;
+  padding: 20px;
+  inset-shadow: 0 1px 0 rgba(200,220,255,0.25), 0 2px 2px rgba(100,160,230,0.1), 0 -2px 6px rgba(0,0,0,0.5);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.card-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-value.green { color: var(--accent-green); }
 .card-value.red { color: #f85149; }
-.card-value.blue { color: #58a6ff; }
-.card-sub { color: #8b949e; font-size: 12px; margin-top: 4px; }
+.card-value.blue { color: var(--accent-blue); }
+.card-value.purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
+
 .proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.proto-chip { padding: 6px 12px; background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; border-radius: 8px; font-size: 13px; }
-.proto-chip strong { color: #58a6ff; }
-.filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+.proto-chip {
+  padding: 6px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.proto-chip strong { color: var(--accent-blue); }
+
+.filters {
+  display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
+}
 .filter-group { display: flex; align-items: center; gap: 6px; }
-.filter-group label { color: #8b949e; font-size: 13px; }
-.filter-group select, .filter-group input { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; color: #f0f6fc; padding: 6px 10px; border-radius: 6px; font-size: 13px; }
-.download-btn { margin-left: auto; padding: 8px 16px; background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%); border: 1px solid #2d4a6f; color: white; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 13px; font-weight: 600; }
-.download-btn:hover { background: #2ea043; }
-.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #5a8ac4; }
+.filter-group label { color: var(--text-secondary); font-size: 13px; }
+.filter-group select, .filter-group input {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.download-btn {
+  margin-left: auto;
+  padding: 8px 16px;
+  background: var(--gradient-btn);
+  border: 1px solid #2d4a6f;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s;
+}
+.download-btn:hover {
+  background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%);
+  border-color: #3d6a9f;
+}
+
+.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); padding: 12px 16px; text-align: left; color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; position: sticky; top: 0; }
+th {
+  background: var(--bg-secondary);
+  padding: 12px 16px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: sticky;
+  top: 0;
+}
 th:nth-child(n+9) { text-align: right; }
 td { padding: 12px 16px; border-top: 1px solid #21262d; }
 td:nth-child(n+9) { text-align: right; font-variant-numeric: tabular-nums; }
-tr:hover td { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); }
+tr:hover td { background: var(--bg-secondary); }
+
 .badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.badge-loop { background: #1f6feb22; color: #58a6ff; }
-.badge-lend { background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%); border: 1px solid #2d4a6f; color: white22; color: #3fb950; }
+.badge-loop { background: #1f6feb22; color: var(--accent-blue); }
+.badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
-.badge-farm { background: #d2992222; color: #e3b341; }
+.badge-farm { background: #d2992222; color: var(--accent-orange); }
 .badge-lp { background: #f8514922; color: #ff7b72; }
+.badge-illiquid { background: #a371f722; color: #bc8cff; }
+.badge-liquid { background: #4facfe22; color: #4facfe; }
+
 .hf { font-weight: 600; }
-.hf-safe { color: #3fb950; }
-.hf-warn { color: #e3b341; }
+.hf-safe { color: var(--accent-green); }
+.hf-warn { color: var(--accent-orange); }
 .hf-danger { color: #f85149; }
-.token-list { display: flex; flex-direction: column; gap: 2px; }
-.token { white-space: nowrap; }
-.token-amount { color: #8b949e; font-size: 12px; }
-.token-supply { color: #3fb950; }
-.token-borrow { color: #f85149; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding: 20px; }
+
+@media (max-width: 768px) {
+  .container { padding: 16px; }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .table-wrap { font-size: 12px; }
+  th, td { padding: 8px 10px; }
+}
 </style>
-<link rel="icon" href="favicon.jpg">
 </head>
 <body>
 <div class="container">
     <div class="header">
         <a class="home-btn" href="index.html">← Home</a>
+        <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
         <h1>Pareto</h1>
     </div>
     <p class="subtitle">Wallet positions and yield strategies</p>
 
     <div class="cards" id="summaryCards"></div>
-    <div class="proto-summary" id="protoSummary" style="display:none"></div>
-    
+    <div class="proto-summary" id="protoSummary"></div>
 
     <div class="filters">
         <div class="filter-group">
-            <label>Protocol:</label>
-            <select id="filterProtocol"><option value="">All</option></select>
-        </div>
-        <div class="filter-group">
             <label>Chain:</label>
-            <select id="filterChain"><option value="">All</option></select>
+            <select id="chainFilter"><option value="all">All chains</option></select>
         </div>
         <div class="filter-group">
-            <label>Strategy:</label>
-            <select id="filterStrategy"><option value="">All</option></select>
+            <label>Protocol:</label>
+            <select id="protoFilter"><option value="all">All protocols</option></select>
         </div>
         <div class="filter-group">
-            <label>Min $:</label>
-            <input type="number" id="filterMin" placeholder="50000" value="50000" style="width:100px">
+            <label>Search:</label>
+            <input type="text" id="searchFilter" placeholder="Token, wallet, or protocol...">
         </div>
-        <button class="download-btn" onclick="downloadXLSX()">📥 Download XLSX</button>
+        <button class="download-btn" onclick="downloadXLSX()">↓ Download XLSX</button>
     </div>
 
     <div class="table-wrap">
-        <table>
+        <table id="positionsTable">
             <thead>
                 <tr>
                     <th>Wallet</th>
                     <th>Chain</th>
                     <th>Protocol</th>
-                    <th>Type</th>
                     <th>Strategy</th>
-                    <th>HF</th>
-                    <th>Supply</th>
-                    <th>Borrow</th>
+                    <th>Supply Tokens</th>
+                    <th>Borrow Tokens</th>
+                    <th>Supply USD</th>
+                    <th>Borrow USD</th>
                     <th>Net USD</th>
-                    <th>Assets</th>
-                    <th>Debt</th>
-                    <th>APY Net</th>
-                    <th>APY Gross</th>
+                    <th>Base APY</th>
+                    <th>Cost APY</th>
+                    <th>Net APY</th>
+                    <th>Utilization</th>
+                    <th>Health Factor</th>
                 </tr>
             </thead>
             <tbody id="positionsBody"></tbody>
         </table>
     </div>
-
-    <div class="footer" id="footer"></div>
 </div>
 
 <script>
-let DATA = null;
+const WHALE_DATA = '[
+  {
+    "wallet": "off-chain",
+    "chain": "eth",
+    "protocol_name": "Adaptive Frontier",
+    "protocol_id": "adaptive-frontier",
+    "position_type": "Illiquid",
+    "strategy": "rwa",
+    "yield_source": "adaptive",
+    "health_rate": null,
+    "net_usd": 1372725.9980524532,
+    "asset_usd": 1372725.9980524532,
+    "debt_usd": 0,
+    "supply": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "amount": 1372725.9980524532,
+        "price_usd": 1,
+        "value_usd": 1372725.9980524532
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_current": 7.46,
+    "apy_gross": 8.32,
+    "apy_avg": 7.46,
+    "apy_base": 7.46,
+    "apy_rewards": 0,
+    "apy_fee": 10,
+    "maturity": null,
+    "bucket_weeks": null,
+    "underlying": "USDC",
+    "paused": false,
+    "manual": true,
+    "asset_type": "HF Trading"
+  },
+  {
+    "wallet": "off-chain",
+    "chain": "eth",
+    "protocol_name": "RockawayX",
+    "protocol_id": "rockawayx",
+    "position_type": "Illiquid",
+    "strategy": "rwa",
+    "yield_source": "rockawayx",
+    "health_rate": null,
+    "net_usd": 1005629.9857711309,
+    "asset_usd": 1005629.9857711309,
+    "debt_usd": 0,
+    "supply": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "amount": 1005629.9857711309,
+        "price_usd": 1,
+        "value_usd": 1005629.9857711309
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_current": 7.45,
+    "apy_gross": 8.31,
+    "apy_avg": 7.45,
+    "apy_base": 7.45,
+    "apy_rewards": 0,
+    "apy_fee": 10,
+    "maturity": null,
+    "bucket_weeks": null,
+    "underlying": "USDC",
+    "paused": false,
+    "manual": true,
+    "asset_type": "Private Credit & DeFi"
+  },
+  {
+    "wallet": "off-chain",
+    "chain": "eth",
+    "protocol_name": "Fasanara Digital",
+    "protocol_id": "fasanara-digital",
+    "position_type": "Illiquid",
+    "strategy": "rwa",
+    "yield_source": "fasanara",
+    "health_rate": null,
+    "net_usd": 750283.8261944128,
+    "asset_usd": 750283.8261944128,
+    "debt_usd": 0,
+    "supply": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "amount": 750283.8261944128,
+        "price_usd": 1,
+        "value_usd": 750283.8261944128
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_current": 0,
+    "apy_gross": 0,
+    "apy_avg": 0,
+    "apy_base": 0,
+    "apy_rewards": 0,
+    "apy_fee": 20,
+    "maturity": null,
+    "bucket_weeks": null,
+    "underlying": "USDC",
+    "paused": false,
+    "manual": true,
+    "asset_type": "Basis Trading"
+  },
+  {
+    "wallet": "off-chain",
+    "chain": "eth",
+    "protocol_name": "Sky",
+    "protocol_id": "sky",
+    "position_type": "Illiquid",
+    "strategy": "rwa",
+    "yield_source": "sky",
+    "health_rate": null,
+    "net_usd": 136225.5099350275,
+    "asset_usd": 136225.5099350275,
+    "debt_usd": 0,
+    "supply": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "amount": 136225.5099350275,
+        "price_usd": 1,
+        "value_usd": 136225.5099350275
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_current": 0,
+    "apy_gross": 0,
+    "apy_avg": 0,
+    "apy_base": 0,
+    "apy_rewards": 0,
+    "apy_fee": 0,
+    "maturity": null,
+    "bucket_weeks": null,
+    "underlying": "USDC",
+    "paused": false,
+    "manual": true,
+    "asset_type": "DeFi"
+  }
+]';
 
-async function init() {
-    try {
-        const res = await fetch('data.json?v='+Date.now());
-        DATA = await res.json();
-    } catch (e) {
-        document.getElementById('positionsBody').innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px">Failed to load data.json.</td></tr>';
-        return;
-    }
-    render();
-}
+const positions = WHALE_DATA;
+const chains = [...new Set(positions.map(p => p.chain))].sort();
+const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
 
-function getWhale() {
-    return DATA.whales['Pareto'] || Object.values(DATA.whales)[0] || { positions: [], wallets: [], total_wallets: 0, active_wallets: 0 };
-}
-
-function fmtHF(n) {
-    if (!n) return "-";
-    return Number(n).toExponential(3).split("e")[0];
-}
-function render() {
-    const whale = getWhale();
-    const positions = whale.positions || [];
-
-    populateFilters(positions);
-    const filtered = applyFilters(positions);
-
-    const totalNet = filtered.reduce((s, p) => s + p.net_usd, 0);
-    const totalAssets = filtered.reduce((s, p) => s + p.asset_usd, 0);
-    const totalDebt = filtered.reduce((s, p) => s + p.debt_usd, 0);
-    const validHF = filtered.filter(p => p.health_rate && p.health_rate < 1000);
-    const avgHF = validHF.length ? validHF.reduce((s, p) => s + p.health_rate, 0) / validHF.length : 0;
-    const chains = [...new Set(filtered.map(p => p.chain))];
-    const protos = [...new Set(filtered.map(p => p.protocol_name))];
-    const totalWallets = whale.total_wallets || '?';
-    const activeWallets = whale.active_wallets || filtered.length;
-
-    document.getElementById('summaryCards').innerHTML = `
-        <div class="card"><div class="card-label">Net Value</div><div class="card-value green">$${fmt(totalNet)}</div></div>
-        <div class="card"><div class="card-label">Total Assets</div><div class="card-value blue">$${fmt(totalAssets)}</div></div>
-        <div class="card"><div class="card-label">Total Debt</div><div class="card-value red">$${fmt(totalDebt)}</div></div>
-        <div class="card"><div class="card-label">Avg Health</div><div class="card-value ${avgHF < 1.05 ? 'red' : avgHF < 1.15 ? '' : 'green'}">${fmtHF(avgHF)}</div></div>
-        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${activeWallets}/${totalWallets}</div><div class="card-sub">${activeWallets} active · ${totalWallets - activeWallets} below threshold</div></div>
-        <div class="card"><div class="card-label">Positions</div><div class="card-value">${filtered.length}</div><div class="card-sub">${chains.length} chains · ${protos.length} protocols</div></div>
-    `;
-
-    const byProto = {};
-    filtered.forEach(p => {
-        if (!byProto[p.protocol_name]) byProto[p.protocol_name] = { count: 0, total: 0 };
-        byProto[p.protocol_name].count++;
-        byProto[p.protocol_name].total += p.net_usd;
+function buildFilters() {
+    const chainEl = document.getElementById('chainFilter');
+    const protoEl = document.getElementById('protoFilter');
+    chains.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c.toUpperCase();
+        chainEl.appendChild(opt);
     });
-    document.getElementById('protoSummary').innerHTML = Object.entries(byProto)
-        .sort((a, b) => b[1].total - a[1].total)
-        .map(([name, d]) => `<div class="proto-chip"><strong>${name}</strong> ${d.count} pos · $${fmt(d.total)}</div>`)
-        .join('');
-
-    const rows = filtered.map(p => {
-        const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
-        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${fmtHF(p.health_rate)}</span>` : '-';
-        const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
-        const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
-        return `<tr>
-            <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
-            <td>${p.chain}</td>
-            <td>${p.protocol_name}</td>
-            <td>${p.asset_type || p.position_type}</td>
-            <td><span class="badge badge-${p.strategy}">${p.strategy}</span></td>
-            <td>${hf}</td>
-            <td><div class="token-list">${supply || '-'}</div></td>
-            <td><div class="token-list">${borrow || '-'}</div></td>
-            <td>$${fmt(p.net_usd)}</td>
-            <td>$${fmt(p.asset_usd)}</td>
-            <td>$${fmt(p.debt_usd)}</td>
-            <td>${p.apy_current ? p.apy_current + '%' : '-'}</td>
-            <td>${p.apy_gross ? p.apy_gross + '%' : '-'}</td>
-        </tr>`;
-    }).join('');
-    document.getElementById('positionsBody').innerHTML = rows || '<tr><td colspan="11" style="text-align:center;padding:40px">No positions match filters</td></tr>';
-
-    document.getElementById('footer').innerHTML = `Generated ${new Date(DATA.generated_at).toLocaleString()} · ${DATA.token_registry_count} tokens in registry`;
-}
-
-function populateFilters(positions) {
-    const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
-    const chains = [...new Set(positions.map(p => p.chain))].sort();
-    const strats = [...new Set(positions.map(p => p.strategy))].sort();
-    setOptions('filterProtocol', protos);
-    setOptions('filterChain', chains);
-    setOptions('filterStrategy', strats);
-}
-
-function setOptions(id, values) {
-    const sel = document.getElementById(id);
-    const current = sel.value;
-    sel.innerHTML = '<option value="">All</option>' + values.map(v => `<option value="${v}">${v}</option>`).join('');
-    sel.value = current;
-}
-
-function applyFilters(positions) {
-    const proto = document.getElementById('filterProtocol').value;
-    const chain = document.getElementById('filterChain').value;
-    const strat = document.getElementById('filterStrategy').value;
-    const min = parseFloat(document.getElementById('filterMin').value) || 0;
-    return positions.filter(p => {
-        if (proto && p.protocol_name !== proto) return false;
-        if (chain && p.chain !== chain) return false;
-        if (strat && p.strategy !== strat) return false;
-        if (p.net_usd < min) return false;
-        return true;
-    }).sort((a, b) => b.net_usd - a.net_usd);
+    protos.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p; opt.textContent = p;
+        protoEl.appendChild(opt);
+    });
 }
 
 function fmt(n) {
-    if (n >= 1e9) return (n/1e9).toFixed(2) + 'B';
-    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
-    return n.toLocaleString(undefined, {maximumFractionDigits: 0});
+    if (n === null || n === undefined) return '-';
+    return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function fmtShort(n) {
+    if (n === null || n === undefined) return '-';
+    if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+    if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+    if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+    return '$' + n.toFixed(2);
+}
+
+function hfClass(hf) {
+    if (!hf || hf === 0) return '';
+    if (hf >= 1.5) return 'hf-safe';
+    if (hf >= 1.1) return 'hf-warn';
+    return 'hf-danger';
+}
+
+function strategyBadge(s) {
+    if (!s) return '';
+    const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
+    return `<span class="badge ${cls}">${s}</span>`;
+}
+
+function shortWallet(addr) {
+    if (!addr) return '-';
+    return addr.slice(0, 6) + '...' + addr.slice(-4);
+}
+
+function shortAddr(addr) {
+    if (!addr) return '-';
+    return addr.slice(0, 8) + '...';
+}
+
+function renderTable(data) {
+    const body = document.getElementById('positionsBody');
+    if (data.length === 0) {
+        body.innerHTML = '<tr><td colspan="15" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
+        return;
+    }
+    body.innerHTML = data.map(p => {
+        const supplyTokens = (p.supply || []).map(t => t.symbol).filter(Boolean).join(', ');
+        const borrowTokens = (p.borrow || []).map(t => t.symbol).filter(Boolean).join(', ');
+        const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
+        const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
+        const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
+        const costApy = p.apy_cost != null ? p.apy_cost.toFixed(2) + '%' : '-';
+        const netApy = p.apy_net != null ? p.apy_net.toFixed(2) + '%' : '-';
+        const netColor = p.apy_net > 0 ? 'var(--accent-green)' : p.apy_net < 0 ? '#f85149' : 'var(--text-secondary)';
+        return `<tr>
+            <td title="${p.wallet || ''}"><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet)}</a></td>
+            <td>${(p.chain || '').toUpperCase()}</td>
+            <td>${p.protocol_name || '-'}</td>
+            <td>${strategyBadge(p.strategy)}</td>
+            <td>${supplyTokens || '-'}</td>
+            <td>${borrowTokens || '-'}</td>
+            <td>${fmtShort(p.asset_usd)}</td>
+            <td>${fmtShort(p.debt_usd)}</td>
+            <td style="font-weight:600;color:var(--accent-green)">${fmtShort(p.net_usd)}</td>
+            <td>${baseApy}</td>
+            <td>${costApy}</td>
+            <td style="font-weight:600;color:${netColor}">${netApy}</td>
+            <td>${util}</td>
+            <td class="${hfClass(p.health_rate)}">${hf}</td>
+        </tr>`;
+    }).join('');
+}
+
+function filterPositions() {
+    const chain = document.getElementById('chainFilter').value;
+    const proto = document.getElementById('protoFilter').value;
+    const search = document.getElementById('searchFilter').value.toLowerCase().trim();
+
+    let data = positions;
+    if (chain !== 'all') data = data.filter(p => p.chain === chain);
+    if (proto !== 'all') data = data.filter(p => p.protocol_name === proto);
+    if (search) {
+        data = data.filter(p =>
+            (p.wallet || '').toLowerCase().includes(search) ||
+            (p.protocol_name || '').toLowerCase().includes(search) ||
+            (p.supply || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
+            (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
+            (p.strategy || '').toLowerCase().includes(search)
+        );
+    }
+    return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
+}
+
+function updateSummary(data) {
+    const total = data.reduce((s, p) => s + (p.net_usd || 0), 0);
+    const supply = data.reduce((s, p) => s + (p.asset_usd || 0), 0);
+    const borrow = data.reduce((s, p) => s + (Math.abs(p.debt_usd) || 0), 0);
+    const wallets = new Set(data.map(p => p.wallet)).size;
+    const avgApy = supply > 0 ? (data.reduce((s, p) => s + ((p.apy_net || 0) * (p.asset_usd || 0)), 0) / supply) : 0;
+    const avgUtil = supply > 0 ? (borrow / supply * 100) : 0;
+
+    const avgHf = positions.filter(p => p.health_rate > 0).reduce((s, p, _, arr) => s + p.health_rate / arr.length, 0);
+
+    const chainsUsed = [...new Set(data.map(p => p.chain))].length;
+    const protocolList = [...new Set(data.map(p => p.protocol_name))];
+    const protosUsed = protocolList.length;
+    const topProto = [...new Map(data.map(p => [p.protocol_name, (p.net_usd || 0)])).entries()]
+        .sort((a, b) => b[1] - a[1])[0];
+    const topChain = [...new Map(data.map(p => [p.chain, (p.net_usd || 0)])).entries()]
+        .sort((a, b) => b[1] - a[1])[0];
+
+    document.getElementById('summaryCards').innerHTML = `
+        <div class="card"><div class="card-label">Total Value</div><div class="card-value green">${fmtShort(total)}</div><div class="card-sub">${data.length} positions</div></div>
+        <div class="card"><div class="card-label">Net APY</div><div class="card-value blue">${avgApy.toFixed(2)}%</div><div class="card-sub">weighted avg</div></div>
+        <div class="card"><div class="card-label">Utilization</div><div class="card-value">${avgUtil.toFixed(1)}%</div><div class="card-sub">${fmtShort(borrow)} borrowed</div></div>
+        <div class="card"><div class="card-label">Health Factor</div><div class="card-value purple ${hfClass(avgHf)}">${avgHf.toFixed(2)}</div><div class="card-sub">${avgHf >= 1.1 ? 'Safe' : '⚠️ Below 1.1'}</div></div>
+        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${wallets}</div><div class="card-sub">active</div></div>
+        <div class="card"><div class="card-label">Top Protocol</div><div class="card-value blue">${topProto ? topProto[0] : '-'}</div><div class="card-sub">${topProto ? fmtShort(topProto[1]) : ''}</div></div>
+        <div class="card"><div class="card-label">Top Chain</div><div class="card-value blue">${topChain ? topChain[0].toUpperCase() : '-'}</div><div class="card-sub">${topChain ? fmtShort(topChain[1]) : ''}</div></div>
+        <div class="card"><div class="card-label">Distribution</div><div class="card-value">${chainsUsed} chains</div><div class="card-sub">${protosUsed} protocols</div></div>
+    `;
+
+    const protoHtml = protocolList.map(p => {
+        const count = data.filter(d => d.protocol_name === p).length;
+        const val = data.filter(d => d.protocol_name === p).reduce((s, d) => s + (d.net_usd || 0), 0);
+        return `<div class="proto-chip"><strong>${p}</strong> ${count} pos · ${fmtShort(val)}</div>`;
+    }).join('');
+    document.getElementById('protoSummary').innerHTML = protoHtml;
 }
 
 function downloadXLSX() {
-    const whale = getWhale();
-    const positions = whale.positions || [];
-    const filtered = applyFilters(positions);
-
-    const rows = filtered.map(p => ({
-        'Wallet': p.wallet,
-        'Chain': p.chain,
-        'Protocol': p.protocol_name,
-        'Type': p.asset_type || p.position_type,
-        'Strategy': p.strategy,
-        'Health Rate': p.health_rate || '',
-        'Net USD': p.net_usd,
-        'Asset USD': p.asset_usd,
-        'Debt USD': p.debt_usd,
-        'APY Net': p.apy_current || '',
-        'APY Gross': p.apy_gross || '',
-        'Supply Tokens': p.supply.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + '),
-        'Borrow Tokens': p.borrow.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ')
+    const rows = positions.map(p => ({
+        Wallet: p.wallet,
+        Chain: p.chain,
+        Protocol: p.protocol_name,
+        Strategy: p.strategy,
+        SupplyTokens: (p.supply || []).map(t => t.symbol).join(', '),
+        BorrowTokens: (p.borrow || []).map(t => t.symbol).join(', '),
+        SupplyUSD: p.asset_usd,
+        BorrowUSD: p.debt_usd,
+        NetUSD: p.net_usd,
+        BaseAPY: p.apy_base,
+        CostAPY: p.apy_cost,
+        NetAPY: p.apy_net,
+        Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
+        HealthFactor: p.health_rate,
+        ScanTime: p.scanned_at,
     }));
-
     const ws = XLSX.utils.json_to_sheet(rows);
-    ws['!cols'] = [{wch:44},{wch:8},{wch:15},{wch:10},{wch:8},{wch:10},{wch:15},{wch:15},{wch:15},{wch:50},{wch:50}];
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Pareto');
-    XLSX.writeFile(wb, 'pareto-positions.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, 'Positions');
+    ws['!cols'] = [
+        { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 },
+        { wch: 40 }, { wch: 40 },
+        { wch: 16 }, { wch: 16 }, { wch: 16 },
+        { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
+        { wch: 22 },
+    ];
+    XLSX.writeFile(wb, 'pareto_positions.xlsx');
 }
 
-['filterProtocol', 'filterChain', 'filterStrategy', 'filterMin'].forEach(id => {
-    document.getElementById(id).addEventListener('change', render);
-    document.getElementById(id).addEventListener('input', render);
+document.addEventListener('DOMContentLoaded', () => {
+    buildFilters();
+    const data = filterPositions();
+    updateSummary(data);
+    renderTable(data);
+    document.getElementById('chainFilter').addEventListener('change', () => {
+        const data = filterPositions();
+        updateSummary(data);
+        renderTable(data);
+    });
+    document.getElementById('protoFilter').addEventListener('change', () => {
+        const data = filterPositions();
+        updateSummary(data);
+        renderTable(data);
+    });
+    document.getElementById('searchFilter').addEventListener('input', () => {
+        const data = filterPositions();
+        updateSummary(data);
+        renderTable(data);
+    });
 });
-
-init();
 </script>
 </body>
 </html>

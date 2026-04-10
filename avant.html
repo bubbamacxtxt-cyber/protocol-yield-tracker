@@ -4,267 +4,1256 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Protocol Yield Tracker — Avant</title>
+<link rel="icon" href="favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card: #1c2128;
+  --border: #30363d;
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --accent-blue: #58a6ff;
+  --accent-green: #3fb950;
+  --accent-purple: #a371f7;
+  --accent-orange: #d29922;
+  --gradient-blue: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%);
+  --gradient-teal: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-btn: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #f0f6fc; }
-.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-.header { display: flex; align-items: center; gap: 16px; margin-bottom: 5px; }
-.home-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; border-radius: 8px; color: #8b949e; text-decoration: none; font-size: 13px; cursor: pointer; }
-.home-btn:hover { border-color: #58a6ff; color: #58a6ff; }
-h1 { font-size: 28px; }
-.subtitle { color: #8b949e; margin-bottom: 30px; font-size: 14px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
-.card { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; border-radius: 12px; padding: 20px; }
-.card-label { color: #8b949e; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.card-value.green { color: #3fb950; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.home-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  background: var(--gradient-teal);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: var(--gradient-blue);
+  border: 1px solid #5a8ac4;
+  border-top: 1px solid rgba(140,180,230,0.4);
+  border-bottom: 1px solid #1a3a6a;
+  border-radius: 12px;
+  padding: 20px;
+  inset-shadow: 0 1px 0 rgba(200,220,255,0.25), 0 2px 2px rgba(100,160,230,0.1), 0 -2px 6px rgba(0,0,0,0.5);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.card-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-value.green { color: var(--accent-green); }
 .card-value.red { color: #f85149; }
-.card-value.blue { color: #58a6ff; }
-.card-sub { color: #8b949e; font-size: 12px; margin-top: 4px; }
+.card-value.blue { color: var(--accent-blue); }
+.card-value.purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
+
 .proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.proto-chip { padding: 6px 12px; background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; border-radius: 8px; font-size: 13px; }
-.proto-chip strong { color: #58a6ff; }
-.filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+.proto-chip {
+  padding: 6px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.proto-chip strong { color: var(--accent-blue); }
+
+.filters {
+  display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
+}
 .filter-group { display: flex; align-items: center; gap: 6px; }
-.filter-group label { color: #8b949e; font-size: 13px; }
-.filter-group select, .filter-group input { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid #5a8ac4; color: #f0f6fc; padding: 6px 10px; border-radius: 6px; font-size: 13px; }
-.download-btn { margin-left: auto; padding: 8px 16px; background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%); border: 1px solid #2d4a6f; color: white; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 13px; font-weight: 600; }
-.download-btn:hover { background: #2ea043; }
-.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #5a8ac4; }
+.filter-group label { color: var(--text-secondary); font-size: 13px; }
+.filter-group select, .filter-group input {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.download-btn {
+  margin-left: auto;
+  padding: 8px 16px;
+  background: var(--gradient-btn);
+  border: 1px solid #2d4a6f;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s;
+}
+.download-btn:hover {
+  background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%);
+  border-color: #3d6a9f;
+}
+
+.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); padding: 12px 16px; text-align: left; color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; position: sticky; top: 0; }
+th {
+  background: var(--bg-secondary);
+  padding: 12px 16px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: sticky;
+  top: 0;
+}
 th:nth-child(n+9) { text-align: right; }
 td { padding: 12px 16px; border-top: 1px solid #21262d; }
 td:nth-child(n+9) { text-align: right; font-variant-numeric: tabular-nums; }
-tr:hover td { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); }
+tr:hover td { background: var(--bg-secondary); }
+
 .badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.badge-loop { background: #1f6feb22; color: #58a6ff; }
-.badge-lend { background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%); border: 1px solid #2d4a6f; color: white22; color: #3fb950; }
+.badge-loop { background: #1f6feb22; color: var(--accent-blue); }
+.badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
-.badge-farm { background: #d2992222; color: #e3b341; }
+.badge-farm { background: #d2992222; color: var(--accent-orange); }
 .badge-lp { background: #f8514922; color: #ff7b72; }
+.badge-illiquid { background: #a371f722; color: #bc8cff; }
+.badge-liquid { background: #4facfe22; color: #4facfe; }
+
 .hf { font-weight: 600; }
-.hf-safe { color: #3fb950; }
-.hf-warn { color: #e3b341; }
+.hf-safe { color: var(--accent-green); }
+.hf-warn { color: var(--accent-orange); }
 .hf-danger { color: #f85149; }
-.token-list { display: flex; flex-direction: column; gap: 2px; }
-.token { white-space: nowrap; }
-.token-amount { color: #8b949e; font-size: 12px; }
-.token-supply { color: #3fb950; }
-.token-borrow { color: #f85149; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding: 20px; }
+
+@media (max-width: 768px) {
+  .container { padding: 16px; }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .table-wrap { font-size: 12px; }
+  th, td { padding: 8px 10px; }
+}
 </style>
-<link rel="icon" href="favicon.jpg">
 </head>
 <body>
 <div class="container">
     <div class="header">
         <a class="home-btn" href="index.html">← Home</a>
+        <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
         <h1>Avant</h1>
     </div>
     <p class="subtitle">Wallet positions and yield strategies</p>
 
     <div class="cards" id="summaryCards"></div>
-    <div class="proto-summary" id="protoSummary" style="display:none"></div>
-    
+    <div class="proto-summary" id="protoSummary"></div>
 
     <div class="filters">
         <div class="filter-group">
-            <label>Protocol:</label>
-            <select id="filterProtocol"><option value="">All</option></select>
-        </div>
-        <div class="filter-group">
             <label>Chain:</label>
-            <select id="filterChain"><option value="">All</option></select>
+            <select id="chainFilter"><option value="all">All chains</option></select>
         </div>
         <div class="filter-group">
-            <label>Strategy:</label>
-            <select id="filterStrategy"><option value="">All</option></select>
+            <label>Protocol:</label>
+            <select id="protoFilter"><option value="all">All protocols</option></select>
         </div>
         <div class="filter-group">
-            <label>Min $:</label>
-            <input type="number" id="filterMin" placeholder="50000" value="50000" style="width:100px">
+            <label>Search:</label>
+            <input type="text" id="searchFilter" placeholder="Token, wallet, or protocol...">
         </div>
-        <button class="download-btn" onclick="downloadXLSX()">📥 Download XLSX</button>
+        <button class="download-btn" onclick="downloadXLSX()">↓ Download XLSX</button>
     </div>
 
     <div class="table-wrap">
-        <table>
+        <table id="positionsTable">
             <thead>
                 <tr>
                     <th>Wallet</th>
                     <th>Chain</th>
                     <th>Protocol</th>
-                    <th>Type</th>
                     <th>Strategy</th>
-                    <th>HF</th>
-                    <th>Supply</th>
-                    <th>Borrow</th>
+                    <th>Supply Tokens</th>
+                    <th>Borrow Tokens</th>
+                    <th>Supply USD</th>
+                    <th>Borrow USD</th>
                     <th>Net USD</th>
-                    <th>Assets</th>
-                    <th>Debt</th>
+                    <th>Base APY</th>
+                    <th>Cost APY</th>
+                    <th>Net APY</th>
+                    <th>Utilization</th>
+                    <th>Health Factor</th>
                 </tr>
             </thead>
             <tbody id="positionsBody"></tbody>
         </table>
     </div>
-
-    <div class="footer" id="footer"></div>
 </div>
 
 <script>
-let DATA = null;
+const WHALE_DATA = '[
+  {
+    "id": 561,
+    "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
+    "chain": "eth",
+    "protocol_id": "aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.083,
+    "net_usd": 43981715.57,
+    "asset_usd": 311735126.59,
+    "debt_usd": 267753411.02,
+    "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xdac17f958d2ee523a2206206994597c13d831ec7_43981716",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:20:09",
+    "supply": [
+      {
+        "symbol": "USDe",
+        "real_symbol": "USDe",
+        "real_name": "USDe",
+        "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+        "amount": 311735126.590294,
+        "price_usd": 1,
+        "value_usd": 311735126.590294,
+        "apy_base": 0.96,
+        "apy_base_source": "aave_supply"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "real_name": "USD Coin",
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "amount": 123330096.056969,
+        "price_usd": 0.999900009999,
+        "value_usd": 123317764.280541,
+        "apy_base": 4.56,
+        "apy_base_source": "aave_borrow"
+      },
+      {
+        "symbol": "USDT",
+        "real_symbol": "USDT",
+        "real_name": "Tether USD",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "amount": 144464539.649201,
+        "price_usd": 0.9998,
+        "value_usd": 144435646.741271,
+        "apy_base": 3.29,
+        "apy_base_source": "aave_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 0.9600000000000001,
+    "apy_cost": 3.874917144616801,
+    "apy_net": -16.78553352903299,
+    "apy_reward": null
+  },
+  {
+    "id": 559,
+    "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
+    "chain": "mnt",
+    "protocol_id": "mnt_aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.024,
+    "net_usd": 18812105.2,
+    "asset_usd": 185927985.45,
+    "debt_usd": 167115880.25,
+    "position_index": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9,0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x779ded0c9e1022225f8e0630b35a9b54be713736_18812105",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:38",
+    "supply": [
+      {
+        "symbol": "sUSDe",
+        "real_symbol": "sUSDe",
+        "real_name": "Staked USDe",
+        "address": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
+        "amount": 151640170,
+        "price_usd": 1.22611301111985,
+        "value_usd": 185927985.445426,
+        "apy_base": 3.54462,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USDT0",
+        "real_symbol": "USDT0",
+        "real_name": "USDT0",
+        "address": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
+        "amount": 167149290.050511,
+        "price_usd": 0.9998,
+        "value_usd": 167115860.192501,
+        "apy_base": 3.37,
+        "apy_base_source": "aave_borrow"
+      },
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "real_name": "USD Coin",
+        "address": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9",
+        "amount": 20.058538,
+        "price_usd": 0.999900009999,
+        "value_usd": 20.0565323467653,
+        "apy_base": 3.36,
+        "apy_base_source": "aave_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 3.5446200000000005,
+    "apy_cost": 3.3699999987998432,
+    "apy_net": 5.095843262871204,
+    "apy_reward": null
+  },
+  {
+    "id": 563,
+    "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
+    "chain": "plasma",
+    "protocol_id": "plasma_aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.034,
+    "net_usd": 13150244.51,
+    "asset_usd": 130291314.51,
+    "debt_usd": 117141070,
+    "position_index": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb_13150245",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:20:16",
+    "supply": [
+      {
+        "symbol": "USDe",
+        "real_symbol": "USDe",
+        "real_name": "USDe",
+        "address": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
+        "amount": 130291314.508117,
+        "price_usd": 1,
+        "value_usd": 130291314.508117,
+        "apy_base": 0.88,
+        "apy_base_source": "aave_supply"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USDT0",
+        "real_symbol": "USDT0",
+        "real_name": "USDT0",
+        "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
+        "amount": 117164502.903066,
+        "price_usd": 0.9998,
+        "value_usd": 117141070.002485,
+        "apy_base": 3.64,
+        "apy_base_source": "aave_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 0.88,
+    "apy_cost": 3.64,
+    "apy_net": -23.705805454350447,
+    "apy_reward": null
+  },
+  {
+    "id": 550,
+    "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
+    "chain": "plasma",
+    "protocol_id": "plasma_aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.024,
+    "net_usd": 13029372.33,
+    "asset_usd": 128377132.2,
+    "debt_usd": 115347759.87,
+    "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xc4374775489cb9c56003bf2c9b12495fc64f0771_13029372",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:26",
+    "supply": [
+      {
+        "symbol": "syrupUSDT",
+        "real_symbol": "syrupUSDT",
+        "real_name": "Syrup USDT",
+        "address": "0xc4374775489cb9c56003bf2c9b12495fc64f0771",
+        "amount": 114384265.553795,
+        "price_usd": 1.12233209331354,
+        "value_usd": 128377132.201123,
+        "apy_base": 3.71611,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USDT0",
+        "real_symbol": "USDT0",
+        "real_name": "USDT0",
+        "address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
+        "amount": 115370834.041644,
+        "price_usd": 0.9998,
+        "value_usd": 115347759.874836,
+        "apy_base": 3.64,
+        "apy_base_source": "aave_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 3.71611,
+    "apy_cost": 3.64,
+    "apy_net": 4.389904391729209,
+    "apy_reward": null
+  },
+  {
+    "id": 557,
+    "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+    "chain": "base",
+    "protocol_id": "base_aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.052,
+    "net_usd": 7191978.49,
+    "asset_usd": 57622825.05,
+    "debt_usd": 50430846.56,
+    "position_index": "0x660975730059246a68521a3e2fbd4740173100f5,0x833589fcd6edb6e08f4c7c32d4f71b54bda02913_7191978",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:31",
+    "supply": [
+      {
+        "symbol": "syrupUSDC",
+        "real_symbol": "syrupUSDC",
+        "real_name": "Syrup USDC",
+        "address": "0x660975730059246a68521a3e2fbd4740173100f5",
+        "amount": 49747712.489343,
+        "price_usd": 1.15830099859866,
+        "value_usd": 57622825.0544048,
+        "apy_base": 4.29962,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "real_name": "USD Coin",
+        "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "amount": 50435889.647142,
+        "price_usd": 0.999900009999,
+        "value_usd": 50430846.5624858,
+        "apy_base": 3.96,
+        "apy_base_source": "aave_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 4.29962,
+    "apy_cost": 3.9599999999999995,
+    "apy_net": 6.681068183211572,
+    "apy_reward": null
+  },
+  {
+    "id": 558,
+    "wallet": "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
+    "chain": "ink",
+    "protocol_id": "ink_aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.024,
+    "net_usd": 4650590.12,
+    "asset_usd": 45846050.39,
+    "debt_usd": 41195460.27,
+    "position_index": "0x0200c29006150606b650577bbe7b6248f58470c1,0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x2d270e6886d130d724215a266106e6832161eaed_4650590",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:37",
+    "supply": [
+      {
+        "symbol": "sUSDe",
+        "real_symbol": "sUSDe",
+        "real_name": "Staked USDe",
+        "address": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
+        "amount": 37399746.459039,
+        "price_usd": 1.22583853454882,
+        "value_usd": 45846050.3918458,
+        "apy_base": 3.54462,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USD₮0",
+        "real_symbol": "USD₮0",
+        "real_name": "USD₮0",
+        "address": "0x0200c29006150606b650577bbe7b6248f58470c1",
+        "amount": 29671412.755269,
+        "price_usd": 0.9998,
+        "value_usd": 29665478.4727179,
+        "apy_base": 3,
+        "apy_base_source": "aave_borrow_ref"
+      },
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "real_name": "USDC",
+        "address": "0x2d270e6886d130d724215a266106e6832161eaed",
+        "amount": 11529464.51776,
+        "price_usd": 1.00004486626958,
+        "value_usd": 11529981.8018232,
+        "apy_base": 4.56,
+        "apy_base_source": "aave_borrow_ref"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 3.54462,
+    "apy_cost": 3.4366202365739813,
+    "apy_net": 4.5012942818836,
+    "apy_reward": null
+  },
+  {
+    "id": 553,
+    "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+    "chain": "eth",
+    "protocol_id": "aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.045,
+    "net_usd": 4247335.17,
+    "asset_usd": 16736245.39,
+    "debt_usd": 12488910.22,
+    "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_4247335",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:29",
+    "supply": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "real_name": "USD Coin",
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "amount": 16737919.014539,
+        "price_usd": 0.999900009999,
+        "value_usd": 16736245.39,
+        "apy_base": 2.44,
+        "apy_base_source": "aave_supply"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "PYUSD",
+        "real_symbol": "PYUSD",
+        "real_name": "PayPal USD",
+        "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+        "amount": 12487661.457579,
+        "price_usd": 1.0001,
+        "value_usd": 12488910.2237248,
+        "apy_base": 3.14,
+        "apy_base_source": "aave_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 2.44,
+    "apy_cost": 3.14,
+    "apy_net": 0.3817124375423367,
+    "apy_reward": null
+  },
+  {
+    "id": 548,
+    "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
+    "chain": "eth",
+    "protocol_id": "aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.029,
+    "net_usd": 3626852.44,
+    "asset_usd": 34356862.79,
+    "debt_usd": 30730010.36,
+    "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7_3626852",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:21",
+    "supply": [
+      {
+        "symbol": "USDT",
+        "real_symbol": "USDT",
+        "real_name": "Tether USD",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "amount": 3627577.9539373,
+        "price_usd": 0.9998,
+        "value_usd": 3626852.43834652,
+        "apy_base": 2.19,
+        "apy_base_source": "aave_supply"
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_base": 2.19,
+    "apy_cost": null,
+    "apy_net": 20.7456825869927,
+    "apy_reward": null
+  },
+  {
+    "id": 554,
+    "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+    "chain": "eth",
+    "protocol_id": "morphoblue",
+    "protocol_name": "Morpho",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Morpho",
+    "health_rate": 1.053,
+    "net_usd": 1619489.89,
+    "asset_usd": 12353505.32,
+    "debt_usd": 10734015.43,
+    "position_index": "0xc9629945524f3fde56c7e8854a6c3d48e76b9d97236abbe73c750fcc7aeb8501",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:29",
+    "supply": [
+      {
+        "symbol": "syrupUSDC",
+        "real_symbol": "syrupUSDC",
+        "real_name": "USD Coin",
+        "address": "0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b",
+        "amount": 12354740.6655511,
+        "price_usd": 0.999900009999,
+        "value_usd": 12353505.3150196,
+        "apy_base": 4.29962,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "PYUSD",
+        "real_symbol": "PYUSD",
+        "real_name": "PayPal USD",
+        "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+        "amount": 10732942.1322412,
+        "price_usd": 1.0001,
+        "value_usd": 10734015.4264544,
+        "apy_base": 5.70784606898341,
+        "apy_base_source": "morpho_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 4.29962,
+    "apy_cost": 5.70784606898341,
+    "apy_net": -5.034134070793347,
+    "apy_reward": null
+  },
+  {
+    "id": 552,
+    "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+    "chain": "arb",
+    "protocol_id": "arb_morphoblue",
+    "protocol_name": "Morpho",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Morpho",
+    "health_rate": 1.056,
+    "net_usd": 1162601.98,
+    "asset_usd": 8747414.74,
+    "debt_usd": 7584812.76,
+    "position_index": "0xf86f3edd6f16cd8211f4d206866dc4ecd41be6211063ac11f8508e1b7112ef40",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:28",
+    "supply": [
+      {
+        "symbol": "syrupUSDC",
+        "real_symbol": "syrupUSDC",
+        "real_name": "Syrup USDC",
+        "address": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
+        "amount": 7555302.746291,
+        "price_usd": 1.15778480816842,
+        "value_usd": 8747414.74076887,
+        "apy_base": 4.29962,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "real_name": "USD Coin",
+        "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+        "amount": 7585571.23827953,
+        "price_usd": 0.999900009999,
+        "value_usd": 7584812.75700383,
+        "apy_base": 297995.798684274,
+        "apy_base_source": "morpho_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 4.29962,
+    "apy_cost": 297995.798684274,
+    "apy_net": -1944091.584746405,
+    "apy_reward": null
+  },
+  {
+    "id": 562,
+    "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
+    "chain": "ink",
+    "protocol_id": "ink_aave3",
+    "protocol_name": "Aave V3",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Aave V3",
+    "health_rate": 1.045,
+    "net_usd": 1094972.87,
+    "asset_usd": 9900136.1,
+    "debt_usd": 8805163.22,
+    "position_index": "0x0200c29006150606b650577bbe7b6248f58470c1,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34_1094973",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:20:11",
+    "supply": [
+      {
+        "symbol": "USDe",
+        "real_symbol": "USDe",
+        "real_name": "USDe",
+        "address": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
+        "amount": 9900136.09753595,
+        "price_usd": 1,
+        "value_usd": 9900136.09753595,
+        "apy_base": 0.96,
+        "apy_base_source": "aave_supply_ref"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USD₮0",
+        "real_symbol": "USD₮0",
+        "real_name": "USD₮0",
+        "address": "0x0200c29006150606b650577bbe7b6248f58470c1",
+        "amount": 8806924.607576,
+        "price_usd": 0.9998,
+        "value_usd": 8805163.22265448,
+        "apy_base": 3,
+        "apy_base_source": "aave_borrow_ref"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 0.96,
+    "apy_cost": 3,
+    "apy_net": -15.444546131996862,
+    "apy_reward": null
+  },
+  {
+    "id": 564,
+    "wallet": "0x3BbCb84fCDE71063D8C396e6C54F5dC3D19EE0EC",
+    "chain": "avax",
+    "protocol_id": "wallet-held",
+    "protocol_name": "Wallet",
+    "position_type": "Holding",
+    "strategy": "hold",
+    "yield_source": "wallet",
+    "health_rate": null,
+    "net_usd": 586532.03,
+    "asset_usd": 586532.03,
+    "debt_usd": 0,
+    "position_index": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:20:24",
+    "supply": [
+      {
+        "symbol": "USDC",
+        "real_symbol": "USDC",
+        "real_name": "USD Coin",
+        "address": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+        "amount": 586590.683908,
+        "price_usd": 0.999900009999,
+        "value_usd": 586532.030704929,
+        "apy_base": 2.44,
+        "apy_base_source": "aave_supply_ref"
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_base": 2.44,
+    "apy_cost": null,
+    "apy_net": 2.44,
+    "apy_reward": null
+  },
+  {
+    "id": 556,
+    "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+    "chain": "eth",
+    "protocol_id": "morphoblue",
+    "protocol_name": "Morpho",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Morpho",
+    "health_rate": 1.054,
+    "net_usd": 554104.91,
+    "asset_usd": 4195071.73,
+    "debt_usd": 3640966.82,
+    "position_index": "0xc0ae375fd761ff19b3f04de5534c0f1ec110f80e1c2ede27c42c1c43c3040394",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:29",
+    "supply": [
+      {
+        "symbol": "syrupUSDC",
+        "real_symbol": "syrupUSDC",
+        "real_name": "USD Coin",
+        "address": "0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b",
+        "amount": 4195491.23716372,
+        "price_usd": 0.999900009999,
+        "value_usd": 4195071.72999072,
+        "apy_base": 4.29962,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "RLUSD",
+        "real_symbol": "RLUSD",
+        "real_name": "RLUSD",
+        "address": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+        "amount": 3640966.81811084,
+        "price_usd": 1,
+        "value_usd": 3640966.81811084,
+        "apy_base": 2.70016010319818,
+        "apy_base_source": "morpho_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 4.29962,
+    "apy_cost": 2.70016010319818,
+    "apy_net": 14.809507765073317,
+    "apy_reward": null
+  },
+  {
+    "id": 551,
+    "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+    "chain": "arb",
+    "protocol_id": "arb_morphoblue",
+    "protocol_name": "Morpho",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Morpho",
+    "health_rate": 1.07,
+    "net_usd": 321905.55,
+    "asset_usd": 2234525.84,
+    "debt_usd": 1912620.28,
+    "position_index": "0x571cb3ac535d61d92026c071ef1df4794d0bbbe1755f916ff640746f81b52af4",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:28",
+    "supply": [
+      {
+        "symbol": "syrupUSDC",
+        "real_symbol": "syrupUSDC",
+        "real_name": "Syrup USDC",
+        "address": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
+        "amount": 1930001,
+        "price_usd": 1.15778480816842,
+        "value_usd": 2234525.83754986,
+        "apy_base": 4.29962,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "USD₮0",
+        "real_symbol": "USD₮0",
+        "real_name": "USD₮0",
+        "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+        "amount": 1913002.8833649,
+        "price_usd": 0.9998,
+        "value_usd": 1912620.28278823,
+        "apy_base": 3,
+        "apy_base_source": "aave_borrow_ref"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 4.29962,
+    "apy_cost": 3,
+    "apy_net": 12.021386870095283,
+    "apy_reward": null
+  },
+  {
+    "id": 560,
+    "wallet": "0xD2305803Ca7821e4E5C3bcAeD366AD7dE9F13739",
+    "chain": "eth",
+    "protocol_id": "wallet-held",
+    "protocol_name": "Wallet",
+    "position_type": "Holding",
+    "strategy": "hold",
+    "yield_source": "wallet",
+    "health_rate": null,
+    "net_usd": 298314,
+    "asset_usd": 298314,
+    "debt_usd": 0,
+    "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:44",
+    "supply": [
+      {
+        "symbol": "USDe",
+        "real_symbol": "USDe",
+        "real_name": "USDe",
+        "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+        "amount": 298314,
+        "price_usd": 1,
+        "value_usd": 298314,
+        "apy_base": 0.96,
+        "apy_base_source": "aave_supply_ref"
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_base": 0.96,
+    "apy_cost": null,
+    "apy_net": 0.96,
+    "apy_reward": null
+  },
+  {
+    "id": 549,
+    "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
+    "chain": "eth",
+    "protocol_id": "morphoblue",
+    "protocol_name": "Morpho",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Morpho",
+    "health_rate": 1.056,
+    "net_usd": 278200.69,
+    "asset_usd": 2085142.42,
+    "debt_usd": 1806941.73,
+    "position_index": "0xa4774e3e693fff2ebd1dcbbd69b1b0a5b9bb0ccc753bfda5dd07bdac97c4818a",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:21",
+    "supply": [
+      {
+        "symbol": "USDT",
+        "real_symbol": "USDT",
+        "real_name": "Tether USD",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "amount": 278256.33696868,
+        "price_usd": 0.9998,
+        "value_usd": 278200.685701287,
+        "apy_base": 297995.798684274,
+        "apy_base_source": "morpho_supply"
+      }
+    ],
+    "borrow": [],
+    "rewards": [],
+    "apy_base": 297995.798684274,
+    "apy_cost": null,
+    "apy_net": 2233508.76958055,
+    "apy_reward": null
+  },
+  {
+    "id": 555,
+    "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+    "chain": "eth",
+    "protocol_id": "morphoblue",
+    "protocol_name": "Morpho",
+    "position_type": "Lending",
+    "strategy": "loop",
+    "yield_source": "Morpho",
+    "health_rate": 1.055,
+    "net_usd": 91905.67,
+    "asset_usd": 691839.18,
+    "debt_usd": 599933.5,
+    "position_index": "0xab3196447663a41382ba4b4d55eab3fa702ee2cf071db224fd72492953040056",
+    "debank_updated_at": null,
+    "scanned_at": "2026-04-09 14:19:29",
+    "supply": [
+      {
+        "symbol": "syrupUSDC",
+        "real_symbol": "syrupUSDC",
+        "real_name": "USD Coin",
+        "address": "0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b",
+        "amount": 691908.36148805,
+        "price_usd": 0.999900009999,
+        "value_usd": 691839.177570293,
+        "apy_base": 4.29962,
+        "apy_base_source": "ybs"
+      }
+    ],
+    "borrow": [
+      {
+        "symbol": "AUSD",
+        "real_symbol": "AUSD",
+        "real_name": "AUSD",
+        "address": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
+        "amount": 600002.692585877,
+        "price_usd": 0.99988468740273,
+        "value_usd": 599933.504717026,
+        "apy_base": 2.66756660014009,
+        "apy_base_source": "morpho_borrow"
+      }
+    ],
+    "rewards": [],
+    "apy_base": 4.29962,
+    "apy_cost": 2.66756660014009,
+    "apy_net": 14.953190681341592,
+    "apy_reward": null
+  }
+]';
 
-async function init() {
-    try {
-        const res = await fetch('data.json?v='+Date.now());
-        DATA = await res.json();
-    } catch (e) {
-        document.getElementById('positionsBody').innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px">Failed to load data.json.</td></tr>';
-        return;
-    }
-    render();
-}
+const positions = WHALE_DATA;
+const chains = [...new Set(positions.map(p => p.chain))].sort();
+const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
 
-function getWhale() {
-    return DATA.whales['Avant'] || Object.values(DATA.whales)[0] || { positions: [], wallets: [], total_wallets: 0, active_wallets: 0 };
-}
-
-function fmtHF(n) {
-    if (!n) return "-";
-    return Number(n).toExponential(3).split("e")[0];
-}
-function render() {
-    const whale = getWhale();
-    const positions = whale.positions || [];
-
-    populateFilters(positions);
-    const filtered = applyFilters(positions);
-
-    const totalNet = filtered.reduce((s, p) => s + p.net_usd, 0);
-    const totalAssets = filtered.reduce((s, p) => s + p.asset_usd, 0);
-    const totalDebt = filtered.reduce((s, p) => s + p.debt_usd, 0);
-    const validHF = filtered.filter(p => p.health_rate && p.health_rate < 1000);
-    const avgHF = validHF.length ? validHF.reduce((s, p) => s + p.health_rate, 0) / validHF.length : 0;
-    const chains = [...new Set(filtered.map(p => p.chain))];
-    const protos = [...new Set(filtered.map(p => p.protocol_name))];
-    const totalWallets = whale.total_wallets || '?';
-    const activeWallets = whale.active_wallets || filtered.length;
-
-    document.getElementById('summaryCards').innerHTML = `
-        <div class="card"><div class="card-label">Net Value</div><div class="card-value green">$${fmt(totalNet)}</div></div>
-        <div class="card"><div class="card-label">Total Assets</div><div class="card-value blue">$${fmt(totalAssets)}</div></div>
-        <div class="card"><div class="card-label">Total Debt</div><div class="card-value red">$${fmt(totalDebt)}</div></div>
-        <div class="card"><div class="card-label">Avg Health</div><div class="card-value ${avgHF < 1.05 ? 'red' : avgHF < 1.15 ? '' : 'green'}">${fmtHF(avgHF)}</div></div>
-        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${activeWallets}/${totalWallets}</div><div class="card-sub">${activeWallets} active · ${totalWallets - activeWallets} below threshold</div></div>
-        <div class="card"><div class="card-label">Positions</div><div class="card-value">${filtered.length}</div><div class="card-sub">${chains.length} chains · ${protos.length} protocols</div></div>
-    `;
-
-    const byProto = {};
-    filtered.forEach(p => {
-        if (!byProto[p.protocol_name]) byProto[p.protocol_name] = { count: 0, total: 0 };
-        byProto[p.protocol_name].count++;
-        byProto[p.protocol_name].total += p.net_usd;
+function buildFilters() {
+    const chainEl = document.getElementById('chainFilter');
+    const protoEl = document.getElementById('protoFilter');
+    chains.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c.toUpperCase();
+        chainEl.appendChild(opt);
     });
-    document.getElementById('protoSummary').innerHTML = Object.entries(byProto)
-        .sort((a, b) => b[1].total - a[1].total)
-        .map(([name, d]) => `<div class="proto-chip"><strong>${name}</strong> ${d.count} pos · $${fmt(d.total)}</div>`)
-        .join('');
-
-    const rows = filtered.map(p => {
-        const w = p.wallet.slice(0, 6) + '...' + p.wallet.slice(-4);
-        const hf = p.health_rate ? `<span class="hf ${p.health_rate < 1.05 ? 'hf-danger' : p.health_rate < 1.15 ? 'hf-warn' : 'hf-safe'}">${fmtHF(p.health_rate)}</span>` : '-';
-        const supply = p.supply.map(t => `<div class="token token-supply">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
-        const borrow = p.borrow.map(t => `<div class="token token-borrow">${t.real_symbol || t.symbol} <span class="token-amount">${t.amount.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`).join('');
-        return `<tr>
-            <td><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:#58a6ff;text-decoration:none">${w}</a></td>
-            <td>${p.chain}</td>
-            <td>${p.protocol_name}</td>
-            <td>${p.position_type}</td>
-            <td><span class="badge badge-${p.strategy}">${p.strategy}</span></td>
-            <td>${hf}</td>
-            <td><div class="token-list">${supply || '-'}</div></td>
-            <td><div class="token-list">${borrow || '-'}</div></td>
-            <td>$${fmt(p.net_usd)}</td>
-            <td>$${fmt(p.asset_usd)}</td>
-            <td>$${fmt(p.debt_usd)}</td>
-        </tr>`;
-    }).join('');
-    document.getElementById('positionsBody').innerHTML = rows || '<tr><td colspan="11" style="text-align:center;padding:40px">No positions match filters</td></tr>';
-
-    document.getElementById('footer').innerHTML = `Generated ${new Date(DATA.generated_at).toLocaleString()} · ${DATA.token_registry_count} tokens in registry`;
-}
-
-function populateFilters(positions) {
-    const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
-    const chains = [...new Set(positions.map(p => p.chain))].sort();
-    const strats = [...new Set(positions.map(p => p.strategy))].sort();
-    setOptions('filterProtocol', protos);
-    setOptions('filterChain', chains);
-    setOptions('filterStrategy', strats);
-}
-
-function setOptions(id, values) {
-    const sel = document.getElementById(id);
-    const current = sel.value;
-    sel.innerHTML = '<option value="">All</option>' + values.map(v => `<option value="${v}">${v}</option>`).join('');
-    sel.value = current;
-}
-
-function applyFilters(positions) {
-    const proto = document.getElementById('filterProtocol').value;
-    const chain = document.getElementById('filterChain').value;
-    const strat = document.getElementById('filterStrategy').value;
-    const min = parseFloat(document.getElementById('filterMin').value) || 0;
-    return positions.filter(p => {
-        if (proto && p.protocol_name !== proto) return false;
-        if (chain && p.chain !== chain) return false;
-        if (strat && p.strategy !== strat) return false;
-        if (p.net_usd < min) return false;
-        return true;
-    }).sort((a, b) => b.net_usd - a.net_usd);
+    protos.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p; opt.textContent = p;
+        protoEl.appendChild(opt);
+    });
 }
 
 function fmt(n) {
-    if (n >= 1e9) return (n/1e9).toFixed(2) + 'B';
-    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
-    return n.toLocaleString(undefined, {maximumFractionDigits: 0});
+    if (n === null || n === undefined) return '-';
+    return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function fmtShort(n) {
+    if (n === null || n === undefined) return '-';
+    if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+    if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+    if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+    return '$' + n.toFixed(2);
+}
+
+function hfClass(hf) {
+    if (!hf || hf === 0) return '';
+    if (hf >= 1.5) return 'hf-safe';
+    if (hf >= 1.1) return 'hf-warn';
+    return 'hf-danger';
+}
+
+function strategyBadge(s) {
+    if (!s) return '';
+    const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
+    return `<span class="badge ${cls}">${s}</span>`;
+}
+
+function shortWallet(addr) {
+    if (!addr) return '-';
+    return addr.slice(0, 6) + '...' + addr.slice(-4);
+}
+
+function shortAddr(addr) {
+    if (!addr) return '-';
+    return addr.slice(0, 8) + '...';
+}
+
+function renderTable(data) {
+    const body = document.getElementById('positionsBody');
+    if (data.length === 0) {
+        body.innerHTML = '<tr><td colspan="15" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
+        return;
+    }
+    body.innerHTML = data.map(p => {
+        const supplyTokens = (p.supply || []).map(t => t.symbol).filter(Boolean).join(', ');
+        const borrowTokens = (p.borrow || []).map(t => t.symbol).filter(Boolean).join(', ');
+        const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
+        const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
+        const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
+        const costApy = p.apy_cost != null ? p.apy_cost.toFixed(2) + '%' : '-';
+        const netApy = p.apy_net != null ? p.apy_net.toFixed(2) + '%' : '-';
+        const netColor = p.apy_net > 0 ? 'var(--accent-green)' : p.apy_net < 0 ? '#f85149' : 'var(--text-secondary)';
+        return `<tr>
+            <td title="${p.wallet || ''}"><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet)}</a></td>
+            <td>${(p.chain || '').toUpperCase()}</td>
+            <td>${p.protocol_name || '-'}</td>
+            <td>${strategyBadge(p.strategy)}</td>
+            <td>${supplyTokens || '-'}</td>
+            <td>${borrowTokens || '-'}</td>
+            <td>${fmtShort(p.asset_usd)}</td>
+            <td>${fmtShort(p.debt_usd)}</td>
+            <td style="font-weight:600;color:var(--accent-green)">${fmtShort(p.net_usd)}</td>
+            <td>${baseApy}</td>
+            <td>${costApy}</td>
+            <td style="font-weight:600;color:${netColor}">${netApy}</td>
+            <td>${util}</td>
+            <td class="${hfClass(p.health_rate)}">${hf}</td>
+        </tr>`;
+    }).join('');
+}
+
+function filterPositions() {
+    const chain = document.getElementById('chainFilter').value;
+    const proto = document.getElementById('protoFilter').value;
+    const search = document.getElementById('searchFilter').value.toLowerCase().trim();
+
+    let data = positions;
+    if (chain !== 'all') data = data.filter(p => p.chain === chain);
+    if (proto !== 'all') data = data.filter(p => p.protocol_name === proto);
+    if (search) {
+        data = data.filter(p =>
+            (p.wallet || '').toLowerCase().includes(search) ||
+            (p.protocol_name || '').toLowerCase().includes(search) ||
+            (p.supply || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
+            (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
+            (p.strategy || '').toLowerCase().includes(search)
+        );
+    }
+    return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
+}
+
+function updateSummary(data) {
+    const total = data.reduce((s, p) => s + (p.net_usd || 0), 0);
+    const supply = data.reduce((s, p) => s + (p.asset_usd || 0), 0);
+    const borrow = data.reduce((s, p) => s + (Math.abs(p.debt_usd) || 0), 0);
+    const wallets = new Set(data.map(p => p.wallet)).size;
+    const avgApy = supply > 0 ? (data.reduce((s, p) => s + ((p.apy_net || 0) * (p.asset_usd || 0)), 0) / supply) : 0;
+    const avgUtil = supply > 0 ? (borrow / supply * 100) : 0;
+
+    const avgHf = positions.filter(p => p.health_rate > 0).reduce((s, p, _, arr) => s + p.health_rate / arr.length, 0);
+
+    const chainsUsed = [...new Set(data.map(p => p.chain))].length;
+    const protocolList = [...new Set(data.map(p => p.protocol_name))];
+    const protosUsed = protocolList.length;
+    const topProto = [...new Map(data.map(p => [p.protocol_name, (p.net_usd || 0)])).entries()]
+        .sort((a, b) => b[1] - a[1])[0];
+    const topChain = [...new Map(data.map(p => [p.chain, (p.net_usd || 0)])).entries()]
+        .sort((a, b) => b[1] - a[1])[0];
+
+    document.getElementById('summaryCards').innerHTML = `
+        <div class="card"><div class="card-label">Total Value</div><div class="card-value green">${fmtShort(total)}</div><div class="card-sub">${data.length} positions</div></div>
+        <div class="card"><div class="card-label">Net APY</div><div class="card-value blue">${avgApy.toFixed(2)}%</div><div class="card-sub">weighted avg</div></div>
+        <div class="card"><div class="card-label">Utilization</div><div class="card-value">${avgUtil.toFixed(1)}%</div><div class="card-sub">${fmtShort(borrow)} borrowed</div></div>
+        <div class="card"><div class="card-label">Health Factor</div><div class="card-value purple ${hfClass(avgHf)}">${avgHf.toFixed(2)}</div><div class="card-sub">${avgHf >= 1.1 ? 'Safe' : '⚠️ Below 1.1'}</div></div>
+        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${wallets}</div><div class="card-sub">active</div></div>
+        <div class="card"><div class="card-label">Top Protocol</div><div class="card-value blue">${topProto ? topProto[0] : '-'}</div><div class="card-sub">${topProto ? fmtShort(topProto[1]) : ''}</div></div>
+        <div class="card"><div class="card-label">Top Chain</div><div class="card-value blue">${topChain ? topChain[0].toUpperCase() : '-'}</div><div class="card-sub">${topChain ? fmtShort(topChain[1]) : ''}</div></div>
+        <div class="card"><div class="card-label">Distribution</div><div class="card-value">${chainsUsed} chains</div><div class="card-sub">${protosUsed} protocols</div></div>
+    `;
+
+    const protoHtml = protocolList.map(p => {
+        const count = data.filter(d => d.protocol_name === p).length;
+        const val = data.filter(d => d.protocol_name === p).reduce((s, d) => s + (d.net_usd || 0), 0);
+        return `<div class="proto-chip"><strong>${p}</strong> ${count} pos · ${fmtShort(val)}</div>`;
+    }).join('');
+    document.getElementById('protoSummary').innerHTML = protoHtml;
 }
 
 function downloadXLSX() {
-    const whale = getWhale();
-    const positions = whale.positions || [];
-    const filtered = applyFilters(positions);
-
-    const rows = filtered.map(p => ({
-        'Wallet': p.wallet,
-        'Chain': p.chain,
-        'Protocol': p.protocol_name,
-        'Type': p.position_type,
-        'Strategy': p.strategy,
-        'Health Rate': p.health_rate || '',
-        'Net USD': p.net_usd,
-        'Asset USD': p.asset_usd,
-        'Debt USD': p.debt_usd,
-        'Supply Tokens': p.supply.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + '),
-        'Borrow Tokens': p.borrow.map(t => `${t.real_symbol||t.symbol}: ${t.amount.toLocaleString()} ($${t.value_usd.toLocaleString()})`).join(' + ')
+    const rows = positions.map(p => ({
+        Wallet: p.wallet,
+        Chain: p.chain,
+        Protocol: p.protocol_name,
+        Strategy: p.strategy,
+        SupplyTokens: (p.supply || []).map(t => t.symbol).join(', '),
+        BorrowTokens: (p.borrow || []).map(t => t.symbol).join(', '),
+        SupplyUSD: p.asset_usd,
+        BorrowUSD: p.debt_usd,
+        NetUSD: p.net_usd,
+        BaseAPY: p.apy_base,
+        CostAPY: p.apy_cost,
+        NetAPY: p.apy_net,
+        Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
+        HealthFactor: p.health_rate,
+        ScanTime: p.scanned_at,
     }));
-
     const ws = XLSX.utils.json_to_sheet(rows);
-    ws['!cols'] = [{wch:44},{wch:8},{wch:15},{wch:10},{wch:8},{wch:10},{wch:15},{wch:15},{wch:15},{wch:50},{wch:50}];
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Avant');
-    XLSX.writeFile(wb, 'avant-positions.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, 'Positions');
+    ws['!cols'] = [
+        { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 },
+        { wch: 40 }, { wch: 40 },
+        { wch: 16 }, { wch: 16 }, { wch: 16 },
+        { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
+        { wch: 22 },
+    ];
+    XLSX.writeFile(wb, 'avant_positions.xlsx');
 }
 
-['filterProtocol', 'filterChain', 'filterStrategy', 'filterMin'].forEach(id => {
-    document.getElementById(id).addEventListener('change', render);
-    document.getElementById(id).addEventListener('input', render);
+document.addEventListener('DOMContentLoaded', () => {
+    buildFilters();
+    const data = filterPositions();
+    updateSummary(data);
+    renderTable(data);
+    document.getElementById('chainFilter').addEventListener('change', () => {
+        const data = filterPositions();
+        updateSummary(data);
+        renderTable(data);
+    });
+    document.getElementById('protoFilter').addEventListener('change', () => {
+        const data = filterPositions();
+        updateSummary(data);
+        renderTable(data);
+    });
+    document.getElementById('searchFilter').addEventListener('input', () => {
+        const data = filterPositions();
+        updateSummary(data);
+        renderTable(data);
+    });
 });
-
-init();
 </script>
 </body>
 </html>

@@ -23,16 +23,18 @@ function main() {
         manualPositions = JSON.parse(fs.readFileSync(manualPath, 'utf8'));
     }
 
-    // Load all positions with token data
+    // Load all positions with token data (including apy_base)
     const allPositions = db.prepare(`
         SELECT p.*,
             (SELECT json_group_array(json_object(
                 'symbol', pt.symbol, 'real_symbol', pt.real_symbol, 'real_name', pt.real_name,
-                'address', pt.address, 'amount', pt.amount, 'price_usd', pt.price_usd, 'value_usd', pt.value_usd
+                'address', pt.address, 'amount', pt.amount, 'price_usd', pt.price_usd, 'value_usd', pt.value_usd,
+                'apy_base', pt.apy_base, 'apy_base_source', pt.apy_base_source
             )) FROM position_tokens pt WHERE pt.position_id = p.id AND pt.role = 'supply') as supply_json,
             (SELECT json_group_array(json_object(
                 'symbol', pt.symbol, 'real_symbol', pt.real_symbol, 'real_name', pt.real_name,
-                'address', pt.address, 'amount', pt.amount, 'price_usd', pt.price_usd, 'value_usd', pt.value_usd
+                'address', pt.address, 'amount', pt.amount, 'price_usd', pt.price_usd, 'value_usd', pt.value_usd,
+                'apy_base', pt.apy_base, 'apy_base_source', pt.apy_base_source
             )) FROM position_tokens pt WHERE pt.position_id = p.id AND pt.role = 'borrow') as borrow_json,
             (SELECT json_group_array(json_object(
                 'symbol', pt.symbol, 'real_symbol', pt.real_symbol,
@@ -49,6 +51,44 @@ function main() {
         delete p.supply_json;
         delete p.borrow_json;
         delete p.reward_json;
+
+        // Calculate APY breakdown
+        // Base APY: weighted average of supply tokens' apy_base
+        let baseApyNum = 0, baseApyDen = 0;
+        for (const t of p.supply) {
+            if (t.apy_base != null && t.value_usd > 0) {
+                baseApyNum += t.apy_base * t.value_usd;
+                baseApyDen += t.value_usd;
+            }
+        }
+        p.apy_base = baseApyDen > 0 ? baseApyNum / baseApyDen : null;
+
+        // Cost APY: weighted average of borrow tokens' apy_base (their supply rate = our cost)
+        // For borrow positions, the cost is the borrow APY which we store as apy_base on borrow tokens
+        let costApyNum = 0, costApyDen = 0;
+        for (const t of p.borrow) {
+            if (t.apy_base != null && t.value_usd > 0) {
+                costApyNum += t.apy_base * t.value_usd;
+                costApyDen += t.value_usd;
+            }
+        }
+        p.apy_cost = costApyDen > 0 ? costApyNum / costApyDen : null;
+
+        // Net APY: base - cost * (borrow/supply ratio)
+        // More precisely: (base*supply - cost*borrow) / supply
+        if (p.apy_base != null && p.asset_usd > 0) {
+            const baseYield = p.apy_base * p.asset_usd;
+            const costYield = (p.apy_cost || 0) * Math.abs(p.debt_usd || 0);
+            const netYield = baseYield - costYield;
+            p.apy_net = (netYield / p.asset_usd) * (p.asset_usd / (p.net_usd || p.asset_usd));
+            // Simplified: net APY relative to equity
+            p.apy_net = p.net_usd > 0 ? ((p.apy_base * p.asset_usd - (p.apy_cost || 0) * Math.abs(p.debt_usd || 0)) / p.net_usd) : null;
+        } else {
+            p.apy_net = null;
+        }
+
+        // Reward APY: placeholder (would need reward token APR data)
+        p.apy_reward = null;
     }
 
     const deduped = allPositions; // DB is cleaned at scan time, no dedup needed
