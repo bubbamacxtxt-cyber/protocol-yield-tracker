@@ -180,6 +180,19 @@ tr:hover td { background: var(--bg-secondary); }
 .badge-loop { background: #1f6feb22; color: var(--accent-blue); }
 .badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
+
+.vault-tab {
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.vault-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.vault-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
 .badge-farm { background: #d2992222; color: var(--accent-orange); }
 .badge-lp { background: #f8514922; color: #ff7b72; }
 .badge-illiquid { background: #a371f722; color: #bc8cff; }
@@ -209,6 +222,11 @@ tr:hover td { background: var(--bg-secondary); }
 
     <div class="cards" id="summaryCards"></div>
     <div class="proto-summary" id="protoSummary"></div>
+    <div id="vaultTabs" style="display:none;margin-bottom:16px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
+        </div>
+    </div>
 
     <div class="filters">
         <div class="filter-group">
@@ -253,10 +271,40 @@ tr:hover td { background: var(--bg-secondary); }
 
 <script>
 const WHALE_DATA = [{"wallet":"off-chain","chain":"eth","protocol_name":"MMZ20240501ZZZ500","protocol_id":"mmz-blended-note","position_type":"Illiquid","strategy":"rwa","yield_source":"institutional","health_rate":null,"net_usd":5109592.227075031,"asset_usd":5109592.227075031,"debt_usd":0,"supply":[{"symbol":"USDz","real_symbol":"USDz","amount":5109592.227075031,"price_usd":1,"value_usd":5109592.227075031}],"borrow":[],"rewards":[],"apy_current":5,"apy_avg":5,"apy_base":5,"apy_rewards":0,"maturity":"2026-07-10","bucket_weeks":null,"underlying":"USDz","paused":false,"manual":true,"asset_type":"Institutional Blended Note","financing_type":"Asset Backed","deal_type":"Institutional Blended Note","preference":"Senior"},{"wallet":"off-chain","chain":"eth","protocol_name":"HLF20270521ZZZ1300","protocol_id":"hlf20270521zzz1300","position_type":"Illiquid","strategy":"rwa","yield_source":"litigation","health_rate":null,"net_usd":1250000,"asset_usd":1250000,"debt_usd":0,"supply":[{"symbol":"USDz","real_symbol":"USDz","amount":1250000,"price_usd":1,"value_usd":1250000}],"borrow":[],"rewards":[],"apy_current":13,"apy_avg":13,"apy_base":13,"apy_rewards":0,"maturity":"2027-05-21","bucket_weeks":null,"underlying":"USDz","paused":false,"manual":true,"asset_type":"Litigation Finance","financing_type":"Asset Backed","deal_type":"Structured Notes","preference":"Senior"},{"wallet":"off-chain","chain":"eth","protocol_name":"BYZ20260506ZZZ1675","protocol_id":"byz20260506zzz1675","position_type":"Illiquid","strategy":"rwa","yield_source":"smb","health_rate":null,"net_usd":1130000,"asset_usd":1130000,"debt_usd":0,"supply":[{"symbol":"USDz","real_symbol":"USDz","amount":1130000,"price_usd":1,"value_usd":1130000}],"borrow":[],"rewards":[],"apy_current":16.75,"apy_avg":16.75,"apy_base":16.75,"apy_rewards":0,"maturity":"2026-05-06","bucket_weeks":null,"underlying":"USDz","paused":false,"manual":true,"asset_type":"SMB Financing","financing_type":"Asset Backed","deal_type":"Amortizing","preference":"Junior"},{"wallet":"off-chain","chain":"eth","protocol_name":"ICM260627BBB2000","protocol_id":"icm260627bbb2000","position_type":"Illiquid","strategy":"rwa","yield_source":"smb","health_rate":null,"net_usd":997172,"asset_usd":997172,"debt_usd":0,"supply":[{"symbol":"USDz","real_symbol":"USDz","amount":997172,"price_usd":1,"value_usd":997172}],"borrow":[],"rewards":[],"apy_current":20,"apy_avg":20,"apy_base":20,"apy_rewards":0,"maturity":"2026-06-27","bucket_weeks":null,"underlying":"USDz","paused":false,"manual":true,"asset_type":"SMB Financing","financing_type":"Asset Backed","deal_type":"Amortizing","preference":"Junior"},{"wallet":"off-chain","chain":"eth","protocol_name":"SPR20260501ZZZ1300","protocol_id":"spr20260501zzz1300","position_type":"Illiquid","strategy":"rwa","yield_source":"smb","health_rate":null,"net_usd":729914,"asset_usd":729914,"debt_usd":0,"supply":[{"symbol":"USDz","real_symbol":"USDz","amount":729914,"price_usd":1,"value_usd":729914}],"borrow":[],"rewards":[],"apy_current":13,"apy_avg":13,"apy_base":13,"apy_rewards":0,"maturity":"2026-05-01","bucket_weeks":null,"underlying":"USDz","paused":false,"manual":true,"asset_type":"SMB Financing","financing_type":"Asset Backed","deal_type":"Amortizing","preference":"Senior"}];
+const WHALE_VAULTS = {};
 
 const positions = WHALE_DATA;
 const chains = [...new Set(positions.map(p => p.chain))].sort();
 const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+
+// Build vault tabs if multi-vault whale
+if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
+    const tabsEl = document.getElementById('vaultTabs');
+    tabsEl.style.display = 'block';
+    const btns = tabsEl.querySelector('div');
+    for (const [vName, vData] of Object.entries(WHALE_VAULTS)) {
+        const btn = document.createElement('button');
+        btn.className = 'vault-tab';
+        btn.dataset.vault = vName;
+        btn.textContent = vName;
+        btn.onclick = () => filterVault(vName);
+        btns.appendChild(btn);
+    }
+}
+
+let currentVault = 'all';
+function filterVault(vault) {
+    currentVault = vault;
+    document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
+    // Filter positions by vault wallets
+    if (WHALE_VAULTS && WHALE_VAULTS[vault]) {
+        const walletSet = new Set(WHALE_VAULTS[vault].wallets.map(w => w.toLowerCase()));
+        const filtered = positions.filter(p => walletSet.has(p.wallet.toLowerCase()));
+        renderTable(filtered);
+    } else {
+        renderTable(positions);
+    }
+}
 
 function buildFilters() {
     const chainEl = document.getElementById('chainFilter');

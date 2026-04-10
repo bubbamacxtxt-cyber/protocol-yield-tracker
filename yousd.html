@@ -180,6 +180,19 @@ tr:hover td { background: var(--bg-secondary); }
 .badge-loop { background: #1f6feb22; color: var(--accent-blue); }
 .badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
+
+.vault-tab {
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.vault-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.vault-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
 .badge-farm { background: #d2992222; color: var(--accent-orange); }
 .badge-lp { background: #f8514922; color: #ff7b72; }
 .badge-illiquid { background: #a371f722; color: #bc8cff; }
@@ -209,6 +222,11 @@ tr:hover td { background: var(--bg-secondary); }
 
     <div class="cards" id="summaryCards"></div>
     <div class="proto-summary" id="protoSummary"></div>
+    <div id="vaultTabs" style="display:none;margin-bottom:16px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
+        </div>
+    </div>
 
     <div class="filters">
         <div class="filter-group">
@@ -253,10 +271,40 @@ tr:hover td { background: var(--bg-secondary); }
 
 <script>
 const WHALE_DATA = [{"id":568,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":10023571.04,"asset_usd":10023571.04,"debt_usd":0,"position_index":"0x6c3ea9036406852006290770bedfcaba0e23a0e8_10023571","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"PayPal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":10023571.043303,"price_usd":1,"value_usd":10023571.043303,"apy_base":4.70407431543183,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":4.70407431543183,"apy_cost":null,"apy_net":4.70407431543183,"apy_reward":null},{"id":567,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":8511824.09,"asset_usd":8511824.09,"debt_usd":0,"position_index":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed_8511824","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"RLUSD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":8512675.35911364,"price_usd":0.9999,"value_usd":8511824.09157773,"apy_base":2.42713081473433,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":2.42713081473433,"apy_cost":null,"apy_net":2.42713081473433,"apy_reward":null},{"id":565,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"lend","yield_source":"Aave V3","health_rate":null,"net_usd":8216962.21,"asset_usd":8216962.21,"debt_usd":0,"position_index":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f_8216962","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"GHO","real_symbol":"GHO","real_name":"Gho Token","address":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f","amount":8200561.08396483,"price_usd":1.002,"value_usd":8216962.20613276,"apy_base":1.9,"apy_base_source":"aave_supply"}],"borrow":[],"rewards":[],"apy_base":1.9,"apy_cost":null,"apy_net":1.9,"apy_reward":null},{"id":570,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":4112301.98,"asset_usd":4112301.98,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_4112302","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":4112301.975915,"price_usd":1,"value_usd":4112301.975915,"apy_base":11.2718873670828,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":11.2718873670828,"apy_cost":null,"apy_net":11.2718873670828,"apy_reward":null},{"id":566,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":4020492.39,"asset_usd":4020492.39,"debt_usd":0,"position_index":"0xdac17f958d2ee523a2206206994597c13d831ec7_4020492","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":4019809.020141,"price_usd":1.00017,"value_usd":4020492.38767442,"apy_base":3.65714509274362,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":3.65714509274362,"apy_cost":null,"apy_net":3.65714509274362,"apy_reward":null},{"id":573,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"base","protocol_id":"base_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":1602302.51,"asset_usd":1602302.51,"debt_usd":0,"position_index":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913_1602303","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:02","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":1602302.506883,"price_usd":1,"value_usd":1602302.506883,"apy_base":9.22772012585437,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":9.22772012585437,"apy_cost":null,"apy_net":9.22772012585437,"apy_reward":null},{"id":574,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"base","protocol_id":"wallet-held","protocol_name":"Wallet","position_type":"Holding","strategy":"hold","yield_source":"wallet","health_rate":null,"net_usd":791654.66,"asset_usd":791654.66,"debt_usd":0,"position_index":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:02","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":791654.662225,"price_usd":1,"value_usd":791654.662225,"apy_base":2.74,"apy_base_source":"aave_supply_ref"}],"borrow":[],"rewards":[],"apy_base":2.7399999999999998,"apy_cost":null,"apy_net":2.7399999999999998,"apy_reward":null},{"id":572,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"wallet-held","protocol_name":"Wallet","position_type":"Holding","strategy":"hold","yield_source":"wallet","health_rate":null,"net_usd":592343.05,"asset_usd":592343.05,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:00","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":592343.045834,"price_usd":1,"value_usd":592343.045834,"apy_base":2.42,"apy_base_source":"aave_supply_ref"}],"borrow":[],"rewards":[],"apy_base":2.42,"apy_cost":null,"apy_net":2.42,"apy_reward":null},{"id":571,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"resolv","protocol_name":"resolv","position_type":"Lending","strategy":"lend","yield_source":"resolv","health_rate":null,"net_usd":450276.21,"asset_usd":450276.21,"debt_usd":0,"position_index":"0x4956b52ae2ff65d74ca2d61207523288e4528f96","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:00","supply":[{"symbol":"RLP","real_symbol":"RLP","real_name":"Resolv Liquidity Provider Token","address":"0x4956b52ae2ff65d74ca2d61207523288e4528f96","amount":943248.070451355,"price_usd":0.477367754038895,"value_usd":450276.212892885,"apy_base":0,"apy_base_source":"static"}],"borrow":[],"rewards":[],"apy_base":0,"apy_cost":null,"apy_net":0,"apy_reward":null},{"id":569,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":400346.76,"asset_usd":400346.76,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_400347","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":400346.7631,"price_usd":1,"value_usd":400346.7631,"apy_base":11.2718873670828,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":11.2718873670828,"apy_cost":null,"apy_net":11.2718873670828,"apy_reward":null}];
+const WHALE_VAULTS = {};
 
 const positions = WHALE_DATA;
 const chains = [...new Set(positions.map(p => p.chain))].sort();
 const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+
+// Build vault tabs if multi-vault whale
+if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
+    const tabsEl = document.getElementById('vaultTabs');
+    tabsEl.style.display = 'block';
+    const btns = tabsEl.querySelector('div');
+    for (const [vName, vData] of Object.entries(WHALE_VAULTS)) {
+        const btn = document.createElement('button');
+        btn.className = 'vault-tab';
+        btn.dataset.vault = vName;
+        btn.textContent = vName;
+        btn.onclick = () => filterVault(vName);
+        btns.appendChild(btn);
+    }
+}
+
+let currentVault = 'all';
+function filterVault(vault) {
+    currentVault = vault;
+    document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
+    // Filter positions by vault wallets
+    if (WHALE_VAULTS && WHALE_VAULTS[vault]) {
+        const walletSet = new Set(WHALE_VAULTS[vault].wallets.map(w => w.toLowerCase()));
+        const filtered = positions.filter(p => walletSet.has(p.wallet.toLowerCase()));
+        renderTable(filtered);
+    } else {
+        renderTable(positions);
+    }
+}
 
 function buildFilters() {
     const chainEl = document.getElementById('chainFilter');

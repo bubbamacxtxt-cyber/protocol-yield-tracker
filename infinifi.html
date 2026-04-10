@@ -180,6 +180,19 @@ tr:hover td { background: var(--bg-secondary); }
 .badge-loop { background: #1f6feb22; color: var(--accent-blue); }
 .badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
+
+.vault-tab {
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.vault-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.vault-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
 .badge-farm { background: #d2992222; color: var(--accent-orange); }
 .badge-lp { background: #f8514922; color: #ff7b72; }
 .badge-illiquid { background: #a371f722; color: #bc8cff; }
@@ -209,6 +222,11 @@ tr:hover td { background: var(--bg-secondary); }
 
     <div class="cards" id="summaryCards"></div>
     <div class="proto-summary" id="protoSummary"></div>
+    <div id="vaultTabs" style="display:none;margin-bottom:16px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
+        </div>
+    </div>
 
     <div class="filters">
         <div class="filter-group">
@@ -253,10 +271,40 @@ tr:hover td { background: var(--bg-secondary); }
 
 <script>
 const WHALE_DATA = [{"wallet":"0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f","chain":"eth","protocol_name":"Fasanara mGLOBAL (GDADF)","protocol_id":"fasanara-gdaf","position_type":"Illiquid","strategy":"rwa","yield_source":"fasanara","health_rate":null,"net_usd":30352462.166693,"asset_usd":30352462.166693,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":30352462.166693,"price_usd":1,"value_usd":30352462.166693}],"borrow":[],"rewards":[],"apy_current":8.5,"apy_avg":8.5,"apy_base":8.5,"apy_rewards":0,"maturity":"2026-05-08","bucket_weeks":4,"underlying":"USDC","paused":false,"manual":true},{"wallet":"0xe919C66475f2F30d285c768853E6B5b23ef181Cf","chain":"eth","protocol_name":"FalconX Institutional","protocol_id":"falconx-farm","position_type":"Illiquid","strategy":"rwa","yield_source":"falconx","health_rate":null,"net_usd":25158787.520026,"asset_usd":25158787.520026,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":25158787.520026,"price_usd":1,"value_usd":25158787.520026}],"borrow":[],"rewards":[],"apy_current":6.25,"apy_avg":6.25,"apy_base":6.25,"apy_rewards":0,"maturity":"2026-04-17","bucket_weeks":1,"underlying":"USDC","paused":false,"manual":true},{"wallet":"0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE","chain":"eth","protocol_name":"Sentora PYUSD","protocol_id":"morpho-v2-sentora-pyusd","position_type":"Illiquid","strategy":"rwa","yield_source":"sentora","health_rate":null,"net_usd":20202670.588283,"asset_usd":20202670.588283,"debt_usd":0,"supply":[{"symbol":"senPYUSDmain","real_symbol":"senPYUSDmain","amount":20202670.588283,"price_usd":1,"value_usd":20202670.588283}],"borrow":[],"rewards":[],"apy_current":5.85,"apy_avg":5.85,"apy_base":5.85,"apy_rewards":0,"maturity":"2026-04-17","bucket_weeks":1,"underlying":"senPYUSDmain","paused":false,"manual":true},{"wallet":"0xd880D7C5CaFdbE2AEc281250995abF612235e563","chain":"eth","protocol_name":"Spark sUSDC","protocol_id":"spark-sUSDC-refcode","position_type":"Liquid","strategy":"lend","yield_source":"spark","health_rate":null,"net_usd":16226665.701989,"asset_usd":16226665.701989,"debt_usd":0,"supply":[{"symbol":"sUSDC","real_symbol":"sUSDC","amount":16226665.701989,"price_usd":1,"value_usd":16226665.701989}],"borrow":[],"rewards":[],"apy_current":3.78,"apy_avg":3.76,"apy_base":3.78,"apy_rewards":0,"maturity":null,"bucket_weeks":null,"underlying":"sUSDC","paused":false,"manual":true},{"wallet":"0x9E5efC5F387D8661C1AFB2469B7EeF6972451852","chain":"eth","protocol_name":"Fasanara Genesis Fund","protocol_id":"fasanara-rwa-farm","position_type":"Illiquid","strategy":"rwa","yield_source":"fasanara","health_rate":null,"net_usd":5051808.315969,"asset_usd":5051808.315969,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":5051808.315969,"price_usd":1,"value_usd":5051808.315969}],"borrow":[],"rewards":[],"apy_current":5,"apy_avg":5,"apy_base":5,"apy_rewards":0,"maturity":"2026-05-08","bucket_weeks":4,"underlying":"USDC","paused":false,"manual":true},{"wallet":"0x76D2E84009dAE457f8667D823c7c96e9A7c35B78","chain":"eth","protocol_name":"Morpho infiniFi Ecosystem Vault","protocol_id":"morpho-steakUSDCinfinifi","position_type":"Illiquid","strategy":"rwa","yield_source":"morpho","health_rate":null,"net_usd":4001576.833072,"asset_usd":4001576.833072,"debt_usd":0,"supply":[{"symbol":"steakUSDCinfinifi","real_symbol":"steakUSDCinfinifi","amount":4001576.833072,"price_usd":1,"value_usd":4001576.833072}],"borrow":[],"rewards":[],"apy_current":4.56,"apy_avg":4.31,"apy_base":4.56,"apy_rewards":0,"maturity":"2026-04-17","bucket_weeks":1,"underlying":"steakUSDCinfinifi","paused":false,"manual":true},{"wallet":"0x7E9AA426abC2D9006E8C9881754BAA00a392158d","chain":"eth","protocol_name":"sGHO","protocol_id":"sGHO","position_type":"Illiquid","strategy":"rwa","yield_source":"gho","health_rate":null,"net_usd":1552344.372593,"asset_usd":1552344.372593,"debt_usd":0,"supply":[{"symbol":"sGHO","real_symbol":"sGHO","amount":1552344.372593,"price_usd":1,"value_usd":1552344.372593}],"borrow":[],"rewards":[],"apy_current":5.08,"apy_avg":5.08,"apy_base":5.08,"apy_rewards":0,"maturity":"2026-04-17","bucket_weeks":1,"underlying":"sGHO","paused":false,"manual":true},{"wallet":"0xF56E946e92FeF6a050F482C560b5f8DcCB8163B3","chain":"eth","protocol_name":"Maple Institutional","protocol_id":"maple-farm-institutional","position_type":"Illiquid","strategy":"rwa","yield_source":"maple","health_rate":null,"net_usd":1002055.105854,"asset_usd":1002055.105854,"debt_usd":0,"supply":[{"symbol":"MPLhysUSDC1","real_symbol":"MPLhysUSDC1","amount":1002055.105854,"price_usd":1,"value_usd":1002055.105854}],"borrow":[],"rewards":[],"apy_current":5.4,"apy_avg":5.48,"apy_base":5.4,"apy_rewards":0,"maturity":"2026-05-08","bucket_weeks":4,"underlying":"MPLhysUSDC1","paused":false,"manual":true},{"wallet":"0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032","chain":"eth","protocol_name":"Aave Horizon USDC","protocol_id":"aavev3-horizon-usdc","position_type":"Liquid","strategy":"lend","yield_source":"aave","health_rate":null,"net_usd":881879.872922,"asset_usd":881879.872922,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":881879.872922,"price_usd":1,"value_usd":881879.872922}],"borrow":[],"rewards":[],"apy_current":2.32,"apy_avg":2.35,"apy_base":2.32,"apy_rewards":0,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true},{"wallet":"0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580","chain":"eth","protocol_name":"Aave USDC","protocol_id":"aavev3","position_type":"Liquid","strategy":"lend","yield_source":"aave","health_rate":null,"net_usd":529128.219563,"asset_usd":529128.219563,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":529128.219563,"price_usd":1,"value_usd":529128.219563}],"borrow":[],"rewards":[],"apy_current":2.53,"apy_avg":2.55,"apy_base":2.53,"apy_rewards":0,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true},{"wallet":"0x6FBc446f25Ab5141C4F7E7711E52DFc0AdA407A5","chain":"eth","protocol_name":"Euler Sentora USDC","protocol_id":"euler-sentora-usdc","position_type":"Liquid","strategy":"rwa","yield_source":"euler","health_rate":null,"net_usd":135149.959916,"asset_usd":135149.959916,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":135149.959916,"price_usd":1,"value_usd":135149.959916}],"borrow":[],"rewards":[],"apy_current":3.77,"apy_avg":3.77,"apy_base":3.77,"apy_rewards":0,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true},{"wallet":"0xe945de0D08E2F39B0740FE2d6e50FE2Bb9751eA4","chain":"eth","protocol_name":"Cap stcUSD","protocol_id":"capfarm","position_type":"Illiquid","strategy":"rwa","yield_source":"cap","health_rate":null,"net_usd":5715.434869,"asset_usd":5715.434869,"debt_usd":0,"supply":[{"symbol":"stcUSD","real_symbol":"stcUSD","amount":5715.434869,"price_usd":1,"value_usd":5715.434869}],"borrow":[],"rewards":[],"apy_current":5.33,"apy_avg":4.93,"apy_base":5.33,"apy_rewards":0,"maturity":"2026-04-11","bucket_weeks":1,"underlying":"stcUSD","paused":false,"manual":true},{"wallet":"0x92c3A5f226A47a44aD73f04663b305372cc665bf","chain":"eth","protocol_name":"infinifiUSD Autopool","protocol_id":"tokemak-auto-infinifiUSD","position_type":"Illiquid","strategy":"rwa","yield_source":"tokemak","health_rate":null,"net_usd":4933.703619,"asset_usd":4933.703619,"debt_usd":0,"supply":[{"symbol":"infinifiUSD","real_symbol":"infinifiUSD","amount":4933.703619,"price_usd":1,"value_usd":4933.703619}],"borrow":[],"rewards":[],"apy_current":3.5,"apy_avg":4.06,"apy_base":3.5,"apy_rewards":0,"maturity":"2026-04-17","bucket_weeks":1,"underlying":"infinifiUSD","paused":false,"manual":true},{"wallet":"0xBE2B5838eb9Eedb637EDe5dF8Ac43b73b4482Ae8","chain":"eth","protocol_name":"Aave Horizon RLUSD","protocol_id":"aavev3-rlusd-farm","position_type":"Liquid","strategy":"lend","yield_source":"aave","health_rate":null,"net_usd":209.307,"asset_usd":209.307,"debt_usd":0,"supply":[{"symbol":"RLUSD","real_symbol":"RLUSD","amount":209.307,"price_usd":1,"value_usd":209.307}],"borrow":[],"rewards":[],"apy_current":4.45,"apy_avg":4.45,"apy_base":4.45,"apy_rewards":0,"maturity":"2026-04-17","bucket_weeks":1,"underlying":"RLUSD","paused":false,"manual":true}];
+const WHALE_VAULTS = {};
 
 const positions = WHALE_DATA;
 const chains = [...new Set(positions.map(p => p.chain))].sort();
 const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+
+// Build vault tabs if multi-vault whale
+if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
+    const tabsEl = document.getElementById('vaultTabs');
+    tabsEl.style.display = 'block';
+    const btns = tabsEl.querySelector('div');
+    for (const [vName, vData] of Object.entries(WHALE_VAULTS)) {
+        const btn = document.createElement('button');
+        btn.className = 'vault-tab';
+        btn.dataset.vault = vName;
+        btn.textContent = vName;
+        btn.onclick = () => filterVault(vName);
+        btns.appendChild(btn);
+    }
+}
+
+let currentVault = 'all';
+function filterVault(vault) {
+    currentVault = vault;
+    document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
+    // Filter positions by vault wallets
+    if (WHALE_VAULTS && WHALE_VAULTS[vault]) {
+        const walletSet = new Set(WHALE_VAULTS[vault].wallets.map(w => w.toLowerCase()));
+        const filtered = positions.filter(p => walletSet.has(p.wallet.toLowerCase()));
+        renderTable(filtered);
+    } else {
+        renderTable(positions);
+    }
+}
 
 function buildFilters() {
     const chainEl = document.getElementById('chainFilter');

@@ -180,6 +180,19 @@ tr:hover td { background: var(--bg-secondary); }
 .badge-loop { background: #1f6feb22; color: var(--accent-blue); }
 .badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
+
+.vault-tab {
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.vault-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+.vault-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
 .badge-farm { background: #d2992222; color: var(--accent-orange); }
 .badge-lp { background: #f8514922; color: #ff7b72; }
 .badge-illiquid { background: #a371f722; color: #bc8cff; }
@@ -209,6 +222,11 @@ tr:hover td { background: var(--bg-secondary); }
 
     <div class="cards" id="summaryCards"></div>
     <div class="proto-summary" id="protoSummary"></div>
+    <div id="vaultTabs" style="display:none;margin-bottom:16px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
+        </div>
+    </div>
 
     <div class="filters">
         <div class="filter-group">
@@ -253,10 +271,40 @@ tr:hover td { background: var(--bg-secondary); }
 
 <script>
 const WHALE_DATA = [{"wallet":"off-chain","chain":"eth","protocol_name":"Adaptive Frontier","protocol_id":"adaptive-frontier","position_type":"Illiquid","strategy":"rwa","yield_source":"adaptive","health_rate":null,"net_usd":1372725.9980524532,"asset_usd":1372725.9980524532,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":1372725.9980524532,"price_usd":1,"value_usd":1372725.9980524532}],"borrow":[],"rewards":[],"apy_current":7.46,"apy_gross":8.32,"apy_avg":7.46,"apy_base":7.46,"apy_rewards":0,"apy_fee":10,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"HF Trading"},{"wallet":"off-chain","chain":"eth","protocol_name":"RockawayX","protocol_id":"rockawayx","position_type":"Illiquid","strategy":"rwa","yield_source":"rockawayx","health_rate":null,"net_usd":1005629.9857711309,"asset_usd":1005629.9857711309,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":1005629.9857711309,"price_usd":1,"value_usd":1005629.9857711309}],"borrow":[],"rewards":[],"apy_current":7.45,"apy_gross":8.31,"apy_avg":7.45,"apy_base":7.45,"apy_rewards":0,"apy_fee":10,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"Private Credit & DeFi"},{"wallet":"off-chain","chain":"eth","protocol_name":"Fasanara Digital","protocol_id":"fasanara-digital","position_type":"Illiquid","strategy":"rwa","yield_source":"fasanara","health_rate":null,"net_usd":750283.8261944128,"asset_usd":750283.8261944128,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":750283.8261944128,"price_usd":1,"value_usd":750283.8261944128}],"borrow":[],"rewards":[],"apy_current":0,"apy_gross":0,"apy_avg":0,"apy_base":0,"apy_rewards":0,"apy_fee":20,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"Basis Trading"},{"wallet":"off-chain","chain":"eth","protocol_name":"Sky","protocol_id":"sky","position_type":"Illiquid","strategy":"rwa","yield_source":"sky","health_rate":null,"net_usd":136225.5099350275,"asset_usd":136225.5099350275,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":136225.5099350275,"price_usd":1,"value_usd":136225.5099350275}],"borrow":[],"rewards":[],"apy_current":0,"apy_gross":0,"apy_avg":0,"apy_base":0,"apy_rewards":0,"apy_fee":0,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"DeFi"}];
+const WHALE_VAULTS = {};
 
 const positions = WHALE_DATA;
 const chains = [...new Set(positions.map(p => p.chain))].sort();
 const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+
+// Build vault tabs if multi-vault whale
+if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
+    const tabsEl = document.getElementById('vaultTabs');
+    tabsEl.style.display = 'block';
+    const btns = tabsEl.querySelector('div');
+    for (const [vName, vData] of Object.entries(WHALE_VAULTS)) {
+        const btn = document.createElement('button');
+        btn.className = 'vault-tab';
+        btn.dataset.vault = vName;
+        btn.textContent = vName;
+        btn.onclick = () => filterVault(vName);
+        btns.appendChild(btn);
+    }
+}
+
+let currentVault = 'all';
+function filterVault(vault) {
+    currentVault = vault;
+    document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
+    // Filter positions by vault wallets
+    if (WHALE_VAULTS && WHALE_VAULTS[vault]) {
+        const walletSet = new Set(WHALE_VAULTS[vault].wallets.map(w => w.toLowerCase()));
+        const filtered = positions.filter(p => walletSet.has(p.wallet.toLowerCase()));
+        renderTable(filtered);
+    } else {
+        renderTable(positions);
+    }
+}
 
 function buildFilters() {
     const chainEl = document.getElementById('chainFilter');
