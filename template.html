@@ -252,9 +252,9 @@ tr:hover td { background: var(--bg-secondary); }
 </div>
 
 <script>
-const WHALE_DATA = 'WHALE_DATA_PLACEHOLDER';
+const WHALE_DATA = [WHALE_DATA_PLACEHOLDER];
 
-const positions = JSON.parse(WHALE_DATA);
+const positions = WHALE_DATA;
 const chains = [...new Set(positions.map(p => p.chain))].sort();
 const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
 
