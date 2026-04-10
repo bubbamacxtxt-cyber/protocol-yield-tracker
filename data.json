@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-10T17:15:52.806Z",
+  "generated_at": "2026-04-10T17:18:01.205Z",
   "summary": {
     "total_positions": 164,
     "total_value": 696343594.349396,
@@ -586,14 +586,14 @@
               "amount": 7585571.23827953,
               "price_usd": 0.999900009999,
               "value_usd": 7584812.75700383,
-              "apy_base": 297995.798684274,
+              "apy_base": 64.9640899770557,
               "apy_base_source": "morpho_borrow"
             }
           ],
           "rewards": [],
           "apy_base": 4.29962,
-          "apy_cost": 297995.798684274,
-          "apy_net": -1944091.584746405,
+          "apy_cost": 64.9640899770557,
+          "apy_net": -391.4752486791408,
           "apy_reward": null
         },
         {
@@ -837,15 +837,15 @@
               "amount": 278256.33696868,
               "price_usd": 0.9998,
               "value_usd": 278200.685701287,
-              "apy_base": 297995.798684274,
+              "apy_base": 3.65714509274362,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 3.65714509274362,
           "apy_cost": null,
-          "apy_net": 2233508.76958055,
+          "apy_net": 27.410673815994333,
           "apy_reward": null
         },
         {
@@ -1041,15 +1041,15 @@
               "amount": 4112301.975915,
               "price_usd": 1,
               "value_usd": 4112301.975915,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -1077,15 +1077,15 @@
               "amount": 4019809.020141,
               "price_usd": 1.00017,
               "value_usd": 4020492.38767442,
-              "apy_base": 297995.798684274,
+              "apy_base": 3.65714509274362,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 3.65714509274362,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 3.65714509274362,
           "apy_reward": null
         },
         {
@@ -1257,15 +1257,15 @@
               "amount": 400346.7631,
               "price_usd": 1,
               "value_usd": 400346.7631,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         }
       ],
@@ -1611,7 +1611,7 @@
               "amount": 633675.392380346,
               "price_usd": 0.99027237721097,
               "value_usd": 627511.237192579,
-              "apy_base": 5.936402668158,
+              "apy_base": 5.93640266899262,
               "apy_base_source": "pendle"
             },
             {
@@ -1628,9 +1628,9 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 4.286421028478449,
+          "apy_base": 4.2864210286020015,
           "apy_cost": null,
-          "apy_net": 4.286421028478449,
+          "apy_net": 4.2864210286020015,
           "apy_reward": null
         },
         {
@@ -1706,15 +1706,15 @@
               "amount": 2735101.066261,
               "price_usd": 1.00017,
               "value_usd": 2735566.03344226,
-              "apy_base": 297995.798684274,
+              "apy_base": 3.65714509274362,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 3.65714509274362,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 3.65714509274362,
           "apy_reward": null
         },
         {
@@ -1755,14 +1755,14 @@
               "amount": 29827043.8700766,
               "price_usd": 1.00017,
               "value_usd": 29832114.4675345,
-              "apy_base": 297995.798684274,
+              "apy_base": 4.07166259346158,
               "apy_base_source": "morpho_borrow"
             }
           ],
           "rewards": [],
           "apy_base": 3.75,
-          "apy_cost": 297995.798684274,
-          "apy_net": -3286546.7041888833,
+          "apy_cost": 4.07166259346158,
+          "apy_net": 0.20238741334067195,
           "apy_reward": null
         },
         {
@@ -1886,7 +1886,7 @@
               "amount": 12798485.9354461,
               "price_usd": 0.996944322490991,
               "value_usd": 12759377.8898238,
-              "apy_base": 3.62159678241663,
+              "apy_base": 3.62159678404683,
               "apy_base_source": "pendle"
             }
           ],
@@ -1904,9 +1904,9 @@
             }
           ],
           "rewards": [],
-          "apy_base": 3.62159678241663,
+          "apy_base": 3.62159678404683,
           "apy_cost": 5.70125536201432,
-          "apy_net": -10.213798673303327,
+          "apy_net": -10.213798660827855,
           "apy_reward": null
         },
         {
@@ -2425,15 +2425,15 @@
               "amount": 523374.587453,
               "price_usd": 0.992986795414918,
               "value_usd": 519704.054396559,
-              "apy_base": 5.50826787117329,
+              "apy_base": 5.50826787194612,
               "apy_base_source": "pendle"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 5.50826787117329,
+          "apy_base": 5.50826787194612,
           "apy_cost": null,
-          "apy_net": 5.50826787117329,
+          "apy_net": 5.50826787194612,
           "apy_reward": null
         },
         {
@@ -2556,7 +2556,7 @@
               "amount": 66175.235774807,
               "price_usd": 0.965421912794555,
               "value_usd": 63887.0227013448,
-              "apy_base": 9.00056211611617,
+              "apy_base": 9.00057000346457,
               "apy_base_source": "pendle"
             },
             {
@@ -2573,9 +2573,9 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 4.819672603306889,
+          "apy_base": 4.819675138234586,
           "apy_cost": null,
-          "apy_net": 4.819672603306889,
+          "apy_net": 4.819675138234586,
           "apy_reward": null
         },
         {
@@ -2650,7 +2650,7 @@
               "amount": 8253.29418190197,
               "price_usd": 0.995248494072515,
               "value_usd": 8214.07860567538,
-              "apy_base": 9.48150383044171,
+              "apy_base": 9.48155146031064,
               "apy_base_source": "pendle"
             },
             {
@@ -2667,9 +2667,9 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 3.925190102236589,
+          "apy_base": 3.9251978855578846,
           "apy_cost": null,
-          "apy_net": 3.925190102236589,
+          "apy_net": 3.9251978855578846,
           "apy_reward": null
         }
       ],
@@ -2820,15 +2820,15 @@
               "amount": 26179887.252564,
               "price_usd": 1,
               "value_usd": 26179887.252564,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.271887367082801,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.271887367082801,
           "apy_reward": null
         },
         {
@@ -3049,15 +3049,15 @@
               "amount": 2773256.853522,
               "price_usd": 1,
               "value_usd": 2773256.853522,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -3475,15 +3475,15 @@
               "amount": 721193.569137,
               "price_usd": 1.00019,
               "value_usd": 721330.595915136,
-              "apy_base": 297995.798684274,
+              "apy_base": 3.65714509274362,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 3.6571450927436207,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 3.6571450927436207,
           "apy_reward": null
         },
         {
@@ -3524,14 +3524,14 @@
               "amount": 5156318.31154398,
               "price_usd": 1,
               "value_usd": 5156318.31154398,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.5497973421854,
               "apy_base_source": "morpho_borrow"
             }
           ],
           "rewards": [],
           "apy_base": 4.75333,
-          "apy_cost": 297995.798684274,
-          "apy_net": -2246393.512471888,
+          "apy_cost": 11.5497973421854,
+          "apy_net": -46.48167416904548,
           "apy_reward": null
         },
         {
@@ -3559,15 +3559,15 @@
               "amount": 650134.039728,
               "price_usd": 1,
               "value_usd": 650134.039728,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -3595,15 +3595,15 @@
               "amount": 599281.881643274,
               "price_usd": 1.00019,
               "value_usd": 599395.745200787,
-              "apy_base": 297995.798684274,
+              "apy_base": 3.65714509274362,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 3.65714509274362,
           "apy_cost": null,
-          "apy_net": 2080200.1749396578,
+          "apy_net": 25.529198382307467,
           "apy_reward": null
         },
         {
@@ -3689,15 +3689,15 @@
               "amount": 442131.291492,
               "price_usd": 1,
               "value_usd": 442131.291492,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -3738,14 +3738,14 @@
               "amount": 2012746.65923039,
               "price_usd": 1.00019,
               "value_usd": 2013129.08109564,
-              "apy_base": 297995.798684274,
+              "apy_base": 4.07166259346158,
               "apy_base_source": "morpho_borrow"
             }
           ],
           "rewards": [],
           "apy_base": 3.75,
-          "apy_cost": 297995.798684274,
-          "apy_net": -2986191.7657476715,
+          "apy_cost": 4.07166259346158,
+          "apy_net": 0.5266005891101825,
           "apy_reward": null
         }
       ],
@@ -4115,14 +4115,14 @@
                   "amount": 5156318.31154398,
                   "price_usd": 1,
                   "value_usd": 5156318.31154398,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.5497973421854,
                   "apy_base_source": "morpho_borrow"
                 }
               ],
               "rewards": [],
               "apy_base": 4.75333,
-              "apy_cost": 297995.798684274,
-              "apy_net": -2246393.512471888,
+              "apy_cost": 11.5497973421854,
+              "apy_net": -46.48167416904548,
               "apy_reward": null
             },
             {
@@ -4150,15 +4150,15 @@
                   "amount": 650134.039728,
                   "price_usd": 1,
                   "value_usd": 650134.039728,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -4186,15 +4186,15 @@
                   "amount": 599281.881643274,
                   "price_usd": 1.00019,
                   "value_usd": 599395.745200787,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 3.65714509274362,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 3.65714509274362,
               "apy_cost": null,
-              "apy_net": 2080200.1749396578,
+              "apy_net": 25.529198382307467,
               "apy_reward": null
             },
             {
@@ -4293,14 +4293,14 @@
                   "amount": 2012746.65923039,
                   "price_usd": 1.00019,
                   "value_usd": 2013129.08109564,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 4.07166259346158,
                   "apy_base_source": "morpho_borrow"
                 }
               ],
               "rewards": [],
               "apy_base": 3.75,
-              "apy_cost": 297995.798684274,
-              "apy_net": -2986191.7657476715,
+              "apy_cost": 4.07166259346158,
+              "apy_net": 0.5266005891101825,
               "apy_reward": null
             }
           ],
@@ -4339,15 +4339,15 @@
                   "amount": 2773256.853522,
                   "price_usd": 1,
                   "value_usd": 2773256.853522,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -4483,15 +4483,15 @@
                   "amount": 721193.569137,
                   "price_usd": 1.00019,
                   "value_usd": 721330.595915136,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 3.65714509274362,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 3.6571450927436207,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 3.6571450927436207,
               "apy_reward": null
             },
             {
@@ -4519,15 +4519,15 @@
                   "amount": 442131.291492,
                   "price_usd": 1,
                   "value_usd": 442131.291492,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             }
           ],
@@ -5447,15 +5447,15 @@
               "amount": 1068505.82817243,
               "price_usd": 1,
               "value_usd": 1068505.82817243,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 1160680.3529349002,
+          "apy_net": 43.90349885881975,
           "apy_reward": null
         },
         {
@@ -5817,15 +5817,15 @@
                   "amount": 1068505.82817243,
                   "price_usd": 1,
                   "value_usd": 1068505.82817243,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 1160680.3529349002,
+              "apy_net": 43.90349885881975,
               "apy_reward": null
             },
             {
@@ -6551,15 +6551,15 @@
               "amount": 7299053.76121623,
               "price_usd": 0.986494810854601,
               "value_usd": 7200478.65958857,
-              "apy_base": 8.83463386762673,
+              "apy_base": 8.83463386858176,
               "apy_base_source": "pendle"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 8.83463386762673,
+          "apy_base": 8.83463386858176,
           "apy_cost": null,
-          "apy_net": 8.83463386762673,
+          "apy_net": 8.83463386858176,
           "apy_reward": null
         },
         {
@@ -6659,15 +6659,15 @@
               "amount": 3842273.691724,
               "price_usd": 1,
               "value_usd": 3842273.691724,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.79868427396,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -6886,15 +6886,15 @@
               "amount": 2121567.802223,
               "price_usd": 1,
               "value_usd": 2121567.802223,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -7077,14 +7077,14 @@
               "amount": 4355450.2225431,
               "price_usd": 1.00017,
               "value_usd": 4356190.64908093,
-              "apy_base": 297995.798684274,
+              "apy_base": 4.07166259346158,
               "apy_base_source": "morpho_borrow"
             }
           ],
           "rewards": [],
           "apy_base": 3.75,
-          "apy_cost": 297995.798684274,
-          "apy_net": -949718.3907787966,
+          "apy_cost": 4.07166259346158,
+          "apy_net": 2.7248381266559845,
           "apy_reward": null
         },
         {
@@ -7148,15 +7148,15 @@
               "amount": 1296522.243755,
               "price_usd": 1,
               "value_usd": 1296522.243755,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -7566,15 +7566,15 @@
               "amount": 651058.326613,
               "price_usd": 1,
               "value_usd": 651058.326613,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -7685,7 +7685,7 @@
               "amount": 78819.7521444665,
               "price_usd": 0.992986795414918,
               "value_usd": 78266.9730973319,
-              "apy_base": 5.50826787117329,
+              "apy_base": 5.50826787194612,
               "apy_base_source": "pendle"
             },
             {
@@ -7702,9 +7702,9 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 5.456436621118997,
+          "apy_base": 5.456436621270292,
           "apy_cost": null,
-          "apy_net": 5.456436621118998,
+          "apy_net": 5.456436621270292,
           "apy_reward": null
         },
         {
@@ -7732,15 +7732,15 @@
               "amount": 328557.832172416,
               "price_usd": 1,
               "value_usd": 328557.832172416,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -7768,15 +7768,15 @@
               "amount": 301184.376072442,
               "price_usd": 1,
               "value_usd": 301184.376072442,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -7948,7 +7948,7 @@
               "amount": 7055341.26405826,
               "price_usd": 0.012567387282359,
               "value_usd": 88667.2060746286,
-              "apy_base": 14.4230016855523,
+              "apy_base": 14.423169051315,
               "apy_base_source": "pendle"
             },
             {
@@ -7965,9 +7965,9 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 13.903627410262512,
+          "apy_base": 13.90378874916107,
           "apy_cost": null,
-          "apy_net": 13.903627410262512,
+          "apy_net": 13.90378874916107,
           "apy_reward": null
         },
         {
@@ -8078,15 +8078,15 @@
                   "amount": 7299053.76121623,
                   "price_usd": 0.986494810854601,
                   "value_usd": 7200478.65958857,
-                  "apy_base": 8.83463386762673,
+                  "apy_base": 8.83463386858176,
                   "apy_base_source": "pendle"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 8.83463386762673,
+              "apy_base": 8.83463386858176,
               "apy_cost": null,
-              "apy_net": 8.83463386762673,
+              "apy_net": 8.83463386858176,
               "apy_reward": null
             },
             {
@@ -8257,15 +8257,15 @@
                   "amount": 2121567.802223,
                   "price_usd": 1,
                   "value_usd": 2121567.802223,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -8389,15 +8389,15 @@
                   "amount": 301184.376072442,
                   "price_usd": 1,
                   "value_usd": 301184.376072442,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -8425,7 +8425,7 @@
                   "amount": 7055341.26405826,
                   "price_usd": 0.012567387282359,
                   "value_usd": 88667.2060746286,
-                  "apy_base": 14.4230016855523,
+                  "apy_base": 14.423169051315,
                   "apy_base_source": "pendle"
                 },
                 {
@@ -8442,9 +8442,9 @@
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 13.903627410262512,
+              "apy_base": 13.90378874916107,
               "apy_cost": null,
-              "apy_net": 13.903627410262512,
+              "apy_net": 13.90378874916107,
               "apy_reward": null
             }
           ],
@@ -8519,15 +8519,15 @@
                   "amount": 3842273.691724,
                   "price_usd": 1,
                   "value_usd": 3842273.691724,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.79868427396,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -8746,15 +8746,15 @@
                   "amount": 651058.326613,
                   "price_usd": 1,
                   "value_usd": 651058.326613,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -8829,7 +8829,7 @@
                   "amount": 78819.7521444665,
                   "price_usd": 0.992986795414918,
                   "value_usd": 78266.9730973319,
-                  "apy_base": 5.50826787117329,
+                  "apy_base": 5.50826787194612,
                   "apy_base_source": "pendle"
                 },
                 {
@@ -8846,9 +8846,9 @@
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 5.456436621118997,
+              "apy_base": 5.456436621270292,
               "apy_cost": null,
-              "apy_net": 5.456436621118998,
+              "apy_net": 5.456436621270292,
               "apy_reward": null
             },
             {
@@ -9046,14 +9046,14 @@
                   "amount": 4355450.2225431,
                   "price_usd": 1.00017,
                   "value_usd": 4356190.64908093,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 4.07166259346158,
                   "apy_base_source": "morpho_borrow"
                 }
               ],
               "rewards": [],
               "apy_base": 3.75,
-              "apy_cost": 297995.798684274,
-              "apy_net": -949718.3907787966,
+              "apy_cost": 4.07166259346158,
+              "apy_net": 2.7248381266559845,
               "apy_reward": null
             },
             {
@@ -9117,15 +9117,15 @@
                   "amount": 1296522.243755,
                   "price_usd": 1,
                   "value_usd": 1296522.243755,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -9403,15 +9403,15 @@
                   "amount": 328557.832172416,
                   "price_usd": 1,
                   "value_usd": 328557.832172416,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -9632,15 +9632,15 @@
               "amount": 2630591.260731,
               "price_usd": 1,
               "value_usd": 2630591.260731,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -9668,15 +9668,15 @@
               "amount": 1814342.159892,
               "price_usd": 1,
               "value_usd": 1814342.159892,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -9704,15 +9704,15 @@
               "amount": 1349433.251186,
               "price_usd": 1,
               "value_usd": 1349433.251186,
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_base_source": "morpho_supply"
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 297995.798684274,
+          "apy_base": 11.2718873670828,
           "apy_cost": null,
-          "apy_net": 297995.798684274,
+          "apy_net": 11.2718873670828,
           "apy_reward": null
         },
         {
@@ -9823,15 +9823,15 @@
                   "amount": 2630591.260731,
                   "price_usd": 1,
                   "value_usd": 2630591.260731,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -9859,15 +9859,15 @@
                   "amount": 1814342.159892,
                   "price_usd": 1,
                   "value_usd": 1814342.159892,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {
@@ -9895,15 +9895,15 @@
                   "amount": 1349433.251186,
                   "price_usd": 1,
                   "value_usd": 1349433.251186,
-                  "apy_base": 297995.798684274,
+                  "apy_base": 11.2718873670828,
                   "apy_base_source": "morpho_supply"
                 }
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 297995.798684274,
+              "apy_base": 11.2718873670828,
               "apy_cost": null,
-              "apy_net": 297995.798684274,
+              "apy_net": 11.2718873670828,
               "apy_reward": null
             },
             {

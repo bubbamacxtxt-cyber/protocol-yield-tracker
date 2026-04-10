@@ -150,6 +150,8 @@ async function fetchMorphoApy() {
         if (!symbol) continue;
         const sApy = (m.state?.supplyApy || 0) * 100;
         const bApy = (m.state?.borrowApy || 0) * 100;
+        // Skip broken markets (expired LP/PT tokens with bogus APYs)
+        if (sApy > 100 || bApy > 100) continue;
         if (sApy > 0) {
           if (!supplyMap[symbol]) supplyMap[symbol] = {};
           supplyMap[symbol][cid] = Math.max(supplyMap[symbol][cid] || 0, sApy);
