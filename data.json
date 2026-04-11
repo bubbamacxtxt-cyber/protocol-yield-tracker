@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-11T12:24:27.814Z",
+  "generated_at": "2026-04-11T12:29:18.816Z",
   "summary": {
     "total_positions": 164,
     "total_value": 696343594.349396,
@@ -3714,8 +3714,8 @@
               "value_usd": 1111009.72962928,
               "apy_base": 0,
               "apy_base_source": "static",
-              "bonus_supply_apy": 71.56,
-              "bonus_supply_source": "curve:eth(35.78%); curve:eth(35.78%)",
+              "bonus_supply_apy": 35.78,
+              "bonus_supply_source": "curve:eth(35.78%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             },
@@ -3754,9 +3754,9 @@
           "rewards": [],
           "apy_base": 0.5189533932033034,
           "apy_cost": null,
-          "bonus_supply": 71.56,
+          "bonus_supply": 35.78,
           "bonus_borrow": null,
-          "apy_net": 72.0789533932033,
+          "apy_net": 36.298953393203305,
           "apy_reward": null
         },
         {
@@ -4591,8 +4591,8 @@
                   "value_usd": 1111009.72962928,
                   "apy_base": 0,
                   "apy_base_source": "static",
-                  "bonus_supply_apy": 71.56,
-                  "bonus_supply_source": "curve:eth(35.78%); curve:eth(35.78%)",
+                  "bonus_supply_apy": 35.78,
+                  "bonus_supply_source": "curve:eth(35.78%)",
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 },
@@ -4631,9 +4631,9 @@
               "rewards": [],
               "apy_base": 0.5189533932033034,
               "apy_cost": null,
-              "bonus_supply": 71.56,
+              "bonus_supply": 35.78,
               "bonus_borrow": null,
-              "apy_net": 72.0789533932033,
+              "apy_net": 36.298953393203305,
               "apy_reward": null
             },
             {

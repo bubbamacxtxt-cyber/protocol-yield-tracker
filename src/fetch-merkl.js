@@ -168,8 +168,12 @@ function matchesPosition(campaign, rules, position, allPositions) {
   }
 
   // For Euler: match by vault address (identifier)
-  // position.market_id contains the vault address from Goldsky
   if (campaign.protocol?.id === 'euler' && rules.morphoMarketId) {
+    if (!position.market_id || position.market_id.toLowerCase() !== rules.morphoMarketId) return false;
+  }
+
+  // For Fluid: match by vault address (identifier)
+  if (campaign.protocol?.id === 'fluid' && rules.morphoMarketId) {
     if (!position.market_id || position.market_id.toLowerCase() !== rules.morphoMarketId) return false;
   }
 
