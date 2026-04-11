@@ -2,7 +2,7 @@ name: Update Whale Data
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # 8:00 AM UTC daily
+    - cron: '21 17 * * *'  # TEMP: 17:21 UTC test (normally 08:00)
   workflow_dispatch:  # Manual trigger
 
 jobs:
