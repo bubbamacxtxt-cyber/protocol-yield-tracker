@@ -14,7 +14,7 @@ const fs = require('fs');
 const path = require('path');
 const { ethers } = require('ethers');
 
-const THRESHOLD = 0.05; // 5%
+const THRESHOLD = 0.06; // 6% (InfiniFi API fluctuates ~5%, Pareto includes unallocated funds)
 const errors = [];
 const warnings = [];
 
