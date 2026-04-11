@@ -209,6 +209,7 @@ Detailed documentation for all protocol APIs used:
 
 - **[API Reference](docs/API-REFERENCE.md)** — Complete guide for Aave, Morpho, Euler, Fluid APIs
 - Query structures, parameters, examples, and notes for each protocol
+- **[ALL-APIs.md](docs/ALL-APIs.md)** — Complete reference for all 14 APIs (DeBank, InfiniFi, Pareto, Anzen, Pendle, CoinGecko, 1inch, DeFiLlama, Portals, August Digital)
 - Market enrichment system for Merkl bonus matching
 
 ## API Rate Limits
