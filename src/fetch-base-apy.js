@@ -20,7 +20,7 @@ const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const STABLES_PATH = path.join(__dirname, '..', 'data', 'stables.json');
 
 const AAVE_CHAINS = [1, 42161, 8453, 9745, 5000, 56, 146];
-const MORPHO_CHAINS = [1, 42161, 8453, 5000, 56, 146, 10];
+const MORPHO_CHAINS = [1, 42161, 8453, 5000, 56, 146, 10, 999];  // 999 = Monad on Morpho
 const PENDLE_CHAINS = [
   { id: 1, name: 'eth' },
   { id: 9745, name: 'plasma' },
@@ -41,6 +41,12 @@ const CHAIN_ID_MAP = {
   monad: 143,
   hyper: 999,
   ink: 57073,
+};
+// Morpho uses different chain IDs for some chains
+const MORPHO_CHAIN_ID_MAP = {
+  ...CHAIN_ID_MAP,
+  monad: 999,  // Morpho uses 999 for Monad
+  hyper: 999,  // Also check: hyper might be different
 };
 
 // ─── Source 1: YBS List ────────────────────────────────────────────
@@ -160,8 +166,10 @@ async function fetchMorphoApy() {
       const d = await res.json();
       const items = d?.data?.markets?.items || [];
       for (const m of items) {
-        const symbol = m.loanAsset?.symbol;
+        let symbol = m.loanAsset?.symbol;
         if (!symbol) continue;
+        // Map Morpho special symbols (USD₮0 -> USDT0)
+        if (symbol.includes("₮")) symbol = symbol.replace("₮", "T");
         // Use daily average APY (more stable than instantaneous)
         const sApy = (m.state?.dailySupplyApy ?? m.state?.supplyApy ?? 0) * 100;
         const bApy = (m.state?.dailyBorrowApy ?? m.state?.borrowApy ?? 0) * 100;
@@ -170,7 +178,7 @@ async function fetchMorphoApy() {
           byMarketId[m.marketId.toLowerCase()] = { supplyApy: sApy, borrowApy: bApy };
         }
         // Skip broken markets (expired LP/PT tokens with bogus APYs)
-        if (sApy > 100 || bApy > 100) continue;
+        if (sApy > 50 || bApy > 50) continue;
         if (sApy > 0) {
           if (!supplyMap[symbol]) supplyMap[symbol] = {};
           supplyMap[symbol][cid] = Math.max(supplyMap[symbol][cid] || 0, sApy);
@@ -256,7 +264,7 @@ async function main() {
   let staticApplied = 0, aaveApplied = 0, morphoApplied = 0, zeroCount = 0, stillMissing = 0;
 
   for (const row of pending) {
-    const cid = CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
+    const cid = MORPHO_CHAIN_ID_MAP[row.chain?.toLowerCase()] || CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
     let apy = null, source = null;
 
     if (staticApy[row.symbol] != null) {
@@ -309,7 +317,7 @@ async function main() {
   `).all();
 
   for (const row of borrowPending) {
-    const cid = CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
+    const cid = MORPHO_CHAIN_ID_MAP[row.chain?.toLowerCase()] || CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
     let apy = null, source = null;
 
     if (row.protocol_name === 'Aave V3' && aaveApy.borrow[row.symbol]?.[cid] != null) {
