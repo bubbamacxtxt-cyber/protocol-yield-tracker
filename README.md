@@ -73,6 +73,20 @@ These are DeFi platforms with vaults or yield-bearing stables that return intere
 | Midas | Multi-vault | mHyper, mMev, mAPOLLO | — |
 | Superform | Multi-vault | Flagship USDC SuperVault | — |
 
+
+## Merkl Bonus Matching
+
+Fetches Merkl incentive campaigns and applies bonus APYs to positions.
+
+| Protocol | Matching Method | Status |
+|----------|-----------------|--------|
+| Morpho | By market ID (position_index) | ✅ |
+| Aave | By market name (Horizon/Core/EtherFi/Lido) | ✅ |
+| Euler | By vault address (Goldsky subgraph) | ✅ |
+| Fluid | By vault address (Fluid REST API) | ✅ |
+
+**Pipeline:** enrich-markets.js → fetch-merkl.js → export.js
+
 ## Roadmap
 
 ### Phase 1 — Yield Data ✅ (in progress)
@@ -187,6 +201,15 @@ protocol-yield-tracker/
 │   └── TEMPLATE.md            # How to add new whales
 └── yield-tracker.db           # SQLite database
 ```
+
+
+## Protocol APIs
+
+Detailed documentation for all protocol APIs used:
+
+- **[API Reference](docs/API-REFERENCE.md)** — Complete guide for Aave, Morpho, Euler, Fluid APIs
+- Query structures, parameters, examples, and notes for each protocol
+- Market enrichment system for Merkl bonus matching
 
 ## API Rate Limits
 
