@@ -249,12 +249,20 @@ async function getMorphoPositions(address, chainId = 1) {
 
 ### Subgraph Endpoints
 
-| Chain | Endpoint |
-|-------|----------|
-| Ethereum | `https://api.goldsky.com/api/public/project_cm4iagnemt1wp01xn4gh1agft/subgraphs/euler-v2-mainnet/latest/gn` |
-| Base | `https://api.goldsky.com/api/public/project_cm4iagnemt1wp01xn4gh1agft/subgraphs/euler-v2-base/latest/gn` |
-| Sonic | `https://api.goldsky.com/api/public/project_cm4iagnemt1wp01xn4gh1agft/subgraphs/euler-v2-sonic/latest/gn` |
+| Chain | Chain ID | Vaults | Endpoint |
+|-------|----------|--------|----------|
+| Ethereum | 1 | 500 | `euler-v2-mainnet` |
+| Base | 8453 | 258 | `euler-v2-base` |
+| Sonic | 146 | 174 | `euler-v2-sonic` |
+| Arbitrum | 42161 | 116 | `euler-v2-arbitrum` |
+| Berachain | 80085 | 59 | `euler-v2-berachain` |
+| Monad | 143 | 98 | `euler-v2-monad` |
+| Optimism | 10 | 1 | `euler-v2-optimism` |
 
+Base URL pattern:
+```
+https://api.goldsky.com/api/public/project_cm4iagnemt1wp01xn4gh1agft/subgraphs/{endpoint}/latest/gn
+```
 ### Available Queries
 
 ```graphql

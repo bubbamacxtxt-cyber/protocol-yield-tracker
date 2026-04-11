@@ -4,6 +4,12 @@ const https = require('https');
 const path = require('path');
 
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
+const GOLDSKY_BASE = "https://api.goldsky.com/api/public/project_cm4iagnemt1wp01xn4gh1agft/subgraphs";
+const EULER_CHAINS = {
+  eth: "euler-v2-mainnet", base: "euler-v2-base", sonic: "euler-v2-sonic",
+  arb: "euler-v2-arbitrum", op: "euler-v2-optimism",
+  bera: "euler-v2-berachain", monad: "euler-v2-monad",
+};
 const AAVE_API = 'https://api.v3.aave.com/graphql';
 
 function postJSON(url, body) {
@@ -57,16 +63,24 @@ async function fetchAaveReserves() {
 }
 
 async function fetchEulerVaults() {
-  const url = 'https://api.goldsky.com/api/public/project_cm4iagnemt1wp01xn4gh1agft/subgraphs/euler-v2-mainnet/latest/gn';
-  const data = await postJSON(url, { query: '{ eulerVaults(first: 500) { id name symbol asset } }' });
-  const vaults = data.data?.eulerVaults || [];
   const vaultMap = {};
-  for (const v of vaults) {
-    vaultMap[v.id?.toLowerCase()] = {
-      name: v.name, symbol: v.symbol, asset: v.asset?.toLowerCase(),
-    };
+  for (const [chainName, subgraph] of Object.entries(EULER_CHAINS)) {
+    try {
+      const url = `${GOLDSKY_BASE}/${subgraph}/latest/gn`;
+      const data = await postJSON(url, { query: '{ eulerVaults(first: 500) { id name symbol asset } }' });
+      const vaults = data.data?.eulerVaults || [];
+      for (const v of vaults) {
+        vaultMap[v.id?.toLowerCase()] = {
+          chain: chainName,
+          name: v.name, symbol: v.symbol, asset: v.asset?.toLowerCase(),
+        };
+      }
+      console.log(`  Euler ${chainName}: ${vaults.length} vaults`);
+    } catch(e) {
+      console.log(`  Euler ${chainName}: error`);
+    }
   }
-  console.log(`  Euler: ${vaults.length} vaults`);
+  console.log(`  Total Euler: ${Object.keys(vaultMap).length} vaults`);
   return vaultMap;
 }
 
@@ -210,11 +224,11 @@ async function main() {
       const borrowAddr = tokens.find(t => t.role === 'borrow')?.address?.toLowerCase();
       const posIdx = pos.position_index?.toLowerCase();
       
-      if (eulerVaults[posIdx]) {
+      if (eulerVaults[posIdx] && eulerVaults[posIdx].chain === pos.chain) {
         insertMarket.run(pos.id, 'Euler', pos.chain, posIdx, eulerVaults[posIdx].name, eulerVaults[posIdx].asset, 'vault-address');
         eulerOk++;
       } else if (supplyAddr) {
-        const match = Object.entries(eulerVaults).find(([a, v]) => v.asset === supplyAddr);
+        const match = Object.entries(eulerVaults).find(([a, v]) => v.asset === supplyAddr && v.chain === pos.chain);
         if (match) {
           insertMarket.run(pos.id, 'Euler', pos.chain, match[0], match[1].name, supplyAddr, 'asset-match');
           eulerOk++;
