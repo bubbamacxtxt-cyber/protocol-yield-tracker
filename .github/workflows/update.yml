@@ -38,6 +38,9 @@ jobs:
         run: node src/fetch-pareto.js
 
       # Merkl incentives (runs after base APY fetch)
+      - name: Enrich positions with market/vault info
+        run: node src/enrich-markets.js
+
       - name: Fetch Merkl incentives
         run: node src/fetch-merkl.js
 
