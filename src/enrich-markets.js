@@ -276,6 +276,64 @@ async function main() {
   })();
   console.log(`   ${eulerOk}/${eulerPos.length} enriched`);
 
+  // Morpho - find market IDs for collateral/loan pairs
+  console.log('7. Morpho positions...');
+  const morphoPos = db.prepare(`SELECT p.id, p.chain,
+    (SELECT json_group_array(json_object('symbol',pt.symbol,'role',pt.role,'address',pt.address))
+     FROM position_tokens pt WHERE pt.position_id = p.id) as tokens
+    FROM positions p WHERE p.protocol_name = 'Morpho'`).all();
+
+  let morphoOk = 0;
+  const morphoChains = [...new Set(morphoPos.map(p => p.chain))];
+  const morphoMarkets = {};
+  
+  for (const chain of morphoChains) {
+    const cidMap = { eth: 1, arb: 42161, base: 8453, mnt: 5000, plasma: 9745, sonic: 146, bsc: 56 };
+    const cid = cidMap[chain.toLowerCase()];
+    if (!cid) continue;
+    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 500) { items { marketId loanAsset { address } collateralAsset { address } state { dailyBorrowApy dailySupplyApy } } } }`;
+    try {
+      const res = await fetch('https://api.morpho.org/graphql', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      const items = data?.data?.markets?.items || [];
+      morphoMarkets[chain.toLowerCase()] = items.map(m => ({
+        loanAddr: m.loanAsset?.address?.toLowerCase(),
+        collateralAddr: m.collateralAsset?.address?.toLowerCase(),
+        marketId: m.marketId,
+        hasDailyApy: (m.state?.dailyBorrowApy || 0) > 0 || (m.state?.dailySupplyApy || 0) > 0
+      })).sort((a, b) => (b.hasDailyApy ? 1 : 0) - (a.hasDailyApy ? 1 : 0));
+      console.log('   ' + chain + ': ' + items.length + ' markets');
+    } catch (e) {
+      console.log('   ' + chain + ': failed - ' + e.message);
+    }
+  }
+
+  db.transaction(() => {
+    for (const pos of morphoPos) {
+      const tokens = JSON.parse(pos.tokens || '[]');
+      const supplyAddr = tokens.find(t => t.role === 'supply')?.address?.toLowerCase();
+      const borrowAddr = tokens.find(t => t.role === 'borrow')?.address?.toLowerCase();
+      const chain = pos.chain.toLowerCase();
+      const markets = morphoMarkets[chain] || [];
+      // Debug: find all matches
+      const allMatches = markets.filter(m => m.collateralAddr === supplyAddr && m.loanAddr === borrowAddr);
+      if (allMatches.length > 0) {
+        console.log('   found', allMatches.length, 'matches, first:', allMatches[0].marketId.slice(0,12), 'hasDaily:', allMatches[0].hasDailyApy);
+      }
+      const match = allMatches[0];
+      if (match) {
+        insertMarket.run(pos.id, 'Morpho', pos.chain, match.marketId, 'Morpho Market', supplyAddr, 'market-match');
+        morphoOk++;
+      } else {
+        console.log('   no match for supply:', supplyAddr?.slice(0,10), 'borrow:', borrowAddr?.slice(0,10));
+      }
+    }
+  })();
+  console.log('   ' + morphoOk + '/' + morphoPos.length + ' enriched');
+
   // Summary
   console.log('\n=== All Enriched ===');
   const all = db.prepare(`SELECT pm.*, p.protocol_name FROM position_markets pm JOIN positions p ON p.id = pm.position_id ORDER BY pm.protocol, pm.chain`).all();
