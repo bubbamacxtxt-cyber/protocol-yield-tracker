@@ -274,6 +274,7 @@ query {
 
 **Base URL:** `https://api.merkl.xyz/v4`  
 **Auth:** None  
+**Cost:** Free
 
 ### Endpoints
 
@@ -289,20 +290,65 @@ query {
 146=sonic, 56=bsc, 143=monad, 999=hyper, 57073=ink
 ```
 
-### Response Structure
+### Full Example (from fetch-merkl.js)
 
-```json
-{
-  "id": "...",
-  "name": "Lend USDe on Aave",
-  "type": "MULTILOG_DUTCH",
-  "action": "LEND",
-  "identifier": "0x...",
-  "apr": "3.06",
-  "tokens": [{ "symbol": "USDe", "address": "0x...", "decimals": 18 }],
-  "rewardTokens": [{ "symbol": "MERKL", "amount": "..." }],
-  "explorerUrl": "https://app.merkl.xyz/opportunity/...",
-  "tags": ["aave", "aave-v3"]
+```javascript
+const https = require('https');
+
+const CHAINS = {
+  eth: 1, arb: 42161, base: 8453, plasma: 9745,
+  mnt: 5000, sonic: 146, bsc: 56, monad: 143,
+};
+
+function postJSON(url, body) {
+  return new Promise((res, rej) => {
+    const bodyStr = JSON.stringify(body);
+    const u = new URL(url);
+    const req = https.request({
+      hostname: u.hostname, path: u.pathname + u.search,
+      method: 'POST', headers: { 'Content-Type': 'application/json' }
+    }, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    });
+    req.on('error', rej);
+    req.write(bodyStr);
+    req.end();
+  });
+}
+
+async function fetchMerklOpportunities(chainIds = [1, 42161, 8453]) {
+  const ids = chainIds.join(',');
+  const url = `https://api.merkl.xyz/v4/opportunities?chainIds=${ids}&status=LIVE&limit=1000`;
+  const data = await postJSON(url, { query: '{ items { id name type action identifier apr tokens rewardTokens tags } }' });
+  return data.items || [];
+}
+
+// ─── Match campaigns to positions ────────────────────────────────
+function matchCampaignToPosition(campaign, position) {
+  // Check protocol tags
+  const protocol = campaign.tags?.[0];
+  if (protocol !== position.protocol_name?.toLowerCase()) return false;
+  
+  // Check if position's tokens are in campaign's required tokens
+  const campaignTokens = campaign.tokens?.map(t => t.symbol?.toLowerCase());
+  const positionTokens = position.tokens?.map(t => t.symbol?.toLowerCase());
+  
+  return campaignTokens?.some(ct => positionTokens?.includes(ct));
+}
+
+// ─── Protocol mapping for Merkl tags ─────────────────────────────
+const PROTOCOL_MAP = {
+  'Aave V3': ['aave', 'aave-v3'],
+  'Morpho': ['morpho', 'morpho-blue'],
+  'Euler': ['euler', 'euler-v2'],
+  'Fluid': ['fluid'],
+};
+
+function matchesProtocol(campaign, protocolName) {
+  const merklTags = PROTOCOL_MAP[protocolName] || [];
+  return campaign.tags?.some(t => merklTags.includes(t));
 }
 ```
 
@@ -314,28 +360,83 @@ query {
 - ETH: `https://eth-api.infinifi.xyz/api/protocol/data`
 - Plasma: `https://plasma-api.infinifi.xyz/api/protocol/data`
 
-**Auth:** None
+**Auth:** None  
+**Cost:** Free
 
-### Query
+### How It Works
+
+InfiniFi returns position data for their RWA vault. We map vault deposit names to underlying protocols (which we detect automatically via DeBank).
+
+### Full Example (from fetch-infinifi.js)
 
 ```javascript
-const resp = await fetch('https://eth-api.infinifi.xyz/api/protocol/data');
-const data = await resp.json();
+const https = require('https');
 
-// Response contains:
-// - yield_sources: array of underlying strategies
-// - vault_tvl: total value locked
-// - apy: current APY
+const INFINIFI_ENDPOINTS = [
+  { chain: 'eth', url: 'https://eth-api.infinifi.xyz/api/protocol/data' },
+  { chain: 'plasma', url: 'https://plasma-api.infinifi.xyz/api/protocol/data' },
+];
+
+function fetchJSON(url) {
+  return new Promise((res, rej) => {
+    https.get(url, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    }).on('error', rej);
+  });
+}
+
+async function fetchInfiniFi() {
+  const positions = [];
+  
+  for (const { chain, url } of INFINIFI_ENDPOINTS) {
+    const data = await fetchJSON(url);
+    
+    // Each vault has yield sources with APY
+    for (const vault of data.vaults || []) {
+      const totalValue = parseFloat(vault.total_value || 0);
+      if (totalValue < 1000) continue; // Skip dust
+      
+      positions.push({
+        chain,
+        wallet: vault.depositor_address,
+        net_usd: totalValue,
+        apy_current: parseFloat(vault.apy || 0) * 100,
+        supply: [{
+          symbol: vault.token_symbol,
+          amount: parseFloat(vault.token_amount || 0),
+          value_usd: totalValue,
+        }],
+        yield_source: vault.strategy_name,
+      });
+    }
+  }
+  
+  return positions;
+}
 ```
 
-### Mapping
+### Yield Source Mapping
+
+We map vault strategy names to underlying protocols for DeBank detection:
 
 ```javascript
 const YIELD_SOURCE_MAP = {
   'morpho-steakUSDCinfinifi': 'morpho',
   'morpho-steakUSDTinfinifi': 'morpho',
   'tokemak-auto-infinifiUSD': 'tokemak',
+  'moonwell-infinifiUSDC': 'moonwell',
 };
+
+function getUnderlyingProtocol(strategyName) {
+  // Check direct map first
+  if (YIELD_SOURCE_MAP[strategyName]) return YIELD_SOURCE_MAP[strategyName];
+  
+  // Auto-detect: extract protocol from name like 'morpho-steakUSDCinfinifi'
+  const match = strategyName.match(/^([a-z]+)/);
+  return match ? match[1] : 'unknown';
+}
 ```
 
 ---
@@ -344,27 +445,85 @@ const YIELD_SOURCE_MAP = {
 
 **Base URL:** `https://app.pareto.credit/api/v1`  
 **Auth:** None  
-**On-chain:** `ParetoDollarQueue` at `0xA7780086ab732C110E9E71950B9Fb3cb2ea50D89`
+**Cost:** Free  
+**On-chain Contract:** `ParetoDollarQueue` at `0xA7780086ab732C110E9E71950B9Fb3cb2ea50D89`
 
-### Endpoints
+### How It Works
 
-| Endpoint | Use |
-|----------|-----|
-| `/vault-blocks` | Historical vault data |
-| `/vault-blocks?limit=1` | Latest vault info |
+Pareto has two data sources:
+1. **REST API** — Vault block history with APY data
+2. **On-chain** — Live APY and total deposits via contract reads
 
-### On-chain Reads (ethers.js)
+### Full Example (from fetch-pareto.js)
 
 ```javascript
-const queue = new ethers.Contract(
-  '0xA7780086ab732C110E9E71950B9Fb3cb2ea50D89',
-  ['function getAPY() view returns (uint256)',
-   'function getTotalDeposits() view returns (uint256)'].join('\n'),
-  provider
-);
+const { ethers } = require('ethers');
+const https = require('https');
 
-const apy = await queue.getAPY();
-const deposits = await queue.getTotalDeposits();
+const PARETO_QUEUE = '0xA7780086ab732C110E9E71950B9Fb3cb2ea50D89';
+const API_BASE = 'https://app.pareto.credit/api/v1';
+
+// ─── REST API: Get vault APY history ─────────────────────────────
+function fetchJSON(url) {
+  return new Promise((res, rej) => {
+    https.get(url, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    }).on('error', rej);
+  });
+}
+
+async function getParetoApiData() {
+  // Get latest vault block
+  const data = await fetchJSON(`${API_BASE}/vault-blocks?limit=1`);
+  const block = data[0];
+  
+  return {
+    apy: parseFloat(block.apy || 0),  // Already as percentage
+    tvl: parseFloat(block.tvl || 0),
+    timestamp: block.timestamp,
+  };
+}
+
+// ─── On-chain: Get live APY + deposits ────────────────────────────
+async function getParetoOnChain() {
+  const provider = new ethers.JsonRpcProvider('https://eth.llamarpc.com');
+  
+  const queue = new ethers.Contract(PARETO_QUEUE, [
+    'function getAPY() view returns (uint256)',
+    'function getTotalDeposits() view returns (uint256)',
+    'function getPricePerShare() view returns (uint256)',
+  ], provider);
+  
+  const [apyRaw, depositsRaw, ppsRaw] = await Promise.all([
+    queue.getAPY(),
+    queue.getTotalDeposits(),
+    queue.getPricePerShare(),
+  ]);
+  
+  // APY is in basis points (10000 = 100%)
+  const apy = Number(apyRaw) / 100;
+  
+  // Deposits has 6 decimals (USDC)
+  const deposits = Number(depositsRaw) / 1e6;
+  
+  return { apy, deposits };
+}
+
+// ─── Combine both sources ─────────────────────────────────────────
+async function fetchParetoPositions() {
+  const [apiData, chainData] = await Promise.all([
+    getParetoApiData(),
+    getParetoOnChain(),
+  ]);
+  
+  return {
+    net_usd: chainData.deposits,
+    apy_current: chainData.apy || apiData.apy,  // Prefer on-chain
+    source: 'Pareto sUSP',
+  };
+}
 ```
 
 ---
@@ -373,15 +532,83 @@ const deposits = await queue.getTotalDeposits();
 
 **Base URL:** `https://rwa-api.anzen.finance/collaterals`  
 **Auth:** None  
-**On-chain:** USDz token varies by chain
+**Cost:** Free  
+**On-chain:** USDz token varies by chain (e.g., ETH mainnet)
 
-### Query
+### How It Works
+
+Anzen API returns collateral data for USDz. We combine this with on-chain USDz supply to get total value locked.
+
+### Full Example (from fetch-anzen.js)
 
 ```javascript
-const resp = await fetch('https://rwa-api.anzen.finance/collaterals?page=1');
-const data = await resp.json();
+const { ethers } = require('ethers');
+const https = require('https');
 
-// Returns collateral data with yield info
+const API_URL = 'https://rwa-api.anzen.finance/collaterals?page=1';
+
+function fetchJSON(url) {
+  return new Promise((res, rej) => {
+    https.get(url, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    }).on('error', rej);
+  });
+}
+
+// ─── REST API: Get collateral data ───────────────────────────────
+async function fetchAnzenCollaterals() {
+  const data = await fetchJSON(API_URL);
+  
+  // data.collaterals is array of collateral types
+  return data.collaterals.map(c => ({
+    name: c.name,
+    symbol: c.symbol,
+    tvl: parseFloat(c.tvl || 0),
+    apy: parseFloat(c.apy || 0),
+    risk_level: c.risk_level,
+  }));
+}
+
+// ─── On-chain: Get USDz total supply ─────────────────────────────
+async function getUSDzSupply() {
+  const provider = new ethers.JsonRpcProvider('https://eth.llamarpc.com');
+  
+  // USDz token contract on ETH mainnet
+  const USDZ = '0x...'; // Find actual address from Etherscan
+  
+  const token = new ethers.Contract(USDZ, [
+    'function totalSupply() view returns (uint256)',
+    'function decimals() view returns (uint8)',
+  ], provider);
+  
+  const [supply, decimals] = await Promise.all([
+    token.totalSupply(),
+    token.decimals(),
+  ]);
+  
+  return Number(supply) / Math.pow(10, decimals);
+}
+
+// ─── Combine for whale position ──────────────────────────────────
+async function fetchAnzenPosition() {
+  const [collaterals, totalSupply] = await Promise.all([
+    fetchAnzenCollaterals(),
+    getUSDzSupply(),
+  ]);
+  
+  // Calculate weighted average APY
+  const totalTvl = collaterals.reduce((s, c) => s + c.tvl, 0);
+  const weightedApy = collaterals.reduce((s, c) => s + c.apy * (c.tvl / totalTvl), 0);
+  
+  return {
+    net_usd: totalSupply,  // From on-chain
+    apy_current: weightedApy * 100,  // Convert to percentage
+    collaterals,
+    source: 'Anzen USDz',
+  };
+}
 ```
 
 ---
@@ -389,7 +616,9 @@ const data = await resp.json();
 ## Pendle API
 
 **Base URL:** `https://api-v2.pendle.finance/core/v1/`  
-**Auth:** None
+**Auth:** None  
+**Cost:** Free  
+**Note:** Rate limited — use delays between calls
 
 ### Endpoints
 
@@ -397,37 +626,133 @@ const data = await resp.json();
 |----------|-----|
 | `/markets?chain_id={id}` | All markets |
 | `/tokens?chain_id={id}` | Token info |
+| `/markets/{address}?chain_id={id}` | Single market details |
 
-### Key Data
+### Full Example
 
-- Market addresses for yield tokenization
-- PT (Principal Token) and YT (Yield Token) prices
-- Underlying yield rates
+```javascript
+const https = require('https');
+
+function fetchJSON(url) {
+  return new Promise((res, rej) => {
+    https.get(url, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    }).on('error', rej);
+  });
+}
+
+async function fetchPendleMarkets(chainId = 1) {
+  const data = await fetchJSON(
+    `https://api-v2.pendle.finance/core/v1/markets?chain_id=${chainId}`
+  );
+  
+  return data.markets?.map(m => ({
+    address: m.address,
+    name: m.name,
+    pt_symbol: m.pt?.symbol,  // Principal Token
+    yt_symbol: m.yt?.symbol,  // Yield Token
+    underlying_asset: m.underlyingAsset?.symbol,
+    maturity: m.maturity,
+    implied_apy: parseFloat(m.impliedYield || 0) * 100,
+  })) || [];
+}
+
+// ─── Get market for specific token ───────────────────────────────
+async function findPendleMarket(tokenSymbol, chainId = 1) {
+  const markets = await fetchPendleMarkets(chainId);
+  return markets.find(m => 
+    m.pt_symbol?.includes(tokenSymbol) || 
+    m.yt_symbol?.includes(tokenSymbol) ||
+    m.underlying_asset?.includes(tokenSymbol)
+  );
+}
+```
 
 ---
 
 ## CoinGecko API
 
 **Base URL:** `https://api.coingecko.com/api/v3`  
-**Auth:** None (free) / Pro API key  
+**Auth:** None (free tier)  
 **Rate Limit:** ~20 requests/min (free)
 
-### Endpoints
+### How We Use It
 
-| Endpoint | Use |
-|----------|-----|
-| `/coins/{id}` | Token price + metadata |
-| `/simple/price?ids={ids}&vs_currencies=usd` | Batch price lookup |
-| `/coins/{id}/contract/{address}` | Token by contract address |
+CoinGecko is our fallback for unknown tokens. When DeBank doesn't return a token symbol, we look it up by contract address.
 
-### Chain Mapping
+### Full Example
 
 ```javascript
+const https = require('https');
+
 const CHAIN_MAP = {
   eth: 'ethereum', arb: 'arbitrum-one', base: 'base',
   poly: 'polygon-pos', bsc: 'binance-smart-chain',
   avax: 'avalanche', op: 'optimistic-ethereum',
 };
+
+function fetchJSON(url) {
+  return new Promise((res, rej) => {
+    https.get(url, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => {
+        try { res(JSON.parse(d)); } 
+        catch(e) { rej(new Error(`Parse error: ${d.slice(0,100)}`)); }
+      });
+    }).on('error', rej);
+  });
+}
+
+// ─── Get token price by contract address ─────────────────────────
+async function getTokenPrice(chain, contractAddress) {
+  const platform = CHAIN_MAP[chain] || 'ethereum';
+  
+  try {
+    const data = await fetchJSON(
+      `https://api.coingecko.com/api/v3/simple/token_addresses/${platform}?` +
+      `contract_addresses=${contractAddress}&vs_currencies=usd`
+    );
+    
+    const key = contractAddress.toLowerCase();
+    return data[key]?.usd || 0;
+  } catch(e) {
+    // Rate limited or error — return 0
+    return 0;
+  }
+}
+
+// ─── Batch price lookup ──────────────────────────────────────────
+async function batchGetPrices(contractAddresses) {
+  const addrStr = contractAddresses.join(',');
+  const data = await fetchJSON(
+    `https://api.coingecko.com/api/v3/simple/token_addresses/ethereum?` +
+    `contract_addresses=${addrStr}&vs_currencies=usd`
+  );
+  
+  const prices = {};
+  for (const [addr, info] of Object.entries(data)) {
+    prices[addr.toLowerCase()] = info.usd || 0;
+  }
+  return prices;
+}
+
+// ─── Use in scanner (with delay for rate limit) ──────────────────
+async function resolveUnknownToken(contractAddress, chain = 'eth') {
+  await sleep(12000);  // Wait 12s between calls
+  
+  const price = await getTokenPrice(chain, contractAddress);
+  
+  return {
+    address: contractAddress.toLowerCase(),
+    price_usd: price,
+    source: 'coingecko',
+  };
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 ```
 
 ---
@@ -435,32 +760,89 @@ const CHAIN_MAP = {
 ## 1inch Token List
 
 **Base URL:** `https://tokens.1inch.io`  
-**Auth:** None
+**Auth:** None  
+**Cost:** Free
+
+### How We Use It
+
+1inch provides a comprehensive token list that we use as our primary token registry. Every token address gets mapped to a human-readable symbol.
 
 ### Endpoints
 
-| Endpoint | Use |
-|----------|-----|
-| `/v6.0/{chainId}` | All tokens on chain |
-| `/v6.0/1` | ETH tokens (~2,570) |
+| Endpoint | Chain | Token Count |
+|----------|-------|-------------|
+| `/v6.0/1` | Ethereum | ~2,570 |
+| `/v6.0/42161` | Arbitrum | ~800 |
+| `/v6.0/8453` | Base | ~500 |
+| `/v6.0/137` | Polygon | ~400 |
+| `/v6.0/56` | BSC | ~600 |
 
-### Response
+### Full Example (from build-token-list.js)
 
-```json
-[
-  {
-    "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-    "symbol": "USDC",
-    "decimals": 6,
-    "name": "USD Coin",
-    "logoURI": "https://..."
+```javascript
+const https = require('https');
+
+const CHAINS = [1, 42161, 8453, 137, 56, 10, 43114, 250, 100];
+
+function fetchJSON(url) {
+  return new Promise((res, rej) => {
+    https.get(url, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    }).on('error', rej);
+  });
+}
+
+// ─── Build token registry from 1inch ─────────────────────────────
+async function buildTokenRegistry() {
+  const registry = {};  // { address: { symbol, decimals, chain } }
+  
+  for (const chainId of CHAINS) {
+    console.log(`Fetching chain ${chainId}...`);
+    
+    try {
+      const tokens = await fetchJSON(
+        `https://tokens.1inch.io/v6.0/${chainId}`
+      );
+      
+      for (const token of tokens) {
+        const addr = token.address?.toLowerCase();
+        if (!addr) continue;
+        
+        registry[addr] = {
+          symbol: token.symbol?.toUpperCase(),
+          decimals: token.decimals,
+          name: token.name,
+          chainId,
+        };
+      }
+      
+      console.log(`  Got ${tokens.length} tokens`);
+      await sleep(1000);  // Rate limit
+    } catch(e) {
+      console.log(`  Error on chain ${chainId}: ${e.message}`);
+    }
   }
-]
+  
+  return registry;
+}
+
+// ─── Lookup token symbol ─────────────────────────────────────────
+function getSymbol(registry, address, chainId = 1) {
+  const key = address.toLowerCase();
+  const token = registry[key];
+  
+  if (token && token.chainId === chainId) {
+    return token.symbol;
+  }
+  
+  // Try any chain
+  return token?.symbol || null;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 ```
-
-### Supported Chains
-
-1=ETH, 10=Optimism, 56=BSC, 100=xDai, 137=Polygon, 250=Fantom, 42161=Arbitrum, 43114=Avalanche
 
 ---
 
@@ -476,16 +858,73 @@ const CHAIN_MAP = {
 |----------|-----|
 | `/pools` | All yield pools across protocols |
 | `/stablecoins` | Stablecoin market caps |
+| `/stablecoins/{id}` | Single stablecoin details |
 | `/protocols` | Protocol info |
 | `/chart/{pool}` | Historical APY for a pool |
 
-### Stablecoins Endpoint
+### Full Example
 
 ```javascript
-const resp = await fetch('https://stablecoins.llama.fi/stablecoins');
-const data = await resp.json();
+const https = require('https');
 
-// Returns: { peggedAssets: [{ name, symbol, chains, circulating }] }
+function fetchJSON(url) {
+  return new Promise((res, rej) => {
+    https.get(url, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    }).on('error', rej);
+  });
+}
+
+// ─── Get all stablecoins ─────────────────────────────────────────
+async function getStablecoins() {
+  const data = await fetchJSON('https://stablecoins.llama.fi/stablecoins');
+  
+  return data.peggedAssets?.map(s => ({
+    name: s.name,
+    symbol: s.symbol,
+    id: s.id,
+    chains: Object.keys(s.chainCirculating || {}),
+    totalCirculating: {
+      usd: Object.values(s.chainCirculating || {})
+        .reduce((sum, c) => sum + (c.current?.peggedUSD || 0), 0),
+    },
+  })) || [];
+}
+
+// ─── Build stablecoin symbol registry ────────────────────────────
+async function buildStablecoinRegistry() {
+  const stablecoins = await getStablecoins();
+  const registry = new Set();
+  
+  for (const s of stablecoins) {
+    // Add common symbols
+    registry.add(s.symbol?.toUpperCase());
+    
+    // Add variations (e.g., 'USDC.e' -> 'USDC')
+    if (s.symbol?.includes('.')) {
+      registry.add(s.symbol.split('.')[0].toUpperCase());
+    }
+  }
+  
+  return registry;  // Use: registry.has('USDC') to check
+}
+
+// ─── Get yield pools for a protocol ──────────────────────────────
+async function getProtocolPools(protocolName) {
+  const data = await fetchJSON('https://yields.llama.fi/pools');
+  
+  return data.data?.filter(p => 
+    p.project?.toLowerCase() === protocolName.toLowerCase()
+  ).map(p => ({
+    pool: p.pool,
+    chain: p.chain,
+    symbol: p.symbol,
+    apy: p.apy,
+    tvlUsd: p.tvlUsd,
+  })) || [];
+}
 ```
 
 ---
@@ -494,7 +933,7 @@ const data = await resp.json();
 
 **Base URL:** `https://api.portals.fi/v2`  
 **Auth:** Bearer token  
-**Budget:** 50,000 calls/month  
+**Budget:** 50,000 calls/month (~50/day)
 
 ### API Key
 
@@ -510,10 +949,82 @@ e9302cf2-58c8-4275-a533-ed0342b78fff
 | `/tokens?platforms={protocol}` | Protocol-specific tokens | Bearer |
 | `/account?owner={address}` | Wallet positions | Bearer |
 
-### Headers
+### Full Example (from Yield Portal)
 
-```
-Authorization: Bearer e9302cf2-58c8-4275-a533-ed0342b78fff
+```javascript
+const https = require('https');
+
+const PORTALS_KEY = 'e9302cf2-58c8-4275-a533-ed0342b78fff';
+const CHAIN_IDS = { eth: 1, arb: 42161, base: 8453, poly: 137, bsc: 56 };
+
+function fetchJSON(url, headers = {}) {
+  return new Promise((res, rej) => {
+    const u = new URL(url);
+    const req = https.request({
+      hostname: u.hostname, path: u.pathname + u.search,
+      headers: { 'Authorization': `Bearer ${PORTALS_KEY}`, ...headers }
+    }, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => res(JSON.parse(d)));
+    });
+    req.on('error', rej);
+    req.end();
+  });
+}
+
+// ─── Fetch tokens with yield (stablecoins, lending, etc.) ────────
+async function fetchPortalsTokens(chainId = 1, minTvl = 1000000) {
+  const data = await fetchJSON(
+    `https://api.portals.fi/v2/tokens?chains=${chainId}&minTvl=${minTvl}`
+  );
+  
+  return data.tokens?.map(t => ({
+    symbol: t.symbol,
+    name: t.name,
+    address: t.address,
+    price_usd: t.price,
+    apy: parseFloat(t.apy || 0),
+    tvl: parseFloat(t.tvl || 0),
+    protocol: t.platform?.name,
+    category: t.category,
+  })) || [];
+}
+
+// ─── Fetch wallet positions ──────────────────────────────────────
+async function fetchWalletPositions(walletAddress) {
+  const data = await fetchJSON(
+    `https://api.portals.fi/v2/account?owner=${walletAddress}`
+  );
+  
+  return data.positions?.map(p => ({
+    protocol: p.platform?.name,
+    symbol: p.token?.symbol,
+    balance_usd: p.value,
+    apy: parseFloat(p.apy || 0),
+  })) || [];
+}
+
+// ─── Two-tier fetch: large TVL first, then lending platforms ────
+async function fetchYieldPortalData() {
+  // Tier 1: All tokens with >$1M TVL
+  const largeTokens = await fetchPortalsTokens(1, 1000000);
+  
+  // Tier 2: Lending platforms specifically
+  const LENDING_PLATFORMS = [
+    'compound-v3', 'morpho', 'fluid', 'euler', 'aavev3', 'spark'
+  ];
+  
+  const lendingTokens = [];
+  for (const platform of LENDING_PLATFORMS) {
+    const tokens = await fetchJSON(
+      `https://api.portals.fi/v2/tokens?platforms=${platform}&minTvl=100000`
+    );
+    lendingTokens.push(...(tokens.tokens || []));
+  }
+  
+  return { largeTokens, lendingTokens };
+}
 ```
 
 ---
