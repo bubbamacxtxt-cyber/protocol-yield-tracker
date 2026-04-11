@@ -182,12 +182,9 @@ function matchesPosition(campaign, rules, position, allPositions) {
   
   // For 'min of X and Y' campaigns: bonus only applies to the target token (usually USDe)
   if (rules.minOfTokens && rules.minOfTokens.length === 2) {
-    // Determine which token is the target: usually the one mentioned second or explicitly
-    // The user said bonus applies to USDe, not sUSDe
-    const targetToken = posSymbol === 'USDE' ? 'USDE' : null;
-    if (!targetToken || !rules.eligibleTokens.some(t => t.symbol?.toUpperCase() === posSymbol)) return false;
-    // Only USDe gets the bonus, not sUSDe
-    if (posSymbol === 'SUSDE' && rules.minOfTokens.includes('SUSDE')) return false;
+    // minOfTokens means BOTH must be present (bonus based on lower amount)
+    // Both tokens in the pair should get the bonus
+    if (!rules.eligibleTokens.some(t => t.symbol?.toUpperCase() === posSymbol)) return false;
   } else {
     if (!rules.eligibleTokens.some(t => t.symbol?.toUpperCase() === posSymbol)) return false;
   }
