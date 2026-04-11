@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-11T16:26:04.078Z",
+  "generated_at": "2026-04-11T16:38:35.234Z",
   "summary": {
     "total_positions": 164,
     "total_value": 696343594.349396,
@@ -214,7 +214,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.819837876652285,
+              "bonus_borrow_apy": 0.820632337227861,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             },
             {
@@ -229,7 +229,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.883566151790928,
+              "bonus_borrow_apy": 0.884422367993548,
               "bonus_borrow_source": "aave:mnt(0.88%)"
             }
           ],
@@ -237,8 +237,8 @@
           "apy_base": 3.5446200000000005,
           "apy_cost": 3.4145454633924586,
           "bonus_supply": null,
-          "bonus_borrow": 1.703404028443213,
-          "apy_net": 19.83218489826369,
+          "bonus_borrow": 1.705054705221409,
+          "apy_net": 19.846848557639593,
           "apy_reward": null
         },
         {
@@ -1600,7 +1600,7 @@
               "value_usd": 68535172.4061577,
               "apy_base": 0.968181818181818,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 3.03474905133522,
+              "bonus_supply_apy": 3.03470617777384,
               "bonus_supply_source": "aave:eth(3.03%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -1626,9 +1626,9 @@
           "rewards": [],
           "apy_base": 0.968181818181818,
           "apy_cost": 3.25083333333333,
-          "bonus_supply": 3.03474905133522,
+          "bonus_supply": 3.03470617777384,
           "bonus_borrow": null,
-          "apy_net": 10.663787307500879,
+          "apy_net": 10.663364729680943,
           "apy_reward": null
         },
         {
@@ -1776,7 +1776,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.819837876652285,
+              "bonus_borrow_apy": 0.820632337227861,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             },
             {
@@ -1791,7 +1791,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.883566151790928,
+              "bonus_borrow_apy": 0.884422367993548,
               "bonus_borrow_source": "aave:mnt(0.88%)"
             }
           ],
@@ -1799,8 +1799,8 @@
           "apy_base": 3.5445159039960625,
           "apy_cost": 3.4145619972234105,
           "bonus_supply": 3.5,
-          "bonus_borrow": 1.703404028443213,
-          "apy_net": 54.688061167677866,
+          "bonus_borrow": 1.705054705221409,
+          "apy_net": 54.702806867245194,
           "apy_reward": null
         },
         {
@@ -1979,7 +1979,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.819837876652285,
+              "bonus_borrow_apy": 0.820632337227861,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             }
           ],
@@ -1987,8 +1987,8 @@
           "apy_base": 3.71611,
           "apy_cost": 3.41454545454545,
           "bonus_supply": null,
-          "bonus_borrow": 0.819837876652285,
-          "apy_net": 13.519322980745542,
+          "bonus_borrow": 0.820632337227861,
+          "apy_net": 13.52626809346658,
           "apy_reward": null
         },
         {
@@ -2923,7 +2923,7 @@
               "value_usd": 508490.374091722,
               "apy_base": 2.78958333333333,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 1.30963355039056,
+              "bonus_supply_apy": 1.30911978216789,
               "bonus_supply_source": "aave:plasma(0.65%); aave:plasma(0.65%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -2933,9 +2933,9 @@
           "rewards": [],
           "apy_base": 2.78958333333333,
           "apy_cost": null,
-          "bonus_supply": 1.30963355039056,
+          "bonus_supply": 1.30911978216789,
           "bonus_borrow": null,
-          "apy_net": 4.099216883723891,
+          "apy_net": 4.09870311550122,
           "apy_reward": null
         },
         {
@@ -3434,7 +3434,7 @@
               "value_usd": 10017447.3597903,
               "apy_base": 1.40791666666667,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 4.18056259412929,
+              "bonus_supply_apy": 4.17931135714217,
               "bonus_supply_source": "aave:plasma(4.18%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -3444,9 +3444,9 @@
           "rewards": [],
           "apy_base": 1.40791666666667,
           "apy_cost": null,
-          "bonus_supply": 4.18056259412929,
+          "bonus_supply": 4.17931135714217,
           "bonus_borrow": null,
-          "apy_net": 5.58847926079596,
+          "apy_net": 5.587228023808841,
           "apy_reward": null
         },
         {
@@ -7971,7 +7971,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.819837876652285,
+              "bonus_borrow_apy": 0.820632337227861,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             }
           ],
@@ -7979,8 +7979,8 @@
           "apy_base": 1.7980180674205528,
           "apy_cost": 3.41454545454545,
           "bonus_supply": null,
-          "bonus_borrow": 0.819837876652285,
-          "apy_net": -4.461521157737673,
+          "bonus_borrow": 0.820632337227861,
+          "apy_net": -4.455279131113386,
           "apy_reward": null
         },
         {
@@ -8144,7 +8144,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.819837876652285,
+              "bonus_borrow_apy": 0.820632337227861,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             }
           ],
@@ -8152,8 +8152,8 @@
           "apy_base": 1.796230288568157,
           "apy_cost": 3.41454545454545,
           "bonus_supply": null,
-          "bonus_borrow": 0.819837876652285,
-          "apy_net": -5.430881529132403,
+          "bonus_borrow": 0.820632337227861,
+          "apy_net": -5.423690773063066,
           "apy_reward": null
         },
         {
@@ -8616,7 +8616,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.819837876652285,
+              "bonus_borrow_apy": 0.820632337227861,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             },
             {
@@ -8631,7 +8631,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.883566151790928,
+              "bonus_borrow_apy": 0.884422367993548,
               "bonus_borrow_source": "aave:mnt(0.88%)"
             }
           ],
@@ -8639,8 +8639,8 @@
           "apy_base": 3.71611,
           "apy_cost": 3.4659122152957345,
           "bonus_supply": null,
-          "bonus_borrow": 1.703404028443213,
-          "apy_net": 21.421413159454385,
+          "bonus_borrow": 1.705054705221409,
+          "apy_net": 21.436373082494764,
           "apy_reward": null
         },
         {
@@ -8805,7 +8805,7 @@
               "apy_base_source": "aave_borrow_ref",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 2.87637428418617,
+              "bonus_borrow_apy": 2.87523561193541,
               "bonus_borrow_source": "fluid:plasma(0.68%); fluid:plasma(2.19%)"
             }
           ],
@@ -8813,8 +8813,8 @@
           "apy_base": 7.12,
           "apy_cost": 3.57958333333333,
           "bonus_supply": null,
-          "bonus_borrow": 2.87637428418617,
-          "apy_net": 48.05330944971393,
+          "bonus_borrow": 2.87523561193541,
+          "apy_net": 48.04604575294284,
           "apy_reward": null
         },
         {
@@ -9612,7 +9612,7 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.819837876652285,
+                  "bonus_borrow_apy": 0.820632337227861,
                   "bonus_borrow_source": "aave:mnt(0.82%)"
                 }
               ],
@@ -9620,8 +9620,8 @@
               "apy_base": 1.7980180674205528,
               "apy_cost": 3.41454545454545,
               "bonus_supply": null,
-              "bonus_borrow": 0.819837876652285,
-              "apy_net": -4.461521157737673,
+              "bonus_borrow": 0.820632337227861,
+              "apy_net": -4.455279131113386,
               "apy_reward": null
             },
             {
@@ -9828,7 +9828,7 @@
                   "apy_base_source": "aave_borrow_ref",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 2.87637428418617,
+                  "bonus_borrow_apy": 2.87523561193541,
                   "bonus_borrow_source": "fluid:plasma(0.68%); fluid:plasma(2.19%)"
                 }
               ],
@@ -9836,8 +9836,8 @@
               "apy_base": 7.12,
               "apy_cost": 3.57958333333333,
               "bonus_supply": null,
-              "bonus_borrow": 2.87637428418617,
-              "apy_net": 48.05330944971393,
+              "bonus_borrow": 2.87523561193541,
+              "apy_net": 48.04604575294284,
               "apy_reward": null
             },
             {
@@ -10590,7 +10590,7 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.819837876652285,
+                  "bonus_borrow_apy": 0.820632337227861,
                   "bonus_borrow_source": "aave:mnt(0.82%)"
                 }
               ],
@@ -10598,8 +10598,8 @@
               "apy_base": 1.796230288568157,
               "apy_cost": 3.41454545454545,
               "bonus_supply": null,
-              "bonus_borrow": 0.819837876652285,
-              "apy_net": -5.430881529132403,
+              "bonus_borrow": 0.820632337227861,
+              "apy_net": -5.423690773063066,
               "apy_reward": null
             },
             {
@@ -10921,7 +10921,7 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.819837876652285,
+                  "bonus_borrow_apy": 0.820632337227861,
                   "bonus_borrow_source": "aave:mnt(0.82%)"
                 },
                 {
@@ -10936,7 +10936,7 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.883566151790928,
+                  "bonus_borrow_apy": 0.884422367993548,
                   "bonus_borrow_source": "aave:mnt(0.88%)"
                 }
               ],
@@ -10944,8 +10944,8 @@
               "apy_base": 3.71611,
               "apy_cost": 3.4659122152957345,
               "bonus_supply": null,
-              "bonus_borrow": 1.703404028443213,
-              "apy_net": 21.421413159454385,
+              "bonus_borrow": 1.705054705221409,
+              "apy_net": 21.436373082494764,
               "apy_reward": null
             },
             {

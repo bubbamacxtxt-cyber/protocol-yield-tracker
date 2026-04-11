@@ -103,9 +103,10 @@ function parseCampaignRules(campaign) {
   // Parse conditions from description
   const text = `${campaign.name || ''} ${campaign.description || ''}`.toLowerCase();
 
-  const borrowMatch = text.match(/must (?:also )?borrow (?:any of )?(\w[\w\s,\/]+(?:or \w+)?)/i);
+  // Match "borrow TOKEN1, TOKEN2, or TOKEN3 and ..." 
+  const borrowMatch = text.match(/borrow\s+(.*?)(?:\s+and\s+)/i);
   if (borrowMatch) {
-    rules.requiredBorrows = borrowMatch[1].split(/[,\s]+or\s+|\s*,\s*/).map(s => s.trim().toUpperCase()).filter(s => s.length > 1);
+    rules.requiredBorrows = borrowMatch[1].split(/[,\s]+or\s+|\s*,\s*/).map(s => s.trim().toUpperCase()).filter(s => s.length > 1 && s.length <= 10);
   }
 
   const hfMatch = text.match(/health factor (?:below|under|less than) (\d+\.?\d*)/i);
