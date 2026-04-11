@@ -40,23 +40,36 @@ function httpGet(url) {
   });
 }
 
+const AAVE_CHAINS = {
+  eth: 1, base: 8453, arb: 42161, plasma: 9745, mnt: 5000, ink: 57073, sonic: 146,
+};
+
 async function fetchAaveReserves() {
-  const data = await postJSON(AAVE_API, {
-    query: `{ markets(request: {chainIds: [1]}) { name reserves { underlyingToken { symbol address } aToken { address } vToken { address } } } }`
-  });
-  const markets = data.data?.markets || [];
   const reserveMap = {};
-  for (const market of markets) {
-    for (const r of (market.reserves || [])) {
-      const addr = r.underlyingToken?.address?.toLowerCase();
-      if (!addr) continue;
-      if (!reserveMap[addr]) reserveMap[addr] = [];
-      reserveMap[addr].push({
-        marketName: market.name,
-        symbol: r.underlyingToken?.symbol,
-        vToken: r.vToken?.address?.toLowerCase(),
-        aToken: r.aToken?.address?.toLowerCase(),
+  for (const [chainName, chainId] of Object.entries(AAVE_CHAINS)) {
+    try {
+      const data = await postJSON(AAVE_API, {
+        query: `{ markets(request: {chainIds: [${chainId}]}) { name reserves { underlyingToken { symbol address } aToken { address } vToken { address } } } }`
       });
+      const markets = data.data?.markets || [];
+      for (const market of markets) {
+        for (const r of (market.reserves || [])) {
+          const addr = r.underlyingToken?.address?.toLowerCase();
+          if (!addr) continue;
+          if (!reserveMap[addr]) reserveMap[addr] = [];
+          reserveMap[addr].push({
+            chain: chainName,
+            marketName: market.name,
+            symbol: r.underlyingToken?.symbol,
+            vToken: r.vToken?.address?.toLowerCase(),
+            aToken: r.aToken?.address?.toLowerCase(),
+          });
+        }
+      }
+      const count = markets.reduce((s, m) => s + (m.reserves?.length || 0), 0);
+      console.log(`  Aave ${chainName}: ${count} reserves`);
+    } catch(e) {
+      console.log(`  Aave ${chainName}: error ${e.message}`);
     }
   }
   return reserveMap;
@@ -93,7 +106,9 @@ async function fetchFluidVaults() {
       const data = await httpGet(`https://api.fluid.instadapp.io/v2/${chainId}/vaults`);
       const vaults = Array.isArray(data) ? data : [];
       for (const v of vaults) {
-        vaultMap[v.address?.toLowerCase()] = {
+        // Key by chain + address since Fluid uses same addresses across chains
+        const key = chainName + ':' + v.address?.toLowerCase();
+        vaultMap[key] = {
           chain: chainName,
           address: v.address?.toLowerCase(),
           supplySymbol: v.supplyToken?.token0?.symbol,
@@ -155,6 +170,8 @@ async function main() {
       let matched = null;
       for (const [underlying, reserves] of Object.entries(aaveReserves)) {
         for (const r of reserves) {
+          // Must match chain
+          if (r.chain !== pos.chain) continue;
           if (r.vToken && posIdx.includes(r.vToken.toLowerCase())) {
             matched = { ...r, underlying }; break;
           }
@@ -163,7 +180,11 @@ async function main() {
       }
       
       if (!matched && supplyAddr && aaveReserves[supplyAddr]) {
-        matched = { ...aaveReserves[supplyAddr][0], underlying: supplyAddr };
+        // Filter reserves by chain
+        const chainReserves = aaveReserves[supplyAddr].filter(r => r.chain === pos.chain);
+        if (chainReserves.length > 0) {
+          matched = { ...chainReserves[0], underlying: supplyAddr };
+        }
       }
       
       if (matched) {
@@ -190,13 +211,30 @@ async function main() {
       const posIdx = pos.position_index?.toLowerCase() || '';
       
       let matchedVault = null;
-      for (const [vaultAddr, v] of Object.entries(fluidVaults)) {
-        if (v.chain !== pos.chain) continue;
-        if (supplyAddr && v.supplyAddr === supplyAddr) {
-          if (borrowAddr && v.borrowAddr === borrowAddr) {
+      
+      // First try: match position_index to vault address (for vault positions)
+      if (posIdx) {
+        const idxKey = pos.chain + ':' + posIdx;
+        matchedVault = fluidVaults[idxKey];
+      }
+      
+      // Second: try exact match (supply + borrow)
+      if (!matchedVault) {
+        for (const [key, v] of Object.entries(fluidVaults)) {
+          if (v.chain !== pos.chain) continue;
+          if (supplyAddr && v.supplyAddr === supplyAddr) {
+            if (borrowAddr && v.borrowAddr === borrowAddr) {
+              matchedVault = v; break;
+            }
+          }
+        }
+      }
+      
+      // Third: supply-only match for positions without borrow
+      if (!matchedVault && !borrowAddr && supplyAddr) {
+        for (const [key, v] of Object.entries(fluidVaults)) {
+          if (v.chain === pos.chain && v.supplyAddr === supplyAddr) {
             matchedVault = v; break;
-          } else if (!borrowAddr && !v.borrowAddr) {
-            matchedVault = v;
           }
         }
       }
