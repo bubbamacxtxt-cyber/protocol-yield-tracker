@@ -209,7 +209,10 @@ tr:hover td { background: var(--bg-secondary); }
   .table-wrap { font-size: 12px; }
   th, td { padding: 8px 10px; }
 }
+#detail-modal .modal-content { animation: slideIn 0.2s ease; }
+@keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 </style>
+<div id="detail-modal"></div>
 </head>
 <body>
 <div class="container">
@@ -370,11 +373,16 @@ function renderTable(data) {
         const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
         const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
         const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
-        const bonusApy = p.apy_bonus != null ? '+' + p.apy_bonus.toFixed(2) + '%' : '';
+        const bonusSupply = p.bonus_supply || 0;
+        const bonusBorrow = p.bonus_borrow || 0;
+        const bonusTotal = bonusSupply + bonusBorrow;
+        const bonusApy = bonusTotal > 0 ? '+' + bonusTotal.toFixed(2) + '%' : '';
+        const bonusDetail = bonusTotal > 0 ? `Supply +${bonusSupply.toFixed(2)}%\nBorrow +${bonusBorrow.toFixed(2)}%` : '';
         const costApy = p.apy_cost != null ? p.apy_cost.toFixed(2) + '%' : '-';
         const netApy = p.apy_net != null ? p.apy_net.toFixed(2) + '%' : '-';
         const netColor = p.apy_net > 0 ? 'var(--accent-green)' : p.apy_net < 0 ? '#f85149' : 'var(--text-secondary)';
-        return `<tr>
+        const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
+        return `<tr onclick="showDetail(${detailData})" style="cursor:pointer">
             <td title="${p.wallet || ''}"><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet)}</a></td>
             <td>${(p.chain || '').toUpperCase()}</td>
             <td>${p.protocol_name || '-'}</td>
@@ -463,7 +471,8 @@ function downloadXLSX() {
         BorrowUSD: p.debt_usd,
         NetUSD: p.net_usd,
         BaseAPY: p.apy_base,
-        BonusAPY: p.apy_bonus,
+        BonusSupply: p.bonus_supply,
+        BonusBorrow: p.bonus_borrow,
         CostAPY: p.apy_cost,
         NetAPY: p.apy_net,
         Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
@@ -504,6 +513,70 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTable(data);
     });
 });
+
+// Detail modal
+function showDetail(p) {
+    const modal = document.getElementById('detail-modal');
+    if (!modal) return;
+    
+    const bonusSupply = p.bonus_supply || 0;
+    const bonusBorrow = p.bonus_borrow || 0;
+    
+    let supplyDetail = (p.supply || []).map(t => {
+        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% base`;
+        if (t.bonus_supply_apy) info += ` + ${(t.bonus_supply_apy).toFixed(2)}%`;
+        return info;
+    }).join('<br>');
+    
+    let borrowDetail = (p.borrow || []).map(t => {
+        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% cost`;
+        if (t.bonus_borrow_apy) info += ` − ${(t.bonus_borrow_apy).toFixed(2)}%`;
+        return info;
+    }).join('<br>');
+    
+    modal.innerHTML = `
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3 style="margin:0">${p.protocol_name} — ${p.supply?.map(t=>t.symbol).join('/') || p.symbol || ''}</h3>
+                <button onclick="document.getElementById('detail-modal').remove()" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer">×</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Supply</div>
+                    <div style="font-size:13px">${supplyDetail || '-'}</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Borrow</div>
+                    <div style="font-size:13px">${borrowDetail || '-'}</div>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Base APY</div>
+                    <div style="font-size:18px;font-weight:600">${(p.apy_base || 0).toFixed(2)}%</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div>
+                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">+${bonusSupply.toFixed(2)}%</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Cost APY</div>
+                    <div style="font-size:18px;font-weight:600">${(p.apy_cost || 0).toFixed(2)}%</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div>
+                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">−${bonusBorrow.toFixed(2)}%</div>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+                <div style="color:var(--text-secondary);font-size:12px">Net APY</div>
+                <div style="font-size:28px;font-weight:700;color:${(p.apy_net||0) > 0 ? 'var(--accent-green)' : '#f85149'}">${(p.apy_net || 0).toFixed(2)}%</div>
+            </div>
+        </div>
+    `;
+    modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+}
 </script>
 </body>
 </html>

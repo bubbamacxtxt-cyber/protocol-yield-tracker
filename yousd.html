@@ -209,7 +209,10 @@ tr:hover td { background: var(--bg-secondary); }
   .table-wrap { font-size: 12px; }
   th, td { padding: 8px 10px; }
 }
+#detail-modal .modal-content { animation: slideIn 0.2s ease; }
+@keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 </style>
+<div id="detail-modal"></div>
 </head>
 <body>
 <div class="container">
@@ -271,7 +274,7 @@ tr:hover td { background: var(--bg-secondary); }
 </div>
 
 <script>
-const WHALE_DATA = [{"id":568,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":10023571.04,"asset_usd":10023571.04,"debt_usd":0,"position_index":"0x6c3ea9036406852006290770bedfcaba0e23a0e8_10023571","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"PayPal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":10023571.043303,"price_usd":1,"value_usd":10023571.043303,"apy_base":4.74701383851093,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":4.74701383851093,"apy_cost":null,"apy_net":4.74701383851093,"apy_reward":null},{"id":567,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":8511824.09,"asset_usd":8511824.09,"debt_usd":0,"position_index":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed_8511824","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"RLUSD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":8512675.35911364,"price_usd":0.9999,"value_usd":8511824.09157773,"apy_base":2.4272170490528,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":2.4272170490528,"apy_cost":null,"apy_net":2.4272170490528,"apy_reward":null},{"id":565,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"lend","yield_source":"Aave V3","health_rate":null,"net_usd":8216962.21,"asset_usd":8216962.21,"debt_usd":0,"position_index":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f_8216962","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"GHO","real_symbol":"GHO","real_name":"Gho Token","address":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f","amount":8200561.08396483,"price_usd":1.002,"value_usd":8216962.20613276,"apy_base":2.00086956521739,"apy_base_source":"aave_supply"}],"borrow":[],"rewards":[],"apy_base":2.00086956521739,"apy_cost":null,"apy_net":2.00086956521739,"apy_reward":null},{"id":570,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":4112301.98,"asset_usd":4112301.98,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_4112302","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":4112301.975915,"price_usd":1,"value_usd":4112301.975915,"apy_base":11.2507980299972,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":11.2507980299972,"apy_cost":null,"apy_net":11.2507980299972,"apy_reward":null},{"id":566,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":4020492.39,"asset_usd":4020492.39,"debt_usd":0,"position_index":"0xdac17f958d2ee523a2206206994597c13d831ec7_4020492","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":4019809.020141,"price_usd":1.00017,"value_usd":4020492.38767442,"apy_base":3.69790523897411,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":3.69790523897411,"apy_cost":null,"apy_net":3.69790523897411,"apy_reward":null},{"id":573,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"base","protocol_id":"base_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":1602302.51,"asset_usd":1602302.51,"debt_usd":0,"position_index":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913_1602303","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:02","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":1602302.506883,"price_usd":1,"value_usd":1602302.506883,"apy_base":10.2484795770873,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":10.2484795770873,"apy_cost":null,"apy_net":10.2484795770873,"apy_reward":null},{"id":574,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"base","protocol_id":"wallet-held","protocol_name":"Wallet","position_type":"Holding","strategy":"hold","yield_source":"wallet","health_rate":null,"net_usd":791654.66,"asset_usd":791654.66,"debt_usd":0,"position_index":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:02","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":791654.662225,"price_usd":1,"value_usd":791654.662225,"apy_base":2.73541666666667,"apy_base_source":"aave_supply_ref"}],"borrow":[],"rewards":[],"apy_base":2.73541666666667,"apy_cost":null,"apy_net":2.73541666666667,"apy_reward":null},{"id":572,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"wallet-held","protocol_name":"Wallet","position_type":"Holding","strategy":"hold","yield_source":"wallet","health_rate":null,"net_usd":592343.05,"asset_usd":592343.05,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:00","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":592343.045834,"price_usd":1,"value_usd":592343.045834,"apy_base":2.502,"apy_base_source":"aave_supply_ref"}],"borrow":[],"rewards":[],"apy_base":2.502,"apy_cost":null,"apy_net":2.502,"apy_reward":null},{"id":571,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"resolv","protocol_name":"resolv","position_type":"Lending","strategy":"lend","yield_source":"resolv","health_rate":null,"net_usd":450276.21,"asset_usd":450276.21,"debt_usd":0,"position_index":"0x4956b52ae2ff65d74ca2d61207523288e4528f96","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:00","supply":[{"symbol":"RLP","real_symbol":"RLP","real_name":"Resolv Liquidity Provider Token","address":"0x4956b52ae2ff65d74ca2d61207523288e4528f96","amount":943248.070451355,"price_usd":0.477367754038895,"value_usd":450276.212892885,"apy_base":0,"apy_base_source":"static"}],"borrow":[],"rewards":[],"apy_base":0,"apy_cost":null,"apy_net":0,"apy_reward":null},{"id":569,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":400346.76,"asset_usd":400346.76,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_400347","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":400346.7631,"price_usd":1,"value_usd":400346.7631,"apy_base":11.2507980299972,"apy_base_source":"morpho_supply"}],"borrow":[],"rewards":[],"apy_base":11.2507980299972,"apy_cost":null,"apy_net":11.2507980299972,"apy_reward":null}];
+const WHALE_DATA = [{"id":568,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":10023571.04,"asset_usd":10023571.04,"debt_usd":0,"position_index":"0x6c3ea9036406852006290770bedfcaba0e23a0e8_10023571","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"PayPal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":10023571.043303,"price_usd":1,"value_usd":10023571.043303,"apy_base":4.74701383851093,"apy_base_source":"morpho_supply","bonus_supply_apy":0.268099772728764,"bonus_supply_source":"morpho:eth(0.27%)","bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":4.74701383851093,"apy_cost":null,"bonus_supply":0.268099772728764,"bonus_borrow":null,"apy_net":5.015113611239694,"apy_reward":null},{"id":567,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":8511824.09,"asset_usd":8511824.09,"debt_usd":0,"position_index":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed_8511824","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"RLUSD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":8512675.35911364,"price_usd":0.9999,"value_usd":8511824.09157773,"apy_base":2.4272170490528,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.4272170490528,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.4272170490528,"apy_reward":null},{"id":565,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"lend","yield_source":"Aave V3","health_rate":null,"net_usd":8216962.21,"asset_usd":8216962.21,"debt_usd":0,"position_index":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f_8216962","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"GHO","real_symbol":"GHO","real_name":"Gho Token","address":"0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f","amount":8200561.08396483,"price_usd":1.002,"value_usd":8216962.20613276,"apy_base":2.00086956521739,"apy_base_source":"aave_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.00086956521739,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.00086956521739,"apy_reward":null},{"id":570,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":4112301.98,"asset_usd":4112301.98,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_4112302","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":4112301.975915,"price_usd":1,"value_usd":4112301.975915,"apy_base":11.2507980299972,"apy_base_source":"morpho_supply","bonus_supply_apy":21.6904369392698,"bonus_supply_source":"morpho:eth(0.32%); morpho:eth(6.38%); morpho:eth(15.00%)","bonus_borrow_apy":31.1017069690131,"bonus_borrow_source":"morpho:eth(5.37%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"}],"borrow":[],"rewards":[],"apy_base":11.2507980299972,"apy_cost":null,"bonus_supply":21.6904369392698,"bonus_borrow":31.1017069690131,"apy_net":32.941234969267,"apy_reward":null},{"id":566,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":4020492.39,"asset_usd":4020492.39,"debt_usd":0,"position_index":"0xdac17f958d2ee523a2206206994597c13d831ec7_4020492","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":4019809.020141,"price_usd":1.00017,"value_usd":4020492.38767442,"apy_base":3.69790523897411,"apy_base_source":"morpho_supply","bonus_supply_apy":0.304156601443893,"bonus_supply_source":"morpho:eth(0.30%)","bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":3.69790523897411,"apy_cost":null,"bonus_supply":0.304156601443893,"bonus_borrow":null,"apy_net":4.002061840418003,"apy_reward":null},{"id":573,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"base","protocol_id":"base_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":1602302.51,"asset_usd":1602302.51,"debt_usd":0,"position_index":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913_1602303","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:02","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":1602302.506883,"price_usd":1,"value_usd":1602302.506883,"apy_base":10.2484795770873,"apy_base_source":"morpho_supply","bonus_supply_apy":4.16206961427737,"bonus_supply_source":"morpho:base(4.16%)","bonus_borrow_apy":10.539327791842,"bonus_borrow_source":"morpho:base(7.50%); morpho:base(3.04%)"}],"borrow":[],"rewards":[],"apy_base":10.2484795770873,"apy_cost":null,"bonus_supply":4.16206961427737,"bonus_borrow":10.539327791842,"apy_net":14.41054919136467,"apy_reward":null},{"id":574,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"base","protocol_id":"wallet-held","protocol_name":"Wallet","position_type":"Holding","strategy":"hold","yield_source":"wallet","health_rate":null,"net_usd":791654.66,"asset_usd":791654.66,"debt_usd":0,"position_index":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:02","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":791654.662225,"price_usd":1,"value_usd":791654.662225,"apy_base":2.73541666666667,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.73541666666667,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.73541666666667,"apy_reward":null},{"id":572,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"wallet-held","protocol_name":"Wallet","position_type":"Holding","strategy":"hold","yield_source":"wallet","health_rate":null,"net_usd":592343.05,"asset_usd":592343.05,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:00","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":592343.045834,"price_usd":1,"value_usd":592343.045834,"apy_base":2.502,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.502,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.502,"apy_reward":null},{"id":571,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"resolv","protocol_name":"resolv","position_type":"Lending","strategy":"lend","yield_source":"resolv","health_rate":null,"net_usd":450276.21,"asset_usd":450276.21,"debt_usd":0,"position_index":"0x4956b52ae2ff65d74ca2d61207523288e4528f96","debank_updated_at":null,"scanned_at":"2026-04-09 15:05:00","supply":[{"symbol":"RLP","real_symbol":"RLP","real_name":"Resolv Liquidity Provider Token","address":"0x4956b52ae2ff65d74ca2d61207523288e4528f96","amount":943248.070451355,"price_usd":0.477367754038895,"value_usd":450276.212892885,"apy_base":0,"apy_base_source":"static","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":0,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":0,"apy_reward":null},{"id":569,"wallet":"0x0000000f2eb9f69274678c76222b35eec7588a65","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":400346.76,"asset_usd":400346.76,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_400347","debank_updated_at":null,"scanned_at":"2026-04-09 15:04:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":400346.7631,"price_usd":1,"value_usd":400346.7631,"apy_base":11.2507980299972,"apy_base_source":"morpho_supply","bonus_supply_apy":21.6904369392698,"bonus_supply_source":"morpho:eth(0.32%); morpho:eth(6.38%); morpho:eth(15.00%)","bonus_borrow_apy":31.1017069690131,"bonus_borrow_source":"morpho:eth(5.37%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"}],"borrow":[],"rewards":[],"apy_base":11.2507980299972,"apy_cost":null,"bonus_supply":21.6904369392698,"bonus_borrow":31.1017069690131,"apy_net":32.941234969267,"apy_reward":null}];
 const WHALE_VAULTS = {};
 
 const positions = WHALE_DATA;
@@ -370,11 +373,16 @@ function renderTable(data) {
         const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
         const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
         const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
-        const bonusApy = p.apy_bonus != null ? '+' + p.apy_bonus.toFixed(2) + '%' : '';
+        const bonusSupply = p.bonus_supply || 0;
+        const bonusBorrow = p.bonus_borrow || 0;
+        const bonusTotal = bonusSupply + bonusBorrow;
+        const bonusApy = bonusTotal > 0 ? '+' + bonusTotal.toFixed(2) + '%' : '';
+        const bonusDetail = bonusTotal > 0 ? `Supply +${bonusSupply.toFixed(2)}%\nBorrow +${bonusBorrow.toFixed(2)}%` : '';
         const costApy = p.apy_cost != null ? p.apy_cost.toFixed(2) + '%' : '-';
         const netApy = p.apy_net != null ? p.apy_net.toFixed(2) + '%' : '-';
         const netColor = p.apy_net > 0 ? 'var(--accent-green)' : p.apy_net < 0 ? '#f85149' : 'var(--text-secondary)';
-        return `<tr>
+        const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
+        return `<tr onclick="showDetail(${detailData})" style="cursor:pointer">
             <td title="${p.wallet || ''}"><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet)}</a></td>
             <td>${(p.chain || '').toUpperCase()}</td>
             <td>${p.protocol_name || '-'}</td>
@@ -463,7 +471,8 @@ function downloadXLSX() {
         BorrowUSD: p.debt_usd,
         NetUSD: p.net_usd,
         BaseAPY: p.apy_base,
-        BonusAPY: p.apy_bonus,
+        BonusSupply: p.bonus_supply,
+        BonusBorrow: p.bonus_borrow,
         CostAPY: p.apy_cost,
         NetAPY: p.apy_net,
         Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
@@ -504,6 +513,70 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTable(data);
     });
 });
+
+// Detail modal
+function showDetail(p) {
+    const modal = document.getElementById('detail-modal');
+    if (!modal) return;
+    
+    const bonusSupply = p.bonus_supply || 0;
+    const bonusBorrow = p.bonus_borrow || 0;
+    
+    let supplyDetail = (p.supply || []).map(t => {
+        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% base`;
+        if (t.bonus_supply_apy) info += ` + ${(t.bonus_supply_apy).toFixed(2)}%`;
+        return info;
+    }).join('<br>');
+    
+    let borrowDetail = (p.borrow || []).map(t => {
+        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% cost`;
+        if (t.bonus_borrow_apy) info += ` − ${(t.bonus_borrow_apy).toFixed(2)}%`;
+        return info;
+    }).join('<br>');
+    
+    modal.innerHTML = `
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3 style="margin:0">${p.protocol_name} — ${p.supply?.map(t=>t.symbol).join('/') || p.symbol || ''}</h3>
+                <button onclick="document.getElementById('detail-modal').remove()" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer">×</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Supply</div>
+                    <div style="font-size:13px">${supplyDetail || '-'}</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Borrow</div>
+                    <div style="font-size:13px">${borrowDetail || '-'}</div>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Base APY</div>
+                    <div style="font-size:18px;font-weight:600">${(p.apy_base || 0).toFixed(2)}%</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div>
+                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">+${bonusSupply.toFixed(2)}%</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Cost APY</div>
+                    <div style="font-size:18px;font-weight:600">${(p.apy_cost || 0).toFixed(2)}%</div>
+                </div>
+                <div>
+                    <div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div>
+                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">−${bonusBorrow.toFixed(2)}%</div>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+                <div style="color:var(--text-secondary);font-size:12px">Net APY</div>
+                <div style="font-size:28px;font-weight:700;color:${(p.apy_net||0) > 0 ? 'var(--accent-green)' : '#f85149'}">${(p.apy_net || 0).toFixed(2)}%</div>
+            </div>
+        </div>
+    `;
+    modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+}
 </script>
 </body>
 </html>

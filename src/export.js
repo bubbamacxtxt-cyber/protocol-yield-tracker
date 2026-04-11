@@ -29,12 +29,16 @@ function main() {
             (SELECT json_group_array(json_object(
                 'symbol', pt.symbol, 'real_symbol', pt.real_symbol, 'real_name', pt.real_name,
                 'address', pt.address, 'amount', pt.amount, 'price_usd', pt.price_usd, 'value_usd', pt.value_usd,
-                'apy_base', pt.apy_base, 'apy_base_source', pt.apy_base_source
+                'apy_base', pt.apy_base, 'apy_base_source', pt.apy_base_source,
+                'bonus_supply_apy', pt.bonus_supply_apy, 'bonus_supply_source', pt.bonus_supply_source,
+                'bonus_borrow_apy', pt.bonus_borrow_apy, 'bonus_borrow_source', pt.bonus_borrow_source
             )) FROM position_tokens pt WHERE pt.position_id = p.id AND pt.role = 'supply') as supply_json,
             (SELECT json_group_array(json_object(
                 'symbol', pt.symbol, 'real_symbol', pt.real_symbol, 'real_name', pt.real_name,
                 'address', pt.address, 'amount', pt.amount, 'price_usd', pt.price_usd, 'value_usd', pt.value_usd,
-                'apy_base', pt.apy_base, 'apy_base_source', pt.apy_base_source
+                'apy_base', pt.apy_base, 'apy_base_source', pt.apy_base_source,
+                'bonus_supply_apy', pt.bonus_supply_apy, 'bonus_supply_source', pt.bonus_supply_source,
+                'bonus_borrow_apy', pt.bonus_borrow_apy, 'bonus_borrow_source', pt.bonus_borrow_source
             )) FROM position_tokens pt WHERE pt.position_id = p.id AND pt.role = 'borrow') as borrow_json,
             (SELECT json_group_array(json_object(
                 'symbol', pt.symbol, 'real_symbol', pt.real_symbol,
@@ -74,15 +78,26 @@ function main() {
         }
         p.apy_cost = costApyDen > 0 ? costApyNum / costApyDen : null;
 
-        // Net APY: base - cost * (borrow/supply ratio)
-        // More precisely: (base*supply - cost*borrow) / supply
+        // Bonus APY: sum of supply bonuses and borrow bonuses from tokens
+        let bonusSupplyTotal = 0, bonusBorrowTotal = 0;
+        for (const t of p.supply) {
+            if (t.bonus_supply_apy) bonusSupplyTotal += t.bonus_supply_apy;
+            if (t.bonus_borrow_apy) bonusBorrowTotal += t.bonus_borrow_apy;
+        }
+        for (const t of p.borrow) {
+            if (t.bonus_supply_apy) bonusSupplyTotal += t.bonus_supply_apy;
+            if (t.bonus_borrow_apy) bonusBorrowTotal += t.bonus_borrow_apy;
+        }
+        p.bonus_supply = bonusSupplyTotal || null;
+        p.bonus_borrow = bonusBorrowTotal || null;
+        
+        // Net APY: (base + bonus_supply) * supply - (cost - bonus_borrow) * borrow / equity
         if (p.apy_base != null && p.asset_usd > 0) {
-            const baseYield = p.apy_base * p.asset_usd;
-            const costYield = (p.apy_cost || 0) * Math.abs(p.debt_usd || 0);
-            const netYield = baseYield - costYield;
-            p.apy_net = (netYield / p.asset_usd) * (p.asset_usd / (p.net_usd || p.asset_usd));
-            // Simplified: net APY relative to equity
-            p.apy_net = p.net_usd > 0 ? ((p.apy_base * p.asset_usd - (p.apy_cost || 0) * Math.abs(p.debt_usd || 0)) / p.net_usd) : null;
+            const effectiveBase = (p.apy_base || 0) + bonusSupplyTotal;
+            const effectiveCost = (p.apy_cost || 0) - bonusBorrowTotal;
+            const baseYield = effectiveBase * p.asset_usd;
+            const costYield = effectiveCost * Math.abs(p.debt_usd || 0);
+            p.apy_net = p.net_usd > 0 ? ((baseYield - costYield) / p.net_usd) : null;
         } else {
             p.apy_net = null;
         }
