@@ -95,12 +95,12 @@ async function fetchPendleApy() {
   return map;
 }
 
-// ─── Source 4: Aave V3 APY ────────────────────────────────────────
+// ─── Source 4: Aave V3 APY (1-day average) ────────────────────────
 async function fetchAaveApy() {
   const supplyMap = {};
   const borrowMap = {};
   for (const cid of AAVE_CHAINS) {
-    const query = `{ markets(request: { chainIds: [${cid}] }) { reserves { underlyingToken { symbol } supplyInfo { apy { formatted } } borrowInfo { apy { formatted } } } } }`;
+    const query = `{ markets(request: { chainIds: [${cid}] }) { reserves { underlyingToken { symbol address } market { address } supplyInfo { apy { formatted } } borrowInfo { apy { formatted } } } } }`;
     try {
       const res = await fetch('https://api.v3.aave.com/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -112,8 +112,21 @@ async function fetchAaveApy() {
       for (const r of allReserves) {
         const symbol = r.underlyingToken?.symbol;
         if (!symbol) continue;
-        const sApy = parseFloat(r.supplyInfo?.apy?.formatted || '0');
-        const bApy = parseFloat(r.borrowInfo?.apy?.formatted || '0');
+        const tokenAddr = r.underlyingToken?.address;
+        const poolAddr = r.market?.address;
+        let sApy = parseFloat(r.supplyInfo?.apy?.formatted || '0');
+        let bApy = parseFloat(r.borrowInfo?.apy?.formatted || '0');
+        // Try 1-day average from history
+        if (tokenAddr && poolAddr) {
+          try {
+            const hq = `{ supply: supplyAPYHistory(request: { chainId: ${cid}, underlyingToken: "${tokenAddr}", market: "${poolAddr}", window: LAST_DAY }) { avgRate { formatted } } borrow: borrowAPYHistory(request: { chainId: ${cid}, underlyingToken: "${tokenAddr}", market: "${poolAddr}", window: LAST_DAY }) { avgRate { formatted } } }`;
+            const hr = await fetch('https://api.v3.aave.com/graphql', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query: hq }) });
+            const hd = await hr.json();
+            const ss = hd?.data?.supply || []; const bs = hd?.data?.borrow || [];
+            if (ss.length > 0) sApy = ss.reduce((a, x) => a + parseFloat(x.avgRate?.formatted || '0'), 0) / ss.length;
+            if (bs.length > 0) bApy = bs.reduce((a, x) => a + parseFloat(x.avgRate?.formatted || '0'), 0) / bs.length;
+          } catch (e) {}
+        }
         if (sApy > 0) {
           if (!supplyMap[symbol]) supplyMap[symbol] = {};
           supplyMap[symbol][cid] = Math.max(supplyMap[symbol][cid] || 0, sApy);
@@ -137,7 +150,7 @@ async function fetchMorphoApy() {
   const supplyMap = {};
   const borrowMap = {};
   for (const cid of MORPHO_CHAINS) {
-    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 100) { items { loanAsset { symbol } state { supplyApy borrowApy } } } }`;
+    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 100) { items { loanAsset { symbol } state { supplyApy borrowApy dailySupplyApy dailyBorrowApy } } } }`;
     try {
       const res = await fetch('https://api.morpho.org/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -148,8 +161,9 @@ async function fetchMorphoApy() {
       for (const m of items) {
         const symbol = m.loanAsset?.symbol;
         if (!symbol) continue;
-        const sApy = (m.state?.supplyApy || 0) * 100;
-        const bApy = (m.state?.borrowApy || 0) * 100;
+        // Use daily average APY (more stable than instantaneous)
+        const sApy = (m.state?.dailySupplyApy ?? m.state?.supplyApy ?? 0) * 100;
+        const bApy = (m.state?.dailyBorrowApy ?? m.state?.borrowApy ?? 0) * 100;
         // Skip broken markets (expired LP/PT tokens with bogus APYs)
         if (sApy > 100 || bApy > 100) continue;
         if (sApy > 0) {
