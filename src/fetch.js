@@ -365,6 +365,30 @@ async function scanAll() {
                       saveTokens(supplyTokens, 'supply');
                       saveTokens(borrowTokens, 'borrow');
                       saveTokens(rewardTokens, 'reward');
+                      
+                      // Morpho fix: if debt_usd > 0 but no borrow tokens, query Morpho API
+                      if (protocol.id === 'morpho' && borrowUsd > 0 && borrowTokens.length === 0 && stableIndex) {
+                        const chainIdMap = { eth: 1, arb: 42161, base: 8453, mnt: 5000, plasma: 9745, sonic: 146, bsc: 56, op: 10 };
+                        const morphoChainId = chainIdMap[chain] || 1;
+                        try {
+                          const mquery = JSON.stringify({ query: '{ marketById(marketId: "' + stableIndex + '", chainId: ' + morphoChainId + ') { loanAsset { symbol address } } }' });
+                          const mres = await new Promise((res, rej) => {
+                            const req = require('https').request({ hostname: 'api.morpho.org', path: '/graphql', method: 'POST', headers: { 'Content-Type': 'application/json' } }, r => {
+                              let d = ''; r.on('data', c => d += c); r.on('end', () => { try { res(JSON.parse(d)); } catch(e) { rej(e); } });
+                            });
+                            req.on('error', rej);
+                            req.write(mquery);
+                            req.end();
+                          });
+                          const loanSymbol = mres?.data?.marketById?.loanAsset?.symbol;
+                          if (loanSymbol) {
+                            tokStmt.run(posId, 'borrow', loanSymbol, loanSymbol, loanSymbol, null, null, 0, 0, borrowUsd);
+                            console.log(`    Fixed Morpho: added borrow token ${loanSymbol} ($${(borrowUsd/1e6).toFixed(1)}M)`);
+                          }
+                        } catch (e) {
+                          console.log(`    WARN: Morpho market lookup failed: ${e.message}`);
+                        }
+                      }
                     } catch (e) {
                       console.log(`    WARN: Token insert failed for posId ${posId}: ${e.message}`);
                     }

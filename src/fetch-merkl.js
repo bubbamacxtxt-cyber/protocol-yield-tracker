@@ -83,7 +83,14 @@ function parseCampaignRules(campaign) {
     minOfTokens: null,
     isNetLending: false,
     isVaultCampaign: false,
+    morphoMarketId: null, // For MORPHOBORROW/MORPHOSUPPLY: the specific market ID
   };
+
+  // For Morpho campaigns, the identifier is the market ID
+  // Only positions in THIS specific market should get the bonus
+  if (campaign.type === 'MORPHOBORROW' || campaign.type === 'MORPHOSUPPLY' || campaign.type === 'MORPHOVAULT' || campaign.type === 'MORPHOSUPPLY_SINGLETOKEN') {
+    rules.morphoMarketId = campaign.identifier?.toLowerCase();
+  }
 
   // Multi-token campaigns are vault-specific (underlying + vault share)
   // Exception: Aave campaigns with aTokens are normal lending positions
@@ -139,6 +146,13 @@ function matchesPosition(campaign, rules, position, allPositions) {
 
   // Vault campaigns don't match our underlying-token positions
   if (rules.isVaultCampaign) return false;
+
+  // For Morpho: match by market ID if specified
+  // position_index contains the market ID for Morpho positions
+  if (rules.morphoMarketId && position.protocol_name === 'Morpho') {
+    const posMarketId = position.position_index?.toLowerCase();
+    if (posMarketId !== rules.morphoMarketId) return false;
+  }
 
   // Token symbol match
   const posSymbol = position.symbol?.toUpperCase();
