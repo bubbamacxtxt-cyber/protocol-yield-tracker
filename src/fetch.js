@@ -183,7 +183,7 @@ function classifyStrategy(item, supplyUsd, borrowUsd, healthRate, protocolName) 
 
     const type = item.name || '';
     if (type === 'Lending' || isMoneyMarket) {
-        return (borrowUsd > 0 || healthRate) ? 'loop' : 'lend';
+        return borrowUsd > 0 ? 'loop' : 'lend';
     }
     if (type === 'Farming' || type === 'Leveraged Farming') return 'farm';
     if (type === 'Staked' || type === 'Locked') return 'stake';
