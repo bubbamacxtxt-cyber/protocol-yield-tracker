@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-11T11:34:20.614Z",
+  "generated_at": "2026-04-11T11:41:04.700Z",
   "summary": {
     "total_positions": 164,
     "total_value": 696343594.349396,
@@ -212,9 +212,9 @@
               "value_usd": 167115860.192501,
               "apy_base": 3.41454545454545,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.46127283341949,
-              "bonus_supply_source": "aave:mnt(1.46%)",
-              "bonus_borrow_apy": 0.820761681950513,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.819814898362222,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             },
             {
@@ -227,18 +227,18 @@
               "value_usd": 20.0565323467653,
               "apy_base": 3.48826086956522,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 2.12694257230238,
-              "bonus_supply_source": "aave:mnt(2.13%)",
-              "bonus_borrow_apy": 0.884603644012003,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.883583215998962,
               "bonus_borrow_source": "aave:mnt(0.88%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.5446200000000005,
           "apy_cost": 3.4145454633924586,
-          "bonus_supply": 3.58821540572187,
-          "bonus_borrow": 1.705365325962516,
-          "apy_net": 55.313457122272524,
+          "bonus_supply": null,
+          "bonus_borrow": 1.703398114361184,
+          "apy_net": 19.832132360973812,
           "apy_reward": null
         },
         {
@@ -285,8 +285,8 @@
               "value_usd": 117141070.002485,
               "apy_base": 3.57958333333333,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.26344633258863,
-              "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+              "bonus_supply_apy": 0.628012887554374,
+              "bonus_supply_source": "aave:plasma(0.63%)",
               "bonus_borrow_apy": 0.470964231799166,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
@@ -294,9 +294,9 @@
           "rewards": [],
           "apy_base": 0.926521739130435,
           "apy_cost": 3.57958333333333,
-          "bonus_supply": 1.26344633258863,
+          "bonus_supply": 0.628012887554374,
           "bonus_borrow": 0.470964231799166,
-          "apy_net": -5.9932839208435125,
+          "apy_net": -12.289095285732804,
           "apy_reward": null
         },
         {
@@ -343,8 +343,8 @@
               "value_usd": 115347759.874836,
               "apy_base": 3.57958333333333,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.26344633258863,
-              "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+              "bonus_supply_apy": 0.628012887554374,
+              "bonus_supply_source": "aave:plasma(0.63%)",
               "bonus_borrow_apy": 0.470964231799166,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
@@ -352,9 +352,9 @@
           "rewards": [],
           "apy_base": 3.71611,
           "apy_cost": 3.57958333333333,
-          "bonus_supply": 1.26344633258863,
+          "bonus_supply": 0.628012887554374,
           "bonus_borrow": 0.470964231799166,
-          "apy_net": 21.54278079142281,
+          "apy_net": 15.281917158748945,
           "apy_reward": null
         },
         {
@@ -517,8 +517,8 @@
               "apy_base_source": "aave_supply",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 1.75,
-              "bonus_borrow_source": "aave:eth(1.75%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [
@@ -532,8 +532,8 @@
               "value_usd": 12488910.2237248,
               "apy_base": 2.96608695652174,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.59974429189181,
-              "bonus_supply_source": "aave:eth(1.60%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -541,9 +541,9 @@
           "rewards": [],
           "apy_base": 2.502,
           "apy_cost": 2.96608695652174,
-          "bonus_supply": 1.59974429189181,
-          "bonus_borrow": 1.75,
-          "apy_net": 12.586762296044576,
+          "bonus_supply": null,
+          "bonus_borrow": null,
+          "apy_net": 1.1373936992749605,
           "apy_reward": null
         },
         {
@@ -632,8 +632,8 @@
               "value_usd": 10734015.4264544,
               "apy_base": 5.71394643974661,
               "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": 0.266301975862345,
-              "bonus_supply_source": "morpho:eth(0.27%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -641,9 +641,9 @@
           "rewards": [],
           "apy_base": 4.29962,
           "apy_cost": 5.71394643974661,
-          "bonus_supply": 0.266301975862345,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -3.043210001708182,
+          "apy_net": -5.074567465472277,
           "apy_reward": null
         },
         {
@@ -989,8 +989,8 @@
               "value_usd": 278200.685701287,
               "apy_base": 3.69790523897411,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": 0.304632151347257,
+              "bonus_supply_source": "morpho:eth(0.30%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -999,9 +999,9 @@
           "rewards": [],
           "apy_base": 3.69790523897411,
           "apy_cost": null,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": 0.304632151347257,
           "bonus_borrow": null,
-          "apy_net": 30.003748626825047,
+          "apy_net": 29.999424157413767,
           "apy_reward": null
         },
         {
@@ -1050,7 +1050,7 @@
               "apy_base_source": "morpho_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 8.80576883217737,
+              "bonus_borrow_apy": 8.80582469265448,
               "bonus_borrow_source": "morpho:eth(8.81%)"
             }
           ],
@@ -1058,8 +1058,8 @@
           "apy_base": 4.29962,
           "apy_cost": 2.71340037728969,
           "bonus_supply": null,
-          "bonus_borrow": 8.80576883217737,
-          "apy_net": 72.1355005141898,
+          "bonus_borrow": 8.80582469265448,
+          "apy_net": 72.1358651551477,
           "apy_reward": null
         }
       ],
@@ -1101,7 +1101,7 @@
               "value_usd": 10023571.043303,
               "apy_base": 4.74701383851093,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.266301975862345,
+              "bonus_supply_apy": 0.265798292849875,
               "bonus_supply_source": "morpho:eth(0.27%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -1111,9 +1111,9 @@
           "rewards": [],
           "apy_base": 4.74701383851093,
           "apy_cost": null,
-          "bonus_supply": 0.266301975862345,
+          "bonus_supply": 0.265798292849875,
           "bonus_borrow": null,
-          "apy_net": 5.013315814373275,
+          "apy_net": 5.012812131360805,
           "apy_reward": null
         },
         {
@@ -1227,19 +1227,19 @@
               "value_usd": 4112301.975915,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -1269,8 +1269,8 @@
               "value_usd": 4020492.38767442,
               "apy_base": 3.69790523897411,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": 0.304632151347257,
+              "bonus_supply_source": "morpho:eth(0.30%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -1279,9 +1279,9 @@
           "rewards": [],
           "apy_base": 3.69790523897411,
           "apy_cost": null,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": 0.304632151347257,
           "bonus_borrow": null,
-          "apy_net": 4.0031143630799475,
+          "apy_net": 4.002537390321367,
           "apy_reward": null
         },
         {
@@ -1311,19 +1311,19 @@
               "value_usd": 1602302.506883,
               "apy_base": 10.2484795770873,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 4.15962431294835,
-              "bonus_supply_source": "morpho:base(4.16%)",
-              "bonus_borrow_apy": 10.5525826665833,
-              "bonus_borrow_source": "morpho:base(7.51%); morpho:base(3.04%)"
+              "bonus_supply_apy": 4.16516796278499,
+              "bonus_supply_source": "morpho:base(4.17%)",
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 10.2484795770873,
           "apy_cost": null,
-          "bonus_supply": 4.15962431294835,
-          "bonus_borrow": 10.5525826665833,
-          "apy_net": 14.40810389003565,
+          "bonus_supply": 4.16516796278499,
+          "bonus_borrow": null,
+          "apy_net": 14.41364753987229,
           "apy_reward": null
         },
         {
@@ -1479,19 +1479,19 @@
               "value_usd": 400346.7631,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         }
       ],
@@ -1600,7 +1600,7 @@
               "value_usd": 68535172.4061577,
               "apy_base": 0.968181818181818,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 3.0575305327042,
+              "bonus_supply_apy": 3.05721256272372,
               "bonus_supply_source": "aave:eth(3.06%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -1626,9 +1626,9 @@
           "rewards": [],
           "apy_base": 0.968181818181818,
           "apy_cost": 3.25083333333333,
-          "bonus_supply": 3.0575305327042,
+          "bonus_supply": 3.05721256272372,
           "bonus_borrow": null,
-          "apy_net": 10.888330089157268,
+          "apy_net": 10.885196058373937,
           "apy_reward": null
         },
         {
@@ -1774,9 +1774,9 @@
               "value_usd": 44624040.9202529,
               "apy_base": 3.41454545454545,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.46127283341949,
-              "bonus_supply_source": "aave:mnt(1.46%)",
-              "bonus_borrow_apy": 0.820761681950513,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.819814898362222,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             },
             {
@@ -1789,18 +1789,18 @@
               "value_usd": 10016.450928,
               "apy_base": 3.48826086956522,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 2.12694257230238,
-              "bonus_supply_source": "aave:mnt(2.13%)",
-              "bonus_borrow_apy": 0.884603644012003,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.883583215998962,
               "bonus_borrow_source": "aave:mnt(0.88%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.5445159039960625,
           "apy_cost": 3.4145619972234105,
-          "bonus_supply": 7.08821540572187,
-          "bonus_borrow": 1.705365325962516,
-          "apy_net": 90.34776855710132,
+          "bonus_supply": 3.5,
+          "bonus_borrow": 1.703398114361184,
+          "apy_net": 54.68800833645253,
           "apy_reward": null
         },
         {
@@ -1847,8 +1847,8 @@
               "value_usd": 40123191.2685925,
               "apy_base": 3.57958333333333,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.26344633258863,
-              "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+              "bonus_supply_apy": 0.628012887554374,
+              "bonus_supply_source": "aave:plasma(0.63%)",
               "bonus_borrow_apy": 0.470964231799166,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
@@ -1856,9 +1856,9 @@
           "rewards": [],
           "apy_base": 3.7161099999999996,
           "apy_cost": 3.57958333333333,
-          "bonus_supply": 1.26344633258863,
+          "bonus_supply": 0.628012887554374,
           "bonus_borrow": 0.470964231799166,
-          "apy_net": 21.74000505627289,
+          "apy_net": 15.412157405120007,
           "apy_reward": null
         },
         {
@@ -1977,18 +1977,18 @@
               "value_usd": 33904262.1129756,
               "apy_base": 3.41454545454545,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.46127283341949,
-              "bonus_supply_source": "aave:mnt(1.46%)",
-              "bonus_borrow_apy": 0.820761681950513,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.819814898362222,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.71611,
           "apy_cost": 3.41454545454545,
-          "bonus_supply": 1.46127283341949,
-          "bonus_borrow": 0.820761681950513,
-          "apy_net": 27.76300539925368,
+          "bonus_supply": null,
+          "bonus_borrow": 0.819814898362222,
+          "apy_net": 13.51912210631636,
           "apy_reward": null
         },
         {
@@ -2018,8 +2018,8 @@
               "value_usd": 2735566.03344226,
               "apy_base": 3.69790523897411,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": 0.304632151347257,
+              "bonus_supply_source": "morpho:eth(0.30%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -2028,9 +2028,9 @@
           "rewards": [],
           "apy_base": 3.69790523897411,
           "apy_cost": null,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": 0.304632151347257,
           "bonus_borrow": null,
-          "apy_net": 4.0031143630799475,
+          "apy_net": 4.002537390321367,
           "apy_reward": null
         },
         {
@@ -2077,8 +2077,8 @@
               "value_usd": 29832114.4675345,
               "apy_base": 4.08212464724631,
               "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -2086,9 +2086,9 @@
           "rewards": [],
           "apy_base": 3.75,
           "apy_cost": 4.08212464724631,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 3.7583581672007,
+          "apy_net": 0.08700155734293713,
           "apy_reward": null
         },
         {
@@ -2251,8 +2251,8 @@
               "value_usd": 11092079.1443605,
               "apy_base": 5.71394643974661,
               "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": 0.266301975862345,
-              "bonus_supply_source": "morpho:eth(0.27%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -2260,9 +2260,9 @@
           "rewards": [],
           "apy_base": 3.65402668398165,
           "apy_cost": 5.71394643974661,
-          "bonus_supply": 0.266301975862345,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -8.012116177406023,
+          "apy_net": -10.05005181604386,
           "apy_reward": null
         },
         {
@@ -2366,8 +2366,8 @@
               "value_usd": 12991934.9485482,
               "apy_base": 3.57958333333333,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.26344633258863,
-              "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+              "bonus_supply_apy": 0.628012887554374,
+              "bonus_supply_source": "aave:plasma(0.63%)",
               "bonus_borrow_apy": 0.470964231799166,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
@@ -2375,9 +2375,9 @@
           "rewards": [],
           "apy_base": 2.2337040655534435,
           "apy_cost": 3.57958333333333,
-          "bonus_supply": 4.7634463325886305,
+          "bonus_supply": 4.128012887554374,
           "bonus_borrow": 0.470964231799166,
-          "apy_net": 46.587872422223185,
+          "apy_net": 39.48283208239527,
           "apy_reward": null
         },
         {
@@ -2424,8 +2424,8 @@
               "value_usd": 8880882.24440713,
               "apy_base": 3.71857142857143,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 5.96154918928744,
-              "bonus_supply_source": "aave:eth(2.88%); aave:eth(3.08%)",
+              "bonus_supply_apy": 3.07896324606001,
+              "bonus_supply_source": "aave:eth(3.08%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -2433,9 +2433,9 @@
           "rewards": [],
           "apy_base": 3.43838,
           "apy_cost": 3.71857142857143,
-          "bonus_supply": 5.96154918928744,
+          "bonus_supply": 3.07896324606001,
           "bonus_borrow": null,
-          "apy_net": 49.33992526065345,
+          "apy_net": 26.192734268417887,
           "apy_reward": null
         },
         {
@@ -2923,19 +2923,19 @@
               "value_usd": 508490.374091722,
               "apy_base": 2.78958333333333,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 1.26344633258863,
+              "bonus_supply_apy": 1.2560696878949,
               "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
-              "bonus_borrow_apy": 0.470964231799166,
-              "bonus_borrow_source": "aave:plasma(0.47%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 2.78958333333333,
           "apy_cost": null,
-          "bonus_supply": 1.26344633258863,
-          "bonus_borrow": 0.470964231799166,
-          "apy_net": 4.05302966592196,
+          "bonus_supply": 1.2560696878949,
+          "bonus_borrow": null,
+          "apy_net": 4.0456530212282305,
           "apy_reward": null
         },
         {
@@ -3350,19 +3350,19 @@
               "value_usd": 26179887.252564,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -3392,7 +3392,7 @@
               "value_usd": 16661361.03949,
               "apy_base": 4.74701383851093,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.266301975862345,
+              "bonus_supply_apy": 0.265798292849875,
               "bonus_supply_source": "morpho:eth(0.27%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -3402,9 +3402,9 @@
           "rewards": [],
           "apy_base": 4.74701383851093,
           "apy_cost": null,
-          "bonus_supply": 0.266301975862345,
+          "bonus_supply": 0.265798292849875,
           "bonus_borrow": null,
-          "apy_net": 5.013315814373275,
+          "apy_net": 5.012812131360805,
           "apy_reward": null
         },
         {
@@ -3434,19 +3434,19 @@
               "value_usd": 10017447.3597903,
               "apy_base": 1.40791666666667,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 4.07707316530207,
-              "bonus_supply_source": "aave:plasma(4.08%)",
-              "bonus_borrow_apy": 0.672726185348224,
-              "bonus_borrow_source": "aave:plasma(0.67%)"
+              "bonus_supply_apy": 4.05893590011221,
+              "bonus_supply_source": "aave:plasma(4.06%)",
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 1.40791666666667,
           "apy_cost": null,
-          "bonus_supply": 4.07707316530207,
-          "bonus_borrow": 0.672726185348224,
-          "apy_net": 5.48498983196874,
+          "bonus_supply": 4.05893590011221,
+          "bonus_borrow": null,
+          "apy_net": 5.466852566778879,
           "apy_reward": null
         },
         {
@@ -3478,8 +3478,8 @@
               "apy_base_source": "aave_supply",
               "bonus_supply_apy": 4.52733143693056,
               "bonus_supply_source": "aave:mnt(4.53%)",
-              "bonus_borrow_apy": 1.0577135496176,
-              "bonus_borrow_source": "aave:mnt(1.06%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -3487,7 +3487,7 @@
           "apy_base": 0.782857142857143,
           "apy_cost": null,
           "bonus_supply": 4.52733143693056,
-          "bonus_borrow": 1.0577135496176,
+          "bonus_borrow": null,
           "apy_net": 5.310188579787703,
           "apy_reward": null
         },
@@ -3615,19 +3615,19 @@
               "value_usd": 2773256.853522,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -3657,7 +3657,7 @@
               "value_usd": 1952817.310414,
               "apy_base": 4.74701383851093,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.266301975862345,
+              "bonus_supply_apy": 0.265798292849875,
               "bonus_supply_source": "morpho:eth(0.27%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -3667,9 +3667,9 @@
           "rewards": [],
           "apy_base": 4.74701383851093,
           "apy_cost": null,
-          "bonus_supply": 0.266301975862345,
+          "bonus_supply": 0.265798292849875,
           "bonus_borrow": null,
-          "apy_net": 5.013315814373274,
+          "apy_net": 5.012812131360806,
           "apy_reward": null
         },
         {
@@ -3714,8 +3714,8 @@
               "value_usd": 1111009.72962928,
               "apy_base": 0,
               "apy_base_source": "static",
-              "bonus_supply_apy": 71.56,
-              "bonus_supply_source": "curve:eth(35.78%); curve:eth(35.78%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             },
@@ -3754,9 +3754,9 @@
           "rewards": [],
           "apy_base": 0.5189533932033034,
           "apy_cost": null,
-          "bonus_supply": 71.56,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 72.0789533932033,
+          "apy_net": 0.5189533932033034,
           "apy_reward": null
         },
         {
@@ -3830,8 +3830,8 @@
               "apy_base_source": "morpho_supply",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 8.80576883217737,
-              "bonus_borrow_source": "morpho:eth(8.81%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -3839,7 +3839,7 @@
           "apy_base": 2.42448069944474,
           "apy_cost": null,
           "bonus_supply": null,
-          "bonus_borrow": 8.80576883217737,
+          "bonus_borrow": null,
           "apy_net": 2.42448069944474,
           "apy_reward": null
         },
@@ -3870,19 +3870,19 @@
               "value_usd": 1505136.900242,
               "apy_base": 10.2484795770873,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 4.15962431294835,
-              "bonus_supply_source": "morpho:base(4.16%)",
-              "bonus_borrow_apy": 10.5525826665833,
-              "bonus_borrow_source": "morpho:base(7.51%); morpho:base(3.04%)"
+              "bonus_supply_apy": 4.16516796278499,
+              "bonus_supply_source": "morpho:base(4.17%)",
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 10.2484795770873,
           "apy_cost": null,
-          "bonus_supply": 4.15962431294835,
-          "bonus_borrow": 10.5525826665833,
-          "apy_net": 14.408103890035651,
+          "bonus_supply": 4.16516796278499,
+          "bonus_borrow": null,
+          "apy_net": 14.41364753987229,
           "apy_reward": null
         },
         {
@@ -4085,8 +4085,8 @@
               "apy_base_source": "morpho_supply",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 8.80576883217737,
-              "bonus_borrow_source": "morpho:eth(8.81%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -4094,7 +4094,7 @@
           "apy_base": 2.42448069944474,
           "apy_cost": null,
           "bonus_supply": null,
-          "bonus_borrow": 8.80576883217737,
+          "bonus_borrow": null,
           "apy_net": 2.42448069944474,
           "apy_reward": null
         },
@@ -4125,8 +4125,8 @@
               "value_usd": 721330.595915136,
               "apy_base": 3.69790523897411,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": 0.304632151347257,
+              "bonus_supply_source": "morpho:eth(0.30%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -4135,9 +4135,9 @@
           "rewards": [],
           "apy_base": 3.6979052389741094,
           "apy_cost": null,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": 0.304632151347257,
           "bonus_borrow": null,
-          "apy_net": 4.0031143630799475,
+          "apy_net": 4.002537390321367,
           "apy_reward": null
         },
         {
@@ -4184,18 +4184,18 @@
               "value_usd": 5156318.31154398,
               "apy_base": 11.569381404447,
               "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": 21.6929942756689,
-              "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 31.1102784720873,
               "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
             }
           ],
           "rewards": [],
           "apy_base": 4.75333,
           "apy_cost": 11.569381404447,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 373.1194452525876,
+          "bonus_supply": null,
+          "bonus_borrow": 31.1102784720873,
+          "apy_net": 187.89477134385717,
           "apy_reward": null
         },
         {
@@ -4225,19 +4225,19 @@
               "value_usd": 650134.039728,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -4267,8 +4267,8 @@
               "value_usd": 599395.745200787,
               "apy_base": 3.69790523897411,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": 0.304632151347257,
+              "bonus_supply_source": "morpho:eth(0.30%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -4277,9 +4277,9 @@
           "rewards": [],
           "apy_base": 3.69790523897411,
           "apy_cost": null,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": 0.304632151347257,
           "bonus_borrow": null,
-          "apy_net": 27.944283896448823,
+          "apy_net": 27.940256259688052,
           "apy_reward": null
         },
         {
@@ -4381,19 +4381,19 @@
               "value_usd": 442131.291492,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -4440,8 +4440,8 @@
               "value_usd": 2013129.08109564,
               "apy_base": 4.08212464724631,
               "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -4449,9 +4449,9 @@
           "rewards": [],
           "apy_base": 3.75,
           "apy_cost": 4.08212464724631,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 3.7854871135321977,
+          "apy_net": 0.4217597444117665,
           "apy_reward": null
         }
       ],
@@ -4534,7 +4534,7 @@
                   "value_usd": 1952817.310414,
                   "apy_base": 4.74701383851093,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 0.266301975862345,
+                  "bonus_supply_apy": 0.265798292849875,
                   "bonus_supply_source": "morpho:eth(0.27%)",
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
@@ -4544,9 +4544,9 @@
               "rewards": [],
               "apy_base": 4.74701383851093,
               "apy_cost": null,
-              "bonus_supply": 0.266301975862345,
+              "bonus_supply": 0.265798292849875,
               "bonus_borrow": null,
-              "apy_net": 5.013315814373274,
+              "apy_net": 5.012812131360806,
               "apy_reward": null
             },
             {
@@ -4591,8 +4591,8 @@
                   "value_usd": 1111009.72962928,
                   "apy_base": 0,
                   "apy_base_source": "static",
-                  "bonus_supply_apy": 71.56,
-                  "bonus_supply_source": "curve:eth(35.78%); curve:eth(35.78%)",
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 },
@@ -4631,9 +4631,9 @@
               "rewards": [],
               "apy_base": 0.5189533932033034,
               "apy_cost": null,
-              "bonus_supply": 71.56,
+              "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 72.0789533932033,
+              "apy_net": 0.5189533932033034,
               "apy_reward": null
             },
             {
@@ -4893,18 +4893,18 @@
                   "value_usd": 5156318.31154398,
                   "apy_base": 11.569381404447,
                   "apy_base_source": "morpho_borrow",
-                  "bonus_supply_apy": 21.6929942756689,
-                  "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
+                  "bonus_borrow_apy": 31.1102784720873,
                   "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
                 }
               ],
               "rewards": [],
               "apy_base": 4.75333,
               "apy_cost": 11.569381404447,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 373.1194452525876,
+              "bonus_supply": null,
+              "bonus_borrow": 31.1102784720873,
+              "apy_net": 187.89477134385717,
               "apy_reward": null
             },
             {
@@ -4934,19 +4934,19 @@
                   "value_usd": 650134.039728,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -4976,8 +4976,8 @@
                   "value_usd": 599395.745200787,
                   "apy_base": 3.69790523897411,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 0.305209124105838,
-                  "bonus_supply_source": "morpho:eth(0.31%)",
+                  "bonus_supply_apy": 0.304632151347257,
+                  "bonus_supply_source": "morpho:eth(0.30%)",
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 }
@@ -4986,9 +4986,9 @@
               "rewards": [],
               "apy_base": 3.69790523897411,
               "apy_cost": null,
-              "bonus_supply": 0.305209124105838,
+              "bonus_supply": 0.304632151347257,
               "bonus_borrow": null,
-              "apy_net": 27.944283896448823,
+              "apy_net": 27.940256259688052,
               "apy_reward": null
             },
             {
@@ -5107,8 +5107,8 @@
                   "value_usd": 2013129.08109564,
                   "apy_base": 4.08212464724631,
                   "apy_base_source": "morpho_borrow",
-                  "bonus_supply_apy": 0.305209124105838,
-                  "bonus_supply_source": "morpho:eth(0.31%)",
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 }
@@ -5116,9 +5116,9 @@
               "rewards": [],
               "apy_base": 3.75,
               "apy_cost": 4.08212464724631,
-              "bonus_supply": 0.305209124105838,
+              "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 3.7854871135321977,
+              "apy_net": 0.4217597444117665,
               "apy_reward": null
             }
           ],
@@ -5159,19 +5159,19 @@
                   "value_usd": 2773256.853522,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -5203,8 +5203,8 @@
                   "apy_base_source": "morpho_supply",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 8.80576883217737,
-                  "bonus_borrow_source": "morpho:eth(8.81%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
@@ -5212,7 +5212,7 @@
               "apy_base": 2.42448069944474,
               "apy_cost": null,
               "bonus_supply": null,
-              "bonus_borrow": 8.80576883217737,
+              "bonus_borrow": null,
               "apy_net": 2.42448069944474,
               "apy_reward": null
             },
@@ -5243,19 +5243,19 @@
                   "value_usd": 1505136.900242,
                   "apy_base": 10.2484795770873,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 4.15962431294835,
-                  "bonus_supply_source": "morpho:base(4.16%)",
-                  "bonus_borrow_apy": 10.5525826665833,
-                  "bonus_borrow_source": "morpho:base(7.51%); morpho:base(3.04%)"
+                  "bonus_supply_apy": 4.16516796278499,
+                  "bonus_supply_source": "morpho:base(4.17%)",
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 10.2484795770873,
               "apy_cost": null,
-              "bonus_supply": 4.15962431294835,
-              "bonus_borrow": 10.5525826665833,
-              "apy_net": 14.408103890035651,
+              "bonus_supply": 4.16516796278499,
+              "bonus_borrow": null,
+              "apy_net": 14.41364753987229,
               "apy_reward": null
             },
             {
@@ -5287,8 +5287,8 @@
                   "apy_base_source": "morpho_supply",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 8.80576883217737,
-                  "bonus_borrow_source": "morpho:eth(8.81%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
@@ -5296,7 +5296,7 @@
               "apy_base": 2.42448069944474,
               "apy_cost": null,
               "bonus_supply": null,
-              "bonus_borrow": 8.80576883217737,
+              "bonus_borrow": null,
               "apy_net": 2.42448069944474,
               "apy_reward": null
             },
@@ -5327,8 +5327,8 @@
                   "value_usd": 721330.595915136,
                   "apy_base": 3.69790523897411,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 0.305209124105838,
-                  "bonus_supply_source": "morpho:eth(0.31%)",
+                  "bonus_supply_apy": 0.304632151347257,
+                  "bonus_supply_source": "morpho:eth(0.30%)",
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 }
@@ -5337,9 +5337,9 @@
               "rewards": [],
               "apy_base": 3.6979052389741094,
               "apy_cost": null,
-              "bonus_supply": 0.305209124105838,
+              "bonus_supply": 0.304632151347257,
               "bonus_borrow": null,
-              "apy_net": 4.0031143630799475,
+              "apy_net": 4.002537390321367,
               "apy_reward": null
             },
             {
@@ -5369,19 +5369,19 @@
                   "value_usd": 442131.291492,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             }
           ],
@@ -5927,7 +5927,7 @@
               "apy_base_source": "morpho_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 8.80576883217737,
+              "bonus_borrow_apy": 8.80582469265448,
               "bonus_borrow_source": "morpho:eth(8.81%)"
             }
           ],
@@ -5935,8 +5935,8 @@
           "apy_base": 4.9990285196162,
           "apy_cost": 2.7134003772896897,
           "bonus_supply": null,
-          "bonus_borrow": 8.80576883217737,
-          "apy_net": 12.355140198021235,
+          "bonus_borrow": 8.80582469265448,
+          "apy_net": 12.35517724618649,
           "apy_reward": null
         },
         {
@@ -5983,8 +5983,8 @@
               "value_usd": 62609792.7124515,
               "apy_base": 5.71394643974661,
               "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": 0.266301975862345,
-              "bonus_supply_source": "morpho:eth(0.27%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -5992,9 +5992,9 @@
           "rewards": [],
           "apy_base": 3.54462,
           "apy_cost": 5.71394643974661,
-          "bonus_supply": 0.266301975862345,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -8.724505330105217,
+          "apy_net": -10.744967130610247,
           "apy_reward": null
         },
         {
@@ -6026,8 +6026,8 @@
               "apy_base_source": "morpho_supply",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 8.80576883217737,
-              "bonus_borrow_source": "morpho:eth(8.81%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -6035,7 +6035,7 @@
           "apy_base": 2.42448069944474,
           "apy_cost": null,
           "bonus_supply": null,
-          "bonus_borrow": 8.80576883217737,
+          "bonus_borrow": null,
           "apy_net": 2.42448069944474,
           "apy_reward": null
         },
@@ -6375,19 +6375,19 @@
               "value_usd": 1068505.82817243,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 218.37730666139552,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 128.3123880726414,
           "apy_reward": null
         },
         {
@@ -6772,7 +6772,7 @@
                   "apy_base_source": "morpho_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 8.80576883217737,
+                  "bonus_borrow_apy": 8.80582469265448,
                   "bonus_borrow_source": "morpho:eth(8.81%)"
                 }
               ],
@@ -6780,8 +6780,8 @@
               "apy_base": 4.9990285196162,
               "apy_cost": 2.7134003772896897,
               "bonus_supply": null,
-              "bonus_borrow": 8.80576883217737,
-              "apy_net": 12.355140198021235,
+              "bonus_borrow": 8.80582469265448,
+              "apy_net": 12.35517724618649,
               "apy_reward": null
             },
             {
@@ -6811,19 +6811,19 @@
                   "value_usd": 1068505.82817243,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 218.37730666139552,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 128.3123880726414,
               "apy_reward": null
             },
             {
@@ -6965,8 +6965,8 @@
                   "value_usd": 62609792.7124515,
                   "apy_base": 5.71394643974661,
                   "apy_base_source": "morpho_borrow",
-                  "bonus_supply_apy": 0.266301975862345,
-                  "bonus_supply_source": "morpho:eth(0.27%)",
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 }
@@ -6974,9 +6974,9 @@
               "rewards": [],
               "apy_base": 3.54462,
               "apy_cost": 5.71394643974661,
-              "bonus_supply": 0.266301975862345,
+              "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": -8.724505330105217,
+              "apy_net": -10.744967130610247,
               "apy_reward": null
             },
             {
@@ -7008,8 +7008,8 @@
                   "apy_base_source": "morpho_supply",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 8.80576883217737,
-                  "bonus_borrow_source": "morpho:eth(8.81%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
@@ -7017,7 +7017,7 @@
               "apy_base": 2.42448069944474,
               "apy_cost": null,
               "bonus_supply": null,
-              "bonus_borrow": 8.80576883217737,
+              "bonus_borrow": null,
               "apy_net": 2.42448069944474,
               "apy_reward": null
             },
@@ -7629,8 +7629,8 @@
               "apy_base_source": "aave_supply_ref",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 3.07559801696541,
-              "bonus_borrow_source": "fluid:plasma(0.96%); fluid:plasma(2.12%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -7638,7 +7638,7 @@
           "apy_base": 2.78958333333333,
           "apy_cost": null,
           "bonus_supply": null,
-          "bonus_borrow": 3.07559801696541,
+          "bonus_borrow": null,
           "apy_net": 2.78958333333333,
           "apy_reward": null
         },
@@ -7795,19 +7795,19 @@
               "value_usd": 3842273.691724,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -7854,8 +7854,8 @@
               "value_usd": 22607696.5228245,
               "apy_base": 3.57958333333333,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.26344633258863,
-              "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+              "bonus_supply_apy": 0.628012887554374,
+              "bonus_supply_source": "aave:plasma(0.63%)",
               "bonus_borrow_apy": 0.470964231799166,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
@@ -7863,9 +7863,9 @@
           "rewards": [],
           "apy_base": 3.54462,
           "apy_cost": 3.5795833333333302,
-          "bonus_supply": 1.26344633258863,
+          "bonus_supply": 0.628012887554374,
           "bonus_borrow": 0.470964231799166,
-          "apy_net": 15.012134850154652,
+          "apy_net": 10.56133939034374,
           "apy_reward": null
         },
         {
@@ -7969,18 +7969,18 @@
               "value_usd": 19366912.7304965,
               "apy_base": 3.41454545454545,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.46127283341949,
-              "bonus_supply_source": "aave:mnt(1.46%)",
-              "bonus_borrow_apy": 0.820761681950513,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.819814898362222,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             }
           ],
           "rewards": [],
           "apy_base": 1.7980180674205528,
           "apy_cost": 3.41454545454545,
-          "bonus_supply": 1.46127283341949,
-          "bonus_borrow": 0.820761681950513,
-          "apy_net": 8.488138424389623,
+          "bonus_supply": null,
+          "bonus_borrow": 0.819814898362222,
+          "apy_net": -4.461701696713127,
           "apy_reward": null
         },
         {
@@ -8027,8 +8027,8 @@
               "value_usd": 21610908.7557624,
               "apy_base": 3.57958333333333,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.26344633258863,
-              "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+              "bonus_supply_apy": 0.628012887554374,
+              "bonus_supply_source": "aave:plasma(0.63%)",
               "bonus_borrow_apy": 0.470964231799166,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
@@ -8036,9 +8036,9 @@
           "rewards": [],
           "apy_base": 3.71611,
           "apy_cost": 3.57958333333333,
-          "bonus_supply": 1.26344633258863,
+          "bonus_supply": 0.628012887554374,
           "bonus_borrow": 0.470964231799166,
-          "apy_net": 21.40756808823108,
+          "apy_net": 15.192627249945808,
           "apy_reward": null
         },
         {
@@ -8068,19 +8068,19 @@
               "value_usd": 2121567.802223,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -8142,18 +8142,18 @@
               "value_usd": 17842378.9038446,
               "apy_base": 3.41454545454545,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.46127283341949,
-              "bonus_supply_source": "aave:mnt(1.46%)",
-              "bonus_borrow_apy": 0.820761681950513,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.819814898362222,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             }
           ],
           "rewards": [],
           "apy_base": 1.796230288568157,
           "apy_cost": 3.41454545454545,
-          "bonus_supply": 1.46127283341949,
-          "bonus_borrow": 0.820761681950513,
-          "apy_net": 9.264904982706234,
+          "bonus_supply": null,
+          "bonus_borrow": 0.819814898362222,
+          "apy_net": -5.4310895083371795,
           "apy_reward": null
         },
         {
@@ -8185,8 +8185,8 @@
               "apy_base_source": "morpho_supply",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 8.80576883217737,
-              "bonus_borrow_source": "morpho:eth(8.81%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -8194,7 +8194,7 @@
           "apy_base": 2.42448069944474,
           "apy_cost": null,
           "bonus_supply": null,
-          "bonus_borrow": 8.80576883217737,
+          "bonus_borrow": null,
           "apy_net": 2.42448069944474,
           "apy_reward": null
         },
@@ -8299,8 +8299,8 @@
               "value_usd": 4356190.64908093,
               "apy_base": 4.08212464724631,
               "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": 0.305209124105838,
-              "bonus_supply_source": "morpho:eth(0.31%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -8308,9 +8308,9 @@
           "rewards": [],
           "apy_base": 3.75,
           "apy_cost": 4.08212464724631,
-          "bonus_supply": 0.305209124105838,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 3.969427411573522,
+          "apy_net": 2.6914948070565266,
           "apy_reward": null
         },
         {
@@ -8382,19 +8382,19 @@
               "value_usd": 1296522.243755,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -8484,8 +8484,8 @@
               "apy_base_source": "aave_supply_ref",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 3.07559801696541,
-              "bonus_borrow_source": "fluid:plasma(0.96%); fluid:plasma(2.12%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -8493,7 +8493,7 @@
           "apy_base": 2.78958333333333,
           "apy_cost": null,
           "bonus_supply": null,
-          "bonus_borrow": 3.07559801696541,
+          "bonus_borrow": null,
           "apy_net": 2.78958333333333,
           "apy_reward": null
         },
@@ -8614,9 +8614,9 @@
               "value_usd": 2583687.57946063,
               "apy_base": 3.41454545454545,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 1.46127283341949,
-              "bonus_supply_source": "aave:mnt(1.46%)",
-              "bonus_borrow_apy": 0.820761681950513,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.819814898362222,
               "bonus_borrow_source": "aave:mnt(0.82%)"
             },
             {
@@ -8629,18 +8629,18 @@
               "value_usd": 5938418.490318,
               "apy_base": 3.48826086956522,
               "apy_base_source": "aave_borrow",
-              "bonus_supply_apy": 2.12694257230238,
-              "bonus_supply_source": "aave:mnt(2.13%)",
-              "bonus_borrow_apy": 0.884603644012003,
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": 0.883583215998962,
               "bonus_borrow_source": "aave:mnt(0.88%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.71611,
           "apy_cost": 3.4659122152957345,
-          "bonus_supply": 3.58821540572187,
-          "bonus_borrow": 1.705365325962516,
-          "apy_net": 57.54705072516322,
+          "bonus_supply": null,
+          "bonus_borrow": 1.703398114361184,
+          "apy_net": 21.42135956070436,
           "apy_reward": null
         },
         {
@@ -8805,16 +8805,16 @@
               "apy_base_source": "aave_borrow_ref",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 3.07559801696541,
-              "bonus_borrow_source": "fluid:plasma(0.96%); fluid:plasma(2.12%)"
+              "bonus_borrow_apy": 2.8703746302045,
+              "bonus_borrow_source": "fluid:plasma(0.77%); fluid:plasma(2.10%)"
             }
           ],
           "rewards": [],
           "apy_base": 7.12,
           "apy_cost": 3.57958333333333,
           "bonus_supply": null,
-          "bonus_borrow": 3.07559801696541,
-          "apy_net": 49.324176271617056,
+          "bonus_borrow": 2.8703746302045,
+          "apy_net": 48.01503709590429,
           "apy_reward": null
         },
         {
@@ -8886,19 +8886,19 @@
               "value_usd": 651058.326613,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -9084,19 +9084,19 @@
               "value_usd": 328557.832172416,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -9126,19 +9126,19 @@
               "value_usd": 301184.376072442,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -9454,8 +9454,8 @@
                   "apy_base_source": "aave_supply_ref",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 3.07559801696541,
-                  "bonus_borrow_source": "fluid:plasma(0.96%); fluid:plasma(2.12%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
@@ -9463,7 +9463,7 @@
               "apy_base": 2.78958333333333,
               "apy_cost": null,
               "bonus_supply": null,
-              "bonus_borrow": 3.07559801696541,
+              "bonus_borrow": null,
               "apy_net": 2.78958333333333,
               "apy_reward": null
             },
@@ -9610,18 +9610,18 @@
                   "value_usd": 19366912.7304965,
                   "apy_base": 3.41454545454545,
                   "apy_base_source": "aave_borrow",
-                  "bonus_supply_apy": 1.46127283341949,
-                  "bonus_supply_source": "aave:mnt(1.46%)",
-                  "bonus_borrow_apy": 0.820761681950513,
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
+                  "bonus_borrow_apy": 0.819814898362222,
                   "bonus_borrow_source": "aave:mnt(0.82%)"
                 }
               ],
               "rewards": [],
               "apy_base": 1.7980180674205528,
               "apy_cost": 3.41454545454545,
-              "bonus_supply": 1.46127283341949,
-              "bonus_borrow": 0.820761681950513,
-              "apy_net": 8.488138424389623,
+              "bonus_supply": null,
+              "bonus_borrow": 0.819814898362222,
+              "apy_net": -4.461701696713127,
               "apy_reward": null
             },
             {
@@ -9668,8 +9668,8 @@
                   "value_usd": 21610908.7557624,
                   "apy_base": 3.57958333333333,
                   "apy_base_source": "aave_borrow",
-                  "bonus_supply_apy": 1.26344633258863,
-                  "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+                  "bonus_supply_apy": 0.628012887554374,
+                  "bonus_supply_source": "aave:plasma(0.63%)",
                   "bonus_borrow_apy": 0.470964231799166,
                   "bonus_borrow_source": "aave:plasma(0.47%)"
                 }
@@ -9677,9 +9677,9 @@
               "rewards": [],
               "apy_base": 3.71611,
               "apy_cost": 3.57958333333333,
-              "bonus_supply": 1.26344633258863,
+              "bonus_supply": 0.628012887554374,
               "bonus_borrow": 0.470964231799166,
-              "apy_net": 21.40756808823108,
+              "apy_net": 15.192627249945808,
               "apy_reward": null
             },
             {
@@ -9709,19 +9709,19 @@
                   "value_usd": 2121567.802223,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -9828,16 +9828,16 @@
                   "apy_base_source": "aave_borrow_ref",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 3.07559801696541,
-                  "bonus_borrow_source": "fluid:plasma(0.96%); fluid:plasma(2.12%)"
+                  "bonus_borrow_apy": 2.8703746302045,
+                  "bonus_borrow_source": "fluid:plasma(0.77%); fluid:plasma(2.10%)"
                 }
               ],
               "rewards": [],
               "apy_base": 7.12,
               "apy_cost": 3.57958333333333,
               "bonus_supply": null,
-              "bonus_borrow": 3.07559801696541,
-              "apy_net": 49.324176271617056,
+              "bonus_borrow": 2.8703746302045,
+              "apy_net": 48.01503709590429,
               "apy_reward": null
             },
             {
@@ -9867,19 +9867,19 @@
                   "value_usd": 301184.376072442,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -10019,19 +10019,19 @@
                   "value_usd": 3842273.691724,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -10105,8 +10105,8 @@
                   "apy_base_source": "morpho_supply",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 8.80576883217737,
-                  "bonus_borrow_source": "morpho:eth(8.81%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
@@ -10114,7 +10114,7 @@
               "apy_base": 2.42448069944474,
               "apy_cost": null,
               "bonus_supply": null,
-              "bonus_borrow": 8.80576883217737,
+              "bonus_borrow": null,
               "apy_net": 2.42448069944474,
               "apy_reward": null
             },
@@ -10204,8 +10204,8 @@
                   "apy_base_source": "aave_supply_ref",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 3.07559801696541,
-                  "bonus_borrow_source": "fluid:plasma(0.96%); fluid:plasma(2.12%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
@@ -10213,7 +10213,7 @@
               "apy_base": 2.78958333333333,
               "apy_cost": null,
               "bonus_supply": null,
-              "bonus_borrow": 3.07559801696541,
+              "bonus_borrow": null,
               "apy_net": 2.78958333333333,
               "apy_reward": null
             },
@@ -10286,19 +10286,19 @@
                   "value_usd": 651058.326613,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -10515,8 +10515,8 @@
                   "value_usd": 22607696.5228245,
                   "apy_base": 3.57958333333333,
                   "apy_base_source": "aave_borrow",
-                  "bonus_supply_apy": 1.26344633258863,
-                  "bonus_supply_source": "aave:plasma(0.63%); aave:plasma(0.63%)",
+                  "bonus_supply_apy": 0.628012887554374,
+                  "bonus_supply_source": "aave:plasma(0.63%)",
                   "bonus_borrow_apy": 0.470964231799166,
                   "bonus_borrow_source": "aave:plasma(0.47%)"
                 }
@@ -10524,9 +10524,9 @@
               "rewards": [],
               "apy_base": 3.54462,
               "apy_cost": 3.5795833333333302,
-              "bonus_supply": 1.26344633258863,
+              "bonus_supply": 0.628012887554374,
               "bonus_borrow": 0.470964231799166,
-              "apy_net": 15.012134850154652,
+              "apy_net": 10.56133939034374,
               "apy_reward": null
             },
             {
@@ -10588,18 +10588,18 @@
                   "value_usd": 17842378.9038446,
                   "apy_base": 3.41454545454545,
                   "apy_base_source": "aave_borrow",
-                  "bonus_supply_apy": 1.46127283341949,
-                  "bonus_supply_source": "aave:mnt(1.46%)",
-                  "bonus_borrow_apy": 0.820761681950513,
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
+                  "bonus_borrow_apy": 0.819814898362222,
                   "bonus_borrow_source": "aave:mnt(0.82%)"
                 }
               ],
               "rewards": [],
               "apy_base": 1.796230288568157,
               "apy_cost": 3.41454545454545,
-              "bonus_supply": 1.46127283341949,
-              "bonus_borrow": 0.820761681950513,
-              "apy_net": 9.264904982706234,
+              "bonus_supply": null,
+              "bonus_borrow": 0.819814898362222,
+              "apy_net": -5.4310895083371795,
               "apy_reward": null
             },
             {
@@ -10646,8 +10646,8 @@
                   "value_usd": 4356190.64908093,
                   "apy_base": 4.08212464724631,
                   "apy_base_source": "morpho_borrow",
-                  "bonus_supply_apy": 0.305209124105838,
-                  "bonus_supply_source": "morpho:eth(0.31%)",
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 }
@@ -10655,9 +10655,9 @@
               "rewards": [],
               "apy_base": 3.75,
               "apy_cost": 4.08212464724631,
-              "bonus_supply": 0.305209124105838,
+              "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 3.969427411573522,
+              "apy_net": 2.6914948070565266,
               "apy_reward": null
             },
             {
@@ -10729,19 +10729,19 @@
                   "value_usd": 1296522.243755,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -10919,9 +10919,9 @@
                   "value_usd": 2583687.57946063,
                   "apy_base": 3.41454545454545,
                   "apy_base_source": "aave_borrow",
-                  "bonus_supply_apy": 1.46127283341949,
-                  "bonus_supply_source": "aave:mnt(1.46%)",
-                  "bonus_borrow_apy": 0.820761681950513,
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
+                  "bonus_borrow_apy": 0.819814898362222,
                   "bonus_borrow_source": "aave:mnt(0.82%)"
                 },
                 {
@@ -10934,18 +10934,18 @@
                   "value_usd": 5938418.490318,
                   "apy_base": 3.48826086956522,
                   "apy_base_source": "aave_borrow",
-                  "bonus_supply_apy": 2.12694257230238,
-                  "bonus_supply_source": "aave:mnt(2.13%)",
-                  "bonus_borrow_apy": 0.884603644012003,
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
+                  "bonus_borrow_apy": 0.883583215998962,
                   "bonus_borrow_source": "aave:mnt(0.88%)"
                 }
               ],
               "rewards": [],
               "apy_base": 3.71611,
               "apy_cost": 3.4659122152957345,
-              "bonus_supply": 3.58821540572187,
-              "bonus_borrow": 1.705365325962516,
-              "apy_net": 57.54705072516322,
+              "bonus_supply": null,
+              "bonus_borrow": 1.703398114361184,
+              "apy_net": 21.42135956070436,
               "apy_reward": null
             },
             {
@@ -11075,19 +11075,19 @@
                   "value_usd": 328557.832172416,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -11306,8 +11306,8 @@
               "apy_base_source": "aave_supply",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 1.75,
-              "bonus_borrow_source": "aave:eth(1.75%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
@@ -11315,7 +11315,7 @@
           "apy_base": 2.502,
           "apy_cost": null,
           "bonus_supply": null,
-          "bonus_borrow": 1.75,
+          "bonus_borrow": null,
           "apy_net": 2.502,
           "apy_reward": null
         },
@@ -11346,19 +11346,19 @@
               "value_usd": 2630591.260731,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -11388,19 +11388,19 @@
               "value_usd": 1814342.159892,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -11430,19 +11430,19 @@
               "value_usd": 1349433.251186,
               "apy_base": 11.2507980299972,
               "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": 21.6929942756689,
+              "bonus_supply_apy": 21.69242571641,
               "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-              "bonus_borrow_apy": 31.1102212433587,
-              "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_base": 11.2507980299972,
           "apy_cost": null,
-          "bonus_supply": 21.6929942756689,
-          "bonus_borrow": 31.1102212433587,
-          "apy_net": 32.9437923056661,
+          "bonus_supply": 21.69242571641,
+          "bonus_borrow": null,
+          "apy_net": 32.9432237464072,
           "apy_reward": null
         },
         {
@@ -11527,8 +11527,8 @@
                   "apy_base_source": "aave_supply",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 1.75,
-                  "bonus_borrow_source": "aave:eth(1.75%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
@@ -11536,7 +11536,7 @@
               "apy_base": 2.502,
               "apy_cost": null,
               "bonus_supply": null,
-              "bonus_borrow": 1.75,
+              "bonus_borrow": null,
               "apy_net": 2.502,
               "apy_reward": null
             },
@@ -11567,19 +11567,19 @@
                   "value_usd": 2630591.260731,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -11609,19 +11609,19 @@
                   "value_usd": 1814342.159892,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {
@@ -11651,19 +11651,19 @@
                   "value_usd": 1349433.251186,
                   "apy_base": 11.2507980299972,
                   "apy_base_source": "morpho_supply",
-                  "bonus_supply_apy": 21.6929942756689,
+                  "bonus_supply_apy": 21.69242571641,
                   "bonus_supply_source": "morpho:eth(0.31%); morpho:eth(6.38%); morpho:eth(15.00%)",
-                  "bonus_borrow_apy": 31.1102212433587,
-                  "bonus_borrow_source": "morpho:eth(5.38%); morpho:eth(9.73%); morpho:eth(10.00%); morpho:eth(6.00%)"
+                  "bonus_borrow_apy": null,
+                  "bonus_borrow_source": null
                 }
               ],
               "borrow": [],
               "rewards": [],
               "apy_base": 11.2507980299972,
               "apy_cost": null,
-              "bonus_supply": 21.6929942756689,
-              "bonus_borrow": 31.1102212433587,
-              "apy_net": 32.9437923056661,
+              "bonus_supply": 21.69242571641,
+              "bonus_borrow": null,
+              "apy_net": 32.9432237464072,
               "apy_reward": null
             },
             {

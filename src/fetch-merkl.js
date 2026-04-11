@@ -128,6 +128,12 @@ function matchesPosition(campaign, rules, position, allPositions) {
     [position.protocol_name.toLowerCase().replace(/\s+/g, '-')];
   if (!merklProtocols.includes(campaign.protocol?.id)) return false;
 
+  // Role check: LEND campaigns only match supply positions, BORROW campaigns only match borrow positions
+  const posRole = position.role; // 'supply', 'borrow', or 'reward'
+  const campaignAction = campaign.action; // 'LEND', 'BORROW', 'HOLD', 'POOL', etc.
+  if (campaignAction === 'LEND' && posRole !== 'supply') return false;
+  if (campaignAction === 'BORROW' && posRole !== 'borrow') return false;
+
   // Vault campaigns don't match our underlying-token positions
   if (rules.isVaultCampaign) return false;
 
