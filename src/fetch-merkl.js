@@ -85,12 +85,13 @@ function parseCampaignRules(campaign) {
     isVaultCampaign: false,
   };
 
-  // For Morpho: multi-token campaigns are vault-specific (underlying + vault share)
-  // For Aave: aTokens alongside underlying = normal lending, NOT vault
-  const isMorpho = campaign.protocol?.id?.includes('morpho');
-  const isDirectType = ['MORPHOSUPPLY_SINGLETOKEN', 'MORPHOBORROW', 'AAVE_NET_LENDING', 'DOLOMITE_NET_LENDING', 'AAVE_SUPPLY'].includes(campaign.type);
+  // Multi-token campaigns are vault-specific (underlying + vault share)
+  // Exception: Aave campaigns with aTokens are normal lending positions
+  const directTypes = ['MORPHOSUPPLY_SINGLETOKEN', 'MORPHOBORROW', 'AAVE_NET_LENDING', 'DOLOMITE_NET_LENDING', 'AAVE_SUPPLY'];
+  const isDirectType = directTypes.includes(campaign.type);
   const hasMultiTokens = rules.eligibleTokens.length > 1;
-  rules.isVaultCampaign = isMorpho && hasMultiTokens && !isDirectType;
+  const isAave = campaign.protocol?.id?.startsWith('aave');
+  rules.isVaultCampaign = hasMultiTokens && !isDirectType && !isAave;
 
   // Parse conditions from description
   const text = `${campaign.name || ''} ${campaign.description || ''}`.toLowerCase();
@@ -105,8 +106,9 @@ function parseCampaignRules(campaign) {
     rules.maxHealthFactor = parseFloat(hfMatch[1]);
   }
 
-  const minMatch = text.match(/(?:lowest|minimum)\s+(?:amount\s+of\s+)?tokens\s+(?:lent|supplied|across)\s+(?:the\s+)?(\w+)\s+and\s+(\w+)/i);
-  if (minMatch) {
+  // Match patterns like "lowest amount of tokens lent across sUSDe and USDe"
+  const minMatch = text.match(/lowest.*?(\w+)\s+and\s+(\w+)/i);
+  if (minMatch && minMatch[1].length <= 10 && minMatch[2].length <= 10) {
     rules.minOfTokens = [minMatch[1].toUpperCase(), minMatch[2].toUpperCase()];
   }
 
@@ -131,7 +133,18 @@ function matchesPosition(campaign, rules, position, allPositions) {
 
   // Token symbol match
   const posSymbol = position.symbol?.toUpperCase();
-  if (!rules.eligibleTokens.some(t => t.symbol?.toUpperCase() === posSymbol)) return false;
+  
+  // For 'min of X and Y' campaigns: bonus only applies to the target token (usually USDe)
+  if (rules.minOfTokens && rules.minOfTokens.length === 2) {
+    // Determine which token is the target: usually the one mentioned second or explicitly
+    // The user said bonus applies to USDe, not sUSDe
+    const targetToken = posSymbol === 'USDE' ? 'USDE' : null;
+    if (!targetToken || !rules.eligibleTokens.some(t => t.symbol?.toUpperCase() === posSymbol)) return false;
+    // Only USDe gets the bonus, not sUSDe
+    if (posSymbol === 'SUSDE' && rules.minOfTokens.includes('SUSDE')) return false;
+  } else {
+    if (!rules.eligibleTokens.some(t => t.symbol?.toUpperCase() === posSymbol)) return false;
+  }
 
   // Conditions
   if (rules.requiredBorrows.length > 0) {

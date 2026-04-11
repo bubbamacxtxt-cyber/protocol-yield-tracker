@@ -538,7 +538,7 @@ function showDetail(p) {
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
                 <h3 style="margin:0">${p.protocol_name} — ${p.supply?.map(t=>t.symbol).join('/') || p.symbol || ''}</h3>
-                <button onclick="document.getElementById('detail-modal').remove()" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer">×</button>
+                <button onclick="document.getElementById('detail-modal').style.display='none'" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer">×</button>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
                 <div>
@@ -575,7 +575,7 @@ function showDetail(p) {
         </div>
     `;
     modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
-    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
 }
 </script>
 </body>
