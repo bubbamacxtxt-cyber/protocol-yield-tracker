@@ -149,8 +149,9 @@ async function fetchAaveApy() {
 async function fetchMorphoApy() {
   const supplyMap = {};
   const borrowMap = {};
+  const byMarketId = {};  // marketId -> { supplyApy, borrowApy }
   for (const cid of MORPHO_CHAINS) {
-    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 100) { items { loanAsset { symbol } state { supplyApy borrowApy dailySupplyApy dailyBorrowApy } } } }`;
+    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 100) { items { marketId loanAsset { symbol } state { supplyApy borrowApy dailySupplyApy dailyBorrowApy } } } }`;
     try {
       const res = await fetch('https://api.morpho.org/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -164,6 +165,10 @@ async function fetchMorphoApy() {
         // Use daily average APY (more stable than instantaneous)
         const sApy = (m.state?.dailySupplyApy ?? m.state?.supplyApy ?? 0) * 100;
         const bApy = (m.state?.dailyBorrowApy ?? m.state?.borrowApy ?? 0) * 100;
+        // Store by market ID for precise lookups
+        if (m.marketId) {
+          byMarketId[m.marketId.toLowerCase()] = { supplyApy: sApy, borrowApy: bApy };
+        }
         // Skip broken markets (expired LP/PT tokens with bogus APYs)
         if (sApy > 100 || bApy > 100) continue;
         if (sApy > 0) {
@@ -180,8 +185,8 @@ async function fetchMorphoApy() {
       console.log(`  ❌ Morpho chain ${cid}: ${e.message}`);
     }
   }
-  console.log(`  Morpho: ${Object.keys(supplyMap).length} supply, ${Object.keys(borrowMap).length} borrow tokens      `);
-  return { supply: supplyMap, borrow: borrowMap };
+  console.log(`  Morpho: ${Object.keys(supplyMap).length} supply, ${Object.keys(borrowMap).length} borrow, ${Object.keys(byMarketId).length} markets      `);
+  return { supply: supplyMap, borrow: borrowMap, byMarketId };
 }
 
 // ─── Main ──────────────────────────────────────────────────────────
@@ -243,7 +248,7 @@ async function main() {
 
   // Step 2: Protocol-level (Aave, Morpho, static, non-yield)
   const pending = db.prepare(`
-    SELECT pt.id, pt.symbol, p.protocol_name, p.chain
+    SELECT pt.id, pt.symbol, p.protocol_name, p.chain, p.position_index
     FROM position_tokens pt JOIN positions p ON pt.position_id = p.id
     WHERE pt.role='supply' AND pt.apy_base IS NULL
   `).all();
@@ -258,8 +263,14 @@ async function main() {
       apy = staticApy[row.symbol]; source = 'static'; staticApplied++;
     } else if (row.protocol_name === 'Aave V3' && aaveApy.supply[row.symbol]?.[cid] != null) {
       apy = aaveApy.supply[row.symbol][cid]; source = 'aave_supply'; aaveApplied++;
-    } else if (row.protocol_name === 'Morpho' && morphoApy.supply[row.symbol]?.[cid] != null) {
-      apy = morphoApy.supply[row.symbol][cid]; source = 'morpho_supply'; morphoApplied++;
+    } else if (row.protocol_name === 'Morpho') {
+      // Try market-specific rate first (from position_index)
+      const marketId = row.position_index?.split(',')[0]?.toLowerCase();
+      if (marketId && morphoApy.byMarketId[marketId]?.supplyApy > 0) {
+        apy = morphoApy.byMarketId[marketId].supplyApy; source = 'morpho_supply'; morphoApplied++;
+      } else if (morphoApy.supply[row.symbol]?.[cid] != null) {
+        apy = morphoApy.supply[row.symbol][cid]; source = 'morpho_supply'; morphoApplied++;
+      }
     } else if (nonYieldStables.has(row.symbol)) {
       // Try Aave reference rate first
       if (aaveApy.supply[row.symbol]?.[cid] != null) {
@@ -292,7 +303,7 @@ async function main() {
   }
 
   const borrowPending = db.prepare(`
-    SELECT pt.id, pt.symbol, p.protocol_name, p.chain
+    SELECT pt.id, pt.symbol, p.protocol_name, p.chain, p.position_index
     FROM position_tokens pt JOIN positions p ON pt.position_id = p.id
     WHERE pt.role='borrow' AND pt.apy_base IS NULL
   `).all();
@@ -303,8 +314,13 @@ async function main() {
 
     if (row.protocol_name === 'Aave V3' && aaveApy.borrow[row.symbol]?.[cid] != null) {
       apy = aaveApy.borrow[row.symbol][cid]; source = 'aave_borrow'; borrowAave++;
-    } else if (row.protocol_name === 'Morpho' && morphoApy.borrow[row.symbol]?.[cid] != null) {
-      apy = morphoApy.borrow[row.symbol][cid]; source = 'morpho_borrow'; borrowMorpho++;
+    } else if (row.protocol_name === 'Morpho') {
+      const marketId = row.position_index?.split(',')[0]?.toLowerCase();
+      if (marketId && morphoApy.byMarketId[marketId]?.borrowApy > 0) {
+        apy = morphoApy.byMarketId[marketId].borrowApy; source = 'morpho_borrow'; borrowMorpho++;
+      } else if (morphoApy.borrow[row.symbol]?.[cid] != null) {
+        apy = morphoApy.borrow[row.symbol][cid]; source = 'morpho_borrow'; borrowMorpho++;
+      }
     } else if (aaveApy.borrow[row.symbol]?.[cid] != null) {
       // Use Aave as reference for other protocols
       apy = aaveApy.borrow[row.symbol][cid]; source = 'aave_borrow_ref'; borrowRef++;
