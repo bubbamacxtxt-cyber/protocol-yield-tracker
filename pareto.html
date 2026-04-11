@@ -258,6 +258,7 @@ tr:hover td { background: var(--bg-secondary); }
                     <th>Borrow USD</th>
                     <th>Net USD</th>
                     <th>Base APY</th>
+                    <th>Bonus APY</th>
                     <th>Cost APY</th>
                     <th>Net APY</th>
                     <th>Utilization</th>
@@ -369,6 +370,7 @@ function renderTable(data) {
         const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
         const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
         const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
+        const bonusApy = p.apy_bonus != null ? '+' + p.apy_bonus.toFixed(2) + '%' : '';
         const costApy = p.apy_cost != null ? p.apy_cost.toFixed(2) + '%' : '-';
         const netApy = p.apy_net != null ? p.apy_net.toFixed(2) + '%' : '-';
         const netColor = p.apy_net > 0 ? 'var(--accent-green)' : p.apy_net < 0 ? '#f85149' : 'var(--text-secondary)';
@@ -383,6 +385,7 @@ function renderTable(data) {
             <td>${fmtShort(p.debt_usd)}</td>
             <td style="font-weight:600;color:var(--accent-green)">${fmtShort(p.net_usd)}</td>
             <td>${baseApy}</td>
+            <td style="color:var(--accent-green)">${bonusApy}</td>
             <td>${costApy}</td>
             <td style="font-weight:600;color:${netColor}">${netApy}</td>
             <td>${util}</td>
@@ -460,6 +463,7 @@ function downloadXLSX() {
         BorrowUSD: p.debt_usd,
         NetUSD: p.net_usd,
         BaseAPY: p.apy_base,
+        BonusAPY: p.apy_bonus,
         CostAPY: p.apy_cost,
         NetAPY: p.apy_net,
         Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
