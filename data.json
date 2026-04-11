@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-11T16:23:48.229Z",
+  "generated_at": "2026-04-11T16:26:04.078Z",
   "summary": {
     "total_positions": 164,
     "total_value": 696343594.349396,
@@ -2349,8 +2349,8 @@
               "value_usd": 7123816.39378695,
               "apy_base": 3.54462,
               "apy_base_source": "ybs",
-              "bonus_supply_apy": 3.5,
-              "bonus_supply_source": "aave:plasma(3.50%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -2375,9 +2375,9 @@
           "rewards": [],
           "apy_base": 2.2337040655534435,
           "apy_cost": 3.57958333333333,
-          "bonus_supply": 7,
+          "bonus_supply": 3.5,
           "bonus_borrow": 0.470956531083309,
-          "apy_net": 71.59561215126243,
+          "apy_net": 32.460685616104854,
           "apy_reward": null
         },
         {
