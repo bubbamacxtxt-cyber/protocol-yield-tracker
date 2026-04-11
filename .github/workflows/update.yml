@@ -37,9 +37,12 @@ jobs:
       - name: Fetch Pareto data
         run: node src/fetch-pareto.js
 
-      # Merkl incentives (runs after base APY fetch)
+      # APY enrichment (fetches rates from Aave/Morpho/Euler)
       - name: Enrich positions with market/vault info
         run: node src/enrich-markets.js
+
+      - name: Fetch base APY rates
+        run: node src/fetch-base-apy.js
 
       - name: Fetch Merkl incentives
         run: node src/fetch-merkl.js || node src/fetch-merkl.js || echo 'Merkl failed after 3 attempts'
