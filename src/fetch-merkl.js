@@ -154,6 +154,25 @@ function matchesPosition(campaign, rules, position, allPositions) {
     if (posMarketId !== rules.morphoMarketId) return false;
   }
 
+  // For Aave: match by market name from campaign title
+  // e.g., 'Borrow USDC from Aave Horizon market' → position must be in Horizon
+  if (campaign.protocol?.id === 'aave') {
+    const campaignName = campaign.name || '';
+    const marketName = position.market_name || '';
+    
+    // If campaign specifies a market, check position is in it
+    if (campaignName.includes('Horizon') && !marketName.includes('Horizon')) return false;
+    if (campaignName.includes('Core') && !marketName.includes('Ethereum') && marketName.includes('Horizon')) return false;
+    if (campaignName.includes('EtherFi') && !marketName.includes('EtherFi')) return false;
+    if (campaignName.includes('Lido') && !marketName.includes('Lido')) return false;
+  }
+
+  // For Euler: match by vault address (identifier)
+  // position.market_id contains the vault address from Goldsky
+  if (campaign.protocol?.id === 'euler' && rules.morphoMarketId) {
+    if (!position.market_id || position.market_id.toLowerCase() !== rules.morphoMarketId) return false;
+  }
+
   // Token symbol match
   const posSymbol = position.symbol?.toUpperCase();
   
@@ -236,10 +255,13 @@ async function main() {
     }
   }
 
-  // Load positions
+  // Load positions (with market enrichment)
   const positions = db.prepare(`
-    SELECT pt.*, p.wallet, p.chain, p.protocol_name, p.health_rate
-    FROM position_tokens pt JOIN positions p ON pt.position_id = p.id
+    SELECT pt.*, p.wallet, p.chain, p.protocol_name, p.health_rate, p.position_index,
+      pm.market_id, pm.market_name
+    FROM position_tokens pt
+    JOIN positions p ON pt.position_id = p.id
+    LEFT JOIN position_markets pm ON pm.position_id = p.id
   `).all();
   console.log(`\n${positions.length} positions\n`);
 
