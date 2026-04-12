@@ -324,6 +324,18 @@ async function scanAll() {
                         .sort()
                         .join(',') || `${wallet}_${chain}_${protocol.id}`;
 
+                    // For Morpho: check if position_index looks like a market ID (hex hash)
+                    let morphoMarketId = null;
+                    if (protocol.id === 'morpho' && item.position_index) {
+                      const idx = item.position_index;
+                      // Morpho market IDs are 64-char hex strings
+                      if (/^0x[0-9a-f]{64}$/i.test(idx)) {
+                        morphoMarketId = idx;
+                      } else if (/^[0-9a-f]{64}$/i.test(idx)) {
+                        morphoMarketId = '0x' + idx;
+                      }
+                    }
+
                     // Save to DB
                     const posStmt = db.prepare(`
                         INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type,
@@ -350,6 +362,16 @@ async function scanAll() {
                     );
 
                     const posId = result.lastInsertRowid;
+
+                    // Save Morpho market ID if captured from DeBank
+                    if (morphoMarketId) {
+                      try {
+                        db.prepare(`
+                          INSERT OR REPLACE INTO position_markets (position_id, protocol, chain, market_id, market_name, underlying_token, source)
+                          VALUES (?, ?, ?, ?, ?, ?, ?)
+                        `).run(posId, 'Morpho', chain, morphoMarketId, null, supplyTokens[0]?.address || null, 'debank-scan');
+                      } catch (e) {}
+                    }
 
                     // Save tokens (wrapped in try-catch for FK safety)
                     const tokStmt = db.prepare(`

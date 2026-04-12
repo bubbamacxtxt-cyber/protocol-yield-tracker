@@ -212,6 +212,33 @@ async function queryMorphoMarketDirect(marketId, chainId) {
   return null;
 }
 
+// Query Morpho for markets by collateral+loan addresses (for positions without market ID)
+async function queryMorphoMarketsByTokens(collateralAddr, loanAddr, chainId) {
+  try {
+    // Query markets and filter client-side (GraphQL address filters unreliable)
+    const query = `{ markets(where: { chainId_in: [${chainId}] }, first: 500) { items { marketId loanAsset { address symbol } collateralAsset { address symbol } state { dailyBorrowApy dailySupplyApy } } } }`;
+    const res = await fetch('https://api.morpho.org/graphql', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+    const data = await res.json();
+    const items = data?.data?.markets?.items || [];
+    // Find matching market by both addresses
+    const match = items.find(m => 
+      m.collateralAsset?.address?.toLowerCase() === collateralAddr?.toLowerCase() &&
+      m.loanAsset?.address?.toLowerCase() === loanAddr?.toLowerCase()
+    );
+    if (match?.state) {
+      return {
+        marketId: match.marketId,
+        supplyApy: (match.state.dailySupplyApy ?? 0) * 100,
+        borrowApy: (match.state.dailyBorrowApy ?? 0) * 100
+      };
+    }
+  } catch (e) { console.log(`  Token query error: ${e.message}`); }
+  return null;
+}
+
 // Normalize symbols: USD₮0 -> USDT0 (for map lookups)
 function normSymbol(sym) {
   if (!sym) return sym;
@@ -277,8 +304,10 @@ async function main() {
 
   // Step 2: Protocol-level (Aave, Morpho, static, non-yield)
   const pending = db.prepare(`
-    SELECT pt.id, pt.symbol, p.protocol_name, p.chain, p.position_index,
-           pm.market_id as morpho_market_id
+    SELECT pt.id, pt.position_id, pt.symbol, pt.address as supply_address,
+           p.protocol_name, p.chain, p.position_index,
+           pm.market_id as morpho_market_id,
+           (SELECT address FROM position_tokens WHERE position_id = p.id AND role = 'borrow' LIMIT 1) as borrow_address
     FROM position_tokens pt JOIN positions p ON pt.position_id = p.id
     LEFT JOIN position_markets pm ON pm.position_id = p.id AND pm.protocol = 'Morpho'
     WHERE pt.role='supply' AND pt.apy_base IS NULL
@@ -301,6 +330,17 @@ async function main() {
         apy = morphoApy.byMarketId[marketId].supplyApy; source = 'morpho_supply'; morphoApplied++;
       } else if (morphoApy.supply[normSymbol(row.symbol)]?.[cid] != null) {
         apy = morphoApy.supply[normSymbol(row.symbol)][cid]; source = 'morpho_supply'; morphoApplied++;
+      } else if (row.borrow_address && cid > 0) {
+        // Last resort: query Morpho by token addresses
+        const tokenResult = await queryMorphoMarketsByTokens(row.supply_address, row.borrow_address, cid);
+        if (tokenResult?.supplyApy > 0) {
+          apy = tokenResult.supplyApy; source = 'morpho_supply_addr'; morphoApplied++;
+          if (tokenResult.marketId) {
+            morphoApy.byMarketId[tokenResult.marketId.toLowerCase()] = tokenResult;
+            db.prepare("INSERT OR REPLACE INTO position_markets (position_id, protocol, chain, market_id, underlying_token, source) VALUES (?, ?, ?, ?, ?, ?)")
+              .run(row.position_id, 'Morpho', row.chain, tokenResult.marketId, row.supply_address, 'apy-fetch');
+          }
+        }
       }
     } else if (nonYieldStables.has(row.symbol)) {
       // Try Aave reference rate first
@@ -334,8 +374,10 @@ async function main() {
   }
 
   const borrowPending = db.prepare(`
-    SELECT pt.id, pt.symbol, p.protocol_name, p.chain, p.position_index,
-           pm.market_id as morpho_market_id
+    SELECT pt.id, pt.position_id, pt.symbol, pt.address as borrow_address,
+           p.protocol_name, p.chain, p.position_index,
+           pm.market_id as morpho_market_id,
+           (SELECT address FROM position_tokens WHERE position_id = p.id AND role = 'supply' LIMIT 1) as supply_address
     FROM position_tokens pt JOIN positions p ON pt.position_id = p.id
     LEFT JOIN position_markets pm ON pm.position_id = p.id AND pm.protocol = 'Morpho'
     WHERE pt.role='borrow' AND pt.apy_base IS NULL
@@ -350,20 +392,31 @@ async function main() {
     } else if (row.protocol_name === 'Morpho') {
       const marketId = row.morpho_market_id?.toLowerCase();
       if (marketId && morphoApy.byMarketId[marketId]?.borrowApy > 0) {
+        // Found in bulk query by market ID
         apy = morphoApy.byMarketId[marketId].borrowApy; source = 'morpho_borrow'; borrowMorpho++;
       } else if (marketId && cid > 0) {
         // Market ID exists but not in bulk query - query directly
-        if (row.symbol === 'WETH') console.log('DEBUG: Direct query for WETH market', marketId.slice(0,12));
         const direct = await queryMorphoMarketDirect(marketId, cid);
-        if (row.symbol === 'WETH') console.log('DEBUG: Direct result:', direct);
-        if (direct?.borrowApy > 0) {
+        if (direct != null && direct.borrowApy != null) {
           apy = direct.borrowApy; source = 'morpho_borrow'; borrowMorpho++;
           morphoApy.byMarketId[marketId] = direct;
-        } else if (morphoApy.borrow[normSymbol(row.symbol)]?.[cid] != null) {
-          apy = morphoApy.borrow[normSymbol(row.symbol)][cid]; source = 'morpho_borrow'; borrowMorpho++;
         }
-      } else if (morphoApy.borrow[normSymbol(row.symbol)]?.[cid] != null) {
-        apy = morphoApy.borrow[normSymbol(row.symbol)][cid]; source = 'morpho_borrow'; borrowMorpho++;
+      }
+      // If still no APY, try token-based query (more accurate than symbol+chain max)
+      if (apy == null && row.borrow_address && row.supply_address && cid > 0) {
+        const tokenResult = await queryMorphoMarketsByTokens(row.supply_address, row.borrow_address, cid);
+        if (tokenResult != null && tokenResult.borrowApy != null) {
+          apy = tokenResult.borrowApy; source = 'morpho_borrow_addr'; borrowMorpho++;
+          if (tokenResult.marketId) {
+            morphoApy.byMarketId[tokenResult.marketId.toLowerCase()] = tokenResult;
+            db.prepare("INSERT OR REPLACE INTO position_markets (position_id, protocol, chain, market_id, underlying_token, source) VALUES (?, ?, ?, ?, ?, ?)")
+              .run(row.position_id, 'Morpho', row.chain, tokenResult.marketId, row.supply_address, 'apy-fetch');
+          }
+        }
+      }
+      // Last resort: symbol+chain max rate (WARNING: may be inaccurate for non-specific markets)
+      if (apy == null && morphoApy.borrow[normSymbol(row.symbol)]?.[cid] != null) {
+        apy = morphoApy.borrow[normSymbol(row.symbol)][cid]; source = 'morpho_borrow_max'; borrowMorpho++;
       }
     } else if (aaveApy.borrow[row.symbol]?.[cid] != null) {
       // Use Aave as reference for other protocols
