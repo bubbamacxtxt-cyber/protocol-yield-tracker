@@ -12,6 +12,11 @@ const EULER_CHAINS = {
 };
 const AAVE_API = 'https://api.v3.aave.com/graphql';
 
+// Wrapped token -> underlying token mapping for market lookups
+const WRAPPED_TO_UNDERLYING = {
+  '0xd3fd63209fa2d55b07a0f6db36c2f43900be3094': '0x738d1115b90efa71ae468f1287fc864775e23a31', // wsrUSD -> srUSD
+};
+
 function postJSON(url, body) {
   return new Promise((res, rej) => {
     const bodyStr = JSON.stringify(body);
@@ -319,13 +324,20 @@ async function main() {
       const chain = pos.chain.toLowerCase();
       const markets = morphoMarkets[chain] || [];
       // Debug: find all matches
-      const allMatches = markets.filter(m => m.collateralAddr === supplyAddr && m.loanAddr === borrowAddr);
+      // Try direct match first, then with underlying token
+      const underlyingAddr = WRAPPED_TO_UNDERLYING[supplyAddr] || supplyAddr;
+      const allMatches = markets.filter(m => 
+        (m.collateralAddr === supplyAddr || m.collateralAddr === underlyingAddr) && 
+        m.loanAddr === borrowAddr
+      );
       if (allMatches.length > 0) {
-        console.log('   found', allMatches.length, 'matches, first:', allMatches[0].marketId.slice(0,12), 'hasDaily:', allMatches[0].hasDailyApy);
+        const usedUnderlying = allMatches[0].collateralAddr !== supplyAddr;
+        console.log('   found', allMatches.length, 'matches:', allMatches[0].marketId.slice(0,12), 
+                    usedUnderlying ? '(using underlying ' + allMatches[0].collateralAsset + ')' : '');
       }
       const match = allMatches[0];
       if (match) {
-        insertMarket.run(pos.id, 'Morpho', pos.chain, match.marketId, 'Morpho Market', supplyAddr, 'market-match');
+        insertMarket.run(pos.id, 'Morpho', pos.chain, match.marketId, 'Morpho Market', match.collateralAddr, 'market-match');
         morphoOk++;
       } else {
         console.log('   no match for supply:', supplyAddr?.slice(0,10), 'borrow:', borrowAddr?.slice(0,10));

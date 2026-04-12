@@ -152,7 +152,7 @@ async function fetchMorphoApy() {
   const borrowMap = {};
   const byMarketId = {};  // marketId -> { supplyApy, borrowApy }
   for (const cid of MORPHO_CHAINS) {
-    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 500) { items { marketId loanAsset { symbol } state { supplyApy borrowApy dailySupplyApy dailyBorrowApy } } } }`;
+    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 1000) { items { marketId loanAsset { symbol } state { supplyApy borrowApy dailySupplyApy dailyBorrowApy } } } }`;
     try {
       const res = await fetch('https://api.morpho.org/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -189,7 +189,27 @@ async function fetchMorphoApy() {
     }
   }
   console.log(`  Morpho: ${Object.keys(supplyMap).length} supply, ${Object.keys(borrowMap).length} borrow, ${Object.keys(byMarketId).length} markets      `);
-  return { supply: supplyMap, borrow: borrowMap, byMarketId };
+  return { supply: supplyMap, borrow: borrowMap, byMarketId, missingMarketIds: new Set() };
+}
+
+// Query Morpho directly for a specific market ID (fallback for markets not in bulk query)
+async function queryMorphoMarketDirect(marketId, chainId) {
+  try {
+    const query = `{ marketById(marketId: "${marketId}", chainId: ${chainId}) { marketId loanAsset { symbol } collateralAsset { symbol } state { dailyBorrowApy dailySupplyApy } } }`;
+    const res = await fetch('https://api.morpho.org/graphql', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+    const data = await res.json();
+    const m = data?.data?.marketById;
+    if (m?.state) {
+      return {
+        supplyApy: (m.state.dailySupplyApy ?? 0) * 100,
+        borrowApy: (m.state.dailyBorrowApy ?? 0) * 100
+      };
+    }
+  } catch (e) {}
+  return null;
 }
 
 // Normalize symbols: USD₮0 -> USDT0 (for map lookups)
@@ -331,6 +351,17 @@ async function main() {
       const marketId = row.morpho_market_id?.toLowerCase();
       if (marketId && morphoApy.byMarketId[marketId]?.borrowApy > 0) {
         apy = morphoApy.byMarketId[marketId].borrowApy; source = 'morpho_borrow'; borrowMorpho++;
+      } else if (marketId && cid > 0) {
+        // Market ID exists but not in bulk query - query directly
+        if (row.symbol === 'WETH') console.log('DEBUG: Direct query for WETH market', marketId.slice(0,12));
+        const direct = await queryMorphoMarketDirect(marketId, cid);
+        if (row.symbol === 'WETH') console.log('DEBUG: Direct result:', direct);
+        if (direct?.borrowApy > 0) {
+          apy = direct.borrowApy; source = 'morpho_borrow'; borrowMorpho++;
+          morphoApy.byMarketId[marketId] = direct;
+        } else if (morphoApy.borrow[normSymbol(row.symbol)]?.[cid] != null) {
+          apy = morphoApy.borrow[normSymbol(row.symbol)][cid]; source = 'morpho_borrow'; borrowMorpho++;
+        }
       } else if (morphoApy.borrow[normSymbol(row.symbol)]?.[cid] != null) {
         apy = morphoApy.borrow[normSymbol(row.symbol)][cid]; source = 'morpho_borrow'; borrowMorpho++;
       }
