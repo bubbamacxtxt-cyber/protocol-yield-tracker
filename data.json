@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-04-11T19:19:53.453Z",
+  "generated_at": "2026-04-12T08:42:48.204Z",
   "summary": {
-    "total_positions": 133,
-    "total_value": 668051041.3428165,
-    "total_assets": 1957112134.4428182,
-    "total_debt": 1289061093.1399999,
+    "total_positions": 132,
+    "total_value": 674139932.1440557,
+    "total_assets": 1967181039.3240566,
+    "total_debt": 1293041107.1599998,
     "total_whales": 11,
     "total_wallets": 58,
-    "total_active": 44,
+    "total_active": 43,
     "chains": [
       "eth",
       "mnt",
@@ -30,15 +30,14 @@
       "Convex",
       "Fasanara mGLOBAL (GDADF)",
       "FalconX Institutional",
-      "Spark sUSDC",
       "Sentora PYUSD",
+      "Spark sUSDC",
       "Fasanara Genesis Fund",
       "Morpho infiniFi Ecosystem Vault",
       "sGHO",
       "Aave Horizon USDC",
       "Maple Institutional",
       "Aave USDC",
-      "Euler Sentora USDC",
       "Cap stcUSD",
       "infinifiUSD Autopool",
       "Aave Horizon RLUSD",
@@ -98,13 +97,13 @@
           "position_type": "Lending",
           "strategy": "loop",
           "yield_source": "Aave V3",
-          "health_rate": 1.078,
-          "net_usd": 42708351.9,
-          "asset_usd": 311896674.73,
-          "debt_usd": 269188322.83,
+          "health_rate": 1.076,
+          "net_usd": 42255590.23,
+          "asset_usd": 311930268.43,
+          "debt_usd": 269674678.21,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": "2026-04-11T16:34:20.000Z",
-          "scanned_at": "2026-04-11 17:56:10",
+          "scanned_at": "2026-04-12 08:40:36",
           "supply": [
             {
               "symbol": "USDe",
@@ -159,7 +158,7 @@
           "apy_cost": 3.8356695016652225,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -17.23212562539401,
+          "apy_net": -17.4601570506242,
           "apy_reward": null
         },
         {
@@ -172,12 +171,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 18637926.47,
+          "net_usd": 18601764.09,
           "asset_usd": 185853606.81,
-          "debt_usd": 167215680.34,
+          "debt_usd": 167251842.72,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
           "debank_updated_at": "2026-04-11T05:55:42.000Z",
-          "scanned_at": "2026-04-11 17:56:10",
+          "scanned_at": "2026-04-12 08:40:35",
           "supply": [
             {
               "symbol": "sUSDe",
@@ -208,8 +207,8 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.82236933539714,
-              "bonus_borrow_source": "aave:mnt(0.82%)"
+              "bonus_borrow_apy": 0.799167133858957,
+              "bonus_borrow_source": "aave:mnt(0.80%)"
             },
             {
               "symbol": "USDC",
@@ -223,16 +222,16 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.887458278276732,
-              "bonus_borrow_source": "aave:mnt(0.89%)"
+              "bonus_borrow_apy": 0.897376251258619,
+              "bonus_borrow_source": "aave:mnt(0.90%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.5651800000000002,
           "apy_cost": 3.2914286107809976,
           "bonus_supply": null,
-          "bonus_borrow": 1.709827613673872,
-          "apy_net": 21.361446822425705,
+          "bonus_borrow": 1.696543385117576,
+          "apy_net": 21.280458514177703,
           "apy_reward": null
         },
         {
@@ -245,12 +244,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.034,
-          "net_usd": 13013884.38,
-          "asset_usd": 130233297.16,
-          "debt_usd": 117219412.78,
+          "net_usd": 13006780.19,
+          "asset_usd": 130247239.12,
+          "debt_usd": 117240458.93,
           "position_index": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
           "debank_updated_at": "2026-04-11T16:34:20.000Z",
-          "scanned_at": "2026-04-11 17:56:11",
+          "scanned_at": "2026-04-12 08:40:37",
           "supply": [
             {
               "symbol": "USDe",
@@ -281,7 +280,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.470952624972065,
+              "bonus_borrow_apy": 0.471068671495452,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
           ],
@@ -289,8 +288,8 @@
           "apy_base": 0.859565217391305,
           "apy_cost": 3.63041666666667,
           "bonus_supply": null,
-          "bonus_borrow": 0.470952624972065,
-          "apy_net": -19.856216617320616,
+          "bonus_borrow": 0.471068671495452,
+          "apy_net": -19.870206822081233,
           "apy_reward": null
         },
         {
@@ -303,12 +302,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 12973454.34,
-          "asset_usd": 128396388.96,
-          "debt_usd": 115422934.62,
+          "net_usd": 12983046.46,
+          "asset_usd": 128428483.57,
+          "debt_usd": 115445437.11,
           "position_index": "0xc4374775489cb9c56003bf2c9b12495fc64f0771",
           "debank_updated_at": "2026-04-11T13:04:48.000Z",
-          "scanned_at": "2026-04-11 17:56:05",
+          "scanned_at": "2026-04-12 08:40:30",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -339,7 +338,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.470952624972065,
+              "bonus_borrow_apy": 0.471068671495452,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
           ],
@@ -347,8 +346,8 @@
           "apy_base": 3.7296,
           "apy_cost": 3.6304166666666706,
           "bonus_supply": null,
-          "bonus_borrow": 0.470952624972065,
-          "apy_net": 8.80201662207866,
+          "bonus_borrow": 0.471068671495452,
+          "apy_net": 8.800289083886437,
           "apy_reward": null
         },
         {
@@ -361,12 +360,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.052,
-          "net_usd": 7199734.37,
-          "asset_usd": 57626458.76,
-          "debt_usd": 50426724.39,
+          "net_usd": 7211103.24,
+          "asset_usd": 57635856.69,
+          "debt_usd": 50424753.45,
           "position_index": "0x660975730059246a68521a3e2fbd4740173100f5",
           "debank_updated_at": "2026-04-11T12:50:53.000Z",
-          "scanned_at": "2026-04-11 17:56:06",
+          "scanned_at": "2026-04-12 08:40:31",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -406,7 +405,7 @@
           "apy_cost": 3.95458333333333,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 6.549363726211731,
+          "apy_net": 6.545695350307998,
           "apy_reward": null
         },
         {
@@ -419,12 +418,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 4598313.95,
-          "asset_usd": 45811158.61,
-          "debt_usd": 41212844.66,
+          "net_usd": 4595746.31,
+          "asset_usd": 45818639.81,
+          "debt_usd": 41222893.5,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
           "debank_updated_at": "2026-04-11T15:42:22.000Z",
-          "scanned_at": "2026-04-11 17:56:09",
+          "scanned_at": "2026-04-12 08:40:35",
           "supply": [
             {
               "symbol": "sUSDe",
@@ -479,7 +478,7 @@
           "apy_cost": 3.5573825256614873,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 3.6350656368111722,
+          "apy_net": 3.635121731449812,
           "apy_reward": null
         },
         {
@@ -492,12 +491,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": 1.029,
-          "net_usd": 3629730.68,
-          "asset_usd": 3629730.68,
+          "net_usd": 3630508.96,
+          "asset_usd": 3630508.96,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T13:04:49.000Z",
-          "scanned_at": "2026-04-11 17:56:04",
+          "scanned_at": "2026-04-12 08:40:29",
           "supply": [
             {
               "symbol": "USDT",
@@ -534,12 +533,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.056,
-          "net_usd": 1163283.35,
-          "asset_usd": 8747466.01,
-          "debt_usd": 7584182.66,
+          "net_usd": 1162969.75,
+          "asset_usd": 8746771.19,
+          "debt_usd": 7583801.45,
           "position_index": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
           "debank_updated_at": "2026-04-11T12:50:53.000Z",
-          "scanned_at": "2026-04-11 17:56:05",
+          "scanned_at": "2026-04-12 08:40:30",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -579,7 +578,7 @@
           "apy_cost": 4.70041005814483,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 1.5298307860557634,
+          "apy_net": 1.5292276949447325,
           "apy_reward": null
         },
         {
@@ -592,12 +591,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.045,
-          "net_usd": 1084412.97,
-          "asset_usd": 9895211.99,
-          "debt_usd": 8810799.02,
+          "net_usd": 1083760.35,
+          "asset_usd": 9896202.08,
+          "debt_usd": 8812441.73,
           "position_index": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
           "debank_updated_at": "2026-04-11T16:34:20.000Z",
-          "scanned_at": "2026-04-11 17:56:10",
+          "scanned_at": "2026-04-12 08:40:36",
           "supply": [
             {
               "symbol": "USDe",
@@ -637,65 +636,7 @@
           "apy_cost": 3.22833333333333,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -17.55373579594402,
-          "apy_reward": null
-        },
-        {
-          "id": 5,
-          "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
-          "chain": "eth",
-          "protocol_id": "morphoblue",
-          "protocol_name": "Morpho",
-          "position_type": "Lending",
-          "strategy": "loop",
-          "yield_source": "Morpho",
-          "health_rate": 1.054,
-          "net_usd": 554479.34,
-          "asset_usd": 4194832.22,
-          "debt_usd": 3640352.89,
-          "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-          "debank_updated_at": "2026-04-11T12:50:53.000Z",
-          "scanned_at": "2026-04-11 17:56:05",
-          "supply": [
-            {
-              "symbol": "syrupUSDC",
-              "real_symbol": "syrupUSDC",
-              "real_name": "USD Coin",
-              "address": "0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b",
-              "amount": 12357695.8996633,
-              "price_usd": 0.999600159936026,
-              "value_usd": 12352754.7977442,
-              "apy_base": 4.27877,
-              "apy_base_source": "ybs",
-              "bonus_supply_apy": null,
-              "bonus_supply_source": null,
-              "bonus_borrow_apy": null,
-              "bonus_borrow_source": null
-            }
-          ],
-          "borrow": [
-            {
-              "symbol": "PYUSD",
-              "real_symbol": "PYUSD",
-              "real_name": "Paypal USD",
-              "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
-              "amount": 10733929.3207791,
-              "price_usd": 0.9997,
-              "value_usd": 10730709.1419829,
-              "apy_base": 3.29891579101809,
-              "apy_base_source": "morpho_borrow",
-              "bonus_supply_apy": null,
-              "bonus_supply_source": null,
-              "bonus_borrow_apy": null,
-              "bonus_borrow_source": null
-            }
-          ],
-          "rewards": [],
-          "apy_base": 4.27877,
-          "apy_cost": 3.29891579101809,
-          "bonus_supply": null,
-          "bonus_borrow": null,
-          "apy_net": 10.711859208803087,
+          "apy_net": -17.568331018891747,
           "apy_reward": null
         },
         {
@@ -708,12 +649,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.056,
-          "net_usd": 370986.31,
-          "asset_usd": 3520734.17,
-          "debt_usd": 3149747.86,
+          "net_usd": 840967.95,
+          "asset_usd": 7988650.3,
+          "debt_usd": 7147682.35,
           "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
           "debank_updated_at": "2026-04-11T12:50:53.000Z",
-          "scanned_at": "2026-04-11 17:56:05",
+          "scanned_at": "2026-04-12 08:40:31",
           "supply": [
             {
               "symbol": "wsrUSD",
@@ -753,7 +694,65 @@
           "apy_cost": 34.023460200633,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -243.7559208167354,
+          "apy_net": -244.02379999320178,
+          "apy_reward": null
+        },
+        {
+          "id": 5,
+          "wallet": "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+          "chain": "eth",
+          "protocol_id": "morphoblue",
+          "protocol_name": "Morpho",
+          "position_type": "Lending",
+          "strategy": "loop",
+          "yield_source": "Morpho",
+          "health_rate": 1.054,
+          "net_usd": 554342.06,
+          "asset_usd": 4194694.95,
+          "debt_usd": 3640352.89,
+          "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "debank_updated_at": "2026-04-11T12:50:53.000Z",
+          "scanned_at": "2026-04-12 08:40:31",
+          "supply": [
+            {
+              "symbol": "syrupUSDC",
+              "real_symbol": "syrupUSDC",
+              "real_name": "USD Coin",
+              "address": "0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b",
+              "amount": 12357695.8996633,
+              "price_usd": 0.999600159936026,
+              "value_usd": 12352754.7977442,
+              "apy_base": 4.27877,
+              "apy_base_source": "ybs",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
+            }
+          ],
+          "borrow": [
+            {
+              "symbol": "PYUSD",
+              "real_symbol": "PYUSD",
+              "real_name": "Paypal USD",
+              "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+              "amount": 10733929.3207791,
+              "price_usd": 0.9997,
+              "value_usd": 10730709.1419829,
+              "apy_base": 3.29891579101809,
+              "apy_base_source": "morpho_borrow",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
+            }
+          ],
+          "rewards": [],
+          "apy_base": 4.27877,
+          "apy_cost": 3.29891579101809,
+          "bonus_supply": null,
+          "bonus_borrow": null,
+          "apy_net": 10.713452407908859,
           "apy_reward": null
         },
         {
@@ -766,12 +765,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": 1.056,
-          "net_usd": 278446.6,
-          "asset_usd": 278446.6,
+          "net_usd": 278613.86,
+          "asset_usd": 278613.86,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T13:04:48.000Z",
-          "scanned_at": "2026-04-11 17:56:04",
+          "scanned_at": "2026-04-12 08:40:29",
           "supply": [
             {
               "symbol": "USDT",
@@ -820,12 +819,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 10023267.85,
-          "asset_usd": 10023267.85,
+          "net_usd": 10019414.41,
+          "asset_usd": 10019414.41,
           "debt_usd": 0,
           "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
           "debank_updated_at": "2026-04-11T15:10:41.000Z",
-          "scanned_at": "2026-04-11 17:56:12",
+          "scanned_at": "2026-04-12 08:40:37",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -862,12 +861,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 8511145.59,
-          "asset_usd": 8511145.59,
+          "net_usd": 8511381.75,
+          "asset_usd": 8511381.75,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
           "debank_updated_at": "2026-04-11T15:10:41.000Z",
-          "scanned_at": "2026-04-11 17:56:12",
+          "scanned_at": "2026-04-12 08:40:37",
           "supply": [
             {
               "symbol": "RLUSD",
@@ -904,12 +903,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 8190720.41,
-          "asset_usd": 8190720.41,
+          "net_usd": 8202201.2,
+          "asset_usd": 8202201.2,
           "debt_usd": 0,
           "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
           "debank_updated_at": "2026-04-11T15:10:40.000Z",
-          "scanned_at": "2026-04-11 17:56:12",
+          "scanned_at": "2026-04-12 08:40:37",
           "supply": [
             {
               "symbol": "GHO",
@@ -946,12 +945,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 4111926.56,
-          "asset_usd": 4111926.56,
+          "net_usd": 4111819.15,
+          "asset_usd": 4111819.15,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T15:10:41.000Z",
-          "scanned_at": "2026-04-11 17:56:12",
+          "scanned_at": "2026-04-12 08:40:37",
           "supply": [
             {
               "symbol": "USDC",
@@ -988,12 +987,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 4021587.26,
-          "asset_usd": 4021587.26,
+          "net_usd": 4022406.25,
+          "asset_usd": 4022406.25,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T15:10:41.000Z",
-          "scanned_at": "2026-04-11 17:56:12",
+          "scanned_at": "2026-04-12 08:40:37",
           "supply": [
             {
               "symbol": "USDT",
@@ -1030,12 +1029,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1602031.25,
-          "asset_usd": 1602031.25,
+          "net_usd": 1601958.9,
+          "asset_usd": 1601958.9,
           "debt_usd": 0,
           "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
           "debank_updated_at": "2026-04-11T16:50:39.000Z",
-          "scanned_at": "2026-04-11 17:56:12",
+          "scanned_at": "2026-04-12 08:40:38",
           "supply": [
             {
               "symbol": "USDC",
@@ -1093,12 +1092,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 8348429.88,
-          "asset_usd": 11376248.41,
-          "debt_usd": 3027818.53,
+          "net_usd": 8346325.31,
+          "asset_usd": 11378556.87,
+          "debt_usd": 3032231.55,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T11:58:02.000Z",
-          "scanned_at": "2026-04-11 17:56:14",
+          "scanned_at": "2026-04-12 08:40:40",
           "supply": [
             {
               "symbol": "USDT",
@@ -1138,7 +1137,7 @@
           "apy_cost": 3.14208333333333,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 1.9520084225366554,
+          "apy_net": 1.9514667926057638,
           "apy_reward": null
         },
         {
@@ -1151,12 +1150,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 6926049.26,
-          "asset_usd": 68523230.48,
-          "debt_usd": 61597181.22,
+          "net_usd": 6922547.64,
+          "asset_usd": 68532655.02,
+          "debt_usd": 61610107.38,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": "2026-04-11T11:58:02.000Z",
-          "scanned_at": "2026-04-11 17:56:21",
+          "scanned_at": "2026-04-12 08:40:47",
           "supply": [
             {
               "symbol": "USDe",
@@ -1168,7 +1167,7 @@
               "value_usd": 68523116.1899264,
               "apy_base": 0.950833333333333,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 3.03421434166432,
+              "bonus_supply_apy": 3.02939656436242,
               "bonus_supply_source": "aave:eth(3.03%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -1194,9 +1193,9 @@
           "rewards": [],
           "apy_base": 0.950833333333333,
           "apy_cost": 3.345,
-          "bonus_supply": 3.03421434166432,
+          "bonus_supply": 3.02939656436242,
           "bonus_borrow": null,
-          "apy_net": 9.677345137269837,
+          "apy_net": 9.633723993118362,
           "apy_reward": null
         },
         {
@@ -1209,12 +1208,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 5559021.99,
-          "asset_usd": 55899621.94,
-          "debt_usd": 50340599.95,
+          "net_usd": 5547921.97,
+          "asset_usd": 55899622.09,
+          "debt_usd": 50351700.12,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
           "debank_updated_at": "2026-04-11T11:58:02.000Z",
-          "scanned_at": "2026-04-11 17:56:25",
+          "scanned_at": "2026-04-12 08:40:51",
           "supply": [
             {
               "symbol": "USDe",
@@ -1260,8 +1259,8 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.82236933539714,
-              "bonus_borrow_source": "aave:mnt(0.82%)"
+              "bonus_borrow_apy": 0.799167133858957,
+              "bonus_borrow_source": "aave:mnt(0.80%)"
             },
             {
               "symbol": "USDC",
@@ -1275,16 +1274,16 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.887458278276732,
-              "bonus_borrow_source": "aave:mnt(0.89%)"
+              "bonus_borrow_apy": 0.897376251258619,
+              "bonus_borrow_source": "aave:mnt(0.90%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.5650867829012864,
           "apy_cost": 3.291493855535314,
           "bonus_supply": 3.5,
-          "bonus_borrow": 1.709827613673872,
-          "apy_net": 56.721065894093705,
+          "bonus_borrow": 1.696543385117576,
+          "apy_net": 56.71082165643885,
           "apy_reward": null
         },
         {
@@ -1297,12 +1296,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 5112248.59,
-          "asset_usd": 5112248.59,
+          "net_usd": 5112455.1,
+          "asset_usd": 5112455.1,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
           "debank_updated_at": "2026-04-11T11:58:01.000Z",
-          "scanned_at": "2026-04-11 17:56:14",
+          "scanned_at": "2026-04-12 08:40:40",
           "supply": [
             {
               "symbol": "RLUSD",
@@ -1339,12 +1338,12 @@
           "strategy": "yield",
           "yield_source": "Upshift",
           "health_rate": null,
-          "net_usd": 5084263.24,
-          "asset_usd": 5084263.24,
+          "net_usd": 5083755.06,
+          "asset_usd": 5083755.06,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T05:23:06.000Z",
-          "scanned_at": "2026-04-11 17:56:30",
+          "scanned_at": "2026-04-12 08:40:55",
           "supply": [
             {
               "symbol": "USDC",
@@ -1381,12 +1380,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 4484597.3,
-          "asset_usd": 44618573.88,
-          "debt_usd": 40133976.59,
+          "net_usd": 4486792.9,
+          "asset_usd": 44629726.96,
+          "debt_usd": 40142934.06,
           "position_index": "0xc4374775489cb9c56003bf2c9b12495fc64f0771",
           "debank_updated_at": "2026-04-11T13:43:11.000Z",
-          "scanned_at": "2026-04-11 17:56:14",
+          "scanned_at": "2026-04-12 08:40:39",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -1417,7 +1416,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.470952624972065,
+              "bonus_borrow_apy": 0.471068671495452,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
           ],
@@ -1425,8 +1424,8 @@
           "apy_base": 3.7296,
           "apy_cost": 3.63041666666667,
           "bonus_supply": null,
-          "bonus_borrow": 0.470952624972065,
-          "apy_net": 8.831913905966527,
+          "bonus_borrow": 0.471068671495452,
+          "apy_net": 8.831593592667174,
           "apy_reward": null
         },
         {
@@ -1439,12 +1438,12 @@
           "strategy": "lp",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 4237730.72,
-          "asset_usd": 4237730.72,
+          "net_usd": 4238001.13,
+          "asset_usd": 4238001.13,
           "debt_usd": 0,
           "position_index": "0x67aeeed39c1675e0df93ad8bab543b17992d433b,0x808507121b80c02388fad14726482e061b8da827,0x8238884ec9668ef77b90c6dff4d1a9f4f4823bfe",
           "debank_updated_at": "2026-04-11T11:58:02.000Z",
-          "scanned_at": "2026-04-11 17:56:17",
+          "scanned_at": "2026-04-12 08:40:43",
           "supply": [
             {
               "symbol": "USDO",
@@ -1469,7 +1468,7 @@
               "amount": 634139.92726598,
               "price_usd": 0.99022394728856,
               "value_usd": 627940.541910599,
-              "apy_base": 5.95656099001671,
+              "apy_base": 5.95655656967737,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -1501,11 +1500,11 @@
               "value_usd": 319.246952737545
             }
           ],
-          "apy_base": 4.289619172228477,
+          "apy_base": 4.289618517228687,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 4.289619172228477,
+          "apy_net": 4.289618517228687,
           "apy_reward": null
         },
         {
@@ -1518,12 +1517,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.027,
-          "net_usd": 3879070.03,
-          "asset_usd": 37785637.39,
-          "debt_usd": 33906567.36,
+          "net_usd": 3924622.65,
+          "asset_usd": 37838381.65,
+          "debt_usd": 33913759,
           "position_index": "0x051665f2455116e929b9972c36d23070f5054ce0",
           "debank_updated_at": "2026-04-11T11:58:01.000Z",
-          "scanned_at": "2026-04-11 17:56:21",
+          "scanned_at": "2026-04-12 08:40:47",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -1554,16 +1553,16 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.82236933539714,
-              "bonus_borrow_source": "aave:mnt(0.82%)"
+              "bonus_borrow_apy": 0.799167133858957,
+              "bonus_borrow_source": "aave:mnt(0.80%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.7295999999999996,
           "apy_cost": 3.29142857142857,
           "bonus_supply": null,
-          "bonus_borrow": 0.82236933539714,
-          "apy_net": 14.747862107406748,
+          "bonus_borrow": 0.799167133858957,
+          "apy_net": 14.42178764450401,
           "apy_reward": null
         },
         {
@@ -1576,12 +1575,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 2707771.85,
-          "asset_usd": 2707771.85,
+          "net_usd": 2708389.24,
+          "asset_usd": 2708389.24,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T11:58:02.000Z",
-          "scanned_at": "2026-04-11 17:56:21",
+          "scanned_at": "2026-04-12 08:40:47",
           "supply": [
             {
               "symbol": "USDT",
@@ -1618,12 +1617,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.052,
-          "net_usd": 2703032.93,
-          "asset_usd": 32543947.63,
-          "debt_usd": 29840914.7,
+          "net_usd": 2699459.59,
+          "asset_usd": 32545930.8,
+          "debt_usd": 29846471.21,
           "position_index": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
           "debank_updated_at": "2026-04-11T13:43:11.000Z",
-          "scanned_at": "2026-04-11 17:56:13",
+          "scanned_at": "2026-04-12 08:40:39",
           "supply": [
             {
               "symbol": "sUSDS",
@@ -1663,7 +1662,7 @@
           "apy_cost": 598346.853967447,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -6605578.197840278,
+          "apy_net": -6615553.783227027,
           "apy_reward": null
         },
         {
@@ -1676,12 +1675,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.062,
-          "net_usd": 2275230.51,
-          "asset_usd": 16391565.89,
-          "debt_usd": 14116335.38,
+          "net_usd": 2275744.15,
+          "asset_usd": 16394155.88,
+          "debt_usd": 14118411.73,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": "2026-04-11T11:58:03.000Z",
-          "scanned_at": "2026-04-11 17:56:26",
+          "scanned_at": "2026-04-12 08:40:52",
           "supply": [
             {
               "symbol": "sUSDe",
@@ -1721,7 +1720,7 @@
           "apy_cost": 33.4925447700298,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -182.1147835362385,
+          "apy_net": -182.10018041284673,
           "apy_reward": null
         },
         {
@@ -1734,12 +1733,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.053,
-          "net_usd": 2087653.05,
-          "asset_usd": 15962668.82,
+          "net_usd": 2087130.68,
+          "asset_usd": 15962146.45,
           "debt_usd": 13875015.77,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T13:43:11.000Z",
-          "scanned_at": "2026-04-11 17:56:13",
+          "scanned_at": "2026-04-12 08:40:39",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -1779,7 +1778,7 @@
           "apy_cost": 3.1230290070630704,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 11.96008682754247,
+          "apy_net": 11.962009318313964,
           "apy_reward": null
         },
         {
@@ -1792,12 +1791,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.053,
-          "net_usd": 1667861.85,
-          "asset_usd": 12759748.11,
-          "debt_usd": 11091886.26,
+          "net_usd": 1674222.97,
+          "asset_usd": 12761672.03,
+          "debt_usd": 11087449.06,
           "position_index": "0x3de0ff76e8b528c092d47b9dac775931cef80f49",
           "debank_updated_at": "2026-04-11T11:58:02.000Z",
-          "scanned_at": "2026-04-11 17:56:24",
+          "scanned_at": "2026-04-12 08:40:50",
           "supply": [
             {
               "symbol": "PT-sUSDE-7MAY2026",
@@ -1807,7 +1806,7 @@
               "amount": 12798485.9354461,
               "price_usd": 0.997123498484209,
               "value_usd": 12761671.0712529,
-              "apy_base": 3.7448740242058,
+              "apy_base": 3.75274903912617,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -1833,11 +1832,11 @@
             }
           ],
           "rewards": [],
-          "apy_base": 3.7448740242058003,
+          "apy_base": 3.75274903912617,
           "apy_cost": 2.25739198681991,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 13.63716910396757,
+          "apy_net": 13.655668447738401,
           "apy_reward": null
         },
         {
@@ -1850,12 +1849,12 @@
           "strategy": "deposit",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 1512889.48,
-          "asset_usd": 1512889.48,
+          "net_usd": 1512785.09,
+          "asset_usd": 1512785.09,
           "debt_usd": 0,
           "position_index": "0x9db38d74a0d29380899ad354121dfb521adb0548",
           "debank_updated_at": "2026-04-11T05:23:06.000Z",
-          "scanned_at": "2026-04-11 17:56:30",
+          "scanned_at": "2026-04-12 08:40:55",
           "supply": [
             {
               "symbol": "PT-USDG-28MAY2026",
@@ -1865,7 +1864,7 @@
               "amount": 1523281.488451,
               "price_usd": 0.993172773039642,
               "value_usd": 1512881.70000483,
-              "apy_base": 5.502419275853,
+              "apy_base": 5.6429462265235,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -1875,11 +1874,11 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 5.502419275853,
+          "apy_base": 5.642946226523501,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 5.502419275853,
+          "apy_net": 5.642946226523501,
           "apy_reward": null
         },
         {
@@ -1892,12 +1891,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.011,
-          "net_usd": 1272360.26,
-          "asset_usd": 14267781.76,
-          "debt_usd": 12995421.5,
+          "net_usd": 1272869.04,
+          "asset_usd": 14271084.32,
+          "debt_usd": 12998215.28,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
           "debank_updated_at": "2026-04-11T11:58:02.000Z",
-          "scanned_at": "2026-04-11 17:56:25",
+          "scanned_at": "2026-04-12 08:40:51",
           "supply": [
             {
               "symbol": "USDe",
@@ -1943,7 +1942,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.470952624972065,
+              "bonus_borrow_apy": 0.471068671495452,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
           ],
@@ -1951,8 +1950,8 @@
           "apy_base": 2.210701266180273,
           "apy_cost": 3.63041666666667,
           "bonus_supply": 3.5,
-          "bonus_borrow": 0.470952624972065,
-          "apy_net": 31.768103498061816,
+          "bonus_borrow": 0.471068671495452,
+          "apy_net": 31.764472730295605,
           "apy_reward": null
         },
         {
@@ -1965,12 +1964,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.028,
-          "net_usd": 1264512.68,
+          "net_usd": 1264006.51,
           "asset_usd": 10145129.21,
-          "debt_usd": 8880616.53,
+          "debt_usd": 8881122.7,
           "position_index": "0x43415eb6ff9db7e26a15b704e7a3edce97d31c4e",
           "debank_updated_at": "2026-04-11T11:58:04.000Z",
-          "scanned_at": "2026-04-11 17:56:26",
+          "scanned_at": "2026-04-12 08:40:52",
           "supply": [
             {
               "symbol": "USTB",
@@ -2010,7 +2009,7 @@
           "apy_cost": 3.8291304347826105,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -0.2511878618655194,
+          "apy_net": -0.25282182078572685,
           "apy_reward": null
         },
         {
@@ -2023,12 +2022,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.01,
-          "net_usd": 1101245.33,
-          "asset_usd": 12376978.97,
-          "debt_usd": 11275733.65,
+          "net_usd": 1104047.45,
+          "asset_usd": 12378997.45,
+          "debt_usd": 11274950,
           "position_index": "0x660975730059246a68521a3e2fbd4740173100f5",
           "debank_updated_at": "2026-04-11T13:43:10.000Z",
-          "scanned_at": "2026-04-11 17:56:13",
+          "scanned_at": "2026-04-12 08:40:39",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -2068,7 +2067,7 @@
           "apy_cost": 3.95458333333333,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 7.598141591275676,
+          "apy_net": 7.589486815054795,
           "apy_reward": null
         },
         {
@@ -2081,12 +2080,12 @@
           "strategy": "loop",
           "yield_source": "Euler",
           "health_rate": 1.02,
-          "net_usd": 831734.55,
-          "asset_usd": 7718461.81,
-          "debt_usd": 6886727.25,
+          "net_usd": 829270.9,
+          "asset_usd": 7715586.34,
+          "debt_usd": 6886315.44,
           "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
           "debank_updated_at": "2026-04-11T13:43:11.000Z",
-          "scanned_at": "2026-04-11 17:56:13",
+          "scanned_at": "2026-04-12 08:40:39",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -2126,7 +2125,7 @@
           "apy_cost": 4.40458333333333,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -24.280742301465637,
+          "apy_net": -24.35524421229271,
           "apy_reward": null
         },
         {
@@ -2139,12 +2138,12 @@
           "strategy": "lp",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 800686.29,
-          "asset_usd": 800686.29,
+          "net_usd": 800808.97,
+          "asset_usd": 800808.97,
           "debt_usd": 0,
           "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": "2026-04-11T11:13:52.000Z",
-          "scanned_at": "2026-04-11 17:56:30",
+          "scanned_at": "2026-04-12 08:40:57",
           "supply": [
             {
               "symbol": "USDT0",
@@ -2181,12 +2180,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": 1.024,
-          "net_usd": 643585.08,
-          "asset_usd": 643585.08,
+          "net_usd": 643768.93,
+          "asset_usd": 643768.93,
           "debt_usd": 0,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": "2026-04-11T11:58:03.000Z",
-          "scanned_at": "2026-04-11 17:56:26",
+          "scanned_at": "2026-04-12 08:40:52",
           "supply": [
             {
               "symbol": "USDe",
@@ -2210,7 +2209,7 @@
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 0.950833333333333,
+          "apy_net": 0.9508333333333331,
           "apy_reward": null
         },
         {
@@ -2223,12 +2222,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.052,
-          "net_usd": 635154.62,
-          "asset_usd": 4902205.67,
-          "debt_usd": 4267051.05,
+          "net_usd": 633897.69,
+          "asset_usd": 4901816.29,
+          "debt_usd": 4267918.6,
           "position_index": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
           "debank_updated_at": "2026-04-11T13:43:11.000Z",
-          "scanned_at": "2026-04-11 17:56:12",
+          "scanned_at": "2026-04-12 08:40:38",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -2268,7 +2267,7 @@
           "apy_cost": 4.70041005814483,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 1.446137446954951,
+          "apy_net": 1.4399436798387715,
           "apy_reward": null
         },
         {
@@ -2281,12 +2280,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": 1.157920892373162e+59,
-          "net_usd": 508613.55,
-          "asset_usd": 508613.55,
+          "net_usd": 508707.74,
+          "asset_usd": 508707.74,
           "debt_usd": 0,
           "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": "2026-04-11T16:28:49.000Z",
-          "scanned_at": "2026-04-11 17:56:30",
+          "scanned_at": "2026-04-12 08:40:56",
           "supply": [
             {
               "symbol": "USDT0",
@@ -2298,8 +2297,8 @@
               "value_usd": 508583.044371862,
               "apy_base": 2.82791666666667,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 1.32840283496624,
-              "bonus_supply_source": "aave:plasma(0.66%); aave:plasma(0.66%)",
+              "bonus_supply_apy": 1.23213254169864,
+              "bonus_supply_source": "aave:plasma(0.62%); aave:plasma(0.62%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -2308,9 +2307,9 @@
           "rewards": [],
           "apy_base": 2.82791666666667,
           "apy_cost": null,
-          "bonus_supply": 1.32840283496624,
+          "bonus_supply": 1.23213254169864,
           "bonus_borrow": null,
-          "apy_net": 4.15631950163291,
+          "apy_net": 4.06004920836531,
           "apy_reward": null
         },
         {
@@ -2323,12 +2322,12 @@
           "strategy": "loop",
           "yield_source": "Euler",
           "health_rate": 1.032,
-          "net_usd": 391324.5,
-          "asset_usd": 3976089.49,
-          "debt_usd": 3584764.99,
+          "net_usd": 392504,
+          "asset_usd": 3975919.6,
+          "debt_usd": 3583415.6,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T13:43:11.000Z",
-          "scanned_at": "2026-04-11 17:56:13",
+          "scanned_at": "2026-04-12 08:40:39",
           "supply": [
             {
               "symbol": "USDC",
@@ -2368,7 +2367,7 @@
           "apy_cost": 3.82913043478261,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -11.051538518177013,
+          "apy_net": -11.006187232745315,
           "apy_reward": null
         },
         {
@@ -2381,12 +2380,12 @@
           "strategy": "lp",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 199343.39,
-          "asset_usd": 199343.39,
+          "net_usd": 199376.61,
+          "asset_usd": 199376.61,
           "debt_usd": 0,
           "position_index": "0x17bac5f906c9a0282ac06a59958d85796c831f24,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb,0xd2e8488b8aa076db8227a459d47288b0bbcf9779",
           "debank_updated_at": "2026-04-11T11:13:51.000Z",
-          "scanned_at": "2026-04-11 17:56:40",
+          "scanned_at": "2026-04-12 08:41:06",
           "supply": [
             {
               "symbol": "USDT0",
@@ -2411,7 +2410,7 @@
               "amount": 45096.3995336661,
               "price_usd": 0.974591945469712,
               "value_usd": 43950.5877551951,
-              "apy_base": 9.03378101945069,
+              "apy_base": 9.03378103483785,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -2443,11 +2442,11 @@
               "value_usd": 20.7546287682003
             }
           ],
-          "apy_base": 4.195908843162536,
+          "apy_base": 4.195908846555141,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 4.195908843162536,
+          "apy_net": 4.195908846555141,
           "apy_reward": null
         },
         {
@@ -2460,12 +2459,12 @@
           "strategy": "lp",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 50288.7,
-          "asset_usd": 50288.7,
+          "net_usd": 50301.82,
+          "asset_usd": 50301.82,
           "debt_usd": 0,
           "position_index": "0x17bac5f906c9a0282ac06a59958d85796c831f24,0x58674ec29dd0742dddee721c5a6783c6bc417016,0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": "2026-04-11T11:13:51.000Z",
-          "scanned_at": "2026-04-11 17:56:49",
+          "scanned_at": "2026-04-12 08:41:15",
           "supply": [
             {
               "symbol": "USDT0",
@@ -2490,7 +2489,7 @@
               "amount": 8949.37906198809,
               "price_usd": 0.995708991613024,
               "value_usd": 8910.97720137487,
-              "apy_base": 9.3092629751188,
+              "apy_base": 9.30926356198172,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -2522,11 +2521,11 @@
               "value_usd": 2.15929660935714
             }
           ],
-          "apy_base": 3.9763091886946693,
+          "apy_base": 3.9763092926885335,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 3.976309188694669,
+          "apy_net": 3.9763092926885335,
           "apy_reward": null
         }
       ],
@@ -2554,12 +2553,12 @@
           "strategy": "lend",
           "yield_source": "Euler",
           "health_rate": null,
-          "net_usd": 68706715.39,
-          "asset_usd": 68706715.39,
+          "net_usd": 68708531.4,
+          "asset_usd": 68708531.4,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
           "debank_updated_at": "2026-04-11T12:43:05.000Z",
-          "scanned_at": "2026-04-11 17:56:50",
+          "scanned_at": "2026-04-12 08:41:16",
           "supply": [
             {
               "symbol": "RLUSD",
@@ -2596,12 +2595,12 @@
           "strategy": "lend",
           "yield_source": "Euler",
           "health_rate": null,
-          "net_usd": 45855882.74,
-          "asset_usd": 45855882.74,
+          "net_usd": 45838915.34,
+          "asset_usd": 45838915.34,
           "debt_usd": 0,
           "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
           "debank_updated_at": "2026-04-11T12:43:05.000Z",
-          "scanned_at": "2026-04-11 17:56:50",
+          "scanned_at": "2026-04-12 08:41:16",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -2629,6 +2628,48 @@
           "apy_reward": null
         },
         {
+          "id": 45,
+          "wallet": "0x99a95a9e38e927486fc878f41ff8b118eb632b10",
+          "chain": "eth",
+          "protocol_id": "morphoblue",
+          "protocol_name": "Morpho",
+          "position_type": "Lending",
+          "strategy": "lend",
+          "yield_source": "Morpho",
+          "health_rate": null,
+          "net_usd": 28439338.81,
+          "asset_usd": 28439338.81,
+          "debt_usd": 0,
+          "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "debank_updated_at": "2026-04-11T11:43:17.000Z",
+          "scanned_at": "2026-04-12 08:41:16",
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "real_name": "USD Coin",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": 22197938.354171,
+              "price_usd": 0.999600159936026,
+              "value_usd": 22189062.7290794,
+              "apy_base": 9.84227045938491,
+              "apy_base_source": "morpho_supply",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
+              "bonus_borrow_apy": null,
+              "bonus_borrow_source": null
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_base": 9.84227045938491,
+          "apy_cost": null,
+          "bonus_supply": null,
+          "bonus_borrow": null,
+          "apy_net": 9.842270459384908,
+          "apy_reward": null
+        },
+        {
           "id": 50,
           "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
           "chain": "eth",
@@ -2638,12 +2679,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 26930220.99,
-          "asset_usd": 26930220.99,
+          "net_usd": 26931184.55,
+          "asset_usd": 26931184.55,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
           "debank_updated_at": "2026-04-11T16:53:55.000Z",
-          "scanned_at": "2026-04-11 17:56:51",
+          "scanned_at": "2026-04-12 08:41:17",
           "supply": [
             {
               "symbol": "RLUSD",
@@ -2680,12 +2721,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 26662796.9,
-          "asset_usd": 26662796.9,
+          "net_usd": 26652659,
+          "asset_usd": 26652659,
           "debt_usd": 0,
           "position_index": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
           "debank_updated_at": "2026-04-11T16:53:55.000Z",
-          "scanned_at": "2026-04-11 17:56:51",
+          "scanned_at": "2026-04-12 08:41:17",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -2713,48 +2754,6 @@
           "apy_reward": null
         },
         {
-          "id": 45,
-          "wallet": "0x99a95a9e38e927486fc878f41ff8b118eb632b10",
-          "chain": "eth",
-          "protocol_id": "morphoblue",
-          "protocol_name": "Morpho",
-          "position_type": "Lending",
-          "strategy": "lend",
-          "yield_source": "Morpho",
-          "health_rate": null,
-          "net_usd": 22189062.73,
-          "asset_usd": 22189062.73,
-          "debt_usd": 0,
-          "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-          "debank_updated_at": "2026-04-11T11:43:17.000Z",
-          "scanned_at": "2026-04-11 17:56:49",
-          "supply": [
-            {
-              "symbol": "USDC",
-              "real_symbol": "USDC",
-              "real_name": "USD Coin",
-              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-              "amount": 22197938.354171,
-              "price_usd": 0.999600159936026,
-              "value_usd": 22189062.7290794,
-              "apy_base": 9.84227045938491,
-              "apy_base_source": "morpho_supply",
-              "bonus_supply_apy": null,
-              "bonus_supply_source": null,
-              "bonus_borrow_apy": null,
-              "bonus_borrow_source": null
-            }
-          ],
-          "borrow": [],
-          "rewards": [],
-          "apy_base": 9.84227045938491,
-          "apy_cost": null,
-          "bonus_supply": null,
-          "bonus_borrow": null,
-          "apy_net": 9.84227045938491,
-          "apy_reward": null
-        },
-        {
           "id": 49,
           "wallet": "0x3063c5907faa10c01b242181aa689beb23d2bd65",
           "chain": "plasma",
@@ -2764,12 +2763,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": 1.157920892373162e+59,
-          "net_usd": 10013445.8,
-          "asset_usd": 10013445.8,
+          "net_usd": 10014614.07,
+          "asset_usd": 10014614.07,
           "debt_usd": 0,
           "position_index": "0xb77e872a68c62cfc0dfb02c067ecc3da23b4bbf3",
           "debank_updated_at": "2026-04-11T11:20:10.000Z",
-          "scanned_at": "2026-04-11 17:56:51",
+          "scanned_at": "2026-04-12 08:41:17",
           "supply": [
             {
               "symbol": "GHO",
@@ -2781,8 +2780,8 @@
               "value_usd": 10013445.801248,
               "apy_base": 1.29869565217391,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 4.21977611549795,
-              "bonus_supply_source": "aave:plasma(4.22%)",
+              "bonus_supply_apy": 3.99343360691169,
+              "bonus_supply_source": "aave:plasma(3.99%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             }
@@ -2791,9 +2790,9 @@
           "rewards": [],
           "apy_base": 1.29869565217391,
           "apy_cost": null,
-          "bonus_supply": 4.21977611549795,
+          "bonus_supply": 3.99343360691169,
           "bonus_borrow": null,
-          "apy_net": 5.51847176767186,
+          "apy_net": 5.2921292590856,
           "apy_reward": null
         },
         {
@@ -2806,12 +2805,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": 1.157920892373162e+59,
-          "net_usd": 2008785.8,
-          "asset_usd": 2008785.8,
+          "net_usd": 2009021.9,
+          "asset_usd": 2009021.9,
           "debt_usd": 0,
           "position_index": "0xfc421ad3c883bf9e7c4f42de845c4e4405799e73",
           "debank_updated_at": "2026-04-11T11:20:10.000Z",
-          "scanned_at": "2026-04-11 17:56:50",
+          "scanned_at": "2026-04-12 08:41:17",
           "supply": [
             {
               "symbol": "GHO",
@@ -2823,7 +2822,7 @@
               "value_usd": 2008785.80013688,
               "apy_base": 0.883333333333333,
               "apy_base_source": "aave_supply",
-              "bonus_supply_apy": 4.62813372532396,
+              "bonus_supply_apy": 4.62909493178388,
               "bonus_supply_source": "aave:mnt(4.63%)",
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
@@ -2833,9 +2832,9 @@
           "rewards": [],
           "apy_base": 0.883333333333333,
           "apy_cost": null,
-          "bonus_supply": 4.62813372532396,
+          "bonus_supply": 4.62909493178388,
           "bonus_borrow": null,
-          "apy_net": 5.511467058657293,
+          "apy_net": 5.5124282651172125,
           "apy_reward": null
         },
         {
@@ -2848,12 +2847,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 52604.97,
-          "asset_usd": 52604.97,
+          "net_usd": 52605.28,
+          "asset_usd": 52605.28,
           "debt_usd": 0,
           "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
           "debank_updated_at": "2026-04-11T02:32:01.000Z",
-          "scanned_at": "2026-04-11 17:56:49",
+          "scanned_at": "2026-04-12 08:41:15",
           "supply": [
             {
               "symbol": "rUSD",
@@ -2877,7 +2876,7 @@
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 6.0827370046697204,
+          "apy_net": 6.08273700466972,
           "apy_reward": null
         }
       ],
@@ -2903,12 +2902,12 @@
           "strategy": "farm",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 1902285.82,
-          "asset_usd": 1902285.82,
+          "net_usd": 1901828.61,
+          "asset_usd": 1901828.61,
           "debt_usd": 0,
           "position_index": "0x01791f726b4103694969820be083196cc7c045ff,0x6c3ea9036406852006290770bedfcaba0e23a0e8,0xd533a949740bb3306d119cc777fa900ba034cd52,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
           "debank_updated_at": "2026-04-11T15:30:29.000Z",
-          "scanned_at": "2026-04-11 17:56:58",
+          "scanned_at": "2026-04-12 08:41:24",
           "supply": [
             {
               "symbol": "PYUSD",
@@ -2935,8 +2934,8 @@
               "value_usd": 961473.737373024,
               "apy_base": 0,
               "apy_base_source": "static",
-              "bonus_supply_apy": 71.56,
-              "bonus_supply_source": "curve:eth(35.78%); curve:eth(35.78%)",
+              "bonus_supply_apy": null,
+              "bonus_supply_source": null,
               "bonus_borrow_apy": null,
               "bonus_borrow_source": null
             },
@@ -2988,9 +2987,9 @@
           ],
           "apy_base": 0.649489365996598,
           "apy_cost": null,
-          "bonus_supply": 71.56,
+          "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 72.2094893659966,
+          "apy_net": 0.649489365996598,
           "apy_reward": null
         },
         {
@@ -3003,12 +3002,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 1621325.12,
-          "asset_usd": 1621325.12,
+          "net_usd": 1623743.74,
+          "asset_usd": 1623743.74,
           "debt_usd": 0,
           "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:52",
+          "scanned_at": "2026-04-12 08:41:18",
           "supply": [
             {
               "symbol": "GHO",
@@ -3052,12 +3051,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1597184.52,
-          "asset_usd": 1597184.52,
+          "net_usd": 1597256.95,
+          "asset_usd": 1597256.95,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": "2026-04-11T05:11:58.000Z",
-          "scanned_at": "2026-04-11 17:56:59",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "AUSD",
@@ -3094,12 +3093,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1504909.61,
-          "asset_usd": 1504909.61,
+          "net_usd": 1504930.95,
+          "asset_usd": 1504930.95,
           "debt_usd": 0,
           "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
           "debank_updated_at": "2026-04-11T08:05:48.000Z",
-          "scanned_at": "2026-04-11 17:56:59",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "USDC",
@@ -3136,12 +3135,12 @@
           "strategy": "stake",
           "yield_source": "infiniFi",
           "health_rate": null,
-          "net_usd": 1435531.67,
-          "asset_usd": 1435531.67,
+          "net_usd": 1436343.14,
+          "asset_usd": 1436343.14,
           "debt_usd": 0,
           "position_index": "0x48f9e38f3070ad8945dfeae3fa70987722e3d89c",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:58",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "iUSD",
@@ -3178,12 +3177,12 @@
           "strategy": "stake",
           "yield_source": "Convex",
           "health_rate": null,
-          "net_usd": 1290533.41,
-          "asset_usd": 1290533.41,
+          "net_usd": 1290491.95,
+          "asset_usd": 1290491.95,
           "debt_usd": 0,
           "position_index": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b,0xd533a949740bb3306d119cc777fa900ba034cd52,0xdac17f958d2ee523a2206206994597c13d831ec7,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:52",
+          "scanned_at": "2026-04-12 08:41:18",
           "supply": [
             {
               "symbol": "USDT",
@@ -3278,12 +3277,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1130323.1,
-          "asset_usd": 1130323.1,
+          "net_usd": 1130366.1,
+          "asset_usd": 1130366.1,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:58",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "RLUSD",
@@ -3320,12 +3319,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 1009676.97,
-          "asset_usd": 1009676.97,
+          "net_usd": 1009932.19,
+          "asset_usd": 1009932.19,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:52",
+          "scanned_at": "2026-04-12 08:41:18",
           "supply": [
             {
               "symbol": "USDT",
@@ -3356,7 +3355,7 @@
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 2.2687499999999994,
+          "apy_net": 2.26875,
           "apy_reward": null
         },
         {
@@ -3369,12 +3368,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 721487.47,
-          "asset_usd": 721487.47,
+          "net_usd": 721699.61,
+          "asset_usd": 721699.61,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T05:11:58.000Z",
-          "scanned_at": "2026-04-11 17:56:59",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "USDT",
@@ -3411,12 +3410,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.07,
-          "net_usd": 684097.08,
-          "asset_usd": 5839555.36,
-          "debt_usd": 5155458.28,
+          "net_usd": 684141.58,
+          "asset_usd": 5839420.23,
+          "debt_usd": 5155278.65,
           "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:58",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "wsrUSD",
@@ -3456,7 +3455,7 @@
           "apy_cost": 34.023460200633,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -215.83076473043133,
+          "apy_net": -215.8087315926363,
           "apy_reward": null
         },
         {
@@ -3469,12 +3468,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": 1.068,
-          "net_usd": 599758.51,
-          "asset_usd": 599758.51,
+          "net_usd": 600106.17,
+          "asset_usd": 600106.17,
           "debt_usd": 0,
           "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:58",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "USDT",
@@ -3511,12 +3510,12 @@
           "strategy": "farm",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 500023.96,
-          "asset_usd": 500023.96,
+          "net_usd": 500046.21,
+          "asset_usd": 500046.21,
           "debt_usd": 0,
           "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xd533a949740bb3306d119cc777fa900ba034cd52",
           "debank_updated_at": "2026-04-11T15:30:29.000Z",
-          "scanned_at": "2026-04-11 17:56:58",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "USDC",
@@ -3596,12 +3595,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 442115.79,
-          "asset_usd": 442115.79,
+          "net_usd": 442088.5,
+          "asset_usd": 442088.5,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T05:11:58.000Z",
-          "scanned_at": "2026-04-11 17:56:59",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "USDC",
@@ -3638,12 +3637,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.061,
-          "net_usd": 200808.9,
-          "asset_usd": 2214493.48,
-          "debt_usd": 2013684.58,
+          "net_usd": 200464.16,
+          "asset_usd": 2214628.43,
+          "debt_usd": 2014164.27,
           "position_index": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
           "debank_updated_at": "2026-04-11T15:29:29.000Z",
-          "scanned_at": "2026-04-11 17:56:58",
+          "scanned_at": "2026-04-12 08:41:25",
           "supply": [
             {
               "symbol": "sUSDS",
@@ -3683,7 +3682,7 @@
           "apy_cost": 598346.853967447,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -6000100.239457563,
+          "apy_net": -6011850.444845238,
           "apy_reward": null
         }
       ],
@@ -3707,12 +3706,12 @@
               "strategy": "farm",
               "yield_source": "Curve",
               "health_rate": null,
-              "net_usd": 1902285.82,
-              "asset_usd": 1902285.82,
+              "net_usd": 1901828.61,
+              "asset_usd": 1901828.61,
               "debt_usd": 0,
               "position_index": "0x01791f726b4103694969820be083196cc7c045ff,0x6c3ea9036406852006290770bedfcaba0e23a0e8,0xd533a949740bb3306d119cc777fa900ba034cd52,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
               "debank_updated_at": "2026-04-11T15:30:29.000Z",
-              "scanned_at": "2026-04-11 17:56:58",
+              "scanned_at": "2026-04-12 08:41:24",
               "supply": [
                 {
                   "symbol": "PYUSD",
@@ -3739,8 +3738,8 @@
                   "value_usd": 961473.737373024,
                   "apy_base": 0,
                   "apy_base_source": "static",
-                  "bonus_supply_apy": 71.56,
-                  "bonus_supply_source": "curve:eth(35.78%); curve:eth(35.78%)",
+                  "bonus_supply_apy": null,
+                  "bonus_supply_source": null,
                   "bonus_borrow_apy": null,
                   "bonus_borrow_source": null
                 },
@@ -3792,9 +3791,9 @@
               ],
               "apy_base": 0.649489365996598,
               "apy_cost": null,
-              "bonus_supply": 71.56,
+              "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 72.2094893659966,
+              "apy_net": 0.649489365996598,
               "apy_reward": null
             },
             {
@@ -3807,12 +3806,12 @@
               "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
-              "net_usd": 1621325.12,
-              "asset_usd": 1621325.12,
+              "net_usd": 1623743.74,
+              "asset_usd": 1623743.74,
               "debt_usd": 0,
               "position_index": "0x40d16fc0246ad3160ccc09b8d0d3a2cd28ae6c2f",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:52",
+              "scanned_at": "2026-04-12 08:41:18",
               "supply": [
                 {
                   "symbol": "GHO",
@@ -3856,12 +3855,12 @@
               "strategy": "stake",
               "yield_source": "infiniFi",
               "health_rate": null,
-              "net_usd": 1435531.67,
-              "asset_usd": 1435531.67,
+              "net_usd": 1436343.14,
+              "asset_usd": 1436343.14,
               "debt_usd": 0,
               "position_index": "0x48f9e38f3070ad8945dfeae3fa70987722e3d89c",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:58",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "iUSD",
@@ -3898,12 +3897,12 @@
               "strategy": "stake",
               "yield_source": "Convex",
               "health_rate": null,
-              "net_usd": 1290533.41,
-              "asset_usd": 1290533.41,
+              "net_usd": 1290491.95,
+              "asset_usd": 1290491.95,
               "debt_usd": 0,
               "position_index": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b,0xd533a949740bb3306d119cc777fa900ba034cd52,0xdac17f958d2ee523a2206206994597c13d831ec7,0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:52",
+              "scanned_at": "2026-04-12 08:41:18",
               "supply": [
                 {
                   "symbol": "USDT",
@@ -3998,12 +3997,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 1130323.1,
-              "asset_usd": 1130323.1,
+              "net_usd": 1130366.1,
+              "asset_usd": 1130366.1,
               "debt_usd": 0,
               "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:58",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "RLUSD",
@@ -4040,12 +4039,12 @@
               "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
-              "net_usd": 1009676.97,
-              "asset_usd": 1009676.97,
+              "net_usd": 1009932.19,
+              "asset_usd": 1009932.19,
               "debt_usd": 0,
               "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:52",
+              "scanned_at": "2026-04-12 08:41:18",
               "supply": [
                 {
                   "symbol": "USDT",
@@ -4076,7 +4075,7 @@
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 2.2687499999999994,
+              "apy_net": 2.26875,
               "apy_reward": null
             },
             {
@@ -4089,12 +4088,12 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.07,
-              "net_usd": 684097.08,
-              "asset_usd": 5839555.36,
-              "debt_usd": 5155458.28,
+              "net_usd": 684141.58,
+              "asset_usd": 5839420.23,
+              "debt_usd": 5155278.65,
               "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:58",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "wsrUSD",
@@ -4134,7 +4133,7 @@
               "apy_cost": 34.023460200633,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": -215.83076473043133,
+              "apy_net": -215.8087315926363,
               "apy_reward": null
             },
             {
@@ -4147,12 +4146,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": 1.068,
-              "net_usd": 599758.51,
-              "asset_usd": 599758.51,
+              "net_usd": 600106.17,
+              "asset_usd": 600106.17,
               "debt_usd": 0,
               "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:58",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "USDT",
@@ -4189,12 +4188,12 @@
               "strategy": "farm",
               "yield_source": "Curve",
               "health_rate": null,
-              "net_usd": 500023.96,
-              "asset_usd": 500023.96,
+              "net_usd": 500046.21,
+              "asset_usd": 500046.21,
               "debt_usd": 0,
               "position_index": "0x8292bb45bf1ee4d140127049757c2e0ff06317ed,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48,0xd533a949740bb3306d119cc777fa900ba034cd52",
               "debank_updated_at": "2026-04-11T15:30:29.000Z",
-              "scanned_at": "2026-04-11 17:56:58",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -4274,12 +4273,12 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.061,
-              "net_usd": 200808.9,
-              "asset_usd": 2214493.48,
-              "debt_usd": 2013684.58,
+              "net_usd": 200464.16,
+              "asset_usd": 2214628.43,
+              "debt_usd": 2014164.27,
               "position_index": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
               "debank_updated_at": "2026-04-11T15:29:29.000Z",
-              "scanned_at": "2026-04-11 17:56:58",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "sUSDS",
@@ -4319,7 +4318,7 @@
               "apy_cost": 598346.853967447,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": -6000100.239457563,
+              "apy_net": -6011850.444845238,
               "apy_reward": null
             }
           ],
@@ -4343,12 +4342,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 1597184.52,
-              "asset_usd": 1597184.52,
+              "net_usd": 1597256.95,
+              "asset_usd": 1597256.95,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": "2026-04-11T05:11:58.000Z",
-              "scanned_at": "2026-04-11 17:56:59",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -4385,12 +4384,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 1504909.61,
-              "asset_usd": 1504909.61,
+              "net_usd": 1504930.95,
+              "asset_usd": 1504930.95,
               "debt_usd": 0,
               "position_index": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
               "debank_updated_at": "2026-04-11T08:05:48.000Z",
-              "scanned_at": "2026-04-11 17:56:59",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -4427,12 +4426,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 721487.47,
-              "asset_usd": 721487.47,
+              "net_usd": 721699.61,
+              "asset_usd": 721699.61,
               "debt_usd": 0,
               "position_index": "0xdac17f958d2ee523a2206206994597c13d831ec7",
               "debank_updated_at": "2026-04-11T05:11:58.000Z",
-              "scanned_at": "2026-04-11 17:56:59",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "USDT",
@@ -4469,12 +4468,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 442115.79,
-              "asset_usd": 442115.79,
+              "net_usd": 442088.5,
+              "asset_usd": 442088.5,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T05:11:58.000Z",
-              "scanned_at": "2026-04-11 17:56:59",
+              "scanned_at": "2026-04-12 08:41:25",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -4520,7 +4519,7 @@
         "0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580"
       ],
       "total_wallets": 9,
-      "active_wallets": 14,
+      "active_wallets": 13,
       "positions": [
         {
           "wallet": "0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f",
@@ -4531,16 +4530,16 @@
           "strategy": "rwa",
           "yield_source": "fasanara",
           "health_rate": null,
-          "net_usd": 30361318.311498,
-          "asset_usd": 30361318.311498,
+          "net_usd": 30366620.471095,
+          "asset_usd": 30366620.471095,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 30361318.311498,
+              "amount": 30366620.471095,
               "price_usd": 1,
-              "value_usd": 30361318.311498
+              "value_usd": 30366620.471095
             }
           ],
           "borrow": [],
@@ -4549,7 +4548,7 @@
           "apy_avg": 8.5,
           "apy_base": 8.5,
           "apy_rewards": 0,
-          "maturity": "2026-05-09",
+          "maturity": "2026-05-10",
           "bucket_weeks": 4,
           "underlying": "USDC",
           "paused": false,
@@ -4564,16 +4563,16 @@
           "strategy": "rwa",
           "yield_source": "falconx",
           "health_rate": null,
-          "net_usd": 25164186.161162,
-          "asset_usd": 25164186.161162,
+          "net_usd": 25167416.205948,
+          "asset_usd": 25167416.205948,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 25164186.161162,
+              "amount": 25167416.205948,
               "price_usd": 1,
-              "value_usd": 25164186.161162
+              "value_usd": 25167416.205948
             }
           ],
           "borrow": [],
@@ -4582,9 +4581,42 @@
           "apy_avg": 6.25,
           "apy_base": 6.25,
           "apy_rewards": 0,
-          "maturity": "2026-04-18",
+          "maturity": "2026-04-19",
           "bucket_weeks": 1,
           "underlying": "USDC",
+          "paused": false,
+          "manual": true
+        },
+        {
+          "wallet": "0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE",
+          "chain": "eth",
+          "protocol_name": "Sentora PYUSD",
+          "protocol_id": "morpho-v2-sentora-pyusd",
+          "position_type": "Illiquid",
+          "strategy": "rwa",
+          "yield_source": "sentora",
+          "health_rate": null,
+          "net_usd": 20207919.387292,
+          "asset_usd": 20207919.387292,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "senPYUSDmain",
+              "real_symbol": "senPYUSDmain",
+              "amount": 20207919.387292,
+              "price_usd": 1,
+              "value_usd": 20207919.387292
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 5.81,
+          "apy_avg": 5.81,
+          "apy_base": 5.81,
+          "apy_rewards": 0,
+          "maturity": "2026-04-19",
+          "bucket_weeks": 1,
+          "underlying": "senPYUSDmain",
           "paused": false,
           "manual": true
         },
@@ -4597,16 +4629,16 @@
           "strategy": "lend",
           "yield_source": "spark",
           "health_rate": null,
-          "net_usd": 21447332.33745,
-          "asset_usd": 21447332.33745,
+          "net_usd": 19870405.136898,
+          "asset_usd": 19870405.136898,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "sUSDC",
               "real_symbol": "sUSDC",
-              "amount": 21447332.33745,
+              "amount": 19870405.136898,
               "price_usd": 1,
-              "value_usd": 21447332.33745
+              "value_usd": 19870405.136898
             }
           ],
           "borrow": [],
@@ -4622,39 +4654,6 @@
           "manual": true
         },
         {
-          "wallet": "0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE",
-          "chain": "eth",
-          "protocol_name": "Sentora PYUSD",
-          "protocol_id": "morpho-v2-sentora-pyusd",
-          "position_type": "Illiquid",
-          "strategy": "rwa",
-          "yield_source": "sentora",
-          "health_rate": null,
-          "net_usd": 20206208.490225,
-          "asset_usd": 20206208.490225,
-          "debt_usd": 0,
-          "supply": [
-            {
-              "symbol": "senPYUSDmain",
-              "real_symbol": "senPYUSDmain",
-              "amount": 20206208.490225,
-              "price_usd": 1,
-              "value_usd": 20206208.490225
-            }
-          ],
-          "borrow": [],
-          "rewards": [],
-          "apy_current": 5.83,
-          "apy_avg": 5.83,
-          "apy_base": 5.83,
-          "apy_rewards": 0,
-          "maturity": "2026-04-18",
-          "bucket_weeks": 1,
-          "underlying": "senPYUSDmain",
-          "paused": false,
-          "manual": true
-        },
-        {
           "wallet": "0x9E5efC5F387D8661C1AFB2469B7EeF6972451852",
           "chain": "eth",
           "protocol_name": "Fasanara Genesis Fund",
@@ -4663,16 +4662,16 @@
           "strategy": "rwa",
           "yield_source": "fasanara",
           "health_rate": null,
-          "net_usd": 5052675.237324,
-          "asset_usd": 5052675.237324,
+          "net_usd": 5053194.36557,
+          "asset_usd": 5053194.36557,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 5052675.237324,
+              "amount": 5053194.36557,
               "price_usd": 1,
-              "value_usd": 5052675.237324
+              "value_usd": 5053194.36557
             }
           ],
           "borrow": [],
@@ -4681,7 +4680,7 @@
           "apy_avg": 5,
           "apy_base": 5,
           "apy_rewards": 0,
-          "maturity": "2026-05-09",
+          "maturity": "2026-05-10",
           "bucket_weeks": 4,
           "underlying": "USDC",
           "paused": false,
@@ -4696,25 +4695,25 @@
           "strategy": "rwa",
           "yield_source": "morpho",
           "health_rate": null,
-          "net_usd": 4002519.858228,
-          "asset_usd": 4002519.858228,
+          "net_usd": 4002997.406573,
+          "asset_usd": 4002997.406573,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "steakUSDCinfinifi",
               "real_symbol": "steakUSDCinfinifi",
-              "amount": 4002519.858228,
+              "amount": 4002997.406573,
               "price_usd": 1,
-              "value_usd": 4002519.858228
+              "value_usd": 4002997.406573
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 5.75,
-          "apy_avg": 4.66,
-          "apy_base": 5.75,
+          "apy_current": 6.69,
+          "apy_avg": 4.96,
+          "apy_base": 6.69,
           "apy_rewards": 0,
-          "maturity": "2026-04-18",
+          "maturity": "2026-04-19",
           "bucket_weeks": 1,
           "underlying": "steakUSDCinfinifi",
           "paused": false,
@@ -4729,16 +4728,16 @@
           "strategy": "rwa",
           "yield_source": "gho",
           "health_rate": null,
-          "net_usd": 1552634.011279,
-          "asset_usd": 1552634.011279,
+          "net_usd": 1552762.98599,
+          "asset_usd": 1552762.98599,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "sGHO",
               "real_symbol": "sGHO",
-              "amount": 1552634.011279,
+              "amount": 1552762.98599,
               "price_usd": 1,
-              "value_usd": 1552634.011279
+              "value_usd": 1552762.98599
             }
           ],
           "borrow": [],
@@ -4747,7 +4746,7 @@
           "apy_avg": 5.08,
           "apy_base": 5.08,
           "apy_rewards": 0,
-          "maturity": "2026-04-18",
+          "maturity": "2026-04-19",
           "bucket_weeks": 1,
           "underlying": "sGHO",
           "paused": false,
@@ -4762,23 +4761,23 @@
           "strategy": "lend",
           "yield_source": "aave",
           "health_rate": null,
-          "net_usd": 1165744.069691,
-          "asset_usd": 1165744.069691,
+          "net_usd": 1081035.535842,
+          "asset_usd": 1081035.535842,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 1165744.069691,
+              "amount": 1081035.535842,
               "price_usd": 1,
-              "value_usd": 1165744.069691
+              "value_usd": 1081035.535842
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 2.22,
-          "apy_avg": 2.39,
-          "apy_base": 2.22,
+          "apy_current": 2.17,
+          "apy_avg": 2.38,
+          "apy_base": 2.17,
           "apy_rewards": 0,
           "maturity": null,
           "bucket_weeks": null,
@@ -4795,25 +4794,25 @@
           "strategy": "rwa",
           "yield_source": "maple",
           "health_rate": null,
-          "net_usd": 1002247.961021,
-          "asset_usd": 1002247.961021,
+          "net_usd": 1002342.974571,
+          "asset_usd": 1002342.974571,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "MPLhysUSDC1",
               "real_symbol": "MPLhysUSDC1",
-              "amount": 1002247.961021,
+              "amount": 1002342.974571,
               "price_usd": 1,
-              "value_usd": 1002247.961021
+              "value_usd": 1002342.974571
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 5.23,
-          "apy_avg": 5.58,
-          "apy_base": 5.23,
+          "apy_current": 5.61,
+          "apy_avg": 5.65,
+          "apy_base": 5.61,
           "apy_rewards": 0,
-          "maturity": "2026-05-09",
+          "maturity": "2026-05-10",
           "bucket_weeks": 4,
           "underlying": "MPLhysUSDC1",
           "paused": false,
@@ -4828,56 +4827,23 @@
           "strategy": "lend",
           "yield_source": "aave",
           "health_rate": null,
-          "net_usd": 699447.233322,
-          "asset_usd": 699447.233322,
+          "net_usd": 648621.562368,
+          "asset_usd": 648621.562368,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 699447.233322,
+              "amount": 648621.562368,
               "price_usd": 1,
-              "value_usd": 699447.233322
+              "value_usd": 648621.562368
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 2.42,
-          "apy_avg": 2.51,
-          "apy_base": 2.42,
-          "apy_rewards": 0,
-          "maturity": null,
-          "bucket_weeks": null,
-          "underlying": "USDC",
-          "paused": false,
-          "manual": true
-        },
-        {
-          "wallet": "0x6FBc446f25Ab5141C4F7E7711E52DFc0AdA407A5",
-          "chain": "eth",
-          "protocol_name": "Euler Sentora USDC",
-          "protocol_id": "euler-sentora-usdc",
-          "position_type": "Liquid",
-          "strategy": "rwa",
-          "yield_source": "euler",
-          "health_rate": null,
-          "net_usd": 8400.092967,
-          "asset_usd": 8400.092967,
-          "debt_usd": 0,
-          "supply": [
-            {
-              "symbol": "USDC",
-              "real_symbol": "USDC",
-              "amount": 8400.092967,
-              "price_usd": 1,
-              "value_usd": 8400.092967
-            }
-          ],
-          "borrow": [],
-          "rewards": [],
-          "apy_current": 3.77,
-          "apy_avg": 3.76,
-          "apy_base": 3.77,
+          "apy_current": 2.37,
+          "apy_avg": 2.48,
+          "apy_base": 2.37,
           "apy_rewards": 0,
           "maturity": null,
           "bucket_weeks": null,
@@ -4894,25 +4860,25 @@
           "strategy": "rwa",
           "yield_source": "cap",
           "health_rate": null,
-          "net_usd": 5716.594446,
-          "asset_usd": 5716.594446,
+          "net_usd": 5717.064083,
+          "asset_usd": 5717.064083,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "stcUSD",
               "real_symbol": "stcUSD",
-              "amount": 5716.594446,
+              "amount": 5717.064083,
               "price_usd": 1,
-              "value_usd": 5716.594446
+              "value_usd": 5717.064083
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 5.35,
-          "apy_avg": 4.91,
-          "apy_base": 5.35,
+          "apy_current": 5.37,
+          "apy_avg": 4.97,
+          "apy_base": 5.37,
           "apy_rewards": 0,
-          "maturity": "2026-04-12",
+          "maturity": "2026-04-13",
           "bucket_weeks": 1,
           "underlying": "stcUSD",
           "paused": false,
@@ -4927,25 +4893,25 @@
           "strategy": "rwa",
           "yield_source": "tokemak",
           "health_rate": null,
-          "net_usd": 4935.225172,
-          "asset_usd": 4935.225172,
+          "net_usd": 4935.510923,
+          "asset_usd": 4935.510923,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "infinifiUSD",
               "real_symbol": "infinifiUSD",
-              "amount": 4935.225172,
+              "amount": 4935.510923,
               "price_usd": 1,
-              "value_usd": 4935.225172
+              "value_usd": 4935.510923
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 7.18,
-          "apy_avg": 5.42,
-          "apy_base": 7.18,
+          "apy_current": 6.99,
+          "apy_avg": 5.22,
+          "apy_base": 6.99,
           "apy_rewards": 0,
-          "maturity": "2026-04-18",
+          "maturity": "2026-04-19",
           "bucket_weeks": 1,
           "underlying": "infinifiUSD",
           "paused": false,
@@ -4960,16 +4926,16 @@
           "strategy": "lend",
           "yield_source": "aave",
           "health_rate": null,
-          "net_usd": 209.341145,
-          "asset_usd": 209.341145,
+          "net_usd": 209.357537,
+          "asset_usd": 209.357537,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "RLUSD",
               "real_symbol": "RLUSD",
-              "amount": 209.341145,
+              "amount": 209.357537,
               "price_usd": 1,
-              "value_usd": 209.341145
+              "value_usd": 209.357537
             }
           ],
           "borrow": [],
@@ -4978,7 +4944,7 @@
           "apy_avg": 4.42,
           "apy_base": 4.42,
           "apy_rewards": 0,
-          "maturity": "2026-04-18",
+          "maturity": "2026-04-19",
           "bucket_weeks": 1,
           "underlying": "RLUSD",
           "paused": false,
@@ -5008,12 +4974,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 2.294,
-          "net_usd": 9920223.09,
-          "asset_usd": 16500769.38,
-          "debt_usd": 6580546.3,
+          "net_usd": 9918501.84,
+          "asset_usd": 16499120.13,
+          "debt_usd": 6580618.29,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T16:47:41.000Z",
-          "scanned_at": "2026-04-11 17:56:59",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "USDC",
@@ -5037,7 +5003,7 @@
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 16.371107136653826,
+          "apy_net": 16.372311593112727,
           "apy_reward": null
         },
         {
@@ -5050,12 +5016,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.054,
-          "net_usd": 9495668.15,
-          "asset_usd": 72107700.32,
-          "debt_usd": 62612032.18,
+          "net_usd": 9530353.2,
+          "asset_usd": 72119093.87,
+          "debt_usd": 62588740.67,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "sUSDe",
@@ -5095,7 +5061,7 @@
           "apy_cost": 12.2574392615922,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -53.74937733732288,
+          "apy_net": -53.519541766681215,
           "apy_reward": null
         },
         {
@@ -5108,12 +5074,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 7649864.03,
-          "asset_usd": 7649864.03,
+          "net_usd": 7651877.06,
+          "asset_usd": 7651877.06,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "AUSD",
@@ -5150,12 +5116,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 4974957.98,
-          "asset_usd": 4974957.98,
+          "net_usd": 4974982.21,
+          "asset_usd": 4974982.21,
           "debt_usd": 0,
           "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "USDC",
@@ -5192,12 +5158,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 3945692.22,
-          "asset_usd": 3945692.22,
+          "net_usd": 3946530.16,
+          "asset_usd": 3946530.16,
           "debt_usd": 0,
           "position_index": "0xe7cd86e13ac4309349f30b3435a9d337750fc82d",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:03",
+          "scanned_at": "2026-04-12 08:41:29",
           "supply": [
             {
               "symbol": "USDT0",
@@ -5234,12 +5200,12 @@
           "strategy": "yield",
           "yield_source": "Gearbox",
           "health_rate": null,
-          "net_usd": 2072708.84,
-          "asset_usd": 2072708.84,
+          "net_usd": 3555189.11,
+          "asset_usd": 3555189.11,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "AUSD",
@@ -5276,12 +5242,12 @@
           "strategy": "yield",
           "yield_source": "Gearbox",
           "health_rate": null,
-          "net_usd": 1935724.41,
-          "asset_usd": 1935724.41,
+          "net_usd": 1935591.49,
+          "asset_usd": 1935591.49,
           "debt_usd": 0,
           "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "USDC",
@@ -5318,12 +5284,12 @@
           "strategy": "lp",
           "yield_source": "LFJ",
           "health_rate": null,
-          "net_usd": 1265806.52,
-          "asset_usd": 1265806.52,
+          "net_usd": 1266083.68,
+          "asset_usd": 1266083.68,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a,0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
           "debank_updated_at": "2026-04-11T06:03:33.000Z",
-          "scanned_at": "2026-04-11 17:57:27",
+          "scanned_at": "2026-04-12 08:41:54",
           "supply": [
             {
               "symbol": "AUSD",
@@ -5362,7 +5328,7 @@
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 1.8253725047211349,
+          "apy_net": 1.8253725047211347,
           "apy_reward": null
         },
         {
@@ -5375,12 +5341,12 @@
           "strategy": "lend",
           "yield_source": "Dolomite",
           "health_rate": null,
-          "net_usd": 1261961.28,
-          "asset_usd": 1261961.28,
+          "net_usd": 1262041.6,
+          "asset_usd": 1262041.6,
           "debt_usd": 0,
           "position_index": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d,0xdac17f958d2ee523a2206206994597c13d831ec7",
           "debank_updated_at": "2026-04-11T06:34:26.000Z",
-          "scanned_at": "2026-04-11 17:57:27",
+          "scanned_at": "2026-04-12 08:41:53",
           "supply": [
             {
               "symbol": "USD1",
@@ -5432,12 +5398,12 @@
           "strategy": "lp",
           "yield_source": "LFJ",
           "health_rate": null,
-          "net_usd": 1001098.2,
-          "asset_usd": 1001098.2,
+          "net_usd": 1000999.44,
+          "asset_usd": 1000999.44,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a,0x754704bc059f8c67012fed69bc8a327a5aafb603",
           "debank_updated_at": "2026-04-11T09:59:06.000Z",
-          "scanned_at": "2026-04-11 17:57:28",
+          "scanned_at": "2026-04-12 08:41:54",
           "supply": [
             {
               "symbol": "AUSD",
@@ -5489,12 +5455,12 @@
           "strategy": "lend",
           "yield_source": "Curvance",
           "health_rate": null,
-          "net_usd": 669036.68,
-          "asset_usd": 669036.68,
+          "net_usd": 668993.35,
+          "asset_usd": 668993.35,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "AUSD",
@@ -5531,12 +5497,12 @@
           "strategy": "lend",
           "yield_source": "Euler",
           "health_rate": null,
-          "net_usd": 493465.23,
-          "asset_usd": 493465.23,
+          "net_usd": 493441.28,
+          "asset_usd": 493441.28,
           "debt_usd": 0,
           "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "USDC",
@@ -5572,13 +5538,13 @@
           "position_type": "Lending",
           "strategy": "loop",
           "yield_source": "Aave V3",
-          "health_rate": 1.022,
-          "net_usd": 358019.54,
-          "asset_usd": 4348181.26,
-          "debt_usd": 3990161.72,
+          "health_rate": 1.023,
+          "net_usd": 358068.99,
+          "asset_usd": 4348862.1,
+          "debt_usd": 3990793.11,
           "position_index": "0x30559e3d35e33ab69399a3fe9f383d32bd3c016e",
           "debank_updated_at": "2026-04-11T07:37:14.000Z",
-          "scanned_at": "2026-04-11 17:57:31",
+          "scanned_at": "2026-04-12 08:41:58",
           "supply": [
             {
               "symbol": "PT-sUSDE-18JUN2026",
@@ -5588,7 +5554,7 @@
               "amount": 4379286.18615818,
               "price_usd": 0.993113504178198,
               "value_usd": 4349128.25013472,
-              "apy_base": 3.69609423654103,
+              "apy_base": 3.70230549653077,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -5614,11 +5580,11 @@
             }
           ],
           "rewards": [],
-          "apy_base": 3.69609423654103,
+          "apy_base": 3.70230549653077,
           "apy_cost": 2.31565217391304,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 19.081251915298022,
+          "apy_net": 19.15699909024701,
           "apy_reward": null
         },
         {
@@ -5631,12 +5597,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 347038.89,
-          "asset_usd": 347038.89,
+          "net_usd": 347029.29,
+          "asset_usd": 347029.29,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "AUSD",
@@ -5673,12 +5639,12 @@
           "strategy": "lend",
           "yield_source": "Euler",
           "health_rate": null,
-          "net_usd": 257297.66,
-          "asset_usd": 257297.66,
+          "net_usd": 257294.62,
+          "asset_usd": 257294.62,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": "2026-04-11T17:02:12.000Z",
-          "scanned_at": "2026-04-11 17:57:00",
+          "scanned_at": "2026-04-12 08:41:26",
           "supply": [
             {
               "symbol": "AUSD",
@@ -5726,12 +5692,12 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 2.294,
-              "net_usd": 9920223.09,
-              "asset_usd": 16500769.38,
-              "debt_usd": 6580546.3,
+              "net_usd": 9918501.84,
+              "asset_usd": 16499120.13,
+              "debt_usd": 6580618.29,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T16:47:41.000Z",
-              "scanned_at": "2026-04-11 17:56:59",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -5755,7 +5721,7 @@
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 16.371107136653826,
+              "apy_net": 16.372311593112727,
               "apy_reward": null
             }
           ],
@@ -5779,12 +5745,12 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.054,
-              "net_usd": 9495668.15,
-              "asset_usd": 72107700.32,
-              "debt_usd": 62612032.18,
+              "net_usd": 9530353.2,
+              "asset_usd": 72119093.87,
+              "debt_usd": 62588740.67,
               "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "sUSDe",
@@ -5824,7 +5790,7 @@
               "apy_cost": 12.2574392615922,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": -53.74937733732288,
+              "apy_net": -53.519541766681215,
               "apy_reward": null
             },
             {
@@ -5837,12 +5803,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 7649864.03,
-              "asset_usd": 7649864.03,
+              "net_usd": 7651877.06,
+              "asset_usd": 7651877.06,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -5879,12 +5845,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 4974957.98,
-              "asset_usd": 4974957.98,
+              "net_usd": 4974982.21,
+              "asset_usd": 4974982.21,
               "debt_usd": 0,
               "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -5921,12 +5887,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 3945692.22,
-              "asset_usd": 3945692.22,
+              "net_usd": 3946530.16,
+              "asset_usd": 3946530.16,
               "debt_usd": 0,
               "position_index": "0xe7cd86e13ac4309349f30b3435a9d337750fc82d",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:03",
+              "scanned_at": "2026-04-12 08:41:29",
               "supply": [
                 {
                   "symbol": "USDT0",
@@ -5963,12 +5929,12 @@
               "strategy": "yield",
               "yield_source": "Gearbox",
               "health_rate": null,
-              "net_usd": 2072708.84,
-              "asset_usd": 2072708.84,
+              "net_usd": 3555189.11,
+              "asset_usd": 3555189.11,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -6005,12 +5971,12 @@
               "strategy": "yield",
               "yield_source": "Gearbox",
               "health_rate": null,
-              "net_usd": 1935724.41,
-              "asset_usd": 1935724.41,
+              "net_usd": 1935591.49,
+              "asset_usd": 1935591.49,
               "debt_usd": 0,
               "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -6047,12 +6013,12 @@
               "strategy": "lend",
               "yield_source": "Curvance",
               "health_rate": null,
-              "net_usd": 669036.68,
-              "asset_usd": 669036.68,
+              "net_usd": 668993.35,
+              "asset_usd": 668993.35,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -6089,12 +6055,12 @@
               "strategy": "lend",
               "yield_source": "Euler",
               "health_rate": null,
-              "net_usd": 493465.23,
-              "asset_usd": 493465.23,
+              "net_usd": 493441.28,
+              "asset_usd": 493441.28,
               "debt_usd": 0,
               "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -6131,12 +6097,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 347038.89,
-              "asset_usd": 347038.89,
+              "net_usd": 347029.29,
+              "asset_usd": 347029.29,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -6173,12 +6139,12 @@
               "strategy": "lend",
               "yield_source": "Euler",
               "health_rate": null,
-              "net_usd": 257297.66,
-              "asset_usd": 257297.66,
+              "net_usd": 257294.62,
+              "asset_usd": 257294.62,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": "2026-04-11T17:02:12.000Z",
-              "scanned_at": "2026-04-11 17:57:00",
+              "scanned_at": "2026-04-12 08:41:26",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -6226,12 +6192,12 @@
               "strategy": "lp",
               "yield_source": "LFJ",
               "health_rate": null,
-              "net_usd": 1265806.52,
-              "asset_usd": 1265806.52,
+              "net_usd": 1266083.68,
+              "asset_usd": 1266083.68,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a,0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
               "debank_updated_at": "2026-04-11T06:03:33.000Z",
-              "scanned_at": "2026-04-11 17:57:27",
+              "scanned_at": "2026-04-12 08:41:54",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -6270,7 +6236,7 @@
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 1.8253725047211349,
+              "apy_net": 1.8253725047211347,
               "apy_reward": null
             },
             {
@@ -6283,12 +6249,12 @@
               "strategy": "lend",
               "yield_source": "Dolomite",
               "health_rate": null,
-              "net_usd": 1261961.28,
-              "asset_usd": 1261961.28,
+              "net_usd": 1262041.6,
+              "asset_usd": 1262041.6,
               "debt_usd": 0,
               "position_index": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d,0xdac17f958d2ee523a2206206994597c13d831ec7",
               "debank_updated_at": "2026-04-11T06:34:26.000Z",
-              "scanned_at": "2026-04-11 17:57:27",
+              "scanned_at": "2026-04-12 08:41:53",
               "supply": [
                 {
                   "symbol": "USD1",
@@ -6340,12 +6306,12 @@
               "strategy": "lp",
               "yield_source": "LFJ",
               "health_rate": null,
-              "net_usd": 1001098.2,
-              "asset_usd": 1001098.2,
+              "net_usd": 1000999.44,
+              "asset_usd": 1000999.44,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a,0x754704bc059f8c67012fed69bc8a327a5aafb603",
               "debank_updated_at": "2026-04-11T09:59:06.000Z",
-              "scanned_at": "2026-04-11 17:57:28",
+              "scanned_at": "2026-04-12 08:41:54",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -6396,13 +6362,13 @@
               "position_type": "Lending",
               "strategy": "loop",
               "yield_source": "Aave V3",
-              "health_rate": 1.022,
-              "net_usd": 358019.54,
-              "asset_usd": 4348181.26,
-              "debt_usd": 3990161.72,
+              "health_rate": 1.023,
+              "net_usd": 358068.99,
+              "asset_usd": 4348862.1,
+              "debt_usd": 3990793.11,
               "position_index": "0x30559e3d35e33ab69399a3fe9f383d32bd3c016e",
               "debank_updated_at": "2026-04-11T07:37:14.000Z",
-              "scanned_at": "2026-04-11 17:57:31",
+              "scanned_at": "2026-04-12 08:41:58",
               "supply": [
                 {
                   "symbol": "PT-sUSDE-18JUN2026",
@@ -6412,7 +6378,7 @@
                   "amount": 4379286.18615818,
                   "price_usd": 0.993113504178198,
                   "value_usd": 4349128.25013472,
-                  "apy_base": 3.69609423654103,
+                  "apy_base": 3.70230549653077,
                   "apy_base_source": "pendle",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
@@ -6438,11 +6404,11 @@
                 }
               ],
               "rewards": [],
-              "apy_base": 3.69609423654103,
+              "apy_base": 3.70230549653077,
               "apy_cost": 2.31565217391304,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 19.081251915298022,
+              "apy_net": 19.15699909024701,
               "apy_reward": null
             }
           ],
@@ -6473,12 +6439,12 @@
           "strategy": "lend",
           "yield_source": "Fluid",
           "health_rate": null,
-          "net_usd": 12541375.45,
-          "asset_usd": 12541375.45,
+          "net_usd": 12544286.39,
+          "asset_usd": 12544286.39,
           "debt_usd": 0,
           "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:11",
+          "scanned_at": "2026-04-12 08:41:37",
           "supply": [
             {
               "symbol": "USDT0",
@@ -6515,12 +6481,12 @@
           "strategy": "deposit",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 7206838.17,
-          "asset_usd": 7206838.17,
+          "net_usd": 7209013.83,
+          "asset_usd": 7209013.83,
           "debt_usd": 0,
           "position_index": "0x6c65db1d88c8eda1e3debf2b2ef3d0ece8600466",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:10",
+          "scanned_at": "2026-04-12 08:41:36",
           "supply": [
             {
               "symbol": "PT-sNUSD-4JUN2026",
@@ -6530,7 +6496,7 @@
               "amount": 7304799.12467118,
               "price_usd": 0.986583762431042,
               "value_usd": 7206796.20422107,
-              "apy_base": 8.89961073566869,
+              "apy_base": 8.80543803568927,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -6540,11 +6506,11 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 8.89961073566869,
+          "apy_base": 8.80543803568927,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 8.89961073566869,
+          "apy_net": 8.80543803568927,
           "apy_reward": null
         },
         {
@@ -6557,12 +6523,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 5005103.77,
-          "asset_usd": 5005103.77,
+          "net_usd": 5005057.74,
+          "asset_usd": 5005057.74,
           "debt_usd": 0,
           "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:11",
+          "scanned_at": "2026-04-12 08:41:37",
           "supply": [
             {
               "symbol": "USDC",
@@ -6599,12 +6565,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 4942105.14,
-          "asset_usd": 4942105.14,
+          "net_usd": 4941905.4,
+          "asset_usd": 4941905.4,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T02:39:04.000Z",
-          "scanned_at": "2026-04-11 17:57:18",
+          "scanned_at": "2026-04-12 08:41:44",
           "supply": [
             {
               "symbol": "USDC",
@@ -6640,13 +6606,13 @@
           "position_type": "Lending",
           "strategy": "loop",
           "yield_source": "Aave V3",
-          "health_rate": 1.148,
-          "net_usd": 3751100.46,
-          "asset_usd": 18971503.39,
-          "debt_usd": 15220402.92,
+          "health_rate": 1.157,
+          "net_usd": 3754148,
+          "asset_usd": 18378712.37,
+          "debt_usd": 14624564.37,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
           "debank_updated_at": "2026-04-11T14:58:23.000Z",
-          "scanned_at": "2026-04-11 17:57:21",
+          "scanned_at": "2026-04-12 08:41:48",
           "supply": [
             {
               "symbol": "sUSDe",
@@ -6677,7 +6643,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.470952624972065,
+              "bonus_borrow_apy": 0.471068671495452,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
           ],
@@ -6685,8 +6651,8 @@
           "apy_base": 3.5651799999999993,
           "apy_cost": 3.63041666666667,
           "bonus_supply": null,
-          "bonus_borrow": 0.470952624972065,
-          "apy_net": 5.211406342904668,
+          "bonus_borrow": 0.471068671495452,
+          "apy_net": 5.146128933825909,
           "apy_reward": null
         },
         {
@@ -6699,12 +6665,12 @@
           "strategy": "yield",
           "yield_source": "USD.AI",
           "health_rate": null,
-          "net_usd": 3173333.5,
-          "asset_usd": 3173333.5,
+          "net_usd": 3173627.68,
+          "asset_usd": 3173627.68,
           "debt_usd": 0,
           "position_index": "0x0a1a1a107e45b7ced86833863f482bc5f4ed82ef",
           "debank_updated_at": "2026-04-11T12:53:32.000Z",
-          "scanned_at": "2026-04-11 17:57:17",
+          "scanned_at": "2026-04-12 08:41:44",
           "supply": [
             {
               "symbol": "USDai",
@@ -6741,12 +6707,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.025,
-          "net_usd": 2464792.97,
-          "asset_usd": 24081019.38,
-          "debt_usd": 21616226.41,
+          "net_usd": 2466132.29,
+          "asset_usd": 24087038.8,
+          "debt_usd": 21620906.5,
           "position_index": "0xc4374775489cb9c56003bf2c9b12495fc64f0771",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:11",
+          "scanned_at": "2026-04-12 08:41:37",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -6777,7 +6743,7 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.470952624972065,
+              "bonus_borrow_apy": 0.471068671495452,
               "bonus_borrow_source": "aave:plasma(0.47%)"
             }
           ],
@@ -6785,8 +6751,8 @@
           "apy_base": 3.7296,
           "apy_cost": 3.63041666666667,
           "bonus_supply": null,
-          "bonus_borrow": 0.470952624972065,
-          "apy_net": 8.729690518438849,
+          "bonus_borrow": 0.471068671495452,
+          "apy_net": 8.729074426060349,
           "apy_reward": null
         },
         {
@@ -6799,12 +6765,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.038,
-          "net_usd": 2456467.3,
-          "asset_usd": 21828542.67,
-          "debt_usd": 19372075.37,
+          "net_usd": 2453418.49,
+          "asset_usd": 21829615.2,
+          "debt_usd": 19376196.7,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0x78c1b0c915c4faa5fffa6cabf0219da63d7f4cb8",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:10",
+          "scanned_at": "2026-04-12 08:41:36",
           "supply": [
             {
               "symbol": "WMNT",
@@ -6865,16 +6831,16 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.82236933539714,
-              "bonus_borrow_source": "aave:mnt(0.82%)"
+              "bonus_borrow_apy": 0.799167133858957,
+              "bonus_borrow_source": "aave:mnt(0.80%)"
             }
           ],
           "rewards": [],
           "apy_base": 1.8040272990164896,
           "apy_cost": 3.29142857142857,
           "bonus_supply": null,
-          "bonus_borrow": 0.82236933539714,
-          "apy_net": -3.4405158737383497,
+          "bonus_borrow": 0.799167133858957,
+          "apy_net": -3.6313927406442135,
           "apy_reward": null
         },
         {
@@ -6887,12 +6853,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.022,
-          "net_usd": 1959697.82,
-          "asset_usd": 19806756.88,
-          "debt_usd": 17847059.06,
+          "net_usd": 1956848.19,
+          "asset_usd": 19807754.45,
+          "debt_usd": 17850906.26,
           "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
           "debank_updated_at": "2026-04-11T13:11:03.000Z",
-          "scanned_at": "2026-04-11 17:57:22",
+          "scanned_at": "2026-04-12 08:41:49",
           "supply": [
             {
               "symbol": "USDe",
@@ -6938,16 +6904,16 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.82236933539714,
-              "bonus_borrow_source": "aave:mnt(0.82%)"
+              "bonus_borrow_apy": 0.799167133858957,
+              "bonus_borrow_source": "aave:mnt(0.80%)"
             }
           ],
           "rewards": [],
           "apy_base": 1.8024724583210048,
           "apy_cost": 3.29142857142857,
           "bonus_supply": null,
-          "bonus_borrow": 0.82236933539714,
-          "apy_net": -4.268164284242221,
+          "bonus_borrow": 0.799167133858957,
+          "apy_net": -4.4899719278467325,
           "apy_reward": null
         },
         {
@@ -6960,12 +6926,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1921220.87,
-          "asset_usd": 1921220.87,
+          "net_usd": 1921269.24,
+          "asset_usd": 1921269.24,
           "debt_usd": 0,
           "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
           "debank_updated_at": "2026-04-11T02:39:04.000Z",
-          "scanned_at": "2026-04-11 17:57:18",
+          "scanned_at": "2026-04-12 08:41:44",
           "supply": [
             {
               "symbol": "AUSD",
@@ -7002,12 +6968,12 @@
           "strategy": "lp",
           "yield_source": "Curve",
           "health_rate": null,
-          "net_usd": 1545194.41,
-          "asset_usd": 1545194.41,
+          "net_usd": 1545249.92,
+          "asset_usd": 1545249.92,
           "debt_usd": 0,
           "position_index": "0x0b2b2b2076d95dda7817e785989fe353fe955ef9,0xaf88d065e77c8cc2239327c5edb3a432268e5831",
           "debank_updated_at": "2026-04-11T02:39:04.000Z",
-          "scanned_at": "2026-04-11 17:57:14",
+          "scanned_at": "2026-04-12 08:41:41",
           "supply": [
             {
               "symbol": "sUSDai",
@@ -7058,13 +7024,13 @@
           "position_type": "Lending",
           "strategy": "loop",
           "yield_source": "Morpho",
-          "health_rate": 1.268,
-          "net_usd": 1366973.01,
-          "asset_usd": 5724248.76,
-          "debt_usd": 4357275.75,
+          "health_rate": 1.267,
+          "net_usd": 1366223.5,
+          "asset_usd": 5724597.59,
+          "debt_usd": 4358374.09,
           "position_index": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
           "debank_updated_at": "2026-04-11T08:26:03.000Z",
-          "scanned_at": "2026-04-11 17:57:23",
+          "scanned_at": "2026-04-12 08:41:50",
           "supply": [
             {
               "symbol": "sUSDS",
@@ -7104,7 +7070,7 @@
           "apy_cost": 598346.853967447,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -1907236.4647113974,
+          "apy_net": -1908763.7988394813,
           "apy_reward": null
         },
         {
@@ -7117,12 +7083,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1357649.43,
-          "asset_usd": 1357649.43,
+          "net_usd": 1357609.06,
+          "asset_usd": 1357609.06,
           "debt_usd": 0,
           "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
           "debank_updated_at": "2026-04-11T08:26:03.000Z",
-          "scanned_at": "2026-04-11 17:57:23",
+          "scanned_at": "2026-04-12 08:41:50",
           "supply": [
             {
               "symbol": "rUSD",
@@ -7159,12 +7125,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 1296343.14,
-          "asset_usd": 1296343.14,
+          "net_usd": 1296352.8,
+          "asset_usd": 1296352.8,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T08:26:03.000Z",
-          "scanned_at": "2026-04-11 17:57:23",
+          "scanned_at": "2026-04-12 08:41:50",
           "supply": [
             {
               "symbol": "USDC",
@@ -7201,12 +7167,12 @@
           "strategy": "loop",
           "yield_source": "Venus Flux",
           "health_rate": 1.025,
-          "net_usd": 1051381.3,
-          "asset_usd": 10231787.45,
-          "debt_usd": 9180406.15,
+          "net_usd": 1052017.62,
+          "asset_usd": 10233322.98,
+          "debt_usd": 9181305.36,
           "position_index": "0x8e9d4cea39299323fe8eda678cad449718556c4e",
           "debank_updated_at": "2026-04-11T07:37:56.000Z",
-          "scanned_at": "2026-04-11 17:57:23",
+          "scanned_at": "2026-04-12 08:41:49",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -7246,7 +7212,7 @@
           "apy_cost": 2.96291666666667,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 10.42409265308009,
+          "apy_net": 10.420698764824843,
           "apy_reward": null
         },
         {
@@ -7259,12 +7225,12 @@
           "strategy": "loop",
           "yield_source": "Aave V3",
           "health_rate": 1.023,
-          "net_usd": 942035.49,
-          "asset_usd": 9463191.49,
-          "debt_usd": 8521155.99,
+          "net_usd": 954492.79,
+          "asset_usd": 9476400.98,
+          "debt_usd": 8521908.18,
           "position_index": "0x051665f2455116e929b9972c36d23070f5054ce0",
           "debank_updated_at": "2026-04-11T04:01:32.000Z",
-          "scanned_at": "2026-04-11 17:57:27",
+          "scanned_at": "2026-04-12 08:41:53",
           "supply": [
             {
               "symbol": "syrupUSDT",
@@ -7295,8 +7261,8 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.82236933539714,
-              "bonus_borrow_source": "aave:mnt(0.82%)"
+              "bonus_borrow_apy": 0.799167133858957,
+              "bonus_borrow_source": "aave:mnt(0.80%)"
             },
             {
               "symbol": "USDC",
@@ -7310,16 +7276,16 @@
               "apy_base_source": "aave_borrow",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 0.887458278276732,
-              "bonus_borrow_source": "aave:mnt(0.89%)"
+              "bonus_borrow_apy": 0.897376251258619,
+              "bonus_borrow_source": "aave:mnt(0.90%)"
             }
           ],
           "rewards": [],
           "apy_base": 3.7295999999999996,
           "apy_cost": 3.520067017848203,
           "bonus_supply": null,
-          "bonus_borrow": 1.709827613673872,
-          "apy_net": 21.09112326425182,
+          "bonus_borrow": 1.696543385117576,
+          "apy_net": 20.747442348744777,
           "apy_reward": null
         },
         {
@@ -7332,12 +7298,12 @@
           "strategy": "loop",
           "yield_source": "Fluid",
           "health_rate": 1.04,
-          "net_usd": 917814.44,
-          "asset_usd": 6803495.56,
-          "debt_usd": 5885681.12,
+          "net_usd": 917420.08,
+          "asset_usd": 6804554.84,
+          "debt_usd": 5887134.76,
           "position_index": "0x0b2b2b2076d95dda7817e785989fe353fe955ef9",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:03",
+          "scanned_at": "2026-04-12 08:41:30",
           "supply": [
             {
               "symbol": "sUSDai",
@@ -7377,7 +7343,7 @@
           "apy_cost": 3.3175,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 31.356089102716663,
+          "apy_net": 31.37250908842109,
           "apy_reward": null
         },
         {
@@ -7390,12 +7356,12 @@
           "strategy": "loop",
           "yield_source": "Euler",
           "health_rate": 1.022,
-          "net_usd": 890455.91,
-          "asset_usd": 9883104.49,
-          "debt_usd": 8992648.59,
+          "net_usd": 893129.18,
+          "asset_usd": 9882682.2,
+          "debt_usd": 8989553.02,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T05:12:23.000Z",
-          "scanned_at": "2026-04-11 17:57:23",
+          "scanned_at": "2026-04-12 08:41:50",
           "supply": [
             {
               "symbol": "USDC",
@@ -7435,7 +7401,7 @@
           "apy_cost": 3.20260869565217,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -6.098573047409415,
+          "apy_net": -6.0703369395323765,
           "apy_reward": null
         },
         {
@@ -7448,12 +7414,12 @@
           "strategy": "loop",
           "yield_source": "Fluid",
           "health_rate": 1.041,
-          "net_usd": 749066.79,
-          "asset_usd": 5526535.88,
-          "debt_usd": 4777469.09,
+          "net_usd": 750511.53,
+          "asset_usd": 5529183.27,
+          "debt_usd": 4778671.74,
           "position_index": "0x0b2b2b2076d95dda7817e785989fe353fe955ef9",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:14",
+          "scanned_at": "2026-04-12 08:41:40",
           "supply": [
             {
               "symbol": "sUSDai",
@@ -7484,16 +7450,16 @@
               "apy_base_source": "aave_borrow_ref",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
-              "bonus_borrow_apy": 2.94924154465245,
-              "bonus_borrow_source": "fluid:plasma(0.72%); fluid:plasma(2.23%)"
+              "bonus_borrow_apy": 3.20090865378331,
+              "bonus_borrow_source": "fluid:plasma(0.68%); fluid:plasma(2.52%)"
             }
           ],
           "rewards": [],
           "apy_base": 7.1000000000000005,
           "apy_cost": 3.63041666666667,
           "bonus_supply": null,
-          "bonus_borrow": 2.94924154465245,
-          "apy_net": 48.038588999119945,
+          "bonus_borrow": 3.20090865378331,
+          "apy_net": 49.572487465623254,
           "apy_reward": null
         },
         {
@@ -7511,7 +7477,7 @@
           "debt_usd": 0,
           "position_index": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
           "debank_updated_at": "2026-04-11T02:39:04.000Z",
-          "scanned_at": "2026-04-11 17:57:18",
+          "scanned_at": "2026-04-12 08:41:44",
           "supply": [
             {
               "symbol": "USDS",
@@ -7548,12 +7514,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": 1.027,
-          "net_usd": 576173.6,
-          "asset_usd": 576173.6,
+          "net_usd": 576626.9,
+          "asset_usd": 576626.9,
           "debt_usd": 0,
           "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
           "debank_updated_at": "2026-04-11T01:49:28.000Z",
-          "scanned_at": "2026-04-11 17:57:22",
+          "scanned_at": "2026-04-12 08:41:48",
           "supply": [
             {
               "symbol": "USDe",
@@ -7577,7 +7543,7 @@
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 0.950833333333333,
+          "apy_net": 0.9508333333333329,
           "apy_reward": null
         },
         {
@@ -7590,12 +7556,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 500856.45,
-          "asset_usd": 500856.45,
+          "net_usd": 500840.18,
+          "asset_usd": 500840.18,
           "debt_usd": 0,
           "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
           "debank_updated_at": "2026-04-11T02:39:04.000Z",
-          "scanned_at": "2026-04-11 17:57:18",
+          "scanned_at": "2026-04-12 08:41:44",
           "supply": [
             {
               "symbol": "rUSD",
@@ -7619,7 +7585,7 @@
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 6.0827370046697204,
+          "apy_net": 6.08273700466972,
           "apy_reward": null
         },
         {
@@ -7632,12 +7598,12 @@
           "strategy": "lp",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 399829.69,
-          "asset_usd": 399829.69,
+          "net_usd": 399741.09,
+          "asset_usd": 399741.09,
           "debt_usd": 0,
           "position_index": "0x808507121b80c02388fad14726482e061b8da827,0x9db38d74a0d29380899ad354121dfb521adb0548,0xe343167631d89b6ffc58b88d6b7fb0228795491d",
           "debank_updated_at": "2026-04-11T02:39:04.000Z",
-          "scanned_at": "2026-04-11 17:57:21",
+          "scanned_at": "2026-04-12 08:41:47",
           "supply": [
             {
               "symbol": "USDG",
@@ -7662,7 +7628,7 @@
               "amount": 80739.1809554949,
               "price_usd": 0.993172773039642,
               "value_usd": 80187.9562425183,
-              "apy_base": 5.502419275853,
+              "apy_base": 5.6429462265235,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -7694,11 +7660,11 @@
               "value_usd": 41.5560913053022
             }
           ],
-          "apy_base": 5.506036406931349,
+          "apy_base": 5.534221606377268,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 5.506036406931349,
+          "apy_net": 5.534221606377268,
           "apy_reward": null
         },
         {
@@ -7711,12 +7677,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 301163.88,
-          "asset_usd": 301163.88,
+          "net_usd": 301139.03,
+          "asset_usd": 301139.03,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T10:33:25.000Z",
-          "scanned_at": "2026-04-11 17:57:04",
+          "scanned_at": "2026-04-12 08:41:30",
           "supply": [
             {
               "symbol": "USDC",
@@ -7753,12 +7719,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.033,
-          "net_usd": 202025.06,
-          "asset_usd": 2360042.21,
-          "debt_usd": 2158017.16,
+          "net_usd": 198285.24,
+          "asset_usd": 2316448.94,
+          "debt_usd": 2118163.7,
           "position_index": "0xd6c757043e7d59088969b188923c62fa960afe9b_eth_morphoblue",
           "debank_updated_at": "2026-04-11T08:26:03.000Z",
-          "scanned_at": "2026-04-11 17:57:23",
+          "scanned_at": "2026-04-12 08:41:50",
           "supply": [
             {
               "symbol": "weETH",
@@ -7798,7 +7764,7 @@
           "apy_cost": 35.3247629570601,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": -342.2907930544263,
+          "apy_net": -342.30628455627544,
           "apy_reward": null
         },
         {
@@ -7811,12 +7777,12 @@
           "strategy": "loop",
           "yield_source": "Morpho",
           "health_rate": 1.022,
-          "net_usd": 126238.98,
-          "asset_usd": 1215418.67,
-          "debt_usd": 1089179.69,
+          "net_usd": 125854.48,
+          "asset_usd": 1215322.13,
+          "debt_usd": 1089467.65,
           "position_index": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
           "debank_updated_at": "2026-04-11T08:43:17.000Z",
-          "scanned_at": "2026-04-11 17:57:23",
+          "scanned_at": "2026-04-12 08:41:49",
           "supply": [
             {
               "symbol": "syrupUSDC",
@@ -7856,7 +7822,7 @@
           "apy_cost": 4.70041005814483,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 0.6408937448071246,
+          "apy_net": 0.6288148828447583,
           "apy_reward": null
         },
         {
@@ -7869,12 +7835,12 @@
           "strategy": "deposit",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 92686.5,
-          "asset_usd": 92686.5,
+          "net_usd": 92710.38,
+          "asset_usd": 92710.38,
           "debt_usd": 0,
           "position_index": "0xb459db106f645d698e74027eef6019a26a0675cc",
           "debank_updated_at": "2026-04-11T12:53:32.000Z",
-          "scanned_at": "2026-04-11 17:57:17",
+          "scanned_at": "2026-04-12 08:41:44",
           "supply": [
             {
               "symbol": "PT-sUSDai-15OCT2026",
@@ -7884,7 +7850,7 @@
               "amount": 96450.9782895906,
               "price_usd": 0.960906446959373,
               "value_usd": 92680.3668540061,
-              "apy_base": 8.12588424998559,
+              "apy_base": 8.08470163263513,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -7894,11 +7860,11 @@
           ],
           "borrow": [],
           "rewards": [],
-          "apy_base": 8.12588424998559,
+          "apy_base": 8.08470163263513,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 8.12588424998559,
+          "apy_net": 8.08470163263513,
           "apy_reward": null
         },
         {
@@ -7911,12 +7877,12 @@
           "strategy": "deposit",
           "yield_source": "Pendle V2",
           "health_rate": null,
-          "net_usd": 89470.69,
-          "asset_usd": 89470.69,
+          "net_usd": 88402.47,
+          "asset_usd": 88402.47,
           "debt_usd": 0,
           "position_index": "0x5ee662a280cec0cf6fa5c110241e588a0bf38988,0xe556aba6fe6036275ec1f87eda296be72c811bce",
           "debank_updated_at": "2026-04-11T10:33:24.000Z",
-          "scanned_at": "2026-04-11 17:57:07",
+          "scanned_at": "2026-04-12 08:41:33",
           "supply": [
             {
               "symbol": "YT-sNUSD-4JUN2026",
@@ -7926,7 +7892,7 @@
               "amount": 7061086.62751321,
               "price_usd": 0.0123573925212118,
               "value_usd": 87256.6190824603,
-              "apy_base": 2.67890096834558,
+              "apy_base": 5.89141736779291,
               "apy_base_source": "pendle",
               "bonus_supply_apy": null,
               "bonus_supply_source": null,
@@ -7958,11 +7924,11 @@
               "value_usd": 1868.92384489922
             }
           ],
-          "apy_base": 2.622725580982775,
+          "apy_base": 5.767876909723603,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 2.622725580982775,
+          "apy_net": 5.767876909723603,
           "apy_reward": null
         }
       ],
@@ -7986,12 +7952,12 @@
               "strategy": "lend",
               "yield_source": "Fluid",
               "health_rate": null,
-              "net_usd": 12541375.45,
-              "asset_usd": 12541375.45,
+              "net_usd": 12544286.39,
+              "asset_usd": 12544286.39,
               "debt_usd": 0,
               "position_index": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:11",
+              "scanned_at": "2026-04-12 08:41:37",
               "supply": [
                 {
                   "symbol": "USDT0",
@@ -8028,12 +7994,12 @@
               "strategy": "deposit",
               "yield_source": "Pendle V2",
               "health_rate": null,
-              "net_usd": 7206838.17,
-              "asset_usd": 7206838.17,
+              "net_usd": 7209013.83,
+              "asset_usd": 7209013.83,
               "debt_usd": 0,
               "position_index": "0x6c65db1d88c8eda1e3debf2b2ef3d0ece8600466",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:10",
+              "scanned_at": "2026-04-12 08:41:36",
               "supply": [
                 {
                   "symbol": "PT-sNUSD-4JUN2026",
@@ -8043,7 +8009,7 @@
                   "amount": 7304799.12467118,
                   "price_usd": 0.986583762431042,
                   "value_usd": 7206796.20422107,
-                  "apy_base": 8.89961073566869,
+                  "apy_base": 8.80543803568927,
                   "apy_base_source": "pendle",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
@@ -8053,11 +8019,11 @@
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 8.89961073566869,
+              "apy_base": 8.80543803568927,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 8.89961073566869,
+              "apy_net": 8.80543803568927,
               "apy_reward": null
             },
             {
@@ -8070,12 +8036,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 5005103.77,
-              "asset_usd": 5005103.77,
+              "net_usd": 5005057.74,
+              "asset_usd": 5005057.74,
               "debt_usd": 0,
               "position_index": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:11",
+              "scanned_at": "2026-04-12 08:41:37",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -8112,12 +8078,12 @@
               "strategy": "loop",
               "yield_source": "Aave V3",
               "health_rate": 1.025,
-              "net_usd": 2464792.97,
-              "asset_usd": 24081019.38,
-              "debt_usd": 21616226.41,
+              "net_usd": 2466132.29,
+              "asset_usd": 24087038.8,
+              "debt_usd": 21620906.5,
               "position_index": "0xc4374775489cb9c56003bf2c9b12495fc64f0771",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:11",
+              "scanned_at": "2026-04-12 08:41:37",
               "supply": [
                 {
                   "symbol": "syrupUSDT",
@@ -8148,7 +8114,7 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.470952624972065,
+                  "bonus_borrow_apy": 0.471068671495452,
                   "bonus_borrow_source": "aave:plasma(0.47%)"
                 }
               ],
@@ -8156,8 +8122,8 @@
               "apy_base": 3.7296,
               "apy_cost": 3.63041666666667,
               "bonus_supply": null,
-              "bonus_borrow": 0.470952624972065,
-              "apy_net": 8.729690518438849,
+              "bonus_borrow": 0.471068671495452,
+              "apy_net": 8.729074426060349,
               "apy_reward": null
             },
             {
@@ -8170,12 +8136,12 @@
               "strategy": "loop",
               "yield_source": "Aave V3",
               "health_rate": 1.038,
-              "net_usd": 2456467.3,
-              "asset_usd": 21828542.67,
-              "debt_usd": 19372075.37,
+              "net_usd": 2453418.49,
+              "asset_usd": 21829615.2,
+              "debt_usd": 19376196.7,
               "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34,0x78c1b0c915c4faa5fffa6cabf0219da63d7f4cb8",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:10",
+              "scanned_at": "2026-04-12 08:41:36",
               "supply": [
                 {
                   "symbol": "WMNT",
@@ -8236,16 +8202,16 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.82236933539714,
-                  "bonus_borrow_source": "aave:mnt(0.82%)"
+                  "bonus_borrow_apy": 0.799167133858957,
+                  "bonus_borrow_source": "aave:mnt(0.80%)"
                 }
               ],
               "rewards": [],
               "apy_base": 1.8040272990164896,
               "apy_cost": 3.29142857142857,
               "bonus_supply": null,
-              "bonus_borrow": 0.82236933539714,
-              "apy_net": -3.4405158737383497,
+              "bonus_borrow": 0.799167133858957,
+              "apy_net": -3.6313927406442135,
               "apy_reward": null
             },
             {
@@ -8258,12 +8224,12 @@
               "strategy": "loop",
               "yield_source": "Fluid",
               "health_rate": 1.04,
-              "net_usd": 917814.44,
-              "asset_usd": 6803495.56,
-              "debt_usd": 5885681.12,
+              "net_usd": 917420.08,
+              "asset_usd": 6804554.84,
+              "debt_usd": 5887134.76,
               "position_index": "0x0b2b2b2076d95dda7817e785989fe353fe955ef9",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:03",
+              "scanned_at": "2026-04-12 08:41:30",
               "supply": [
                 {
                   "symbol": "sUSDai",
@@ -8303,7 +8269,7 @@
               "apy_cost": 3.3175,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 31.356089102716663,
+              "apy_net": 31.37250908842109,
               "apy_reward": null
             },
             {
@@ -8316,12 +8282,12 @@
               "strategy": "loop",
               "yield_source": "Fluid",
               "health_rate": 1.041,
-              "net_usd": 749066.79,
-              "asset_usd": 5526535.88,
-              "debt_usd": 4777469.09,
+              "net_usd": 750511.53,
+              "asset_usd": 5529183.27,
+              "debt_usd": 4778671.74,
               "position_index": "0x0b2b2b2076d95dda7817e785989fe353fe955ef9",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:14",
+              "scanned_at": "2026-04-12 08:41:40",
               "supply": [
                 {
                   "symbol": "sUSDai",
@@ -8352,16 +8318,16 @@
                   "apy_base_source": "aave_borrow_ref",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 2.94924154465245,
-                  "bonus_borrow_source": "fluid:plasma(0.72%); fluid:plasma(2.23%)"
+                  "bonus_borrow_apy": 3.20090865378331,
+                  "bonus_borrow_source": "fluid:plasma(0.68%); fluid:plasma(2.52%)"
                 }
               ],
               "rewards": [],
               "apy_base": 7.1000000000000005,
               "apy_cost": 3.63041666666667,
               "bonus_supply": null,
-              "bonus_borrow": 2.94924154465245,
-              "apy_net": 48.038588999119945,
+              "bonus_borrow": 3.20090865378331,
+              "apy_net": 49.572487465623254,
               "apy_reward": null
             },
             {
@@ -8374,12 +8340,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 301163.88,
-              "asset_usd": 301163.88,
+              "net_usd": 301139.03,
+              "asset_usd": 301139.03,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T10:33:25.000Z",
-              "scanned_at": "2026-04-11 17:57:04",
+              "scanned_at": "2026-04-12 08:41:30",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -8416,12 +8382,12 @@
               "strategy": "deposit",
               "yield_source": "Pendle V2",
               "health_rate": null,
-              "net_usd": 89470.69,
-              "asset_usd": 89470.69,
+              "net_usd": 88402.47,
+              "asset_usd": 88402.47,
               "debt_usd": 0,
               "position_index": "0x5ee662a280cec0cf6fa5c110241e588a0bf38988,0xe556aba6fe6036275ec1f87eda296be72c811bce",
               "debank_updated_at": "2026-04-11T10:33:24.000Z",
-              "scanned_at": "2026-04-11 17:57:07",
+              "scanned_at": "2026-04-12 08:41:33",
               "supply": [
                 {
                   "symbol": "YT-sNUSD-4JUN2026",
@@ -8431,7 +8397,7 @@
                   "amount": 7061086.62751321,
                   "price_usd": 0.0123573925212118,
                   "value_usd": 87256.6190824603,
-                  "apy_base": 2.67890096834558,
+                  "apy_base": 5.89141736779291,
                   "apy_base_source": "pendle",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
@@ -8463,11 +8429,11 @@
                   "value_usd": 1868.92384489922
                 }
               ],
-              "apy_base": 2.622725580982775,
+              "apy_base": 5.767876909723603,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 2.622725580982775,
+              "apy_net": 5.767876909723603,
               "apy_reward": null
             }
           ],
@@ -8491,12 +8457,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 4942105.14,
-              "asset_usd": 4942105.14,
+              "net_usd": 4941905.4,
+              "asset_usd": 4941905.4,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T02:39:04.000Z",
-              "scanned_at": "2026-04-11 17:57:18",
+              "scanned_at": "2026-04-12 08:41:44",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -8533,12 +8499,12 @@
               "strategy": "yield",
               "yield_source": "USD.AI",
               "health_rate": null,
-              "net_usd": 3173333.5,
-              "asset_usd": 3173333.5,
+              "net_usd": 3173627.68,
+              "asset_usd": 3173627.68,
               "debt_usd": 0,
               "position_index": "0x0a1a1a107e45b7ced86833863f482bc5f4ed82ef",
               "debank_updated_at": "2026-04-11T12:53:32.000Z",
-              "scanned_at": "2026-04-11 17:57:17",
+              "scanned_at": "2026-04-12 08:41:44",
               "supply": [
                 {
                   "symbol": "USDai",
@@ -8575,12 +8541,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 1921220.87,
-              "asset_usd": 1921220.87,
+              "net_usd": 1921269.24,
+              "asset_usd": 1921269.24,
               "debt_usd": 0,
               "position_index": "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
               "debank_updated_at": "2026-04-11T02:39:04.000Z",
-              "scanned_at": "2026-04-11 17:57:18",
+              "scanned_at": "2026-04-12 08:41:44",
               "supply": [
                 {
                   "symbol": "AUSD",
@@ -8617,12 +8583,12 @@
               "strategy": "lp",
               "yield_source": "Curve",
               "health_rate": null,
-              "net_usd": 1545194.41,
-              "asset_usd": 1545194.41,
+              "net_usd": 1545249.92,
+              "asset_usd": 1545249.92,
               "debt_usd": 0,
               "position_index": "0x0b2b2b2076d95dda7817e785989fe353fe955ef9,0xaf88d065e77c8cc2239327c5edb3a432268e5831",
               "debank_updated_at": "2026-04-11T02:39:04.000Z",
-              "scanned_at": "2026-04-11 17:57:14",
+              "scanned_at": "2026-04-12 08:41:41",
               "supply": [
                 {
                   "symbol": "sUSDai",
@@ -8679,7 +8645,7 @@
               "debt_usd": 0,
               "position_index": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
               "debank_updated_at": "2026-04-11T02:39:04.000Z",
-              "scanned_at": "2026-04-11 17:57:18",
+              "scanned_at": "2026-04-12 08:41:44",
               "supply": [
                 {
                   "symbol": "USDS",
@@ -8716,12 +8682,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 500856.45,
-              "asset_usd": 500856.45,
+              "net_usd": 500840.18,
+              "asset_usd": 500840.18,
               "debt_usd": 0,
               "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
               "debank_updated_at": "2026-04-11T02:39:04.000Z",
-              "scanned_at": "2026-04-11 17:57:18",
+              "scanned_at": "2026-04-12 08:41:44",
               "supply": [
                 {
                   "symbol": "rUSD",
@@ -8745,7 +8711,7 @@
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 6.0827370046697204,
+              "apy_net": 6.08273700466972,
               "apy_reward": null
             },
             {
@@ -8758,12 +8724,12 @@
               "strategy": "lp",
               "yield_source": "Pendle V2",
               "health_rate": null,
-              "net_usd": 399829.69,
-              "asset_usd": 399829.69,
+              "net_usd": 399741.09,
+              "asset_usd": 399741.09,
               "debt_usd": 0,
               "position_index": "0x808507121b80c02388fad14726482e061b8da827,0x9db38d74a0d29380899ad354121dfb521adb0548,0xe343167631d89b6ffc58b88d6b7fb0228795491d",
               "debank_updated_at": "2026-04-11T02:39:04.000Z",
-              "scanned_at": "2026-04-11 17:57:21",
+              "scanned_at": "2026-04-12 08:41:47",
               "supply": [
                 {
                   "symbol": "USDG",
@@ -8788,7 +8754,7 @@
                   "amount": 80739.1809554949,
                   "price_usd": 0.993172773039642,
                   "value_usd": 80187.9562425183,
-                  "apy_base": 5.502419275853,
+                  "apy_base": 5.6429462265235,
                   "apy_base_source": "pendle",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
@@ -8820,11 +8786,11 @@
                   "value_usd": 41.5560913053022
                 }
               ],
-              "apy_base": 5.506036406931349,
+              "apy_base": 5.534221606377268,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 5.506036406931349,
+              "apy_net": 5.534221606377268,
               "apy_reward": null
             },
             {
@@ -8837,12 +8803,12 @@
               "strategy": "deposit",
               "yield_source": "Pendle V2",
               "health_rate": null,
-              "net_usd": 92686.5,
-              "asset_usd": 92686.5,
+              "net_usd": 92710.38,
+              "asset_usd": 92710.38,
               "debt_usd": 0,
               "position_index": "0xb459db106f645d698e74027eef6019a26a0675cc",
               "debank_updated_at": "2026-04-11T12:53:32.000Z",
-              "scanned_at": "2026-04-11 17:57:17",
+              "scanned_at": "2026-04-12 08:41:44",
               "supply": [
                 {
                   "symbol": "PT-sUSDai-15OCT2026",
@@ -8852,7 +8818,7 @@
                   "amount": 96450.9782895906,
                   "price_usd": 0.960906446959373,
                   "value_usd": 92680.3668540061,
-                  "apy_base": 8.12588424998559,
+                  "apy_base": 8.08470163263513,
                   "apy_base_source": "pendle",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
@@ -8862,11 +8828,11 @@
               ],
               "borrow": [],
               "rewards": [],
-              "apy_base": 8.12588424998559,
+              "apy_base": 8.08470163263513,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 8.12588424998559,
+              "apy_net": 8.08470163263513,
               "apy_reward": null
             }
           ],
@@ -8892,13 +8858,13 @@
               "position_type": "Lending",
               "strategy": "loop",
               "yield_source": "Aave V3",
-              "health_rate": 1.148,
-              "net_usd": 3751100.46,
-              "asset_usd": 18971503.39,
-              "debt_usd": 15220402.92,
+              "health_rate": 1.157,
+              "net_usd": 3754148,
+              "asset_usd": 18378712.37,
+              "debt_usd": 14624564.37,
               "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2",
               "debank_updated_at": "2026-04-11T14:58:23.000Z",
-              "scanned_at": "2026-04-11 17:57:21",
+              "scanned_at": "2026-04-12 08:41:48",
               "supply": [
                 {
                   "symbol": "sUSDe",
@@ -8929,7 +8895,7 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.470952624972065,
+                  "bonus_borrow_apy": 0.471068671495452,
                   "bonus_borrow_source": "aave:plasma(0.47%)"
                 }
               ],
@@ -8937,8 +8903,8 @@
               "apy_base": 3.5651799999999993,
               "apy_cost": 3.63041666666667,
               "bonus_supply": null,
-              "bonus_borrow": 0.470952624972065,
-              "apy_net": 5.211406342904668,
+              "bonus_borrow": 0.471068671495452,
+              "apy_net": 5.146128933825909,
               "apy_reward": null
             },
             {
@@ -8951,12 +8917,12 @@
               "strategy": "loop",
               "yield_source": "Aave V3",
               "health_rate": 1.022,
-              "net_usd": 1959697.82,
-              "asset_usd": 19806756.88,
-              "debt_usd": 17847059.06,
+              "net_usd": 1956848.19,
+              "asset_usd": 19807754.45,
+              "debt_usd": 17850906.26,
               "position_index": "0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2,0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
               "debank_updated_at": "2026-04-11T13:11:03.000Z",
-              "scanned_at": "2026-04-11 17:57:22",
+              "scanned_at": "2026-04-12 08:41:49",
               "supply": [
                 {
                   "symbol": "USDe",
@@ -9002,16 +8968,16 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.82236933539714,
-                  "bonus_borrow_source": "aave:mnt(0.82%)"
+                  "bonus_borrow_apy": 0.799167133858957,
+                  "bonus_borrow_source": "aave:mnt(0.80%)"
                 }
               ],
               "rewards": [],
               "apy_base": 1.8024724583210048,
               "apy_cost": 3.29142857142857,
               "bonus_supply": null,
-              "bonus_borrow": 0.82236933539714,
-              "apy_net": -4.268164284242221,
+              "bonus_borrow": 0.799167133858957,
+              "apy_net": -4.4899719278467325,
               "apy_reward": null
             },
             {
@@ -9023,13 +8989,13 @@
               "position_type": "Lending",
               "strategy": "loop",
               "yield_source": "Morpho",
-              "health_rate": 1.268,
-              "net_usd": 1366973.01,
-              "asset_usd": 5724248.76,
-              "debt_usd": 4357275.75,
+              "health_rate": 1.267,
+              "net_usd": 1366223.5,
+              "asset_usd": 5724597.59,
+              "debt_usd": 4358374.09,
               "position_index": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
               "debank_updated_at": "2026-04-11T08:26:03.000Z",
-              "scanned_at": "2026-04-11 17:57:23",
+              "scanned_at": "2026-04-12 08:41:50",
               "supply": [
                 {
                   "symbol": "sUSDS",
@@ -9069,7 +9035,7 @@
               "apy_cost": 598346.853967447,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": -1907236.4647113974,
+              "apy_net": -1908763.7988394813,
               "apy_reward": null
             },
             {
@@ -9082,12 +9048,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 1357649.43,
-              "asset_usd": 1357649.43,
+              "net_usd": 1357609.06,
+              "asset_usd": 1357609.06,
               "debt_usd": 0,
               "position_index": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
               "debank_updated_at": "2026-04-11T08:26:03.000Z",
-              "scanned_at": "2026-04-11 17:57:23",
+              "scanned_at": "2026-04-12 08:41:50",
               "supply": [
                 {
                   "symbol": "rUSD",
@@ -9124,12 +9090,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 1296343.14,
-              "asset_usd": 1296343.14,
+              "net_usd": 1296352.8,
+              "asset_usd": 1296352.8,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T08:26:03.000Z",
-              "scanned_at": "2026-04-11 17:57:23",
+              "scanned_at": "2026-04-12 08:41:50",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -9166,12 +9132,12 @@
               "strategy": "loop",
               "yield_source": "Venus Flux",
               "health_rate": 1.025,
-              "net_usd": 1051381.3,
-              "asset_usd": 10231787.45,
-              "debt_usd": 9180406.15,
+              "net_usd": 1052017.62,
+              "asset_usd": 10233322.98,
+              "debt_usd": 9181305.36,
               "position_index": "0x8e9d4cea39299323fe8eda678cad449718556c4e",
               "debank_updated_at": "2026-04-11T07:37:56.000Z",
-              "scanned_at": "2026-04-11 17:57:23",
+              "scanned_at": "2026-04-12 08:41:49",
               "supply": [
                 {
                   "symbol": "syrupUSDT",
@@ -9211,7 +9177,7 @@
               "apy_cost": 2.96291666666667,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 10.42409265308009,
+              "apy_net": 10.420698764824843,
               "apy_reward": null
             },
             {
@@ -9224,12 +9190,12 @@
               "strategy": "loop",
               "yield_source": "Aave V3",
               "health_rate": 1.023,
-              "net_usd": 942035.49,
-              "asset_usd": 9463191.49,
-              "debt_usd": 8521155.99,
+              "net_usd": 954492.79,
+              "asset_usd": 9476400.98,
+              "debt_usd": 8521908.18,
               "position_index": "0x051665f2455116e929b9972c36d23070f5054ce0",
               "debank_updated_at": "2026-04-11T04:01:32.000Z",
-              "scanned_at": "2026-04-11 17:57:27",
+              "scanned_at": "2026-04-12 08:41:53",
               "supply": [
                 {
                   "symbol": "syrupUSDT",
@@ -9260,8 +9226,8 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.82236933539714,
-                  "bonus_borrow_source": "aave:mnt(0.82%)"
+                  "bonus_borrow_apy": 0.799167133858957,
+                  "bonus_borrow_source": "aave:mnt(0.80%)"
                 },
                 {
                   "symbol": "USDC",
@@ -9275,16 +9241,16 @@
                   "apy_base_source": "aave_borrow",
                   "bonus_supply_apy": null,
                   "bonus_supply_source": null,
-                  "bonus_borrow_apy": 0.887458278276732,
-                  "bonus_borrow_source": "aave:mnt(0.89%)"
+                  "bonus_borrow_apy": 0.897376251258619,
+                  "bonus_borrow_source": "aave:mnt(0.90%)"
                 }
               ],
               "rewards": [],
               "apy_base": 3.7295999999999996,
               "apy_cost": 3.520067017848203,
               "bonus_supply": null,
-              "bonus_borrow": 1.709827613673872,
-              "apy_net": 21.09112326425182,
+              "bonus_borrow": 1.696543385117576,
+              "apy_net": 20.747442348744777,
               "apy_reward": null
             },
             {
@@ -9297,12 +9263,12 @@
               "strategy": "loop",
               "yield_source": "Euler",
               "health_rate": 1.022,
-              "net_usd": 890455.91,
-              "asset_usd": 9883104.49,
-              "debt_usd": 8992648.59,
+              "net_usd": 893129.18,
+              "asset_usd": 9882682.2,
+              "debt_usd": 8989553.02,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T05:12:23.000Z",
-              "scanned_at": "2026-04-11 17:57:23",
+              "scanned_at": "2026-04-12 08:41:50",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -9342,7 +9308,7 @@
               "apy_cost": 3.20260869565217,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": -6.098573047409415,
+              "apy_net": -6.0703369395323765,
               "apy_reward": null
             },
             {
@@ -9355,12 +9321,12 @@
               "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": 1.027,
-              "net_usd": 576173.6,
-              "asset_usd": 576173.6,
+              "net_usd": 576626.9,
+              "asset_usd": 576626.9,
               "debt_usd": 0,
               "position_index": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
               "debank_updated_at": "2026-04-11T01:49:28.000Z",
-              "scanned_at": "2026-04-11 17:57:22",
+              "scanned_at": "2026-04-12 08:41:48",
               "supply": [
                 {
                   "symbol": "USDe",
@@ -9384,7 +9350,7 @@
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 0.950833333333333,
+              "apy_net": 0.9508333333333329,
               "apy_reward": null
             },
             {
@@ -9397,12 +9363,12 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.033,
-              "net_usd": 202025.06,
-              "asset_usd": 2360042.21,
-              "debt_usd": 2158017.16,
+              "net_usd": 198285.24,
+              "asset_usd": 2316448.94,
+              "debt_usd": 2118163.7,
               "position_index": "0xd6c757043e7d59088969b188923c62fa960afe9b_eth_morphoblue",
               "debank_updated_at": "2026-04-11T08:26:03.000Z",
-              "scanned_at": "2026-04-11 17:57:23",
+              "scanned_at": "2026-04-12 08:41:50",
               "supply": [
                 {
                   "symbol": "weETH",
@@ -9442,7 +9408,7 @@
               "apy_cost": 35.3247629570601,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": -342.2907930544263,
+              "apy_net": -342.30628455627544,
               "apy_reward": null
             },
             {
@@ -9455,12 +9421,12 @@
               "strategy": "loop",
               "yield_source": "Morpho",
               "health_rate": 1.022,
-              "net_usd": 126238.98,
-              "asset_usd": 1215418.67,
-              "debt_usd": 1089179.69,
+              "net_usd": 125854.48,
+              "asset_usd": 1215322.13,
+              "debt_usd": 1089467.65,
               "position_index": "0x41ca7586cc1311807b4605fbb748a3b8862b42b5",
               "debank_updated_at": "2026-04-11T08:43:17.000Z",
-              "scanned_at": "2026-04-11 17:57:23",
+              "scanned_at": "2026-04-12 08:41:49",
               "supply": [
                 {
                   "symbol": "syrupUSDC",
@@ -9500,7 +9466,7 @@
               "apy_cost": 4.70041005814483,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 0.6408937448071246,
+              "apy_net": 0.6288148828447583,
               "apy_reward": null
             }
           ],
@@ -9526,12 +9492,12 @@
           "strategy": "lend",
           "yield_source": "Aave V3",
           "health_rate": null,
-          "net_usd": 13962290.04,
-          "asset_usd": 13962290.04,
+          "net_usd": 13960894.51,
+          "asset_usd": 13960894.51,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T09:15:24.000Z",
-          "scanned_at": "2026-04-11 17:57:31",
+          "scanned_at": "2026-04-12 08:41:58",
           "supply": [
             {
               "symbol": "USDC",
@@ -9568,12 +9534,12 @@
           "strategy": "lend",
           "yield_source": "Morpho",
           "health_rate": null,
-          "net_usd": 2630077.93,
-          "asset_usd": 2630077.93,
+          "net_usd": 2629975.28,
+          "asset_usd": 2629975.28,
           "debt_usd": 0,
           "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
           "debank_updated_at": "2026-04-11T09:56:08.000Z",
-          "scanned_at": "2026-04-11 17:57:31",
+          "scanned_at": "2026-04-12 08:41:58",
           "supply": [
             {
               "symbol": "USDC",
@@ -9621,12 +9587,12 @@
               "strategy": "lend",
               "yield_source": "Aave V3",
               "health_rate": null,
-              "net_usd": 13962290.04,
-              "asset_usd": 13962290.04,
+              "net_usd": 13960894.51,
+              "asset_usd": 13960894.51,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T09:15:24.000Z",
-              "scanned_at": "2026-04-11 17:57:31",
+              "scanned_at": "2026-04-12 08:41:58",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -9663,12 +9629,12 @@
               "strategy": "lend",
               "yield_source": "Morpho",
               "health_rate": null,
-              "net_usd": 2630077.93,
-              "asset_usd": 2630077.93,
+              "net_usd": 2629975.28,
+              "asset_usd": 2629975.28,
               "debt_usd": 0,
               "position_index": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "debank_updated_at": "2026-04-11T09:56:08.000Z",
-              "scanned_at": "2026-04-11 17:57:31",
+              "scanned_at": "2026-04-12 08:41:58",
               "supply": [
                 {
                   "symbol": "USDC",
@@ -9735,7 +9701,7 @@
           "apy_avg": 5,
           "apy_base": 5,
           "apy_rewards": 0,
-          "maturity": "2026-07-11",
+          "maturity": "2026-07-12",
           "bucket_weeks": null,
           "underlying": "USDz",
           "paused": false,
@@ -10022,16 +9988,16 @@
           "strategy": "rwa",
           "yield_source": "sky",
           "health_rate": null,
-          "net_usd": 226941.17079345766,
-          "asset_usd": 226941.17079345766,
+          "net_usd": 226955.23227285096,
+          "asset_usd": 226955.23227285096,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 226941.17079345766,
+              "amount": 226955.23227285096,
               "price_usd": 1,
-              "value_usd": 226941.17079345766
+              "value_usd": 226955.23227285096
             }
           ],
           "borrow": [],
