@@ -254,6 +254,7 @@ tr:hover td { background: var(--bg-secondary); }
                     <th>Wallet</th>
                     <th>Chain</th>
                     <th>Protocol</th>
+                    <th>Asset</th>
                     <th>Strategy</th>
                     <th>Supply Tokens</th>
                     <th>Borrow Tokens</th>
@@ -385,7 +386,8 @@ function renderTable(data) {
         return `<tr onclick="showDetail(${detailData})" style="cursor:pointer">
             <td title="${p.wallet || ''}"><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet)}</a></td>
             <td>${(p.chain || '').toUpperCase()}</td>
-            <td>${p.protocol_name || '-'}</td>
+            <td>${p.supply?.[0]?.symbol || '-'}</td>
+            <td>${p.asset_type || p.protocol_name || '-'}</td>
             <td>${strategyBadge(p.strategy)}</td>
             <td>${supplyTokens || '-'}</td>
             <td>${borrowTokens || '-'}</td>
