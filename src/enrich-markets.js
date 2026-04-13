@@ -308,8 +308,10 @@ async function main() {
         loanAddr: m.loanAsset?.address?.toLowerCase(),
         collateralAddr: m.collateralAsset?.address?.toLowerCase(),
         marketId: m.marketId,
+        dailyBorrowApy: m.state?.dailyBorrowApy || 0,
         hasDailyApy: (m.state?.dailyBorrowApy || 0) > 0 || (m.state?.dailySupplyApy || 0) > 0
-      })).sort((a, b) => (b.hasDailyApy ? 1 : 0) - (a.hasDailyApy ? 1 : 0));
+      })).sort((a, b) => (a.dailyBorrowApy || 0) - (b.dailyBorrowApy || 0));
+      // Sort: normal rates first (lowest borrow APY), broken markets last
       console.log('   ' + chain + ': ' + items.length + ' markets');
     } catch (e) {
       console.log('   ' + chain + ': failed - ' + e.message);
@@ -335,7 +337,10 @@ async function main() {
         console.log('   found', allMatches.length, 'matches:', allMatches[0].marketId.slice(0,12), 
                     usedUnderlying ? '(using underlying ' + allMatches[0].collateralAsset + ')' : '');
       }
-      const match = allMatches[0];
+      // Pick market with LOWEST borrow APY (most stable, avoids broken markets with inflated rates)
+      const match = allMatches.sort((a, b) => 
+        Math.abs(a.dailyBorrowApy || 0) - Math.abs(b.dailyBorrowApy || 0)
+      )[0];
       if (match) {
         insertMarket.run(pos.id, 'Morpho', pos.chain, match.marketId, 'Morpho Market', match.collateralAddr, 'market-match');
         morphoOk++;
