@@ -433,9 +433,9 @@ function updateSummary(data) {
     const avgHf = positions.filter(p => p.health_rate > 0).reduce((s, p, _, arr) => s + p.health_rate / arr.length, 0);
 
     const chainsUsed = [...new Set(data.map(p => p.chain))].length;
-    const protocolList = [...new Set(data.map(p => p.protocol_name))];
+    const protocolList = [...new Set(data.map(p => p.asset_type || p.protocol_name))];
     const protosUsed = protocolList.length;
-    const topProto = [...new Map(data.map(p => [p.protocol_name, (p.net_usd || 0)])).entries()]
+    const topProto = [...new Map(data.map(p => [p.asset_type || p.protocol_name, (p.net_usd || 0)])).entries()]
         .sort((a, b) => b[1] - a[1])[0];
     const topChain = [...new Map(data.map(p => [p.chain, (p.net_usd || 0)])).entries()]
         .sort((a, b) => b[1] - a[1])[0];
@@ -452,8 +452,8 @@ function updateSummary(data) {
     `;
 
     const protoHtml = protocolList.map(p => {
-        const count = data.filter(d => d.protocol_name === p).length;
-        const val = data.filter(d => d.protocol_name === p).reduce((s, d) => s + (d.net_usd || 0), 0);
+        const count = data.filter(d => (d.asset_type || d.protocol_name) === p).length;
+        const val = data.filter(d => (d.asset_type || d.protocol_name) === p).reduce((s, d) => s + (d.net_usd || 0), 0);
         return `<div class="proto-chip"><strong>${p}</strong> ${count} pos · ${fmtShort(val)}</div>`;
     }).join('');
     document.getElementById('protoSummary').innerHTML = protoHtml;
