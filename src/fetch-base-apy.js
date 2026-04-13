@@ -172,8 +172,11 @@ async function fetchMorphoApy() {
         if (m.marketId) {
           byMarketId[m.marketId.toLowerCase()] = { supplyApy: sApy, borrowApy: bApy };
         }
-        // Skip broken markets (expired LP/PT tokens with bogus APYs)
-        if (sApy > 50 || bApy > 50) continue;
+        // Skip broken/abnormal markets (bogus APYs > 100% daily are not real)
+        if (sApy > 100 || bApy > 100) {
+          if (bApy > 1000) console.log(`  ⚠️ Skipping broken market: ${m.collateralAsset?.symbol}->${symbol} borrow ${(bApy).toFixed(0)}%`);
+          continue;
+        }
         if (sApy > 0) {
           if (!supplyMap[symbol]) supplyMap[symbol] = {};
           supplyMap[symbol][cid] = Math.max(supplyMap[symbol][cid] || 0, sApy);

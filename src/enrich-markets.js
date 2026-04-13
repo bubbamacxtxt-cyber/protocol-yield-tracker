@@ -304,14 +304,23 @@ async function main() {
       });
       const data = await res.json();
       const items = data?.data?.markets?.items || [];
-      morphoMarkets[chain.toLowerCase()] = items.map(m => ({
-        loanAddr: m.loanAsset?.address?.toLowerCase(),
-        collateralAddr: m.collateralAsset?.address?.toLowerCase(),
-        marketId: m.marketId,
-        dailyBorrowApy: m.state?.dailyBorrowApy || 0,
-        hasDailyApy: (m.state?.dailyBorrowApy || 0) > 0 || (m.state?.dailySupplyApy || 0) > 0
-      })).sort((a, b) => (a.dailyBorrowApy || 0) - (b.dailyBorrowApy || 0));
-      // Sort: normal rates first (lowest borrow APY), broken markets last
+      morphoMarkets[chain.toLowerCase()] = items
+        .filter(m => {
+          // Skip markets with abnormal APYs (>100% daily = broken/illiquid market)
+          const dailyBorrow = (m.state?.dailyBorrowApy || 0) * 100;
+          const dailySupply = (m.state?.dailySupplyApy || 0) * 100;
+          if (dailyBorrow > 100 || dailySupply > 100) {
+            if (dailyBorrow > 1000) console.log(`   ⚠️ Skipping broken market: ${m.collateralAsset?.symbol}->${m.loanAsset?.symbol} borrow ${dailyBorrow.toFixed(0)}%`);
+            return false;
+          }
+          return true;
+        })
+        .map(m => ({
+          loanAddr: m.loanAsset?.address?.toLowerCase(),
+          collateralAddr: m.collateralAsset?.address?.toLowerCase(),
+          marketId: m.marketId,
+          dailyBorrowApy: m.state?.dailyBorrowApy || 0
+        }))
       console.log('   ' + chain + ': ' + items.length + ' markets');
     } catch (e) {
       console.log('   ' + chain + ': failed - ' + e.message);
