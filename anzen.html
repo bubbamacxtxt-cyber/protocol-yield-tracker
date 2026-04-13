@@ -309,7 +309,7 @@ function resolveFieldKey(key) {
 const WHALE_NAME = 'Anzen';
 let WHALE_DATA = [];
 let positions = [];
-const WHALE_VAULTS = {};
+let WHALE_VAULTS = {};
 
 // Pre-compute bonus_total and enrich positions
 async function loadData() {
@@ -320,14 +320,18 @@ async function loadData() {
     WHALE_DATA = data.whales[WHALE_NAME]?.positions || [];
     WHALE_DATA.forEach(p => { p.bonus_total = (p.bonus_supply || 0) + (p.bonus_borrow || 0); });
     positions = WHALE_DATA;
+    WHALE_VAULTS = data.whales[WHALE_NAME]?.vaults || {};
+    protocolCol = COLUMNS.find(c => c.key === 'protocol');
+    chains = [...new Set(positions.map(p => p.chain))].sort();
+    protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
   } catch (e) {
     document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
   }
 }
 
-const protocolCol = COLUMNS.find(c => c.key === 'protocol');
-const chains = [...new Set(positions.map(p => p.chain))].sort();
-const protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
+let protocolCol = COLUMNS.find(c => c.key === 'protocol');
+let chains = [...new Set(positions.map(p => p.chain))].sort();
+let protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
 
 // ═══════════════════════════════════════════════════════════════
 // FORMATTERS — shared by table and cards
