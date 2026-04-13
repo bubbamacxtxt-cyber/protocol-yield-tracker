@@ -324,6 +324,7 @@ async function loadData() {
     protocolCol = COLUMNS.find(c => c.key === 'protocol');
     chains = [...new Set(positions.map(p => p.chain))].sort();
     protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
+    updateView();
   } catch (e) {
     document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
   }
