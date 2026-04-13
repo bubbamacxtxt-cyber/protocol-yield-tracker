@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-04-13T11:23:36.959Z",
+  "generated_at": "2026-04-13T11:35:03.095Z",
   "summary": {
-    "total_positions": 132,
-    "total_value": 666072875.8482401,
-    "total_assets": 1955133968.9482422,
+    "total_positions": 133,
+    "total_value": 666038910.1643775,
+    "total_assets": 1955100003.2643795,
     "total_debt": 1289061093.1399999,
     "total_whales": 11,
     "total_wallets": 58,
-    "total_active": 43,
+    "total_active": 44,
     "chains": [
       "eth",
       "mnt",
@@ -38,6 +38,7 @@
       "Aave Horizon USDC",
       "Maple Institutional",
       "Aave USDC",
+      "Euler Sentora USDC",
       "Cap stcUSD",
       "infinifiUSD Autopool",
       "Aave Horizon RLUSD",
@@ -4519,7 +4520,7 @@
         "0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580"
       ],
       "total_wallets": 9,
-      "active_wallets": 13,
+      "active_wallets": 14,
       "positions": [
         {
           "wallet": "0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f",
@@ -4552,7 +4553,8 @@
           "bucket_weeks": 4,
           "underlying": "USDC",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 8.5
         },
         {
           "wallet": "0xe919C66475f2F30d285c768853E6B5b23ef181Cf",
@@ -4585,7 +4587,8 @@
           "bucket_weeks": 1,
           "underlying": "USDC",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 6.25
         },
         {
           "wallet": "0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE",
@@ -4596,16 +4599,16 @@
           "strategy": "rwa",
           "yield_source": "sentora",
           "health_rate": null,
-          "net_usd": 20210583.449444,
-          "asset_usd": 20210583.449444,
+          "net_usd": 20210644.003987,
+          "asset_usd": 20210644.003987,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "senPYUSDmain",
               "real_symbol": "senPYUSDmain",
-              "amount": 20210583.449444,
+              "amount": 20210644.003987,
               "price_usd": 1,
-              "value_usd": 20210583.449444
+              "value_usd": 20210644.003987
             }
           ],
           "borrow": [],
@@ -4618,7 +4621,8 @@
           "bucket_weeks": 1,
           "underlying": "senPYUSDmain",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 5.87
         },
         {
           "wallet": "0xd880D7C5CaFdbE2AEc281250995abF612235e563",
@@ -4629,16 +4633,16 @@
           "strategy": "lend",
           "yield_source": "spark",
           "health_rate": null,
-          "net_usd": 19608767.877149,
-          "asset_usd": 19608767.877149,
+          "net_usd": 19528314.99549,
+          "asset_usd": 19528314.99549,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "sUSDC",
               "real_symbol": "sUSDC",
-              "amount": 19608767.877149,
+              "amount": 19528314.99549,
               "price_usd": 1,
-              "value_usd": 19608767.877149
+              "value_usd": 19528314.99549
             }
           ],
           "borrow": [],
@@ -4651,7 +4655,8 @@
           "bucket_weeks": null,
           "underlying": "sUSDC",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 3.76
         },
         {
           "wallet": "0x9E5efC5F387D8661C1AFB2469B7EeF6972451852",
@@ -4684,7 +4689,8 @@
           "bucket_weeks": 4,
           "underlying": "USDC",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 5
         },
         {
           "wallet": "0x76D2E84009dAE457f8667D823c7c96e9A7c35B78",
@@ -4695,29 +4701,30 @@
           "strategy": "rwa",
           "yield_source": "morpho",
           "health_rate": null,
-          "net_usd": 4003655.502506,
-          "asset_usd": 4003655.502506,
+          "net_usd": 4003707.493896,
+          "asset_usd": 4003707.493896,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "steakUSDCinfinifi",
               "real_symbol": "steakUSDCinfinifi",
-              "amount": 4003655.502506,
+              "amount": 4003707.493896,
               "price_usd": 1,
-              "value_usd": 4003655.502506
+              "value_usd": 4003707.493896
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 6.46,
-          "apy_avg": 5.18,
-          "apy_base": 6.46,
+          "apy_current": 6.45,
+          "apy_avg": 5.21,
+          "apy_base": 6.45,
           "apy_rewards": 0,
           "maturity": "2026-04-20",
           "bucket_weeks": 1,
           "underlying": "steakUSDCinfinifi",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 6.45
         },
         {
           "wallet": "0x7E9AA426abC2D9006E8C9881754BAA00a392158d",
@@ -4728,16 +4735,16 @@
           "strategy": "rwa",
           "yield_source": "gho",
           "health_rate": null,
-          "net_usd": 1552979.908616,
-          "asset_usd": 1552979.908616,
+          "net_usd": 1552997.737474,
+          "asset_usd": 1552997.737474,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "sGHO",
               "real_symbol": "sGHO",
-              "amount": 1552979.908616,
+              "amount": 1552997.737474,
               "price_usd": 1,
-              "value_usd": 1552979.908616
+              "value_usd": 1552997.737474
             }
           ],
           "borrow": [],
@@ -4750,7 +4757,8 @@
           "bucket_weeks": 1,
           "underlying": "sGHO",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 5.09
         },
         {
           "wallet": "0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032",
@@ -4761,16 +4769,16 @@
           "strategy": "lend",
           "yield_source": "aave",
           "health_rate": null,
-          "net_usd": 1066715.428332,
-          "asset_usd": 1066715.428332,
+          "net_usd": 1066720.795304,
+          "asset_usd": 1066720.795304,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 1066715.428332,
+              "amount": 1066720.795304,
               "price_usd": 1,
-              "value_usd": 1066715.428332
+              "value_usd": 1066720.795304
             }
           ],
           "borrow": [],
@@ -4783,7 +4791,8 @@
           "bucket_weeks": null,
           "underlying": "USDC",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 2.16
         },
         {
           "wallet": "0xF56E946e92FeF6a050F482C560b5f8DcCB8163B3",
@@ -4794,29 +4803,30 @@
           "strategy": "rwa",
           "yield_source": "maple",
           "health_rate": null,
-          "net_usd": 1002494.821279,
-          "asset_usd": 1002494.821279,
+          "net_usd": 1002517.582624,
+          "asset_usd": 1002517.582624,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "MPLhysUSDC1",
               "real_symbol": "MPLhysUSDC1",
-              "amount": 1002494.821279,
+              "amount": 1002517.582624,
               "price_usd": 1,
-              "value_usd": 1002494.821279
+              "value_usd": 1002517.582624
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_current": 5.43,
-          "apy_avg": 5.38,
+          "apy_avg": 5.37,
           "apy_base": 5.43,
           "apy_rewards": 0,
           "maturity": "2026-05-11",
           "bucket_weeks": 4,
           "underlying": "MPLhysUSDC1",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 5.43
         },
         {
           "wallet": "0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580",
@@ -4827,16 +4837,16 @@
           "strategy": "lend",
           "yield_source": "aave",
           "health_rate": null,
-          "net_usd": 640029.513296,
-          "asset_usd": 640029.513296,
+          "net_usd": 640032.903268,
+          "asset_usd": 640032.903268,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 640029.513296,
+              "amount": 640032.903268,
               "price_usd": 1,
-              "value_usd": 640029.513296
+              "value_usd": 640032.903268
             }
           ],
           "borrow": [],
@@ -4849,7 +4859,42 @@
           "bucket_weeks": null,
           "underlying": "USDC",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 2.32
+        },
+        {
+          "wallet": "0x6FBc446f25Ab5141C4F7E7711E52DFc0AdA407A5",
+          "chain": "eth",
+          "protocol_name": "Euler Sentora USDC",
+          "protocol_id": "euler-sentora-usdc",
+          "position_type": "Liquid",
+          "strategy": "rwa",
+          "yield_source": "euler",
+          "health_rate": null,
+          "net_usd": 33928.87586,
+          "asset_usd": 33928.87586,
+          "debt_usd": 0,
+          "supply": [
+            {
+              "symbol": "USDC",
+              "real_symbol": "USDC",
+              "amount": 33928.87586,
+              "price_usd": 1,
+              "value_usd": 33928.87586
+            }
+          ],
+          "borrow": [],
+          "rewards": [],
+          "apy_current": 3.76,
+          "apy_avg": 3.77,
+          "apy_base": 3.76,
+          "apy_rewards": 0,
+          "maturity": null,
+          "bucket_weeks": null,
+          "underlying": "USDC",
+          "paused": false,
+          "manual": true,
+          "apy_net": 3.76
         },
         {
           "wallet": "0xe945de0D08E2F39B0740FE2d6e50FE2Bb9751eA4",
@@ -4860,29 +4905,30 @@
           "strategy": "rwa",
           "yield_source": "cap",
           "health_rate": null,
-          "net_usd": 5717.914728,
-          "asset_usd": 5717.914728,
+          "net_usd": 5717.994551,
+          "asset_usd": 5717.994551,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "stcUSD",
               "real_symbol": "stcUSD",
-              "amount": 5717.914728,
+              "amount": 5717.994551,
               "price_usd": 1,
-              "value_usd": 5717.914728
+              "value_usd": 5717.994551
             }
           ],
           "borrow": [],
           "rewards": [],
           "apy_current": 5.42,
-          "apy_avg": 5.11,
+          "apy_avg": 5.12,
           "apy_base": 5.42,
           "apy_rewards": 0,
           "maturity": "2026-04-14",
           "bucket_weeks": 1,
           "underlying": "stcUSD",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 5.42
         },
         {
           "wallet": "0x92c3A5f226A47a44aD73f04663b305372cc665bf",
@@ -4893,29 +4939,30 @@
           "strategy": "rwa",
           "yield_source": "tokemak",
           "health_rate": null,
-          "net_usd": 4936.008226,
-          "asset_usd": 4936.008226,
+          "net_usd": 4936.055012,
+          "asset_usd": 4936.055012,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "infinifiUSD",
               "real_symbol": "infinifiUSD",
-              "amount": 4936.008226,
+              "amount": 4936.055012,
               "price_usd": 1,
-              "value_usd": 4936.008226
+              "value_usd": 4936.055012
             }
           ],
           "borrow": [],
           "rewards": [],
-          "apy_current": 4.8,
-          "apy_avg": 5.04,
-          "apy_base": 4.8,
+          "apy_current": 4.57,
+          "apy_avg": 5.06,
+          "apy_base": 4.57,
           "apy_rewards": 0,
           "maturity": "2026-04-20",
           "bucket_weeks": 1,
           "underlying": "infinifiUSD",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 4.57
         },
         {
           "wallet": "0xBE2B5838eb9Eedb637EDe5dF8Ac43b73b4482Ae8",
@@ -4926,16 +4973,16 @@
           "strategy": "lend",
           "yield_source": "aave",
           "health_rate": null,
-          "net_usd": 209.382617,
-          "asset_usd": 209.382617,
+          "net_usd": 209.383311,
+          "asset_usd": 209.383311,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "RLUSD",
               "real_symbol": "RLUSD",
-              "amount": 209.382617,
+              "amount": 209.383311,
               "price_usd": 1,
-              "value_usd": 209.382617
+              "value_usd": 209.383311
             }
           ],
           "borrow": [],
@@ -4948,7 +4995,8 @@
           "bucket_weeks": 1,
           "underlying": "RLUSD",
           "paused": false,
-          "manual": true
+          "manual": true,
+          "apy_net": 4.22
         }
       ],
       "is_multi_vault": false,
@@ -9709,7 +9757,8 @@
           "asset_type": "Institutional Blended Note",
           "financing_type": "Asset Backed",
           "deal_type": "Institutional Blended Note",
-          "preference": "Senior"
+          "preference": "Senior",
+          "apy_net": 5
         },
         {
           "wallet": "off-chain",
@@ -9746,7 +9795,8 @@
           "asset_type": "Litigation Finance",
           "financing_type": "Asset Backed",
           "deal_type": "Structured Notes",
-          "preference": "Senior"
+          "preference": "Senior",
+          "apy_net": 13
         },
         {
           "wallet": "off-chain",
@@ -9783,7 +9833,8 @@
           "asset_type": "SMB Financing",
           "financing_type": "Asset Backed",
           "deal_type": "Amortizing",
-          "preference": "Junior"
+          "preference": "Junior",
+          "apy_net": 16.75
         },
         {
           "wallet": "off-chain",
@@ -9820,7 +9871,8 @@
           "asset_type": "SMB Financing",
           "financing_type": "Asset Backed",
           "deal_type": "Amortizing",
-          "preference": "Junior"
+          "preference": "Junior",
+          "apy_net": 20
         },
         {
           "wallet": "off-chain",
@@ -9857,7 +9909,8 @@
           "asset_type": "SMB Financing",
           "financing_type": "Asset Backed",
           "deal_type": "Amortizing",
-          "preference": "Senior"
+          "preference": "Senior",
+          "apy_net": 13
         }
       ],
       "is_multi_vault": false,
@@ -9880,16 +9933,16 @@
           "strategy": "rwa",
           "yield_source": "adaptive",
           "health_rate": null,
-          "net_usd": 1372725.9980524532,
-          "asset_usd": 1372725.9980524532,
+          "net_usd": 1374417.8499298575,
+          "asset_usd": 1374417.8499298575,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 1372725.9980524532,
+              "amount": 1374417.8499298575,
               "price_usd": 1,
-              "value_usd": 1372725.9980524532
+              "value_usd": 1374417.8499298575
             }
           ],
           "borrow": [],
@@ -9905,7 +9958,8 @@
           "underlying": "USDC",
           "paused": false,
           "manual": true,
-          "asset_type": "HF Trading"
+          "asset_type": "HF Trading",
+          "apy_net": 7.46
         },
         {
           "wallet": "off-chain",
@@ -9941,7 +9995,8 @@
           "underlying": "USDC",
           "paused": false,
           "manual": true,
-          "asset_type": "Private Credit & DeFi"
+          "asset_type": "Private Credit & DeFi",
+          "apy_net": 7.45
         },
         {
           "wallet": "off-chain",
@@ -9952,16 +10007,16 @@
           "strategy": "rwa",
           "yield_source": "fasanara",
           "health_rate": null,
-          "net_usd": 750283.8261944128,
-          "asset_usd": 750283.8261944128,
+          "net_usd": 750986.3171128747,
+          "asset_usd": 750986.3171128747,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 750283.8261944128,
+              "amount": 750986.3171128747,
               "price_usd": 1,
-              "value_usd": 750283.8261944128
+              "value_usd": 750986.3171128747
             }
           ],
           "borrow": [],
@@ -9977,7 +10032,8 @@
           "underlying": "USDC",
           "paused": false,
           "manual": true,
-          "asset_type": "Basis Trading"
+          "asset_type": "Basis Trading",
+          "apy_net": 0
         },
         {
           "wallet": "off-chain",
@@ -9988,16 +10044,16 @@
           "strategy": "rwa",
           "yield_source": "sky",
           "health_rate": null,
-          "net_usd": 226978.91589714083,
-          "asset_usd": 226978.91589714083,
+          "net_usd": 236980.87465450467,
+          "asset_usd": 236980.87465450467,
           "debt_usd": 0,
           "supply": [
             {
               "symbol": "USDC",
               "real_symbol": "USDC",
-              "amount": 226978.91589714083,
+              "amount": 236980.87465450467,
               "price_usd": 1,
-              "value_usd": 226978.91589714083
+              "value_usd": 236980.87465450467
             }
           ],
           "borrow": [],
@@ -10013,7 +10069,8 @@
           "underlying": "USDC",
           "paused": false,
           "manual": true,
-          "asset_type": "DeFi"
+          "asset_type": "DeFi",
+          "apy_net": 0
         }
       ],
       "is_multi_vault": false,

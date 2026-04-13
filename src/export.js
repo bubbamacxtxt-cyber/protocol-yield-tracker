@@ -127,7 +127,16 @@ function main() {
 
         // Merge manual positions if they exist for this whale
         if (manualPositions[name]) {
-            positions.push(...manualPositions[name]);
+            for (const mp of manualPositions[name]) {
+                // Calculate apy_net for manual positions (they have apy_base but no token data)
+                if (mp.apy_net == null && mp.apy_base != null) {
+                    const bonusSupply = mp.apy_rewards || 0;
+                    const baseYield = (mp.apy_base + bonusSupply) * (mp.asset_usd || 0);
+                    const costYield = 0; // Manual positions typically have no borrow
+                    mp.apy_net = mp.net_usd > 0 ? baseYield / mp.net_usd : mp.apy_base;
+                }
+                positions.push(mp);
+            }
         }
 
         // If multi-vault, build vault breakdown
@@ -160,15 +169,23 @@ function main() {
     }
 
     // Add manual-only whales (no on-chain wallets, entirely manual positions)
-    for (const [name, positions] of Object.entries(manualPositions)) {
-        if (!whales[name] && positions.length > 0) {
-            const uniqueWallets = [...new Set(positions.map(p => p.wallet))];
+    for (const [name, manualWhalePositions] of Object.entries(manualPositions)) {
+        if (!whales[name] && manualWhalePositions.length > 0) {
+            // Calculate apy_net for manual positions
+            for (const mp of manualWhalePositions) {
+                if (mp.apy_net == null && mp.apy_base != null) {
+                    const bonusSupply = mp.apy_rewards || 0;
+                    const baseYield = (mp.apy_base + bonusSupply) * (mp.asset_usd || 0);
+                    mp.apy_net = mp.net_usd > 0 ? baseYield / mp.net_usd : mp.apy_base;
+                }
+            }
+            const uniqueWallets = [...new Set(manualWhalePositions.map(p => p.wallet))];
             whales[name] = {
                 name,
                 wallets: uniqueWallets,
                 total_wallets: uniqueWallets.length,
                 active_wallets: uniqueWallets.length,
-                positions,
+                positions: manualWhalePositions,
                 is_multi_vault: false,
                 vaults: null
             };
