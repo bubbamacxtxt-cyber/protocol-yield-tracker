@@ -305,15 +305,25 @@ function resolveFieldKey(key) {
 // ═══════════════════════════════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════════════════════════════
-const WHALE_DATA = [{"wallet":"off-chain","chain":"eth","protocol_name":"Adaptive Frontier","protocol_id":"adaptive-frontier","position_type":"Illiquid","strategy":"rwa","yield_source":"adaptive","health_rate":null,"net_usd":1374417.8499298575,"asset_usd":1374417.8499298575,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":1374417.8499298575,"price_usd":1,"value_usd":1374417.8499298575}],"borrow":[],"rewards":[],"apy_current":7.46,"apy_gross":8.32,"apy_avg":7.46,"apy_base":7.46,"apy_rewards":0,"apy_fee":10,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"HF Trading","apy_net":7.46},{"wallet":"off-chain","chain":"eth","protocol_name":"RockawayX","protocol_id":"rockawayx","position_type":"Illiquid","strategy":"rwa","yield_source":"rockawayx","health_rate":null,"net_usd":1005629.9857711309,"asset_usd":1005629.9857711309,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":1005629.9857711309,"price_usd":1,"value_usd":1005629.9857711309}],"borrow":[],"rewards":[],"apy_current":7.45,"apy_gross":8.31,"apy_avg":7.45,"apy_base":7.45,"apy_rewards":0,"apy_fee":10,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"Private Credit & DeFi","apy_net":7.45},{"wallet":"off-chain","chain":"eth","protocol_name":"Fasanara Digital","protocol_id":"fasanara-digital","position_type":"Illiquid","strategy":"rwa","yield_source":"fasanara","health_rate":null,"net_usd":750986.3171128747,"asset_usd":750986.3171128747,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":750986.3171128747,"price_usd":1,"value_usd":750986.3171128747}],"borrow":[],"rewards":[],"apy_current":0,"apy_gross":0,"apy_avg":0,"apy_base":0,"apy_rewards":0,"apy_fee":20,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"Basis Trading","apy_net":0},{"wallet":"off-chain","chain":"eth","protocol_name":"Sky","protocol_id":"sky","position_type":"Illiquid","strategy":"rwa","yield_source":"sky","health_rate":null,"net_usd":236980.87465450467,"asset_usd":236980.87465450467,"debt_usd":0,"supply":[{"symbol":"USDC","real_symbol":"USDC","amount":236980.87465450467,"price_usd":1,"value_usd":236980.87465450467}],"borrow":[],"rewards":[],"apy_current":0,"apy_gross":0,"apy_avg":0,"apy_base":0,"apy_rewards":0,"apy_fee":0,"maturity":null,"bucket_weeks":null,"underlying":"USDC","paused":false,"manual":true,"asset_type":"DeFi","apy_net":0}];
+const WHALE_NAME = 'Pareto';
+let WHALE_DATA = [];
+let positions = [];
 const WHALE_VAULTS = {};
 
 // Pre-compute bonus_total and enrich positions
-WHALE_DATA.forEach(p => {
-  p.bonus_total = (p.bonus_supply || 0) + (p.bonus_borrow || 0);
-});
+async function loadData() {
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    WHALE_DATA = data.whales[WHALE_NAME]?.positions || [];
+    WHALE_DATA.forEach(p => { p.bonus_total = (p.bonus_supply || 0) + (p.bonus_borrow || 0); });
+    positions = WHALE_DATA;
+  } catch (e) {
+    document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
+  }
+}
 
-const positions = WHALE_DATA;
 const protocolCol = COLUMNS.find(c => c.key === 'protocol');
 const chains = [...new Set(positions.map(p => p.chain))].sort();
 const protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
@@ -340,9 +350,7 @@ function filterVault(vault) {
     if (WHALE_VAULTS && WHALE_VAULTS[vault]) {
         const walletSet = new Set(WHALE_VAULTS[vault].wallets.map(w => w.toLowerCase()));
         const filtered = positions.filter(p => walletSet.has(p.wallet.toLowerCase()));
-        updateView();
     } else {
-        updateView();
     }
 }
 
@@ -625,8 +633,7 @@ function showDetail(p) {
 // INIT
 // ═══════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
-    buildFilters();
-    updateView();
+  loadData();
     ['chainFilter', 'protoFilter', 'searchFilter'].forEach(id => {
         document.getElementById(id).addEventListener('input', updateView);
         document.getElementById(id).addEventListener('change', updateView);
