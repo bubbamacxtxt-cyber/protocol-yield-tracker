@@ -444,7 +444,7 @@
           ],
           "borrow": [
             {
-              "symbol": "USD₮0",
+              "symbol": "USD\u20ae0",
               "real_symbol": "USDT0",
               "real_name": "USDT0",
               "address": "0x0200c29006150606b650577bbe7b6248f58470c1",
@@ -559,7 +559,7 @@
           ],
           "borrow": [
             {
-              "symbol": "USD₮0",
+              "symbol": "USD\u20ae0",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
@@ -617,7 +617,7 @@
           ],
           "borrow": [
             {
-              "symbol": "USD₮0",
+              "symbol": "USD\u20ae0",
               "real_symbol": "USDT0",
               "real_name": "USDT0",
               "address": "0x0200c29006150606b650577bbe7b6248f58470c1",
@@ -2248,7 +2248,7 @@
           ],
           "borrow": [
             {
-              "symbol": "USD₮0",
+              "symbol": "USD\u20ae0",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
@@ -7371,7 +7371,7 @@
           ],
           "borrow": [
             {
-              "symbol": "USD₮0",
+              "symbol": "USD\u20ae0",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
@@ -7850,7 +7850,7 @@
           ],
           "borrow": [
             {
-              "symbol": "USD₮0",
+              "symbol": "USD\u20ae0",
               "real_symbol": "USDT",
               "real_name": "Tether USD",
               "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
@@ -8297,7 +8297,7 @@
               ],
               "borrow": [
                 {
-                  "symbol": "USD₮0",
+                  "symbol": "USD\u20ae0",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
@@ -9494,7 +9494,7 @@
               ],
               "borrow": [
                 {
-                  "symbol": "USD₮0",
+                  "symbol": "USD\u20ae0",
                   "real_symbol": "USDT",
                   "real_name": "Tether USD",
                   "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
@@ -9729,7 +9729,7 @@
           "protocol_id": "mmz-blended-note",
           "position_type": "Illiquid",
           "strategy": "rwa",
-          "yield_source": "institutional",
+          "yield_source": "Institutional",
           "health_rate": null,
           "net_usd": 5109592.227075031,
           "asset_usd": 5109592.227075031,
@@ -9767,7 +9767,7 @@
           "protocol_id": "hlf20270521zzz1300",
           "position_type": "Illiquid",
           "strategy": "rwa",
-          "yield_source": "litigation",
+          "yield_source": "Litigation",
           "health_rate": null,
           "net_usd": 1250000,
           "asset_usd": 1250000,
@@ -9805,7 +9805,7 @@
           "protocol_id": "byz20260506zzz1675",
           "position_type": "Illiquid",
           "strategy": "rwa",
-          "yield_source": "smb",
+          "yield_source": "SMB Financing",
           "health_rate": null,
           "net_usd": 1130000,
           "asset_usd": 1130000,
@@ -9843,7 +9843,7 @@
           "protocol_id": "icm260627bbb2000",
           "position_type": "Illiquid",
           "strategy": "rwa",
-          "yield_source": "smb",
+          "yield_source": "SMB Financing",
           "health_rate": null,
           "net_usd": 997172,
           "asset_usd": 997172,
@@ -9881,7 +9881,7 @@
           "protocol_id": "spr20260501zzz1300",
           "position_type": "Illiquid",
           "strategy": "rwa",
-          "yield_source": "smb",
+          "yield_source": "SMB Financing",
           "health_rate": null,
           "net_usd": 729914,
           "asset_usd": 729914,
