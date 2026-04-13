@@ -419,7 +419,9 @@ function renderTable(data) {
       }
       if (c.compute_class) style.push(c.compute_class(p));
       const align = c.align === 'right' ? 'text-align:right' : '';
-      return `<td style="${style.join(';')};${align}">${display}</td>`;
+      const allStyles = [...style];
+      if (align) allStyles.push(align);
+      return `<td style="${allStyles.join(';')}">${display}</td>`;
     }).join('');
 
     const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
