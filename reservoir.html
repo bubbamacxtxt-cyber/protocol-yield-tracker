@@ -37,139 +37,68 @@ body {
 
 .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
 
-.header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 8px;
-}
+.header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
 
 .home-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-secondary); text-decoration: none;
+  font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
-
 .home-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
 
 h1 {
-  font-size: 28px;
-  font-weight: 700;
-  background: var(--gradient-teal);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 28px; font-weight: 700;
+  background: var(--gradient-teal); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
 }
-
 .subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 30px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px; margin-bottom: 30px;
 }
-
 .card {
-  background: var(--gradient-blue);
-  border: 1px solid #5a8ac4;
-  border-top: 1px solid rgba(140,180,230,0.4);
-  border-bottom: 1px solid #1a3a6a;
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--gradient-blue); border: 1px solid #5a8ac4;
+  border-top: 1px solid rgba(140,180,230,0.4); border-bottom: 1px solid #1a3a6a;
+  border-radius: 12px; padding: 20px;
   inset-shadow: 0 1px 0 rgba(200,220,255,0.25), 0 2px 2px rgba(100,160,230,0.1), 0 -2px 6px rgba(0,0,0,0.5);
   box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-
-.card-label {
-  color: var(--text-secondary);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.card-value {
-  font-size: 28px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.card-label { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .card-value.green { color: var(--accent-green); }
 .card-value.red { color: #f85149; }
 .card-value.blue { color: var(--accent-blue); }
 .card-value.purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
 .card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
 
 .proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.proto-chip {
-  padding: 6px 12px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-}
+.proto-chip { padding: 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
 .proto-chip strong { color: var(--accent-blue); }
 
-.filters {
-  display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
-}
+.filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
 .filter-group { display: flex; align-items: center; gap: 6px; }
 .filter-group label { color: var(--text-secondary); font-size: 13px; }
 .filter-group select, .filter-group input {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 13px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 13px;
 }
-
 .download-btn {
-  margin-left: auto;
-  padding: 8px 16px;
-  background: var(--gradient-btn);
-  border: 1px solid #2d4a6f;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  transition: background 0.2s, border-color 0.2s;
+  margin-left: auto; padding: 8px 16px; background: var(--gradient-btn);
+  border: 1px solid #2d4a6f; border-radius: 8px; color: white; cursor: pointer;
+  font-size: 13px; font-weight: 600; transition: background 0.2s, border-color 0.2s;
 }
-.download-btn:hover {
-  background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%);
-  border-color: #3d6a9f;
-}
+.download-btn:hover { background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%); border-color: #3d6a9f; }
 
 .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th {
-  background: var(--bg-secondary);
-  padding: 12px 16px;
-  text-align: left;
-  color: var(--text-secondary);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: sticky;
-  top: 0;
+  background: var(--bg-secondary); padding: 12px 16px; text-align: left;
+  color: var(--text-secondary); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 1px; position: sticky; top: 0;
 }
 th:nth-child(n+9) { text-align: right; }
 td { padding: 12px 16px; border-top: 1px solid #21262d; }
@@ -180,16 +109,9 @@ tr:hover td { background: var(--bg-secondary); }
 .badge-loop { background: #1f6feb22; color: var(--accent-blue); }
 .badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
-
 .vault-tab {
-  padding: 8px 16px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  font-size: 13px;
-  cursor: pointer;
-  font-family: inherit;
+  padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-secondary); font-size: 13px; cursor: pointer; font-family: inherit;
 }
 .vault-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
 .vault-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
@@ -216,367 +138,401 @@ tr:hover td { background: var(--bg-secondary); }
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <a class="home-btn" href="index.html">← Home</a>
-        <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
-        <h1>Reservoir</h1>
+  <div class="header">
+    <a class="home-btn" href="index.html">← Home</a>
+    <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
+    <h1>Reservoir</h1>
+  </div>
+  <p class="subtitle">Wallet positions and yield strategies</p>
+  <div class="cards" id="summaryCards"></div>
+  <div class="proto-summary" id="protoSummary"></div>
+  <div id="vaultTabs" style="display:none;margin-bottom:16px;">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
     </div>
-    <p class="subtitle">Wallet positions and yield strategies</p>
-
-    <div class="cards" id="summaryCards"></div>
-    <div class="proto-summary" id="protoSummary"></div>
-    <div id="vaultTabs" style="display:none;margin-bottom:16px;">
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
-        </div>
-    </div>
-
-    <div class="filters">
-        <div class="filter-group">
-            <label>Chain:</label>
-            <select id="chainFilter"><option value="all">All chains</option></select>
-        </div>
-        <div class="filter-group">
-            <label>Protocol:</label>
-            <select id="protoFilter"><option value="all">All protocols</option></select>
-        </div>
-        <div class="filter-group">
-            <label>Search:</label>
-            <input type="text" id="searchFilter" placeholder="Token, wallet, or protocol...">
-        </div>
-        <button class="download-btn" onclick="downloadXLSX()">↓ Download XLSX</button>
-    </div>
-
-    <div class="table-wrap">
-        <table id="positionsTable">
-            <thead>
-                <tr>
-                    <th>Wallet</th>
-                    <th>Chain</th>
-                    <th>Protocol</th>
-                    <th>Strategy</th>
-                    <th>Supply Tokens</th>
-                    <th>Borrow Tokens</th>
-                    <th>Supply USD</th>
-                    <th>Borrow USD</th>
-                    <th>Net USD</th>
-                    <th>Base APY</th>
-                    <th>Bonus APY</th>
-                    <th>Cost APY</th>
-                    <th>Net APY</th>
-                    <th>Utilization</th>
-                    <th>Health Factor</th>
-                </tr>
-            </thead>
-            <tbody id="positionsBody"></tbody>
-        </table>
-    </div>
+  </div>
+  <div class="filters">
+    <div class="filter-group"><label>Chain:</label><select id="chainFilter"><option value="all">All chains</option></select></div>
+    <div class="filter-group"><label>Protocol:</label><select id="protoFilter"><option value="all">All protocols</option></select></div>
+    <div class="filter-group"><label>Search:</label><input type="text" id="searchFilter" placeholder="Token, wallet, or protocol..."></div>
+    <button class="download-btn" onclick="downloadXLSX()">&#8595; Download XLSX</button>
+  </div>
+  <div class="table-wrap">
+    <table id="positionsTable">
+      <thead><tr id="tableHeader"></tr></thead>
+      <tbody id="positionsBody"></tbody>
+    </table>
+  </div>
 </div>
-
 <script>
+// ═══════════════════════════════════════════════════════════════
+// SINGLE SOURCE OF TRUTH — columns define field mappings
+// Table and cards both derive from this config
+// ═══════════════════════════════════════════════════════════════
+const COLUMNS = [
+  { key: 'wallet',     label: 'Wallet',        field: 'wallet',          render: v => '<a href="https://debank.com/profile/' + v + '" target="_blank" style="color:var(--accent-blue);text-decoration:none">' + shortWallet(v) + '</a>', sortable: true },
+  { key: 'chain',      label: 'Chain',         field: 'chain',           render: v => (v || '').toUpperCase() },
+  { key: 'protocol',   label: 'Protocol',      field: 'protocol_name' },
+  { key: 'strategy',   label: 'Strategy',      field: 'strategy',        render: v => strategyBadge(v) },
+  { key: 'supply',     label: 'Supply Tokens', field: 'protocol_name' },
+  { key: 'borrow',     label: 'Borrow Tokens', field: 'borrow',          render: v => (v || []).map(t => t.symbol).filter(Boolean).join(', ') || '-' },
+  { key: 'supply_usd', label: 'Supply USD',    field: 'asset_usd',       format: 'usd_short', align: 'right' },
+  { key: 'borrow_usd', label: 'Borrow USD',    field: 'debt_usd',        format: 'usd_short', align: 'right' },
+  { key: 'net_usd',    label: 'Net USD',       field: 'net_usd',         format: 'usd_short', align: 'right', bold: true, color: 'green' },
+  { key: 'base_apy',   label: 'Base APY',      field: 'apy_base',        format: 'pct', align: 'right' },
+  { key: 'bonus_apy',  label: 'Bonus APY',     field: 'bonus_total',     format: 'bonus', align: 'right', color: 'green' },
+  { key: 'cost_apy',   label: 'Cost APY',      field: 'apy_cost',        format: 'pct', align: 'right' },
+  { key: 'net_apy',    label: 'Net APY',       field: 'apy_net',         format: 'pct', align: 'right', bold: true, color_dynamic: true },
+  { key: 'util',       label: 'Utilization',   field: '_computed',       compute: p => p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-', align: 'right' },
+  { key: 'health',     label: 'Health Factor',  field: 'health_rate',     render: v => v ? v.toFixed(2) : '-', compute_class: p => hfClass(p.health_rate), align: 'right' },
+];
+
+// Cards derive from same field keys as COLUMNS
+const CARDS = [
+  { label: 'Total Value', field: 'net_usd',    aggregate: 'sum',     format: 'usd_short', color: 'green', subtitle: d => d.length + ' positions' },
+  { label: 'Net APY',     field: 'apy_net',    aggregate: 'wavg',    weight: 'asset_usd', format: 'pct', color: 'blue', subtitle: () => 'weighted avg' },
+  { label: 'Utilization', field: '_computed',  aggregate: 'custom',  fn: (d) => { const s = d.reduce((a,p) => a + (p.asset_usd||0), 0); const b = d.reduce((a,p) => a + (Math.abs(p.debt_usd)||0), 0); return s > 0 ? (b/s*100).toFixed(1) + '%' : '0%'; }, subtitle: d => fmtShort(d.reduce((a,p) => a + (Math.abs(p.debt_usd)||0), 0)) + ' borrowed' },
+  { label: 'Health Factor', field: 'health_rate', aggregate: 'avg', filter: p => p.health_rate > 0, format: 'num', render_class: v => hfClass(v), color: 'purple', subtitle: d => { const avg = d.filter(p => p.health_rate > 0).reduce((s,p,_,a) => s + p.health_rate / a.length, 0); return avg >= 1.1 ? 'Safe' : '⚠️ Below 1.1'; } },
+  { label: 'Wallets',     field: 'wallet',     aggregate: 'count_unique', format: 'none', subtitle: () => 'active' },
+  { label: 'Top Protocol', field: 'protocol',  aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
+  { label: 'Top Chain',   field: 'chain',      aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', render: v => (v||'').toUpperCase(), subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
+  { label: 'Distribution', field: '_computed', aggregate: 'custom',  fn: (d) => { const chains = new Set(d.map(p => p.chain)).size; const protos = new Set(d.map(p => getFieldValue(p, COLUMNS.find(c => c.key === 'protocol')))).size; return chains + ' chains'; }, subtitle: d => { const protos = new Set(d.map(p => getFieldValue(p, COLUMNS.find(c => c.key === 'protocol')))).size; return protos + ' protocols'; } },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// FIELD RESOLUTION — shared by table AND cards
+// ═══════════════════════════════════════════════════════════════
+function getFieldValue(position, col) {
+  if (col.compute) return col.compute(position);
+  const val = position[col.field];
+  if ((val === undefined || val === null) && col.fallback) return position[col.fallback];
+  return val;
+}
+
+function resolveFieldKey(key) {
+  return COLUMNS.find(c => c.key === key);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
 const WHALE_DATA = [{"id":46,"wallet":"0x3063c5907faa10c01b242181aa689beb23d2bd65","chain":"eth","protocol_id":"euler2","protocol_name":"Euler","position_type":"Lending","strategy":"lend","yield_source":"Euler","health_rate":null,"net_usd":68706715.39,"asset_usd":68706715.39,"debt_usd":0,"position_index":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","debank_updated_at":"2026-04-11T12:43:05.000Z","scanned_at":"2026-04-11 17:56:50","supply":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"Ripple USD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":68727333.5930539,"price_usd":0.9996,"value_usd":68699842.6596167,"apy_base":1.54,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":1.54,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":1.54,"apy_reward":null},{"id":47,"wallet":"0x3063c5907faa10c01b242181aa689beb23d2bd65","chain":"eth","protocol_id":"euler2","protocol_name":"Euler","position_type":"Lending","strategy":"lend","yield_source":"Euler","health_rate":null,"net_usd":45855882.74,"asset_usd":45855882.74,"debt_usd":0,"position_index":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","debank_updated_at":"2026-04-11T12:43:05.000Z","scanned_at":"2026-04-11 17:56:50","supply":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"Paypal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":45860468.787646,"price_usd":0.9997,"value_usd":45846710.6470097,"apy_base":1.31347826086957,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":1.31347826086957,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":1.31347826086957,"apy_reward":null},{"id":50,"wallet":"0x289c204b35859bfb924b9c0759a4fe80f610671c","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":26930220.99,"asset_usd":26930220.99,"debt_usd":0,"position_index":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","debank_updated_at":"2026-04-11T16:53:55.000Z","scanned_at":"2026-04-11 17:56:51","supply":[{"symbol":"RLUSD","real_symbol":"RLUSD","real_name":"Ripple USD","address":"0x8292bb45bf1ee4d140127049757c2e0ff06317ed","amount":26938234.5920333,"price_usd":0.9996,"value_usd":26927459.2981965,"apy_base":2.45338060827862,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.45338060827862,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.45338060827862,"apy_reward":null},{"id":51,"wallet":"0x289c204b35859bfb924b9c0759a4fe80f610671c","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":26662796.9,"asset_usd":26662796.9,"debt_usd":0,"position_index":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","debank_updated_at":"2026-04-11T16:53:55.000Z","scanned_at":"2026-04-11 17:56:51","supply":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"Paypal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":26665425.369169,"price_usd":0.9997,"value_usd":26657425.7415583,"apy_base":4.78638857773226,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":4.78638857773226,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":4.78638857773226,"apy_reward":null},{"id":45,"wallet":"0x99a95a9e38e927486fc878f41ff8b118eb632b10","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":22189062.73,"asset_usd":22189062.73,"debt_usd":0,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","debank_updated_at":"2026-04-11T11:43:17.000Z","scanned_at":"2026-04-11 17:56:49","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":22197938.354171,"price_usd":0.999600159936026,"value_usd":22189062.7290794,"apy_base":9.84227045938491,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":9.84227045938491,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":9.84227045938491,"apy_reward":null},{"id":49,"wallet":"0x3063c5907faa10c01b242181aa689beb23d2bd65","chain":"plasma","protocol_id":"plasma_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"lend","yield_source":"Aave V3","health_rate":1.157920892373162e+59,"net_usd":10013445.8,"asset_usd":10013445.8,"debt_usd":0,"position_index":"0xb77e872a68c62cfc0dfb02c067ecc3da23b4bbf3","debank_updated_at":"2026-04-11T11:20:10.000Z","scanned_at":"2026-04-11 17:56:51","supply":[{"symbol":"GHO","real_symbol":"GHO","real_name":"GHO","address":"0xb77e872a68c62cfc0dfb02c067ecc3da23b4bbf3","amount":10017711.2396846,"price_usd":0.999574210282718,"value_usd":10013445.801248,"apy_base":1.29869565217391,"apy_base_source":"aave_supply","bonus_supply_apy":4.21977611549795,"bonus_supply_source":"aave:plasma(4.22%)","bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":1.29869565217391,"apy_cost":null,"bonus_supply":4.21977611549795,"bonus_borrow":null,"apy_net":5.51847176767186,"apy_reward":null},{"id":48,"wallet":"0x3063c5907faa10c01b242181aa689beb23d2bd65","chain":"mnt","protocol_id":"mnt_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"lend","yield_source":"Aave V3","health_rate":1.157920892373162e+59,"net_usd":2008785.8,"asset_usd":2008785.8,"debt_usd":0,"position_index":"0xfc421ad3c883bf9e7c4f42de845c4e4405799e73","debank_updated_at":"2026-04-11T11:20:10.000Z","scanned_at":"2026-04-11 17:56:50","supply":[{"symbol":"GHO","real_symbol":"GHO","real_name":"GHO","address":"0xfc421ad3c883bf9e7c4f42de845c4e4405799e73","amount":2009641.48481654,"price_usd":0.999574210282718,"value_usd":2008785.80013688,"apy_base":0.883333333333333,"apy_base_source":"aave_supply","bonus_supply_apy":4.62813372532396,"bonus_supply_source":"aave:mnt(4.63%)","bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":0.883333333333333,"apy_cost":null,"bonus_supply":4.62813372532396,"bonus_borrow":null,"apy_net":5.511467058657293,"apy_reward":null},{"id":44,"wallet":"0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":52604.97,"asset_usd":52604.97,"debt_usd":0,"position_index":"0x09d4214c03d01f49544c0448dbe3a27f768f2b34","debank_updated_at":"2026-04-11T02:32:01.000Z","scanned_at":"2026-04-11 17:56:49","supply":[{"symbol":"rUSD","real_symbol":"rUSD","real_name":"Reservoir Stablecoin","address":"0x09d4214c03d01f49544c0448dbe3a27f768f2b34","amount":52626.0075753078,"price_usd":0.999600159936026,"value_usd":52604.9655890721,"apy_base":6.08273700466972,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":6.08273700466972,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":6.0827370046697204,"apy_reward":null}];
 const WHALE_VAULTS = {};
 
-const positions = WHALE_DATA;
-const chains = [...new Set(positions.map(p => p.chain))].sort();
-const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+// Pre-compute bonus_total and enrich positions
+WHALE_DATA.forEach(p => { p.bonus_total = (p.bonus_supply || 0) + (p.bonus_borrow || 0); });
 
-// Build vault tabs if multi-vault whale
+const positions = WHALE_DATA;
+const protocolCol = COLUMNS.find(c => c.key === 'protocol');
+const chains = [...new Set(positions.map(p => p.chain))].sort();
+const protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
+
+// Build vault tabs
 if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
-    const tabsEl = document.getElementById('vaultTabs');
-    tabsEl.style.display = 'block';
-    const btns = tabsEl.querySelector('div');
-    for (const [vName, vData] of Object.entries(WHALE_VAULTS)) {
-        const btn = document.createElement('button');
-        btn.className = 'vault-tab';
-        btn.dataset.vault = vName;
-        btn.textContent = vName;
-        btn.onclick = () => filterVault(vName);
-        btns.appendChild(btn);
-    }
+  const tabsEl = document.getElementById('vaultTabs');
+  tabsEl.style.display = 'block';
+  const btns = tabsEl.querySelector('div');
+  for (const [vName] of Object.entries(WHALE_VAULTS)) {
+    const btn = document.createElement('button');
+    btn.className = 'vault-tab';
+    btn.dataset.vault = vName;
+    btn.textContent = vName;
+    btn.onclick = () => filterVault(vName);
+    btns.appendChild(btn);
+  }
 }
 
 let currentVault = 'all';
 function filterVault(vault) {
-    currentVault = vault;
-    document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
-    // Filter positions by vault wallets
-    if (WHALE_VAULTS && WHALE_VAULTS[vault]) {
-        const walletSet = new Set(WHALE_VAULTS[vault].wallets.map(w => w.toLowerCase()));
-        const filtered = positions.filter(p => walletSet.has(p.wallet.toLowerCase()));
-        renderTable(filtered);
-    } else {
-        renderTable(positions);
-    }
+  currentVault = vault;
+  document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
+  updateView();
 }
 
-function buildFilters() {
-    const chainEl = document.getElementById('chainFilter');
-    const protoEl = document.getElementById('protoFilter');
-    chains.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c; opt.textContent = c.toUpperCase();
-        chainEl.appendChild(opt);
-    });
-    protos.forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p; opt.textContent = p;
-        protoEl.appendChild(opt);
-    });
-}
-
+// ═══════════════════════════════════════════════════════════════
+// FORMATTERS — shared by table and cards
+// ═══════════════════════════════════════════════════════════════
 function fmt(n) {
-    if (n === null || n === undefined) return '-';
-    return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (n === null || n === undefined) return '-';
+  return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function fmtShort(n) {
-    if (n === null || n === undefined) return '-';
-    if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
-    if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
-    if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
-    return '$' + n.toFixed(2);
+  if (n === null || n === undefined) return '-';
+  if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+  if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+  if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n.toFixed(2);
+}
+
+function formatValue(val, format, render) {
+  if (render) return render(val);
+  switch (format) {
+    case 'usd_short': return fmtShort(val);
+    case 'usd': return fmt(val);
+    case 'pct': return val != null ? val.toFixed(2) + '%' : '-';
+    case 'bonus': return val > 0 ? '+' + val.toFixed(2) + '%' : '';
+    case 'num': return val != null ? val.toFixed(2) : '-';
+    default: return val ?? '-';
+  }
 }
 
 function hfClass(hf) {
-    if (!hf || hf === 0) return '';
-    if (hf >= 1.5) return 'hf-safe';
-    if (hf >= 1.1) return 'hf-warn';
-    return 'hf-danger';
+  if (!hf || hf === 0) return '';
+  if (hf >= 1.5) return 'hf-safe';
+  if (hf >= 1.1) return 'hf-warn';
+  return 'hf-danger';
 }
 
 function strategyBadge(s) {
-    if (!s) return '';
-    const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
-    return `<span class="badge ${cls}">${s}</span>`;
+  if (!s) return '';
+  const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
+  return '<span class="badge ' + cls + '">' + s + '</span>';
 }
 
 function shortWallet(addr) {
-    if (!addr) return '-';
-    return addr.slice(0, 6) + '...' + addr.slice(-4);
+  if (!addr) return '-';
+  return addr.slice(0, 6) + '...' + addr.slice(-4);
 }
 
-function shortAddr(addr) {
-    if (!addr) return '-';
-    return addr.slice(0, 8) + '...';
-}
-
+// ═══════════════════════════════════════════════════════════════
+// RENDER TABLE — driven entirely by COLUMNS config
+// ═══════════════════════════════════════════════════════════════
 function renderTable(data) {
-    const body = document.getElementById('positionsBody');
-    if (data.length === 0) {
-        body.innerHTML = '<tr><td colspan="15" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
-        return;
-    }
-    body.innerHTML = data.map(p => {
-        const supplyTokens = (p.supply || []).map(t => t.symbol).filter(Boolean).join(', ');
-        const borrowTokens = (p.borrow || []).map(t => t.symbol).filter(Boolean).join(', ');
-        const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
-        const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
-        const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
-        const bonusSupply = p.bonus_supply || 0;
-        const bonusBorrow = p.bonus_borrow || 0;
-        const bonusTotal = bonusSupply + bonusBorrow;
-        const bonusApy = bonusTotal > 0 ? '+' + bonusTotal.toFixed(2) + '%' : '';
-        const bonusDetail = bonusTotal > 0 ? `Supply +${bonusSupply.toFixed(2)}%\nBorrow +${bonusBorrow.toFixed(2)}%` : '';
-        const costApy = p.apy_cost != null ? p.apy_cost.toFixed(2) + '%' : '-';
-        const netApy = p.apy_net != null ? p.apy_net.toFixed(2) + '%' : '-';
-        const netColor = p.apy_net > 0 ? 'var(--accent-green)' : p.apy_net < 0 ? '#f85149' : 'var(--text-secondary)';
-        const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
-        return `<tr onclick="showDetail(${detailData})" style="cursor:pointer">
-            <td title="${p.wallet || ''}"><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet)}</a></td>
-            <td>${(p.chain || '').toUpperCase()}</td>
-            <td>${p.protocol_name || '-'}</td>
-            <td>${strategyBadge(p.strategy)}</td>
-            <td>${supplyTokens || '-'}</td>
-            <td>${borrowTokens || '-'}</td>
-            <td>${fmtShort(p.asset_usd)}</td>
-            <td>${fmtShort(p.debt_usd)}</td>
-            <td style="font-weight:600;color:var(--accent-green)">${fmtShort(p.net_usd)}</td>
-            <td>${baseApy}</td>
-            <td style="color:var(--accent-green)">${bonusApy}</td>
-            <td>${costApy}</td>
-            <td style="font-weight:600;color:${netColor}">${netApy}</td>
-            <td>${util}</td>
-            <td class="${hfClass(p.health_rate)}">${hf}</td>
-        </tr>`;
+  const header = document.getElementById('tableHeader');
+  header.innerHTML = COLUMNS.map(c => '<th>' + c.label + '</th>').join('');
+
+  const body = document.getElementById('positionsBody');
+  if (data.length === 0) {
+    body.innerHTML = '<tr><td colspan="' + COLUMNS.length + '" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
+    return;
+  }
+
+  body.innerHTML = data.map(p => {
+    const cells = COLUMNS.map(c => {
+      const val = getFieldValue(p, c);
+      const display = formatValue(val, c.format, c.render);
+      const style = [];
+      if (c.bold) style.push('font-weight:600');
+      if (c.color === 'green') style.push('color:var(--accent-green)');
+      if (c.color === 'blue') style.push('color:var(--accent-blue)');
+      if (c.color_dynamic) {
+        const nc = val > 0 ? 'var(--accent-green)' : val < 0 ? '#f85149' : 'var(--text-secondary)';
+        style.push('color:' + nc);
+      }
+      if (c.compute_class) style.push(c.compute_class(p));
+      const align = c.align === 'right' ? 'text-align:right' : '';
+      return '<td style="' + style.join(';') + ';' + align + '">' + display + '</td>';
     }).join('');
+
+    const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
+    return '<tr onclick="showDetail(' + detailData + ')" style="cursor:pointer">' + cells + '</tr>';
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER CARDS — derived from same field keys as COLUMNS
+// ═══════════════════════════════════════════════════════════════
+function renderCards(data) {
+  const cardsHtml = CARDS.map(card => {
+    let value, subtitle, topEntry = null;
+    if (card.aggregate === 'custom') {
+      value = card.fn(data);
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'sum') {
+      value = data.reduce((s, p) => s + (p[card.field] || 0), 0);
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'wavg') {
+      const wf = card.weight;
+      const tw = data.reduce((s, p) => s + (p[wf] || 0), 0);
+      value = tw > 0 ? data.reduce((s, p) => s + ((p[card.field] || 0) * (p[wf] || 0)), 0) / tw : 0;
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'avg') {
+      const filtered = card.filter ? data.filter(card.filter) : data;
+      value = filtered.length > 0 ? filtered.reduce((s, p) => s + (p[card.field] || 0), 0) / filtered.length : 0;
+      subtitle = card.subtitle(filtered.length > 0 ? filtered : data);
+    } else if (card.aggregate === 'count_unique') {
+      value = new Set(data.map(p => p[card.field])).size;
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'top') {
+      const col = resolveFieldKey(card.field);
+      const grouped = new Map();
+      data.forEach(p => {
+        const k = getFieldValue(p, col);
+        grouped.set(k, (grouped.get(k) || 0) + (p[card.sort_field] || 0));
+      });
+      const sorted = [...grouped.entries()].sort((a, b) => b[1] - a[1]);
+      topEntry = sorted[0];
+      value = topEntry ? (card.render ? card.render(topEntry[0]) : topEntry[0]) : '-';
+      subtitle = card.subtitle(data, topEntry ? { key: topEntry[0], sum: topEntry[1] } : null);
+    }
+
+    let display;
+    if (card.aggregate === 'top' && topEntry) {
+      display = value;
+    } else {
+      display = formatValue(value, card.format, card.render);
+    }
+
+    const renderClass = card.render_class ? card.render_class(value) : '';
+    const colorClass = card.color ? ' ' + card.color : '';
+    const sub = typeof subtitle === 'function' ? subtitle(data) : subtitle;
+
+    return '<div class="card">' +
+      '<div class="card-label">' + card.label + '</div>' +
+      '<div class="card-value' + colorClass + ' ' + renderClass + '">' + display + '</div>' +
+      '<div class="card-sub">' + (sub || '') + '</div>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('summaryCards').innerHTML = cardsHtml;
+
+  const grouped = new Map();
+  data.forEach(p => {
+    const k = getFieldValue(p, protocolCol);
+    const existing = grouped.get(k) || { count: 0, value: 0 };
+    grouped.set(k, { count: existing.count + 1, value: existing.value + (p.net_usd || 0) });
+  });
+  const protoHtml = [...grouped.entries()].map(([name, { count, value }]) =>
+    '<div class="proto-chip"><strong>' + name + '</strong> ' + count + ' pos · ' + fmtShort(value) + '</div>'
+  ).join('');
+  document.getElementById('protoSummary').innerHTML = protoHtml;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FILTERS & EVENTS
+// ═══════════════════════════════════════════════════════════════
+function buildFilters() {
+  const chainEl = document.getElementById('chainFilter');
+  const protoEl = document.getElementById('protoFilter');
+  chains.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c.toUpperCase();
+    chainEl.appendChild(opt);
+  });
+  protos.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p; opt.textContent = p;
+    protoEl.appendChild(opt);
+  });
 }
 
 function filterPositions() {
-    const chain = document.getElementById('chainFilter').value;
-    const proto = document.getElementById('protoFilter').value;
-    const search = document.getElementById('searchFilter').value.toLowerCase().trim();
+  const chain = document.getElementById('chainFilter').value;
+  const proto = document.getElementById('protoFilter').value;
+  const search = document.getElementById('searchFilter').value.toLowerCase().trim();
 
-    let data = positions;
-    if (chain !== 'all') data = data.filter(p => p.chain === chain);
-    if (proto !== 'all') data = data.filter(p => p.protocol_name === proto);
-    if (search) {
-        data = data.filter(p =>
-            (p.wallet || '').toLowerCase().includes(search) ||
-            (p.protocol_name || '').toLowerCase().includes(search) ||
-            (p.supply || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
-            (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
-            (p.strategy || '').toLowerCase().includes(search)
-        );
-    }
-    return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
+  let data = positions;
+  if (chain !== 'all') data = data.filter(p => p.chain === chain);
+  if (proto !== 'all') data = data.filter(p => getFieldValue(p, protocolCol) === proto);
+  if (search) {
+    data = data.filter(p =>
+      (p.wallet || '').toLowerCase().includes(search) ||
+      getFieldValue(p, protocolCol).toLowerCase().includes(search) ||
+      (p.protocol_name || '').toLowerCase().includes(search) ||
+      (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
+      (p.strategy || '').toLowerCase().includes(search)
+    );
+  }
+  return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
 }
 
-function updateSummary(data) {
-    const total = data.reduce((s, p) => s + (p.net_usd || 0), 0);
-    const supply = data.reduce((s, p) => s + (p.asset_usd || 0), 0);
-    const borrow = data.reduce((s, p) => s + (Math.abs(p.debt_usd) || 0), 0);
-    const wallets = new Set(data.map(p => p.wallet)).size;
-    const avgApy = supply > 0 ? (data.reduce((s, p) => s + ((p.apy_net || 0) * (p.asset_usd || 0)), 0) / supply) : 0;
-    const avgUtil = supply > 0 ? (borrow / supply * 100) : 0;
-
-    const avgHf = positions.filter(p => p.health_rate > 0).reduce((s, p, _, arr) => s + p.health_rate / arr.length, 0);
-
-    const chainsUsed = [...new Set(data.map(p => p.chain))].length;
-    const protocolList = [...new Set(data.map(p => p.protocol_name))];
-    const protosUsed = protocolList.length;
-    const topProto = [...new Map(data.map(p => [p.protocol_name, (p.net_usd || 0)])).entries()]
-        .sort((a, b) => b[1] - a[1])[0];
-    const topChain = [...new Map(data.map(p => [p.chain, (p.net_usd || 0)])).entries()]
-        .sort((a, b) => b[1] - a[1])[0];
-
-    document.getElementById('summaryCards').innerHTML = `
-        <div class="card"><div class="card-label">Total Value</div><div class="card-value green">${fmtShort(total)}</div><div class="card-sub">${data.length} positions</div></div>
-        <div class="card"><div class="card-label">Net APY</div><div class="card-value blue">${avgApy.toFixed(2)}%</div><div class="card-sub">weighted avg</div></div>
-        <div class="card"><div class="card-label">Utilization</div><div class="card-value">${avgUtil.toFixed(1)}%</div><div class="card-sub">${fmtShort(borrow)} borrowed</div></div>
-        <div class="card"><div class="card-label">Health Factor</div><div class="card-value purple ${hfClass(avgHf)}">${avgHf.toFixed(2)}</div><div class="card-sub">${avgHf >= 1.1 ? 'Safe' : '⚠️ Below 1.1'}</div></div>
-        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${wallets}</div><div class="card-sub">active</div></div>
-        <div class="card"><div class="card-label">Top Protocol</div><div class="card-value blue">${topProto ? topProto[0] : '-'}</div><div class="card-sub">${topProto ? fmtShort(topProto[1]) : ''}</div></div>
-        <div class="card"><div class="card-label">Top Chain</div><div class="card-value blue">${topChain ? topChain[0].toUpperCase() : '-'}</div><div class="card-sub">${topChain ? fmtShort(topChain[1]) : ''}</div></div>
-        <div class="card"><div class="card-label">Distribution</div><div class="card-value">${chainsUsed} chains</div><div class="card-sub">${protosUsed} protocols</div></div>
-    `;
-
-    const protoHtml = protocolList.map(p => {
-        const count = data.filter(d => d.protocol_name === p).length;
-        const val = data.filter(d => d.protocol_name === p).reduce((s, d) => s + (d.net_usd || 0), 0);
-        return `<div class="proto-chip"><strong>${p}</strong> ${count} pos · ${fmtShort(val)}</div>`;
-    }).join('');
-    document.getElementById('protoSummary').innerHTML = protoHtml;
+function updateView() {
+  const data = filterPositions();
+  renderCards(data);
+  renderTable(data);
 }
 
+// ═══════════════════════════════════════════════════════════════
+// XLSX EXPORT
+// ═══════════════════════════════════════════════════════════════
 function downloadXLSX() {
-    const rows = positions.map(p => ({
-        Wallet: p.wallet,
-        Chain: p.chain,
-        Protocol: p.protocol_name,
-        Strategy: p.strategy,
-        SupplyTokens: (p.supply || []).map(t => t.symbol).join(', '),
-        BorrowTokens: (p.borrow || []).map(t => t.symbol).join(', '),
-        SupplyUSD: p.asset_usd,
-        BorrowUSD: p.debt_usd,
-        NetUSD: p.net_usd,
-        BaseAPY: p.apy_base,
-        BonusSupply: p.bonus_supply,
-        BonusBorrow: p.bonus_borrow,
-        CostAPY: p.apy_cost,
-        NetAPY: p.apy_net,
-        Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
-        HealthFactor: p.health_rate,
-        ScanTime: p.scanned_at,
-    }));
-    const ws = XLSX.utils.json_to_sheet(rows);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Positions');
-    ws['!cols'] = [
-        { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 },
-        { wch: 40 }, { wch: 40 },
-        { wch: 16 }, { wch: 16 }, { wch: 16 },
-        { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
-        { wch: 22 },
-    ];
-    XLSX.writeFile(wb, 'reservoir_positions.xlsx');
+  const rows = positions.map(p => ({
+    Wallet: p.wallet,
+    Chain: p.chain,
+    Protocol: getFieldValue(p, protocolCol),
+    Strategy: p.strategy,
+    SupplyTokens: (p.supply || []).map(t => t.symbol).join(', '),
+    BorrowTokens: (p.borrow || []).map(t => t.symbol).join(', '),
+    SupplyUSD: p.asset_usd,
+    BorrowUSD: p.debt_usd,
+    NetUSD: p.net_usd,
+    BaseAPY: p.apy_base,
+    BonusSupply: p.bonus_supply,
+    BonusBorrow: p.bonus_borrow,
+    CostAPY: p.apy_cost,
+    NetAPY: p.apy_net,
+    Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
+    HealthFactor: p.health_rate,
+    ScanTime: p.scanned_at,
+  }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Positions');
+  ws['!cols'] = [
+    { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 },
+    { wch: 40 }, { wch: 40 },
+    { wch: 16 }, { wch: 16 }, { wch: 16 },
+    { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
+    { wch: 22 },
+  ];
+  XLSX.writeFile(wb, 'reservoir_positions.xlsx');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    buildFilters();
-    const data = filterPositions();
-    updateSummary(data);
-    renderTable(data);
-    document.getElementById('chainFilter').addEventListener('change', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-    document.getElementById('protoFilter').addEventListener('change', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-    document.getElementById('searchFilter').addEventListener('input', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-});
-
-// Detail modal
+// ═══════════════════════════════════════════════════════════════
+// DETAIL MODAL
+// ═══════════════════════════════════════════════════════════════
 function showDetail(p) {
-    const modal = document.getElementById('detail-modal');
-    if (!modal) return;
-    
-    const bonusSupply = p.bonus_supply || 0;
-    const bonusBorrow = p.bonus_borrow || 0;
-    
-    let supplyDetail = (p.supply || []).map(t => {
-        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% base`;
-        if (t.bonus_supply_apy) info += ` + ${(t.bonus_supply_apy).toFixed(2)}%`;
-        return info;
-    }).join('<br>');
-    
-    let borrowDetail = (p.borrow || []).map(t => {
-        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% cost`;
-        if (t.bonus_borrow_apy) info += ` − ${(t.bonus_borrow_apy).toFixed(2)}%`;
-        return info;
-    }).join('<br>');
-    
-    modal.innerHTML = `
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-                <h3 style="margin:0">${p.protocol_name} — ${p.supply?.map(t=>t.symbol).join('/') || p.symbol || ''}</h3>
-                <button onclick="document.getElementById('detail-modal').style.display='none'" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer">×</button>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Supply</div>
-                    <div style="font-size:13px">${supplyDetail || '-'}</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Borrow</div>
-                    <div style="font-size:13px">${borrowDetail || '-'}</div>
-                </div>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Base APY</div>
-                    <div style="font-size:18px;font-weight:600">${(p.apy_base || 0).toFixed(2)}%</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div>
-                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">+${bonusSupply.toFixed(2)}%</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Cost APY</div>
-                    <div style="font-size:18px;font-weight:600">${(p.apy_cost || 0).toFixed(2)}%</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div>
-                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">−${bonusBorrow.toFixed(2)}%</div>
-                </div>
-            </div>
-            <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-                <div style="color:var(--text-secondary);font-size:12px">Net APY</div>
-                <div style="font-size:28px;font-weight:700;color:${(p.apy_net||0) > 0 ? 'var(--accent-green)' : '#f85149'}">${(p.apy_net || 0).toFixed(2)}%</div>
-            </div>
-        </div>
-    `;
-    modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
-    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+  const modal = document.getElementById('detail-modal');
+  if (!modal) return;
+
+  let supplyDetail = (p.supply || []).map(t => {
+    let info = t.symbol + ': ' + (t.apy_base || 0).toFixed(2) + '% base';
+    if (t.bonus_supply_apy) info += ' + ' + (t.bonus_supply_apy).toFixed(2) + '%';
+    return info;
+  }).join('<br>');
+
+  let borrowDetail = (p.borrow || []).map(t => {
+    let info = t.symbol + ': ' + (t.apy_base || 0).toFixed(2) + '% cost';
+    if (t.bonus_borrow_apy) info += ' \u2212 ' + (t.bonus_borrow_apy).toFixed(2) + '%';
+    return info;
+  }).join('<br>');
+
+  modal.innerHTML =
+    '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
+      '<h3 style="margin:0">' + getFieldValue(p, protocolCol) + ' \u2014 ' + (p.supply ? p.supply.map(t => t.symbol).join('/') : (p.symbol || '')) + '</h3>' +
+      '<button onclick="document.getElementById('detail-modal').style.display='none'" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer;">\u00d7</button>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Supply</div><div style="font-size:13px">' + (supplyDetail || '-') + '</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Borrow</div><div style="font-size:13px">' + (borrowDetail || '-') + '</div></div>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Base APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_base || 0).toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">+' + (p.bonus_supply || 0).toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Cost APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_cost || 0).toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">\u2212' + (p.bonus_borrow || 0).toFixed(2) + '%</div></div>' +
+    '</div>' +
+    '<div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
+      '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
+      '<div style="font-size:28px;font-weight:700;color:' + ((p.apy_net || 0) > 0 ? 'var(--accent-green)' : '#f85149') + '">' + (p.apy_net || 0).toFixed(2) + '%</div>' +
+    '</div></div>';
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
+  modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
 }
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildFilters();
+  updateView();
+  ['chainFilter', 'protoFilter', 'searchFilter'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateView);
+    document.getElementById(id).addEventListener('change', updateView);
+  });
+});
 </script>
 </body>
 </html>

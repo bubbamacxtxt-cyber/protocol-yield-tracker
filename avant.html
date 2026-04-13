@@ -37,139 +37,68 @@ body {
 
 .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
 
-.header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 8px;
-}
+.header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
 
 .home-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-secondary); text-decoration: none;
+  font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
-
 .home-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
 
 h1 {
-  font-size: 28px;
-  font-weight: 700;
-  background: var(--gradient-teal);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 28px; font-weight: 700;
+  background: var(--gradient-teal); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
 }
-
 .subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 30px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px; margin-bottom: 30px;
 }
-
 .card {
-  background: var(--gradient-blue);
-  border: 1px solid #5a8ac4;
-  border-top: 1px solid rgba(140,180,230,0.4);
-  border-bottom: 1px solid #1a3a6a;
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--gradient-blue); border: 1px solid #5a8ac4;
+  border-top: 1px solid rgba(140,180,230,0.4); border-bottom: 1px solid #1a3a6a;
+  border-radius: 12px; padding: 20px;
   inset-shadow: 0 1px 0 rgba(200,220,255,0.25), 0 2px 2px rgba(100,160,230,0.1), 0 -2px 6px rgba(0,0,0,0.5);
   box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-
-.card-label {
-  color: var(--text-secondary);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.card-value {
-  font-size: 28px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.card-label { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .card-value.green { color: var(--accent-green); }
 .card-value.red { color: #f85149; }
 .card-value.blue { color: var(--accent-blue); }
 .card-value.purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
 .card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
 
 .proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.proto-chip {
-  padding: 6px 12px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-}
+.proto-chip { padding: 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
 .proto-chip strong { color: var(--accent-blue); }
 
-.filters {
-  display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
-}
+.filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
 .filter-group { display: flex; align-items: center; gap: 6px; }
 .filter-group label { color: var(--text-secondary); font-size: 13px; }
 .filter-group select, .filter-group input {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 13px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 13px;
 }
-
 .download-btn {
-  margin-left: auto;
-  padding: 8px 16px;
-  background: var(--gradient-btn);
-  border: 1px solid #2d4a6f;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  transition: background 0.2s, border-color 0.2s;
+  margin-left: auto; padding: 8px 16px; background: var(--gradient-btn);
+  border: 1px solid #2d4a6f; border-radius: 8px; color: white; cursor: pointer;
+  font-size: 13px; font-weight: 600; transition: background 0.2s, border-color 0.2s;
 }
-.download-btn:hover {
-  background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%);
-  border-color: #3d6a9f;
-}
+.download-btn:hover { background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%); border-color: #3d6a9f; }
 
 .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th {
-  background: var(--bg-secondary);
-  padding: 12px 16px;
-  text-align: left;
-  color: var(--text-secondary);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: sticky;
-  top: 0;
+  background: var(--bg-secondary); padding: 12px 16px; text-align: left;
+  color: var(--text-secondary); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 1px; position: sticky; top: 0;
 }
 th:nth-child(n+9) { text-align: right; }
 td { padding: 12px 16px; border-top: 1px solid #21262d; }
@@ -180,16 +109,9 @@ tr:hover td { background: var(--bg-secondary); }
 .badge-loop { background: #1f6feb22; color: var(--accent-blue); }
 .badge-lend { background: #23863622; color: var(--accent-green); }
 .badge-stake { background: #a371f722; color: #bc8cff; }
-
 .vault-tab {
-  padding: 8px 16px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  font-size: 13px;
-  cursor: pointer;
-  font-family: inherit;
+  padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-secondary); font-size: 13px; cursor: pointer; font-family: inherit;
 }
 .vault-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
 .vault-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
@@ -216,367 +138,401 @@ tr:hover td { background: var(--bg-secondary); }
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <a class="home-btn" href="index.html">← Home</a>
-        <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
-        <h1>Avant</h1>
+  <div class="header">
+    <a class="home-btn" href="index.html">← Home</a>
+    <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
+    <h1>Avant</h1>
+  </div>
+  <p class="subtitle">Wallet positions and yield strategies</p>
+  <div class="cards" id="summaryCards"></div>
+  <div class="proto-summary" id="protoSummary"></div>
+  <div id="vaultTabs" style="display:none;margin-bottom:16px;">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
     </div>
-    <p class="subtitle">Wallet positions and yield strategies</p>
-
-    <div class="cards" id="summaryCards"></div>
-    <div class="proto-summary" id="protoSummary"></div>
-    <div id="vaultTabs" style="display:none;margin-bottom:16px;">
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
-        </div>
-    </div>
-
-    <div class="filters">
-        <div class="filter-group">
-            <label>Chain:</label>
-            <select id="chainFilter"><option value="all">All chains</option></select>
-        </div>
-        <div class="filter-group">
-            <label>Protocol:</label>
-            <select id="protoFilter"><option value="all">All protocols</option></select>
-        </div>
-        <div class="filter-group">
-            <label>Search:</label>
-            <input type="text" id="searchFilter" placeholder="Token, wallet, or protocol...">
-        </div>
-        <button class="download-btn" onclick="downloadXLSX()">↓ Download XLSX</button>
-    </div>
-
-    <div class="table-wrap">
-        <table id="positionsTable">
-            <thead>
-                <tr>
-                    <th>Wallet</th>
-                    <th>Chain</th>
-                    <th>Protocol</th>
-                    <th>Strategy</th>
-                    <th>Supply Tokens</th>
-                    <th>Borrow Tokens</th>
-                    <th>Supply USD</th>
-                    <th>Borrow USD</th>
-                    <th>Net USD</th>
-                    <th>Base APY</th>
-                    <th>Bonus APY</th>
-                    <th>Cost APY</th>
-                    <th>Net APY</th>
-                    <th>Utilization</th>
-                    <th>Health Factor</th>
-                </tr>
-            </thead>
-            <tbody id="positionsBody"></tbody>
-        </table>
-    </div>
+  </div>
+  <div class="filters">
+    <div class="filter-group"><label>Chain:</label><select id="chainFilter"><option value="all">All chains</option></select></div>
+    <div class="filter-group"><label>Protocol:</label><select id="protoFilter"><option value="all">All protocols</option></select></div>
+    <div class="filter-group"><label>Search:</label><input type="text" id="searchFilter" placeholder="Token, wallet, or protocol..."></div>
+    <button class="download-btn" onclick="downloadXLSX()">&#8595; Download XLSX</button>
+  </div>
+  <div class="table-wrap">
+    <table id="positionsTable">
+      <thead><tr id="tableHeader"></tr></thead>
+      <tbody id="positionsBody"></tbody>
+    </table>
+  </div>
 </div>
-
 <script>
+// ═══════════════════════════════════════════════════════════════
+// SINGLE SOURCE OF TRUTH — columns define field mappings
+// Table and cards both derive from this config
+// ═══════════════════════════════════════════════════════════════
+const COLUMNS = [
+  { key: 'wallet',     label: 'Wallet',        field: 'wallet',          render: v => '<a href="https://debank.com/profile/' + v + '" target="_blank" style="color:var(--accent-blue);text-decoration:none">' + shortWallet(v) + '</a>', sortable: true },
+  { key: 'chain',      label: 'Chain',         field: 'chain',           render: v => (v || '').toUpperCase() },
+  { key: 'protocol',   label: 'Protocol',      field: 'protocol_name' },
+  { key: 'strategy',   label: 'Strategy',      field: 'strategy',        render: v => strategyBadge(v) },
+  { key: 'supply',     label: 'Supply Tokens', field: 'protocol_name' },
+  { key: 'borrow',     label: 'Borrow Tokens', field: 'borrow',          render: v => (v || []).map(t => t.symbol).filter(Boolean).join(', ') || '-' },
+  { key: 'supply_usd', label: 'Supply USD',    field: 'asset_usd',       format: 'usd_short', align: 'right' },
+  { key: 'borrow_usd', label: 'Borrow USD',    field: 'debt_usd',        format: 'usd_short', align: 'right' },
+  { key: 'net_usd',    label: 'Net USD',       field: 'net_usd',         format: 'usd_short', align: 'right', bold: true, color: 'green' },
+  { key: 'base_apy',   label: 'Base APY',      field: 'apy_base',        format: 'pct', align: 'right' },
+  { key: 'bonus_apy',  label: 'Bonus APY',     field: 'bonus_total',     format: 'bonus', align: 'right', color: 'green' },
+  { key: 'cost_apy',   label: 'Cost APY',      field: 'apy_cost',        format: 'pct', align: 'right' },
+  { key: 'net_apy',    label: 'Net APY',       field: 'apy_net',         format: 'pct', align: 'right', bold: true, color_dynamic: true },
+  { key: 'util',       label: 'Utilization',   field: '_computed',       compute: p => p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-', align: 'right' },
+  { key: 'health',     label: 'Health Factor',  field: 'health_rate',     render: v => v ? v.toFixed(2) : '-', compute_class: p => hfClass(p.health_rate), align: 'right' },
+];
+
+// Cards derive from same field keys as COLUMNS
+const CARDS = [
+  { label: 'Total Value', field: 'net_usd',    aggregate: 'sum',     format: 'usd_short', color: 'green', subtitle: d => d.length + ' positions' },
+  { label: 'Net APY',     field: 'apy_net',    aggregate: 'wavg',    weight: 'asset_usd', format: 'pct', color: 'blue', subtitle: () => 'weighted avg' },
+  { label: 'Utilization', field: '_computed',  aggregate: 'custom',  fn: (d) => { const s = d.reduce((a,p) => a + (p.asset_usd||0), 0); const b = d.reduce((a,p) => a + (Math.abs(p.debt_usd)||0), 0); return s > 0 ? (b/s*100).toFixed(1) + '%' : '0%'; }, subtitle: d => fmtShort(d.reduce((a,p) => a + (Math.abs(p.debt_usd)||0), 0)) + ' borrowed' },
+  { label: 'Health Factor', field: 'health_rate', aggregate: 'avg', filter: p => p.health_rate > 0, format: 'num', render_class: v => hfClass(v), color: 'purple', subtitle: d => { const avg = d.filter(p => p.health_rate > 0).reduce((s,p,_,a) => s + p.health_rate / a.length, 0); return avg >= 1.1 ? 'Safe' : '⚠️ Below 1.1'; } },
+  { label: 'Wallets',     field: 'wallet',     aggregate: 'count_unique', format: 'none', subtitle: () => 'active' },
+  { label: 'Top Protocol', field: 'protocol',  aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
+  { label: 'Top Chain',   field: 'chain',      aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', render: v => (v||'').toUpperCase(), subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
+  { label: 'Distribution', field: '_computed', aggregate: 'custom',  fn: (d) => { const chains = new Set(d.map(p => p.chain)).size; const protos = new Set(d.map(p => getFieldValue(p, COLUMNS.find(c => c.key === 'protocol')))).size; return chains + ' chains'; }, subtitle: d => { const protos = new Set(d.map(p => getFieldValue(p, COLUMNS.find(c => c.key === 'protocol')))).size; return protos + ' protocols'; } },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// FIELD RESOLUTION — shared by table AND cards
+// ═══════════════════════════════════════════════════════════════
+function getFieldValue(position, col) {
+  if (col.compute) return col.compute(position);
+  const val = position[col.field];
+  if ((val === undefined || val === null) && col.fallback) return position[col.fallback];
+  return val;
+}
+
+function resolveFieldKey(key) {
+  return COLUMNS.find(c => c.key === key);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
 const WHALE_DATA = [{"id":10,"wallet":"0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.078,"net_usd":42708351.9,"asset_usd":311896674.73,"debt_usd":269188322.83,"position_index":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3","debank_updated_at":"2026-04-11T16:34:20.000Z","scanned_at":"2026-04-11 17:56:10","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"USDe","address":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3","amount":312052701.076859,"price_usd":0.9994,"value_usd":311865469.456213,"apy_base":0.950833333333333,"apy_base_source":"aave_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":124709010.328174,"price_usd":0.999600159936026,"value_usd":124659146.669506,"apy_base":4.40458333333333,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null},{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":144494497.478829,"price_usd":1.0003,"value_usd":144537845.828073,"apy_base":3.345,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":0.9508333333333329,"apy_cost":3.8356695016652225,"bonus_supply":null,"bonus_borrow":null,"apy_net":-17.23212562539401,"apy_reward":null},{"id":9,"wallet":"0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7","chain":"mnt","protocol_id":"mnt_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.024,"net_usd":18637926.47,"asset_usd":185853606.81,"debt_usd":167215680.34,"position_index":"0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2","debank_updated_at":"2026-04-11T05:55:42.000Z","scanned_at":"2026-04-11 17:56:10","supply":[{"symbol":"sUSDe","real_symbol":"SUSDE","real_name":"Ethena Staked USDe","address":"0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2","amount":151640170,"price_usd":1.22562251686598,"value_usd":185853606.813385,"apy_base":3.58765,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0x779ded0c9e1022225f8e0630b35a9b54be713736","amount":167175538.161725,"price_usd":1.0003,"value_usd":167225690.823174,"apy_base":3.29142857142857,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":0.82236933539714,"bonus_borrow_source":"aave:mnt(0.82%)"},{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9","amount":20.061784,"price_usd":0.999600159936026,"value_usd":20.053762495002,"apy_base":3.61958333333333,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":0.887458278276732,"bonus_borrow_source":"aave:mnt(0.89%)"}],"rewards":[],"apy_base":3.58765,"apy_cost":3.2914286107809976,"bonus_supply":null,"bonus_borrow":1.709827613673872,"apy_net":21.585513086006188,"apy_reward":null},{"id":12,"wallet":"0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6","chain":"plasma","protocol_id":"plasma_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.034,"net_usd":13013884.38,"asset_usd":130233297.16,"debt_usd":117219412.78,"position_index":"0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34","debank_updated_at":"2026-04-11T16:34:20.000Z","scanned_at":"2026-04-11 17:56:11","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"Ethena USDe","address":"0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34","amount":130298446.384077,"price_usd":0.9994,"value_usd":130220267.316247,"apy_base":0.859565217391305,"apy_base_source":"aave_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":117191286.874459,"price_usd":1.0003,"value_usd":117226444.260521,"apy_base":3.63041666666667,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":0.470952624972065,"bonus_borrow_source":"aave:plasma(0.47%)"}],"rewards":[],"apy_base":0.859565217391305,"apy_cost":3.63041666666667,"bonus_supply":null,"bonus_borrow":0.470952624972065,"apy_net":-19.856216617320616,"apy_reward":null},{"id":3,"wallet":"0x3207363359Ca0c11D11073aD48301E8c958B7910","chain":"plasma","protocol_id":"plasma_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.024,"net_usd":12973454.34,"asset_usd":128396388.96,"debt_usd":115422934.62,"position_index":"0xc4374775489cb9c56003bf2c9b12495fc64f0771","debank_updated_at":"2026-04-11T13:04:48.000Z","scanned_at":"2026-04-11 17:56:05","supply":[{"symbol":"syrupUSDT","real_symbol":"SYRUPUSDT","real_name":"syrupUSDT","address":"0xc4374775489cb9c56003bf2c9b12495fc64f0771","amount":114384265.553795,"price_usd":1.12274736034074,"value_usd":128424632.215037,"apy_base":3.75028,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb","amount":115395239.766217,"price_usd":1.0003,"value_usd":115429858.338147,"apy_base":3.63041666666667,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":0.470952624972065,"bonus_borrow_source":"aave:plasma(0.47%)"}],"rewards":[],"apy_base":3.75028,"apy_cost":3.6304166666666706,"bonus_supply":null,"bonus_borrow":0.470952624972065,"apy_net":9.00668357153607,"apy_reward":null},{"id":7,"wallet":"0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb","chain":"base","protocol_id":"base_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.052,"net_usd":7199734.37,"asset_usd":57626458.76,"debt_usd":50426724.39,"position_index":"0x660975730059246a68521a3e2fbd4740173100f5","debank_updated_at":"2026-04-11T12:50:53.000Z","scanned_at":"2026-04-11 17:56:06","supply":[{"symbol":"syrupUSDC","real_symbol":"SYRUPUSDC","real_name":"syrupUSDC","address":"0x660975730059246a68521a3e2fbd4740173100f5","amount":49747712.489343,"price_usd":1.15837404136328,"value_usd":57626458.7648586,"apy_base":4.26834,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","amount":50446895.082967,"price_usd":0.999600159936026,"value_usd":50426724.3932097,"apy_base":3.95458333333333,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":4.26834,"apy_cost":3.95458333333333,"bonus_supply":null,"bonus_borrow":null,"apy_net":6.465882317873775,"apy_reward":null},{"id":8,"wallet":"0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7","chain":"ink","protocol_id":"ink_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.024,"net_usd":4598313.95,"asset_usd":45811158.61,"debt_usd":41212844.66,"position_index":"0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2","debank_updated_at":"2026-04-11T15:42:22.000Z","scanned_at":"2026-04-11 17:56:09","supply":[{"symbol":"sUSDe","real_symbol":"sUSDe","real_name":"sUSDe","address":"0x211cc4dd073734da055fbf44a2b4667d5e5fe5d2","amount":37399746.459039,"price_usd":1.22502315333055,"value_usd":45815555.3410149,"apy_base":3.58765,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USD₮0","real_symbol":"USDT0","real_name":"USDT0","address":"0x0200c29006150606b650577bbe7b6248f58470c1","amount":29678068.96983,"price_usd":1.0003,"value_usd":29686972.3905209,"apy_base":3.22833333333333,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null},{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x2d270e6886d130d724215a266106e6832161eaed","amount":11532226.15467,"price_usd":0.999832445642716,"value_usd":11530293.8799286,"apy_base":4.40458333333333,"apy_base_source":"aave_borrow_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":3.58765,"apy_cost":3.5573825256614873,"bonus_supply":null,"bonus_borrow":null,"apy_net":3.858925239517668,"apy_reward":null},{"id":1,"wallet":"0x3207363359Ca0c11D11073aD48301E8c958B7910","chain":"eth","protocol_id":"aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"lend","yield_source":"Aave V3","health_rate":1.029,"net_usd":3629730.68,"asset_usd":3629730.68,"debt_usd":0,"position_index":"0xdac17f958d2ee523a2206206994597c13d831ec7","debank_updated_at":"2026-04-11T13:04:49.000Z","scanned_at":"2026-04-11 17:56:04","supply":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":3628715.77156419,"price_usd":1.0003,"value_usd":3629804.38629566,"apy_base":2.26875,"apy_base_source":"aave_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.26875,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.26875,"apy_reward":null},{"id":4,"wallet":"0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb","chain":"arb","protocol_id":"arb_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.056,"net_usd":1163283.35,"asset_usd":8747466.01,"debt_usd":7584182.66,"position_index":"0x41ca7586cc1311807b4605fbb748a3b8862b42b5","debank_updated_at":"2026-04-11T12:50:53.000Z","scanned_at":"2026-04-11 17:56:05","supply":[{"symbol":"syrupUSDC","real_symbol":"SYRUPUSDC","real_name":"syrupUSDC","address":"0x41ca7586cc1311807b4605fbb748a3b8862b42b5","amount":1930001,"price_usd":1.15777971318873,"value_usd":2234516.00423395,"apy_base":4.26834,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USD₮0","real_symbol":"USDT","real_name":"Tether USD","address":"0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9","amount":1913450.15117441,"price_usd":1.0003,"value_usd":1914024.18621976,"apy_base":4.36383144113184,"apy_base_source":"morpho_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":4.26834,"apy_cost":4.36383144113184,"bonus_supply":null,"bonus_borrow":null,"apy_net":3.645770673265884,"apy_reward":null},{"id":11,"wallet":"0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6","chain":"ink","protocol_id":"ink_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.045,"net_usd":1084412.97,"asset_usd":9895211.99,"debt_usd":8810799.02,"position_index":"0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34","debank_updated_at":"2026-04-11T16:34:20.000Z","scanned_at":"2026-04-11 17:56:10","supply":[{"symbol":"USDe","real_symbol":"USDe","real_name":"Ethena USDe","address":"0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34","amount":9900162.0664131,"price_usd":0.9994,"value_usd":9894221.96917325,"apy_base":0.950833333333333,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USD₮0","real_symbol":"USDT0","real_name":"USDT0","address":"0x0200c29006150606b650577bbe7b6248f58470c1","amount":8808684.932524,"price_usd":1.0003,"value_usd":8811327.53800376,"apy_base":3.22833333333333,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":0.950833333333333,"apy_cost":3.22833333333333,"bonus_supply":null,"bonus_borrow":null,"apy_net":-17.55373579594402,"apy_reward":null},{"id":5,"wallet":"0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.054,"net_usd":554479.34,"asset_usd":4194832.22,"debt_usd":3640352.89,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","debank_updated_at":"2026-04-11T12:50:53.000Z","scanned_at":"2026-04-11 17:56:05","supply":[{"symbol":"syrupUSDC","real_symbol":"syrupUSDC","real_name":"USD Coin","address":"0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b","amount":12357695.8996633,"price_usd":0.999600159936026,"value_usd":12352754.7977442,"apy_base":4.26834,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"Paypal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":10733929.3207791,"price_usd":0.9997,"value_usd":10730709.1419829,"apy_base":3.2988899348118,"apy_base_source":"morpho_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":4.26834,"apy_cost":3.2988899348118004,"bonus_supply":null,"bonus_borrow":null,"apy_net":10.633122326849454,"apy_reward":null},{"id":6,"wallet":"0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.056,"net_usd":370986.31,"asset_usd":3520734.17,"debt_usd":3149747.86,"position_index":"0x09d4214c03d01f49544c0448dbe3a27f768f2b34","debank_updated_at":"2026-04-11T12:50:53.000Z","scanned_at":"2026-04-11 17:56:05","supply":[{"symbol":"wsrUSD","real_symbol":"wsrUSD","real_name":"Reservoir Stablecoin","address":"0xd3fd63209fa2d55b07a0f6db36c2f43900be3094","amount":3522127.10600551,"price_usd":0.999600159936026,"value_usd":3520718.81847812,"apy_base":4.75333,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":3151007.75913165,"price_usd":0.999600159936026,"value_usd":3149747.85998765,"apy_base":0.58883530295657,"apy_base_source":"morpho_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":4.75333,"apy_cost":0.58883530295657,"bonus_supply":null,"bonus_borrow":null,"apy_net":40.11072165144367,"apy_reward":null},{"id":2,"wallet":"0x3207363359Ca0c11D11073aD48301E8c958B7910","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":1.056,"net_usd":278446.6,"asset_usd":278446.6,"debt_usd":0,"position_index":"0xdac17f958d2ee523a2206206994597c13d831ec7","debank_updated_at":"2026-04-11T13:04:48.000Z","scanned_at":"2026-04-11 17:56:04","supply":[{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":278371.055378645,"price_usd":1.0003,"value_usd":278454.566695259,"apy_base":4.49484068241501,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":4.49484068241501,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":4.49484068241501,"apy_reward":null}];
 const WHALE_VAULTS = {};
 
-const positions = WHALE_DATA;
-const chains = [...new Set(positions.map(p => p.chain))].sort();
-const protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+// Pre-compute bonus_total and enrich positions
+WHALE_DATA.forEach(p => { p.bonus_total = (p.bonus_supply || 0) + (p.bonus_borrow || 0); });
 
-// Build vault tabs if multi-vault whale
+const positions = WHALE_DATA;
+const protocolCol = COLUMNS.find(c => c.key === 'protocol');
+const chains = [...new Set(positions.map(p => p.chain))].sort();
+const protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
+
+// Build vault tabs
 if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
-    const tabsEl = document.getElementById('vaultTabs');
-    tabsEl.style.display = 'block';
-    const btns = tabsEl.querySelector('div');
-    for (const [vName, vData] of Object.entries(WHALE_VAULTS)) {
-        const btn = document.createElement('button');
-        btn.className = 'vault-tab';
-        btn.dataset.vault = vName;
-        btn.textContent = vName;
-        btn.onclick = () => filterVault(vName);
-        btns.appendChild(btn);
-    }
+  const tabsEl = document.getElementById('vaultTabs');
+  tabsEl.style.display = 'block';
+  const btns = tabsEl.querySelector('div');
+  for (const [vName] of Object.entries(WHALE_VAULTS)) {
+    const btn = document.createElement('button');
+    btn.className = 'vault-tab';
+    btn.dataset.vault = vName;
+    btn.textContent = vName;
+    btn.onclick = () => filterVault(vName);
+    btns.appendChild(btn);
+  }
 }
 
 let currentVault = 'all';
 function filterVault(vault) {
-    currentVault = vault;
-    document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
-    // Filter positions by vault wallets
-    if (WHALE_VAULTS && WHALE_VAULTS[vault]) {
-        const walletSet = new Set(WHALE_VAULTS[vault].wallets.map(w => w.toLowerCase()));
-        const filtered = positions.filter(p => walletSet.has(p.wallet.toLowerCase()));
-        renderTable(filtered);
-    } else {
-        renderTable(positions);
-    }
+  currentVault = vault;
+  document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
+  updateView();
 }
 
-function buildFilters() {
-    const chainEl = document.getElementById('chainFilter');
-    const protoEl = document.getElementById('protoFilter');
-    chains.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c; opt.textContent = c.toUpperCase();
-        chainEl.appendChild(opt);
-    });
-    protos.forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p; opt.textContent = p;
-        protoEl.appendChild(opt);
-    });
-}
-
+// ═══════════════════════════════════════════════════════════════
+// FORMATTERS — shared by table and cards
+// ═══════════════════════════════════════════════════════════════
 function fmt(n) {
-    if (n === null || n === undefined) return '-';
-    return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (n === null || n === undefined) return '-';
+  return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function fmtShort(n) {
-    if (n === null || n === undefined) return '-';
-    if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
-    if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
-    if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
-    return '$' + n.toFixed(2);
+  if (n === null || n === undefined) return '-';
+  if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+  if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+  if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n.toFixed(2);
+}
+
+function formatValue(val, format, render) {
+  if (render) return render(val);
+  switch (format) {
+    case 'usd_short': return fmtShort(val);
+    case 'usd': return fmt(val);
+    case 'pct': return val != null ? val.toFixed(2) + '%' : '-';
+    case 'bonus': return val > 0 ? '+' + val.toFixed(2) + '%' : '';
+    case 'num': return val != null ? val.toFixed(2) : '-';
+    default: return val ?? '-';
+  }
 }
 
 function hfClass(hf) {
-    if (!hf || hf === 0) return '';
-    if (hf >= 1.5) return 'hf-safe';
-    if (hf >= 1.1) return 'hf-warn';
-    return 'hf-danger';
+  if (!hf || hf === 0) return '';
+  if (hf >= 1.5) return 'hf-safe';
+  if (hf >= 1.1) return 'hf-warn';
+  return 'hf-danger';
 }
 
 function strategyBadge(s) {
-    if (!s) return '';
-    const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
-    return `<span class="badge ${cls}">${s}</span>`;
+  if (!s) return '';
+  const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
+  return '<span class="badge ' + cls + '">' + s + '</span>';
 }
 
 function shortWallet(addr) {
-    if (!addr) return '-';
-    return addr.slice(0, 6) + '...' + addr.slice(-4);
+  if (!addr) return '-';
+  return addr.slice(0, 6) + '...' + addr.slice(-4);
 }
 
-function shortAddr(addr) {
-    if (!addr) return '-';
-    return addr.slice(0, 8) + '...';
-}
-
+// ═══════════════════════════════════════════════════════════════
+// RENDER TABLE — driven entirely by COLUMNS config
+// ═══════════════════════════════════════════════════════════════
 function renderTable(data) {
-    const body = document.getElementById('positionsBody');
-    if (data.length === 0) {
-        body.innerHTML = '<tr><td colspan="15" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
-        return;
-    }
-    body.innerHTML = data.map(p => {
-        const supplyTokens = (p.supply || []).map(t => t.symbol).filter(Boolean).join(', ');
-        const borrowTokens = (p.borrow || []).map(t => t.symbol).filter(Boolean).join(', ');
-        const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
-        const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
-        const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
-        const bonusSupply = p.bonus_supply || 0;
-        const bonusBorrow = p.bonus_borrow || 0;
-        const bonusTotal = bonusSupply + bonusBorrow;
-        const bonusApy = bonusTotal > 0 ? '+' + bonusTotal.toFixed(2) + '%' : '';
-        const bonusDetail = bonusTotal > 0 ? `Supply +${bonusSupply.toFixed(2)}%\nBorrow +${bonusBorrow.toFixed(2)}%` : '';
-        const costApy = p.apy_cost != null ? p.apy_cost.toFixed(2) + '%' : '-';
-        const netApy = p.apy_net != null ? p.apy_net.toFixed(2) + '%' : '-';
-        const netColor = p.apy_net > 0 ? 'var(--accent-green)' : p.apy_net < 0 ? '#f85149' : 'var(--text-secondary)';
-        const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
-        return `<tr onclick="showDetail(${detailData})" style="cursor:pointer">
-            <td title="${p.wallet || ''}"><a href="https://debank.com/profile/${p.wallet}" target="_blank" style="color:var(--accent-blue);text-decoration:none">${shortWallet(p.wallet)}</a></td>
-            <td>${(p.chain || '').toUpperCase()}</td>
-            <td>${p.protocol_name || '-'}</td>
-            <td>${strategyBadge(p.strategy)}</td>
-            <td>${supplyTokens || '-'}</td>
-            <td>${borrowTokens || '-'}</td>
-            <td>${fmtShort(p.asset_usd)}</td>
-            <td>${fmtShort(p.debt_usd)}</td>
-            <td style="font-weight:600;color:var(--accent-green)">${fmtShort(p.net_usd)}</td>
-            <td>${baseApy}</td>
-            <td style="color:var(--accent-green)">${bonusApy}</td>
-            <td>${costApy}</td>
-            <td style="font-weight:600;color:${netColor}">${netApy}</td>
-            <td>${util}</td>
-            <td class="${hfClass(p.health_rate)}">${hf}</td>
-        </tr>`;
+  const header = document.getElementById('tableHeader');
+  header.innerHTML = COLUMNS.map(c => '<th>' + c.label + '</th>').join('');
+
+  const body = document.getElementById('positionsBody');
+  if (data.length === 0) {
+    body.innerHTML = '<tr><td colspan="' + COLUMNS.length + '" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
+    return;
+  }
+
+  body.innerHTML = data.map(p => {
+    const cells = COLUMNS.map(c => {
+      const val = getFieldValue(p, c);
+      const display = formatValue(val, c.format, c.render);
+      const style = [];
+      if (c.bold) style.push('font-weight:600');
+      if (c.color === 'green') style.push('color:var(--accent-green)');
+      if (c.color === 'blue') style.push('color:var(--accent-blue)');
+      if (c.color_dynamic) {
+        const nc = val > 0 ? 'var(--accent-green)' : val < 0 ? '#f85149' : 'var(--text-secondary)';
+        style.push('color:' + nc);
+      }
+      if (c.compute_class) style.push(c.compute_class(p));
+      const align = c.align === 'right' ? 'text-align:right' : '';
+      return '<td style="' + style.join(';') + ';' + align + '">' + display + '</td>';
     }).join('');
+
+    const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
+    return '<tr onclick="showDetail(' + detailData + ')" style="cursor:pointer">' + cells + '</tr>';
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER CARDS — derived from same field keys as COLUMNS
+// ═══════════════════════════════════════════════════════════════
+function renderCards(data) {
+  const cardsHtml = CARDS.map(card => {
+    let value, subtitle, topEntry = null;
+    if (card.aggregate === 'custom') {
+      value = card.fn(data);
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'sum') {
+      value = data.reduce((s, p) => s + (p[card.field] || 0), 0);
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'wavg') {
+      const wf = card.weight;
+      const tw = data.reduce((s, p) => s + (p[wf] || 0), 0);
+      value = tw > 0 ? data.reduce((s, p) => s + ((p[card.field] || 0) * (p[wf] || 0)), 0) / tw : 0;
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'avg') {
+      const filtered = card.filter ? data.filter(card.filter) : data;
+      value = filtered.length > 0 ? filtered.reduce((s, p) => s + (p[card.field] || 0), 0) / filtered.length : 0;
+      subtitle = card.subtitle(filtered.length > 0 ? filtered : data);
+    } else if (card.aggregate === 'count_unique') {
+      value = new Set(data.map(p => p[card.field])).size;
+      subtitle = card.subtitle(data);
+    } else if (card.aggregate === 'top') {
+      const col = resolveFieldKey(card.field);
+      const grouped = new Map();
+      data.forEach(p => {
+        const k = getFieldValue(p, col);
+        grouped.set(k, (grouped.get(k) || 0) + (p[card.sort_field] || 0));
+      });
+      const sorted = [...grouped.entries()].sort((a, b) => b[1] - a[1]);
+      topEntry = sorted[0];
+      value = topEntry ? (card.render ? card.render(topEntry[0]) : topEntry[0]) : '-';
+      subtitle = card.subtitle(data, topEntry ? { key: topEntry[0], sum: topEntry[1] } : null);
+    }
+
+    let display;
+    if (card.aggregate === 'top' && topEntry) {
+      display = value;
+    } else {
+      display = formatValue(value, card.format, card.render);
+    }
+
+    const renderClass = card.render_class ? card.render_class(value) : '';
+    const colorClass = card.color ? ' ' + card.color : '';
+    const sub = typeof subtitle === 'function' ? subtitle(data) : subtitle;
+
+    return '<div class="card">' +
+      '<div class="card-label">' + card.label + '</div>' +
+      '<div class="card-value' + colorClass + ' ' + renderClass + '">' + display + '</div>' +
+      '<div class="card-sub">' + (sub || '') + '</div>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('summaryCards').innerHTML = cardsHtml;
+
+  const grouped = new Map();
+  data.forEach(p => {
+    const k = getFieldValue(p, protocolCol);
+    const existing = grouped.get(k) || { count: 0, value: 0 };
+    grouped.set(k, { count: existing.count + 1, value: existing.value + (p.net_usd || 0) });
+  });
+  const protoHtml = [...grouped.entries()].map(([name, { count, value }]) =>
+    '<div class="proto-chip"><strong>' + name + '</strong> ' + count + ' pos · ' + fmtShort(value) + '</div>'
+  ).join('');
+  document.getElementById('protoSummary').innerHTML = protoHtml;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FILTERS & EVENTS
+// ═══════════════════════════════════════════════════════════════
+function buildFilters() {
+  const chainEl = document.getElementById('chainFilter');
+  const protoEl = document.getElementById('protoFilter');
+  chains.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c.toUpperCase();
+    chainEl.appendChild(opt);
+  });
+  protos.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p; opt.textContent = p;
+    protoEl.appendChild(opt);
+  });
 }
 
 function filterPositions() {
-    const chain = document.getElementById('chainFilter').value;
-    const proto = document.getElementById('protoFilter').value;
-    const search = document.getElementById('searchFilter').value.toLowerCase().trim();
+  const chain = document.getElementById('chainFilter').value;
+  const proto = document.getElementById('protoFilter').value;
+  const search = document.getElementById('searchFilter').value.toLowerCase().trim();
 
-    let data = positions;
-    if (chain !== 'all') data = data.filter(p => p.chain === chain);
-    if (proto !== 'all') data = data.filter(p => p.protocol_name === proto);
-    if (search) {
-        data = data.filter(p =>
-            (p.wallet || '').toLowerCase().includes(search) ||
-            (p.protocol_name || '').toLowerCase().includes(search) ||
-            (p.supply || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
-            (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
-            (p.strategy || '').toLowerCase().includes(search)
-        );
-    }
-    return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
+  let data = positions;
+  if (chain !== 'all') data = data.filter(p => p.chain === chain);
+  if (proto !== 'all') data = data.filter(p => getFieldValue(p, protocolCol) === proto);
+  if (search) {
+    data = data.filter(p =>
+      (p.wallet || '').toLowerCase().includes(search) ||
+      getFieldValue(p, protocolCol).toLowerCase().includes(search) ||
+      (p.protocol_name || '').toLowerCase().includes(search) ||
+      (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
+      (p.strategy || '').toLowerCase().includes(search)
+    );
+  }
+  return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
 }
 
-function updateSummary(data) {
-    const total = data.reduce((s, p) => s + (p.net_usd || 0), 0);
-    const supply = data.reduce((s, p) => s + (p.asset_usd || 0), 0);
-    const borrow = data.reduce((s, p) => s + (Math.abs(p.debt_usd) || 0), 0);
-    const wallets = new Set(data.map(p => p.wallet)).size;
-    const avgApy = supply > 0 ? (data.reduce((s, p) => s + ((p.apy_net || 0) * (p.asset_usd || 0)), 0) / supply) : 0;
-    const avgUtil = supply > 0 ? (borrow / supply * 100) : 0;
-
-    const avgHf = positions.filter(p => p.health_rate > 0).reduce((s, p, _, arr) => s + p.health_rate / arr.length, 0);
-
-    const chainsUsed = [...new Set(data.map(p => p.chain))].length;
-    const protocolList = [...new Set(data.map(p => p.protocol_name))];
-    const protosUsed = protocolList.length;
-    const topProto = [...new Map(data.map(p => [p.protocol_name, (p.net_usd || 0)])).entries()]
-        .sort((a, b) => b[1] - a[1])[0];
-    const topChain = [...new Map(data.map(p => [p.chain, (p.net_usd || 0)])).entries()]
-        .sort((a, b) => b[1] - a[1])[0];
-
-    document.getElementById('summaryCards').innerHTML = `
-        <div class="card"><div class="card-label">Total Value</div><div class="card-value green">${fmtShort(total)}</div><div class="card-sub">${data.length} positions</div></div>
-        <div class="card"><div class="card-label">Net APY</div><div class="card-value blue">${avgApy.toFixed(2)}%</div><div class="card-sub">weighted avg</div></div>
-        <div class="card"><div class="card-label">Utilization</div><div class="card-value">${avgUtil.toFixed(1)}%</div><div class="card-sub">${fmtShort(borrow)} borrowed</div></div>
-        <div class="card"><div class="card-label">Health Factor</div><div class="card-value purple ${hfClass(avgHf)}">${avgHf.toFixed(2)}</div><div class="card-sub">${avgHf >= 1.1 ? 'Safe' : '⚠️ Below 1.1'}</div></div>
-        <div class="card"><div class="card-label">Wallets</div><div class="card-value">${wallets}</div><div class="card-sub">active</div></div>
-        <div class="card"><div class="card-label">Top Protocol</div><div class="card-value blue">${topProto ? topProto[0] : '-'}</div><div class="card-sub">${topProto ? fmtShort(topProto[1]) : ''}</div></div>
-        <div class="card"><div class="card-label">Top Chain</div><div class="card-value blue">${topChain ? topChain[0].toUpperCase() : '-'}</div><div class="card-sub">${topChain ? fmtShort(topChain[1]) : ''}</div></div>
-        <div class="card"><div class="card-label">Distribution</div><div class="card-value">${chainsUsed} chains</div><div class="card-sub">${protosUsed} protocols</div></div>
-    `;
-
-    const protoHtml = protocolList.map(p => {
-        const count = data.filter(d => d.protocol_name === p).length;
-        const val = data.filter(d => d.protocol_name === p).reduce((s, d) => s + (d.net_usd || 0), 0);
-        return `<div class="proto-chip"><strong>${p}</strong> ${count} pos · ${fmtShort(val)}</div>`;
-    }).join('');
-    document.getElementById('protoSummary').innerHTML = protoHtml;
+function updateView() {
+  const data = filterPositions();
+  renderCards(data);
+  renderTable(data);
 }
 
+// ═══════════════════════════════════════════════════════════════
+// XLSX EXPORT
+// ═══════════════════════════════════════════════════════════════
 function downloadXLSX() {
-    const rows = positions.map(p => ({
-        Wallet: p.wallet,
-        Chain: p.chain,
-        Protocol: p.protocol_name,
-        Strategy: p.strategy,
-        SupplyTokens: (p.supply || []).map(t => t.symbol).join(', '),
-        BorrowTokens: (p.borrow || []).map(t => t.symbol).join(', '),
-        SupplyUSD: p.asset_usd,
-        BorrowUSD: p.debt_usd,
-        NetUSD: p.net_usd,
-        BaseAPY: p.apy_base,
-        BonusSupply: p.bonus_supply,
-        BonusBorrow: p.bonus_borrow,
-        CostAPY: p.apy_cost,
-        NetAPY: p.apy_net,
-        Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
-        HealthFactor: p.health_rate,
-        ScanTime: p.scanned_at,
-    }));
-    const ws = XLSX.utils.json_to_sheet(rows);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Positions');
-    ws['!cols'] = [
-        { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 },
-        { wch: 40 }, { wch: 40 },
-        { wch: 16 }, { wch: 16 }, { wch: 16 },
-        { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
-        { wch: 22 },
-    ];
-    XLSX.writeFile(wb, 'avant_positions.xlsx');
+  const rows = positions.map(p => ({
+    Wallet: p.wallet,
+    Chain: p.chain,
+    Protocol: getFieldValue(p, protocolCol),
+    Strategy: p.strategy,
+    SupplyTokens: (p.supply || []).map(t => t.symbol).join(', '),
+    BorrowTokens: (p.borrow || []).map(t => t.symbol).join(', '),
+    SupplyUSD: p.asset_usd,
+    BorrowUSD: p.debt_usd,
+    NetUSD: p.net_usd,
+    BaseAPY: p.apy_base,
+    BonusSupply: p.bonus_supply,
+    BonusBorrow: p.bonus_borrow,
+    CostAPY: p.apy_cost,
+    NetAPY: p.apy_net,
+    Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
+    HealthFactor: p.health_rate,
+    ScanTime: p.scanned_at,
+  }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Positions');
+  ws['!cols'] = [
+    { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 },
+    { wch: 40 }, { wch: 40 },
+    { wch: 16 }, { wch: 16 }, { wch: 16 },
+    { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
+    { wch: 22 },
+  ];
+  XLSX.writeFile(wb, 'avant_positions.xlsx');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    buildFilters();
-    const data = filterPositions();
-    updateSummary(data);
-    renderTable(data);
-    document.getElementById('chainFilter').addEventListener('change', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-    document.getElementById('protoFilter').addEventListener('change', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-    document.getElementById('searchFilter').addEventListener('input', () => {
-        const data = filterPositions();
-        updateSummary(data);
-        renderTable(data);
-    });
-});
-
-// Detail modal
+// ═══════════════════════════════════════════════════════════════
+// DETAIL MODAL
+// ═══════════════════════════════════════════════════════════════
 function showDetail(p) {
-    const modal = document.getElementById('detail-modal');
-    if (!modal) return;
-    
-    const bonusSupply = p.bonus_supply || 0;
-    const bonusBorrow = p.bonus_borrow || 0;
-    
-    let supplyDetail = (p.supply || []).map(t => {
-        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% base`;
-        if (t.bonus_supply_apy) info += ` + ${(t.bonus_supply_apy).toFixed(2)}%`;
-        return info;
-    }).join('<br>');
-    
-    let borrowDetail = (p.borrow || []).map(t => {
-        let info = `${t.symbol}: ${(t.apy_base || 0).toFixed(2)}% cost`;
-        if (t.bonus_borrow_apy) info += ` − ${(t.bonus_borrow_apy).toFixed(2)}%`;
-        return info;
-    }).join('<br>');
-    
-    modal.innerHTML = `
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-                <h3 style="margin:0">${p.protocol_name} — ${p.supply?.map(t=>t.symbol).join('/') || p.symbol || ''}</h3>
-                <button onclick="document.getElementById('detail-modal').style.display='none'" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer">×</button>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Supply</div>
-                    <div style="font-size:13px">${supplyDetail || '-'}</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Borrow</div>
-                    <div style="font-size:13px">${borrowDetail || '-'}</div>
-                </div>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Base APY</div>
-                    <div style="font-size:18px;font-weight:600">${(p.apy_base || 0).toFixed(2)}%</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div>
-                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">+${bonusSupply.toFixed(2)}%</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Cost APY</div>
-                    <div style="font-size:18px;font-weight:600">${(p.apy_cost || 0).toFixed(2)}%</div>
-                </div>
-                <div>
-                    <div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div>
-                    <div style="font-size:18px;font-weight:600;color:var(--accent-green)">−${bonusBorrow.toFixed(2)}%</div>
-                </div>
-            </div>
-            <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-                <div style="color:var(--text-secondary);font-size:12px">Net APY</div>
-                <div style="font-size:28px;font-weight:700;color:${(p.apy_net||0) > 0 ? 'var(--accent-green)' : '#f85149'}">${(p.apy_net || 0).toFixed(2)}%</div>
-            </div>
-        </div>
-    `;
-    modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
-    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+  const modal = document.getElementById('detail-modal');
+  if (!modal) return;
+
+  let supplyDetail = (p.supply || []).map(t => {
+    let info = t.symbol + ': ' + (t.apy_base || 0).toFixed(2) + '% base';
+    if (t.bonus_supply_apy) info += ' + ' + (t.bonus_supply_apy).toFixed(2) + '%';
+    return info;
+  }).join('<br>');
+
+  let borrowDetail = (p.borrow || []).map(t => {
+    let info = t.symbol + ': ' + (t.apy_base || 0).toFixed(2) + '% cost';
+    if (t.bonus_borrow_apy) info += ' \u2212 ' + (t.bonus_borrow_apy).toFixed(2) + '%';
+    return info;
+  }).join('<br>');
+
+  modal.innerHTML =
+    '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
+      '<h3 style="margin:0">' + getFieldValue(p, protocolCol) + ' \u2014 ' + (p.supply ? p.supply.map(t => t.symbol).join('/') : (p.symbol || '')) + '</h3>' +
+      '<button onclick="document.getElementById('detail-modal').style.display='none'" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer;">\u00d7</button>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Supply</div><div style="font-size:13px">' + (supplyDetail || '-') + '</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Borrow</div><div style="font-size:13px">' + (borrowDetail || '-') + '</div></div>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Base APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_base || 0).toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">+' + (p.bonus_supply || 0).toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Cost APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_cost || 0).toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">\u2212' + (p.bonus_borrow || 0).toFixed(2) + '%</div></div>' +
+    '</div>' +
+    '<div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
+      '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
+      '<div style="font-size:28px;font-weight:700;color:' + ((p.apy_net || 0) > 0 ? 'var(--accent-green)' : '#f85149') + '">' + (p.apy_net || 0).toFixed(2) + '%</div>' +
+    '</div></div>';
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
+  modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
 }
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildFilters();
+  updateView();
+  ['chainFilter', 'protoFilter', 'searchFilter'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateView);
+    document.getElementById(id).addEventListener('change', updateView);
+  });
+});
 </script>
 </body>
 </html>
