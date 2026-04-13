@@ -278,8 +278,8 @@ let WHALE_DATA = [];
 let positions = [];
 let WHALE_VAULTS = {};
 
-let chains = [...new Set(positions.map(p => p.chain))].sort();
-let protos = [...new Set(positions.map(p => p.protocol_name))].sort();
+let chains = [];
+let protos = [];
 
 // Build vault tabs if multi-vault whale
 function buildVaultTabs() {

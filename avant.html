@@ -237,9 +237,9 @@ async function loadData() {
   }
 }
 
-let protocolCol = COLUMNS.find(c => c.key === 'protocol');
-let chains = [...new Set(positions.map(p => p.chain))].sort();
-let protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
+let protocolCol = null;
+let chains = [];
+let protos = [];
 
 // Build vault tabs
 if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
