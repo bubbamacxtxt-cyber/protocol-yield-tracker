@@ -264,7 +264,6 @@ tr:hover td { background: var(--bg-secondary); }
                     <th>Bonus APY</th>
                     <th>Cost APY</th>
                     <th>Net APY</th>
-                    <th>Utilization</th>
                     <th>Health Factor</th>
                 </tr>
             </thead>
@@ -370,7 +369,6 @@ function renderTable(data) {
     body.innerHTML = data.map(p => {
         const supplyTokens = (p.supply || []).map(t => t.symbol).filter(Boolean).join(', ');
         const borrowTokens = (p.borrow || []).map(t => t.symbol).filter(Boolean).join(', ');
-        const util = p.asset_usd > 0 ? ((Math.abs(p.debt_usd || 0) / p.asset_usd) * 100).toFixed(1) + '%' : '-';
         const hf = p.health_rate ? p.health_rate.toFixed(2) : '-';
         const baseApy = p.apy_base != null ? p.apy_base.toFixed(2) + '%' : '-';
         const bonusSupply = p.bonus_supply || 0;
@@ -396,7 +394,6 @@ function renderTable(data) {
             <td style="color:var(--accent-green)">${bonusApy}</td>
             <td>${costApy}</td>
             <td style="font-weight:600;color:${netColor}">${netApy}</td>
-            <td>${util}</td>
             <td class="${hfClass(p.health_rate)}">${hf}</td>
         </tr>`;
     }).join('');
@@ -428,7 +425,6 @@ function updateSummary(data) {
     const borrow = data.reduce((s, p) => s + (Math.abs(p.debt_usd) || 0), 0);
     const wallets = new Set(data.map(p => p.wallet)).size;
     const avgApy = supply > 0 ? (data.reduce((s, p) => s + ((p.apy_net || 0) * (p.asset_usd || 0)), 0) / supply) : 0;
-    const avgUtil = supply > 0 ? (borrow / supply * 100) : 0;
 
     const avgHf = positions.filter(p => p.health_rate > 0).reduce((s, p, _, arr) => s + p.health_rate / arr.length, 0);
 
@@ -443,7 +439,6 @@ function updateSummary(data) {
     document.getElementById('summaryCards').innerHTML = `
         <div class="card"><div class="card-label">Total Value</div><div class="card-value green">${fmtShort(total)}</div><div class="card-sub">${data.length} positions</div></div>
         <div class="card"><div class="card-label">Net APY</div><div class="card-value blue">${avgApy.toFixed(2)}%</div><div class="card-sub">weighted avg</div></div>
-        <div class="card"><div class="card-label">Utilization</div><div class="card-value">${avgUtil.toFixed(1)}%</div><div class="card-sub">${fmtShort(borrow)} borrowed</div></div>
         <div class="card"><div class="card-label">Health Factor</div><div class="card-value purple ${hfClass(avgHf)}">${avgHf.toFixed(2)}</div><div class="card-sub">${avgHf >= 1.1 ? 'Safe' : '⚠️ Below 1.1'}</div></div>
         <div class="card"><div class="card-label">Wallets</div><div class="card-value">${wallets}</div><div class="card-sub">active</div></div>
         <div class="card"><div class="card-label">Top Protocol</div><div class="card-value blue">${topProto ? topProto[0] : '-'}</div><div class="card-sub">${topProto ? fmtShort(topProto[1]) : ''}</div></div>
@@ -475,7 +470,6 @@ function downloadXLSX() {
         BonusBorrow: p.bonus_borrow,
         CostAPY: p.apy_cost,
         NetAPY: p.apy_net,
-        Utilization: p.asset_usd > 0 ? (Math.abs(p.debt_usd || 0) / p.asset_usd) : 0,
         HealthFactor: p.health_rate,
         ScanTime: p.scanned_at,
     }));
