@@ -8,133 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-<style>
-:root {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-card: #1c2128;
-  --border: #30363d;
-  --text-primary: #f0f6fc;
-  --text-secondary: #8b949e;
-  --accent-blue: #58a6ff;
-  --accent-green: #3fb950;
-  --accent-purple: #a371f7;
-  --accent-orange: #d29922;
-  --gradient-blue: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%);
-  --gradient-teal: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --gradient-btn: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-
-.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
-
-.header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
-
-.home-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text-secondary); text-decoration: none;
-  font-size: 13px; cursor: pointer; transition: all 0.2s;
-}
-.home-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-
-h1 {
-  font-size: 28px; font-weight: 700;
-  background: var(--gradient-teal); -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; background-clip: text;
-}
-.subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
-
-.cards {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px; margin-bottom: 30px;
-}
-.card {
-  background: var(--gradient-blue); border: 1px solid #5a8ac4;
-  border-top: 1px solid rgba(140,180,230,0.4); border-bottom: 1px solid #1a3a6a;
-  border-radius: 12px; padding: 20px;
-  inset-shadow: 0 1px 0 rgba(200,220,255,0.25), 0 2px 2px rgba(100,160,230,0.1), 0 -2px 6px rgba(0,0,0,0.5);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-.card-label { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.card-value.green { color: var(--accent-green); }
-.card-value.red { color: #f85149; }
-.card-value.blue { color: var(--accent-blue); }
-.card-value.purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
-
-.proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.proto-chip { padding: 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
-.proto-chip strong { color: var(--accent-blue); }
-
-.filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
-.filter-group { display: flex; align-items: center; gap: 6px; }
-.filter-group label { color: var(--text-secondary); font-size: 13px; }
-.filter-group select, .filter-group input {
-  background: var(--bg-secondary); border: 1px solid var(--border);
-  color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 13px;
-}
-.download-btn {
-  margin-left: auto; padding: 8px 16px; background: var(--gradient-btn);
-  border: 1px solid #2d4a6f; border-radius: 8px; color: white; cursor: pointer;
-  font-size: 13px; font-weight: 600; transition: background 0.2s, border-color 0.2s;
-}
-.download-btn:hover { background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%); border-color: #3d6a9f; }
-
-.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th {
-  background: var(--bg-secondary); padding: 12px 16px; text-align: left;
-  color: var(--text-secondary); font-size: 11px; text-transform: uppercase;
-  letter-spacing: 1px; position: sticky; top: 0;
-}
-th:nth-child(n+9) { text-align: right; }
-td { padding: 12px 16px; border-top: 1px solid #21262d; }
-td:nth-child(n+9) { text-align: right; font-variant-numeric: tabular-nums; }
-tr:hover td { background: var(--bg-secondary); }
-
-.badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.badge-loop { background: #1f6feb22; color: var(--accent-blue); }
-.badge-lend { background: #23863622; color: var(--accent-green); }
-.badge-stake { background: #a371f722; color: #bc8cff; }
-.vault-tab {
-  padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text-secondary); font-size: 13px; cursor: pointer; font-family: inherit;
-}
-.vault-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
-.vault-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
-.badge-farm { background: #d2992222; color: var(--accent-orange); }
-.badge-lp { background: #f8514922; color: #ff7b72; }
-.badge-illiquid { background: #a371f722; color: #bc8cff; }
-.badge-liquid { background: #4facfe22; color: #4facfe; }
-
-.hf { font-weight: 600; }
-.hf-safe { color: var(--accent-green); }
-.hf-warn { color: var(--accent-orange); }
-.hf-danger { color: #f85149; }
-
-@media (max-width: 768px) {
-  .container { padding: 16px; }
-  .cards { grid-template-columns: repeat(2, 1fr); }
-  .table-wrap { font-size: 12px; }
-  th, td { padding: 8px 10px; }
-}
-#detail-modal .modal-content { animation: slideIn 0.2s ease; }
-@keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-</style>
-<div id="detail-modal"></div>
+<link rel="stylesheet" href="whale-common.css">
 </head>
 <body>
 <div class="container">
@@ -143,132 +17,45 @@ tr:hover td { background: var(--bg-secondary); }
     <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
     <h1>Upshift</h1>
   </div>
-  <p class="subtitle">Wallet positions and yield strategies</p>
-  <div class="cards" id="summaryCards"></div>
-  <div class="proto-summary" id="protoSummary"></div>
-  <div id="vaultTabs" style="display:none;margin-bottom:16px;">
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="vault-tab active" data-vault="all" onclick="filterVault('all')">All Vaults</button>
-    </div>
-  </div>
-  <div class="filters">
-    <div class="filter-group"><label>Chain:</label><select id="chainFilter"><option value="all">All chains</option></select></div>
-    <div class="filter-group"><label>Protocol:</label><select id="protoFilter"><option value="all">All protocols</option></select></div>
-    <div class="filter-group"><label>Search:</label><input type="text" id="searchFilter" placeholder="Token, wallet, or protocol..."></div>
-    <button class="download-btn" onclick="downloadXLSX()">&#8595; Download XLSX</button>
-  </div>
-  <div class="table-wrap">
-    <table id="positionsTable">
-      <thead><tr id="tableHeader"></tr></thead>
-      <tbody id="positionsBody"></tbody>
-    </table>
-  </div>
+  <p class="subtitle">Vault overview — click a vault to view positions</p>
+  <div id="vaultGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:24px;"></div>
 </div>
 <script>
-// ═══════════════════════════════════════════════════════════════
-// SINGLE SOURCE OF TRUTH — columns define field mappings
-// Table and cards both derive from this config
-// ═══════════════════════════════════════════════════════════════
-const COLUMNS = [
-  { key: 'wallet',     label: 'Wallet',        field: 'wallet',          render: v => '<a href="https://debank.com/profile/' + v + '" target="_blank" style="color:var(--accent-blue);text-decoration:none">' + shortWallet(v) + '</a>', sortable: true },
-  { key: 'chain',      label: 'Chain',         field: 'chain',           render: v => (v || '').toUpperCase() },
-  { key: 'protocol',   label: 'Protocol',      field: 'protocol_name' },
-  { key: 'strategy',   label: 'Strategy',      field: 'strategy',        render: v => strategyBadge(v) },
-  { key: 'supply',     label: 'Supply Tokens', field: 'protocol_name' },
-  { key: 'borrow',     label: 'Borrow Tokens', field: 'borrow',          render: v => (v || []).map(t => t.symbol).filter(Boolean).join(', ') || '-' },
-  { key: 'supply_usd', label: 'Supply USD',    field: 'asset_usd',       format: 'usd_short', align: 'right' },
-  { key: 'borrow_usd', label: 'Borrow USD',    field: 'debt_usd',        format: 'usd_short', align: 'right' },
-  { key: 'net_usd',    label: 'Net USD',       field: 'net_usd',         format: 'usd_short', align: 'right', bold: true, color: 'green' },
-  { key: 'base_apy',   label: 'Base APY',      field: 'apy_base',        format: 'pct', align: 'right' },
-  { key: 'bonus_apy',  label: 'Bonus APY',     field: 'bonus_total',     format: 'bonus', align: 'right', color: 'green' },
-  { key: 'cost_apy',   label: 'Cost APY',      field: 'apy_cost',        format: 'pct', align: 'right' },
-  { key: 'net_apy',    label: 'Net APY',       field: 'apy_net',         format: 'pct', align: 'right', bold: true, color_dynamic: true },
-  { key: 'health',     label: 'Health Factor',  field: 'health_rate',     render: v => v ? v.toFixed(2) : '-', compute_class: p => hfClass(p.health_rate), align: 'right' },
-];
-
-// Cards derive from same field keys as COLUMNS
-const CARDS = [
-  { label: 'Total Value', field: 'net_usd',    aggregate: 'sum',     format: 'usd_short', color: 'green', subtitle: d => d.length + ' positions' },
-  { label: 'Net APY',     field: 'apy_net',    aggregate: 'wavg',    weight: 'asset_usd', format: 'pct', color: 'blue', subtitle: () => 'weighted avg' },
-  { label: 'Health Factor', field: 'health_rate', aggregate: 'avg', filter: p => p.health_rate > 0, format: 'num', render_class: v => hfClass(v), color: 'purple', subtitle: d => { const avg = d.filter(p => p.health_rate > 0).reduce((s,p,_,a) => s + p.health_rate / a.length, 0); return avg >= 1.1 ? 'Safe' : '⚠️ Below 1.1'; } },
-  { label: 'Wallets',     field: 'wallet',     aggregate: 'count_unique', format: 'none', subtitle: () => 'active' },
-  { label: 'Top Protocol', field: 'protocol',  aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
-  { label: 'Top Chain',   field: 'chain',      aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', render: v => (v||'').toUpperCase(), subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
-  { label: 'Distribution', field: '_computed', aggregate: 'custom',  fn: (d) => { const chains = new Set(d.map(p => p.chain)).size; const protos = new Set(d.map(p => getFieldValue(p, COLUMNS.find(c => c.key === 'protocol')))).size; return chains + ' chains'; }, subtitle: d => { const protos = new Set(d.map(p => getFieldValue(p, COLUMNS.find(c => c.key === 'protocol')))).size; return protos + ' protocols'; } },
-];
-
-// ═══════════════════════════════════════════════════════════════
-// FIELD RESOLUTION — shared by table AND cards
-// ═══════════════════════════════════════════════════════════════
-function getFieldValue(position, col) {
-  if (col.compute) return col.compute(position);
-  const val = position[col.field];
-  if ((val === undefined || val === null) && col.fallback) return position[col.fallback];
-  return val;
-}
-
-function resolveFieldKey(key) {
-  return COLUMNS.find(c => c.key === key);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════════════════════
 const WHALE_NAME = 'Upshift';
-let WHALE_DATA = [];
-let positions = [];
-const WHALE_VAULTS = {"Upshift Core USDC":{"name":"Upshift Core USDC","wallets":["0xf014ef13a3e0372582f44a667e144a4f2e439ea7"],"total_wallets":1,"active_wallets":1,"positions":[{"id":66,"wallet":"0xf014ef13a3e0372582f44a667e144a4f2e439ea7","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":2.294,"net_usd":9920223.09,"asset_usd":16500769.38,"debt_usd":6580546.3,"position_index":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","debank_updated_at":"2026-04-11T16:47:41.000Z","scanned_at":"2026-04-11 17:56:59","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","amount":1069482.68156519,"price_usd":0.999600159936026,"value_usd":1069055.05954138,"apy_base":9.84227045938491,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":9.84227045938491,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":16.371107136653826,"apy_reward":null}],"slug":"upshift-core-usdc"},"earnAUSD":{"name":"earnAUSD","wallets":["0x9f1a1479191af103ff82fead23e950b6b3b2bd1a"],"total_wallets":1,"active_wallets":1,"positions":[{"id":67,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"loop","yield_source":"Morpho","health_rate":1.054,"net_usd":9495668.15,"asset_usd":72107700.32,"debt_usd":62612032.18,"position_index":"0x4c9edd5852cd905f086c759e8383e09bff1e68b3","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"sUSDe","real_symbol":"sUSDe","real_name":"USDe","address":"0x9d39a5de30e57443bff2a8307a4256c8797a3497","amount":72143532.7391316,"price_usd":0.9995,"value_usd":72107460.972762,"apy_base":3.58765,"apy_base_source":"ybs","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"PYUSD","real_symbol":"PYUSD","real_name":"Paypal USD","address":"0x6c3ea9036406852006290770bedfcaba0e23a0e8","amount":62618294.00558,"price_usd":0.9997,"value_usd":62599508.5173784,"apy_base":0,"apy_base_source":"morpho_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":3.58765,"apy_cost":0,"bonus_supply":null,"bonus_borrow":null,"apy_net":27.24370596849975,"apy_reward":null},{"id":68,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"eth","protocol_id":"morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":7649864.03,"asset_usd":7649864.03,"debt_usd":0,"position_index":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"AUSD","real_symbol":"AUSD","real_name":"Agora Dollar","address":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","amount":7652963.083446,"price_usd":0.99949513210895,"value_usd":7649099.34811378,"apy_base":2.60380426541904,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.60380426541904,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.60380426541904,"apy_reward":null},{"id":75,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":4974957.98,"asset_usd":4974957.98,"debt_usd":0,"position_index":"0x754704bc059f8c67012fed69bc8a327a5aafb603","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x754704bc059f8c67012fed69bc8a327a5aafb603","amount":4976947.967639,"price_usd":0.999600159936026,"value_usd":4974957.98444522,"apy_base":6.72130196316321,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":6.72130196316321,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":6.72130196316321,"apy_reward":null},{"id":76,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":3945692.22,"asset_usd":3945692.22,"debt_usd":0,"position_index":"0xe7cd86e13ac4309349f30b3435a9d337750fc82d","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:03","supply":[{"symbol":"USDT0","real_symbol":"USDT0","real_name":"USDT0","address":"0xe7cd86e13ac4309349f30b3435a9d337750fc82d","amount":3944745.480522,"price_usd":1.00018,"value_usd":3945455.53470849,"apy_base":2.92972197154389,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.92972197154389,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.92972197154389,"apy_reward":null},{"id":73,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_gearbox","protocol_name":"Gearbox","position_type":"Yield","strategy":"yield","yield_source":"Gearbox","health_rate":null,"net_usd":2072708.84,"asset_usd":2072708.84,"debt_usd":0,"position_index":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"AUSD","real_symbol":"AUSD","real_name":"Agora Dollar","address":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","amount":2073385.450157,"price_usd":0.999673668921115,"value_usd":2072708.84004611,"apy_base":0,"apy_base_source":"non-yield","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":0,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":0,"apy_reward":null},{"id":72,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_gearbox","protocol_name":"Gearbox","position_type":"Yield","strategy":"yield","yield_source":"Gearbox","health_rate":null,"net_usd":1935724.41,"asset_usd":1935724.41,"debt_usd":0,"position_index":"0x754704bc059f8c67012fed69bc8a327a5aafb603","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x754704bc059f8c67012fed69bc8a327a5aafb603","amount":1936498.696036,"price_usd":0.999600159936026,"value_usd":1935724.40627349,"apy_base":2.36458333333333,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.36458333333333,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.36458333333333,"apy_reward":null},{"id":69,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_curvance","protocol_name":"Curvance","position_type":"Lending","strategy":"lend","yield_source":"Curvance","health_rate":null,"net_usd":669036.68,"asset_usd":669036.68,"debt_usd":0,"position_index":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"AUSD","real_symbol":"AUSD","real_name":"Agora Dollar","address":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","amount":382891.865463209,"price_usd":0.999673668921115,"value_usd":382766.915947656,"apy_base":0,"apy_base_source":"non-yield","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":0,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":0,"apy_reward":null},{"id":71,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_euler2","protocol_name":"Euler","position_type":"Lending","strategy":"lend","yield_source":"Euler","health_rate":null,"net_usd":493465.23,"asset_usd":493465.23,"debt_usd":0,"position_index":"0x754704bc059f8c67012fed69bc8a327a5aafb603","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x754704bc059f8c67012fed69bc8a327a5aafb603","amount":830673.603556,"price_usd":0.999600159936026,"value_usd":830341.466969212,"apy_base":2.36458333333333,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":2.36458333333333,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":2.36458333333333,"apy_reward":null},{"id":74,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_morphoblue","protocol_name":"Morpho","position_type":"Lending","strategy":"lend","yield_source":"Morpho","health_rate":null,"net_usd":347038.89,"asset_usd":347038.89,"debt_usd":0,"position_index":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"AUSD","real_symbol":"AUSD","real_name":"Agora Dollar","address":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","amount":347152.178476,"price_usd":0.999673668921115,"value_usd":347038.891931061,"apy_base":4.61933865847186,"apy_base_source":"morpho_supply","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":4.61933865847186,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":4.61933865847186,"apy_reward":null},{"id":70,"wallet":"0x9f1a1479191af103ff82fead23e950b6b3b2bd1a","chain":"monad","protocol_id":"monad_euler2","protocol_name":"Euler","position_type":"Lending","strategy":"lend","yield_source":"Euler","health_rate":null,"net_usd":257297.66,"asset_usd":257297.66,"debt_usd":0,"position_index":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","debank_updated_at":"2026-04-11T17:02:12.000Z","scanned_at":"2026-04-11 17:57:00","supply":[{"symbol":"AUSD","real_symbol":"AUSD","real_name":"Agora Dollar","address":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","amount":355691.020658,"price_usd":0.999673668921115,"value_usd":355574.947623479,"apy_base":0,"apy_base_source":"non-yield","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":0,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":0,"apy_reward":null}],"slug":"earnausd"},"Upshift singularV":{"name":"Upshift singularV","wallets":["0x6f64630a0c12c60813a80a215fb9a31e52528820"],"total_wallets":1,"active_wallets":1,"positions":[{"id":106,"wallet":"0x6f64630a0c12c60813a80a215fb9a31e52528820","chain":"avax","protocol_id":"avax_traderjoexyz","protocol_name":"LFJ","position_type":"Liquidity Pool","strategy":"lp","yield_source":"LFJ","health_rate":null,"net_usd":1265806.52,"asset_usd":1265806.52,"debt_usd":0,"position_index":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a,0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e","debank_updated_at":"2026-04-11T06:03:33.000Z","scanned_at":"2026-04-11 17:57:27","supply":[{"symbol":"AUSD","real_symbol":"AUSD","real_name":"Agora Dollar","address":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","amount":288736.419461512,"price_usd":0.999700119952019,"value_usd":288649.83317019,"apy_base":0,"apy_base_source":"non-yield","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null},{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e","amount":977547.553533814,"price_usd":0.999600159936026,"value_usd":977156.690857471,"apy_base":2.36458333333333,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":1.8253725047211349,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":1.8253725047211349,"apy_reward":null},{"id":105,"wallet":"0x6f64630a0c12c60813a80a215fb9a31e52528820","chain":"eth","protocol_id":"dolomite","protocol_name":"Dolomite","position_type":"Lending","strategy":"lend","yield_source":"Dolomite","health_rate":null,"net_usd":1261961.28,"asset_usd":1261961.28,"debt_usd":0,"position_index":"0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d,0xdac17f958d2ee523a2206206994597c13d831ec7","debank_updated_at":"2026-04-11T06:34:26.000Z","scanned_at":"2026-04-11 17:57:27","supply":[{"symbol":"USD1","real_symbol":"USD1","real_name":"World Liberty Financial USD","address":"0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d","amount":1261069.00360364,"price_usd":0.9991,"value_usd":1259934.0415004,"apy_base":0,"apy_base_source":"non-yield","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null},{"symbol":"USDT","real_symbol":"USDT","real_name":"Tether USD","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","amount":2152.831198,"price_usd":1.00018,"value_usd":2153.21870761564,"apy_base":2.26875,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":0.003870663381942247,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":0.003870663381942247,"apy_reward":null},{"id":107,"wallet":"0x6f64630a0c12c60813a80a215fb9a31e52528820","chain":"monad","protocol_id":"monad_traderjoexyz","protocol_name":"LFJ","position_type":"Liquidity Pool","strategy":"lp","yield_source":"LFJ","health_rate":null,"net_usd":1001098.2,"asset_usd":1001098.2,"debt_usd":0,"position_index":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a,0x754704bc059f8c67012fed69bc8a327a5aafb603","debank_updated_at":"2026-04-11T09:59:06.000Z","scanned_at":"2026-04-11 17:57:28","supply":[{"symbol":"AUSD","real_symbol":"AUSD","real_name":"Agora Dollar","address":"0x00000000efe302beaa2b3e6e1b18d08d69a9012a","amount":903985.160423162,"price_usd":0.999673668921115,"value_usd":903690.161970465,"apy_base":0,"apy_base_source":"non-yield","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null},{"symbol":"USDC","real_symbol":"USDC","real_name":"USD Coin","address":"0x754704bc059f8c67012fed69bc8a327a5aafb603","amount":97447.0017015613,"price_usd":0.999600159936026,"value_usd":97408.0384861668,"apy_base":2.36458333333333,"apy_base_source":"aave_supply_ref","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[],"rewards":[],"apy_base":0.23007675394084337,"apy_cost":null,"bonus_supply":null,"bonus_borrow":null,"apy_net":0.23007675394084337,"apy_reward":null},{"id":108,"wallet":"0x6f64630a0c12c60813a80a215fb9a31e52528820","chain":"plasma","protocol_id":"plasma_aave3","protocol_name":"Aave V3","position_type":"Lending","strategy":"loop","yield_source":"Aave V3","health_rate":1.022,"net_usd":358019.54,"asset_usd":4348181.26,"debt_usd":3990161.72,"position_index":"0x30559e3d35e33ab69399a3fe9f383d32bd3c016e","debank_updated_at":"2026-04-11T07:37:14.000Z","scanned_at":"2026-04-11 17:57:31","supply":[{"symbol":"PT-sUSDE-18JUN2026","real_symbol":"PT-sUSDE-18JUN2026","real_name":"PT-sUSDE-18JUN2026","address":"0x30559e3d35e33ab69399a3fe9f383d32bd3c016e","amount":4379286.18615818,"price_usd":0.993113504178198,"value_usd":4349128.25013472,"apy_base":3.64261688953091,"apy_base_source":"pendle","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"borrow":[{"symbol":"USDe","real_symbol":"USDe","real_name":"Ethena USDe","address":"0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34","amount":3992157.79972001,"price_usd":0.9995,"value_usd":3990161.72082015,"apy_base":2.31565217391304,"apy_base_source":"aave_borrow","bonus_supply_apy":null,"bonus_supply_source":null,"bonus_borrow_apy":null,"bonus_borrow_source":null}],"rewards":[],"apy_base":3.64261688953091,"apy_cost":2.31565217391304,"bonus_supply":null,"bonus_borrow":null,"apy_net":18.431764465244544,"apy_reward":null}],"slug":"upshift-singularv"}};
+const SUB_DIR = 'upshift';
 
-// Pre-compute bonus_total and enrich positions
-async function loadData() {
+async function loadVaults() {
   try {
     const res = await fetch('data.json?t=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    WHALE_DATA = data.whales[WHALE_NAME]?.positions || [];
-    WHALE_DATA.forEach(p => { p.bonus_total = (p.bonus_supply || 0) + (p.bonus_borrow || 0); });
-    positions = WHALE_DATA;
-    WHALE_VAULTS = data.whales[WHALE_NAME]?.vaults || {};
-    protocolCol = COLUMNS.find(c => c.key === 'protocol');
-    chains = [...new Set(positions.map(p => p.chain))].sort();
-    protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
-    updateView();
+    const whale = data.whales[WHALE_NAME];
+    if (!whale || !whale.vaults) throw new Error('No vault data');
+
+    const grid = document.getElementById('vaultGrid');
+    for (const [vName, vData] of Object.entries(whale.vaults)) {
+      const positions = vData.positions || [];
+      const total = positions.reduce((s, p) => s + (p.net_usd || 0), 0);
+      const chains = [...new Set(positions.map(p => p.chain))];
+      const avgApy = total > 0 ? (positions.reduce((s, p) => s + (p.net_usd || 0) * (p.apy_net || 0), 0) / total).toFixed(2) : '0.00';
+      const slug = vName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+      const card = document.createElement('a');
+      card.className = 'vault-card';
+      card.href = SUB_DIR + '/' + slug + '.html';
+      card.innerHTML = `
+        <h3>${vName}</h3>
+        <div class="vault-stats">
+          <div class="vault-stat"><div class="label">Total Value</div><div class="value green">$${fmtShort(total)}</div></div>
+          <div class="vault-stat"><div class="label">Positions</div><div class="value">${positions.length}</div></div>
+          <div class="vault-stat"><div class="label">Avg APY</div><div class="value blue">${avgApy}%</div></div>
+          <div class="vault-stat"><div class="label">Chains</div><div class="value">${chains.length}</div></div>
+        </div>`;
+      grid.appendChild(card);
+    }
   } catch (e) {
     document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
   }
-}
-
-let protocolCol = null;
-let chains = [];
-let protos = [];
-
-// Build vault tabs
-if (WHALE_VAULTS && Object.keys(WHALE_VAULTS).length > 0) {
-  const tabsEl = document.getElementById('vaultTabs');
-  tabsEl.style.display = 'block';
-  const btns = tabsEl.querySelector('div');
-  for (const [vName] of Object.entries(WHALE_VAULTS)) {
-    const btn = document.createElement('button');
-    btn.className = 'vault-tab';
-    btn.dataset.vault = vName;
-    btn.textContent = vName;
-    btn.onclick = () => filterVault(vName);
-    btns.appendChild(btn);
-  }
-}
-
-let currentVault = 'all';
-function filterVault(vault) {
-  currentVault = vault;
-  document.querySelectorAll('.vault-tab').forEach(b => b.classList.toggle('active', b.dataset.vault === vault));
-}
-
-// ═══════════════════════════════════════════════════════════════
-// FORMATTERS — shared by table and cards
-// ═══════════════════════════════════════════════════════════════
-function fmt(n) {
-  if (n === null || n === undefined) return '-';
-  return '$' + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function fmtShort(n) {
@@ -279,273 +66,7 @@ function fmtShort(n) {
   return '$' + n.toFixed(2);
 }
 
-function formatValue(val, format, render) {
-  if (render) return render(val);
-  switch (format) {
-    case 'usd_short': return fmtShort(val);
-    case 'usd': return fmt(val);
-    case 'pct': return val != null ? val.toFixed(2) + '%' : '-';
-    case 'bonus': return val > 0 ? '+' + val.toFixed(2) + '%' : '';
-    case 'num': return val != null ? val.toFixed(2) : '-';
-    default: return val ?? '-';
-  }
-}
-
-function hfClass(hf) {
-  if (!hf || hf === 0) return '';
-  if (hf >= 1.5) return 'hf-safe';
-  if (hf >= 1.1) return 'hf-warn';
-  return 'hf-danger';
-}
-
-function strategyBadge(s) {
-  if (!s) return '';
-  const cls = { Loop: 'badge-loop', Lend: 'badge-lend', Farm: 'badge-farm', Stake: 'badge-stake', LP: 'badge-lp' }[s] || 'badge-illiquid';
-  return '<span class="badge ' + cls + '">' + s + '</span>';
-}
-
-function shortWallet(addr) {
-  if (!addr) return '-';
-  return addr.slice(0, 6) + '...' + addr.slice(-4);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// RENDER TABLE — driven entirely by COLUMNS config
-// ═══════════════════════════════════════════════════════════════
-function renderTable(data) {
-  const header = document.getElementById('tableHeader');
-  header.innerHTML = COLUMNS.map(c => '<th>' + c.label + '</th>').join('');
-
-  const body = document.getElementById('positionsBody');
-  if (data.length === 0) {
-    body.innerHTML = '<tr><td colspan="' + COLUMNS.length + '" style="text-align:center;padding:40px;color:var(--text-secondary)">No positions match your filters</td></tr>';
-    return;
-  }
-
-  body.innerHTML = data.map(p => {
-    const cells = COLUMNS.map(c => {
-      const val = getFieldValue(p, c);
-      const display = formatValue(val, c.format, c.render);
-      const style = [];
-      if (c.bold) style.push('font-weight:600');
-      if (c.color === 'green') style.push('color:var(--accent-green)');
-      if (c.color === 'blue') style.push('color:var(--accent-blue)');
-      if (c.color_dynamic) {
-        const nc = val > 0 ? 'var(--accent-green)' : val < 0 ? '#f85149' : 'var(--text-secondary)';
-        style.push('color:' + nc);
-      }
-      if (c.compute_class) style.push(c.compute_class(p));
-      const align = c.align === 'right' ? 'text-align:right' : '';
-      var allStyles = [...style]; if (align) allStyles.push(align);
-  return '<td style="' + allStyles.join(';') + '">' + display + '</td>';
-    }).join('');
-
-    const detailData = JSON.stringify(p).replace(/"/g, '&quot;').replace(/</g, '\u003c');
-    return '<tr onclick="showDetail(' + detailData + ')" style="cursor:pointer">' + cells + '</tr>';
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// RENDER CARDS — derived from same field keys as COLUMNS
-// ═══════════════════════════════════════════════════════════════
-function renderCards(data) {
-  const cardsHtml = CARDS.map(card => {
-    let value, subtitle, topEntry = null;
-    if (card.aggregate === 'custom') {
-      value = card.fn(data);
-      subtitle = card.subtitle(data);
-    } else if (card.aggregate === 'sum') {
-      value = data.reduce((s, p) => s + (p[card.field] || 0), 0);
-      subtitle = card.subtitle(data);
-    } else if (card.aggregate === 'wavg') {
-      const wf = card.weight;
-      const tw = data.reduce((s, p) => s + (p[wf] || 0), 0);
-      value = tw > 0 ? data.reduce((s, p) => s + ((p[card.field] || 0) * (p[wf] || 0)), 0) / tw : 0;
-      subtitle = card.subtitle(data);
-    } else if (card.aggregate === 'avg') {
-      const filtered = card.filter ? data.filter(card.filter) : data;
-      value = filtered.length > 0 ? filtered.reduce((s, p) => s + (p[card.field] || 0), 0) / filtered.length : 0;
-      subtitle = card.subtitle(filtered.length > 0 ? filtered : data);
-    } else if (card.aggregate === 'count_unique') {
-      value = new Set(data.map(p => p[card.field])).size;
-      subtitle = card.subtitle(data);
-    } else if (card.aggregate === 'top') {
-      const col = resolveFieldKey(card.field);
-      const grouped = new Map();
-      data.forEach(p => {
-        const k = getFieldValue(p, col);
-        grouped.set(k, (grouped.get(k) || 0) + (p[card.sort_field] || 0));
-      });
-      const sorted = [...grouped.entries()].sort((a, b) => b[1] - a[1]);
-      topEntry = sorted[0];
-      value = topEntry ? (card.render ? card.render(topEntry[0]) : topEntry[0]) : '-';
-      subtitle = card.subtitle(data, topEntry ? { key: topEntry[0], sum: topEntry[1] } : null);
-    }
-
-    let display;
-    if (card.aggregate === 'top' && topEntry) {
-      display = value;
-    } else {
-      display = formatValue(value, card.format, card.render);
-    }
-
-    const renderClass = card.render_class ? card.render_class(value) : '';
-    const colorClass = card.color ? ' ' + card.color : '';
-    const sub = typeof subtitle === 'function' ? subtitle(data) : subtitle;
-
-    return '<div class="card">' +
-      '<div class="card-label">' + card.label + '</div>' +
-      '<div class="card-value' + colorClass + ' ' + renderClass + '">' + display + '</div>' +
-      '<div class="card-sub">' + (sub || '') + '</div>' +
-    '</div>';
-  }).join('');
-
-  document.getElementById('summaryCards').innerHTML = cardsHtml;
-
-  const grouped = new Map();
-  data.forEach(p => {
-    const k = getFieldValue(p, protocolCol);
-    const existing = grouped.get(k) || { count: 0, value: 0 };
-    grouped.set(k, { count: existing.count + 1, value: existing.value + (p.net_usd || 0) });
-  });
-  const protoHtml = [...grouped.entries()].map(([name, { count, value }]) =>
-    '<div class="proto-chip"><strong>' + name + '</strong> ' + count + ' pos · ' + fmtShort(value) + '</div>'
-  ).join('');
-  document.getElementById('protoSummary').innerHTML = protoHtml;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// FILTERS & EVENTS
-// ═══════════════════════════════════════════════════════════════
-function buildFilters() {
-  const chainEl = document.getElementById('chainFilter');
-  const protoEl = document.getElementById('protoFilter');
-  chains.forEach(c => {
-    const opt = document.createElement('option');
-    opt.value = c; opt.textContent = c.toUpperCase();
-    chainEl.appendChild(opt);
-  });
-  protos.forEach(p => {
-    const opt = document.createElement('option');
-    opt.value = p; opt.textContent = p;
-    protoEl.appendChild(opt);
-  });
-}
-
-function filterPositions() {
-  const chain = document.getElementById('chainFilter').value;
-  const proto = document.getElementById('protoFilter').value;
-  const search = document.getElementById('searchFilter').value.toLowerCase().trim();
-
-  let data = positions;
-  if (chain !== 'all') data = data.filter(p => p.chain === chain);
-  if (proto !== 'all') data = data.filter(p => getFieldValue(p, protocolCol) === proto);
-  if (search) {
-    data = data.filter(p =>
-      (p.wallet || '').toLowerCase().includes(search) ||
-      getFieldValue(p, protocolCol).toLowerCase().includes(search) ||
-      (p.protocol_name || '').toLowerCase().includes(search) ||
-      (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
-      (p.strategy || '').toLowerCase().includes(search)
-    );
-  }
-  return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
-}
-
-function updateView() {
-  const data = filterPositions();
-  renderCards(data);
-  renderTable(data);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// XLSX EXPORT
-// ═══════════════════════════════════════════════════════════════
-function downloadXLSX() {
-  const rows = positions.map(p => ({
-    Wallet: p.wallet,
-    Chain: p.chain,
-    Protocol: getFieldValue(p, protocolCol),
-    Strategy: p.strategy,
-    SupplyTokens: (p.supply || []).map(t => t.symbol).join(', '),
-    BorrowTokens: (p.borrow || []).map(t => t.symbol).join(', '),
-    SupplyUSD: p.asset_usd,
-    BorrowUSD: p.debt_usd,
-    NetUSD: p.net_usd,
-    BaseAPY: p.apy_base,
-    BonusSupply: p.bonus_supply,
-    BonusBorrow: p.bonus_borrow,
-    CostAPY: p.apy_cost,
-    NetAPY: p.apy_net,
-    HealthFactor: p.health_rate,
-    ScanTime: p.scanned_at,
-  }));
-  const ws = XLSX.utils.json_to_sheet(rows);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Positions');
-  ws['!cols'] = [
-    { wch: 44 }, { wch: 10 }, { wch: 20 }, { wch: 10 },
-    { wch: 40 }, { wch: 40 },
-    { wch: 16 }, { wch: 16 }, { wch: 16 },
-    { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 },
-    { wch: 22 },
-  ];
-  XLSX.writeFile(wb, 'upshift_positions.xlsx');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DETAIL MODAL
-// ═══════════════════════════════════════════════════════════════
-function showDetail(p) {
-  const modal = document.getElementById('detail-modal');
-  if (!modal) return;
-
-  let supplyDetail = (p.supply || []).map(t => {
-    let info = t.symbol + ': ' + (t.apy_base || 0).toFixed(2) + '% base';
-    if (t.bonus_supply_apy) info += ' + ' + (t.bonus_supply_apy).toFixed(2) + '%';
-    return info;
-  }).join('<br>');
-
-  let borrowDetail = (p.borrow || []).map(t => {
-    let info = t.symbol + ': ' + (t.apy_base || 0).toFixed(2) + '% cost';
-    if (t.bonus_borrow_apy) info += ' \u2212 ' + (t.bonus_borrow_apy).toFixed(2) + '%';
-    return info;
-  }).join('<br>');
-
-  modal.innerHTML =
-    '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">' +
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
-      '<h3 style="margin:0">' + getFieldValue(p, protocolCol) + ' \u2014 ' + (p.supply ? p.supply.map(t => t.symbol).join('/') : (p.symbol || '')) + '</h3>' +
-      '<button onclick="document.getElementById(&quot;detail-modal&quot;).style.display=&quot;none&quot; style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer;">\u00d7</button>' +
-    '</div>' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Supply</div><div style="font-size:13px">' + (supplyDetail || '-') + '</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Borrow</div><div style="font-size:13px">' + (borrowDetail || '-') + '</div></div>' +
-    '</div>' +
-    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Base APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_base || 0).toFixed(2) + '%</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">+' + (p.bonus_supply || 0).toFixed(2) + '%</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Cost APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_cost || 0).toFixed(2) + '%</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">\u2212' + (p.bonus_borrow || 0).toFixed(2) + '%</div></div>' +
-    '</div>' +
-    '<div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
-      '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
-      '<div style="font-size:28px;font-weight:700;color:' + ((p.apy_net || 0) > 0 ? 'var(--accent-green)' : '#f85149') + '">' + (p.apy_net || 0).toFixed(2) + '%</div>' +
-    '</div></div>';
-  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
-  modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
-}
-
-// ═══════════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  loadData();
-  ['chainFilter', 'protoFilter', 'searchFilter'].forEach(id => {
-    document.getElementById(id).addEventListener('input', updateView);
-    document.getElementById(id).addEventListener('change', updateView);
-  });
-});
+document.addEventListener('DOMContentLoaded', loadVaults);
 </script>
 </body>
 </html>
