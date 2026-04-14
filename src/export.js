@@ -231,9 +231,17 @@ function main() {
     const historyPath = path.join(__dirname, '..', 'data', 'total-history.json');
     let history = [];
     try { history = JSON.parse(fs.readFileSync(historyPath, 'utf8')); } catch(e) {}
+    // Add new entry
     history.push({ date: data.generated_at, total: Math.round(totalValue) });
-    // Keep last 8 days
-    history = history.slice(-8);
+    // Deduplicate: keep only the last entry per day
+    const byDay = new Map();
+    for (const entry of history) {
+      const day = entry.date.slice(0, 10); // YYYY-MM-DD
+      byDay.set(day, entry); // last one wins
+    }
+    history = [...byDay.values()];
+    // Keep last 30 days
+    history = history.slice(-30);
     fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
     console.log(`Exported ${totalPositions} positions across ${Object.keys(whales).length} whales`);
 
