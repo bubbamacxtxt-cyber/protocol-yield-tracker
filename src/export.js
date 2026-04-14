@@ -234,6 +234,20 @@ function main() {
         }
     }
 
+    // Compute supply_tokens_display for all positions
+    // Manual/RWA: show protocol_name (deal ID like MMZ20240501ZZZ500)
+    // DeBank on-chain: show actual supply token symbols (sUSDe, USDC, etc.)
+    for (const w of Object.values(whales)) {
+        for (const p of w.positions) {
+            if (p.manual && p.protocol_name) {
+                p.supply_tokens_display = p.protocol_name;
+            } else {
+                const symbols = (p.supply || []).map(t => t.symbol).filter(Boolean);
+                p.supply_tokens_display = symbols.join(', ') || '-';
+            }
+        }
+    }
+
     // Global summary
     let totalPositions = 0, totalValue = 0, totalAssets = 0, totalDebt = 0, totalWallets = 0, totalActive = 0;
     const allChains = new Set(), allProtos = new Set();
