@@ -125,6 +125,46 @@ function main() {
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
         const positions = deduped.filter(p => walletSet.has(p.wallet.toLowerCase()));
 
+        // Fix Re Protocol on-chain positions
+        // DeBank mislabels sUSDe as USDe and calls protocol "Ethena"
+        // Re Protocol holds sUSDe as idle treasury, not as active Ethena deposit
+        if (name === 'Re Protocol') {
+            for (const p of positions) {
+                // Relabel Ethena sUSDe holdings
+                if (p.protocol_name === 'Ethena') {
+                    p.protocol_name = 'Idle Treasury';
+                    p.strategy = 'Lend';
+                    // Fix token symbol: DeBank shows USDe but these are sUSDe holdings
+                    for (const t of (p.supply || [])) {
+                        if (t.symbol === 'USDe' && t.real_symbol === 'USDe') {
+                            t.symbol = 'sUSDe';
+                            t.real_symbol = 'sUSDe';
+                        }
+                    }
+                    // Fix APY: sUSDe yields from Ethena staking
+                    // Read the reUSDe APY saved by fetch-re.js
+                    let susdeApy = 12; // fallback
+                    try {
+                        const reDataPath = path.join(__dirname, '..', 'data', 'whales', 're.json');
+                        if (fs.existsSync(reDataPath)) {
+                            const reData = JSON.parse(fs.readFileSync(reDataPath, 'utf8'));
+                            if (reData.apy_api?.reUSDe?.apy) susdeApy = reData.apy_api.reUSDe.apy;
+                        }
+                    } catch(e) {}
+                    if (p.apy_base != null && p.apy_base < 5) {
+                        p.apy_base = susdeApy;
+                        p.apy_net = susdeApy;
+                        p.apy_current = susdeApy;
+                    }
+                }
+                // Fix Curve position
+                if (p.protocol_name === 'Curve') {
+                    p.protocol_name = 'Curve LP';
+                    p.strategy = 'LP';
+                }
+            }
+        }
+
         // Merge manual positions if they exist for this whale
         if (manualPositions[name]) {
             for (const mp of manualPositions[name]) {
