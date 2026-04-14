@@ -133,7 +133,7 @@ function main() {
                 // Relabel Ethena sUSDe holdings
                 if (p.protocol_name === 'Ethena') {
                     p.protocol_name = 'Idle Treasury';
-                    p.strategy = 'Lend';
+                    p.strategy = 'Stake';
                     // Fix token symbol: DeBank shows USDe but these are sUSDe holdings
                     for (const t of (p.supply || [])) {
                         if (t.symbol === 'USDe' && t.real_symbol === 'USDe') {
@@ -142,16 +142,17 @@ function main() {
                         }
                     }
                     // Fix APY: sUSDe yields from Ethena staking
-                    // Read the reUSDe APY saved by fetch-re.js
-                    let susdeApy = 12; // fallback
+                    // Read from stables.json (YBS list)
+                    let susdeApy = null;
                     try {
-                        const reDataPath = path.join(__dirname, '..', 'data', 'whales', 're.json');
-                        if (fs.existsSync(reDataPath)) {
-                            const reData = JSON.parse(fs.readFileSync(reDataPath, 'utf8'));
-                            if (reData.apy_api?.reUSDe?.apy) susdeApy = reData.apy_api.reUSDe.apy;
+                        const stablesPath = path.join(__dirname, '..', 'data', 'stables.json');
+                        if (fs.existsSync(stablesPath)) {
+                            const stablesData = JSON.parse(fs.readFileSync(stablesPath, 'utf8'));
+                            const susdeEntry = (stablesData.stables || []).find(s => s.name === 'sUSDe');
+                            if (susdeEntry && susdeEntry.aprValue) susdeApy = susdeEntry.aprValue;
                         }
                     } catch(e) {}
-                    if (p.apy_base != null && p.apy_base < 5) {
+                    if (susdeApy !== null) {
                         p.apy_base = susdeApy;
                         p.apy_net = susdeApy;
                         p.apy_current = susdeApy;
