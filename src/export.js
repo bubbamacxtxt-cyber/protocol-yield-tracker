@@ -132,7 +132,6 @@ function main() {
             for (const p of positions) {
                 // Relabel Ethena sUSDe holdings
                 if (p.protocol_name === 'Ethena') {
-                    p.protocol_name = 'Idle Treasury';
                     p.strategy = 'Stake';
                     // Fix token symbol: DeBank shows USDe but these are sUSDe holdings
                     for (const t of (p.supply || [])) {
@@ -160,7 +159,7 @@ function main() {
                 }
                 // Fix Curve position
                 if (p.protocol_name === 'Curve') {
-                    p.protocol_name = 'Curve LP';
+                    p.strategy = 'LP';
                     p.strategy = 'LP';
                 }
             }
