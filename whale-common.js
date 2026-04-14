@@ -336,7 +336,7 @@ let protos = [];
 
 async function loadData() {
   try {
-    const res = await fetch('data.json?t=' + Date.now());
+    const res = await fetch((typeof DATA_PATH !== 'undefined' ? DATA_PATH : '') + 'data.json?t=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     const whale = data.whales[WHALE_NAME];

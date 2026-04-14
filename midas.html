@@ -44,12 +44,18 @@ async function loadVaults() {
       card.className = 'vault-card';
       card.href = SUB_DIR + '/' + slug + '.html';
       card.innerHTML = `
-        <h3>${vName}</h3>
-        <div class="vault-stats">
-          <div class="vault-stat"><div class="label">Total Value</div><div class="value green">$${fmtShort(total)}</div></div>
-          <div class="vault-stat"><div class="label">Positions</div><div class="value">${positions.length}</div></div>
-          <div class="vault-stat"><div class="label">Avg APY</div><div class="value blue">${avgApy}%</div></div>
-          <div class="vault-stat"><div class="label">Chains</div><div class="value">${chains.length}</div></div>
+        <div class="vault-card-header">
+          <h3>${vName}</h3>
+          <div class="chain-count">${chains.length} chain${chains.length !== 1 ? 's' : ''}</div>
+        </div>
+        <div class="vault-card-body">
+          <div class="vault-stat"><span class="label">Total Value</span><span class="value money">${fmtShort(total)}</span></div>
+          <div class="vault-stat"><span class="label">Positions</span><span class="value">${positions.length}</span></div>
+          <div class="vault-stat"><span class="label">Avg APY</span><span class="value">${avgApy}%</span></div>
+          <div class="vault-stat"><span class="label">Wallets</span><span class="value">${vData.wallets ? vData.wallets.length : '-'}</span></div>
+        </div>
+        <div class="vault-card-footer">
+          <span class="view-details-btn">View Details →</span>
         </div>`;
       grid.appendChild(card);
     }

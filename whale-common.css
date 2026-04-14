@@ -111,22 +111,52 @@ tr:hover td { background: var(--bg-secondary); }
 .hf-warn { color: var(--accent-orange); }
 .hf-danger { color: #f85149; }
 
-/* Vault overview cards */
+/* Vault overview cards — match home page whale cards */
 .vault-card {
-  background: var(--gradient-blue); border: 1px solid #5a8ac4;
-  border-top: 1px solid rgba(140,180,230,0.4); border-bottom: 1px solid #1a3a6a;
-  border-radius: 12px; padding: 24px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
   text-decoration: none; color: inherit; display: block;
 }
-.vault-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); border-color: var(--accent-blue); }
-.vault-card h3 { font-size: 20px; margin-bottom: 12px; color: var(--text-primary); }
-.vault-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.vault-stat .label { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-.vault-stat .value { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.vault-stat .value.green { color: var(--accent-green); }
-.vault-stat .value.blue { color: var(--accent-blue); }
+.vault-card:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
+.vault-card-header {
+  padding: 20px;
+  background: linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
+  position: relative;
+}
+.vault-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--bg-card));
+}
+.vault-card-header h3 { font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; }
+.vault-card-header .chain-count { font-size: 12px; color: rgba(255,255,255,0.8); }
+.vault-card-body { padding: 20px; }
+.vault-stat {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.vault-stat:last-child { border-bottom: none; }
+.vault-stat .label { color: var(--text-secondary); font-size: 14px; }
+.vault-stat .value { font-weight: 600; font-size: 15px; }
+.vault-stat .value.money { color: var(--accent-green); }
+.vault-card-footer {
+  padding: 16px 20px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+}
+.view-details-btn {
+  display: block; width: 100%; padding: 12px;
+  background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
+  border: 1px solid #2d4a6f; color: white; border-radius: 8px;
+  font-size: 14px; font-weight: 500; text-align: center; text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.view-details-btn:hover { background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%); border-color: #3d6a9f; }
 
 @media (max-width: 768px) {
   .container { padding: 16px; }
