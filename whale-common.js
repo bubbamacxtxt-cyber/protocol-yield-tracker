@@ -21,14 +21,14 @@ const COLUMNS = [
   { key: 'bonus_apy',  label: 'Bonus APY',     field: 'bonus_total',     format: 'bonus', align: 'right', color: 'green' },
   { key: 'cost_apy',   label: 'Cost APY',      field: 'apy_cost',        format: 'pct', align: 'right' },
   { key: 'net_apy',    label: 'Net APY',       field: 'apy_net',         format: 'pct', align: 'right', bold: true, color_dynamic: true },
-  { key: 'health',     label: 'Health Factor',  field: 'health_rate',     render: v => v ? v.toFixed(2) : '-', compute_class: p => hfClass(p.health_rate), align: 'right' },
+  { key: 'health',     label: 'Health Factor',  field: 'health_rate',     render: v => v ? fmtHF(v) : '-', compute_class: p => hfClass(p.health_rate), align: 'right' },
 ];
 
 // Cards derive from same field keys as COLUMNS
 const CARDS = [
   { label: 'Total Value', field: 'net_usd',    aggregate: 'sum',     format: 'usd_short', color: 'green', subtitle: d => d.length + ' positions' },
   { label: 'Net APY',     field: 'apy_net',    aggregate: 'wavg',    weight: 'asset_usd', format: 'pct', color: 'blue', subtitle: () => 'weighted avg' },
-  { label: 'Health Factor', field: 'health_rate', aggregate: 'avg', filter: p => p.health_rate > 0, format: 'num', render_class: v => hfClass(v), color: 'purple', subtitle: d => { const avg = d.filter(p => p.health_rate > 0).reduce((s,p,_,a) => s + p.health_rate / a.length, 0); return avg >= 1.1 ? 'Safe' : '⚠️ Below 1.1'; } },
+  { label: 'Health Factor', field: 'health_rate', aggregate: 'avg', filter: p => p.health_rate > 0 && p.health_rate < 1000, format: 'num', render_class: v => hfClass(v), color: 'purple', subtitle: d => { const valid = d.filter(p => p.health_rate > 0 && p.health_rate < 1000); const avg = valid.length ? valid.reduce((s,p) => s + p.health_rate, 0) / valid.length : 0; return avg >= 1.1 ? 'Safe' : '⚠️ Below 1.1'; } },
   { label: 'Wallets',     field: 'wallet',     aggregate: 'count_unique', format: 'none', subtitle: () => 'active' },
   { label: 'Top Protocol', field: 'protocol',  aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
   { label: 'Top Chain',   field: 'chain',      aggregate: 'top',     sort_field: 'net_usd', format: 'label', color: 'blue', render: v => (v||'').toUpperCase(), subtitle: (d, top) => top ? fmtShort(top.sum) : '' },
@@ -75,6 +75,11 @@ function formatValue(val, format, render) {
     case 'num': return val != null ? val.toFixed(2) : '-';
     default: return val ?? '-';
   }
+}
+
+function fmtHF(n) {
+  if (!n) return "-";
+  return Number(n).toExponential(3).split("e")[0];
 }
 
 function hfClass(hf) {
