@@ -234,12 +234,19 @@ function main() {
         }
     }
 
-    // Compute supply_tokens_display for all positions
-    // Manual/RWA with deal IDs (like MMZ20240501ZZZ500): show protocol_name (deal ID)
-    // Manual/RWA without deal IDs (like InfiniFi): show supply token symbols
-    // DeBank on-chain: show actual supply token symbols (sUSDe, USDC, etc.)
+    // Compute supply_tokens_display and asset_type for all positions
+    // Protocol column uses asset_type (fallback protocol_name)
+    // Supply Tokens column uses supply_tokens_display
     for (const w of Object.values(whales)) {
         for (const p of w.positions) {
+            // Fix asset_type for manual positions that don't have it
+            // Use yield_source (clean protocol name) if available
+            if (p.manual && !p.asset_type && p.yield_source) {
+                // Capitalize yield_source for display
+                p.asset_type = p.yield_source.charAt(0).toUpperCase() + p.yield_source.slice(1);
+            }
+
+            // Compute supply_tokens_display
             if (p.manual && p.protocol_name) {
                 // Check if protocol_name looks like a deal/bond ID (alphanumeric code)
                 const isDealId = /^[A-Z]{2,}\d{4,}/i.test(p.protocol_name);
