@@ -1,0 +1,59 @@
+{
+  "chainlink": {
+    "proxy": "0xc79a363a3f849d8b3F6A1932f748eA9d4fB2f607",
+    "chain": "avalanche",
+    "decimals": 8,
+    "latest_round": 221,
+    "reserves_usd": 173830514.22457114,
+    "updated_at": "2026-04-13T21:15:29.000Z",
+    "offchain_apy": 6.08
+  },
+  "apy_api": {
+    "reUSD": {
+      "apy": 6.08,
+      "currentNAV": "1.071891598866490000",
+      "pastNAV": "1.070644140898970000",
+      "period": "7d"
+    },
+    "reUSDe": {
+      "apy": 12,
+      "currentNAV": "1.343916015456550000",
+      "pastNAV": "1.340830187276470000",
+      "period": "7d"
+    }
+  },
+  "on_chain_total": 76330992.4913263,
+  "wallet_balances": {
+    "0x9ea38e09f41a9de53972a68268ba0dcc6d2fadf8": {
+      "sUSDe": 53263478.33918298
+    },
+    "0x295f67fdb21255a3db82964445628a706fbe689e": {
+      "USDC": 5969361.040261,
+      "USDT": 1449812.670798,
+      "USDe": 99999.99999999999,
+      "sUSDe": 7732457.8604940735
+    },
+    "0x5c454f5526e41fbe917b63475cd8ca7e4631b147": {
+      "sUSDe": 6188821.617461838
+    },
+    "0xd4374008c88321eb2e59abd311156c44b25831e9": {
+      "USDe": 618901.0280670034,
+      "sUSDe": 1002478.9350614118
+    },
+    "0x9ab62aebabe738ab233c447eedce88d1d0a61fe3": {},
+    "0x19aff1c007397bdb7f82bda18151c28ab4335896": {},
+    "0x802edbb1ec20548a4388abc337e4011718eb0291": {},
+    "0xb22a8533e6cd81598f82514a42f0b3161745fbe1": {},
+    "0xe1886be2ba8b2496c2044a77516f63a734193082": {
+      "USDe": 5251
+    },
+    "0xfb602cb83c9c15b4cc49340dc9ad7a8c23754bb0": {},
+    "0x4691c475be804fa85f91c2d6d0adf03114de3093": {
+      "DAI": 430
+    },
+    "0xe13292f97e38da0c64398de5e0bfc95180de9d23": {},
+    "0x7d214438d0f27afccc23b3d1e1a53906ace5cfea": {},
+    "0xfd4016ea13ca8acc04a11a99702df076a4d3b852": {}
+  },
+  "fetched_at": "2026-04-14T14:09:58.385Z"
+}

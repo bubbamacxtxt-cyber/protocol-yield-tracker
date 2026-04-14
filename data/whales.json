@@ -1,102 +1,122 @@
 {
-  "Avant": [
-    "0x020c5bB0d81b8cf539Ca06364Ece4a41631995b4",
-    "0x887fD380C1e4Cc28e119917015fE7fb0062c5d67",
-    "0xB2e193a469D73634b116810d647960ad00Db321D",
-    "0x1Ae4190c55c2986130694aF6998A94126C0685cd",
-    "0xc29ff89a2dE0c0E8A358a933A8B00692cDe452b5",
-    "0xC1d023141ad6935F81E5286E577768b75C9Ff8EB",
-    "0x5b53358ECA5790fA4c268aD6813386B3A86549C7",
-    "0xFbbF1826Aba90704A2167D2EB4A7a9D83A8DE9c7",
-    "0x1DFF1e9968222aa6c66BF402baC2C3FE5Ed13F76",
-    "0x3207363359Ca0c11D11073aD48301E8c958B7910",
-    "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
-    "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
-    "0xD2305803Ca7821e4E5C3bcAeD366AD7dE9F13739",
-    "0xe5971fd226433d5D3a926c9fc99BbDd1E5953146",
-    "0xc2d2C22f54c9Fae2456b6E7f7fBdC240E1898DA1",
-    "0xAcABC577f359e4Af4Dd057af56de5A576ba9Bd82",
-    "0xD2Fb3766A7d191AFfaa8Ab5C40B6A67007Aa3A5d",
-    "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
-    "0x33A4866bffc90791e65Da0d339eDdcaE3d9ce9F9",
-    "0x3BbCb84fCDE71063D8C396e6C54F5dC3D19EE0EC"
-  ],
-  "yoUSD": [
-    "0x0000000f2eb9f69274678c76222b35eec7588a65"
-  ],
-  "Yuzu": [
-    "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
-    "0x015CC48cC8bC37D80AAFf4e43061dbaF94192308",
-    "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
-    "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
-    "0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7",
-    "0xfAA7744b9Ed973290A36eE815b5AcC76856583a0",
-    "0x424323D25d30C687BDf79Bb333da1D41C0373F37",
-    "0xDAeF005ae017Be5B938A2b321Db3dEC96e684f68",
-    "0x6695c0f8706C5ACe3Bdf8995073179cCA47926dc",
-    "0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a"
-  ],
-  "Reservoir": [
-    "0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61",
-    "0x99a95a9e38e927486fc878f41ff8b118eb632b10",
-    "0x3063c5907faa10c01b242181aa689beb23d2bd65",
-    "0x289c204b35859bfb924b9c0759a4fe80f610671c"
-  ],
-  "Makina": {
-    "vaults": {
-      "Dialectic USD": [
-        "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc"
-      ],
-      "Steakhouse USD": [
-        "0xbeef123217647014429b7670329782e210884e89"
-      ]
+    "Avant": [
+        "0x020c5bB0d81b8cf539Ca06364Ece4a41631995b4",
+        "0x887fD380C1e4Cc28e119917015fE7fb0062c5d67",
+        "0xB2e193a469D73634b116810d647960ad00Db321D",
+        "0x1Ae4190c55c2986130694aF6998A94126C0685cd",
+        "0xc29ff89a2dE0c0E8A358a933A8B00692cDe452b5",
+        "0xC1d023141ad6935F81E5286E577768b75C9Ff8EB",
+        "0x5b53358ECA5790fA4c268aD6813386B3A86549C7",
+        "0xFbbF1826Aba90704A2167D2EB4A7a9D83A8DE9c7",
+        "0x1DFF1e9968222aa6c66BF402baC2C3FE5Ed13F76",
+        "0x3207363359Ca0c11D11073aD48301E8c958B7910",
+        "0x7bee8D37FBA61a6251a08b957d502C56E2A50FAb",
+        "0x920EefBCf1f5756109952E6Ff6dA1Cab950C64d7",
+        "0xD2305803Ca7821e4E5C3bcAeD366AD7dE9F13739",
+        "0xe5971fd226433d5D3a926c9fc99BbDd1E5953146",
+        "0xc2d2C22f54c9Fae2456b6E7f7fBdC240E1898DA1",
+        "0xAcABC577f359e4Af4Dd057af56de5A576ba9Bd82",
+        "0xD2Fb3766A7d191AFfaa8Ab5C40B6A67007Aa3A5d",
+        "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
+        "0x33A4866bffc90791e65Da0d339eDdcaE3d9ce9F9",
+        "0x3BbCb84fCDE71063D8C396e6C54F5dC3D19EE0EC"
+    ],
+    "yoUSD": [
+        "0x0000000f2eb9f69274678c76222b35eec7588a65"
+    ],
+    "Yuzu": [
+        "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
+        "0x015CC48cC8bC37D80AAFf4e43061dbaF94192308",
+        "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
+        "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
+        "0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7",
+        "0xfAA7744b9Ed973290A36eE815b5AcC76856583a0",
+        "0x424323D25d30C687BDf79Bb333da1D41C0373F37",
+        "0xDAeF005ae017Be5B938A2b321Db3dEC96e684f68",
+        "0x6695c0f8706C5ACe3Bdf8995073179cCA47926dc",
+        "0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a"
+    ],
+    "Reservoir": [
+        "0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61",
+        "0x99a95a9e38e927486fc878f41ff8b118eb632b10",
+        "0x3063c5907faa10c01b242181aa689beb23d2bd65",
+        "0x289c204b35859bfb924b9c0759a4fe80f610671c"
+    ],
+    "Makina": {
+        "vaults": {
+            "Dialectic USD": [
+                "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc"
+            ],
+            "Steakhouse USD": [
+                "0xbeef123217647014429b7670329782e210884e89"
+            ]
+        }
+    },
+    "InfiniFi": [
+        "0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f",
+        "0x76D2E84009dAE457f8667D823c7c96e9A7c35B78",
+        "0xe919C66475f2F30d285c768853E6B5b23ef181Cf",
+        "0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE",
+        "0x9E5efC5F387D8661C1AFB2469B7EeF6972451852",
+        "0x7E9AA426abC2D9006E8C9881754BAA00a392158d",
+        "0xd880D7C5CaFdbE2AEc281250995abF612235e563",
+        "0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032",
+        "0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580"
+    ],
+    "Upshift": {
+        "vaults": {
+            "Upshift Core USDC": [
+                "0xf014ef13a3e0372582f44a667e144a4f2e439ea7"
+            ],
+            "earnAUSD": [
+                "0x9f1a1479191af103ff82fead23e950b6b3b2bd1a"
+            ],
+            "Upshift singularV": [
+                "0x6f64630a0c12c60813a80a215fb9a31e52528820"
+            ]
+        }
+    },
+    "Midas": {
+        "vaults": {
+            "Midas mHyper": [
+                "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264"
+            ],
+            "Midas mMev": [
+                "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033"
+            ],
+            "Midas mAPOLLO": [
+                "0x0e9550b1e31d323af15eb615f95bb16d25d5456f",
+                "0x461263bff57cbafe3994b15a5e4d388c50d4d9fe",
+                "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
+                "0xd6c757043e7d59088969b188923c62fa960afe9b"
+            ]
+        }
+    },
+    "Superform": {
+        "vaults": {
+            "Flagship USDC SuperVault": [
+                "0x41a9eb398518d2487301c61d2b33e4e966a9f1dd"
+            ]
+        }
+    },
+    "Re Protocol": {
+        "vaults": {
+            "Re Protocol": [
+                "0x9ea38e09f41a9de53972a68268ba0dcc6d2fadf8",
+                "0x295f67fdb21255a3db82964445628a706fbe689e",
+                "0x5c454f5526e41fbe917b63475cd8ca7e4631b147",
+                "0xd4374008c88321eb2e59abd311156c44b25831e9",
+                "0x9ab62aebabe738ab233c447eedce88d1d0a61fe3",
+                "0x19aff1c007397bdb7f82bda18151c28ab4335896",
+                "0x802edbb1ec20548a4388abc337e4011718eb0291",
+                "0xb22a8533e6cd81598f82514a42f0b3161745fbe1",
+                "0xe1886be2ba8b2496c2044a77516f63a734193082",
+                "0xfb602cb83c9c15b4cc49340dc9ad7a8c23754bb0",
+                "0x4691c475be804fa85f91c2d6d0adf03114de3093",
+                "0xe13292f97e38da0c64398de5e0bfc95180de9d23",
+                "0x7d214438d0f27afccc23b3d1e1a53906ace5cfea",
+                "0xfd4016ea13ca8acc04a11a99702df076a4d3b852"
+            ]
+        }
     }
-  },
-  "InfiniFi": [
-    "0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f",
-    "0x76D2E84009dAE457f8667D823c7c96e9A7c35B78",
-    "0xe919C66475f2F30d285c768853E6B5b23ef181Cf",
-    "0x84FF7Ef9568807c93436F09E2E613dE2aF3FE4EE",
-    "0x9E5efC5F387D8661C1AFB2469B7EeF6972451852",
-    "0x7E9AA426abC2D9006E8C9881754BAA00a392158d",
-    "0xd880D7C5CaFdbE2AEc281250995abF612235e563",
-    "0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032",
-    "0xbFd5FC8DecA3C6128bfCE0FE46c25616811c3580"
-  ],
-  "Upshift": {
-    "vaults": {
-      "Upshift Core USDC": [
-        "0xf014ef13a3e0372582f44a667e144a4f2e439ea7"
-      ],
-      "earnAUSD": [
-        "0x9f1a1479191af103ff82fead23e950b6b3b2bd1a"
-      ],
-      "Upshift singularV": [
-        "0x6f64630a0c12c60813a80a215fb9a31e52528820"
-      ]
-    }
-  },
-  "Midas": {
-    "vaults": {
-      "Midas mHyper": [
-        "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264"
-      ],
-      "Midas mMev": [
-        "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033"
-      ],
-      "Midas mAPOLLO": [
-        "0x0e9550b1e31d323af15eb615f95bb16d25d5456f",
-        "0x461263bff57cbafe3994b15a5e4d388c50d4d9fe",
-        "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
-        "0xd6c757043e7d59088969b188923c62fa960afe9b"
-      ]
-    }
-  },
-  "Superform": {
-    "vaults": {
-      "Flagship USDC SuperVault": [
-        "0x41a9eb398518d2487301c61d2b33e4e966a9f1dd"
-      ]
-    }
-  }
 }

@@ -37,6 +37,9 @@ jobs:
       - name: Fetch Pareto data
         run: node src/fetch-pareto.js
 
+      - name: Fetch Re Protocol data
+        run: node src/fetch-re.js
+
       # APY enrichment (fetches rates from Aave/Morpho/Euler)
       - name: Enrich positions with market/vault info
         run: node src/enrich-markets.js

@@ -795,5 +795,41 @@
       "manual": true,
       "asset_type": "DeFi"
     }
+  ],
+  "Re Protocol": [
+    {
+      "wallet": "off-chain",
+      "chain": "avalanche",
+      "protocol_name": "Private Reinsurance Deals",
+      "protocol_id": "re-offchain-reserves",
+      "position_type": "Illiquid",
+      "strategy": "RWA",
+      "yield_source": "reinsurance",
+      "health_rate": null,
+      "net_usd": 173830514.22457114,
+      "asset_usd": 173830514.22457114,
+      "debt_usd": 0,
+      "supply": [
+        {
+          "symbol": "USD",
+          "real_symbol": "USD",
+          "amount": 173830514.22457114,
+          "price_usd": 1,
+          "value_usd": 173830514.22457114
+        }
+      ],
+      "borrow": [],
+      "rewards": [],
+      "apy_current": 6.08,
+      "apy_avg": 6.08,
+      "apy_base": 6.08,
+      "apy_rewards": 0,
+      "maturity": null,
+      "bucket_weeks": null,
+      "underlying": "USD",
+      "paused": false,
+      "manual": true,
+      "scanned_at": "2026-04-14T14:09:58.377Z"
+    }
   ]
 }
