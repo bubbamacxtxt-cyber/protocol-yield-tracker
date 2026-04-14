@@ -10,9 +10,9 @@
 const COLUMNS = [
   { key: 'wallet',     label: 'Wallet',        field: 'wallet',          render: v => '<a href="https://debank.com/profile/' + v + '" target="_blank" style="color:var(--accent-blue);text-decoration:none">' + shortWallet(v) + '</a>', sortable: true },
   { key: 'chain',      label: 'Chain',         field: 'chain',           render: v => (v || '').toUpperCase() },
-  { key: 'protocol',   label: 'Protocol',      field: 'protocol_name' },
+  { key: 'protocol',   label: 'Protocol',      field: 'asset_type', fallback: 'protocol_name' },
   { key: 'strategy',   label: 'Strategy',      field: 'strategy',        render: v => strategyBadge(v) },
-  { key: 'supply',     label: 'Supply Tokens', field: 'supply',          render: v => (v || []).map(t => t.symbol).filter(Boolean).join(', ') || '-' },
+  { key: 'supply',     label: 'Supply Tokens', field: 'protocol_name' },
   { key: 'borrow',     label: 'Borrow Tokens', field: 'borrow',          render: v => (v || []).map(t => t.symbol).filter(Boolean).join(', ') || '-' },
   { key: 'supply_usd', label: 'Supply USD',    field: 'asset_usd',       format: 'usd_short', align: 'right' },
   { key: 'borrow_usd', label: 'Borrow USD',    field: 'debt_usd',        format: 'usd_short', align: 'right' },

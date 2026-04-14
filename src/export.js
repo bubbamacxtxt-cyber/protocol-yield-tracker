@@ -133,6 +133,7 @@ function main() {
                 // Relabel Ethena sUSDe holdings
                 if (p.protocol_name === 'Ethena') {
                     p.strategy = 'Stake';
+                    p.asset_type = 'Ethena';
                     // Fix token symbol: DeBank shows USDe but these are sUSDe holdings
                     for (const t of (p.supply || [])) {
                         if (t.symbol === 'USDe' && t.real_symbol === 'USDe') {
@@ -160,6 +161,7 @@ function main() {
                 // Fix Curve position
                 if (p.protocol_name === 'Curve') {
                     p.strategy = 'LP';
+                    p.asset_type = 'Curve';
                     p.strategy = 'LP';
                 }
             }
