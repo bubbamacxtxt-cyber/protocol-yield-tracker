@@ -117,7 +117,8 @@ async function main() {
       if (walletLower.length === 0) continue;
 
       // Skip whales with manual-only data (not in DB)
-      if (['InfiniFi', 'Anzen', 'Pareto'].includes(name)) {
+      // Re Protocol: off-chain Chainlink position inflates data.json vs DB
+      if (['InfiniFi', 'Anzen', 'Pareto', 'Re Protocol'].includes(name)) {
         console.log(`  ⏭️  ${name} (source): manual-only, skipped`);
         continue;
       }
