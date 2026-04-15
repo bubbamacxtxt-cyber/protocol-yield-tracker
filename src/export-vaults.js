@@ -12,7 +12,7 @@ function main() {
   const db = new Database(DB_PATH, { readonly: true });
   const vaults = db.prepare(`SELECT address, symbol, name, chain, chain_name, vault_type, status,
     tvl_usd, apy_1d, apy_7d, apy_30d, source, max_drawdown, rating, fetched_at
-    FROM vaults WHERE tvl_usd >= 1000000 ORDER BY tvl_usd DESC`).all();
+    FROM vaults WHERE tvl_usd >= 1000 ORDER BY tvl_usd DESC`).all();
 
   const output = {
     fetched_at: new Date().toISOString(),
