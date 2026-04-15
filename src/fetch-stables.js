@@ -64,8 +64,9 @@ async function main() {
         apr: pool.apy.toFixed(2) + '%',
         aprValue: pool.apy,
         apy_1d: pool.apy,
-        apy_7d: (pool.apyPct7D != null && pool.apy != null) ? pool.apy - pool.apyPct7D : null,
-        apy_30d: pool.apyMean30d || null,
+        apy_7d: null,
+        apy_30d: null,
+        _poolId: target.pool,
         chain: pool.chain || 'N/A',
         tvl: pool.tvlUsd >= 1e6 ? "$" + (pool.tvlUsd / 1e6).toFixed(0) + "M" : pool.tvlUsd >= 1e3 ? "$" + (pool.tvlUsd / 1e3).toFixed(0) + "K" : "N/A",
         tvlNum: pool.tvlUsd || 0,
@@ -75,6 +76,19 @@ async function main() {
     } else {
       console.log(`  ❌ ${target.name}: pool not found or no APY`);
     }
+  }
+  
+  // 30d: apyMean30d (real 30-day average from main pools response)
+  // 7d: apy - apyPct7D (estimated 7-day-ago APY from change delta)
+  for (const s of stables) {
+    const pool = pools.find(p => p.pool === s._poolId);
+    if (pool) {
+      s.apy_30d = pool.apyMean30d || null;
+      if (pool.apyPct7D != null) {
+        s.apy_7d = pool.apy - pool.apyPct7D;
+      }
+    }
+    delete s._poolId;
   }
   
   // Add August Digital vault entries (Upshift etc.)
