@@ -24,11 +24,14 @@ jobs:
       - name: Fetch vault data (IPOR + Upshift)
         run: node src/fetch-vaults.js
 
+      - name: Fetch YBS stables data
+        run: node src/fetch-stables.js
+
       - name: Export vaults.json
         run: node src/export-vaults.js
 
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-update vault data"
-          file_pattern: data/vaults.json yield-tracker.db
+          commit_message: "Auto-update vault + stables data"
+          file_pattern: data/vaults.json data/stables.json yield-tracker.db
