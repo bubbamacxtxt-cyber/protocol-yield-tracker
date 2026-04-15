@@ -262,12 +262,13 @@ async function fetchEulerApy() {
       for (const v of items) {
         const symbol = v.assetSymbol;
         if (!symbol) continue;
-        const sApy = v.supplyApy && v.supplyApy.totalApy != null ? v.supplyApy.totalApy : 0;
-        const bApy = v.borrowApy && v.borrowApy.totalApy != null ? v.borrowApy.totalApy : 0;
+        const baseApy = v.supplyApy && v.supplyApy.baseApy != null ? v.supplyApy.baseApy : 0;
+        const rewardApy = v.supplyApy && v.supplyApy.rewardApy != null ? v.supplyApy.rewardApy : 0;
+        const bApy = v.borrowApy && v.borrowApy.baseApy != null ? v.borrowApy.baseApy : 0;
         const tvl = v.totalAssetsUSD || 0;
         const key = symbol + ':' + cid;
         if (!bestVault[key] || tvl > bestVault[key].tvl) {
-          bestVault[key] = { supplyApy: sApy, borrowApy: bApy, tvl: tvl };
+          bestVault[key] = { baseApy, rewardApy, borrowApy: bApy, tvl };
         }
       }
       console.log('  Euler ' + name + ': ' + items.length + ' vaults');
@@ -275,21 +276,25 @@ async function fetchEulerApy() {
       console.log('  ❌ Euler ' + name + ': ' + e.message);
     }
   }
-  const supplyMap = {}, borrowMap = {};
+  const supplyMap = {}, rewardMap = {}, borrowMap = {};
   for (const [key, v] of Object.entries(bestVault)) {
     const parts = key.split(':');
     const symbol = parts[0], cid = parts[1];
-    if (v.supplyApy > 0) {
+    if (v.baseApy > 0) {
       if (!supplyMap[symbol]) supplyMap[symbol] = {};
-      supplyMap[symbol][cid] = v.supplyApy;
+      supplyMap[symbol][cid] = v.baseApy;
+    }
+    if (v.rewardApy > 0) {
+      if (!rewardMap[symbol]) rewardMap[symbol] = {};
+      rewardMap[symbol][cid] = v.rewardApy;
     }
     if (v.borrowApy > 0) {
       if (!borrowMap[symbol]) borrowMap[symbol] = {};
       borrowMap[symbol][cid] = v.borrowApy;
     }
   }
-  console.log('  Euler: ' + Object.keys(supplyMap).length + ' supply, ' + Object.keys(borrowMap).length + ' borrow');
-  return { supply: supplyMap, borrow: borrowMap };
+  console.log('  Euler: ' + Object.keys(supplyMap).length + ' base, ' + Object.keys(rewardMap).length + ' reward, ' + Object.keys(borrowMap).length + ' borrow');
+  return { supply: supplyMap, reward: rewardMap, borrow: borrowMap };
 }
 
 // ─── Main// ─── Main ──────────────────────────────────────────────────────────
@@ -363,11 +368,11 @@ async function main() {
     WHERE pt.role='supply' AND pt.apy_base IS NULL
   `).all();
 
-  let staticApplied = 0, aaveApplied = 0, morphoApplied = 0, eulerApplied = 0, zeroCount = 0, stillMissing = 0;
+  let staticApplied = 0, aaveApplied = 0, morphoApplied = 0, eulerApplied = 0, zeroCount = 0, stillMissing = 0, bonusCount = 0;
 
   for (const row of pending) {
     const cid = CHAIN_ID_MAP[row.chain?.toLowerCase()] || CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
-    let apy = null, source = null;
+    let apy = null, source = null, bonusApy = 0;
 
     if (staticApy[row.symbol] != null) {
       apy = staticApy[row.symbol]; source = 'static'; staticApplied++;
@@ -394,6 +399,7 @@ async function main() {
       }
     } else if (row.protocol_name === 'Euler' && eulerApy.supply[row.symbol]?.[cid] != null) {
       apy = eulerApy.supply[row.symbol][cid]; source = 'euler_supply'; eulerApplied++;
+      bonusApy = eulerApy.reward?.[row.symbol]?.[cid] || 0;
     } else if (nonYieldStables.has(row.symbol)) {
       // Try Aave reference rate first
       if (aaveApy.supply[row.symbol]?.[cid] != null) {
@@ -406,12 +412,13 @@ async function main() {
     }
 
     if (apy != null) {
-      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ? WHERE id = ?").run(apy, source, row.id);
+      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ?, apy_bonus = ? WHERE id = ?").run(apy, source, bonusApy || 0, row.id);
+      if (bonusApy > 0) bonusCount++;
     } else {
       stillMissing++;
     }
   }
-  console.log(`   Protocol-level: Static: ${staticApplied}, Aave: ${aaveApplied}, Morpho: ${morphoApplied}, Euler: ${eulerApplied}, Zero: ${zeroCount}, Missing: ${stillMissing}`);
+  console.log(`   Protocol-level: Static: ${staticApplied}, Aave: ${aaveApplied}, Morpho: ${morphoApplied}, Euler: ${eulerApplied}, Bonus: ${bonusCount}, Zero: ${zeroCount}, Missing: ${stillMissing}`);
 
   // ── Apply borrow APY (cost) ───────────────────────────────────
   console.log('\n7. Applying borrow APY...');
@@ -437,7 +444,7 @@ async function main() {
 
   for (const row of borrowPending) {
     const cid = CHAIN_ID_MAP[row.chain?.toLowerCase()] || CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
-    let apy = null, source = null;
+    let apy = null, source = null, bonusApy = 0;
 
     if (row.protocol_name === 'Aave V3' && aaveApy.borrow[row.symbol]?.[cid] != null) {
       apy = aaveApy.borrow[row.symbol][cid]; source = 'aave_borrow'; borrowAave++;
@@ -480,7 +487,8 @@ async function main() {
     }
 
     if (apy != null) {
-      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ? WHERE id = ?").run(apy, source, row.id);
+      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ?, apy_bonus = ? WHERE id = ?").run(apy, source, bonusApy || 0, row.id);
+      if (bonusApy > 0) bonusCount++;
     }
   }
   console.log(`   Borrow: Aave: ${borrowAave}, Morpho: ${borrowMorpho}, Ref: ${borrowRef}, Missing: ${borrowMiss}`);
