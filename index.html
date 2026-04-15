@@ -460,8 +460,8 @@ function sortStables(field) {
     const apy7 = s.apy_7d != null && s.apy_7d !== 0 ? '<span style="color:' + (s.apy_7d > 0 ? '#3fb950' : s.apy_7d < 0 ? '#f85149' : '#8b949e') + '">' + s.apy_7d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
     const apy30 = s.apy_30d != null && s.apy_30d !== 0 ? '<span style="color:' + (s.apy_30d > 0 ? '#3fb950' : s.apy_30d < 0 ? '#f85149' : '#8b949e') + '">' + s.apy_30d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
     h += '<tr>' +
-      '<td><strong>' + (s.protocol || '-') + '</strong></td>' +
-      '<td>' + s.name + '</td>' +
+      '<td style="color:var(--text-primary)"><strong>' + (s.protocol || '-') + '</strong></td>' +
+      '<td style="color:var(--text-primary)">' + s.name + '</td>' +
       '<td style="text-align:right;color:#8b949e">' + s.tvl + '</td>' +
       '<td style="text-align:right">' + apy1 + '</td>' +
       '<td style="text-align:right">' + apy7 + '</td>' +
@@ -512,8 +512,8 @@ function sortVaults(field) {
   let h = '';
   for (const v of _vaultsData) {
     h += '<tr>' +
-      '<td><strong>' + v.protocol + '</strong></td>' +
-      '<td>' + v.name + '</td>' +
+      '<td style="color:var(--text-primary)"><strong>' + v.protocol + '</strong></td>' +
+      '<td style="color:var(--text-primary)">' + v.name + '</td>' +
       '<td style="text-align:right;color:#8b949e">' + fmtTvl(v.tvl_usd) + '</td>' +
       '<td style="text-align:right">' + fmtApy(v.apy_1d) + '</td>' +
       '<td style="text-align:right">' + fmtApy(v.apy_7d) + '</td>' +
