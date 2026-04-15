@@ -1,5 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const Database = require('better-sqlite3');
+
+const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 
 const DEFI_LLAMA = 'https://yields.llama.fi/pools';
 
@@ -88,8 +91,56 @@ async function main() {
         s.apy_7d = pool.apy - pool.apyPct7D;
       }
     }
+    // Keep _poolId for history tracking
+  }
+  
+  // --- APY History Tracking ---
+  const db = new Database(DB_PATH);
+  db.exec(`CREATE TABLE IF NOT EXISTS stable_apy_history (
+    pool_id TEXT NOT NULL,
+    timestamp TEXT NOT NULL,
+    apy REAL NOT NULL,
+    tvl_usd REAL,
+    PRIMARY KEY (pool_id, timestamp)
+  )`);
+  
+  const insertHist = db.prepare(`INSERT OR IGNORE INTO stable_apy_history (pool_id, timestamp, apy, tvl_usd) VALUES (?, ?, ?, ?)`);
+  const ts = new Date().toISOString();
+  const insertMany = db.transaction((rows) => {
+    for (const r of rows) insertHist.run(r.pool_id, ts, r.apy, r.tvl_usd);
+  });
+  const historyRows = stables.filter(s => s._poolId && s.apy_1d != null).map(s => ({
+    pool_id: s._poolId,
+    apy: s.apy_1d,
+    tvl_usd: s.tvlNum || null,
+  }));
+  if (historyRows.length) insertMany(historyRows);
+  
+  // Compute 7d average from our own history
+  const sevenDaysAgo = new Date(Date.now() - 7 * 86400000).toISOString();
+  const history7d = db.prepare(`
+    SELECT pool_id, AVG(apy) as avg_apy, COUNT(*) as points
+    FROM stable_apy_history
+    WHERE timestamp >= ?
+    GROUP BY pool_id
+  `).all(sevenDaysAgo);
+  db.close();
+  
+  const historyMap = new Map(history7d.map(h => [h.pool_id, { avg: h.avg_apy, points: h.points }]));
+  
+  for (const s of stables) {
+    if (s._poolId) {
+      const hist = historyMap.get(s._poolId);
+      if (hist && hist.points >= 4) {  // Need at least 4 snapshots (~1 day) for 7d avg
+        s.apy_7d = hist.avg;
+      } else {
+        s.apy_7d = null;  // Not enough history yet
+      }
+    }
     delete s._poolId;
   }
+  
+  console.log('  📊 APY history: saved ' + historyRows.length + ' snapshots, 7d avg from ' + history7d.length + ' pools');
   
   // Add August Digital vault entries (Upshift etc.)
   for (const v of AUGUST_DIGITAL_VAULTS) {
