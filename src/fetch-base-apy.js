@@ -412,7 +412,7 @@ async function main() {
     }
 
     if (apy != null) {
-      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ?, apy_bonus = ? WHERE id = ?").run(apy, source, bonusApy || 0, row.id);
+      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ?, bonus_supply_apy = ? WHERE id = ?").run(apy, source, bonusApy || 0, row.id);
       if (bonusApy > 0) bonusCount++;
     } else {
       stillMissing++;
@@ -487,7 +487,7 @@ async function main() {
     }
 
     if (apy != null) {
-      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ?, apy_bonus = ? WHERE id = ?").run(apy, source, bonusApy || 0, row.id);
+      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = ?, bonus_supply_apy = ? WHERE id = ?").run(apy, source, bonusApy || 0, row.id);
       if (bonusApy > 0) bonusCount++;
     }
   }
