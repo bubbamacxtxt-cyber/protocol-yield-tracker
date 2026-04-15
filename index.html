@@ -359,8 +359,24 @@ body {
       <canvas id="allocationChart"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Value by Chain</h3>
-      <canvas id="chainChart"></canvas>
+      <h3>Vaults</h3>
+      <div class="stables-table">
+        <table id="vaultsTable">
+          <thead>
+            <tr>
+              <th style="cursor:pointer" onclick="sortVaults('protocol')">Protocol</th>
+              <th style="cursor:pointer" onclick="sortVaults('name')">Name</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortVaults('tvl_usd')">TVL</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortVaults('apy_1d')">1d</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortVaults('apy_7d')">7d</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortVaults('apy_30d')">30d</th>
+            </tr>
+          </thead>
+          <tbody id="vaultsList">
+            <tr><td colspan="6" class="stables-placeholder">Loading vault data...</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="chart-card">
       <h3>Yield Bearing Stables</h3>
@@ -443,6 +459,58 @@ function sortStables(field) {
   for (let i = 0; i < data.length; i++) {
     const s = data[i];
     h += '<tr><td><strong>' + s.name + '</strong></td><td>' + s.apr + '</td><td style="text-align:right;color:#8b949e">' + s.tvl + '</td></tr>';
+  }
+  tbody.innerHTML = h;
+}
+
+// Vaults
+let _vaultsData = [];
+let _vaultsSort = { field: 'tvl_usd', dir: -1 };
+
+async function loadVaults() {
+  try {
+    const res = await fetch('data/vaults.json?t=' + Date.now());
+    const data = await res.json();
+    _vaultsData = data.vaults || [];
+    sortVaults('tvl_usd');
+  } catch (e) {
+    document.getElementById('vaultsList').innerHTML = '<tr><td colspan="6" class="stables-placeholder">Failed to load vault data</td></tr>';
+  }
+}
+
+function fmtApy(v) {
+  if (v == null) return '<span style="color:#555">-</span>';
+  const color = v > 0 ? '#3fb950' : v < 0 ? '#f85149' : '#8b949e';
+  return '<span style="color:' + color + '">' + v.toFixed(2) + '%</span>';
+}
+
+function fmtTvl(v) {
+  if (v >= 1e6) return '$' + (v/1e6).toFixed(1) + 'M';
+  if (v >= 1e3) return '$' + (v/1e3).toFixed(0) + 'K';
+  return '$' + v.toFixed(0);
+}
+
+function sortVaults(field) {
+  const sort = _vaultsSort;
+  if (sort.field === field) sort.dir *= -1;
+  else { sort.field = field; sort.dir = -1; }
+  const isStr = field === 'name' || field === 'protocol';
+  _vaultsData.sort((a, b) => {
+    const av = a[field] != null ? a[field] : (isStr ? '' : -Infinity);
+    const bv = b[field] != null ? b[field] : (isStr ? '' : -Infinity);
+    return isStr ? sort.dir * String(av).localeCompare(String(bv)) : sort.dir * (bv - av);
+  });
+  const tbody = document.getElementById('vaultsList');
+  let h = '';
+  for (const v of _vaultsData) {
+    h += '<tr>' +
+      '<td><strong>' + v.protocol + '</strong></td>' +
+      '<td>' + v.name + '</td>' +
+      '<td style="text-align:right;color:#8b949e">' + fmtTvl(v.tvl_usd) + '</td>' +
+      '<td style="text-align:right">' + fmtApy(v.apy_1d) + '</td>' +
+      '<td style="text-align:right">' + fmtApy(v.apy_7d) + '</td>' +
+      '<td style="text-align:right">' + fmtApy(v.apy_30d) + '</td>' +
+      '</tr>';
   }
   tbody.innerHTML = h;
 }
@@ -553,39 +621,8 @@ async function render() {
     }
   });
   
-  // Chain Chart
-  const chainCtx = document.getElementById('chainChart').getContext('2d');
-  const topChains = Object.entries(chainValues)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8);
-  
-  new Chart(chainCtx, {
-    type: 'bar',
-    data: {
-      labels: topChains.map(c => c[0].toUpperCase()),
-      datasets: [{
-        label: 'Value',
-        data: topChains.map(c => c[1]),
-        backgroundColor: getGradient(chainCtx, ['#667eea', '#764ba2']),
-        borderRadius: 8
-      }]
-    },
-    options: {
-      aspectRatio: 1,
-      responsive: true,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { 
-          grid: { color: '#30363d' },
-          ticks: { color: '#8b949e', callback: v => '$' + (v/1e6).toFixed(0) + 'M' }
-        },
-        x: { 
-          grid: { display: false },
-          ticks: { color: '#8b949e' }
-        }
-      }
-    }
-  });
+  // Load vaults
+  loadVaults();
   
   // Render whale cards
   const grid = document.getElementById('whalesGrid');

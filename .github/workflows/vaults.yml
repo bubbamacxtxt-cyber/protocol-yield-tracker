@@ -1,0 +1,34 @@
+name: Update Vault Data
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-vaults:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Fetch vault data (IPOR + Upshift)
+        run: node src/fetch-vaults.js
+
+      - name: Export vaults.json
+        run: node src/export-vaults.js
+
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update vault data"
+          file_pattern: data/vaults.json yield-tracker.db
