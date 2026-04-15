@@ -108,7 +108,7 @@ body {
 /* Charts Section */
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-bottom: 32px;
 }
@@ -355,10 +355,6 @@ body {
   <!-- Charts -->
   <div class="charts-grid">
     <div class="chart-card">
-      <h3>Allocation by Protocol</h3>
-      <canvas id="allocationChart"></canvas>
-    </div>
-    <div class="chart-card">
       <h3>Vaults</h3>
       <div class="stables-table">
         <table id="vaultsTable">
@@ -384,13 +380,16 @@ body {
         <table id="stablesTable">
           <thead>
             <tr>
+              <th style="cursor:pointer" onclick="sortStables('protocol')">Protocol</th>
               <th style="cursor:pointer" onclick="sortStables('name')">Token</th>
-              <th style="text-align:right;cursor:pointer" onclick="sortStables('aprValue')">APR</th>
               <th style="text-align:right;cursor:pointer" onclick="sortStables('tvlNum')">TVL</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortStables('apy_1d')">1d</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortStables('apy_7d')">7d</th>
+              <th style="text-align:right;cursor:pointer" onclick="sortStables('apy_30d')">30d</th>
             </tr>
           </thead>
           <tbody id="stablesList">
-            <tr><td colspan="3" class="stables-placeholder">Data coming soon...</td></tr>
+            <tr><td colspan="6" class="stables-placeholder">Data coming soon...</td></tr>
           </tbody>
         </table>
       </div>
@@ -435,8 +434,8 @@ function renderStables() {
         return;
       }
       window._stablesData = stables;
-      window._stablesSort = { field: 'aprValue', dir: -1 };
-      sortStables('aprValue');
+      window._stablesSort = { field: 'tvlNum', dir: -1 };
+      sortStables('tvlNum');
     })
     .catch(() => {
       tbody.innerHTML = '<tr><td colspan="3" class="stables-placeholder">Failed to load stables data</td></tr>';
@@ -448,17 +447,26 @@ function sortStables(field) {
   const sort = window._stablesSort;
   if (sort.field === field) sort.dir *= -1;
   else { sort.field = field; sort.dir = -1; }
-  const isStr = field === 'name';
+  const isStr = field === 'name' || field === 'protocol';
   data.sort((a, b) => {
-    const av = a[field] || 0;
-    const bv = b[field] || 0;
-    return isStr ? sort.dir * av.localeCompare(bv) : sort.dir * (bv - av);
+    const av = a[field] != null ? a[field] : (isStr ? '' : -Infinity);
+    const bv = b[field] != null ? b[field] : (isStr ? '' : -Infinity);
+    return isStr ? sort.dir * String(av).localeCompare(String(bv)) : sort.dir * (bv - av);
   });
   const tbody = document.getElementById('stablesList');
   let h = '';
-  for (let i = 0; i < data.length; i++) {
-    const s = data[i];
-    h += '<tr><td><strong>' + s.name + '</strong></td><td>' + s.apr + '</td><td style="text-align:right;color:#8b949e">' + s.tvl + '</td></tr>';
+  for (const s of data) {
+    const apy1 = s.apy_1d != null ? '<span style="color:' + (s.apy_1d > 0 ? '#3fb950' : s.apy_1d < 0 ? '#f85149' : '#8b949e') + '">' + s.apy_1d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
+    const apy7 = s.apy_7d != null ? '<span style="color:' + (s.apy_7d > 0 ? '#3fb950' : s.apy_7d < 0 ? '#f85149' : '#8b949e') + '">' + s.apy_7d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
+    const apy30 = s.apy_30d != null ? '<span style="color:' + (s.apy_30d > 0 ? '#3fb950' : s.apy_30d < 0 ? '#f85149' : '#8b949e') + '">' + s.apy_30d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
+    h += '<tr>' +
+      '<td><strong>' + (s.protocol || '-') + '</strong></td>' +
+      '<td>' + s.name + '</td>' +
+      '<td style="text-align:right;color:#8b949e">' + s.tvl + '</td>' +
+      '<td style="text-align:right">' + apy1 + '</td>' +
+      '<td style="text-align:right">' + apy7 + '</td>' +
+      '<td style="text-align:right">' + apy30 + '</td>' +
+      '</tr>';
   }
   tbody.innerHTML = h;
 }
@@ -593,33 +601,6 @@ async function render() {
     }
   } catch(e) {}
   document.getElementById('lastUpdated').innerHTML = changeText;
-  
-  // Allocation Chart
-  const allocCtx = document.getElementById('allocationChart').getContext('2d');
-  const topProtocols = Object.entries(protocolValues)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8);
-  
-  new Chart(allocCtx, {
-    type: 'doughnut',
-    data: {
-      labels: topProtocols.map(p => p[0]),
-      datasets: [{
-        data: topProtocols.map(p => p[1]),
-        backgroundColor: [
-          '#667eea', '#764ba2', '#f093fb', '#f5576c',
-          '#4facfe', '#00f2fe', '#43e97b', '#38f9d7'
-        ],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'right', labels: { color: '#8b949e', font: { size: 11 } } }
-      }
-    }
-  });
   
   // Load vaults
   loadVaults();

@@ -60,11 +60,16 @@ async function main() {
     if (pool && pool.apy != null) {
       stables.push({
         name: target.name,
+        protocol: pool.project || 'Unknown',
         apr: pool.apy.toFixed(2) + '%',
         aprValue: pool.apy,
+        apy_1d: pool.apyPct1D != null ? pool.apyPct1D : null,
+        apy_7d: pool.apyPct7D != null ? pool.apyPct7D : null,
+        apy_30d: pool.apyPct30D != null ? pool.apyPct30D : null,
         chain: pool.chain || 'N/A',
         tvl: pool.tvlUsd >= 1e6 ? "$" + (pool.tvlUsd / 1e6).toFixed(0) + "M" : pool.tvlUsd >= 1e3 ? "$" + (pool.tvlUsd / 1e3).toFixed(0) + "K" : "N/A",
         tvlNum: pool.tvlUsd || 0,
+        source: 'defillama',
       });
       console.log(`  ✅ ${target.name}: ${pool.apy.toFixed(2)}% (${pool.chain}, $${(pool.tvlUsd / 1e6).toFixed(0)}M)`);
     } else {
@@ -78,19 +83,24 @@ async function main() {
       const res = await fetch(`https://api.augustdigital.io/api/v1/tokenized_vault/${v.address}`);
       if (res.ok) {
         const data = await res.json();
-        const apy30 = (data.historical_apy?.['30'] || 0) * 100;  // API returns decimal (0.05 = 5%)
+        const apy30 = (data.historical_apy?.['30'] || 0) * 100;
+        const apy7 = (data.historical_apy?.['7'] || 0) * 100;
+        const apy1 = (data.historical_apy?.['1'] || 0) * 100;
         const tvl = data.latest_reported_tvl || 0;
         stables.push({
           name: v.name,
+          protocol: 'Upshift',
           apr: apy30.toFixed(2) + '%',
           aprValue: apy30,
+          apy_1d: apy1,
+          apy_7d: apy7,
+          apy_30d: apy30,
           chain: v.chain,
           tvl: tvl >= 1e6 ? "$" + (tvl / 1e6).toFixed(0) + "M" : tvl >= 1e3 ? "$" + (tvl / 1e3).toFixed(0) + "K" : "N/A",
           tvlNum: tvl,
           source: 'augustdigital',
-          apy_7d: data.historical_apy?.['7'] ? (data.historical_apy['7'] * 100).toFixed(2) + '%' : null,
         });
-        console.log(`  📡 ${v.name}: ${apy30.toFixed(2)}% (augustdigital, ${v.chain}, 7d: ${data.historical_apy?.['7'] ? (data.historical_apy['7']*100).toFixed(2)+'%' : 'N/A'})`);
+        console.log(`  📡 ${v.name}: 30d=${apy30.toFixed(2)}% 7d=${apy7.toFixed(2)}% 1d=${apy1.toFixed(2)}% (${v.chain})`);
       } else {
         console.log(`  ❌ ${v.name}: augustdigital API ${res.status}`);
       }
