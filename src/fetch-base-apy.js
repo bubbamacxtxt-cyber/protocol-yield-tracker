@@ -7,9 +7,10 @@
  * 1. YBS list → yield-bearing stables with native yield
  * 2. Vaults table → upGAMMAusdc, hgETH, etc.
  * 3. Pendle PT/YT → impliedApy (PT), ytFloatingApy (YT)
- * 4. Protocol supply APY → Aave/Morpho supply rates (per-position)
- * 5. Non-yield stables → 0% (or Aave reference rate)
- * 6. Static entries → tokens with known fixed rates
+ * 4. Protocol supply APY → Aave/Morpho/Euler supply rates (per-position)
+ * 5. Euler → Euler Indexer API (indexer.euler.finance)
+ * 6. Non-yield stables → 0% (or Aave reference rate)
+ * 7. Static entries → tokens with known fixed rates
  */
 
 const Database = require('better-sqlite3');
@@ -248,7 +249,50 @@ function normSymbol(sym) {
   return sym.includes('₮') ? sym.replace('₮', 'T') : sym;
 }
 
-// ─── Main ──────────────────────────────────────────────────────────
+// ─── Source 6: Euler v2 APY (via Euler Indexer API) ─────────────────
+async function fetchEulerApy() {
+  const bestVault = {};
+  const chainIds = { 1: 'ethereum', 8453: 'base', 42161: 'arbitrum', 146: 'sonic', 9745: 'plasma' };
+  for (const [cid, name] of Object.entries(chainIds)) {
+    try {
+      const res = await fetch('https://indexer.euler.finance/v2/vault/list?chainId=' + cid + '&take=200');
+      if (!res.ok) { console.log('  ❌ Euler ' + name + ': HTTP ' + res.status); continue; }
+      const data = await res.json();
+      const items = data.items || [];
+      for (const v of items) {
+        const symbol = v.assetSymbol;
+        if (!symbol) continue;
+        const sApy = v.supplyApy && v.supplyApy.totalApy != null ? v.supplyApy.totalApy : 0;
+        const bApy = v.borrowApy && v.borrowApy.totalApy != null ? v.borrowApy.totalApy : 0;
+        const tvl = v.totalAssetsUSD || 0;
+        const key = symbol + ':' + cid;
+        if (!bestVault[key] || tvl > bestVault[key].tvl) {
+          bestVault[key] = { supplyApy: sApy, borrowApy: bApy, tvl: tvl };
+        }
+      }
+      console.log('  Euler ' + name + ': ' + items.length + ' vaults');
+    } catch (e) {
+      console.log('  ❌ Euler ' + name + ': ' + e.message);
+    }
+  }
+  const supplyMap = {}, borrowMap = {};
+  for (const [key, v] of Object.entries(bestVault)) {
+    const parts = key.split(':');
+    const symbol = parts[0], cid = parts[1];
+    if (v.supplyApy > 0) {
+      if (!supplyMap[symbol]) supplyMap[symbol] = {};
+      supplyMap[symbol][cid] = v.supplyApy;
+    }
+    if (v.borrowApy > 0) {
+      if (!borrowMap[symbol]) borrowMap[symbol] = {};
+      borrowMap[symbol][cid] = v.borrowApy;
+    }
+  }
+  console.log('  Euler: ' + Object.keys(supplyMap).length + ' supply, ' + Object.keys(borrowMap).length + ' borrow');
+  return { supply: supplyMap, borrow: borrowMap };
+}
+
+// ─── Main// ─── Main ──────────────────────────────────────────────────────────
 async function main() {
   const db = new Database(DB_PATH);
 
@@ -274,6 +318,9 @@ async function main() {
 
   console.log('5. Morpho APY...');
   const morphoApy = await fetchMorphoApy();
+
+  console.log('6. Euler v2 APY (Indexer API)...');
+  const eulerApy = await fetchEulerApy();
 
   // ── Apply supply APY ──────────────────────────────────────────
   console.log('\n6. Applying supply APY...');
@@ -316,7 +363,7 @@ async function main() {
     WHERE pt.role='supply' AND pt.apy_base IS NULL
   `).all();
 
-  let staticApplied = 0, aaveApplied = 0, morphoApplied = 0, zeroCount = 0, stillMissing = 0;
+  let staticApplied = 0, aaveApplied = 0, morphoApplied = 0, eulerApplied = 0, zeroCount = 0, stillMissing = 0;
 
   for (const row of pending) {
     const cid = CHAIN_ID_MAP[row.chain?.toLowerCase()] || CHAIN_ID_MAP[row.chain?.toLowerCase()] || 0;
@@ -345,6 +392,8 @@ async function main() {
           }
         }
       }
+    } else if (row.protocol_name === 'Euler' && eulerApy.supply[row.symbol]?.[cid] != null) {
+      apy = eulerApy.supply[row.symbol][cid]; source = 'euler_supply'; eulerApplied++;
     } else if (nonYieldStables.has(row.symbol)) {
       // Try Aave reference rate first
       if (aaveApy.supply[row.symbol]?.[cid] != null) {
@@ -362,7 +411,7 @@ async function main() {
       stillMissing++;
     }
   }
-  console.log(`   Protocol-level: Static: ${staticApplied}, Aave: ${aaveApplied}, Morpho: ${morphoApplied}, Zero: ${zeroCount}, Missing: ${stillMissing}`);
+  console.log(`   Protocol-level: Static: ${staticApplied}, Aave: ${aaveApplied}, Morpho: ${morphoApplied}, Euler: ${eulerApplied}, Zero: ${zeroCount}, Missing: ${stillMissing}`);
 
   // ── Apply borrow APY (cost) ───────────────────────────────────
   console.log('\n7. Applying borrow APY...');
