@@ -1,0 +1,16 @@
+{
+  "name": "protocol-yield-tracker",
+  "version": "1.0.0",
+  "description": "Multi-protocol DeFi position analyzer — tracks lending, borrowing, and looping strategies across Aave v3, Morpho, and more",
+  "main": "src/fetch.js",
+  "scripts": {
+    "fetch": "node src/fetch.js",
+    "export": "node src/export.js",
+    "analyze": "node src/analyze-wallets.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "dotenv": "^17.3.1",
+    "ethers": "^6.16.0"
+  }
+}

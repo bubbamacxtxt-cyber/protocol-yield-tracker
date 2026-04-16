@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol Yield Tracker — Flagship USDC SuperVault</title>
+<link rel="icon" href="../favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="../whale-common.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a class="home-btn" href="../superform.html">← Superform</a>
+    <img src="../favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
+    <h1>Flagship USDC SuperVault</h1>
+  </div>
+  <p class="subtitle">Vault positions and yield strategies</p>
+  <div class="cards" id="summaryCards"></div>
+  <div class="proto-summary" id="protoSummary"></div>
+  <div class="filters">
+    <div class="filter-group"><label>Chain:</label><select id="chainFilter"><option value="all">All chains</option></select></div>
+    <div class="filter-group"><label>Protocol:</label><select id="protoFilter"><option value="all">All protocols</option></select></div>
+    <div class="filter-group"><label>Search:</label><input type="text" id="searchFilter" placeholder="Token, wallet, or protocol..."></div>
+    <button class="download-btn" onclick="downloadXLSX()">&#8595; Download XLSX</button>
+  </div>
+  <div class="table-wrap">
+    <table id="positionsTable">
+      <thead><tr id="tableHeader"></tr></thead>
+      <tbody id="positionsBody"></tbody>
+    </table>
+  </div>
+</div>
+<div id="detail-modal"></div>
+<script src="../whale-common.js"></script>
+<script>
+  DATA_PATH = '../';
+  WHALE_NAME = 'Superform';
+  VAULT_NAME = 'Flagship USDC SuperVault';
+  document.addEventListener('DOMContentLoaded', whaleInit);
+</script>
+</body>
+</html>

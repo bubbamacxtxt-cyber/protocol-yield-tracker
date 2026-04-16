@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol Yield Tracker — Makina</title>
+<link rel="icon" href="favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="whale-common.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a class="home-btn" href="index.html">← Home</a>
+    <img src="favicon.jpg" alt="Logo" style="width:36px;height:36px;border-radius:8px">
+    <h1>Makina</h1>
+  </div>
+  <p class="subtitle">Vault overview — click a vault to view positions</p>
+  <div id="vaultGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:24px;"></div>
+</div>
+<script>
+const WHALE_NAME = 'Makina';
+const SUB_DIR = 'makina';
+
+async function loadVaults() {
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const whale = data.whales[WHALE_NAME];
+    if (!whale || !whale.vaults) throw new Error('No vault data');
+
+    const grid = document.getElementById('vaultGrid');
+    for (const [vName, vData] of Object.entries(whale.vaults)) {
+      const positions = vData.positions || [];
+      const total = positions.reduce((s, p) => s + (p.net_usd || 0), 0);
+      const chains = [...new Set(positions.map(p => p.chain))];
+      const avgApy = total > 0 ? (positions.reduce((s, p) => s + (p.net_usd || 0) * (p.apy_net || 0), 0) / total).toFixed(2) : '0.00';
+      const slug = vName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+      const card = document.createElement('a');
+      card.className = 'vault-card';
+      card.href = SUB_DIR + '/' + slug + '.html';
+      card.innerHTML = `
+        <div class="vault-card-header">
+          <h3>${vName}</h3>
+          <div class="chain-count">${chains.length} chain${chains.length !== 1 ? 's' : ''}</div>
+        </div>
+        <div class="vault-card-body">
+          <div class="vault-stat"><span class="label">Total Value</span><span class="value money">${fmtShort(total)}</span></div>
+          <div class="vault-stat"><span class="label">Positions</span><span class="value">${positions.length}</span></div>
+          <div class="vault-stat"><span class="label">Avg APY</span><span class="value">${avgApy}%</span></div>
+          <div class="vault-stat"><span class="label">Wallets</span><span class="value">${vData.wallets ? vData.wallets.length : '-'}</span></div>
+        </div>
+        <div class="vault-card-footer">
+          <span class="view-details-btn">View Details →</span>
+        </div>`;
+      grid.appendChild(card);
+    }
+  } catch (e) {
+    document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
+  }
+}
+
+function fmtShort(n) {
+  if (n === null || n === undefined) return '-';
+  if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+  if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+  if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n.toFixed(2);
+}
+
+document.addEventListener('DOMContentLoaded', loadVaults);
+</script>
+</body>
+</html>

@@ -1,0 +1,914 @@
+[
+  {
+    "protocol": "Global Dollar",
+    "token": "USDG",
+    "chain": "ETH",
+    "pendleApy": 3.09,
+    "defillamaApy": 5.39521,
+    "defillamaMatch": "pendle | USDG"
+  },
+  {
+    "protocol": "Neutrl",
+    "token": "sNUSD",
+    "chain": "ETH",
+    "pendleApy": 8.277059592833446,
+    "defillamaApy": 9.12688,
+    "defillamaMatch": "pendle | SNUSD"
+  },
+  {
+    "protocol": "Avalon Finance",
+    "token": "sUSDa",
+    "chain": "ETH",
+    "pendleApy": 4.080248423241373,
+    "defillamaApy": 4.3425,
+    "defillamaMatch": "pendle | SUSDA"
+  },
+  {
+    "protocol": "Ethena",
+    "token": "sUSDe",
+    "chain": "ETH",
+    "pendleApy": 3.513147116884663,
+    "defillamaApy": 3.5323,
+    "defillamaMatch": "ethena-usde | SUSDE"
+  },
+  {
+    "protocol": "Ethena",
+    "token": "sUSDe",
+    "chain": "Plasma",
+    "pendleApy": 3.5143255147707317,
+    "defillamaApy": 0,
+    "defillamaMatch": "aave-v3 | SUSDE"
+  },
+  {
+    "protocol": "Strata",
+    "token": "srUSDe",
+    "chain": "ETH",
+    "pendleApy": 2.7482003002441413,
+    "defillamaApy": 2.74092,
+    "defillamaMatch": "strata-markets | SRUSDE"
+  },
+  {
+    "protocol": "USD.AI",
+    "token": "sUSDai",
+    "chain": "ARB",
+    "pendleApy": 5.335057351380534,
+    "defillamaApy": 5.67,
+    "defillamaMatch": "usd-ai | SUSDAI"
+  },
+  {
+    "protocol": "re.xyz",
+    "token": "reUSD",
+    "chain": "ETH",
+    "pendleApy": 6.260340061483305,
+    "defillamaApy": 0,
+    "defillamaMatch": "fluid-lending | REUSD"
+  },
+  {
+    "protocol": "APYX",
+    "token": "apyUSD",
+    "chain": "ETH",
+    "pendleApy": 8.804115924189349,
+    "defillamaApy": 13.76056,
+    "defillamaMatch": "pendle | APYUSD"
+  },
+  {
+    "protocol": "Avant Protocol",
+    "token": "savUSD",
+    "chain": "ETH",
+    "pendleApy": 7.978957280570453,
+    "defillamaApy": 0,
+    "defillamaMatch": "merkl | SAVUSD"
+  },
+  {
+    "protocol": "OpenEden",
+    "token": "cUSDO",
+    "chain": "ETH",
+    "pendleApy": 3.296681059563178,
+    "defillamaApy": 3.24279,
+    "defillamaMatch": "openeden-usdo | USDO"
+  },
+  {
+    "protocol": "Strata",
+    "token": "jrUSDe",
+    "chain": "ETH",
+    "pendleApy": 8.393289411566185,
+    "defillamaApy": 9.61528,
+    "defillamaMatch": "strata-markets | JRUSDE"
+  },
+  {
+    "protocol": "re.xyz",
+    "token": "reUSDe",
+    "chain": "ETH",
+    "pendleApy": 12.734500000003335,
+    "defillamaApy": 14.51049,
+    "defillamaMatch": "pendle | REUSDE"
+  },
+  {
+    "protocol": "Strata",
+    "token": "srNUSD",
+    "chain": "ETH",
+    "pendleApy": 6.045316593829875,
+    "defillamaApy": 6.91028,
+    "defillamaMatch": "pendle | SRNUSD"
+  },
+  {
+    "protocol": "Cap",
+    "token": "stcUSD",
+    "chain": "ETH",
+    "pendleApy": 5.376507743877412,
+    "defillamaApy": 4.74341,
+    "defillamaMatch": "cap | STCUSD"
+  },
+  {
+    "protocol": "Ethena",
+    "token": "USDe",
+    "chain": "Plasma",
+    "pendleApy": 0.02229705851852868,
+    "defillamaApy": 0.71381,
+    "defillamaMatch": "aave-v3 | USDE"
+  },
+  {
+    "protocol": "Term Finance",
+    "token": "tmvUSDT0",
+    "chain": "Plasma",
+    "pendleApy": 2.3808994731508104,
+    "defillamaApy": 2.95869,
+    "defillamaMatch": "pendle | TMVUSDT0"
+  },
+  {
+    "protocol": "Strata",
+    "token": "jrNUSD",
+    "chain": "ETH",
+    "pendleApy": 10.299016689000663,
+    "defillamaApy": 8.87643,
+    "defillamaMatch": "pendle | JRNUSD"
+  },
+  {
+    "protocol": "USD.AI",
+    "token": "sUSDai",
+    "chain": "Plasma",
+    "pendleApy": 6.440389001423408,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Aave",
+    "token": "aEthRLUSD",
+    "chain": "ETH",
+    "pendleApy": 0.995747745505482,
+    "defillamaApy": 0.36555,
+    "defillamaMatch": "aave-v3 | LUSD"
+  },
+  {
+    "protocol": "Aegis",
+    "token": "sYUSD",
+    "chain": "ETH",
+    "pendleApy": 0.37250028587771933,
+    "defillamaApy": 3.55,
+    "defillamaMatch": "aegis | YUSD"
+  },
+  {
+    "protocol": "Falcon Finance",
+    "token": "sUSDf",
+    "chain": "ETH",
+    "pendleApy": 5.469605423296797,
+    "defillamaApy": 5.47238,
+    "defillamaMatch": "falcon-finance | SUSDF"
+  },
+  {
+    "protocol": "3Jane",
+    "token": "USD3",
+    "chain": "ETH",
+    "pendleApy": 9.34463617596748e-9,
+    "defillamaApy": 7.78472,
+    "defillamaMatch": "3jane-lending | SUSD3"
+  },
+  {
+    "protocol": "Yuzu Money",
+    "token": "syzUSD",
+    "chain": "Plasma",
+    "pendleApy": 7.272660783956808,
+    "defillamaApy": 7.26891,
+    "defillamaMatch": "yuzu-money | SYZUSD"
+  },
+  {
+    "protocol": "Sky",
+    "token": "stUSDS",
+    "chain": "ETH",
+    "pendleApy": 5.4535588145482095,
+    "defillamaApy": 0,
+    "defillamaMatch": "morpho-v1 | STUSDS"
+  },
+  {
+    "protocol": "Makina",
+    "token": "DUSD",
+    "chain": "ETH",
+    "pendleApy": 3.405588165706619,
+    "defillamaApy": 0,
+    "defillamaMatch": "merkl | DUSD"
+  },
+  {
+    "protocol": "Superform",
+    "token": "superUSDC",
+    "chain": "ETH",
+    "pendleApy": 8.10848841233569,
+    "defillamaApy": 0,
+    "defillamaMatch": "superform | SUPERUSDC"
+  },
+  {
+    "protocol": "Unitas ",
+    "token": "sUSDu",
+    "chain": "BSC",
+    "pendleApy": 11.66441862032206,
+    "defillamaApy": 10.1029,
+    "defillamaMatch": "pendle | SUSDU"
+  },
+  {
+    "protocol": "Aave",
+    "token": "aEthPYUSD",
+    "chain": "ETH",
+    "pendleApy": 1.8869378508518997,
+    "defillamaApy": 2.06466,
+    "defillamaMatch": "aave-v3 | PYUSD"
+  },
+  {
+    "protocol": "InfiniFi",
+    "token": "siUSD",
+    "chain": "ETH",
+    "pendleApy": 5.836947443786911,
+    "defillamaApy": 5.48764,
+    "defillamaMatch": "infinifi | SIUSD"
+  },
+  {
+    "protocol": "Gains Network",
+    "token": "gUSDC",
+    "chain": "ARB",
+    "pendleApy": 4.786238788291652,
+    "defillamaApy": 7.20403,
+    "defillamaMatch": "gains-network | USDC"
+  },
+  {
+    "protocol": "Spark",
+    "token": "USDS",
+    "chain": "ETH",
+    "pendleApy": 3.771508243314948,
+    "defillamaApy": 0,
+    "defillamaMatch": "sparklend | SUSDS"
+  },
+  {
+    "protocol": "Anzen ",
+    "token": "sUSDz",
+    "chain": "Base",
+    "pendleApy": 13.878380124678724,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Aave",
+    "token": "stkwaEthUSDT.v1",
+    "chain": "ETH",
+    "pendleApy": 7.232014569321221,
+    "defillamaApy": 1.91936,
+    "defillamaMatch": "aave-v3 | USDT"
+  },
+  {
+    "protocol": "Plasma",
+    "token": "PlasmaUSD",
+    "chain": "Plasma",
+    "pendleApy": 3.466789421654015,
+    "defillamaApy": 2.77221,
+    "defillamaMatch": "veda | PLASMAUSD"
+  },
+  {
+    "protocol": "Gauntlet",
+    "token": "gtUSDa",
+    "chain": "Base",
+    "pendleApy": 5.173989978258442,
+    "defillamaApy": 3.98132,
+    "defillamaMatch": "gauntlet | GTUSDA"
+  },
+  {
+    "protocol": "Astherus",
+    "token": "asUSDF",
+    "chain": "BSC",
+    "pendleApy": 4.788940860279212,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Dolomite",
+    "token": "dUSDC",
+    "chain": "ARB",
+    "pendleApy": 4.556560373653662,
+    "defillamaApy": 3.54252,
+    "defillamaMatch": "dolomite | USDC"
+  },
+  {
+    "protocol": "Aave",
+    "token": "aPlaUSDT0",
+    "chain": "Plasma",
+    "pendleApy": 2.9561658108017586,
+    "defillamaApy": 2.83797,
+    "defillamaMatch": "aave-v3 | USDT0"
+  },
+  {
+    "protocol": "Maple",
+    "token": "syrupUSDT",
+    "chain": "Plasma",
+    "pendleApy": 3.814294889880143,
+    "defillamaApy": 0,
+    "defillamaMatch": "aave-v3 | SYRUPUSDT"
+  },
+  {
+    "protocol": "Resupply",
+    "token": "sreUSD",
+    "chain": "ETH",
+    "pendleApy": 3.275947107975097,
+    "defillamaApy": 0.65527,
+    "defillamaMatch": "resupply | SREUSD"
+  },
+  {
+    "protocol": "Fluid",
+    "token": "fUSDT0",
+    "chain": "Plasma",
+    "pendleApy": 5.663556787428623,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Aave",
+    "token": "stkwaEthUSDC.v1",
+    "chain": "ETH",
+    "pendleApy": 6.498430446891558,
+    "defillamaApy": 2.74332,
+    "defillamaMatch": "aave-v3 | USDC"
+  },
+  {
+    "protocol": "Aave",
+    "token": "aSonUSDC",
+    "chain": "Sonic",
+    "pendleApy": 3.998631268726914,
+    "defillamaApy": 2.35209,
+    "defillamaMatch": "aave-v3 | USDC"
+  },
+  {
+    "protocol": "Aave",
+    "token": "aEthUSDC",
+    "chain": "ETH",
+    "pendleApy": 3.6904922290088127,
+    "defillamaApy": 2.74332,
+    "defillamaMatch": "aave-v3 | USDC"
+  },
+  {
+    "protocol": "Aarna Protocol",
+    "token": "atvUSDC",
+    "chain": "ETH",
+    "pendleApy": 5.400935986362243,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Maple",
+    "token": "syrupUSDC",
+    "chain": "ETH",
+    "pendleApy": 4.194444481582682,
+    "defillamaApy": 4.26574,
+    "defillamaMatch": "maple | USDC"
+  },
+  {
+    "protocol": "Tharwa",
+    "token": "sThUSD",
+    "chain": "ETH",
+    "pendleApy": 14.54647965596676,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Euler",
+    "token": "eUSDC-22",
+    "chain": "ETH",
+    "pendleApy": 3.6579101921977886,
+    "defillamaApy": 3.96754,
+    "defillamaMatch": "euler-v2 | USDC"
+  },
+  {
+    "protocol": "OpenEden",
+    "token": "cUSDO",
+    "chain": "BSC",
+    "pendleApy": 3.296681059563178,
+    "defillamaApy": 3.24279,
+    "defillamaMatch": "openeden-usdo | USDO"
+  },
+  {
+    "protocol": "GMX v2",
+    "token": "GM",
+    "chain": "ARB",
+    "pendleApy": 5.145690753859178,
+    "defillamaApy": 15.86173,
+    "defillamaMatch": "gmx-v2-perps | GMX-USDC"
+  },
+  {
+    "protocol": "Hyperbeat",
+    "token": "hbUSDT",
+    "chain": "HyperEVM",
+    "pendleApy": 6.614771353866544,
+    "defillamaApy": 0,
+    "defillamaMatch": "morpho-v1 | HBUSDT"
+  },
+  {
+    "protocol": "usdx.money",
+    "token": "sUSDX",
+    "chain": "BSC",
+    "pendleApy": 5.294168740609284,
+    "defillamaApy": 0,
+    "defillamaMatch": "lista-cdp | SUSDX"
+  },
+  {
+    "protocol": "Almanak",
+    "token": "alUSD",
+    "chain": "ETH",
+    "pendleApy": 4.629807539717423,
+    "defillamaApy": 1.55623,
+    "defillamaMatch": "lagoon | ALUSD"
+  },
+  {
+    "protocol": "Aave",
+    "token": "aArbUSDCn",
+    "chain": "ARB",
+    "pendleApy": 9.824063712463559,
+    "defillamaApy": 1.78496,
+    "defillamaMatch": "aave-v3 | USDC"
+  },
+  {
+    "protocol": "Fluid",
+    "token": "fGHO",
+    "chain": "ETH",
+    "pendleApy": 5.500252268630442,
+    "defillamaApy": 5.76,
+    "defillamaMatch": "fluid-lending | GHO"
+  },
+  {
+    "protocol": "Stargate",
+    "token": "S*USDT",
+    "chain": "ARB",
+    "pendleApy": 0.07152315095348971,
+    "defillamaApy": 0,
+    "defillamaMatch": "stargate-v1 | USDT"
+  },
+  {
+    "protocol": "Syrup.Fi",
+    "token": "syrupUSDC",
+    "chain": "ETH",
+    "pendleApy": 6.952065305778277,
+    "defillamaApy": 0,
+    "defillamaMatch": "morpho-v1 | SYRUPUSDC"
+  },
+  {
+    "protocol": "Ethena",
+    "token": "ctsUSDe",
+    "chain": "ETH",
+    "pendleApy": 4.58121483408378,
+    "defillamaApy": 3.5323,
+    "defillamaMatch": "ethena-usde | SUSDE"
+  },
+  {
+    "protocol": "Trevee",
+    "token": "wstkscUSD",
+    "chain": "Sonic",
+    "pendleApy": 3.989074413831095,
+    "defillamaApy": 0,
+    "defillamaMatch": "trevee-earn | WSTKSCUSD"
+  },
+  {
+    "protocol": "Aave",
+    "token": "stkGHO",
+    "chain": "ETH",
+    "pendleApy": 5.572571797194526,
+    "defillamaApy": 0,
+    "defillamaMatch": "aave-v3 | GHO"
+  },
+  {
+    "protocol": "YieldFi",
+    "token": "yUSD",
+    "chain": "ETH",
+    "pendleApy": 9.061892910213242,
+    "defillamaApy": 0,
+    "defillamaMatch": "yieldfi | YUSD"
+  },
+  {
+    "protocol": "Stargate",
+    "token": "S*USDT",
+    "chain": "ETH",
+    "pendleApy": 14.527632674631846,
+    "defillamaApy": 0,
+    "defillamaMatch": "stargate-v1 | USDT"
+  },
+  {
+    "protocol": "Usual",
+    "token": "USD0++",
+    "chain": "ETH",
+    "pendleApy": 6.080624098710301,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Superform",
+    "token": "ysUSDC",
+    "chain": "ETH",
+    "pendleApy": 5.426100224868469,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Maple",
+    "token": "syrupUSDC",
+    "chain": "ARB",
+    "pendleApy": 5.450404343837234,
+    "defillamaApy": 0,
+    "defillamaMatch": "morpho-v1 | SYRUPUSDC"
+  },
+  {
+    "protocol": "Gains Network",
+    "token": "gDAI",
+    "chain": "ARB",
+    "pendleApy": 6.396582411684193,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "YieldNest",
+    "token": "ynUSDx",
+    "chain": "ETH",
+    "pendleApy": 5.123777356805936,
+    "defillamaApy": 5.10147,
+    "defillamaMatch": "yieldnest | YNUSDX"
+  },
+  {
+    "protocol": "Karak",
+    "token": "KsUSDe",
+    "chain": "ETH",
+    "pendleApy": 17.956357274000112,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Stream",
+    "token": "xUSD",
+    "chain": "ETH",
+    "pendleApy": 16.407936945317438,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Silo",
+    "token": "bscUSD-46",
+    "chain": "Sonic",
+    "pendleApy": 4.550308997571495,
+    "defillamaApy": 0.1316,
+    "defillamaMatch": "silo-v2 | SCUSD"
+  },
+  {
+    "protocol": "Yuzu Money",
+    "token": "yzUSD",
+    "chain": "Plasma",
+    "pendleApy": 9.124352188683709,
+    "defillamaApy": 7.26891,
+    "defillamaMatch": "yuzu-money | SYZUSD"
+  },
+  {
+    "protocol": "YieldFi",
+    "token": "vyUSD",
+    "chain": "ETH",
+    "pendleApy": 9.774463320907945,
+    "defillamaApy": 0,
+    "defillamaMatch": "yieldfi | YUSD"
+  },
+  {
+    "protocol": "Curve",
+    "token": "GHOUSR-gauge",
+    "chain": "ETH",
+    "pendleApy": 0.5546575292587841,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "YO",
+    "token": "yoUSD",
+    "chain": "Base",
+    "pendleApy": 7.971330573793534,
+    "defillamaApy": 0,
+    "defillamaMatch": "morpho-v1 | YOUSD"
+  },
+  {
+    "protocol": "Level",
+    "token": "slvlUSD",
+    "chain": "ETH",
+    "pendleApy": 8.458111903395228,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Hyperbeat",
+    "token": "hbUSDC",
+    "chain": "HyperEVM",
+    "pendleApy": 5.862978716876999,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Midas",
+    "token": "msyrupUSDp",
+    "chain": "ETH",
+    "pendleApy": 3.7748112775838782,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Convex",
+    "token": "crvFRAX",
+    "chain": "ETH",
+    "pendleApy": 3.4033766280106965,
+    "defillamaApy": 0.35023,
+    "defillamaMatch": "yearn-finance | CRVFRAX"
+  },
+  {
+    "protocol": "Silo",
+    "token": "scrvUSD-CRV",
+    "chain": "ETH",
+    "pendleApy": 22.495016281706405,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Aave",
+    "token": "aEthUSDT",
+    "chain": "ETH",
+    "pendleApy": 10.040396567775268,
+    "defillamaApy": 1.91936,
+    "defillamaMatch": "aave-v3 | USDT"
+  },
+  {
+    "protocol": "Trevee",
+    "token": "splUSD",
+    "chain": "Plasma",
+    "pendleApy": 10.413596020846505,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Silo (ARBSilo)",
+    "token": "sUSDC-ARB",
+    "chain": "ARB",
+    "pendleApy": 17.834292355907344,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "River",
+    "token": "satUSD+",
+    "chain": "BSC",
+    "pendleApy": 0.3548711338027255,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Sky Protocol",
+    "token": "sUSDS",
+    "chain": "ARB",
+    "pendleApy": 4.7500160749588405,
+    "defillamaApy": 3.75,
+    "defillamaMatch": "sky-lending | SUSDS"
+  },
+  {
+    "protocol": "Moonwell",
+    "token": "mUSDC",
+    "chain": "Base",
+    "pendleApy": 5.227453829070669,
+    "defillamaApy": 2.48403,
+    "defillamaMatch": "moonwell-lending | USDC"
+  },
+  {
+    "protocol": "Spark",
+    "token": "sDAI",
+    "chain": "ETH",
+    "pendleApy": 11.499999999999622,
+    "defillamaApy": 0,
+    "defillamaMatch": "sparklend | SDAI"
+  },
+  {
+    "protocol": "Lybra",
+    "token": "eUSD",
+    "chain": "ETH",
+    "pendleApy": 4.625668223485713,
+    "defillamaApy": 0,
+    "defillamaMatch": "reserve-protocol | EUSD"
+  },
+  {
+    "protocol": "Stable",
+    "token": "ctStableUSDT",
+    "chain": "ETH",
+    "pendleApy": 1.4682212516684112,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Flux",
+    "token": "fUSDC",
+    "chain": "ETH",
+    "pendleApy": 4.397632452471245,
+    "defillamaApy": 3.75984,
+    "defillamaMatch": "flux-finance | USDC"
+  },
+  {
+    "protocol": "Mellow",
+    "token": "rsUSDe",
+    "chain": "ETH",
+    "pendleApy": 3.632910763673891,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Reservoir",
+    "token": "wsrUSD",
+    "chain": "ETH",
+    "pendleApy": 4.915853532779968,
+    "defillamaApy": 4.75,
+    "defillamaMatch": "reservoir-protocol | SRUSD"
+  },
+  {
+    "protocol": "246 Club",
+    "token": "re-aUSDC",
+    "chain": "Sonic",
+    "pendleApy": 4.431034633124291,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Cygnus",
+    "token": "wcgUSD",
+    "chain": "Base",
+    "pendleApy": 2.0925536935425537,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Ethena",
+    "token": "sUSDe",
+    "chain": "BSC",
+    "pendleApy": 4.334682272947266,
+    "defillamaApy": 0,
+    "defillamaMatch": "venus-core-pool | SUSDE"
+  },
+  {
+    "protocol": "Aave",
+    "token": "aBasGHO",
+    "chain": "Base",
+    "pendleApy": 5.757962223965585,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Silo",
+    "token": "bUSDC.e-20",
+    "chain": "Sonic",
+    "pendleApy": 5.881553758353464,
+    "defillamaApy": 17.21997,
+    "defillamaMatch": "silo-v2 | USDC"
+  },
+  {
+    "protocol": "Frax",
+    "token": "sFRAX",
+    "chain": "ETH",
+    "pendleApy": 11.248702853609327,
+    "defillamaApy": 0.95501,
+    "defillamaMatch": "frax | SFRAX"
+  },
+  {
+    "protocol": "Aave",
+    "token": "stkGHO.v1",
+    "chain": "ETH",
+    "pendleApy": 8.08059967469713,
+    "defillamaApy": 0,
+    "defillamaMatch": "aave-v3 | GHO"
+  },
+  {
+    "protocol": "Fluid",
+    "token": "fUSDC",
+    "chain": "ETH",
+    "pendleApy": 6.113364550322112,
+    "defillamaApy": 4.5,
+    "defillamaMatch": "fluid-lending | USDC"
+  },
+  {
+    "protocol": "Curve",
+    "token": "scrvUSD",
+    "chain": "ETH",
+    "pendleApy": 7.310463006419865,
+    "defillamaApy": 2.1132,
+    "defillamaMatch": "curve-llamalend | CRVUSD"
+  },
+  {
+    "protocol": "Ethena",
+    "token": "sUSDe",
+    "chain": "Bera",
+    "pendleApy": 6.900552852034769,
+    "defillamaApy": 0,
+    "defillamaMatch": "dolomite | SUSDE"
+  },
+  {
+    "protocol": "Ethena",
+    "token": "sUSDe",
+    "chain": "HyperEVM",
+    "pendleApy": 7.464046523295131,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Upshift Finance",
+    "token": "upUSDC",
+    "chain": "ETH",
+    "pendleApy": 30.013010138080176,
+    "defillamaApy": 9.09,
+    "defillamaMatch": "upshift | UPUSDC"
+  },
+  {
+    "protocol": "Frax Finance",
+    "token": "sfrxUSD",
+    "chain": "ETH",
+    "pendleApy": 5.199995776863386,
+    "defillamaApy": 4.24939,
+    "defillamaMatch": "frax | SFRXUSD"
+  },
+  {
+    "protocol": "Asymmetry Finance",
+    "token": "sUSDaf",
+    "chain": "ETH",
+    "pendleApy": 6.386947703062051,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Sky Protocol",
+    "token": "USDS",
+    "chain": "ETH",
+    "pendleApy": 7.7950022749904075,
+    "defillamaApy": 3.79684,
+    "defillamaMatch": "sparklend | USDS"
+  },
+  {
+    "protocol": "Origin ",
+    "token": "WOUSD",
+    "chain": "ETH",
+    "pendleApy": 3.1682561466960912,
+    "defillamaApy": 4.84483,
+    "defillamaMatch": "origin-dollar | OUSD"
+  },
+  {
+    "protocol": "Smardex",
+    "token": "wstUSDN",
+    "chain": "ETH",
+    "pendleApy": 13.529633110401562,
+    "defillamaApy": 11.68266,
+    "defillamaMatch": "smardex-usdn | USDN"
+  },
+  {
+    "protocol": "Infrared",
+    "token": "BYUSD-HONEY-STABLE",
+    "chain": "Bera",
+    "pendleApy": 26.90759087552274,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Sky Protocol",
+    "token": "sUSDS",
+    "chain": "ETH",
+    "pendleApy": 5.806348599774092,
+    "defillamaApy": 3.75,
+    "defillamaMatch": "sky-lending | SUSDS"
+  },
+  {
+    "protocol": "Fluid",
+    "token": "fUSDT",
+    "chain": "ETH",
+    "pendleApy": 6.562225952586926,
+    "defillamaApy": 4.84,
+    "defillamaMatch": "fluid-lending | USDT"
+  },
+  {
+    "protocol": "Yearn",
+    "token": "yvBal-GHO-USR",
+    "chain": "Base",
+    "pendleApy": 0.7091683082989686,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  },
+  {
+    "protocol": "Coinshift",
+    "token": "csUSDL",
+    "chain": "ETH",
+    "pendleApy": 4.125650993355778,
+    "defillamaApy": null,
+    "defillamaMatch": ""
+  }
+]
