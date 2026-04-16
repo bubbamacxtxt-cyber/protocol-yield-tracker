@@ -9,16 +9,16 @@
       "strategy": "rwa",
       "yield_source": "institutional",
       "health_rate": null,
-      "net_usd": 5109592.227075031,
-      "asset_usd": 5109592.227075031,
+      "net_usd": 4611543.217075031,
+      "asset_usd": 4611543.217075031,
       "debt_usd": 0,
       "supply": [
         {
           "symbol": "USDz",
           "real_symbol": "USDz",
-          "amount": 5109592.227075031,
+          "amount": 4611543.217075031,
           "price_usd": 1,
-          "value_usd": 5109592.227075031
+          "value_usd": 4611543.217075031
         }
       ],
       "borrow": [],
@@ -27,7 +27,7 @@
       "apy_avg": 5,
       "apy_base": 5,
       "apy_rewards": 0,
-      "maturity": "2026-07-15",
+      "maturity": "2026-07-16",
       "bucket_weeks": null,
       "underlying": "USDz",
       "paused": false,
@@ -184,6 +184,43 @@
       "financing_type": "Asset Backed",
       "deal_type": "Amortizing",
       "preference": "Senior"
+    },
+    {
+      "wallet": "off-chain",
+      "chain": "eth",
+      "protocol_name": "SPS20250217ZZZ0405",
+      "protocol_id": "sps20250217zzz0405",
+      "position_type": "Illiquid",
+      "strategy": "rwa",
+      "yield_source": "superstate",
+      "health_rate": null,
+      "net_usd": 498049.01,
+      "asset_usd": 498049.01,
+      "debt_usd": 0,
+      "supply": [
+        {
+          "symbol": "USDz",
+          "real_symbol": "USDz",
+          "amount": 498049.01,
+          "price_usd": 1,
+          "value_usd": 498049.01
+        }
+      ],
+      "borrow": [],
+      "rewards": [],
+      "apy_current": 3.42,
+      "apy_avg": 3.42,
+      "apy_base": 3.42,
+      "apy_rewards": 0,
+      "maturity": "2026-04-16",
+      "bucket_weeks": null,
+      "underlying": "USDz",
+      "paused": false,
+      "manual": true,
+      "asset_type": "Superstate Co.",
+      "financing_type": "n/a",
+      "deal_type": "Institutional Liquidity",
+      "preference": "n/a"
     }
   ]
 }
