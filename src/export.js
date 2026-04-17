@@ -168,6 +168,21 @@ function main() {
     }
     const deduped = [...posMap.values()];
 
+    // Filter dust positions (< $100) and fix bogus health_factor
+    const filtered = deduped.filter(p => {
+        // Remove dust: tiny positions (scanner artifacts or DeBank junk)
+        const totalUsd = Math.abs(p.asset_usd || 0) + Math.abs(p.debt_usd || 0);
+        if (totalUsd < 100) return false;
+        return true;
+    });
+    
+    // Fix bogus health_factor: DeBank returns 1e+59 for supply-only positions
+    for (const p of filtered) {
+        if (p.health_factor > 1000 && (!p.borrow || p.borrow.length === 0)) {
+            p.health_factor = null;
+        }
+    }
+
     // Build whale data
     const whales = {};
     for (const [name, definition] of Object.entries(WHALES)) {
@@ -183,7 +198,7 @@ function main() {
         }
 
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
-        const positions = deduped.filter(p => walletSet.has(p.wallet.toLowerCase()));
+        const positions = filtered.filter(p => walletSet.has(p.wallet.toLowerCase()));
 
         // Fix Re Protocol on-chain positions
         // DeBank mislabels sUSDe as USDe and calls protocol "Ethena"
