@@ -8,13 +8,61 @@ const path = require('path');
 const Database = require('better-sqlite3');
 
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
+const https = require('https');
 const OUT_PATH = path.join(__dirname, '..', 'data.json');
 
 // Whale definitions loaded from data/whales.json
 const WHALES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
 
-function main() {
+// Fetch Euler V2 APYs from DeFiLlama
+function fetchEulerAPYs() {
+    return new Promise((resolve) => {
+        https.get('https://yields.llama.fi/pools', { headers: { 'User-Agent': 'Mozilla/5.0' } }, res => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                try {
+                    const pools = JSON.parse(data).data;
+                    const euler = pools.filter(p => p.project === 'euler-v2' && p.chain === 'Ethereum');
+                    const apyBySymbol = {};
+                    for (const p of euler) {
+                        const sym = p.symbol?.toUpperCase();
+                        if (sym && (!apyBySymbol[sym] || p.tvlUsd > apyBySymbol[sym].tvlUsd)) {
+                            apyBySymbol[sym] = { apyBase: p.apyBase || 0, apyReward: p.apyReward || 0, apy: p.apy || 0, tvlUsd: p.tvlUsd };
+                        }
+                    }
+                    resolve(apyBySymbol);
+                } catch(e) { resolve({}); }
+            }).on('error', () => resolve({}));
+        });
+    });
+}
+
+async function main() {
     const db = new Database(DB_PATH, { readonly: true });
+    let eulerApys = {};
+    
+    // Fetch Euler APYs
+    try {
+        const https = require('https');
+        const data = await new Promise((resolve, reject) => {
+            https.get('https://yields.llama.fi/pools', { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 10000 }, res => {
+                let d = '';
+                res.on('data', chunk => d += chunk);
+                res.on('end', () => resolve(d));
+            }).on('error', reject).on('timeout', () => reject(new Error('timeout')));
+        });
+        const pools = JSON.parse(data).data.filter(p => p.project === 'euler-v2' && p.chain === 'Ethereum');
+        for (const p of pools) {
+            const sym = p.symbol?.toUpperCase();
+            if (sym && (!eulerApys[sym] || p.tvlUsd > eulerApys[sym].tvlUsd)) {
+                eulerApys[sym] = { apyBase: p.apyBase || 0, apyReward: p.apyReward || 0, apy: p.apy || 0, tvlUsd: p.tvlUsd };
+            }
+        }
+        console.log(`Loaded ${Object.keys(eulerApys).length} Euler APYs`);
+    } catch(e) {
+        console.log('Could not fetch Euler APYs:', e.message);
+    }
 
     // Load manual positions (RWAs, off-chain, etc.)
     const manualPath = path.join(__dirname, '..', 'data', 'manual-positions.json');
@@ -68,6 +116,32 @@ function main() {
         // Normalize position_type to strategy
         const typeToStrategy = { 'Lending': 'lend', 'supply': 'lend', 'borrow': 'borrow', 'Borrow': 'borrow' };
         p.strategy = typeToStrategy[p.position_type] || typeToStrategy[p.position_type?.toLowerCase()] || 'lend';
+        
+        // Enrich Euler positions with DeFiLlama APYs
+        if (p.protocol_name === 'Euler' && eulerApys) {
+            // Euler position_index is underlying asset address
+            // Map known addresses to symbols
+            const eulerAddrMap = {
+                '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48': 'USDC',
+                '0x6c3ea9036406852006290770bedfcaba0e23a0e8': 'PYUSD',
+                '0x8292bb45bf1ee4d140127049757c2e0ff06317ed': 'RLUSD',
+                '0x00000000efe302beaa2b3e6e1b18d08d69a9012a': 'AUSD',
+            };
+            const addr = (p.position_index || '').toLowerCase();
+            let sym = eulerAddrMap[addr];
+            if (!sym) {
+                // Try supply token symbol
+                sym = (p.supply?.[0]?.symbol || '').toUpperCase().replace(/^E/, '').replace(/-\d+$/, '');
+            }
+            if (sym && eulerApys) {
+                const key = sym.toUpperCase();
+                const eulerPool = eulerApys[key];
+                if (eulerPool) {
+                    p.apy_base = eulerPool.apyBase / 100;
+                    p.bonus_supply = eulerPool.apyReward / 100;
+                }
+            }
+        }
 
         // Calculate asset_usd and debt_usd from supply/borrow tokens
         p.asset_usd = (p.supply || []).reduce((sum, t) => sum + (t.value_usd || 0), 0) || p.asset_usd || 0;
@@ -82,7 +156,8 @@ function main() {
                 baseApyDen += t.value_usd;
             }
         }
-        p.apy_base = baseApyDen > 0 ? baseApyNum / baseApyDen : null;
+        // Only set from tokens if not already set by Euler enrichment
+        if (p.apy_base == null) p.apy_base = baseApyDen > 0 ? baseApyNum / baseApyDen : null;
 
         // Cost APY: weighted average of borrow tokens' apy_base (their supply rate = our cost)
         // For borrow positions, the cost is the borrow APY which we store as apy_base on borrow tokens
@@ -105,8 +180,12 @@ function main() {
             if (t.bonus_supply_apy) bonusSupplyTotal += t.bonus_supply_apy;
             if (t.bonus_borrow_apy) bonusBorrowTotal += t.bonus_borrow_apy;
         }
-        p.bonus_supply = bonusSupplyTotal || null;
-        p.bonus_borrow = bonusBorrowTotal || null;
+        // Only set bonus from tokens if not already set by Euler enrichment
+        if (bonusSupplyTotal > 0 && p.bonus_supply == null) p.bonus_supply = bonusSupplyTotal;
+        if (bonusBorrowTotal > 0 && p.bonus_borrow == null) p.bonus_borrow = bonusBorrowTotal;
+        // If no bonus set yet, null
+        if (p.bonus_supply == null) p.bonus_supply = null;
+        if (p.bonus_borrow == null) p.bonus_borrow = null;
         
         // Net APY: accounts for leverage
         // Formula: net_apy = (supply_value × supply_apy - borrow_value × borrow_apy) / equity
@@ -399,4 +478,4 @@ function main() {
     db.close();
 }
 
-main();
+main().catch(console.error);
