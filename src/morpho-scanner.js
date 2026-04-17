@@ -95,17 +95,27 @@ async function lookupV2Vault(address) {
   return null;
 }
 
-// Get v1 vault APY
+// Get v1 vault APY - uses GetVaultPerformanceApy persisted query
+const V1_APY_HASH = 'db4bd5b01c28c4702d575d3cc6718e9fdf02908fe1769a9ac84769183b15d3a1';
 async function getV1VaultAPY(address) {
   const res = await fetch(MORPHO_INTERNAL_API, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'x-apollo-operation-name': 'GetVaultPerformanceApy' },
     body: JSON.stringify({
-      query: `{ vaultByAddress(address: "${address}") { netApy apy totalAssetsUsd } }`
+      operationName: 'GetVaultPerformanceApy',
+      variables: { address, chainId: 1 },
+      extensions: { persistedQuery: { version: 1, sha256Hash: V1_APY_HASH } }
     })
   });
   const data = await res.json();
-  return data?.data?.vaultByAddress || null;
+  const vault = data?.data?.vaultByAddress;
+  if (!vault) return null;
+  return {
+    netApy: vault.state?.netApy,
+    apy: vault.state?.netApyExcludingRewards,
+    totalAssetsUsd: vault.state?.totalAssets ? Number(vault.state.totalAssets) / 1e18 : null,
+    assetSymbol: vault.asset?.symbol
+  };
 }
 
 // Get v2 vault APY
