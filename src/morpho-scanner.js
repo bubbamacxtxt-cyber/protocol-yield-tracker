@@ -118,6 +118,23 @@ async function getV1VaultAPY(address) {
   };
 }
 
+// Combined: try both v1 and v2 endpoints
+async function getVaultAPY(address, version) {
+  // Try the expected version first
+  if (version === 'v1') {
+    const v1 = await getV1VaultAPY(address);
+    if (v1) return v1;
+    const v2 = await getV2VaultAPY(address);
+    if (v2) return { netApy: v2.netApy, apy: v2.netApyExcludingRewards, totalAssetsUsd: v2.totalAssetsUsd };
+  } else {
+    const v2 = await getV2VaultAPY(address);
+    if (v2) return { netApy: v2.netApy, apy: v2.netApyExcludingRewards, totalAssetsUsd: v2.totalAssetsUsd };
+    const v1 = await getV1VaultAPY(address);
+    if (v1) return v1;
+  }
+  return null;
+}
+
 // Get v2 vault APY
 async function getV2VaultAPY(address) {
   const res = await fetch(MORPHO_INTERNAL_API, {
@@ -214,25 +231,16 @@ async function scanWallet(db, wallet, label) {
     const meta = await getTokenMetadata(token.address);
     const sharesFormatted = Number(shares) / (10 ** meta.decimals);
     
-    // Step 4: Get APY
+    // Step 4: Get APY (try both v1 and v2 endpoints)
     let apyBase = null;
     let apyTotal = null;
     let tvl = null;
     
-    if (vault.version === 'v2') {
-      const apyData = await getV2VaultAPY(vault.address);
-      if (apyData) {
-        apyBase = apyData.netApyExcludingRewards != null ? apyData.netApyExcludingRewards * 100 : null;
-        apyTotal = apyData.netApy != null ? apyData.netApy * 100 : null;
-        tvl = apyData.totalAssetsUsd || null;
-      }
-    } else {
-      const apyData = await getV1VaultAPY(vault.address);
-      if (apyData) {
-        apyBase = apyData.apy != null ? apyData.apy * 100 : null;
-        apyTotal = apyData.netApy != null ? apyData.netApy * 100 : null;
-        tvl = apyData.totalAssetsUsd || null;
-      }
+    const apyData = await getVaultAPY(token.address, vault.version);
+    if (apyData) {
+      apyBase = apyData.apy != null ? apyData.apy * 100 : null;
+      apyTotal = apyData.netApy != null ? apyData.netApy * 100 : null;
+      tvl = apyData.totalAssetsUsd || null;
     }
     
     const bonusApy = (apyTotal != null && apyBase != null) ? apyTotal - apyBase : null;
