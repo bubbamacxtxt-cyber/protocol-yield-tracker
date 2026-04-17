@@ -23,9 +23,10 @@ const V2_PERF_HASH = '2450946f568dabb9e65946408befef7d15c529139e2a397c75bf64cbcc
 
 // Symbol mapping for vault names to display symbols
 const CHAIN_NAMES = {
-  1: 'ETH', 8453: 'BASE', 42161: 'ARB', 137: 'MNT',
-  10: 'OPT', 5000: 'MNT', 81457: 'BLAST', 534352: 'SCROLL',
-  146: 'SONIC', 9745: 'PLASMA', 130: 'UNI', 747474: 'WCT',
+  1: 'eth', 8453: 'base', 42161: 'arb', 137: 'poly',
+  10: 'opt', 5000: 'mnt', 81457: 'blast', 534352: 'scroll',
+  146: 'sonic', 9745: 'plasma', 130: 'uni', 747474: 'wct',
+  143: 'monad', 999: 'ink', 2741: 'abstract',
 };
 
 const SYMBOL_MAP = {
