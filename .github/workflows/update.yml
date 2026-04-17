@@ -40,6 +40,10 @@ jobs:
       - name: Fetch Re Protocol data
         run: node src/fetch-re.js
 
+      # Aave multi-chain scanner
+      - name: Scan Aave positions
+        run: node src/aave-scanner.js
+
       # APY enrichment (fetches rates from Aave/Morpho/Euler)
       - name: Enrich positions with market/vault info
         run: node src/enrich-markets.js
