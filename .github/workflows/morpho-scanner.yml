@@ -1,4 +1,4 @@
-name: Morpho Scanner
+name: Protocol Scanner
 
 on:
   schedule:
@@ -21,11 +21,15 @@ jobs:
 
       - run: npm ci
 
-      # Run Morpho scanner v2 (REST API - 3 calls per wallet)
+      # Morpho scanner v2 (REST API - 3 calls per wallet)
       - name: Scan Morpho positions
         run: node src/morpho-scanner-v2.js
         env:
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+
+      # Aave v3 scanner (GraphQL)
+      - name: Scan Aave v3 positions
+        run: node src/aave-scanner.js
 
       # Enrich positions with market data and Merkl rewards
       - name: Enrich positions with market/vault info
