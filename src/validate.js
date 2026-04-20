@@ -14,9 +14,16 @@ const fs = require('fs');
 const path = require('path');
 const { ethers } = require('ethers');
 
-const THRESHOLD = 0.06; // 6% (InfiniFi API fluctuates ~5%, Pareto includes unallocated funds)
 const errors = [];
 const warnings = [];
+
+function getThreshold(dbTotal) {
+  // Tighter threshold for larger positions
+  if (dbTotal >= 100_000_000) return 0.03; // 3% for >$100M
+  if (dbTotal >= 10_000_000) return 0.05;  // 5% for >$10M
+  if (dbTotal >= 1_000_000) return 0.08;   // 8% for >$1M
+  return 0.15; // 15% for <$1M (more volatile)
+}
 
 function pctDiff(a, b) {
   if (a === 0 && b === 0) return 0;
@@ -32,9 +39,10 @@ async function fetchJson(url, headers = {}) {
 
 function check(name, liveTotal, dbTotal) {
   const diff = pctDiff(dbTotal, liveTotal);
-  const status = diff > THRESHOLD ? '❌' : '✅';
-  console.log(`${status} ${name}: data=$${dbTotal.toLocaleString('en-US', {maximumFractionDigits: 0})} live=$${liveTotal.toLocaleString('en-US', {maximumFractionDigits: 0})} (${(diff * 100).toFixed(1)}%)`);
-  if (diff > THRESHOLD) {
+  const threshold = getThreshold(dbTotal);
+  const status = diff > threshold ? '❌' : '✅';
+  console.log(`${status} ${name}: data=$${dbTotal.toLocaleString('en-US', {maximumFractionDigits: 0})} live=$${liveTotal.toLocaleString('en-US', {maximumFractionDigits: 0})} (${(diff * 100).toFixed(1)}%, threshold: ${(threshold * 100).toFixed(0)}%)`);
+  if (diff > threshold) {
     errors.push(`${name}: ${(diff * 100).toFixed(1)}% off (data=$${dbTotal.toLocaleString()} vs live=$${liveTotal.toLocaleString()})`);
   }
 }

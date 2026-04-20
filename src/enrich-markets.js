@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const Database = require('better-sqlite3');
-const https = require('https');
 const path = require('path');
 
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
@@ -17,32 +16,20 @@ const WRAPPED_TO_UNDERLYING = {
   '0xd3fd63209fa2d55b07a0f6db36c2f43900be3094': '0x738d1115b90efa71ae468f1287fc864775e23a31', // wsrUSD -> srUSD
 };
 
-function postJSON(url, body) {
-  return new Promise((res, rej) => {
-    const bodyStr = JSON.stringify(body);
-    const u = new URL(url);
-    const req = https.request({
-      hostname: u.hostname, path: u.pathname + u.search,
-      method: 'POST', headers: { 'Content-Type': 'application/json' }
-    }, r => {
-      let d = '';
-      r.on('data', c => d += c);
-      r.on('end', () => { try { res(JSON.parse(d)); } catch(e) { rej(new Error(`Parse: ${d.slice(0,200)}`)); } });
-    });
-    req.on('error', rej);
-    req.write(bodyStr);
-    req.end();
+const { fetchWithRetry, fetchJSON } = require('./fetch-helper');
+
+async function postJSON(url, body) {
+  const res = await fetchWithRetry(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
   });
+  if (!res || !res.ok) return null;
+  try { return await res.json(); } catch { return null; }
 }
 
-function httpGet(url) {
-  return new Promise((res, rej) => {
-    https.get(url, r => {
-      let d = '';
-      r.on('data', c => d += c);
-      r.on('end', () => { try { res(JSON.parse(d)); } catch(e) { rej(e); } });
-    }).on('error', rej);
-  });
+async function httpGet(url) {
+  return await fetchJSON(url);
 }
 
 const AAVE_CHAINS = {

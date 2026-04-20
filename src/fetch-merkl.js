@@ -6,7 +6,6 @@
 
 const Database = require('better-sqlite3');
 const path = require('path');
-const https = require('https');
 
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const MERKL_BASE = 'https://api.merkl.xyz/v4';
@@ -30,17 +29,10 @@ const PROTOCOL_MAP = {
   'Compound V3': ['compound-v3', 'compound'],
 };
 
-function httpGet(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'Accept': 'application/json' } }, res => {
-      let data = '';
-      res.on('data', c => data += c);
-      res.on('end', () => {
-        try { resolve(JSON.parse(data)); }
-        catch (e) { reject(new Error(`Parse error for ${url}: ${e.message}`)); }
-      });
-    }).on('error', reject);
-  });
+const { fetchJSON } = require('./fetch-helper');
+
+async function httpGet(url, retries = 3) {
+  return await fetchJSON(url, {}, retries);
 }
 
 async function fetchMerklOpportunities() {
@@ -48,22 +40,18 @@ async function fetchMerklOpportunities() {
   for (const [chainName, chainId] of Object.entries(CHAINS)) {
     let page = 0;
     while (true) {
-      try {
-        const url = `${MERKL_BASE}/opportunities?chainId=${chainId}&items=100&page=${page}`;
-        const data = await httpGet(url);
-        const items = Array.isArray(data) ? data : (data.data || []);
-        if (items.length === 0) break;
-        for (const item of items) {
-          if (item.status === 'LIVE') {
-            all.push({ ...item, _chainName: chainName });
-          }
+      const url = `${MERKL_BASE}/opportunities?chainId=${chainId}&items=100&page=${page}`;
+      const data = await httpGet(url);
+      if (!data) { console.log(`  ⚠ ${chainName} page ${page}: fetch failed`); break; }
+      const items = Array.isArray(data) ? data : (data.data || []);
+      if (items.length === 0) break;
+      for (const item of items) {
+        if (item.status === 'LIVE') {
+          all.push({ ...item, _chainName: chainName });
         }
-        if (items.length < 100) break;
-        page++;
-      } catch (e) {
-        console.log(`  ⚠ ${chainName} page ${page}: ${e.message}`);
-        break;
       }
+      if (items.length < 100) break;
+      page++;
     }
     const count = all.filter(i => i._chainName === chainName).length;
     console.log(`  ${chainName}: ${count} live`);
