@@ -56,7 +56,13 @@ jobs:
       - name: Scan Euler positions
         run: node src/euler-scanner.js
 
-      # APY enrichment (fetches rates from Aave/Morpho/Euler)
+      # Spark scanner (Aave-style RPC + Savings vaults)
+      - name: Scan Spark positions
+        run: node src/spark-scanner.js
+        env:
+          ALCHEMY_RPC_URL: ${{ secrets.ALCHEMY_RPC_URL }}
+
+      # APY enrichment (fetches rates from Aave/Morpho/Euler/Spark)
       - name: Enrich positions with market/vault info
         run: node src/enrich-markets.js
 
