@@ -243,7 +243,7 @@ Use this table to manage migration.
 | Euler | Scanner + DeBank | Scanner | onchain | 0 | Medium | High | None | verify edge cases | no DeBank dependence |
 | Fluid | Scanner + DeBank | Scanner | onchain | 0 | Medium | Medium | validation | finish QA | no DeBank dependence |
 | Ethena | DeBank | Scanner | onchain | 0 | Medium | Medium | exact source selection | build scanner | scanner matches known totals |
-| Spark | Manual/API mix | Scanner/API | onchain | 0 | Medium | Medium | confirm exact contract/API path | build source | no DeBank dependence |
+| Spark | Scanner/API mix | Scanner/API | onchain | 0 | Medium | Medium | finish direct-vs-indirect Spark classification | canonical savings lane landed; expand validation | no DeBank dependence |
 | Pendle | DeBank | Scanner | onchain | 0 | High | Low | PT/YT semantics | design scanner | stable valuation + IDs |
 | Curve | DeBank | Scanner/API | onchain | 0 | Medium | Low | LP/gauge valuation | design scanner | stable pool mapping |
 | Anzen | Manual generator | Manual generator | offchain | 0 | Low | Medium | provenance docs | formalize schema | owned manual workflow |
@@ -427,7 +427,10 @@ We should consider the DeBank replacement successful when all of the following a
 2. Create a real protocol coverage matrix and fill in tracked USD values.
 3. Verify Aave / Morpho / Euler / Fluid are fully DeBank-independent.
 4. Build Ethena scanner.
-5. Build Spark scanner or Spark-specific extension of existing lending logic.
+5. Continue Spark build from current landed state:
+   - canonical direct Spark Savings detection on Ethereum is working
+   - Base/Arbitrum Spark Savings path is scaffolded
+   - next gap is direct-vs-indirect Spark classification plus broader non-ETH validation
 6. Design Pendle scanner before coding it.
 7. Design Curve scanner with LP and gauge handling explicitly.
 8. Formalize manual/off-chain schema and ownership.
