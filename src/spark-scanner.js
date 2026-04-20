@@ -26,8 +26,6 @@ const CHAIN_RPC_URLS = {
   eth: () => process.env.ALCHEMY_RPC_URL || process.env.ETH_RPC_URL || 'https://eth.drpc.org',
   base: () => process.env.BASE_RPC_URL || process.env.ALCHEMY_BASE_RPC_URL || 'https://base.drpc.org',
   arb: () => process.env.ARB_RPC_URL || process.env.ARBITRUM_RPC_URL || process.env.ALCHEMY_ARB_RPC_URL || 'https://arbitrum.drpc.org',
-  op: () => process.env.OP_RPC_URL || process.env.OPTIMISM_RPC_URL || process.env.ALCHEMY_OP_RPC_URL || 'https://optimism.drpc.org',
-  unichain: () => process.env.UNICHAIN_RPC_URL,
 };
 
 const SPARK_SAVINGS_BY_CHAIN = {
@@ -50,20 +48,6 @@ const SPARK_SAVINGS_BY_CHAIN = {
     tokens: {
       sUSDS: { address: '0xdDb46999F8891663a8F2828d25298f70416d7610', underlying: 'USDS', decimals: 18 },
       sUSDC: { address: '0x940098b108fB7D0a7E374f6eDED7760787464609', underlying: 'USDC', decimals: 6 },
-    },
-  },
-  op: {
-    chainId: 10,
-    tokens: {
-      sUSDS: { address: '0xb5B2dc7fd34C249F4be7fB1fCea07950784229e0', underlying: 'USDS', decimals: 18 },
-      sUSDC: { address: '0xCF9326e24EBfFBEF22ce1050007A43A3c0B6DB55', underlying: 'USDC', decimals: 6 },
-    },
-  },
-  unichain: {
-    chainId: 130,
-    tokens: {
-      sUSDS: { address: '0xA06b10Db9F390990364A3984C04FaDf1c13691b5', underlying: 'USDS', decimals: 18 },
-      sUSDC: { address: '0x14d9143BEcC348920b68D123687045db49a016C6', underlying: 'USDC', decimals: 6 },
     },
   },
 };
