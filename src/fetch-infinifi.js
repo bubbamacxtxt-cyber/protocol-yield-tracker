@@ -58,7 +58,7 @@ const STRATEGY_MAP = {
   'capfarm': 'rwa',
   'tokemak-auto-infinifiUSD': 'rwa',
   'tokemak-autoUSD': 'rwa',
-  'spark-sUSDC-refcode': 'lend',
+  'spark-sUSDC-refcode': 'spark-strategy-indirect',
   'aavev3': 'lend',
   'aavev3-horizon-usdc': 'lend',
   'aavev3-rlusd-farm': 'lend',
@@ -70,8 +70,22 @@ function formatMaturity(timestampMs) {
   return new Date(timestampMs).toISOString().split('T')[0];
 }
 
+function classifySparkExposure(farm) {
+  const name = String(farm.name || '');
+  const label = String(farm.label || '');
+  if (!/spark/i.test(name) && !/spark/i.test(label)) return null;
+
+  return {
+    spark_exposure_type: 'indirect_strategy',
+    spark_product_type: /susdc/i.test(name) || /susdc/i.test(label) ? 'savings' : 'unknown',
+    spark_token_address: farm.underlyingAssetAddress || null,
+    spark_token_symbol: farm.underlyingAssetSymbol || null,
+  };
+}
+
 function mapFarmToPosition(farm, chain) {
   const assetsUsd = farm.assetsNormalized || 0;
+  const sparkMeta = classifySparkExposure(farm);
 
   return {
     wallet: farm.address,
@@ -106,6 +120,7 @@ function mapFarmToPosition(farm, chain) {
     source_type: 'protocol_api',
     source_name: 'fetch-infinifi',
     discovery_type: 'onchain',
+    ...(sparkMeta || {}),
   };
 }
 

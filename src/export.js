@@ -530,6 +530,10 @@ async function main() {
                     mp.apy_net = mp.net_usd > 0 ? baseYield / mp.net_usd : mp.apy_base;
                 }
                 normalizeSourceMeta(mp);
+                if (mp.spark_exposure_type === 'indirect_strategy') {
+                    mp.strategy = mp.strategy || 'spark-strategy-indirect';
+                    mp.yield_source = 'spark';
+                }
                 positions.push(mp);
             }
         }
