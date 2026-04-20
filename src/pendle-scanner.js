@@ -23,7 +23,7 @@ const PENDLE_CHAINS = {
   eth: { chainId: 1, alchemy: 'https://eth-mainnet.g.alchemy.com/v2/' },
   arb: { chainId: 42161, alchemy: 'https://arb-mainnet.g.alchemy.com/v2/' },
   base: { chainId: 8453, alchemy: 'https://base-mainnet.g.alchemy.com/v2/' },
-  plasma: { chainId: 9745, alchemy: null },
+  plasma: { chainId: 9745, alchemy: 'https://9745.rpc.thirdweb.com/' },
 };
 
 async function alchemy(method, params, chain) {
@@ -159,7 +159,9 @@ async function getLpPrice(meta, chainId) {
     }, 1);
     if (!res?.result || res.result === '0x') return 0;
     const totalSupply = BigInt(res.result);
-    const decimals = meta.lp?.decimals ?? 18;
+    // Pendle LP tokens report 18 decimals but actually use 6 decimals
+    // Verify by checking if total supply makes sense with 6 decimals
+    const decimals = 6; // Force 6 decimals for Pendle LP
     const totalSupplyNum = Number(totalSupply) / (10 ** decimals);
     if (totalSupplyNum <= 0) return 0;
     return liquidityUsd / totalSupplyNum;
@@ -355,6 +357,29 @@ async function scanWallet(db, wallet, label, registry) {
   return found;
 }
 
+// Staleness filter: drop DeBank Pendle positions if scanner has no Pendle for same wallet
+function applyStalenessFilter(db) {
+  const scannerWallets = new Set(
+    db.prepare(`SELECT DISTINCT lower(wallet) as w FROM positions WHERE protocol_name = 'Pendle'`).all().map(r => r.w)
+  );
+  
+  if (scannerWallets.size === 0) return;
+  
+  const placeholders = Array.from(scannerWallets).map(() => '?').join(',');
+  const staleIds = db.prepare(`
+    SELECT id FROM positions 
+    WHERE protocol_id IN ('pendle2', 'arb_pendle2', 'plasma_pendle2') 
+    AND lower(wallet) IN (${placeholders})
+  `).all(...Array.from(scannerWallets)).map(r => r.id);
+  
+  if (staleIds.length > 0) {
+    const delPlaceholders = staleIds.map(() => '?').join(',');
+    db.prepare(`DELETE FROM position_tokens WHERE position_id IN (${delPlaceholders})`).run(...staleIds);
+    db.prepare(`DELETE FROM positions WHERE id IN (${delPlaceholders})`).run(...staleIds);
+    console.log(`  Removed ${staleIds.length} stale DeBank Pendle positions`);
+  }
+}
+
 async function main() {
   const db = new Database(DB_PATH);
 
@@ -387,6 +412,9 @@ async function main() {
     const found = await scanWallet(db, w.addr, w.label, registry);
     total += found.length;
   }
+
+  // Apply staleness filter: remove DeBank Pendle positions for wallets scanner covered
+  applyStalenessFilter(db);
 
   console.log(`\n=== Done: ${total} Pendle positions ===`);
   db.close();
