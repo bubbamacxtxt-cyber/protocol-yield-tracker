@@ -1,5 +1,9 @@
 # Position Discovery Architecture v2
 
+> OBSOLETE: superseded by `docs/debank-replacement-plan.md`.
+>
+> This document captured an Alchemy-first discovery design. It is preserved for historical context only. We no longer treat generic wallet token scans as the canonical path for protocol position discovery.
+
 _Saved 2026-04-15. Build target: 2026-04-16_
 
 ## The Shift

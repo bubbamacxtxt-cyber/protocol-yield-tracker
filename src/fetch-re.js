@@ -212,6 +212,9 @@ async function main() {
     underlying: 'USD',
     paused: false,
     manual: true,
+    source_type: 'manual',
+    source_name: 'fetch-re',
+    discovery_type: 'offchain',
     scanned_at: new Date().toISOString()
   };
 

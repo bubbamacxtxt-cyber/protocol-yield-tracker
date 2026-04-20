@@ -1,0 +1,62 @@
+{
+  "Avant": {
+    "entity_type": "onchain",
+    "validation_mode": "db",
+    "notes": "Primarily DeBank-backed on-chain wallets."
+  },
+  "yoUSD": {
+    "entity_type": "onchain",
+    "validation_mode": "db",
+    "notes": "DeBank-backed on-chain wallet set."
+  },
+  "Yuzu": {
+    "entity_type": "onchain",
+    "validation_mode": "db",
+    "notes": "Mixed scanner coverage, but source validation currently compares DB-backed slice only."
+  },
+  "Reservoir": {
+    "entity_type": "onchain",
+    "validation_mode": "scanner_only",
+    "notes": "Current export is scanner-owned; raw DB totals are not a reliable parity target."
+  },
+  "Makina": {
+    "entity_type": "onchain",
+    "validation_mode": "db",
+    "notes": "DB-backed wallet set with standard export parity checks."
+  },
+  "InfiniFi": {
+    "entity_type": "mixed",
+    "validation_mode": "api_plus_scanner",
+    "notes": "Protocol API positions plus scanner-derived lending positions. API validation should only target protocol_api slice."
+  },
+  "Upshift": {
+    "entity_type": "onchain",
+    "validation_mode": "db",
+    "notes": "DB-backed wallet set with standard export parity checks."
+  },
+  "Midas": {
+    "entity_type": "onchain",
+    "validation_mode": "db",
+    "notes": "DB-backed wallet set with standard export parity checks."
+  },
+  "Superform": {
+    "entity_type": "onchain",
+    "validation_mode": "scanner_only",
+    "notes": "Current export is scanner-owned; raw DB totals are not a reliable parity target."
+  },
+  "Re Protocol": {
+    "entity_type": "mixed",
+    "validation_mode": "mixed",
+    "notes": "On-chain wallets plus separate off-chain reserve position."
+  },
+  "Anzen": {
+    "entity_type": "offchain",
+    "validation_mode": "manual",
+    "notes": "Off-chain/manual lane sourced by fetch-anzen."
+  },
+  "Pareto": {
+    "entity_type": "mixed",
+    "validation_mode": "protocol_api",
+    "notes": "Derived from on-chain allocation plus API APY enrichment, exported as protocol_api slice."
+  }
+}

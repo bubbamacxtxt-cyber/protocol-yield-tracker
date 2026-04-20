@@ -11,6 +11,59 @@ const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const https = require('https');
 const OUT_PATH = path.join(__dirname, '..', 'data.json');
 
+function normalizeSourceMeta(position) {
+    const p = position;
+    if (p.wallet === 'off-chain') {
+        p.discovery_type = p.discovery_type || 'offchain';
+        p.source_type = p.source_type || (p.manual ? 'manual' : 'protocol_api');
+    } else {
+        p.discovery_type = p.discovery_type || 'onchain';
+    }
+
+    if (!p.source_type) {
+        const protocol = String(p.protocol_name || '').toLowerCase();
+        const protocolId = String(p.protocol_id || '').toLowerCase();
+        if (protocol.includes('aave') || protocol.includes('morpho') || protocol.includes('euler') || protocol.includes('fluid') || protocolId.includes('aave') || protocolId.includes('morpho') || protocolId.includes('euler') || protocolId.includes('fluid')) {
+            p.source_type = 'scanner';
+        } else {
+            p.source_type = 'debank';
+        }
+    }
+
+    if (!p.source_name) {
+        if (p.source_type === 'scanner') {
+            const protocol = String(p.protocol_name || '').toLowerCase();
+            if (protocol.includes('aave')) p.source_name = 'aave-scanner';
+            else if (protocol.includes('morpho')) p.source_name = 'morpho-scanner';
+            else if (protocol.includes('euler')) p.source_name = 'euler-scanner';
+            else if (protocol.includes('fluid')) p.source_name = 'fluid-scanner';
+            else p.source_name = 'scanner';
+        } else if (p.source_type === 'debank') {
+            p.source_name = 'fetch';
+        } else if (p.source_type === 'manual') {
+            p.source_name = 'manual';
+        } else if (p.source_type === 'protocol_api') {
+            p.source_name = 'protocol_api';
+        }
+    }
+
+    return p;
+}
+
+function findYbsToken(stables, symbol, address) {
+    const addr = String(address || '').toLowerCase();
+    if (addr) {
+        const byAddress = (stables || []).find(s => (s.addresses || []).some(a => String(a).toLowerCase() === addr));
+        if (byAddress) return byAddress;
+    }
+    const sym = String(symbol || '').toUpperCase();
+    if (!sym) return null;
+    return (stables || []).find(s => {
+        if (String(s.name || '').toUpperCase() === sym) return true;
+        return (s.aliases || []).some(a => String(a || '').toUpperCase() === sym);
+    }) || null;
+}
+
 // Whale definitions loaded from data/whales.json
 const WHALES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
 
@@ -103,6 +156,7 @@ async function main() {
         delete p.supply_json;
         delete p.borrow_json;
         delete p.reward_json;
+        normalizeSourceMeta(p);
 
         // Normalize chain names to lowercase
         const chainMap = { 1: 'eth', 8453: 'base', 42161: 'arb', 137: 'poly', 10: 'opt', 146: 'sonic', 9745: 'plasma', 5000: 'mnt', 130: 'uni', 143: 'monad', 999: 'ink', 2741: 'abstract', 747474: 'wct', 81457: 'blast' };
@@ -158,9 +212,9 @@ async function main() {
                 if (fs.existsSync(stablesPath2)) {
                     const stablesData2 = JSON.parse(fs.readFileSync(stablesPath2, 'utf8'));
                     for (const t of p.supply) {
-                        const ybsToken = (stablesData2.stables || []).find(s => s.name === t.symbol);
+                        const ybsToken = findYbsToken(stablesData2.stables || [], t.symbol, t.address);
                         if (ybsToken && ybsToken.aprValue && t.apy_base === 0) {
-                            // Add YBS yield to Aave supply APY
+                            // Add YBS yield to Aave supply APY using address-first matching
                             t.apy_base = ybsToken.apy_30d || ybsToken.aprValue;
                             t.apy_base_source = 'ybs:' + (ybsToken.aprValue).toFixed(2) + '%';
                         }
@@ -368,8 +422,9 @@ async function main() {
     // Filter dust positions (< $100) and fix bogus health_factor
     const filtered = deduped.filter(p => {
         // Remove dust: tiny positions (scanner artifacts or DeBank junk)
+        // Keep genuinely small live positions like yoUSD, so use a softer floor.
         const totalUsd = Math.abs(p.asset_usd || 0) + Math.abs(p.debt_usd || 0);
-        if (totalUsd < 100) return false;
+        if (totalUsd < 50) return false;
         return true;
     });
     
@@ -420,7 +475,7 @@ async function main() {
                         const stablesPath = path.join(__dirname, '..', 'data', 'stables.json');
                         if (fs.existsSync(stablesPath)) {
                             const stablesData = JSON.parse(fs.readFileSync(stablesPath, 'utf8'));
-                            const susdeEntry = (stablesData.stables || []).find(s => s.name === 'sUSDe');
+                            const susdeEntry = findYbsToken(stablesData.stables || [], 'sUSDe', '0x9D39A5DE30e57443BfF2A8307A4256c8797A3497');
                             if (susdeEntry && susdeEntry.aprValue) susdeApy = susdeEntry.aprValue;
                         }
                     } catch(e) {}
@@ -443,6 +498,30 @@ async function main() {
         // Merge manual positions if they exist for this whale
         if (manualPositions[name]) {
             for (const mp of manualPositions[name]) {
+                // Backfill source metadata for older manual-positions.json entries
+                if (!mp.source_type) {
+                    if (name === 'InfiniFi') {
+                        mp.manual = false;
+                        mp.source_type = 'protocol_api';
+                        mp.source_name = 'fetch-infinifi';
+                        mp.discovery_type = 'onchain';
+                    } else if (name === 'Pareto') {
+                        mp.manual = false;
+                        mp.source_type = 'protocol_api';
+                        mp.source_name = 'fetch-pareto';
+                        mp.discovery_type = 'mixed';
+                    } else if (name === 'Anzen') {
+                        mp.manual = true;
+                        mp.source_type = 'manual';
+                        mp.source_name = 'fetch-anzen';
+                        mp.discovery_type = 'offchain';
+                    } else if (name === 'Re Protocol' && mp.wallet === 'off-chain') {
+                        mp.manual = true;
+                        mp.source_type = 'manual';
+                        mp.source_name = 'fetch-re';
+                        mp.discovery_type = 'offchain';
+                    }
+                }
                 // Calculate apy_net for manual positions (they have apy_base but no token data)
                 if (mp.apy_net == null && mp.apy_base != null) {
                     const bonusSupply = mp.apy_rewards || 0;
@@ -450,6 +529,7 @@ async function main() {
                     const costYield = 0; // Manual positions typically have no borrow
                     mp.apy_net = mp.net_usd > 0 ? baseYield / mp.net_usd : mp.apy_base;
                 }
+                normalizeSourceMeta(mp);
                 positions.push(mp);
             }
         }
@@ -486,13 +566,32 @@ async function main() {
     // Add manual-only whales (no on-chain wallets, entirely manual positions)
     for (const [name, manualWhalePositions] of Object.entries(manualPositions)) {
         if (!whales[name] && manualWhalePositions.length > 0) {
-            // Calculate apy_net for manual positions
+            // Calculate apy_net for manual positions and backfill source metadata
             for (const mp of manualWhalePositions) {
+                if (!mp.source_type) {
+                    if (name === 'Pareto') {
+                        mp.manual = false;
+                        mp.source_type = 'protocol_api';
+                        mp.source_name = 'fetch-pareto';
+                        mp.discovery_type = 'mixed';
+                    } else if (name === 'Anzen') {
+                        mp.manual = true;
+                        mp.source_type = 'manual';
+                        mp.source_name = 'fetch-anzen';
+                        mp.discovery_type = 'offchain';
+                    } else if (name === 'Re Protocol' && mp.wallet === 'off-chain') {
+                        mp.manual = true;
+                        mp.source_type = 'manual';
+                        mp.source_name = 'fetch-re';
+                        mp.discovery_type = 'offchain';
+                    }
+                }
                 if (mp.apy_net == null && mp.apy_base != null) {
                     const bonusSupply = mp.apy_rewards || 0;
                     const baseYield = (mp.apy_base + bonusSupply) * (mp.asset_usd || 0);
                     mp.apy_net = mp.net_usd > 0 ? baseYield / mp.net_usd : mp.apy_base;
                 }
+                normalizeSourceMeta(mp);
             }
             const uniqueWallets = [...new Set(manualWhalePositions.map(p => p.wallet))];
             whales[name] = {

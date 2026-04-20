@@ -129,7 +129,10 @@ function buildPosition(alloc) {
     bucket_weeks: null,
     underlying: 'USDC',
     paused: false,
-    manual: true,
+    manual: false,
+    source_type: 'protocol_api',
+    source_name: 'fetch-pareto',
+    discovery_type: 'mixed',
     asset_type: alloc.strategy,
   };
 }

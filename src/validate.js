@@ -17,6 +17,18 @@ const { ethers } = require('ethers');
 const errors = [];
 const warnings = [];
 
+function classifyWhaleSources(positions = []) {
+  const out = { dbBacked: [], offchain: [], protocolApi: [] };
+  for (const p of positions) {
+    const sourceType = p.source_type || (p.wallet === 'off-chain' ? (p.manual ? 'manual' : 'protocol_api') : 'debank');
+    const discoveryType = p.discovery_type || (p.wallet === 'off-chain' ? 'offchain' : 'onchain');
+    if (discoveryType === 'offchain' || sourceType === 'manual') out.offchain.push(p);
+    else if (sourceType === 'protocol_api') out.protocolApi.push(p);
+    else out.dbBacked.push(p);
+  }
+  return out;
+}
+
 function getThreshold(dbTotal) {
   // Tighter threshold for larger positions
   if (dbTotal >= 100_000_000) return 0.03; // 3% for >$100M
@@ -57,6 +69,10 @@ async function main() {
     return;
   }
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  const sourcePolicyPath = path.join(__dirname, '..', 'data', 'source-policy.json');
+  const SOURCE_POLICY = fs.existsSync(sourcePolicyPath)
+    ? JSON.parse(fs.readFileSync(sourcePolicyPath, 'utf8'))
+    : {};
 
   // --- Sanity ---
   console.log('--- Sanity ---');
@@ -69,13 +85,21 @@ async function main() {
   // --- InfiniFi ---
   console.log('\n--- API Checks ---');
   try {
-    const ethData = await fetchJson('https://eth-api.infinifi.xyz/api/protocol/data');
-    const farms = ethData.data?.farms || [];
-    const liveTotal = farms
-      .filter(f => f.type !== 'PROTOCOL' && (f.assetsNormalized || 0) > 100)
-      .reduce((s, f) => s + (f.assetsNormalized || 0), 0);
-    const dbTotal = (data.whales.InfiniFi?.positions || []).reduce((s, p) => s + (p.net_usd || 0), 0);
-    check('InfiniFi', liveTotal, dbTotal);
+    const endpoints = [
+      'https://eth-api.infinifi.xyz/api/protocol/data',
+      'https://plasma-api.infinifi.xyz/api/protocol/data'
+    ];
+    let liveTotal = 0;
+    for (const url of endpoints) {
+      const json = await fetchJson(url);
+      const farms = json.data?.farms || [];
+      liveTotal += farms
+        .filter(f => f.type !== 'PROTOCOL' && (f.assetsNormalized || 0) > 100)
+        .reduce((s, f) => s + (f.assetsNormalized || 0), 0);
+    }
+    const sourceBuckets = classifyWhaleSources(data.whales.InfiniFi?.positions || []);
+    const apiTotal = sourceBuckets.protocolApi.reduce((s, p) => s + (p.net_usd || 0), 0);
+    check('InfiniFi (protocol_api)', liveTotal, apiTotal);
   } catch (e) {
     warnings.push(`InfiniFi: ${e.message}`);
   }
@@ -111,6 +135,7 @@ async function main() {
     const WHALES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
 
     for (const [name, definition] of Object.entries(WHALES)) {
+      const policy = SOURCE_POLICY[name] || {};
       let wallets = [];
       if (Array.isArray(definition)) {
         wallets = definition;
@@ -124,10 +149,36 @@ async function main() {
       const walletLower = wallets.map(w => w.toLowerCase());
       if (walletLower.length === 0) continue;
 
-      // Skip whales with manual-only data (not in DB)
-      // Re Protocol: off-chain Chainlink position inflates data.json vs DB
-      if (['InfiniFi', 'Anzen', 'Pareto', 'Re Protocol'].includes(name)) {
-        console.log(`  ⏭️  ${name} (source): manual-only, skipped`);
+      const whalePositions = data.whales[name]?.positions || [];
+      const sourceBuckets = classifyWhaleSources(whalePositions);
+      const dbBackedExportTotal = sourceBuckets.dbBacked.reduce((s, p) => s + (p.net_usd || 0), 0);
+
+      if (policy.validation_mode === 'scanner_only') {
+        console.log(`  ⏭️  ${name} (source): scanner_only, skipped`);
+        continue;
+      }
+
+      if (policy.validation_mode === 'protocol_api') {
+        console.log(`  ⏭️  ${name} (source): protocol_api, skipped`);
+        continue;
+      }
+
+      if (policy.validation_mode === 'manual') {
+        console.log(`  ⏭️  ${name} (source): manual, skipped`);
+        continue;
+      }
+
+      if (policy.validation_mode === 'api_plus_scanner') {
+        console.log(`  ⏭️  ${name} (source): api_plus_scanner, DB parity skipped`);
+        continue;
+      }
+
+      if (dbBackedExportTotal === 0) {
+        const sourceSummary = [
+          sourceBuckets.offchain.length ? 'offchain/manual' : null,
+          sourceBuckets.protocolApi.length ? 'protocol_api' : null,
+        ].filter(Boolean).join(' + ') || 'non-db';
+        console.log(`  ⏭️  ${name} (source): ${sourceSummary}, skipped`);
         continue;
       }
       const placeholders = walletLower.map(() => '?').join(',');
@@ -135,10 +186,7 @@ async function main() {
         `SELECT SUM(net_usd) as total FROM positions WHERE LOWER(wallet) IN (${placeholders})`
       ).get(...walletLower)?.total || 0;
 
-      // data.json total
-      const exportTotal = (data.whales[name]?.positions || []).reduce((s, p) => s + (p.net_usd || 0), 0);
-
-      check(name + ' (source)', dbTotal, exportTotal);
+      check(name + ' (source)', dbTotal, dbBackedExportTotal);
     }
     db.close();
   } catch (e) {

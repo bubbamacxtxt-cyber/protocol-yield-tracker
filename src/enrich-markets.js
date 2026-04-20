@@ -38,6 +38,7 @@ const AAVE_CHAINS = {
 
 async function fetchAaveReserves() {
   const reserveMap = {};
+  const reserveBySymbol = {};
   for (const [chainName, chainId] of Object.entries(AAVE_CHAINS)) {
     try {
       const data = await postJSON(AAVE_API, {
@@ -49,13 +50,17 @@ async function fetchAaveReserves() {
           const addr = r.underlyingToken?.address?.toLowerCase();
           if (!addr) continue;
           if (!reserveMap[addr]) reserveMap[addr] = [];
-          reserveMap[addr].push({
+          const entry = {
             chain: chainName,
             marketName: market.name,
             symbol: r.underlyingToken?.symbol,
             vToken: r.vToken?.address?.toLowerCase(),
             aToken: r.aToken?.address?.toLowerCase(),
-          });
+          };
+          reserveMap[addr].push(entry);
+          const symKey = `${chainName}:${String(r.underlyingToken?.symbol || '').toUpperCase()}`;
+          if (!reserveBySymbol[symKey]) reserveBySymbol[symKey] = [];
+          reserveBySymbol[symKey].push({ ...entry, underlying: addr });
         }
       }
       const count = markets.reduce((s, m) => s + (m.reserves?.length || 0), 0);
@@ -64,7 +69,7 @@ async function fetchAaveReserves() {
       console.log(`  Aave ${chainName}: error ${e.message}`);
     }
   }
-  return reserveMap;
+  return { reserveMap, reserveBySymbol };
 }
 
 async function fetchEulerVaults() {
@@ -125,7 +130,7 @@ async function main() {
   // Fetch data
   console.log('1. Aave ETH reserves...');
   const aaveReserves = await fetchAaveReserves();
-  console.log(`   ${Object.values(aaveReserves).reduce((s,r)=>s+r.length, 0)} reserves`);
+  console.log(`   ${Object.values(aaveReserves.reserveMap).reduce((s,r)=>s+r.length, 0)} reserves`);
 
   console.log('2. Euler vaults...');
   const eulerVaults = await fetchEulerVaults();
@@ -160,7 +165,7 @@ async function main() {
       const posIdx = (pos.position_index || '').toLowerCase();
       
       let matched = null;
-      for (const [underlying, reserves] of Object.entries(aaveReserves)) {
+      for (const [underlying, reserves] of Object.entries(aaveReserves.reserveMap)) {
         for (const r of reserves) {
           // Must match chain
           if (r.chain !== pos.chain) continue;
@@ -171,14 +176,44 @@ async function main() {
         if (matched) break;
       }
       
-      if (!matched && supplyAddr && aaveReserves[supplyAddr]) {
-        // Filter reserves by chain
-        const chainReserves = aaveReserves[supplyAddr].filter(r => r.chain === pos.chain);
-        if (chainReserves.length > 0) {
-          matched = { ...chainReserves[0], underlying: supplyAddr };
+      if (!matched && supplyAddr && aaveReserves.reserveMap[supplyAddr]) {
+        const chainReserves = aaveReserves.reserveMap[supplyAddr].filter(r => r.chain === pos.chain);
+        if (chainReserves.length > 0) matched = { ...chainReserves[0], underlying: supplyAddr };
+      }
+
+      if (!matched) {
+        // Symbol-based fallback: when addresses are empty, match by supply+borrow symbol pair
+        const supplySymbols = [...new Set(tokens.filter(t => t.role === 'supply').map(t => String(t.symbol || '').toUpperCase()).filter(Boolean))];
+        const borrowSymbols = [...new Set(tokens.filter(t => t.role === 'borrow').map(t => String(t.symbol || '').toUpperCase()).filter(Boolean))];
+        for (const sym of supplySymbols) {
+          const symMatches = aaveReserves.reserveBySymbol[`${pos.chain}:${sym}`] || [];
+          if (symMatches.length === 1) {
+            matched = symMatches[0];
+            break;
+          }
+          // Multiple reserves for same symbol — narrow by borrow token
+          if (symMatches.length > 1 && borrowSymbols.length > 0) {
+            // Aave positions with a borrow token usually come from the main pool,
+            // not from isolated Lido/EtherFi/Horizon markets.
+            // Heuristic: prefer the market whose name does NOT contain a suffix like Lido/EtherFi/Horizon
+            const mainPool = symMatches.find(m => !/(lido|etherfi|horizon|mev|libere)/i.test(m.marketName || ''));
+            if (mainPool) {
+              matched = mainPool;
+              break;
+            }
+            // Fallback: just pick the first
+            matched = symMatches[0];
+            break;
+          }
+          // Single supply, no borrow — pick main pool
+          if (symMatches.length > 1 && borrowSymbols.length === 0) {
+            const mainPool = symMatches.find(m => !/(lido|etherfi|horizon|mev|libere)/i.test(m.marketName || ''));
+            matched = mainPool || symMatches[0];
+            break;
+          }
         }
       }
-      
+
       if (matched) {
         insertMarket.run(pos.id, 'Aave V3', pos.chain, matched.vToken, matched.marketName, matched.underlying, 'reserve-match');
         aaveOk++;
@@ -270,7 +305,7 @@ async function main() {
 
   // Morpho - find market IDs for collateral/loan pairs
   console.log('7. Morpho positions...');
-  const morphoPos = db.prepare(`SELECT p.id, p.chain,
+  const morphoPos = db.prepare(`SELECT p.id, p.chain, p.position_index,
     (SELECT json_group_array(json_object('symbol',pt.symbol,'role',pt.role,'address',pt.address))
      FROM position_tokens pt WHERE pt.position_id = p.id) as tokens
     FROM positions p WHERE p.protocol_name = 'Morpho'`).all();
@@ -283,7 +318,7 @@ async function main() {
     const cidMap = { eth: 1, arb: 42161, base: 8453, mnt: 5000, plasma: 9745, sonic: 146, bsc: 56 };
     const cid = cidMap[chain.toLowerCase()];
     if (!cid) continue;
-    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 500) { items { marketId loanAsset { address } collateralAsset { address } state { dailyBorrowApy dailySupplyApy } } } }`;
+    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 500) { items { marketId loanAsset { address symbol } collateralAsset { address symbol } state { dailyBorrowApy dailySupplyApy } } } }`;
     try {
       const res = await fetch('https://api.morpho.org/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -305,12 +340,40 @@ async function main() {
         .map(m => ({
           loanAddr: m.loanAsset?.address?.toLowerCase(),
           collateralAddr: m.collateralAsset?.address?.toLowerCase(),
+          loanSymbol: m.loanAsset?.symbol,
+          collateralSymbol: m.collateralAsset?.symbol,
           marketId: m.marketId,
           dailyBorrowApy: m.state?.dailyBorrowApy || 0
         }))
       console.log('   ' + chain + ': ' + items.length + ' markets');
     } catch (e) {
       console.log('   ' + chain + ': failed - ' + e.message);
+    }
+  }
+
+  // Pre-fetch borrow-only positions by uniqueKey (hashed position_index)
+  const borrowOnlyPos = morphoPos.filter(p => {
+    const tokens = JSON.parse(p.tokens || '[]');
+    const hasSupply = tokens.some(t => t.role === 'supply');
+    const hasBorrow = tokens.some(t => t.role === 'borrow');
+    return hasBorrow && !hasSupply;
+  });
+  const uniqueKeyMap = {};
+  if (borrowOnlyPos.length) {
+    for (const pos of borrowOnlyPos) {
+      const uk = pos.position_index?.toLowerCase();
+      if (!uk) continue;
+      const chain = pos.chain.toLowerCase();
+      const cidMap = { eth: 1, arb: 42161, base: 8453, mnt: 5000, plasma: 9745, sonic: 146, bsc: 56 };
+      const cid = cidMap[chain];
+      if (!cid) continue;
+      try {
+        const res = await postJSON('https://api.morpho.org/graphql', {
+          query: `{ marketByUniqueKey(uniqueKey: "${uk}", chainId: ${cid}) { marketId loanAsset { address symbol } collateralAsset { address symbol } state { dailyBorrowApy } } }`
+        });
+        const m = res?.data?.marketByUniqueKey;
+        if (m) uniqueKeyMap[pos.id] = m;
+      } catch(e) {}
     }
   }
 
@@ -321,27 +384,38 @@ async function main() {
       const borrowAddr = tokens.find(t => t.role === 'borrow')?.address?.toLowerCase();
       const chain = pos.chain.toLowerCase();
       const markets = morphoMarkets[chain] || [];
-      // Debug: find all matches
-      // Try direct match first, then with underlying token
+      const posIdx = pos.position_index?.toLowerCase();
+
+      if (!supplyAddr && !borrowAddr) {
+        continue;
+      }
+
+      // Supply-only vault: use position_index as market_id
+      if (posIdx && !borrowAddr) {
+        insertMarket.run(pos.id, 'Morpho', pos.chain, posIdx, 'Morpho Vault', supplyAddr || posIdx, 'position-index');
+        morphoOk++;
+        continue;
+      }
+
+      // Borrow-only: try uniqueKey lookup first
+      if (!supplyAddr && borrowAddr && uniqueKeyMap[pos.id]) {
+        const m = uniqueKeyMap[pos.id];
+        insertMarket.run(pos.id, 'Morpho', pos.chain, m.marketId, 'Morpho ' + (m.loanAsset?.symbol || '') + '/' + (m.collateralAsset?.symbol || ''), m.collateralAsset?.address?.toLowerCase() || '', 'uniquekey-lookup');
+        morphoOk++;
+        continue;
+      }
+
       const underlyingAddr = WRAPPED_TO_UNDERLYING[supplyAddr] || supplyAddr;
       const allMatches = markets.filter(m => 
         (m.collateralAddr === supplyAddr || m.collateralAddr === underlyingAddr) && 
         m.loanAddr === borrowAddr
       );
-      if (allMatches.length > 0) {
-        const usedUnderlying = allMatches[0].collateralAddr !== supplyAddr;
-        console.log('   found', allMatches.length, 'matches:', allMatches[0].marketId.slice(0,12), 
-                    usedUnderlying ? '(using underlying ' + allMatches[0].collateralAsset + ')' : '');
-      }
-      // Pick market with LOWEST borrow APY (most stable, avoids broken markets with inflated rates)
       const match = allMatches.sort((a, b) => 
         Math.abs(a.dailyBorrowApy || 0) - Math.abs(b.dailyBorrowApy || 0)
       )[0];
       if (match) {
         insertMarket.run(pos.id, 'Morpho', pos.chain, match.marketId, 'Morpho Market', match.collateralAddr, 'market-match');
         morphoOk++;
-      } else {
-        console.log('   no match for supply:', supplyAddr?.slice(0,10), 'borrow:', borrowAddr?.slice(0,10));
       }
     }
   })();

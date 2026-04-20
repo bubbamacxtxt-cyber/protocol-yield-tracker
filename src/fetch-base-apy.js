@@ -48,11 +48,27 @@ const CHAIN_ID_MAP = {
 // ─── Source 1: YBS List ────────────────────────────────────────────
 function loadYbsApy() {
   const data = JSON.parse(fs.readFileSync(STABLES_PATH, 'utf8'));
-  const map = {};
+  const bySymbol = {};
+  const byAddress = {};
   for (const s of data.stables) {
-    map[s.name] = s.aprValue || parseFloat(s.apr) || 0;
+    const apy = s.aprValue || parseFloat(s.apr) || 0;
+    bySymbol[String(s.name || '').toUpperCase()] = apy;
+    for (const alias of (s.aliases || [])) {
+      bySymbol[String(alias || '').toUpperCase()] = apy;
+    }
+    for (const address of (s.addresses || [])) {
+      byAddress[String(address || '').toLowerCase()] = apy;
+    }
   }
-  return map;
+  return { bySymbol, byAddress };
+}
+
+function findYbsApy(ybs, symbol, address) {
+  const addr = String(address || '').toLowerCase();
+  if (addr && ybs.byAddress[addr] != null) return ybs.byAddress[addr];
+  const sym = String(symbol || '').toUpperCase();
+  if (sym && ybs.bySymbol[sym] != null) return ybs.bySymbol[sym];
+  return null;
 }
 
 // ─── Source 2: Vaults table ───────────────────────────────────────
@@ -153,7 +169,7 @@ async function fetchMorphoApy() {
   const borrowMap = {};
   const byMarketId = {};  // marketId -> { supplyApy, borrowApy }
   for (const cid of MORPHO_CHAINS) {
-    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 1000) { items { marketId loanAsset { symbol } state { supplyApy borrowApy dailySupplyApy dailyBorrowApy } } } }`;
+    const query = `{ markets(where: { chainId_in: [${cid}] }, first: 1000) { items { marketId loanAsset { symbol } collateralAsset { symbol } state { supplyApy borrowApy dailySupplyApy dailyBorrowApy } } } }`;
     try {
       const res = await fetch('https://api.morpho.org/graphql', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -175,7 +191,7 @@ async function fetchMorphoApy() {
         }
         // Skip broken/abnormal markets (bogus APYs > 100% daily are not real)
         if (sApy > 100 || bApy > 100) {
-          if (bApy > 1000) console.log(`  ⚠️ Skipping broken market: ${m.collateralAsset?.symbol}->${symbol} borrow ${(bApy).toFixed(0)}%`);
+          if (bApy > 1000) console.log(`  ⚠️ Skipping broken market: ${m.collateralAsset?.symbol || '?'}->${symbol} borrow ${(bApy).toFixed(0)}%`);
           continue;
         }
         if (sApy > 0) {
@@ -309,7 +325,7 @@ async function main() {
   // Fetch all sources
   console.log('1. YBS list...');
   const ybs = loadYbsApy();
-  console.log(`   ${Object.keys(ybs).length} tokens`);
+  console.log(`   ${Object.keys(ybs.bySymbol).length} symbols, ${Object.keys(ybs.byAddress).length} addresses`);
 
   console.log('2. Vaults table...');
   const vaults = loadVaultApy(db);
@@ -337,13 +353,19 @@ async function main() {
   };
 
   // Step 1: Token-level (YBS, vaults, Pendle)
-  const tokens = db.prepare("SELECT DISTINCT symbol FROM position_tokens WHERE role='supply'").all();
+  const tokens = db.prepare("SELECT DISTINCT symbol, address FROM position_tokens WHERE role='supply'").all();
   let ybsCount = 0, vaultCount = 0, pendleCount = 0;
 
   for (const t of tokens) {
-    if (ybs[t.symbol] != null) {
-      db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = 'ybs' WHERE symbol = ? AND role='supply'")
-        .run(ybs[t.symbol], t.symbol);
+    const ybsApy = findYbsApy(ybs, t.symbol, t.address);
+    if (ybsApy != null) {
+      if (t.address) {
+        db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = 'ybs' WHERE address = ? AND role='supply'")
+          .run(ybsApy, t.address);
+      } else {
+        db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = 'ybs' WHERE symbol = ? AND role='supply'")
+          .run(ybsApy, t.symbol);
+      }
       ybsCount++;
     } else if (vaults[t.symbol] != null) {
       db.prepare("UPDATE position_tokens SET apy_base = ?, apy_base_source = 'vault' WHERE symbol = ? AND role='supply'")

@@ -102,7 +102,10 @@ function mapFarmToPosition(farm, chain) {
     bucket_weeks: farm.bucket || null,
     underlying: farm.underlyingAssetSymbol || 'USDC',
     paused: farm.isPaused || false,
-    manual: true,
+    manual: false,
+    source_type: 'protocol_api',
+    source_name: 'fetch-infinifi',
+    discovery_type: 'onchain',
   };
 }
 

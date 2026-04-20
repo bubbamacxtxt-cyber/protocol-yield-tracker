@@ -1,5 +1,9 @@
 # Hybrid Scanner Architecture
 
+> OBSOLETE: superseded by `docs/debank-replacement-plan.md`.
+> 
+> This document reflects a temporary 2026-04-20 hybrid framing that mixes DeBank gap-fill, Alchemy fallback, and manual/off-chain lanes in ways we no longer want as the canonical architecture. Do not use this as the source of truth for new build decisions.
+
 _Updated: 2026-04-20_
 
 ## Architecture

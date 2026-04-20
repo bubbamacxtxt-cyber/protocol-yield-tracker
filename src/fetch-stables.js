@@ -43,6 +43,178 @@ const POOLS = [
   { name: 'USTB', pool: '1910847a-f8b5-40ce-a1ab-1dafdded5fbb' },
 ];
 
+// Optional token metadata for address-first matching in downstream enrichment.
+// Addresses pulled from DeFiLlama underlyingTokens + known contract addresses.
+// Protocol overrides: DeFiLlama labels Pendle PT/YT pools as "pendle",
+// but the real issuer is the protocol that mints the token, not the DEX.
+const TOKEN_META = {
+  sUSDe: {
+    addresses: ['0x9D39A5DE30e57443BfF2A8307A4256c8797A3497'],
+    aliases: ['sUSDe'],
+    protocol: 'ethena-usde',
+  },
+  syrupUSDT: {
+    addresses: ['0x356B8D89C1E1239cbbb9dE4815c39a1474d5Ba7D'],
+    aliases: ['syrupUSDT'],
+    protocol: 'maple',
+  },
+  syrupUSDC: {
+    addresses: [],
+    aliases: ['syrupUSDC'],
+    protocol: 'jupiter-lend',
+  },
+  OUSG: {
+    addresses: ['0x1b19c19393e2d034d8ff31ff34c81252fcbbee92'],
+    aliases: ['OUSG'],
+    protocol: 'ondo-yield-assets',
+  },
+  reUSD: {
+    addresses: ['0x3eaa0f0f0a5d3d595ae4e4b0d27f439d01c3e7b2'],
+    aliases: ['reUSD'],
+    protocol: 're-protocol',
+  },
+  reUSDe: {
+    addresses: ['0xddc0f880ff6e4e22e4b74632fbb43ce4df6ccc5a'],
+    aliases: ['reUSDe'],
+    protocol: 're-protocol',
+  },
+  apxUSD: {
+    addresses: ['0x98a878b1cd98131b271883b390f68d2c90674665'],
+    aliases: ['apxUSD'],
+    protocol: 'apex-finance',
+  },
+  sUSDu: {
+    addresses: ['9ckR7pPPvyPadACDTzLwK2ZAEeUJ3qGSnzPs8bVaHrSy'],
+    aliases: ['sUSDu'],
+    protocol: 'unitas',
+  },
+  apyUSD: {
+    addresses: ['0x38eeb52f0771140d10c4e9a9a72349a329fe8a6a'],
+    aliases: ['apyUSD'],
+    protocol: 'apex-finance',
+  },
+  srUSDe: {
+    addresses: ['0x4c9EDD5852cd905f086C759E8383e09bff1E68B3'],
+    aliases: ['srUSDe'],
+    protocol: 'strata-markets',
+  },
+  jrNUSD: {
+    addresses: ['0xE556ABa6fe6036275Ec1f87eda296BE72C811BCE'],
+    aliases: ['jrNUSD'],
+    protocol: 'strata-markets',
+  },
+  sNUSD: {
+    addresses: ['0x6c65db1d88c8eda1e3debf2b2ef3d0ece8600466'],
+    aliases: ['sNUSD'],
+    protocol: 'nucleus',
+  },
+  USD3: {
+    addresses: ['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'],
+    aliases: ['USD3'],
+    protocol: '3jane-lending',
+  },
+  gUSDC: {
+    addresses: ['0x97c1a4ae3e0da8009aff13e3e3ee7ea5ee4afe84'],
+    aliases: ['gUSDC'],
+    protocol: 'gearn',
+  },
+  fUSDT: {
+    addresses: ['0xdAC17F958D2ee523a2206206994597C13D831ec7'],
+    aliases: ['fUSDT'],
+    protocol: 'fluid-lending',
+  },
+  sUSDai: {
+    addresses: ['0x46850aD61C2B7d64d08c9C754F45254596696984'],
+    aliases: ['sUSDai'],
+    protocol: 'usd-ai',
+  },
+  siUSD: {
+    addresses: ['0x48f9e38f3070AD8945DFEae3FA70987722E3D89c'],
+    aliases: ['siUSD'],
+    protocol: 'infinifi',
+  },
+  sUSDf: {
+    addresses: ['0xFa2B947eEc368f42195f24F36d2aF29f7c24CeC2'],
+    aliases: ['sUSDf'],
+    protocol: 'falcon-finance',
+  },
+  USDG: {
+    addresses: ['0xe343167631d89b6ffc58b88d6b7fb0228795491d'],
+    aliases: ['USDG'],
+    protocol: 'gearn',
+  },
+  ynUSDx: {
+    addresses: [],
+    aliases: ['ynUSDx'],
+    protocol: 'yieldnest',
+  },
+  WOUSD: {
+    addresses: ['0x457842d6de59fa460da58bd2712532b7c27dc579'],
+    aliases: ['WOUSD'],
+    protocol: 'spectra-v2',
+  },
+  wsrUSD: {
+    addresses: ['0x09D4214C03D01F49544C0448DBE3A27f768F2b34'],
+    aliases: ['wsrUSD'],
+    protocol: 'reservoir-protocol',
+  },
+  stcUSD: {
+    addresses: ['0xcCcc62962d17b8914c62D74FfB843d73B2a3cccC'],
+    aliases: ['stcUSD'],
+    protocol: 'cap',
+  },
+  sUSDa: {
+    addresses: ['0x118078288f681389070a9d89d6832b302216ace3'],
+    aliases: ['sUSDa'],
+    protocol: 'avantis',
+  },
+  sfrxUSD: {
+    addresses: ['0xCAcd6fd266aF91b8AeD52aCCc382b4e165586E29'],
+    aliases: ['sfrxUSD'],
+    protocol: 'frax',
+  },
+  fUSDC: {
+    addresses: ['0x58D97B57BB95320F9a05dC918Aef65434969c2B2'],
+    aliases: ['fUSDC'],
+    protocol: 'merkl',
+  },
+  sUSDS: {
+    addresses: ['0xdC035D45d973E3EC169d2276DDab16f1e407384F'],
+    aliases: ['sUSDS'],
+    protocol: 'sky-lending',
+  },
+  sYUSD: {
+    addresses: ['0xfe0ccc9942e98c963fe6b4e5194eb6e3baa4cb64'],
+    aliases: ['sYUSD'],
+    protocol: 'yield-protocol',
+  },
+  dUSDC: {
+    addresses: [],
+    aliases: ['dUSDC'],
+    protocol: 'dolomite',
+  },
+  cUSDO: {
+    addresses: ['0x67aeeed39c1675e0df93ad8bab543b17992d433b'],
+    aliases: ['cUSDO'],
+    protocol: 'usdo',
+  },
+  alUSD: {
+    addresses: [],
+    aliases: ['alUSD'],
+    protocol: 'lagoon',
+  },
+  sFRAX: {
+    addresses: ['0x853d955acef822db058eb8505911ed77f175b99e'],
+    aliases: ['sFRAX'],
+    protocol: 'frax',
+  },
+  USTB: {
+    addresses: ['0x43415eB6Ff9DB7E26A15b704E7A3eDCe97d31C4e'],
+    aliases: ['USTB'],
+    protocol: 'superstate-ustb',
+  },
+};
+
 // Tokens not properly tracked on DeFiLlama — fetched from alternative APIs
 const AUGUST_DIGITAL_VAULTS = [
   { name: 'upGAMMAusdc', address: '0x998D7b14c123c1982404562b68edDB057b0477cB', chain: 'Ethereum' },
@@ -63,7 +235,7 @@ async function main() {
     if (pool && pool.apy != null) {
       stables.push({
         name: target.name,
-        protocol: pool.project || 'Unknown',
+        protocol: TOKEN_META[target.name]?.protocol || pool.project || 'Unknown',
         apr: pool.apy.toFixed(2) + '%',
         aprValue: pool.apy,
         apy_1d: pool.apy,
@@ -74,6 +246,8 @@ async function main() {
         tvl: pool.tvlUsd >= 1e6 ? "$" + (pool.tvlUsd / 1e6).toFixed(0) + "M" : pool.tvlUsd >= 1e3 ? "$" + (pool.tvlUsd / 1e3).toFixed(0) + "K" : "N/A",
         tvlNum: pool.tvlUsd || 0,
         source: 'defillama',
+        addresses: TOKEN_META[target.name]?.addresses || [],
+        aliases: TOKEN_META[target.name]?.aliases || [target.name],
       });
       console.log(`  ✅ ${target.name}: ${pool.apy.toFixed(2)}% (${pool.chain}, $${(pool.tvlUsd / 1e6).toFixed(0)}M)`);
     } else {
