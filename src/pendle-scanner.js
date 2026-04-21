@@ -2,12 +2,17 @@
 /**
  * Pendle v1 scanner
  *
- * API-first discovery for:
- * - PT holdings
- * - YT holdings
- * - Pendle LP holdings
+ * Explicit V1 scope:
+ * - authoritative direct PT holdings
+ * - authoritative direct YT holdings
+ * - optional direct LP token holdings when actually observed
  *
- * Uses Pendle market API for registry/economics and Alchemy token balances for wallet discovery.
+ * Non-goals for this scanner:
+ * - decomposing bundled DeBank Pendle exposures
+ * - inferring wrapped/gauge/vault LP exposure from protocol-level blobs
+ * - destructive replacement of unresolved Pendle fallback rows
+ *
+ * Uses Pendle core API for registry/economics and direct balanceOf checks for token truth.
  */
 
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
@@ -42,6 +47,10 @@ async function getBalances(wallet, chain) {
   return result?.tokenBalances || [];
 }
 
+function uniq(arr) {
+  return [...new Set(arr)];
+}
+
 async function fetchPendleMarketsByChain(chain, chainId) {
   const all = [];
   let skip = 0;
@@ -69,6 +78,7 @@ async function buildPendleRegistry() {
       const pt = {};
       const yt = {};
       const lp = {};
+      const direct = [];
 
       for (const m of markets) {
         const meta = {
@@ -84,12 +94,24 @@ async function buildPendleRegistry() {
           symbol: m.symbol || 'PENDLE-LPT',
         };
 
-        if (m.pt?.address) pt[String(m.pt.address).toLowerCase()] = meta;
-        if (m.yt?.address) yt[String(m.yt.address).toLowerCase()] = meta;
-        if (m.address) lp[String(m.address).toLowerCase()] = meta;
+        if (m.pt?.address) {
+          const addr = String(m.pt.address).toLowerCase();
+          pt[addr] = meta;
+          direct.push({ type: 'pt', addr, meta });
+        }
+        if (m.yt?.address) {
+          const addr = String(m.yt.address).toLowerCase();
+          yt[addr] = meta;
+          direct.push({ type: 'yt', addr, meta });
+        }
+        if (m.address) {
+          const addr = String(m.address).toLowerCase();
+          lp[addr] = meta;
+          direct.push({ type: 'lp', addr, meta });
+        }
       }
 
-      byChain[chain] = { pt, yt, lp };
+      byChain[chain] = { pt, yt, lp, direct };
     } catch (e) {
       console.log(`  Pendle ${chain}: ${e.message}`);
       byChain[chain] = null;
@@ -278,73 +300,43 @@ async function getDirectBalance(token, wallet, chain) {
 async function scanWallet(db, wallet, label, registry) {
   console.log(`\n--- ${label} (${wallet.slice(0, 12)}) ---`);
   const found = [];
-  const foundAddrs = new Set(); // Track addresses we've already processed
+  const foundAddrs = new Set();
 
   for (const [chain, maps] of Object.entries(registry)) {
     if (!maps) continue;
-    
-    // Method 1: Alchemy token balances (catches most tokens)
-    const balances = await getBalances(wallet, chain);
-    if (balances.length) {
-      for (const bal of balances) {
-        const amountHex = bal.tokenBalance;
-        if (!amountHex || amountHex === '0x0' || amountHex === '0x00') continue;
-        const addr = String(bal.contractAddress || '').toLowerCase();
-        if (foundAddrs.has(addr)) continue;
 
-        if (maps.pt[addr]) {
-          const pos = await makePosition(wallet, label, maps.pt[addr], 'pt', addr, amountHex);
-          if (!pos) continue;
-          found.push(pos);
-          foundAddrs.add(addr);
-          console.log(`  ${chain} PT ${pos.symbol} $${pos.value_usd.toFixed(2)}`);
-        } else if (maps.yt[addr]) {
-          const pos = await makePosition(wallet, label, maps.yt[addr], 'yt', addr, amountHex);
-          if (!pos) continue;
-          found.push(pos);
-          foundAddrs.add(addr);
-          console.log(`  ${chain} YT ${pos.symbol} $${pos.value_usd.toFixed(2)}`);
-        } else if (maps.lp[addr]) {
-          const pos = await makePosition(wallet, label, maps.lp[addr], 'lp', addr, amountHex);
-          if (!pos) continue;
-          found.push(pos);
-          foundAddrs.add(addr);
-          console.log(`  ${chain} LP ${pos.symbol} $${pos.value_usd.toFixed(2)}`);
-        }
-      }
+    // Non-authoritative helper only. Useful when Alchemy already knows the token,
+    // but V1 truth comes from direct balanceOf checks below.
+    const balances = await getBalances(wallet, chain);
+    const hinted = new Map();
+    for (const bal of balances || []) {
+      const amountHex = bal.tokenBalance;
+      const addr = String(bal.contractAddress || '').toLowerCase();
+      if (!addr || !amountHex || amountHex === '0x0' || amountHex === '0x00') continue;
+      hinted.set(addr, amountHex);
     }
-    
-    // Method 2: Direct balance checks for known Pendle tokens Alchemy might miss
-    const knownAddrs = [
-      ...Object.keys(maps.pt),
-      ...Object.keys(maps.yt),
-      ...Object.keys(maps.lp),
-    ];
-    
-    for (const addr of knownAddrs) {
-      if (foundAddrs.has(addr)) continue; // Already found via Alchemy
-      const amountHex = await getDirectBalance(addr, wallet, chain);
+
+    for (const item of maps.direct || []) {
+      const addr = item.addr;
+      if (foundAddrs.has(addr)) continue;
+
+      const hintedHex = hinted.get(addr);
+      const amountHex = hintedHex || await getDirectBalance(addr, wallet, chain);
       if (!amountHex || amountHex === '0x0' || amountHex === '0x00') continue;
-      
-      if (maps.pt[addr]) {
-        const pos = await makePosition(wallet, label, maps.pt[addr], 'pt', addr, amountHex);
-        if (!pos) continue;
-        found.push(pos);
-        foundAddrs.add(addr);
-        console.log(`  ${chain} PT ${pos.symbol} $${pos.value_usd.toFixed(2)} (direct)`);
-      } else if (maps.yt[addr]) {
-        const pos = await makePosition(wallet, label, maps.yt[addr], 'yt', addr, amountHex);
-        if (!pos) continue;
-        found.push(pos);
-        foundAddrs.add(addr);
-        console.log(`  ${chain} YT ${pos.symbol} $${pos.value_usd.toFixed(2)} (direct)`);
-      } else if (maps.lp[addr]) {
-        const pos = await makePosition(wallet, label, maps.lp[addr], 'lp', addr, amountHex);
-        if (!pos) continue;
-        found.push(pos);
-        foundAddrs.add(addr);
-        console.log(`  ${chain} LP ${pos.symbol} $${pos.value_usd.toFixed(2)} (direct)`);
+
+      const pos = await makePosition(wallet, label, item.meta, item.type, addr, amountHex);
+      if (!pos) continue;
+
+      // V1: only keep LP when directly observed with non-trivial value.
+      // PT/YT remain authoritative.
+      if (item.type === 'lp' && (!Number.isFinite(pos.value_usd) || pos.value_usd < 100)) {
+        continue;
       }
+
+      found.push(pos);
+      foundAddrs.add(addr);
+      const suffix = hintedHex ? '' : ' (direct)';
+      console.log(`  ${chain} ${item.type.toUpperCase()} ${pos.symbol} $${pos.value_usd.toFixed(2)}${suffix}`);
     }
   }
 
@@ -357,28 +349,9 @@ async function scanWallet(db, wallet, label, registry) {
   return found;
 }
 
-// Staleness filter: drop DeBank Pendle positions if scanner has no Pendle for same wallet
-function applyStalenessFilter(db) {
-  const scannerWallets = new Set(
-    db.prepare(`SELECT DISTINCT lower(wallet) as w FROM positions WHERE protocol_name = 'Pendle'`).all().map(r => r.w)
-  );
-  
-  if (scannerWallets.size === 0) return;
-  
-  const placeholders = Array.from(scannerWallets).map(() => '?').join(',');
-  const staleIds = db.prepare(`
-    SELECT id FROM positions 
-    WHERE protocol_id IN ('pendle2', 'arb_pendle2', 'plasma_pendle2') 
-    AND lower(wallet) IN (${placeholders})
-  `).all(...Array.from(scannerWallets)).map(r => r.id);
-  
-  if (staleIds.length > 0) {
-    const delPlaceholders = staleIds.map(() => '?').join(',');
-    db.prepare(`DELETE FROM position_tokens WHERE position_id IN (${delPlaceholders})`).run(...staleIds);
-    db.prepare(`DELETE FROM positions WHERE id IN (${delPlaceholders})`).run(...staleIds);
-    console.log(`  Removed ${staleIds.length} stale DeBank Pendle positions`);
-  }
-}
+// Intentionally no destructive DeBank cleanup here.
+// Pendle scanner currently owns direct PT/YT discovery only.
+// Keep generic DeBank Pendle rows as fallback until LP / plasma / wrapped exposure is modeled cleanly.
 
 async function main() {
   const db = new Database(DB_PATH);
@@ -412,9 +385,6 @@ async function main() {
     const found = await scanWallet(db, w.addr, w.label, registry);
     total += found.length;
   }
-
-  // Apply staleness filter: remove DeBank Pendle positions for wallets scanner covered
-  applyStalenessFilter(db);
 
   console.log(`\n=== Done: ${total} Pendle positions ===`);
   db.close();

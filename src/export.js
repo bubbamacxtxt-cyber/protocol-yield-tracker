@@ -316,20 +316,11 @@ async function main() {
         p.apy_reward = null;
     }
 
-    // If scanner Pendle exists for a wallet, drop ALL generic DeBank Pendle blobs for that wallet.
-    const pendleScannerWallets = new Set(
-        allPositions
-            .filter(p => String(p.protocol_name || '').toLowerCase() === 'pendle' && (p.net_usd || 0) > 0)
-            .map(p => String(p.wallet || '').toLowerCase())
-    );
-    const filteredPositions = allPositions.filter(p => {
-        const protocolId = String(p.protocol_id || '').toLowerCase();
-        const protocolName = String(p.protocol_name || '').toLowerCase();
-        const wallet = String(p.wallet || '').toLowerCase();
-        const isGenericPendleBlob = protocolName !== 'pendle' && (protocolId === 'pendle2' || protocolId === 'arb_pendle2' || protocolId === 'plasma_pendle2');
-        if (isGenericPendleBlob && pendleScannerWallets.has(wallet)) return false;
-        return true;
-    });
+    // Pendle V1 policy:
+    // - scanner owns direct PT / YT
+    // - generic DeBank Pendle remains as LP / unmatched fallback for now
+    // Dropping all DeBank Pendle per-wallet caused us to hide real LP / unmatched exposure.
+    const filteredPositions = allPositions;
 
     // Deduplicate: merge positions with same wallet + chain + protocol + first supply token symbol
     // For positions with no supply tokens, use position_index as the key component
@@ -366,8 +357,12 @@ async function main() {
             // Prefer scanner positions (has supply tokens)
             if (p.supply?.length > 0) existing.supply = p.supply;
             if (p.borrow?.length > 0) existing.borrow = p.borrow;
-            // Prefer scanner strategy
-            if (p.strategy === 'lend' || p.strategy === 'borrow') existing.strategy = p.strategy;
+            // Prefer Pendle scanner strategy/type labels when available
+            if (String(p.protocol_name || '').toLowerCase() === 'pendle' && String(p.strategy || '').startsWith('pendle-')) {
+                existing.strategy = p.strategy;
+            } else if (p.strategy === 'lend' || p.strategy === 'borrow') {
+                existing.strategy = p.strategy;
+            }
         } else {
             posMap.set(key, p);
         }
@@ -651,6 +646,16 @@ async function main() {
             } else {
                 const symbols = (p.supply || []).map(t => t.symbol).filter(Boolean);
                 p.supply_tokens_display = symbols.join(', ') || '-';
+            }
+
+            // Pendle V1: keep direct scanner rows and unresolved fallback rows clearly separated.
+            const pid = String(p.protocol_id || '').toLowerCase();
+            if (pid === 'pendle-pt' || pid === 'pendle-yt' || pid === 'pendle-lp') {
+                p.pendle_status = 'direct';
+                p.strategy = p.strategy || pid;
+            } else if (pid === 'pendle2' || pid === 'arb_pendle2' || pid === 'plasma_pendle2') {
+                p.pendle_status = 'fallback';
+                if (!p.asset_type) p.asset_type = 'Pendle Fallback';
             }
         }
     }
