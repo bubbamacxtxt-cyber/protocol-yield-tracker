@@ -17,6 +17,7 @@ const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const PENDLE_API = 'https://api-v2.pendle.finance/core';
 const DELAY_MS = 350;          // between wallet calls
 const MAX_RETRIES = 5;         // on 429
+const { loadActiveWalletChains, loadWhaleWalletMap } = require('./recon-helpers');
 const CHAINS = [
   { name: 'eth', chainId: 1 },
   { name: 'arb', chainId: 42161 },
@@ -151,11 +152,22 @@ function upsert(db, wallet, chain, protoId, posIdx, roleSymbol, valUsd, source) 
 
 async function main() {
   const db = new Database(DB_PATH);
-  const whales = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
-  const wallets = [];
-  for (const [name, cfg] of Object.entries(whales)) {
-    const arr = Array.isArray(cfg) ? cfg : (cfg.vaults ? Object.values(cfg.vaults).flat() : []);
-    for (const a of arr) wallets.push({ addr: a.toLowerCase(), label: name });
+  let wallets = [];
+  const active = loadActiveWalletChains();
+  if (active && active.length > 0) {
+    const labelByWallet = new Map(loadWhaleWalletMap().map(w => [w.addr, w.label]));
+    const seen = new Set();
+    for (const row of active) {
+      if (seen.has(row.wallet)) continue;
+      seen.add(row.wallet);
+      wallets.push({ addr: row.wallet, label: labelByWallet.get(row.wallet) || row.whale || 'Unknown' });
+    }
+  } else {
+    const whales = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
+    for (const [name, cfg] of Object.entries(whales)) {
+      const arr = Array.isArray(cfg) ? cfg : (cfg.vaults ? Object.values(cfg.vaults).flat() : []);
+      for (const a of arr) wallets.push({ addr: a.toLowerCase(), label: name });
+    }
   }
   console.log(`[pendle] unified scanner – ${wallets.length} wallets`);
 

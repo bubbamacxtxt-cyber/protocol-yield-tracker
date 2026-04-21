@@ -56,6 +56,15 @@ for (const w of (debank.wallets || [])) {
         });
       }
     }
+    // Reduce noisy false positives:
+    // - ignore inactive wallet+chain pairs under threshold
+    // - ignore tiny DeBank traces / dust protocol mismatches
+    // - keep only meaningful deltas
+    const activeForScan = !!chainInfo.active_for_position_scan;
+    const filteredProtocols = protocols
+      .filter(p => Math.abs(p.delta_usd) > 1000)
+      .filter(p => !(String(p.protocol || '').includes('merkl') && Math.abs(p.delta_usd) < 50000));
+
     report.push({
       wallet,
       whale: w.whale || null,
@@ -63,9 +72,10 @@ for (const w of (debank.wallets || [])) {
       debank_usd: debankUsd,
       modeled_usd: modeledUsd,
       delta_usd: deltaUsd,
-      active_for_position_scan: !!chainInfo.active_for_position_scan,
+      active_for_position_scan: activeForScan,
       scan_threshold_usd: chainInfo.scan_threshold_usd || 50000,
-      protocols_missing_or_misaligned: protocols.sort((a, b) => Math.abs(b.delta_usd) - Math.abs(a.delta_usd))
+      below_threshold: !activeForScan,
+      protocols_missing_or_misaligned: filteredProtocols.sort((a, b) => Math.abs(b.delta_usd) - Math.abs(a.delta_usd))
     });
   }
 }

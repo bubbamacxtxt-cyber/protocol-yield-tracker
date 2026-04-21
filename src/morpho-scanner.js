@@ -269,18 +269,32 @@ function savePositions(db, allPositions) {
   transaction();
 }
 
+const { loadActiveWalletChains, loadWhaleWalletMap } = require('./recon-helpers');
+
 // ============================================
 // CLI
 // ============================================
 async function main() {
-  const wallets = [
-    { addr: '0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61', label: 'Reservoir-1' },
-    { addr: '0x99a95a9e38e927486fc878f41ff8b118eb632b10', label: 'Reservoir-3' },
-    { addr: '0x289c204b35859bfb924b9c0759a4fe80f610671c', label: 'Reservoir-2' },
-    { addr: '0x3063c5907faa10c01b242181aa689beb23d2bd65', label: 'Euler-Wallet' },
-    { addr: '0x41a9eb398518d2487301c61d2b33e4e966a9f1dd', label: 'Reservoir-4' },
-    { addr: '0x502d222e8e4daef69032f55f0c1a999effd78fb3', label: 'Reservoir-5' },
-  ];
+  let wallets = [];
+  const active = loadActiveWalletChains();
+  if (active && active.length > 0) {
+    const labelByWallet = new Map(loadWhaleWalletMap().map(w => [w.addr, w.label]));
+    const seen = new Set();
+    for (const row of active) {
+      if (seen.has(row.wallet)) continue;
+      seen.add(row.wallet);
+      wallets.push({ addr: row.wallet, label: labelByWallet.get(row.wallet) || row.whale || 'Unknown' });
+    }
+  } else {
+    wallets = [
+      { addr: '0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61', label: 'Reservoir-1' },
+      { addr: '0x99a95a9e38e927486fc878f41ff8b118eb632b10', label: 'Reservoir-3' },
+      { addr: '0x289c204b35859bfb924b9c0759a4fe80f610671c', label: 'Reservoir-2' },
+      { addr: '0x3063c5907faa10c01b242181aa689beb23d2bd65', label: 'Euler-Wallet' },
+      { addr: '0x41a9eb398518d2487301c61d2b33e4e966a9f1dd', label: 'Reservoir-4' },
+      { addr: '0x502d222e8e4daef69032f55f0c1a999effd78fb3', label: 'Reservoir-5' },
+    ];
+  }
   
   const db = new Database(DB_PATH);
   const allPositions = [];

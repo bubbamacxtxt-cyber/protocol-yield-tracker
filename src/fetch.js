@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /**
- * Protocol Yield Tracker — DeBank Cloud Fetcher v3
- * Optimized: chain caching, balance pre-filter, CoinGecko token resolution
+ * Protocol Yield Tracker — Legacy DeBank Cloud Fetcher
+ *
+ * LEGACY / TRANSITIONAL:
+ * This script represents the older DeBank-heavy pipeline and should not remain
+ * the primary production path once the wallet-recon architecture is fully adopted.
+ *
+ * Preferred direction:
+ * - daily paid DeBank wallet recon (`build-debank-recon.js`)
+ * - hourly free scans + export
  */
 
 const fs = require('fs');
