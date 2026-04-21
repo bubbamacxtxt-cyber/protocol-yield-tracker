@@ -632,39 +632,8 @@ async function main() {
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
         const positions = filtered.filter(p => !p._drop && walletSet.has(p.wallet.toLowerCase()));
 
-        // Entity-level protocol override: for some named whales/vaults the wallet is just a container,
-        // and frontend should present the branded entity rather than the underlying venue.
-        if (name === 'Superform') {
-            for (const p of positions) {
-                p.protocol_name = 'Superform';
-                p.protocol_canonical = 'superform';
-                p.protocol_display = 'Superform';
-                p.protocol_category = 'vault';
-                p.source_type = 'protocol_api';
-                p.source_name = 'entity-override:superform';
-                p.normalization_status = 'canonical';
-                p.exposure_class = 'vault_position';
-                p.asset_type = 'Superform Vault';
-                p.supply_tokens_display = 'superUSDC';
-                if (p.supply && p.supply.length > 0) {
-                    p.supply = [{
-                        symbol: 'superUSDC',
-                        address: p.position_index,
-                        amount: null,
-                        price_usd: null,
-                        value_usd: p.net_usd,
-                        apy_base: p.apy_base,
-                        apy_base_source: p.apy_base_source || 'entity-override:superform'
-                    }];
-                }
-                // Use equity / net exposure for UI value instead of gross supply on this branded vault page.
-                if (p.net_usd != null && p.net_usd > 0) {
-                    p.asset_usd = p.net_usd;
-                }
-                p.health_rate = null;
-            }
-        }
-
+        // Important rule: whale page entity identity must not overwrite row-level exposure venue.
+        // Keep row protocol_name/protocol_canonical as the actual deployed venue (e.g. Morpho, Aave, etc.).
         // Fix Re Protocol on-chain positions
         // DeBank mislabels sUSDe as USDe and calls protocol "Ethena"
         // Re Protocol holds sUSDe as idle treasury, not as active Ethena deposit
