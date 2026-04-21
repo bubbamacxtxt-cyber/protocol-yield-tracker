@@ -68,6 +68,10 @@ jobs:
         env:
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
 
+      # Pendle portfolio scanner (official Pendle endpoint for complete coverage)
+      - name: Scan Pendle portfolio positions
+        run: node src/pendle-portfolio-scanner.js
+
       # APY enrichment (fetches rates from Aave/Morpho/Euler/Spark/Pendle)
       - name: Enrich positions with market/vault info
         run: node src/enrich-markets.js
