@@ -297,6 +297,7 @@ async function main() {
         delete p.reward_json;
         normalizeSourceMeta(p);
         applyProtocolRegistry(p, protocolRegistry);
+        finalizeSourceMeta(p);
 
         // Normalize chain names to lowercase
         const chainMap = { 1: 'eth', 8453: 'base', 42161: 'arb', 137: 'poly', 10: 'opt', 146: 'sonic', 9745: 'plasma', 5000: 'mnt', 130: 'uni', 143: 'monad', 999: 'ink', 2741: 'abstract', 747474: 'wct', 81457: 'blast' };
@@ -672,7 +673,7 @@ async function main() {
         );
         const cleanedPositions = positions.filter(p => !p._drop).filter(p => {
             const walletChain = `${String(p.wallet || '').toLowerCase()}|${String(p.chain || '').toLowerCase()}`;
-            const scannerRowsSameWalletChain = positions.filter(x => `${String(x.wallet || '').toLowerCase()}|${String(x.chain || '').toLowerCase()}` === walletChain && x.source_type === 'scanner');
+            const scannerRowsSameWalletChain = positions.filter(x => `${String(x.wallet || '').toLowerCase()}|${String(x.chain || '').toLowerCase()}` === walletChain && (x.source_type === 'scanner' || String(x.source_name || '') === 'aave-scanner' || String(x.source_name || '') === 'morpho-scanner' || String(x.source_name || '') === 'euler-scanner' || String(x.source_name || '') === 'pendle-portfolio' || String(x.source_name || '') === 'pendle-balanceof'));
             const scannerContextForSuppression = scannerRowsSameWalletChain.filter(x => (x.asset_usd || 0) > 0 || (x.debt_usd || 0) > 0);
             const isCanonicalYieldRow = p.source_type === 'protocol_api'
                 && (p.exposure_class === 'yield_bearing_stable' || p.exposure_class === 'vault_position');
@@ -685,6 +686,17 @@ async function main() {
 
             // Stronger suppression: if a canonical issued-asset row shares the same primary token address
             // as a scanner-owned row on the same wallet+chain, it is enrichment, not standalone exposure.
+            // Raw-protocol suppression first: if this is an Ethena issuer row but same wallet+chain already
+            // has scanner-owned Aave exposure carrying USDe/sUSDe, suppress it even before semantic promotion settles.
+            const isRawEthenaRow = String(p.protocol_id || '').toLowerCase() === 'ethena' || String(p.protocol_name || '').toLowerCase() === 'ethena';
+            if (isRawEthenaRow) {
+                const aaveHasUsde = scannerContextForSuppression.some(x =>
+                    String(x.protocol_name || '').toLowerCase().includes('aave') &&
+                    [...(x.supply || []), ...(x.borrow || [])].some(t => ['usde','susde'].includes(String(t.symbol || '').toLowerCase()) || ['0x4c9edd5852cd905f086c759e8383e09bff1e68b3','0x9d39a5de30e57443bff2a8307a4256c8797a3497'].includes(String(t.address || '').toLowerCase()))
+                );
+                if (aaveHasUsde) return false;
+            }
+
             if (isCanonicalYieldRow) {
                 const pAddr = String(p.position_index || '').toLowerCase();
                 const scannerSameToken = scannerContextForSuppression.some(x => {
