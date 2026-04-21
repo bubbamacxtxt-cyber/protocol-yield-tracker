@@ -5,6 +5,7 @@ const path = require('path');
 const DATA_JSON = path.join(__dirname, '..', 'data.json');
 const DEBANK_RECON = path.join(__dirname, '..', 'data', 'recon', 'debank-wallet-summary.json');
 const OUT = path.join(__dirname, '..', 'data', 'recon', 'gap-report.json');
+const PROTOCOL_REGISTRY = path.join(__dirname, '..', 'data', 'protocol-registry.json');
 
 function loadJson(p, fallback) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return fallback; }
@@ -16,6 +17,16 @@ function ensureDir(p) {
 
 const data = loadJson(DATA_JSON, { whales: {} });
 const debank = loadJson(DEBANK_RECON, { wallets: [] });
+const registry = loadJson(PROTOCOL_REGISTRY, { protocols: {} }).protocols || {};
+
+function canonicalizeProtocol(proto) {
+  const raw = String(proto || '').toLowerCase();
+  for (const [key, entry] of Object.entries(registry)) {
+    if ((entry.aliases || []).includes(raw)) return key;
+    if ((entry.name_aliases || []).map(x => String(x).toLowerCase()).includes(raw)) return key;
+  }
+  return raw;
+}
 
 // Build modeled totals by wallet+chain+protocol from exported pages
 const modeledByWalletChain = new Map();
@@ -24,7 +35,7 @@ for (const [whale, group] of Object.entries(data.whales || {})) {
   for (const p of (group.positions || [])) {
     const wallet = String(p.wallet || '').toLowerCase();
     const chain = String(p.chain || '').toLowerCase();
-    const proto = String(p.protocol_canonical || p.protocol_name || p.protocol_id || '').toLowerCase();
+    const proto = canonicalizeProtocol(p.protocol_canonical || p.protocol_name || p.protocol_id || '');
     const usd = Number(p.net_usd || 0);
     const k1 = `${wallet}|${chain}`;
     const k2 = `${wallet}|${chain}|${proto}`;
@@ -43,7 +54,7 @@ for (const w of (debank.wallets || [])) {
     const deltaUsd = debankUsd - modeledUsd;
     const protocols = [];
     for (const proto of (chainInfo.protocols || [])) {
-      const pkey = String(proto.protocol_canonical || proto.protocol_id || proto.protocol_name || '').toLowerCase();
+      const pkey = canonicalizeProtocol(proto.protocol_canonical || proto.protocol_id || proto.protocol_name || '');
       const debankProtoUsd = Number(proto.net_usd || proto.total_usd || 0);
       const modeledProtoUsd = modeledByWalletChainProtocol.get(`${wallet}|${chain}|${pkey}`) || 0;
       const protoDelta = debankProtoUsd - modeledProtoUsd;

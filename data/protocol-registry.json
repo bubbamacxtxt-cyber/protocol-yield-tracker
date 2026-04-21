@@ -13,7 +13,7 @@
     "morpho": {
       "canonical_id": "morpho",
       "display_name": "Morpho",
-      "aliases": ["morpho"],
+      "aliases": ["morpho", "morphoblue", "monad_morphoblue"],
       "name_aliases": ["Morpho"],
       "category": "lending",
       "preferred_source_type": "scanner"
@@ -29,7 +29,7 @@
     "spark": {
       "canonical_id": "spark",
       "display_name": "Spark",
-      "aliases": ["spark", "spark-savings", "spark-lend"],
+      "aliases": ["spark", "spark-savings", "spark-lend", "spark-susdc-refcode"],
       "name_aliases": ["Spark", "Spark sUSDC"],
       "category": "lending",
       "preferred_source_type": "scanner"
@@ -64,6 +64,38 @@
       "aliases": ["curve", "arb_curve", "plasma_curve"],
       "name_aliases": ["Curve"],
       "category": "lp",
+      "preferred_source_type": "mixed"
+    },
+    "gearbox": {
+      "canonical_id": "gearbox",
+      "display_name": "Gearbox",
+      "aliases": ["monad_gearbox", "gearbox"],
+      "name_aliases": ["Gearbox"],
+      "category": "lending",
+      "preferred_source_type": "mixed"
+    },
+    "curvance": {
+      "canonical_id": "curvance",
+      "display_name": "Curvance",
+      "aliases": ["monad_curvance", "curvance"],
+      "name_aliases": ["Curvance"],
+      "category": "lending",
+      "preferred_source_type": "mixed"
+    },
+    "traderjoe": {
+      "canonical_id": "traderjoe",
+      "display_name": "LFJ",
+      "aliases": ["avax_traderjoexyz", "monad_traderjoexyz"],
+      "name_aliases": ["LFJ"],
+      "category": "lp",
+      "preferred_source_type": "mixed"
+    },
+    "yuzumoney": {
+      "canonical_id": "yuzumoney",
+      "display_name": "Yuzu Money",
+      "aliases": ["plasma_yuzumoney"],
+      "name_aliases": ["Yuzu Money"],
+      "category": "vault",
       "preferred_source_type": "mixed"
     }
   }
