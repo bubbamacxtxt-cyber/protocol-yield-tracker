@@ -62,15 +62,9 @@ jobs:
         env:
           ALCHEMY_RPC_URL: ${{ secrets.ALCHEMY_RPC_URL }}
 
-      # Pendle scanner (API-first PT/YT/LP discovery)
+      # Pendle scanner (unified: portfolio endpoint + balanceOf fallback)
       - name: Scan Pendle positions
         run: node src/pendle-scanner.js
-        env:
-          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
-
-      # Pendle portfolio scanner (official Pendle endpoint for complete coverage)
-      - name: Scan Pendle portfolio positions
-        run: node src/pendle-portfolio-scanner.js
 
       # APY enrichment (fetches rates from Aave/Morpho/Euler/Spark/Pendle)
       - name: Enrich positions with market/vault info

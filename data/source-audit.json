@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-21T07:10:13.945Z",
+  "generated_at": "2026-04-21T08:44:24.084Z",
   "summary": {
-    "total_positions": 154,
+    "total_positions": 168,
     "unresolved_fallback_positions": 8,
     "unresolved_fallback_usd": 13862565.809999999
   },
   "by_source_type": {
     "scanner": {
-      "positions": 120,
-      "net_usd": 487972268.3742452
+      "positions": 134,
+      "net_usd": 493405798.9691957
     },
     "fallback": {
       "positions": 34,
@@ -21,8 +21,8 @@
       "net_usd": 409385082.8705072
     },
     "pendle": {
-      "positions": 8,
-      "net_usd": 13862565.809999999
+      "positions": 22,
+      "net_usd": 19296096.404950432
     },
     "upshift": {
       "positions": 1,
@@ -143,6 +143,13 @@
       "positions": 5,
       "net_usd": 6155593.199999999,
       "normalization_status": "partial"
+    },
+    {
+      "protocol": "pendle",
+      "source_type": "scanner",
+      "positions": 14,
+      "net_usd": 5433530.59495043,
+      "normalization_status": "canonical"
     },
     {
       "protocol": "capapp",
