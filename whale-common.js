@@ -242,12 +242,26 @@ function filterPositions() {
   if (search) {
     data = data.filter(p =>
       (p.wallet || '').toLowerCase().includes(search) ||
-      getFieldValue(p, protocolCol).toLowerCase().includes(search) ||
+      String(getFieldValue(p, protocolCol) || '').toLowerCase().includes(search) ||
       (p.protocol_name || '').toLowerCase().includes(search) ||
       (p.borrow || []).some(t => (t.symbol || '').toLowerCase().includes(search)) ||
       (p.strategy || '').toLowerCase().includes(search)
     );
   }
+
+  const hasPositiveAaveContext = new Set(
+    data
+      .filter(p => String(getFieldValue(p, protocolCol) || '').includes('Aave') && (p.asset_usd || 0) > 0)
+      .map(p => `${String(p.wallet || '').toLowerCase()}|${p.chain}`)
+  );
+
+  data = data.filter(p => {
+    const isAave = String(getFieldValue(p, protocolCol) || '').includes('Aave');
+    const borrowOnly = (p.asset_usd || 0) === 0 && (p.debt_usd || 0) > 0 && (!p.supply || p.supply.length === 0 || p.supply_tokens_display === '-');
+    if (isAave && borrowOnly && hasPositiveAaveContext.has(`${String(p.wallet || '').toLowerCase()}|${p.chain}`)) return false;
+    return true;
+  });
+
   return data.sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0));
 }
 
@@ -326,7 +340,7 @@ function showDetail(p) {
       '<div><div style="color:var(--text-secondary);font-size:12px">Base APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_base || 0).toFixed(2) + '%</div></div>' +
       '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">+' + (p.bonus_supply || 0).toFixed(2) + '%</div></div>' +
       '<div><div style="color:var(--text-secondary);font-size:12px">Cost APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_cost || 0).toFixed(2) + '%</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Borrow</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">\u2212' + (p.bonus_borrow || 0).toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Health</div><div style="font-size:18px;font-weight:600">' + (p.health_rate ? fmtHF(p.health_rate) : '-') + '</div></div>' +
     '</div>' +
     '<div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
       '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
