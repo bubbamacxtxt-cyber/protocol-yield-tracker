@@ -1,0 +1,1865 @@
+{
+  "generated_at": "2026-04-21T12:30:58.374Z",
+  "report": [
+    {
+      "wallet": "0x020c5bb0d81b8cf539ca06364ece4a41631995b4",
+      "whale": "Avant",
+      "chain": "avax",
+      "debank_usd": 0.00002979737025332008,
+      "modeled_usd": 0,
+      "delta_usd": 0.00002979737025332008,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x020c5bb0d81b8cf539ca06364ece4a41631995b4",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 0.0025879490411982115,
+      "modeled_usd": 0,
+      "delta_usd": 0.0025879490411982115,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x887fd380c1e4cc28e119917015fe7fb0062c5d67",
+      "whale": "Avant",
+      "chain": "avax",
+      "debank_usd": 502.5296850156173,
+      "modeled_usd": 0,
+      "delta_usd": 502.5296850156173,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "avax_merkl",
+          "debank_usd": 502.41031581405275,
+          "modeled_usd": 0,
+          "delta_usd": 502.41031581405275
+        }
+      ]
+    },
+    {
+      "wallet": "0x887fd380c1e4cc28e119917015fe7fb0062c5d67",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 0.008052975724161927,
+      "modeled_usd": 0,
+      "delta_usd": 0.008052975724161927,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x1ae4190c55c2986130694af6998a94126c0685cd",
+      "whale": "Avant",
+      "chain": "plume",
+      "debank_usd": 0,
+      "modeled_usd": 0,
+      "delta_usd": 0,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x1ae4190c55c2986130694af6998a94126c0685cd",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 0.005143090382327923,
+      "modeled_usd": 0,
+      "delta_usd": 0.005143090382327923,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xc1d023141ad6935f81e5286e577768b75c9ff8eb",
+      "whale": "Avant",
+      "chain": "bera",
+      "debank_usd": 2.7484899136113428,
+      "modeled_usd": 0,
+      "delta_usd": 2.7484899136113428,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xc1d023141ad6935f81e5286e577768b75c9ff8eb",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 1.1373062674930028e-18,
+      "modeled_usd": 0,
+      "delta_usd": 1.1373062674930028e-18,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xfbbf1826aba90704a2167d2eb4a7a9d83a8de9c7",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 1.3273044285863247,
+      "modeled_usd": 0,
+      "delta_usd": 1.3273044285863247,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x1dff1e9968222aa6c66bf402bac2c3fe5ed13f76",
+      "whale": "Avant",
+      "chain": "bsc",
+      "debank_usd": 3.8589932779289238,
+      "modeled_usd": 0,
+      "delta_usd": 3.8589932779289238,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x1dff1e9968222aa6c66bf402bac2c3fe5ed13f76",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 95.3908488117357,
+      "modeled_usd": 0,
+      "delta_usd": 95.3908488117357,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x3207363359ca0c11d11073ad48301e8c958b7910",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 2397687.449203315,
+      "modeled_usd": 7035121.900257263,
+      "delta_usd": -4637434.451053948,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "aave3",
+          "debank_usd": 2120078.583216645,
+          "modeled_usd": 0,
+          "delta_usd": 2120078.583216645
+        },
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 277598.2866590752,
+          "modeled_usd": 0,
+          "delta_usd": 277598.2866590752
+        }
+      ]
+    },
+    {
+      "wallet": "0x3207363359ca0c11d11073ad48301e8c958b7910",
+      "whale": "Avant",
+      "chain": "plasma",
+      "debank_usd": 6094073.096389905,
+      "modeled_usd": 13033433.02693431,
+      "delta_usd": -6939359.930544406,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_aave3",
+          "debank_usd": 6094073.096389905,
+          "modeled_usd": 0,
+          "delta_usd": 6094073.096389905
+        }
+      ]
+    },
+    {
+      "wallet": "0x7bee8d37fba61a6251a08b957d502c56e2a50fab",
+      "whale": "Avant",
+      "chain": "arb",
+      "debank_usd": 281.76019456040484,
+      "modeled_usd": 0,
+      "delta_usd": 281.76019456040484,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "arb_merkl",
+          "debank_usd": 281.76019456040484,
+          "modeled_usd": 0,
+          "delta_usd": 281.76019456040484
+        }
+      ]
+    },
+    {
+      "wallet": "0x7bee8d37fba61a6251a08b957d502c56e2a50fab",
+      "whale": "Avant",
+      "chain": "bera",
+      "debank_usd": 18.55888138082435,
+      "modeled_usd": 0,
+      "delta_usd": 18.55888138082435,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x7bee8d37fba61a6251a08b957d502c56e2a50fab",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 3580780.449792315,
+      "modeled_usd": 0,
+      "delta_usd": 3580780.449792315,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 3580694.4517160878,
+          "modeled_usd": 0,
+          "delta_usd": 3580694.4517160878
+        }
+      ]
+    },
+    {
+      "wallet": "0x7bee8d37fba61a6251a08b957d502c56e2a50fab",
+      "whale": "Avant",
+      "chain": "plasma",
+      "debank_usd": 8.59887614736366,
+      "modeled_usd": 0,
+      "delta_usd": 8.59887614736366,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x7bee8d37fba61a6251a08b957d502c56e2a50fab",
+      "whale": "Avant",
+      "chain": "sei",
+      "debank_usd": 10.762202220942864,
+      "modeled_usd": 0,
+      "delta_usd": 10.762202220942864,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x920eefbcf1f5756109952e6ff6da1cab950c64d7",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 73.67205553077957,
+      "modeled_usd": 0,
+      "delta_usd": 73.67205553077957,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x920eefbcf1f5756109952e6ff6da1cab950c64d7",
+      "whale": "Avant",
+      "chain": "ink",
+      "debank_usd": 3534552.4262312017,
+      "modeled_usd": 0,
+      "delta_usd": 3534552.4262312017,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ink_aave3",
+          "debank_usd": 3534552.4262312017,
+          "modeled_usd": 0,
+          "delta_usd": 3534552.4262312017
+        }
+      ]
+    },
+    {
+      "wallet": "0x920eefbcf1f5756109952e6ff6da1cab950c64d7",
+      "whale": "Avant",
+      "chain": "mnt",
+      "debank_usd": 15266246.883357491,
+      "modeled_usd": 15590025.048430592,
+      "delta_usd": -323778.1650731005,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "mnt_aave3",
+          "debank_usd": 15242107.979069203,
+          "modeled_usd": 0,
+          "delta_usd": 15242107.979069203
+        },
+        {
+          "protocol": "mnt_merkl",
+          "debank_usd": 24138.904288287365,
+          "modeled_usd": 0,
+          "delta_usd": 24138.904288287365
+        }
+      ]
+    },
+    {
+      "wallet": "0xd2305803ca7821e4e5c3bcaed366ad7de9f13739",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 34.109098214916195,
+      "modeled_usd": 0,
+      "delta_usd": 34.109098214916195,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xc2d2c22f54c9fae2456b6e7f7fbdc240e1898da1",
+      "whale": "Avant",
+      "chain": "sonic",
+      "debank_usd": 565.0077037366216,
+      "modeled_usd": 0,
+      "delta_usd": 565.0077037366216,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "sonic_sonicairdrop",
+          "debank_usd": 565.0004336446584,
+          "modeled_usd": 0,
+          "delta_usd": 565.0004336446584
+        }
+      ]
+    },
+    {
+      "wallet": "0xacabc577f359e4af4dd057af56de5a576ba9bd82",
+      "whale": "Avant",
+      "chain": "avax",
+      "debank_usd": 5.738216757059811e-14,
+      "modeled_usd": 0,
+      "delta_usd": 5.738216757059811e-14,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bd5cfe5002ba211f74ca6",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 15503869.939821342,
+      "modeled_usd": 71111913.38228446,
+      "delta_usd": -55608043.44246312,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "aave3",
+          "debank_usd": 15502868.2974073,
+          "modeled_usd": 0,
+          "delta_usd": 15502868.2974073
+        },
+        {
+          "protocol": "ethena",
+          "debank_usd": 1001.5176374369066,
+          "modeled_usd": 10063904.32,
+          "delta_usd": -10062902.802362563
+        }
+      ]
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bd5cfe5002ba211f74ca6",
+      "whale": "Avant",
+      "chain": "hyper",
+      "debank_usd": 5.7055980533157507e-11,
+      "modeled_usd": 0,
+      "delta_usd": 5.7055980533157507e-11,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bd5cfe5002ba211f74ca6",
+      "whale": "Avant",
+      "chain": "ink",
+      "debank_usd": 966708.2054712456,
+      "modeled_usd": 0,
+      "delta_usd": 966708.2054712456,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ink_aave3",
+          "debank_usd": 966708.2054712456,
+          "modeled_usd": 0,
+          "delta_usd": 966708.2054712456
+        }
+      ]
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bd5cfe5002ba211f74ca6",
+      "whale": "Avant",
+      "chain": "mnt",
+      "debank_usd": 595.512261168205,
+      "modeled_usd": 994860.2005526908,
+      "delta_usd": -994264.6882915226,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "mnt_merkl",
+          "debank_usd": 595.5117477996613,
+          "modeled_usd": 0,
+          "delta_usd": 595.5117477996613
+        }
+      ]
+    },
+    {
+      "wallet": "0xc468315a2df54f9c076bd5cfe5002ba211f74ca6",
+      "whale": "Avant",
+      "chain": "plasma",
+      "debank_usd": 9709418.14122416,
+      "modeled_usd": 13024799.288190871,
+      "delta_usd": -3315381.1469667107,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_aave3",
+          "debank_usd": 9709418.14122416,
+          "modeled_usd": 0,
+          "delta_usd": 9709418.14122416
+        }
+      ]
+    },
+    {
+      "wallet": "0x33a4866bffc90791e65da0d339eddcae3d9ce9f9",
+      "whale": "Avant",
+      "chain": "eth",
+      "debank_usd": 0.022322061364644517,
+      "modeled_usd": 0,
+      "delta_usd": 0.022322061364644517,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "whale": "yoUSD",
+      "chain": "eth",
+      "debank_usd": 18207910.596526537,
+      "modeled_usd": 164.25806670650616,
+      "delta_usd": 18207746.33845983,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 18207455.314003877,
+          "modeled_usd": 0,
+          "delta_usd": 18207455.314003877
+        },
+        {
+          "protocol": "aave3",
+          "debank_usd": 354.2760316757651,
+          "modeled_usd": 0,
+          "delta_usd": 354.2760316757651
+        }
+      ]
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "whale": "yoUSD",
+      "chain": "arb",
+      "debank_usd": 0.7298509630065959,
+      "modeled_usd": 0,
+      "delta_usd": 0.7298509630065959,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "whale": "yoUSD",
+      "chain": "base",
+      "debank_usd": 145.27892336126897,
+      "modeled_usd": 0,
+      "delta_usd": 145.27892336126897,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "whale": "yoUSD",
+      "chain": "hyper",
+      "debank_usd": 179.07633637969016,
+      "modeled_usd": 0,
+      "delta_usd": 179.07633637969016,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "hyper_merkl",
+          "debank_usd": 178.7050094070612,
+          "modeled_usd": 0,
+          "delta_usd": 178.7050094070612
+        }
+      ]
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "whale": "yoUSD",
+      "chain": "op",
+      "debank_usd": 259.7545777455498,
+      "modeled_usd": 0,
+      "delta_usd": 259.7545777455498,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "op_merkl",
+          "debank_usd": 259.7545777455498,
+          "modeled_usd": 0,
+          "delta_usd": 259.7545777455498
+        }
+      ]
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "whale": "yoUSD",
+      "chain": "plasma",
+      "debank_usd": 4.244957286539112,
+      "modeled_usd": 0,
+      "delta_usd": 4.244957286539112,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
+      "whale": "yoUSD",
+      "chain": "uni",
+      "debank_usd": 5.7521515037119375,
+      "modeled_usd": 0,
+      "delta_usd": 5.7521515037119375,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x815f5bb257e88b67216a344c7c83a3ea4ee74748",
+      "whale": "Yuzu",
+      "chain": "eth",
+      "debank_usd": 6862017.676140769,
+      "modeled_usd": 9015386.56481289,
+      "delta_usd": -2153368.88867212,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 3820412.7689556256,
+          "modeled_usd": 0,
+          "delta_usd": 3820412.7689556256
+        },
+        {
+          "protocol": "pendle2",
+          "debank_usd": 1523516.1736295547,
+          "modeled_usd": 0,
+          "delta_usd": 1523516.1736295547
+        },
+        {
+          "protocol": "euler2",
+          "debank_usd": 1515948.7769002467,
+          "modeled_usd": 0,
+          "delta_usd": 1515948.7769002467
+        },
+        {
+          "protocol": "merkl",
+          "debank_usd": 1584.9701251818628,
+          "modeled_usd": 0,
+          "delta_usd": 1584.9701251818628
+        },
+        {
+          "protocol": "aave3",
+          "debank_usd": 550.2544033373429,
+          "modeled_usd": 0,
+          "delta_usd": 550.2544033373429
+        }
+      ]
+    },
+    {
+      "wallet": "0x815f5bb257e88b67216a344c7c83a3ea4ee74748",
+      "whale": "Yuzu",
+      "chain": "arb",
+      "debank_usd": 226938.3967469146,
+      "modeled_usd": 0,
+      "delta_usd": 226938.3967469146,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "arb_morphoblue",
+          "debank_usd": 226938.3967469146,
+          "modeled_usd": 0,
+          "delta_usd": 226938.3967469146
+        }
+      ]
+    },
+    {
+      "wallet": "0x815f5bb257e88b67216a344c7c83a3ea4ee74748",
+      "whale": "Yuzu",
+      "chain": "base",
+      "debank_usd": 1445376.3654487506,
+      "modeled_usd": 837159.6977626989,
+      "delta_usd": 608216.6676860517,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "base_aave3",
+          "debank_usd": 1445376.3654487506,
+          "modeled_usd": 0,
+          "delta_usd": 1445376.3654487506
+        }
+      ]
+    },
+    {
+      "wallet": "0x815f5bb257e88b67216a344c7c83a3ea4ee74748",
+      "whale": "Yuzu",
+      "chain": "plasma",
+      "debank_usd": 227.2999661930776,
+      "modeled_usd": 3942586.625111319,
+      "delta_usd": -3942359.325145126,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_yuzumoney",
+          "debank_usd": 216.5268559612507,
+          "modeled_usd": 0,
+          "delta_usd": 216.5268559612507
+        }
+      ]
+    },
+    {
+      "wallet": "0x815f5bb257e88b67216a344c7c83a3ea4ee74748",
+      "whale": "Yuzu",
+      "chain": "uni",
+      "debank_usd": 0.000016993202718912435,
+      "modeled_usd": 0,
+      "delta_usd": 0.000016993202718912435,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x015cc48cc8bc37d80aaff4e43061dbaf94192308",
+      "whale": "Yuzu",
+      "chain": "eth",
+      "debank_usd": 5522107.063784081,
+      "modeled_usd": 4242343.73,
+      "delta_usd": 1279763.33378408,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 5522100.892135724,
+          "modeled_usd": 0,
+          "delta_usd": 5522100.892135724
+        }
+      ]
+    },
+    {
+      "wallet": "0x015cc48cc8bc37d80aaff4e43061dbaf94192308",
+      "whale": "Yuzu",
+      "chain": "mnt",
+      "debank_usd": 435545.20955579623,
+      "modeled_usd": 1172668.924136002,
+      "delta_usd": -737123.7145802059,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "mnt_aave3",
+          "debank_usd": 435402.89273552364,
+          "modeled_usd": 0,
+          "delta_usd": 435402.89273552364
+        },
+        {
+          "protocol": "mnt_merkl",
+          "debank_usd": 142.31682027256767,
+          "modeled_usd": 0,
+          "delta_usd": 142.31682027256767
+        }
+      ]
+    },
+    {
+      "wallet": "0x015cc48cc8bc37d80aaff4e43061dbaf94192308",
+      "whale": "Yuzu",
+      "chain": "plasma",
+      "debank_usd": 25.072612332820615,
+      "modeled_usd": 0,
+      "delta_usd": 25.072612332820615,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
+      "whale": "Yuzu",
+      "chain": "eth",
+      "debank_usd": 13671193.88142052,
+      "modeled_usd": 7209537.883002579,
+      "delta_usd": 6461655.99841794,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 11040609.099322716,
+          "modeled_usd": 0,
+          "delta_usd": 11040609.099322716
+        },
+        {
+          "protocol": "aave3",
+          "debank_usd": 1517318.8500931952,
+          "modeled_usd": 0,
+          "delta_usd": 1517318.8500931952
+        },
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 1106434.2536100524,
+          "modeled_usd": 0,
+          "delta_usd": 1106434.2536100524
+        },
+        {
+          "protocol": "pendle2",
+          "debank_usd": 4014.063135946409,
+          "modeled_usd": 0,
+          "delta_usd": 4014.063135946409
+        },
+        {
+          "protocol": "merkl",
+          "debank_usd": 2817.6152586104845,
+          "modeled_usd": 0,
+          "delta_usd": 2817.6152586104845
+        }
+      ]
+    },
+    {
+      "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
+      "whale": "Yuzu",
+      "chain": "mnt",
+      "debank_usd": 4933228.560951987,
+      "modeled_usd": 10546305.727112435,
+      "delta_usd": -5613077.1661604475,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "mnt_aave3",
+          "debank_usd": 4931898.93247579,
+          "modeled_usd": 0,
+          "delta_usd": 4931898.93247579
+        },
+        {
+          "protocol": "mnt_merkl",
+          "debank_usd": 1329.6284761967086,
+          "modeled_usd": 0,
+          "delta_usd": 1329.6284761967086
+        }
+      ]
+    },
+    {
+      "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
+      "whale": "Yuzu",
+      "chain": "plasma",
+      "debank_usd": 2565745.8956723697,
+      "modeled_usd": 2613221.0001327097,
+      "delta_usd": -47475.10446033999,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_aave3",
+          "debank_usd": 2565745.8956723697,
+          "modeled_usd": 0,
+          "delta_usd": 2565745.8956723697
+        }
+      ]
+    },
+    {
+      "wallet": "0xcf0a12cbd8088fc5f84ad431e71787157041cd69",
+      "whale": "Yuzu",
+      "chain": "eth",
+      "debank_usd": 6001126.809159898,
+      "modeled_usd": 2485033.3669143803,
+      "delta_usd": 3516093.442245518,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 4308990.979076497,
+          "modeled_usd": 0,
+          "delta_usd": 4308990.979076497
+        },
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 1692132.730356399,
+          "modeled_usd": 0,
+          "delta_usd": 1692132.730356399
+        }
+      ]
+    },
+    {
+      "wallet": "0xb6cbe8b123392ef6aa72897bb85bd6515d2e8db7",
+      "whale": "Yuzu",
+      "chain": "eth",
+      "debank_usd": 12648113.268903395,
+      "modeled_usd": 4288838.850117061,
+      "delta_usd": 8359274.418786334,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 8023899.219575209,
+          "modeled_usd": 0,
+          "delta_usd": 8023899.219575209
+        },
+        {
+          "protocol": "aave3",
+          "debank_usd": 4624214.040500486,
+          "modeled_usd": 0,
+          "delta_usd": 4624214.040500486
+        }
+      ]
+    },
+    {
+      "wallet": "0xfaa7744b9ed973290a36ee815b5acc76856583a0",
+      "whale": "Yuzu",
+      "chain": "eth",
+      "debank_usd": 6057723.16523582,
+      "modeled_usd": 7742817.526805678,
+      "delta_usd": -1685094.3615698582,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "aave3",
+          "debank_usd": 973459.928252551,
+          "modeled_usd": 0,
+          "delta_usd": 973459.928252551
+        },
+        {
+          "protocol": "upshift",
+          "debank_usd": 5084263.235029988,
+          "modeled_usd": 5084771.51,
+          "delta_usd": -508.2749700117856
+        }
+      ]
+    },
+    {
+      "wallet": "0x424323d25d30c687bdf79bb333da1d41c0373f37",
+      "whale": "Yuzu",
+      "chain": "eth",
+      "debank_usd": 4.165406044691789e-12,
+      "modeled_usd": 0,
+      "delta_usd": 4.165406044691789e-12,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xdaef005ae017be5b938a2b321db3dec96e684f68",
+      "whale": "Yuzu",
+      "chain": "plasma",
+      "debank_usd": 0.05749916079000001,
+      "modeled_usd": 0,
+      "delta_usd": 0.05749916079000001,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x6695c0f8706c5ace3bdf8995073179cca47926dc",
+      "whale": "Yuzu",
+      "chain": "plasma",
+      "debank_usd": 10979771.68722958,
+      "modeled_usd": 130045.72,
+      "delta_usd": 10849725.967229579,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_yuzumoney",
+          "debank_usd": 10979771.68722958,
+          "modeled_usd": 130045.72,
+          "delta_usd": 10849725.967229579
+        }
+      ]
+    },
+    {
+      "wallet": "0x09bfbc374c37c927909a0e7b278ee7fdf47a380a",
+      "whale": "Yuzu",
+      "chain": "monad",
+      "debank_usd": 1018.095042270848,
+      "modeled_usd": 0,
+      "delta_usd": 1018.095042270848,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "monad_accountable",
+          "debank_usd": 1005.9018731961476,
+          "modeled_usd": 0,
+          "delta_usd": 1005.9018731961476
+        }
+      ]
+    },
+    {
+      "wallet": "0x09bfbc374c37c927909a0e7b278ee7fdf47a380a",
+      "whale": "Yuzu",
+      "chain": "plasma",
+      "debank_usd": 1051829.2104578693,
+      "modeled_usd": 1049557.1,
+      "delta_usd": 2272.1104578692466,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_curve",
+          "debank_usd": 800744.1558103062,
+          "modeled_usd": 0,
+          "delta_usd": 800744.1558103062
+        },
+        {
+          "protocol": "plasma_pendle2",
+          "debank_usd": 251085.05464741742,
+          "modeled_usd": 0,
+          "delta_usd": 251085.05464741742
+        }
+      ]
+    },
+    {
+      "wallet": "0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61",
+      "whale": "Reservoir",
+      "chain": "eth",
+      "debank_usd": 52690.99361801005,
+      "modeled_usd": 52666.66968066473,
+      "delta_usd": 24.323937345317972,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 52690.99361801005,
+          "modeled_usd": 0,
+          "delta_usd": 52690.99361801005
+        }
+      ]
+    },
+    {
+      "wallet": "0x99a95a9e38e927486fc878f41ff8b118eb632b10",
+      "whale": "Reservoir",
+      "chain": "eth",
+      "debank_usd": 31654805.29884746,
+      "modeled_usd": 40512929.263027914,
+      "delta_usd": -8858123.964180455,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 31654805.29884746,
+          "modeled_usd": 0,
+          "delta_usd": 31654805.29884746
+        }
+      ]
+    },
+    {
+      "wallet": "0x3063c5907faa10c01b242181aa689beb23d2bd65",
+      "whale": "Reservoir",
+      "chain": "eth",
+      "debank_usd": 68182928.22706774,
+      "modeled_usd": 63726206.429016195,
+      "delta_usd": 4456721.7980515435,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "aave3",
+          "debank_usd": 68182866.56321862,
+          "modeled_usd": 0,
+          "delta_usd": 68182866.56321862
+        }
+      ]
+    },
+    {
+      "wallet": "0x3063c5907faa10c01b242181aa689beb23d2bd65",
+      "whale": "Reservoir",
+      "chain": "plasma",
+      "debank_usd": 0.0000321248709115635,
+      "modeled_usd": 10021867.808300246,
+      "delta_usd": -10021867.80826812,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
+      "whale": "Reservoir",
+      "chain": "base",
+      "debank_usd": 6998122.592602959,
+      "modeled_usd": 6998686.321056444,
+      "delta_usd": -563.7284534852952,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "base_morphoblue",
+          "debank_usd": 6998122.592602959,
+          "modeled_usd": 0,
+          "delta_usd": 6998122.592602959
+        }
+      ]
+    },
+    {
+      "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
+      "whale": "Reservoir",
+      "chain": "eth",
+      "debank_usd": 11995861.227556936,
+      "modeled_usd": 10409963.41088732,
+      "delta_usd": 1585897.8166696168,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 11995861.227555979,
+          "modeled_usd": 0,
+          "delta_usd": 11995861.227555979
+        }
+      ]
+    },
+    {
+      "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
+      "whale": "Reservoir",
+      "chain": "mnt",
+      "debank_usd": 3.568091585435286,
+      "modeled_usd": 0,
+      "delta_usd": 3.568091585435286,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
+      "whale": "Reservoir",
+      "chain": "monad",
+      "debank_usd": 5996444.134933767,
+      "modeled_usd": 5997860.128129933,
+      "delta_usd": -1415.9931961661205,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "monad_morphoblue",
+          "debank_usd": 5996444.134933767,
+          "modeled_usd": 0,
+          "delta_usd": 5996444.134933767
+        }
+      ]
+    },
+    {
+      "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
+      "whale": "Makina",
+      "chain": "eth",
+      "debank_usd": 8779982.036180206,
+      "modeled_usd": 5130804.812783956,
+      "delta_usd": 3649177.22339625,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 2810708.9494505776,
+          "modeled_usd": 0,
+          "delta_usd": 2810708.9494505776
+        },
+        {
+          "protocol": "aave3",
+          "debank_usd": 2629304.928453624,
+          "modeled_usd": 0,
+          "delta_usd": 2629304.928453624
+        },
+        {
+          "protocol": "curve",
+          "debank_usd": 1901780.2415834037,
+          "modeled_usd": 2402426.27,
+          "delta_usd": -500646.02841659635
+        },
+        {
+          "protocol": "infinifixyz",
+          "debank_usd": 1438187.916692602,
+          "modeled_usd": 1437501.96,
+          "delta_usd": 685.9566926020198
+        }
+      ]
+    },
+    {
+      "wallet": "0xbeef123217647014429b7670329782e210884e89",
+      "whale": "Makina",
+      "chain": "base",
+      "debank_usd": 1507142.8360185926,
+      "modeled_usd": 0,
+      "delta_usd": 1507142.8360185926,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "base_morphoblue",
+          "debank_usd": 1507142.8360185926,
+          "modeled_usd": 0,
+          "delta_usd": 1507142.8360185926
+        }
+      ]
+    },
+    {
+      "wallet": "0xbeef123217647014429b7670329782e210884e89",
+      "whale": "Makina",
+      "chain": "eth",
+      "debank_usd": 6374246.050720894,
+      "modeled_usd": 0,
+      "delta_usd": 6374246.050720894,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 6339208.720349207,
+          "modeled_usd": 0,
+          "delta_usd": 6339208.720349207
+        },
+        {
+          "protocol": "sky",
+          "debank_usd": 35037.330371687036,
+          "modeled_usd": 0,
+          "delta_usd": 35037.330371687036
+        }
+      ]
+    },
+    {
+      "wallet": "0x76d2e84009dae457f8667d823c7c96e9a7c35b78",
+      "whale": "InfiniFi",
+      "chain": "eth",
+      "debank_usd": 4008822.400955618,
+      "modeled_usd": 4008388.978691,
+      "delta_usd": 433.42226461786777,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 4006924.0051709316,
+          "modeled_usd": 0,
+          "delta_usd": 4006924.0051709316
+        },
+        {
+          "protocol": "merkl",
+          "debank_usd": 1898.3957846861256,
+          "modeled_usd": 0,
+          "delta_usd": 1898.3957846861256
+        }
+      ]
+    },
+    {
+      "wallet": "0x7e9aa426abc2d9006e8c9881754baa00a392158d",
+      "whale": "InfiniFi",
+      "chain": "eth",
+      "debank_usd": 1858.056787005698,
+      "modeled_usd": 574.59742,
+      "delta_usd": 1283.459367005698,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "aave3",
+          "debank_usd": 1858.056787005698,
+          "modeled_usd": 0,
+          "delta_usd": 1858.056787005698
+        }
+      ]
+    },
+    {
+      "wallet": "0xd880d7c5cafdbe2aec281250995abf612235e563",
+      "whale": "InfiniFi",
+      "chain": "eth",
+      "debank_usd": 3193035.2913044784,
+      "modeled_usd": 16193489.731489,
+      "delta_usd": -13000454.440184522,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "spark",
+          "debank_usd": 3193035.2913044784,
+          "modeled_usd": 0,
+          "delta_usd": 3193035.2913044784
+        }
+      ]
+    },
+    {
+      "wallet": "0x817d93dbdfd8190bbef0a73fcf5dd9da5a87e032",
+      "whale": "InfiniFi",
+      "chain": "eth",
+      "debank_usd": 266086.3289354258,
+      "modeled_usd": 2877500.011132481,
+      "delta_usd": -2611413.6821970553,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "aave3",
+          "debank_usd": 266086.3289354258,
+          "modeled_usd": 0,
+          "delta_usd": 266086.3289354258
+        }
+      ]
+    },
+    {
+      "wallet": "0xbfd5fc8deca3c6128bfce0fe46c25616811c3580",
+      "whale": "InfiniFi",
+      "chain": "eth",
+      "debank_usd": 0.07865353858456618,
+      "modeled_usd": 0,
+      "delta_usd": 0.07865353858456618,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
+      "whale": "Upshift",
+      "chain": "eth",
+      "debank_usd": 10993918.193523502,
+      "modeled_usd": 0,
+      "delta_usd": 10993918.193523502,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 10993897.631186444,
+          "modeled_usd": 0,
+          "delta_usd": 10993897.631186444
+        }
+      ]
+    },
+    {
+      "wallet": "0x9f1a1479191af103ff82fead23e950b6b3b2bd1a",
+      "whale": "Upshift",
+      "chain": "eth",
+      "debank_usd": 20921478.338152356,
+      "modeled_usd": 0,
+      "delta_usd": 20921478.338152356,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 17313691.05943769,
+          "modeled_usd": 0,
+          "delta_usd": 17313691.05943769
+        },
+        {
+          "protocol": "ethena",
+          "debank_usd": 3607561.185825008,
+          "modeled_usd": 0,
+          "delta_usd": 3607561.185825008
+        },
+        {
+          "protocol": "merkl",
+          "debank_usd": 226.00002846314175,
+          "modeled_usd": 0,
+          "delta_usd": 226.00002846314175
+        }
+      ]
+    },
+    {
+      "wallet": "0x9f1a1479191af103ff82fead23e950b6b3b2bd1a",
+      "whale": "Upshift",
+      "chain": "monad",
+      "debank_usd": 13675757.622083569,
+      "modeled_usd": 5466755.08,
+      "delta_usd": 8209002.542083569,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "monad_morphoblue",
+          "debank_usd": 6158042.380977526,
+          "modeled_usd": 0,
+          "delta_usd": 6158042.380977526
+        },
+        {
+          "protocol": "monad_curvance",
+          "debank_usd": 5020294.4981523,
+          "modeled_usd": 669474.69,
+          "delta_usd": 4350819.808152299
+        },
+        {
+          "protocol": "monad_gearbox",
+          "debank_usd": 2497418.623048395,
+          "modeled_usd": 4797280.39,
+          "delta_usd": -2299861.7669516047
+        }
+      ]
+    },
+    {
+      "wallet": "0x6f64630a0c12c60813a80a215fb9a31e52528820",
+      "whale": "Upshift",
+      "chain": "avax",
+      "debank_usd": 4.1858235201999996e-14,
+      "modeled_usd": 1028967.99,
+      "delta_usd": -1028967.99,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x6f64630a0c12c60813a80a215fb9a31e52528820",
+      "whale": "Upshift",
+      "chain": "eth",
+      "debank_usd": 2465891.1613222966,
+      "modeled_usd": 1264575.37,
+      "delta_usd": 1201315.7913222965,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 999835.2939064373,
+          "modeled_usd": 0,
+          "delta_usd": 999835.2939064373
+        },
+        {
+          "protocol": "ethena",
+          "debank_usd": 199993.53176593495,
+          "modeled_usd": 0,
+          "delta_usd": 199993.53176593495
+        },
+        {
+          "protocol": "dolomite",
+          "debank_usd": 1266062.3356499241,
+          "modeled_usd": 1264575.37,
+          "delta_usd": 1486.9656499240082
+        }
+      ]
+    },
+    {
+      "wallet": "0x6f64630a0c12c60813a80a215fb9a31e52528820",
+      "whale": "Upshift",
+      "chain": "monad",
+      "debank_usd": 3.767639773201092e-8,
+      "modeled_usd": 701845.85,
+      "delta_usd": -701845.8499999623,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x6f64630a0c12c60813a80a215fb9a31e52528820",
+      "whale": "Upshift",
+      "chain": "plasma",
+      "debank_usd": 355663.7524943257,
+      "modeled_usd": 356461.8345904788,
+      "delta_usd": -798.0820961531135,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_aave3",
+          "debank_usd": 355663.09797055507,
+          "modeled_usd": 0,
+          "delta_usd": 355663.09797055507
+        }
+      ]
+    },
+    {
+      "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
+      "whale": "Midas",
+      "chain": "eth",
+      "debank_usd": 10782626.871942772,
+      "modeled_usd": 7303078.663725465,
+      "delta_usd": 3479548.208217307,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "neutrl",
+          "debank_usd": 7311551.57375612,
+          "modeled_usd": 0,
+          "delta_usd": 7311551.57375612
+        },
+        {
+          "protocol": "ethena",
+          "debank_usd": 1999811.064771206,
+          "modeled_usd": 0,
+          "delta_usd": 1999811.064771206
+        },
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 1471136.0351523675,
+          "modeled_usd": 0,
+          "delta_usd": 1471136.0351523675
+        },
+        {
+          "protocol": "euler2",
+          "debank_usd": 113.7242820721035,
+          "modeled_usd": 0,
+          "delta_usd": 113.7242820721035
+        }
+      ]
+    },
+    {
+      "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
+      "whale": "Midas",
+      "chain": "arb",
+      "debank_usd": 3611653.968280726,
+      "modeled_usd": 917339.73,
+      "delta_usd": 2694314.238280726,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "arb_usdai",
+          "debank_usd": 2295209.8724045334,
+          "modeled_usd": 0,
+          "delta_usd": 2295209.8724045334
+        },
+        {
+          "protocol": "arb_fluid",
+          "debank_usd": 1316435.9786682958,
+          "modeled_usd": 0,
+          "delta_usd": 1316435.9786682958
+        }
+      ]
+    },
+    {
+      "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
+      "whale": "Midas",
+      "chain": "hyper",
+      "debank_usd": 0.5908922238928661,
+      "modeled_usd": 0,
+      "delta_usd": 0.5908922238928661,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
+      "whale": "Midas",
+      "chain": "monad",
+      "debank_usd": 2150275.9142716927,
+      "modeled_usd": 0,
+      "delta_usd": 2150275.9142716927,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "monad_morphoblue",
+          "debank_usd": 2150275.9142682925,
+          "modeled_usd": 0,
+          "delta_usd": 2150275.9142682925
+        }
+      ]
+    },
+    {
+      "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
+      "whale": "Midas",
+      "chain": "plasma",
+      "debank_usd": 5026650.798086394,
+      "modeled_usd": 19086923.422530603,
+      "delta_usd": -14060272.624444209,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_aave3",
+          "debank_usd": 5026650.797977307,
+          "modeled_usd": 0,
+          "delta_usd": 5026650.797977307
+        }
+      ]
+    },
+    {
+      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
+      "whale": "Midas",
+      "chain": "arb",
+      "debank_usd": 4813905.251658574,
+      "modeled_usd": 5521594.460153786,
+      "delta_usd": -707689.2084952127,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "arb_curve",
+          "debank_usd": 1543257.0670826996,
+          "modeled_usd": 0,
+          "delta_usd": 1543257.0670826996
+        },
+        {
+          "protocol": "arb_pendle2",
+          "debank_usd": 885768.5956898531,
+          "modeled_usd": 0,
+          "delta_usd": 885768.5956898531
+        },
+        {
+          "protocol": "arb_usdai",
+          "debank_usd": 2384879.5888860207,
+          "modeled_usd": 3111708.42,
+          "delta_usd": -726828.8311139792
+        }
+      ]
+    },
+    {
+      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
+      "whale": "Midas",
+      "chain": "avax",
+      "debank_usd": 75.58851345007484,
+      "modeled_usd": 0,
+      "delta_usd": 75.58851345007484,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
+      "whale": "Midas",
+      "chain": "eth",
+      "debank_usd": 12396114.13877687,
+      "modeled_usd": 718921.84,
+      "delta_usd": 11677192.29877687,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 11275845.593722511,
+          "modeled_usd": 0,
+          "delta_usd": 11275845.593722511
+        },
+        {
+          "protocol": "pendle2",
+          "debank_usd": 399890.01258034725,
+          "modeled_usd": 0,
+          "delta_usd": 399890.01258034725
+        },
+        {
+          "protocol": "ethstrat",
+          "debank_usd": 720210.2165108826,
+          "modeled_usd": 718921.84,
+          "delta_usd": 1288.3765108826337
+        },
+        {
+          "protocol": "kingprotocol",
+          "debank_usd": 168.29525740960509,
+          "modeled_usd": 0,
+          "delta_usd": 168.29525740960509
+        }
+      ]
+    },
+    {
+      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
+      "whale": "Midas",
+      "chain": "monad",
+      "debank_usd": 1652513.3973088097,
+      "modeled_usd": 0,
+      "delta_usd": 1652513.3973088097,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "monad_morphoblue",
+          "debank_usd": 1652513.3973088097,
+          "modeled_usd": 0,
+          "delta_usd": 1652513.3973088097
+        }
+      ]
+    },
+    {
+      "wallet": "0x0e9550b1e31d323af15eb615f95bb16d25d5456f",
+      "whale": "Midas",
+      "chain": "eth",
+      "debank_usd": 5473139.250323918,
+      "modeled_usd": 0,
+      "delta_usd": 5473139.250323918,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 5473139.250323918,
+          "modeled_usd": 0,
+          "delta_usd": 5473139.250323918
+        }
+      ]
+    },
+    {
+      "wallet": "0x461263bff57cbafe3994b15a5e4d388c50d4d9fe",
+      "whale": "Midas",
+      "chain": "plasma",
+      "debank_usd": 0,
+      "modeled_usd": 0,
+      "delta_usd": 0,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
+      "whale": "Midas",
+      "chain": "eth",
+      "debank_usd": 1211576.6393667588,
+      "modeled_usd": 1724716.6556660607,
+      "delta_usd": -513140.016299302,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 1104414.2651360466,
+          "modeled_usd": 0,
+          "delta_usd": 1104414.2651360466
+        },
+        {
+          "protocol": "aave3",
+          "debank_usd": 107162.37423021533,
+          "modeled_usd": 0,
+          "delta_usd": 107162.37423021533
+        }
+      ]
+    },
+    {
+      "wallet": "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
+      "whale": "Midas",
+      "chain": "mnt",
+      "debank_usd": 937521.5115568079,
+      "modeled_usd": 1977502.383281093,
+      "delta_usd": -1039980.8717242852,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "mnt_aave3",
+          "debank_usd": 937521.5115568079,
+          "modeled_usd": 0,
+          "delta_usd": 937521.5115568079
+        }
+      ]
+    },
+    {
+      "wallet": "0xd6c757043e7d59088969b188923c62fa960afe9b",
+      "whale": "Midas",
+      "chain": "arb",
+      "debank_usd": 0.010158633885791314,
+      "modeled_usd": 0,
+      "delta_usd": 0.010158633885791314,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0xd6c757043e7d59088969b188923c62fa960afe9b",
+      "whale": "Midas",
+      "chain": "bsc",
+      "debank_usd": 1863556.583696073,
+      "modeled_usd": 1050164.48,
+      "delta_usd": 813392.1036960729,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "bsc_venusflux",
+          "debank_usd": 1863556.583696073,
+          "modeled_usd": 1050164.48,
+          "delta_usd": 813392.1036960729
+        }
+      ]
+    },
+    {
+      "wallet": "0xd6c757043e7d59088969b188923c62fa960afe9b",
+      "whale": "Midas",
+      "chain": "eth",
+      "debank_usd": 2333884.6566567365,
+      "modeled_usd": 2000555.19,
+      "delta_usd": 333329.46665673656,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "sky",
+          "debank_usd": 0.06604206918597884,
+          "modeled_usd": 2000555.19,
+          "delta_usd": -2000555.1239579308
+        },
+        {
+          "protocol": "ethena",
+          "debank_usd": 1227187.8027020462,
+          "modeled_usd": 0,
+          "delta_usd": 1227187.8027020462
+        },
+        {
+          "protocol": "euler2",
+          "debank_usd": 896941.8403381194,
+          "modeled_usd": 0,
+          "delta_usd": 896941.8403381194
+        },
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 209127.11888811504,
+          "modeled_usd": 0,
+          "delta_usd": 209127.11888811504
+        },
+        {
+          "protocol": "merkl",
+          "debank_usd": 623.1092296610956,
+          "modeled_usd": 0,
+          "delta_usd": 623.1092296610956
+        }
+      ]
+    },
+    {
+      "wallet": "0xd6c757043e7d59088969b188923c62fa960afe9b",
+      "whale": "Midas",
+      "chain": "plasma",
+      "debank_usd": 586036.7596088381,
+      "modeled_usd": 596765.8877681773,
+      "delta_usd": -10729.12815933919,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "plasma_aave3",
+          "debank_usd": 586036.7484989129,
+          "modeled_usd": 0,
+          "delta_usd": 586036.7484989129
+        }
+      ]
+    },
+    {
+      "wallet": "0x41a9eb398518d2487301c61d2b33e4e966a9f1dd",
+      "whale": "Superform",
+      "chain": "eth",
+      "debank_usd": 7804576.6722094035,
+      "modeled_usd": 3125907.1720099268,
+      "delta_usd": 4678669.500199476,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "morphoblue",
+          "debank_usd": 5210080.517503998,
+          "modeled_usd": 0,
+          "delta_usd": 5210080.517503998
+        },
+        {
+          "protocol": "aave3",
+          "debank_usd": 2591827.18597561,
+          "modeled_usd": 0,
+          "delta_usd": 2591827.18597561
+        },
+        {
+          "protocol": "merkl",
+          "debank_usd": 2668.9685438639362,
+          "modeled_usd": 0,
+          "delta_usd": 2668.9685438639362
+        }
+      ]
+    },
+    {
+      "wallet": "0x9ea38e09f41a9de53972a68268ba0dcc6d2fadf8",
+      "whale": "Re Protocol",
+      "chain": "eth",
+      "debank_usd": 48185281.63969491,
+      "modeled_usd": 65369210.2,
+      "delta_usd": -17183928.560305096,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 48185281.63969491,
+          "modeled_usd": 65369210.2,
+          "delta_usd": -17183928.560305096
+        }
+      ]
+    },
+    {
+      "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
+      "whale": "Re Protocol",
+      "chain": "base",
+      "debank_usd": 38.36645384828178,
+      "modeled_usd": 0,
+      "delta_usd": 38.36645384828178,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": []
+    },
+    {
+      "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
+      "whale": "Re Protocol",
+      "chain": "eth",
+      "debank_usd": 22033806.708258096,
+      "modeled_usd": 11084051.9,
+      "delta_usd": 10949754.808258096,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 20624714.60398997,
+          "modeled_usd": 9676510.39,
+          "delta_usd": 10948204.21398997
+        },
+        {
+          "protocol": "curve",
+          "debank_usd": 1409092.104266696,
+          "modeled_usd": 1407541.51,
+          "delta_usd": 1550.5942666959018
+        }
+      ]
+    },
+    {
+      "wallet": "0x5c454f5526e41fbe917b63475cd8ca7e4631b147",
+      "whale": "Re Protocol",
+      "chain": "eth",
+      "debank_usd": 5648.708446489671,
+      "modeled_usd": 7595636.18,
+      "delta_usd": -7589987.47155351,
+      "active_for_position_scan": false,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 5648.708446489671,
+          "modeled_usd": 7595636.18,
+          "delta_usd": -7589987.47155351
+        }
+      ]
+    },
+    {
+      "wallet": "0xd4374008c88321eb2e59abd311156c44b25831e9",
+      "whale": "Re Protocol",
+      "chain": "eth",
+      "debank_usd": 1624614.7819468607,
+      "modeled_usd": 1300908.55,
+      "delta_usd": 323706.2319468607,
+      "active_for_position_scan": true,
+      "scan_threshold_usd": 50000,
+      "protocols_missing_or_misaligned": [
+        {
+          "protocol": "ethena",
+          "debank_usd": 1624614.7819468607,
+          "modeled_usd": 1300908.55,
+          "delta_usd": 323706.2319468607
+        }
+      ]
+    }
+  ]
+}

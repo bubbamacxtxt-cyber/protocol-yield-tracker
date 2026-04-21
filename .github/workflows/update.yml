@@ -43,14 +43,10 @@ jobs:
       # Aave multi-chain scanner (Merit bonuses + all markets)
       - name: Scan Aave positions
         run: node src/aave-scanner.js
-        env:
-          DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
 
       # Morpho scanner (REST API - catches positions DeBank misses)
       - name: Scan Morpho positions
         run: node src/morpho-scanner.js
-        env:
-          DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
 
       # Euler scanner
       - name: Scan Euler positions
@@ -91,8 +87,6 @@ jobs:
       - name: Validate data (5% threshold)
         id: validate
         run: node src/validate.js
-        env:
-          DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
 
       - name: Alert on failure
         if: failure()
