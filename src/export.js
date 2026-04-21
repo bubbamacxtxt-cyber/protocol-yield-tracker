@@ -734,12 +734,23 @@ async function main() {
                     && x !== p
                     && (x.asset_usd || 0) > 0
                 );
-                // Also suppress scanner borrow-only rows when the wallet+chain has a cleaner venue row elsewhere.
+                // Also suppress scanner borrow-only rows when they are really incomplete venue fragments.
                 const looksLikeMorphoBorrowResidue = String(p.protocol_name || '') === 'Morpho' && (p.borrow || []).length > 0 && (!p.supply || p.supply.length === 0);
-                if (looksLikeMorphoBorrowResidue) return false;
-                
+                const looksLikeAaveBorrowResidue = String(p.protocol_name || '') === 'Aave V3' && (p.borrow || []).length > 0 && (!p.supply || p.supply.length === 0);
+                if (looksLikeMorphoBorrowResidue || looksLikeAaveBorrowResidue) return false;
+
                 if (hasRicher) return false;
             }
+            // Suppress legacy DeBank venue rows for scanner-owned protocol families on the same wallet+chain.
+            const isLegacyVenueRow = (p.source_type === 'debank' || p.source_name === 'fetch')
+                && ['aave', 'morpho', 'euler', 'spark', 'pendle'].includes(String(p.protocol_canonical || p.protocol_name || p.protocol_id || '').toLowerCase());
+            if (isLegacyVenueRow && scannerContextForSuppression.length > 0) {
+                const sameFamilyScanner = scannerContextForSuppression.some(x =>
+                    String(x.protocol_canonical || x.protocol_name || x.protocol_id || '').toLowerCase() === String(p.protocol_canonical || p.protocol_name || p.protocol_id || '').toLowerCase()
+                );
+                if (sameFamilyScanner) return false;
+            }
+
             return true;
         });
 

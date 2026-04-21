@@ -1,27 +1,22 @@
 #!/usr/bin/env node
 /**
- * Morpho Position Scanner v3 (Standalone)
- * 
- * Source of truth for Morpho positions.
- * Creates positions directly - does not rely on DeBank for position data.
- * 
- * Uses:
- * 1. Morpho REST API for all positions (earn + borrow)
- * 2. GraphQL for APY enrichment
+ * Morpho Position Scanner v4
+ *
+ * Scanner-owned position assembly:
+ * - emit combined wallet+chain rows for wallets with supply and/or borrow exposure
+ * - stop emitting raw borrow-only fragments as final modeled rows
  */
 
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const Database = require('better-sqlite3');
-const DB_PATH = require('path').join(__dirname, '..', 'yield-tracker.db');
+const path = require('path');
+const { loadActiveWalletChains, loadWhaleWalletMap, hasProtocolHint } = require('./recon-helpers');
+const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 
 const MORPHO_REST = 'https://app.morpho.org/api';
 const MORPHO_GRAPHQL = 'https://app.morpho.org/api/graphql';
 const ALL_CHAINS = [1, 8453, 42161, 137, 130, 747474, 999, 10, 143, 988, 480];
 
-const V1_APY_HASH = 'db4bd5b01c28c4702d575d3cc6718e9fdf02908fe1769a9ac84769183b15d3a1';
-const V2_PERF_HASH = '2450946f568dabb9e65946408befef7d15c529139e2a397c75bf64cbccf1aa9b';
-
-// Symbol mapping for vault names to display symbols
 const CHAIN_NAMES = {
   1: 'eth', 8453: 'base', 42161: 'arb', 137: 'poly',
   10: 'opt', 5000: 'mnt', 81457: 'blast', 534352: 'scroll',
@@ -29,15 +24,6 @@ const CHAIN_NAMES = {
   143: 'monad', 999: 'ink', 2741: 'abstract',
 };
 
-const SYMBOL_MAP = {
-  'senRLUSDv2': 'RLUSD', 'senPYUSDmain': 'PYUSD', 'senPYUSD': 'PYUSD',
-  'steakRUSD': 'rUSD', 'steakUSDC': 'USDC', 'steakUSDT': 'USDT',
-  'senAUSDv2': 'AUSD', 'senEURv2': 'EUR', 'senGHOv2': 'GHO',
-};
-
-// ============================================
-// API Calls
-// ============================================
 async function getEarnPositions(userAddress) {
   const url = `${MORPHO_REST}/positions/earn?userAddress=${userAddress}&limit=500&skip=0&chainIds=${ALL_CHAINS.join(',')}&orderBy=assetsUsd&orderDirection=DESC`;
   try {
@@ -56,61 +42,6 @@ async function getBorrowPositions(userAddress) {
   } catch { return []; }
 }
 
-async function getVaultAPY(vaultAddress, version) {
-  // Try v2 first if indicated
-  if (version === '2.0' || version === 'v2') {
-    try {
-      const res = await fetch(MORPHO_GRAPHQL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-apollo-operation-name': 'GetVaultV2Performance' },
-        body: JSON.stringify({
-          operationName: 'GetVaultV2Performance',
-          variables: { address: vaultAddress, chainId: 1 },
-          extensions: { persistedQuery: { version: 1, sha256Hash: V2_PERF_HASH } }
-        })
-      });
-      const data = await res.json();
-      const v = data?.data?.vaultV2ByAddress;
-      if (v?.netApy != null) return { netApy: v.netApy, baseApy: v.netApyExcludingRewards };
-    } catch {}
-  }
-  
-  // Try v1
-  try {
-    const res = await fetch(MORPHO_GRAPHQL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-apollo-operation-name': 'GetVaultPerformanceApy' },
-      body: JSON.stringify({
-        operationName: 'GetVaultPerformanceApy',
-        variables: { address: vaultAddress, chainId: 1 },
-        extensions: { persistedQuery: { version: 1, sha256Hash: V1_APY_HASH } }
-      })
-    });
-    const data = await res.json();
-    const v = data?.data?.vaultByAddress?.state;
-    if (v?.netApy != null) return { netApy: v.netApy, baseApy: v.netApyExcludingRewards };
-  } catch {}
-  
-  // Try v2 as fallback for v1 vaults
-  try {
-    const res = await fetch(MORPHO_GRAPHQL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-apollo-operation-name': 'GetVaultV2Performance' },
-      body: JSON.stringify({
-        operationName: 'GetVaultV2Performance',
-        variables: { address: vaultAddress, chainId: 1 },
-        extensions: { persistedQuery: { version: 1, sha256Hash: V2_PERF_HASH } }
-      })
-    });
-    const data = await res.json();
-    const v = data?.data?.vaultV2ByAddress;
-    if (v?.netApy != null) return { netApy: v.netApy, baseApy: v.netApyExcludingRewards };
-  } catch {}
-  
-  return null;
-}
-
-// Get market borrow APY
 async function getMarketAPY(uniqueKey, chainId) {
   if (!uniqueKey) return null;
   try {
@@ -128,211 +59,155 @@ async function getMarketAPY(uniqueKey, chainId) {
   return null;
 }
 
-// ============================================
-// Scan single wallet
-// ============================================
-async function scanWallet(wallet, label) {
-  const positions = [];
-  
-  // Fetch earn and borrow in parallel
+async function scanWallet(wallet, label, allowedChains = null) {
   const [earnItems, borrowItems] = await Promise.all([
     getEarnPositions(wallet),
     getBorrowPositions(wallet),
   ]);
-  
-  // Process earn positions
+
+  const rows = new Map();
+  const chainAllowed = allowedChains ? new Set(allowedChains.map(String)) : null;
+
   for (const item of earnItems) {
     const vault = item.vault || {};
-    const symbol = SYMBOL_MAP[vault.symbol] || vault.symbol || vault.asset?.symbol || '?';
-    const vaultAddress = vault.address;
-    const chainId = vault.chainId || 1;
-    
-    // Get APY - use REST API netApy if available, otherwise fetch from GraphQL
-    let apyBase, apyNet, bonus;
-    if (vault.netApy != null) {
-      // REST API already has APY
-      apyNet = vault.netApy * 100;
-      apyBase = (vault.netApyExcludingRewards != null) ? vault.netApyExcludingRewards * 100 : apyNet;
-      bonus = apyNet - apyBase;
-    } else {
-      // Fallback to GraphQL
-      const apy = await getVaultAPY(vaultAddress, vault.version);
-      apyBase = apy?.baseApy != null ? apy.baseApy * 100 : null;
-      apyNet = apy?.netApy != null ? apy.netApy * 100 : null;
-      bonus = (apyNet != null && apyBase != null) ? apyNet - apyBase : null;
-    }
-    
-    positions.push({
-      wallet, label,
-      chain: CHAIN_NAMES[chainId] || String(chainId),
-      chainId,
-      protocol_name: 'Morpho',
-      protocol_id: 'morpho',
-      position_type: 'supply',
-      strategy: 'Lend',
-      symbol,
-      token_address: vaultAddress,
-      asset_address: vault.asset?.address,
-      asset_symbol: vault.asset?.symbol,
-      amount: item.shares,
-      value_usd: item.assetsUsd || 0,
-      apy_base: apyBase,
-      apy_bonus: bonus,
-      pnl_usd: item.pnlUsd,
+    const chainId = String(vault.chainId || 1);
+    if (chainAllowed && !chainAllowed.has(chainId)) continue;
+    const chain = CHAIN_NAMES[vault.chainId || 1] || String(vault.chainId || 1);
+    const key = `${wallet.toLowerCase()}|${chain}`;
+    if (!rows.has(key)) rows.set(key, { wallet, label, chain, chainId: Number(chainId), supply: [], borrow: [], health_rate: item.healthFactor || null });
+    const row = rows.get(key);
+    row.supply.push({
+      symbol: vault.symbol || vault.asset?.symbol || '?',
+      address: vault.address || '',
+      amount: Number(item.shares || 0),
+      value_usd: Number(item.assetsUsd || 0),
+      apy_base: vault.netApyExcludingRewards != null ? vault.netApyExcludingRewards * 100 : (vault.netApy != null ? vault.netApy * 100 : null),
+      bonus_supply_apy: vault.netApy != null && vault.netApyExcludingRewards != null ? (vault.netApy - vault.netApyExcludingRewards) * 100 : null,
     });
   }
-  
-  // Process borrow positions
+
   for (const item of borrowItems) {
     const market = item.market || {};
-    const loanSymbol = market.loanAsset?.symbol || '?';
-    const collSymbol = market.collateralAsset?.symbol || '?';
-    const chainId = market.chainId || 1;
-    
-    // Get market APY
-    const marketApy = await getMarketAPY(market.uniqueKey, chainId);
-    if (process.env.DEBUG) console.log(`  Market APY for ${loanSymbol}/${collSymbol}:`, marketApy);
-    
-    positions.push({
-      wallet, label,
-      chain: CHAIN_NAMES[chainId] || String(chainId),
-      chainId,
+    const chainId = String(market.chainId || 1);
+    if (chainAllowed && !chainAllowed.has(chainId)) continue;
+    const chain = CHAIN_NAMES[market.chainId || 1] || String(market.chainId || 1);
+    const key = `${wallet.toLowerCase()}|${chain}`;
+    if (!rows.has(key)) rows.set(key, { wallet, label, chain, chainId: Number(chainId), supply: [], borrow: [], health_rate: item.healthFactor || null });
+    const row = rows.get(key);
+    const marketApy = await getMarketAPY(market.uniqueKey, market.chainId || 1);
+    row.borrow.push({
+      symbol: market.loanAsset?.symbol || '?',
+      address: market.uniqueKey || market.marketId || '',
+      amount: Number(item.borrowShares || 0),
+      value_usd: Number(item.borrowAssetsUsd || 0),
+      apy_base: marketApy?.borrowApy || null,
+    });
+    if (item.healthFactor != null) row.health_rate = item.healthFactor;
+  }
+
+  return [...rows.values()].map(row => {
+    const asset_usd = row.supply.reduce((s, t) => s + (t.value_usd || 0), 0);
+    const debt_usd = row.borrow.reduce((s, t) => s + (t.value_usd || 0), 0);
+    return {
+      wallet: row.wallet,
+      label: row.label,
+      chain: row.chain,
+      chainId: row.chainId,
       protocol_name: 'Morpho',
       protocol_id: 'morpho',
-      position_type: 'borrow',
-      strategy: 'Borrow',
-      symbol: loanSymbol,
-      collateral_symbol: collSymbol,
-      token_address: market.uniqueKey || market.marketId,
-      amount: item.borrowShares,
-      value_usd: item.borrowAssetsUsd || 0,
-      collateral_usd: item.collateralUsd || 0,
-      health_factor: item.healthFactor,
-      ltv: item.ltv,
-      liquidation_distance: item.priceVariationToLiquidationPrice,
-      apy_borrow: marketApy?.borrowApy || null,
-      apy_supply: marketApy?.supplyApy || null,
-    });
-  }
-  
-  return positions;
+      position_type: asset_usd > 0 ? 'supply' : 'borrow',
+      strategy: asset_usd > 0 ? 'lend' : 'borrow',
+      position_index: `${row.wallet.toLowerCase()}|${row.chain}`,
+      health_rate: row.health_rate,
+      net_usd: asset_usd - debt_usd,
+      asset_usd,
+      debt_usd,
+      supply: row.supply,
+      borrow: row.borrow,
+    };
+  }).filter(r => r.asset_usd > 0 || r.debt_usd > 0);
 }
 
-// ============================================
-// Save to database (upsert by wallet + symbol + role)
-// ============================================
-function savePositions(db, allPositions) {
+function savePositions(db, rows) {
   const upsertPos = db.prepare(`
-    INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, net_usd, position_index, scanned_at)
-    VALUES (?, ?, 'morpho', 'Morpho', ?, ?, ?, datetime('now'))
+    INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, health_rate, net_usd, asset_usd, debt_usd, position_index, scanned_at)
+    VALUES (?, ?, 'morpho', 'Morpho', 'supply', 'lend', ?, ?, ?, ?, ?, datetime('now'))
     ON CONFLICT(wallet, chain, protocol_id, position_index) DO UPDATE SET
+      health_rate = excluded.health_rate,
       net_usd = excluded.net_usd,
-      position_type = excluded.position_type,
+      asset_usd = excluded.asset_usd,
+      debt_usd = excluded.debt_usd,
       scanned_at = datetime('now')
   `);
-  
   const findPos = db.prepare(`SELECT id FROM positions WHERE wallet = ? AND chain = ? AND protocol_id = 'morpho' AND position_index = ?`);
-  
-  const upsertToken = db.prepare(`
+  const clearTokens = db.prepare(`DELETE FROM position_tokens WHERE position_id = ?`);
+  const clearMarkets = db.prepare(`DELETE FROM position_markets WHERE position_id = ?`);
+  const insertToken = db.prepare(`
     INSERT INTO position_tokens (position_id, role, symbol, address, amount, value_usd, apy_base, bonus_supply_apy)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `);
-  
-  const clearTokens = db.prepare(`DELETE FROM position_tokens WHERE position_id = ? AND role = ?`);
-  
-  const transaction = db.transaction(() => {
-    for (const pos of allPositions) {
-      const role = pos.position_type === 'supply' ? 'supply' : 'borrow';
-      const posIndex = pos.token_address;
-      const netUsd = role === 'borrow' ? -pos.value_usd : pos.value_usd;
-      
-      // Upsert position
-      upsertPos.run(pos.wallet, pos.chain, pos.position_type, netUsd || 0, String(posIndex));
-      const posRow = findPos.get(pos.wallet, pos.chain, String(posIndex));
-      if (!posRow) continue;
-      
-      // Clear and re-insert tokens (ensures fresh data each scan)
-      clearTokens.run(posRow.id, role);
-      
-      // Use apy_borrow for borrow positions, apy_base for supply
-      const apy = role === 'borrow' ? (pos.apy_borrow || null) : (pos.apy_base || null);
-      const bonus = role === 'supply' ? (pos.apy_bonus || null) : null;
-      
-      upsertToken.run(
-        posRow.id, role, pos.symbol, pos.token_address,
-        pos.amount || 0, pos.value_usd || 0,
-        apy, bonus
-      );
+  const deleteOldRows = db.prepare(`SELECT id FROM positions WHERE lower(wallet) = lower(?) AND protocol_id IN ('morpho', 'morphoblue', 'monad_morphoblue')`);
+  const deletePos = db.prepare(`DELETE FROM positions WHERE id = ?`);
+
+  const tx = db.transaction(() => {
+    const seenWallet = new Set();
+    for (const row of rows) {
+      if (!seenWallet.has(row.wallet.toLowerCase())) {
+        seenWallet.add(row.wallet.toLowerCase());
+        const old = deleteOldRows.all(row.wallet);
+        for (const r of old) {
+          clearMarkets.run(r.id);
+          clearTokens.run(r.id);
+          deletePos.run(r.id);
+        }
+      }
+      upsertPos.run(row.wallet, row.chain, row.health_rate, row.net_usd, row.asset_usd, row.debt_usd, row.position_index);
+      const pos = findPos.get(row.wallet, row.chain, row.position_index);
+      if (!pos) continue;
+      clearTokens.run(pos.id);
+      for (const t of row.supply) insertToken.run(pos.id, 'supply', t.symbol, t.address, t.amount || 0, t.value_usd || 0, t.apy_base || null, t.bonus_supply_apy || null);
+      for (const t of row.borrow) insertToken.run(pos.id, 'borrow', t.symbol, t.address, t.amount || 0, t.value_usd || 0, t.apy_base || null, null);
     }
   });
-  
-  transaction();
+  tx();
 }
 
-const { loadActiveWalletChains, loadWhaleWalletMap } = require('./recon-helpers');
-
-// ============================================
-// CLI
-// ============================================
 async function main() {
   let wallets = [];
   const active = loadActiveWalletChains();
   if (active && active.length > 0) {
     const labelByWallet = new Map(loadWhaleWalletMap().map(w => [w.addr, w.label]));
-    const seen = new Set();
+    const grouped = new Map();
     for (const row of active) {
-      if (seen.has(row.wallet)) continue;
-      seen.add(row.wallet);
-      wallets.push({ addr: row.wallet, label: labelByWallet.get(row.wallet) || row.whale || 'Unknown' });
+      if (!hasProtocolHint(row, ['morphoblue', 'monad_morphoblue', 'morpho'])) continue;
+      const k = row.wallet;
+      if (!grouped.has(k)) grouped.set(k, { addr: row.wallet, label: labelByWallet.get(row.wallet) || row.whale || 'Unknown', chains: [] });
+      grouped.get(k).chains.push(Number({ eth:1, base:8453, arb:42161, poly:137, uni:130, wct:747474, ink:999, opt:10, monad:143 }[row.chain] || 0));
     }
+    wallets = [...grouped.values()];
   } else {
     wallets = [
-      { addr: '0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61', label: 'Reservoir-1' },
-      { addr: '0x99a95a9e38e927486fc878f41ff8b118eb632b10', label: 'Reservoir-3' },
-      { addr: '0x289c204b35859bfb924b9c0759a4fe80f610671c', label: 'Reservoir-2' },
-      { addr: '0x3063c5907faa10c01b242181aa689beb23d2bd65', label: 'Euler-Wallet' },
-      { addr: '0x41a9eb398518d2487301c61d2b33e4e966a9f1dd', label: 'Reservoir-4' },
-      { addr: '0x502d222e8e4daef69032f55f0c1a999effd78fb3', label: 'Reservoir-5' },
+      { addr: '0x31eae643b679a84b37e3d0b4bd4f5da90fb04a61', label: 'Reservoir-1', chains: ALL_CHAINS },
+      { addr: '0x99a95a9e38e927486fc878f41ff8b118eb632b10', label: 'Reservoir-3', chains: ALL_CHAINS },
     ];
   }
-  
+
   const db = new Database(DB_PATH);
-  const allPositions = [];
-  
-  console.log('=== Morpho Scanner v3 (Standalone) ===\n');
-  
+  const rows = [];
+  console.log('=== Morpho Scanner v4 ===\n');
   for (const w of wallets) {
     console.log(`--- ${w.label} (${w.addr.slice(0,12)}) ---`);
-    const positions = await scanWallet(w.addr, w.label);
-    
-    for (const p of positions) {
-      const usd = (p.value_usd / 1e6).toFixed(2);
-      const type = p.position_type === 'supply' ? '✅' : '📊';
-      if (p.position_type === 'supply') {
-        const apy = p.apy_base?.toFixed(2) || '?';
-        const bonus = p.apy_bonus?.toFixed(2) || '0';
-        console.log(`  ${type} ${p.symbol}: $${usd}M | supply | APY: ${apy}% + ${bonus}%`);
-      } else {
-        const apy = p.apy_borrow?.toFixed(2) || '?';
-        console.log(`  ${type} ${p.symbol}: $${usd}M | borrow | Cost: ${apy}%`);
-      }
+    const found = await scanWallet(w.addr, w.label, w.chains.filter(Boolean));
+    for (const r of found) {
+      console.log(`  ${r.chain}: $${(r.net_usd/1e6).toFixed(2)}M | supply ${r.supply.length} | borrow ${r.borrow.length}`);
     }
-    
-    allPositions.push(...positions);
+    rows.push(...found);
   }
-  
-  savePositions(db, allPositions);
-  
+  savePositions(db, rows);
   console.log(`\n=== Summary ===`);
-  console.log(`Total positions: ${allPositions.length}`);
-  console.log(`Supply: ${allPositions.filter(p => p.position_type === 'supply').length}`);
-  console.log(`Borrow: ${allPositions.filter(p => p.position_type === 'borrow').length}`);
-  
+  console.log(`Total combined Morpho rows: ${rows.length}`);
   db.close();
 }
 
-if (require.main === module) {
-  main().catch(console.error);
-}
-
+if (require.main === module) main().catch(err => { console.error(err); process.exit(1); });
 module.exports = { scanWallet, savePositions };

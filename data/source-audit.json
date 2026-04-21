@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-21T12:57:10.542Z",
+  "generated_at": "2026-04-21T14:36:47.779Z",
   "summary": {
-    "total_positions": 245,
+    "total_positions": 122,
     "unresolved_fallback_positions": 4,
     "unresolved_fallback_usd": 6006157.989999999
   },
   "by_source_type": {
     "scanner": {
-      "positions": 215,
-      "net_usd": 423329113.17635155
+      "positions": 92,
+      "net_usd": 98779645.95530675
     },
     "fallback": {
       "positions": 30,
@@ -17,8 +17,8 @@
   },
   "by_protocol": {
     "aave": {
-      "positions": 108,
-      "net_usd": 456780487.2140787
+      "positions": 30,
+      "net_usd": 147717182.29565364
     },
     "pendle": {
       "positions": 20,
@@ -40,11 +40,11 @@
       "positions": 1,
       "net_usd": 1437501.96
     },
-    "monad_curvance": {
+    "curvance": {
       "positions": 1,
       "net_usd": 669474.69
     },
-    "monad_gearbox": {
+    "gearbox": {
       "positions": 2,
       "net_usd": 4797280.39
     },
@@ -68,13 +68,9 @@
       "positions": 1,
       "net_usd": 1264575.37
     },
-    "avax_traderjoexyz": {
-      "positions": 1,
-      "net_usd": 1028967.99
-    },
-    "monad_traderjoexyz": {
-      "positions": 1,
-      "net_usd": 701845.85
+    "traderjoe": {
+      "positions": 2,
+      "net_usd": 1730813.8399999999
     },
     "ethena": {
       "positions": 5,
@@ -84,7 +80,7 @@
       "positions": 2,
       "net_usd": 4353031.71
     },
-    "plasma_yuzumoney": {
+    "yuzumoney": {
       "positions": 1,
       "net_usd": 130045.72
     },
@@ -92,21 +88,21 @@
       "positions": 1,
       "net_usd": 5139255.79
     },
-    "morpho": {
-      "positions": 68,
-      "net_usd": -59675465.38680513
-    },
     "euler": {
-      "positions": 20,
+      "positions": 18,
       "net_usd": 0
+    },
+    "morpho": {
+      "positions": 25,
+      "net_usd": -75161627.68942483
     }
   },
   "by_protocol_source": [
     {
       "protocol": "aave",
       "source_type": "scanner",
-      "positions": 108,
-      "net_usd": 456780487.2140787,
+      "positions": 30,
+      "net_usd": 147717182.29565364,
       "normalization_status": "canonical"
     },
     {
@@ -159,7 +155,7 @@
       "normalization_status": "partial"
     },
     {
-      "protocol": "monad_gearbox",
+      "protocol": "gearbox",
       "source_type": "fallback",
       "positions": 2,
       "net_usd": 4797280.39,
@@ -177,6 +173,13 @@
       "source_type": "fallback",
       "positions": 1,
       "net_usd": 3111708.42,
+      "normalization_status": "partial"
+    },
+    {
+      "protocol": "traderjoe",
+      "source_type": "fallback",
+      "positions": 2,
+      "net_usd": 1730813.8399999999,
       "normalization_status": "partial"
     },
     {
@@ -208,13 +211,6 @@
       "normalization_status": "partial"
     },
     {
-      "protocol": "avax_traderjoexyz",
-      "source_type": "fallback",
-      "positions": 1,
-      "net_usd": 1028967.99,
-      "normalization_status": "partial"
-    },
-    {
       "protocol": "ethstrat",
       "source_type": "fallback",
       "positions": 1,
@@ -222,21 +218,14 @@
       "normalization_status": "partial"
     },
     {
-      "protocol": "monad_traderjoexyz",
-      "source_type": "fallback",
-      "positions": 1,
-      "net_usd": 701845.85,
-      "normalization_status": "partial"
-    },
-    {
-      "protocol": "monad_curvance",
+      "protocol": "curvance",
       "source_type": "fallback",
       "positions": 1,
       "net_usd": 669474.69,
       "normalization_status": "partial"
     },
     {
-      "protocol": "plasma_yuzumoney",
+      "protocol": "yuzumoney",
       "source_type": "fallback",
       "positions": 1,
       "net_usd": 130045.72,
@@ -245,15 +234,15 @@
     {
       "protocol": "euler",
       "source_type": "scanner",
-      "positions": 20,
+      "positions": 18,
       "net_usd": 0,
       "normalization_status": "canonical"
     },
     {
       "protocol": "morpho",
       "source_type": "scanner",
-      "positions": 68,
-      "net_usd": -59675465.38680513,
+      "positions": 25,
+      "net_usd": -75161627.68942483,
       "normalization_status": "canonical"
     }
   ]

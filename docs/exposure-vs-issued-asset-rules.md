@@ -49,6 +49,21 @@ YBS/vault registries may provide:
 
 But they must **not** replace the actual exposure venue shown on the whale page unless the whale itself is that protocol and the page is explicitly intended as an issuer page rather than an allocation page.
 
+### Scanner-owned protocol families dominate
+If a wallet+chain already has a scanner-owned row for a protocol family, then:
+- legacy DeBank-heavy rows for that same protocol family must not survive into final page output
+- standalone issuer/enrichment rows for tokens embedded inside that scanner-owned venue row must not survive into final page output
+
+This applies to families like:
+- Aave
+- Morpho
+- Euler
+- Spark
+- Pendle direct
+
+### Borrow-only fragments are not final exposure rows by default
+If a protocol scanner emits borrow-only fragments but the intended modeled exposure is a combined venue position, those fragments should be merged or suppressed from final page output rather than rendered as separate standalone rows.
+
 ## Practical rule set
 
 ### For whale pages

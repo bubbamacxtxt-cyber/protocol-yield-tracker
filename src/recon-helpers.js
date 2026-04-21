@@ -10,7 +10,7 @@ function loadActiveWalletChains(minUsd = 50000) {
     for (const c of (w.chains || [])) {
       if (!c.active_for_position_scan) continue;
       if (Number(c.total_usd || 0) < minUsd) continue;
-      wallets.push({ whale: w.whale, vault: w.vault || null, wallet: w.wallet.toLowerCase(), chain: String(c.chain || '').toLowerCase(), total_usd: Number(c.total_usd || 0) });
+      wallets.push({ whale: w.whale, vault: w.vault || null, wallet: w.wallet.toLowerCase(), chain: String(c.chain || '').toLowerCase(), total_usd: Number(c.total_usd || 0), protocols: c.protocols || [] });
     }
   }
   return wallets;
@@ -27,4 +27,9 @@ function loadWhaleWalletMap() {
   return rows;
 }
 
-module.exports = { loadActiveWalletChains, loadWhaleWalletMap };
+function hasProtocolHint(row, aliases = []) {
+  const hints = (row.protocols || []).map(p => String(p.protocol_id || p.protocol_name || '').toLowerCase());
+  return aliases.some(a => hints.includes(String(a).toLowerCase()));
+}
+
+module.exports = { loadActiveWalletChains, loadWhaleWalletMap, hasProtocolHint };

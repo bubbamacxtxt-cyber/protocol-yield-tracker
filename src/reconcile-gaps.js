@@ -28,6 +28,14 @@ function canonicalizeProtocol(proto) {
   return raw;
 }
 
+function isDustLike(proto, usd) {
+  const p = String(proto || '').toLowerCase();
+  if (Math.abs(usd || 0) < 1000) return true;
+  if (p.includes('merkl')) return true;
+  if (p === 'infinifi' && Math.abs(usd || 0) < 10000) return true;
+  return false;
+}
+
 // Build modeled totals by wallet+chain+protocol from exported pages
 const modeledByWalletChain = new Map();
 const modeledByWalletChainProtocol = new Map();
@@ -37,6 +45,7 @@ for (const [whale, group] of Object.entries(data.whales || {})) {
     const chain = String(p.chain || '').toLowerCase();
     const proto = canonicalizeProtocol(p.protocol_canonical || p.protocol_name || p.protocol_id || '');
     const usd = Number(p.net_usd || 0);
+    if (isDustLike(proto, usd)) continue;
     const k1 = `${wallet}|${chain}`;
     const k2 = `${wallet}|${chain}|${proto}`;
     modeledByWalletChain.set(k1, (modeledByWalletChain.get(k1) || 0) + usd);
@@ -56,6 +65,7 @@ for (const w of (debank.wallets || [])) {
     for (const proto of (chainInfo.protocols || [])) {
       const pkey = canonicalizeProtocol(proto.protocol_canonical || proto.protocol_id || proto.protocol_name || '');
       const debankProtoUsd = Number(proto.net_usd || proto.total_usd || 0);
+      if (isDustLike(pkey, debankProtoUsd)) continue;
       const modeledProtoUsd = modeledByWalletChainProtocol.get(`${wallet}|${chain}|${pkey}`) || 0;
       const protoDelta = debankProtoUsd - modeledProtoUsd;
       if (Math.abs(protoDelta) > 100) {
@@ -74,15 +84,22 @@ for (const w of (debank.wallets || [])) {
     const activeForScan = !!chainInfo.active_for_position_scan;
     const filteredProtocols = protocols
       .filter(p => Math.abs(p.delta_usd) > 5000)
-      .filter(p => !(String(p.protocol || '').includes('merkl') && Math.abs(p.delta_usd) < 50000))
       .filter(p => !(String(p.protocol || '').includes('ethena') && debankUsd < 100000))
       .filter(p => !(String(p.protocol || '').includes('curve') && Math.abs(p.delta_usd) < 10000));
 
-    const classification = !activeForScan
-      ? 'below-threshold'
-      : Math.abs(deltaUsd) < 5000 && filteredProtocols.length === 0
-        ? 'aligned'
-        : 'needs-review';
+    const materialChainDelta = Math.abs(deltaUsd) > 1000000;
+    const materialProtocolDelta = filteredProtocols.some(p => Math.abs(p.delta_usd) > 1000000);
+
+    let classification;
+    if (!activeForScan) {
+      classification = 'below-threshold';
+    } else if (!materialChainDelta && filteredProtocols.length === 0) {
+      classification = 'aligned';
+    } else if (materialChainDelta && !materialProtocolDelta) {
+      classification = 'decomposition-review';
+    } else {
+      classification = 'needs-review';
+    }
 
     report.push({
       wallet,
