@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-04-21T06:15:02.807Z",
+  "generated_at": "2026-04-21T07:10:13.945Z",
   "summary": {
-    "total_positions": 157,
-    "unresolved_fallback_positions": 4,
-    "unresolved_fallback_usd": 6006157.989999999
+    "total_positions": 154,
+    "unresolved_fallback_positions": 8,
+    "unresolved_fallback_usd": 13862565.809999999
   },
   "by_source_type": {
     "scanner": {
-      "positions": 127,
-      "net_usd": 497667090.7717431
+      "positions": 120,
+      "net_usd": 487972268.3742452
     },
     "fallback": {
-      "positions": 30,
-      "net_usd": 136946168.64000002
+      "positions": 34,
+      "net_usd": 144802576.46
     }
   },
   "by_protocol": {
@@ -21,8 +21,8 @@
       "net_usd": 409385082.8705072
     },
     "pendle": {
-      "positions": 11,
-      "net_usd": 15700980.387497852
+      "positions": 8,
+      "net_usd": 13862565.809999999
     },
     "upshift": {
       "positions": 1,
@@ -124,17 +124,17 @@
       "normalization_status": "canonical"
     },
     {
+      "protocol": "pendle",
+      "source_type": "fallback",
+      "positions": 8,
+      "net_usd": 13862565.809999999,
+      "normalization_status": "unresolved"
+    },
+    {
       "protocol": "fluid",
       "source_type": "scanner",
       "positions": 3,
       "net_usd": 13465525.46,
-      "normalization_status": "canonical"
-    },
-    {
-      "protocol": "pendle",
-      "source_type": "scanner",
-      "positions": 7,
-      "net_usd": 9694822.397497853,
       "normalization_status": "canonical"
     },
     {
@@ -143,13 +143,6 @@
       "positions": 5,
       "net_usd": 6155593.199999999,
       "normalization_status": "partial"
-    },
-    {
-      "protocol": "pendle",
-      "source_type": "fallback",
-      "positions": 4,
-      "net_usd": 6006157.989999999,
-      "normalization_status": "unresolved"
     },
     {
       "protocol": "capapp",

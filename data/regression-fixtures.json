@@ -1,0 +1,47 @@
+{
+  "updated_at": "2026-04-21T06:29:00Z",
+  "fixtures": [
+    {
+      "name": "yuzu-pendle-direct",
+      "wallet": "0x815f5BB257e88b67216a344C7C83a3eA4EE74748",
+      "expects": [
+        { "protocol_id": "pendle-pt", "supply_symbol": "PT-USDG-28MAY2026", "min_net_usd": 1000000 },
+        { "protocol_id": "pendle-yt", "supply_symbol": "YT-USDG-28MAY2026", "min_net_usd": 5000 }
+      ]
+    },
+    {
+      "name": "midas-pendle-direct",
+      "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
+      "expects": [
+        { "protocol_id": "pendle-pt", "supply_symbol": "PT-sNUSD-4JUN2026", "min_net_usd": 5000000 },
+        { "protocol_id": "pendle-yt", "supply_symbol": "YT-sNUSD-4JUN2026", "min_net_usd": 50000 }
+      ]
+    },
+    {
+      "name": "midas-arb-pendle-direct",
+      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
+      "expects": [
+        { "protocol_id": "pendle-pt", "supply_symbol": "PT-sUSDai-15OCT2026", "min_net_usd": 500000 }
+      ]
+    },
+    {
+      "name": "yuzu-pendle-fallback",
+      "wallet": "0x015CC48cC8bC37D80AAFf4e43061dbaF94192308",
+      "expects": [
+        { "protocol_id": "pendle2", "min_net_usd": 1000000 }
+      ]
+    },
+    {
+      "name": "reservoir-aave-direct",
+      "wallet": "0x31eAe643B67AB45Eab1d3b0d5A0e4b2cC45fE1D5",
+      "notes": "placeholder wallet for future direct Aave fixture validation; update after verifying current active row"
+    },
+    {
+      "name": "manual-offchain-re",
+      "wallet": "off-chain",
+      "expects": [
+        { "protocol_name": "Private Reinsurance Deals", "min_net_usd": 100000000 }
+      ]
+    }
+  ]
+}

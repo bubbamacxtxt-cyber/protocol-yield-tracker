@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T21:00:01.610Z",
+  "generated_at": "2026-04-21T07:10:15.546Z",
   "summary": {
     "total_positions": 143,
     "total_value": 839084517.0808073,
@@ -21,12 +21,11 @@
       "avalanche"
     ],
     "protocols": [
-      "Aave v3",
       "Aave V3",
       "Ethena",
       "cap",
       "Upshift",
-      "Pendle V2",
+      "Pendle",
       "Sky",
       "Curve",
       "Yuzu Money",
@@ -96,7 +95,7 @@
           "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -129,6 +128,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 3.22934,
           "apy_cost": null,
           "bonus_supply": null,
@@ -136,14 +138,18 @@
           "apy_net": 3.22934,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDe"
+          "supply_tokens_display": "USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 171,
           "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -176,6 +182,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.59088,
           "apy_cost": null,
           "bonus_supply": null,
@@ -183,7 +192,11 @@
           "apy_net": 4.59088,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDT"
+          "supply_tokens_display": "syrupUSDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 10,
@@ -207,6 +220,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -214,7 +230,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 156,
@@ -285,6 +305,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 8.29263099694337,
           "apy_cost": 15.027226089632174,
           "bonus_supply": null,
@@ -292,7 +315,11 @@
           "apy_net": -51.455925266602065,
           "leverage": 9.871885457287481,
           "apy_reward": null,
-          "supply_tokens_display": "USDe"
+          "supply_tokens_display": "USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 9,
@@ -316,6 +343,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -323,7 +353,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 154,
@@ -394,6 +428,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": 15.027379849977303,
           "bonus_borrow": 2.5868913808516902,
@@ -401,7 +438,11 @@
           "apy_net": -93.71334387848643,
           "leverage": 10.016905855275096,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 152,
@@ -457,6 +498,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.59088,
           "apy_cost": 15.027379849811798,
           "bonus_borrow": 0.483779908496276,
@@ -464,7 +508,11 @@
           "apy_net": -87.94511532164493,
           "leverage": 9.866573722349417,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDT"
+          "supply_tokens_display": "syrupUSDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 12,
@@ -488,6 +536,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -495,7 +546,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 157,
@@ -551,6 +606,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 5.21884284851289,
           "apy_cost": 15.0273798498118,
           "bonus_borrow": 0.483779908496276,
@@ -558,7 +616,11 @@
           "apy_net": -83.16016181347065,
           "leverage": 10.010416604461994,
           "apy_reward": null,
-          "supply_tokens_display": "USDe"
+          "supply_tokens_display": "USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 3,
@@ -582,6 +644,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -589,7 +654,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 111,
@@ -613,6 +682,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "ethena",
+          "protocol_display": "Ethena",
+          "protocol_category": "staking",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -620,7 +692,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 153,
@@ -676,6 +752,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.91673,
           "apy_cost": 14.8062400907677,
           "bonus_supply": null,
@@ -683,7 +762,11 @@
           "apy_net": -64.12954018748901,
           "leverage": 7.98176851570704,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDC"
+          "supply_tokens_display": "syrupUSDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 7,
@@ -707,6 +790,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -714,7 +800,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 1,
@@ -738,6 +828,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -745,7 +838,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 8,
@@ -769,6 +866,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -776,7 +876,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 151,
@@ -832,6 +936,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.59088,
           "apy_cost": 15.0271370936872,
           "bonus_supply": null,
@@ -839,7 +946,11 @@
           "apy_net": -86.69025519004272,
           "leverage": 9.746539527591542,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDT"
+          "supply_tokens_display": "syrupUSDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 11,
@@ -863,6 +974,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -870,7 +984,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 158,
@@ -926,6 +1044,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 0.0678523939818098,
           "apy_cost": 15.0273798499773,
           "bonus_borrow": 1.22602865642312,
@@ -933,7 +1054,11 @@
           "apy_net": -133.8729298801659,
           "leverage": 9.953543664273088,
           "apy_reward": null,
-          "supply_tokens_display": "USDe"
+          "supply_tokens_display": "USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 112,
@@ -957,6 +1082,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -964,14 +1092,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 172,
           "wallet": "0x3207363359Ca0c11D11073aD48301E8c958B7910",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -1004,6 +1136,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 15.0273549989059,
           "bonus_supply": null,
@@ -1011,14 +1146,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 176,
           "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -1051,6 +1190,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 15.0273778863722,
           "bonus_supply": null,
@@ -1058,14 +1200,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 175,
           "wallet": "0xc468315a2df54f9c076bD5Cfe5002BA211F74CA6",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -1098,6 +1244,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 15.0273549989059,
           "bonus_supply": null,
@@ -1105,7 +1254,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": false,
@@ -1172,6 +1325,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 2.221371641730499,
           "apy_cost": null,
           "bonus_supply": 3.30042571665381,
@@ -1179,14 +1335,18 @@
           "apy_net": 5.521797358384308,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDG, RLUSD"
+          "supply_tokens_display": "USDG, RLUSD",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 178,
           "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1219,6 +1379,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 2.83360186376979,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1226,7 +1389,11 @@
           "apy_net": 2.8336018637697906,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "RLUSD"
+          "supply_tokens_display": "RLUSD",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": false,
@@ -1254,7 +1421,7 @@
           "wallet": "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1287,6 +1454,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1294,14 +1464,18 @@
           "apy_net": 4.17166,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 142,
           "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1365,6 +1539,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 6.2225362198011975,
           "apy_cost": 15.0271334884347,
           "bonus_supply": 3.75,
@@ -1372,14 +1549,18 @@
           "apy_net": -40.87235554451888,
           "leverage": 11.059138060284253,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe, USDe"
+          "supply_tokens_display": "sUSDe, USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 182,
           "wallet": "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1412,6 +1593,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 3.22934,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1419,14 +1603,18 @@
           "apy_net": 3.22934,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDe"
+          "supply_tokens_display": "USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 143,
           "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1459,6 +1647,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 3.2293399999999997,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1466,14 +1657,18 @@
           "apy_net": 3.22934,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDe"
+          "supply_tokens_display": "USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 187,
           "wallet": "0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1506,6 +1701,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 3.32265,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1513,14 +1711,18 @@
           "apy_net": 3.32265,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USTB"
+          "supply_tokens_display": "USTB",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 184,
           "wallet": "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1553,6 +1755,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1560,14 +1765,18 @@
           "apy_net": 4.17166,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 192,
           "wallet": "0xfAA7744b9Ed973290A36eE815b5AcC76856583a0",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1600,6 +1809,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 3.3226499999999994,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1607,7 +1819,11 @@
           "apy_net": 3.3226499999999994,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USTB"
+          "supply_tokens_display": "USTB",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 147,
@@ -1678,6 +1894,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": 15.0273798499773,
           "bonus_borrow": 2.5868913808516902,
@@ -1685,7 +1904,11 @@
           "apy_net": -34.50548355764898,
           "leverage": 4.562835453765864,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 26,
@@ -1709,6 +1932,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1716,14 +1942,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 186,
           "wallet": "0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -1756,6 +1986,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1763,7 +1996,11 @@
           "apy_net": 4.17166,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 30,
@@ -1787,6 +2024,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1794,7 +2034,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 33,
@@ -1818,6 +2062,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1825,7 +2072,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 126,
@@ -1849,6 +2100,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "capapp",
+          "protocol_display": "cap",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1856,7 +2110,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 39,
@@ -1880,6 +2138,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "upshift",
+          "protocol_display": "Upshift",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1887,7 +2148,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 25,
@@ -1911,6 +2176,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1918,14 +2186,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 28,
           "wallet": "0x015CC48cC8bC37D80AAFf4e43061dbaF94192308",
           "chain": "eth",
           "protocol_id": "pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Liquidity Pool",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -1940,8 +2212,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -1949,7 +2224,13 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 161,
@@ -2005,6 +2286,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.59088,
           "apy_cost": 15.0273798498118,
           "bonus_borrow": 0.483779908496276,
@@ -2012,7 +2296,11 @@
           "apy_net": -87.13984648890019,
           "leverage": 9.789414823836209,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDT"
+          "supply_tokens_display": "syrupUSDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 29,
@@ -2036,6 +2324,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2043,7 +2334,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 118,
@@ -2067,6 +2362,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2074,7 +2372,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 148,
@@ -2145,6 +2447,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.693960590418584,
           "apy_cost": 15.0273798498118,
           "bonus_supply": 3.60089962588949,
@@ -2152,7 +2457,11 @@
           "apy_net": -50.64218143099717,
           "leverage": 9.754083887703915,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe, USDe"
+          "supply_tokens_display": "sUSDe, USDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 124,
@@ -2176,6 +2485,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2183,7 +2495,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 113,
@@ -2207,6 +2523,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "sky",
+          "protocol_display": "Sky",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2214,7 +2533,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 37,
@@ -2238,6 +2561,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2245,14 +2571,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 38,
           "wallet": "0xfAA7744b9Ed973290A36eE815b5AcC76856583a0",
           "chain": "eth",
           "protocol_id": "pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Deposit",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -2267,8 +2597,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2276,7 +2609,13 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 34,
@@ -2300,6 +2639,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2307,7 +2649,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 163,
@@ -2363,6 +2709,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": 11.7134646543374,
           "bonus_supply": null,
@@ -2370,7 +2719,11 @@
           "apy_net": -79.64928617799353,
           "leverage": 12.11417625087742,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 162,
@@ -2426,6 +2779,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.59088,
           "apy_cost": 15.0273798499773,
           "bonus_borrow": 1.22602865642312,
@@ -2433,7 +2789,11 @@
           "apy_net": -31.22141152819708,
           "leverage": 4.431446561873421,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDT"
+          "supply_tokens_display": "syrupUSDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 117,
@@ -2457,6 +2817,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2464,14 +2827,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 188,
           "wallet": "0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -2504,6 +2871,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 0,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2511,7 +2881,11 @@
           "apy_net": 0,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "VBILL"
+          "supply_tokens_display": "VBILL",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 164,
@@ -2567,6 +2941,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": 3.59952800996808,
           "bonus_supply": null,
@@ -2574,7 +2951,11 @@
           "apy_net": 8.882581371862747,
           "leverage": 9.233976519299189,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 160,
@@ -2630,6 +3011,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.91673,
           "apy_cost": 14.8548162348648,
           "bonus_supply": null,
@@ -2637,7 +3021,11 @@
           "apy_net": -93.75053574421285,
           "leverage": 10.928195772549078,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDC"
+          "supply_tokens_display": "syrupUSDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 41,
@@ -2661,6 +3049,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "curve",
+          "protocol_display": "Curve",
+          "protocol_category": "lp",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2668,7 +3059,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 35,
@@ -2692,6 +3087,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2699,7 +3097,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 40,
@@ -2723,6 +3125,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2730,7 +3135,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 24,
@@ -2754,6 +3163,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2761,14 +3173,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 42,
           "wallet": "0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a",
           "chain": "plasma",
           "protocol_id": "plasma_pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Liquidity Pool",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -2783,8 +3199,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2792,7 +3211,13 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 125,
@@ -2816,6 +3241,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "plasma_yuzumoney",
+          "protocol_display": "Yuzu Money",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2823,14 +3251,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 43,
           "wallet": "0x09bfBC374C37c927909a0E7B278eE7Fdf47A380a",
           "chain": "plasma",
           "protocol_id": "plasma_pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Liquidity Pool",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -2845,8 +3277,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -2854,7 +3289,13 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 140,
@@ -2894,6 +3335,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 10.678641107436698,
           "bonus_supply": null,
@@ -2901,14 +3345,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 190,
           "wallet": "0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -2941,6 +3389,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 3.45807404958487,
           "bonus_supply": null,
@@ -2948,14 +3399,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 194,
           "wallet": "0xfAA7744b9Ed973290A36eE815b5AcC76856583a0",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -2988,6 +3443,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 2.78816150949281,
           "bonus_supply": null,
@@ -2995,14 +3453,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 185,
           "wallet": "0xCf0a12CBd8088fc5f84ad431E71787157041cD69",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -3035,6 +3497,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 16.6645872335564,
           "bonus_supply": null,
@@ -3042,14 +3507,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 189,
           "wallet": "0xb6cbe8b123392eF6Aa72897bb85bd6515d2e8db7",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -3082,6 +3551,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 2.43293749198647,
           "bonus_supply": null,
@@ -3089,14 +3561,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 183,
           "wallet": "0x502D222e8e4DaEF69032f55F0c1A999EFFd78fB3",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -3129,6 +3605,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 15.0273549989059,
           "bonus_supply": null,
@@ -3136,14 +3615,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 144,
           "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -3176,6 +3659,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 15.0068048086245,
           "bonus_supply": null,
@@ -3183,7 +3669,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": false,
@@ -3238,6 +3728,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 5.31652854894352,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3245,7 +3738,11 @@
           "apy_net": 5.31652854894352,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 49,
@@ -3285,6 +3782,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 1.45628679517747,
           "apy_cost": null,
           "bonus_supply": 8.90134720198512,
@@ -3292,7 +3792,11 @@
           "apy_net": 10.35763399716259,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "GHO"
+          "supply_tokens_display": "GHO",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 130,
@@ -3332,6 +3836,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 3.82185025730326,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3339,7 +3846,11 @@
           "apy_net": 3.82185025730326,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "RLUSD"
+          "supply_tokens_display": "RLUSD",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 168,
@@ -3379,6 +3890,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 5.81734554791853,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3386,7 +3900,11 @@
           "apy_net": 5.81734554791853,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 132,
@@ -3426,6 +3944,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 0.706189995500467,
           "apy_cost": null,
           "bonus_supply": 4.93964540115577,
@@ -3433,7 +3954,11 @@
           "apy_net": 5.645835396656238,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "AUSD"
+          "supply_tokens_display": "AUSD",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 169,
@@ -3473,6 +3998,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 5.31669153004067,
           "apy_cost": null,
           "bonus_supply": 0.385184567114869,
@@ -3480,7 +4008,11 @@
           "apy_net": 5.701876097155537,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 48,
@@ -3520,6 +4052,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 1.11472444388754,
           "apy_cost": null,
           "bonus_supply": 14.7050441451923,
@@ -3527,7 +4062,11 @@
           "apy_net": 15.81976858907984,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "GHO"
+          "supply_tokens_display": "GHO",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 131,
@@ -3567,6 +4106,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 4.88909012903612,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3574,7 +4116,11 @@
           "apy_net": 4.889090129036119,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "PYUSD"
+          "supply_tokens_display": "PYUSD",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 128,
@@ -3614,6 +4160,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 5.87740991771689,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3621,7 +4170,11 @@
           "apy_net": 5.87740991771689,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "rUSD"
+          "supply_tokens_display": "rUSD",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": false,
@@ -3658,6 +4211,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "curve",
+          "protocol_display": "Curve",
+          "protocol_category": "lp",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3665,7 +4221,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 57,
@@ -3689,6 +4249,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "infinifixyz",
+          "protocol_display": "infiniFi",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3696,7 +4259,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 54,
@@ -3720,6 +4287,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "convex",
+          "protocol_display": "Convex",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3727,7 +4297,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 53,
@@ -3751,6 +4325,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3758,7 +4335,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 56,
@@ -3782,6 +4363,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "curve",
+          "protocol_display": "Curve",
+          "protocol_category": "lp",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3789,7 +4373,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 52,
@@ -3844,6 +4432,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 13.428170172459662,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3851,14 +4442,18 @@
           "apy_net": 13.428170172459664,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDT, USDC"
+          "supply_tokens_display": "USDT, USDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 195,
           "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -3891,6 +4486,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 12.279999999999998,
           "apy_cost": null,
           "bonus_supply": null,
@@ -3898,7 +4496,11 @@
           "apy_net": 12.279999999999998,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDT"
+          "supply_tokens_display": "USDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": true,
@@ -3933,6 +4535,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "curve",
+              "protocol_display": "Curve",
+              "protocol_category": "lp",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -3940,7 +4545,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 57,
@@ -3964,6 +4573,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "infinifixyz",
+              "protocol_display": "infiniFi",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -3971,7 +4583,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 54,
@@ -3995,6 +4611,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "convex",
+              "protocol_display": "Convex",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -4002,7 +4621,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 53,
@@ -4026,6 +4649,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -4033,7 +4659,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 56,
@@ -4057,6 +4687,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "curve",
+              "protocol_display": "Curve",
+              "protocol_category": "lp",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -4064,7 +4697,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 52,
@@ -4119,6 +4756,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 13.428170172459662,
               "apy_cost": null,
               "bonus_supply": null,
@@ -4126,14 +4766,18 @@
               "apy_net": 13.428170172459664,
               "leverage": 1,
               "apy_reward": null,
-              "supply_tokens_display": "USDT, USDC"
+              "supply_tokens_display": "USDT, USDC",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 195,
               "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
               "chain": "eth",
               "protocol_id": "aave-v3",
-              "protocol_name": "Aave v3",
+              "protocol_name": "Aave V3",
               "position_type": "supply",
               "strategy": "lend",
               "yield_source": null,
@@ -4166,6 +4810,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 12.279999999999998,
               "apy_cost": null,
               "bonus_supply": null,
@@ -4173,7 +4820,11 @@
               "apy_net": 12.279999999999998,
               "leverage": 1,
               "apy_reward": null,
-              "supply_tokens_display": "USDT"
+              "supply_tokens_display": "USDT",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             }
           ],
           "slug": "dialectic-usd"
@@ -4211,7 +4862,7 @@
           "wallet": "0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -4244,6 +4895,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.53263,
           "apy_cost": null,
           "bonus_supply": null,
@@ -4251,7 +4905,11 @@
           "apy_net": 4.532629999999999,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0x75B4D36302380099d94271Bfc8BDD12B07FFAD5f",
@@ -4289,7 +4947,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 8.5,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0xe945de0D08E2F39B0740FE2d6e50FE2Bb9751eA4",
@@ -4327,7 +4989,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 7.170000000000001,
-          "supply_tokens_display": "stcUSD"
+          "supply_tokens_display": "stcUSD",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0xd880D7C5CaFdbE2AEc281250995abF612235e563",
@@ -4369,7 +5035,11 @@
           "spark_token_address": "0xBc65ad17c5C0a2A4D159fa5a503f4992c7B545FE",
           "spark_token_symbol": "sUSDC",
           "apy_net": 3.77,
-          "supply_tokens_display": "sUSDC"
+          "supply_tokens_display": "sUSDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0xF56E946e92FeF6a050F482C560b5f8DcCB8163B3",
@@ -4407,7 +5077,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 5.53,
-          "supply_tokens_display": "MPLhysUSDC1"
+          "supply_tokens_display": "MPLhysUSDC1",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0x9E5efC5F387D8661C1AFB2469B7EeF6972451852",
@@ -4445,7 +5119,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 5,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0x76D2E84009dAE457f8667D823c7c96e9A7c35B78",
@@ -4483,7 +5161,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 8.15,
-          "supply_tokens_display": "steakUSDCinfinifi"
+          "supply_tokens_display": "steakUSDCinfinifi",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0x817d93DbdFd8190bbef0a73fCf5Dd9DA5A87E032",
@@ -4521,7 +5203,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 3.2700000000000005,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0x92c3A5f226A47a44aD73f04663b305372cc665bf",
@@ -4559,7 +5245,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 7.4,
-          "supply_tokens_display": "infinifiUSD"
+          "supply_tokens_display": "infinifiUSD",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0x7E9AA426abC2D9006E8C9881754BAA00a392158d",
@@ -4597,7 +5287,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 5.81,
-          "supply_tokens_display": "sGHO"
+          "supply_tokens_display": "sGHO",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "0xBE2B5838eb9Eedb637EDe5dF8Ac43b73b4482Ae8",
@@ -4635,7 +5329,11 @@
           "source_name": "fetch-infinifi",
           "discovery_type": "onchain",
           "apy_net": 3.13,
-          "supply_tokens_display": "RLUSD"
+          "supply_tokens_display": "RLUSD",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": false,
@@ -4673,6 +5371,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "monad_gearbox",
+          "protocol_display": "Gearbox",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -4680,7 +5381,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 72,
@@ -4704,6 +5409,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "monad_gearbox",
+          "protocol_display": "Gearbox",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -4711,7 +5419,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 105,
@@ -4735,6 +5447,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "dolomite",
+          "protocol_display": "Dolomite",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -4742,7 +5457,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 106,
@@ -4766,6 +5485,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "avax_traderjoexyz",
+          "protocol_display": "LFJ",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -4773,7 +5495,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 107,
@@ -4797,6 +5523,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "monad_traderjoexyz",
+          "protocol_display": "LFJ",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -4804,7 +5533,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 69,
@@ -4828,6 +5561,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "monad_curvance",
+          "protocol_display": "Curvance",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -4835,7 +5571,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 108,
@@ -4891,6 +5631,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.77766499136889,
           "apy_cost": 7.8755052713903,
           "bonus_supply": null,
@@ -4898,7 +5641,11 @@
           "apy_net": -29.952034388864924,
           "leverage": 12.210939312853721,
           "apy_reward": null,
-          "supply_tokens_display": "PT-sUSDE-18JUN2026"
+          "supply_tokens_display": "PT-sUSDE-18JUN2026",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": true,
@@ -4943,6 +5690,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "monad_gearbox",
+              "protocol_display": "Gearbox",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -4950,7 +5700,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 72,
@@ -4974,6 +5728,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "monad_gearbox",
+              "protocol_display": "Gearbox",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -4981,7 +5738,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 69,
@@ -5005,6 +5766,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "monad_curvance",
+              "protocol_display": "Curvance",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -5012,7 +5776,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             }
           ],
           "slug": "earnausd"
@@ -5047,6 +5815,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "dolomite",
+              "protocol_display": "Dolomite",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -5054,7 +5825,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 106,
@@ -5078,6 +5853,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "avax_traderjoexyz",
+              "protocol_display": "LFJ",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -5085,7 +5863,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 107,
@@ -5109,6 +5891,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "monad_traderjoexyz",
+              "protocol_display": "LFJ",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -5116,7 +5901,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 108,
@@ -5172,6 +5961,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 4.77766499136889,
               "apy_cost": 7.8755052713903,
               "bonus_supply": null,
@@ -5179,7 +5971,11 @@
               "apy_net": -29.952034388864924,
               "leverage": 12.210939312853721,
               "apy_reward": null,
-              "supply_tokens_display": "PT-sUSDE-18JUN2026"
+              "supply_tokens_display": "PT-sUSDE-18JUN2026",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             }
           ],
           "slug": "upshift-singularv"
@@ -5221,6 +6017,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "fluid-scanner",
+          "protocol_canonical": "fluid",
+          "protocol_display": "Fluid",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5228,14 +6027,18 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 199,
           "wallet": "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "supply",
           "strategy": "lend",
           "yield_source": null,
@@ -5268,6 +6071,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5275,14 +6081,18 @@
           "apy_net": 4.17166,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 80,
           "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
           "chain": "eth",
           "protocol_id": "pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Deposit",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -5297,8 +6107,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5306,7 +6119,13 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 83,
@@ -5362,6 +6181,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.59088,
           "apy_cost": 15.0273798498118,
           "bonus_borrow": 0.483779908496276,
@@ -5369,7 +6191,11 @@
           "apy_net": -5.972539937022934,
           "leverage": 2.0121611736729363,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDT"
+          "supply_tokens_display": "syrupUSDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 94,
@@ -5393,6 +6219,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5400,7 +6229,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 88,
@@ -5424,6 +6257,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "arb_usdai",
+          "protocol_display": "USD.AI",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5431,7 +6267,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 81,
@@ -5517,6 +6357,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 2.1214254900435763,
           "apy_cost": 15.027379849977303,
           "bonus_borrow": 1.22602865642312,
@@ -5524,7 +6367,11 @@
           "apy_net": -98.86073438980304,
           "leverage": 8.824462807132162,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe, USDe, WMNT"
+          "supply_tokens_display": "sUSDe, USDe, WMNT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 104,
@@ -5580,6 +6427,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.59088,
           "apy_cost": 15.027379849977303,
           "bonus_borrow": 1.36086272442857,
@@ -5587,7 +6437,11 @@
           "apy_net": -24.7680189468905,
           "leverage": 3.8130982004425893,
           "apy_reward": null,
-          "supply_tokens_display": "syrupUSDT"
+          "supply_tokens_display": "syrupUSDT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 127,
@@ -5611,6 +6465,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "sky",
+          "protocol_display": "Sky",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5618,7 +6475,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 96,
@@ -5704,6 +6565,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 2.119939939063303,
           "apy_cost": 15.0273798499773,
           "bonus_borrow": 1.22602865642312,
@@ -5711,7 +6575,11 @@
           "apy_net": -114.51406283308567,
           "leverage": 10.036184059515016,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe, USDe, WMNT"
+          "supply_tokens_display": "sUSDe, USDe, WMNT",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 115,
@@ -5735,6 +6603,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5742,7 +6613,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 86,
@@ -5766,6 +6641,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "curve",
+          "protocol_display": "Curve",
+          "protocol_category": "lp",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5773,7 +6651,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 98,
@@ -5797,6 +6679,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "bsc_venusflux",
+          "protocol_display": "Venus Flux",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5804,7 +6689,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 77,
@@ -5828,6 +6717,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "fluid-scanner",
+          "protocol_canonical": "fluid",
+          "protocol_display": "Fluid",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5835,7 +6727,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 95,
@@ -5891,6 +6787,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": 11.7134646543374,
           "bonus_supply": null,
@@ -5898,7 +6797,11 @@
           "apy_net": -72.68964244195993,
           "leverage": 11.19136744648456,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 85,
@@ -5922,6 +6825,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "fluid-scanner",
+          "protocol_canonical": "fluid",
+          "protocol_display": "Fluid",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5929,7 +6835,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 89,
@@ -5953,6 +6863,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "ethstrat",
+          "protocol_display": "STRATEGY",
+          "protocol_category": null,
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -5960,7 +6873,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 116,
@@ -6016,6 +6933,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": 4.17166,
           "apy_cost": 7.875505271390301,
           "bonus_supply": null,
@@ -6023,14 +6943,18 @@
           "apy_net": -38.36526544835227,
           "leverage": 12.484530894668099,
           "apy_reward": null,
-          "supply_tokens_display": "sUSDe"
+          "supply_tokens_display": "sUSDe",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 93,
           "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
           "chain": "eth",
           "protocol_id": "pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Liquidity Pool",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -6045,8 +6969,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -6054,14 +6981,20 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 87,
           "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
           "chain": "arb",
           "protocol_id": "arb_pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Deposit",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -6076,8 +7009,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -6085,14 +7021,20 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 79,
           "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
           "chain": "eth",
           "protocol_id": "pendle2",
-          "protocol_name": "Pendle V2",
+          "protocol_name": "Pendle",
           "position_type": "Deposit",
           "strategy": "lend",
           "yield_source": "Pendle V2",
@@ -6107,8 +7049,11 @@
           "borrow": [],
           "rewards": [],
           "discovery_type": "onchain",
-          "source_type": "debank",
+          "source_type": "fallback",
           "source_name": "fetch",
+          "protocol_canonical": "pendle",
+          "protocol_display": "Pendle",
+          "protocol_category": "yield-splitting",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -6116,14 +7061,20 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "pendle_status": "fallback",
+          "asset_type": "Pendle Fallback",
+          "source_priority": 40,
+          "confidence": "low",
+          "normalization_status": "unresolved",
+          "exposure_class": "bundled_protocol_fallback"
         },
         {
           "id": 200,
           "wallet": "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
           "chain": "eth",
           "protocol_id": "aave-v3",
-          "protocol_name": "Aave v3",
+          "protocol_name": "Aave V3",
           "position_type": "borrow",
           "strategy": "borrow",
           "yield_source": null,
@@ -6156,6 +7107,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": 16.6645872335564,
           "bonus_supply": null,
@@ -6163,7 +7117,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": true,
@@ -6198,6 +7156,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "fluid-scanner",
+              "protocol_canonical": "fluid",
+              "protocol_display": "Fluid",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6205,14 +7166,18 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 80,
               "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
               "chain": "eth",
               "protocol_id": "pendle2",
-              "protocol_name": "Pendle V2",
+              "protocol_name": "Pendle",
               "position_type": "Deposit",
               "strategy": "lend",
               "yield_source": "Pendle V2",
@@ -6227,8 +7192,11 @@
               "borrow": [],
               "rewards": [],
               "discovery_type": "onchain",
-              "source_type": "debank",
+              "source_type": "fallback",
               "source_name": "fetch",
+              "protocol_canonical": "pendle",
+              "protocol_display": "Pendle",
+              "protocol_category": "yield-splitting",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6236,7 +7204,13 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "pendle_status": "fallback",
+              "asset_type": "Pendle Fallback",
+              "source_priority": 40,
+              "confidence": "low",
+              "normalization_status": "unresolved",
+              "exposure_class": "bundled_protocol_fallback"
             },
             {
               "id": 83,
@@ -6292,6 +7266,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 4.59088,
               "apy_cost": 15.0273798498118,
               "bonus_borrow": 0.483779908496276,
@@ -6299,7 +7276,11 @@
               "apy_net": -5.972539937022934,
               "leverage": 2.0121611736729363,
               "apy_reward": null,
-              "supply_tokens_display": "syrupUSDT"
+              "supply_tokens_display": "syrupUSDT",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 81,
@@ -6385,6 +7366,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 2.1214254900435763,
               "apy_cost": 15.027379849977303,
               "bonus_borrow": 1.22602865642312,
@@ -6392,7 +7376,11 @@
               "apy_net": -98.86073438980304,
               "leverage": 8.824462807132162,
               "apy_reward": null,
-              "supply_tokens_display": "sUSDe, USDe, WMNT"
+              "supply_tokens_display": "sUSDe, USDe, WMNT",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 77,
@@ -6416,6 +7404,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "fluid-scanner",
+              "protocol_canonical": "fluid",
+              "protocol_display": "Fluid",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6423,7 +7414,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 85,
@@ -6447,6 +7442,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "fluid-scanner",
+              "protocol_canonical": "fluid",
+              "protocol_display": "Fluid",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6454,14 +7452,18 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 79,
               "wallet": "0x68e7e72938db36a5cbbca7b52c71dbbaadfb8264",
               "chain": "eth",
               "protocol_id": "pendle2",
-              "protocol_name": "Pendle V2",
+              "protocol_name": "Pendle",
               "position_type": "Deposit",
               "strategy": "lend",
               "yield_source": "Pendle V2",
@@ -6476,8 +7478,11 @@
               "borrow": [],
               "rewards": [],
               "discovery_type": "onchain",
-              "source_type": "debank",
+              "source_type": "fallback",
               "source_name": "fetch",
+              "protocol_canonical": "pendle",
+              "protocol_display": "Pendle",
+              "protocol_category": "yield-splitting",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6485,7 +7490,13 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "pendle_status": "fallback",
+              "asset_type": "Pendle Fallback",
+              "source_priority": 40,
+              "confidence": "low",
+              "normalization_status": "unresolved",
+              "exposure_class": "bundled_protocol_fallback"
             }
           ],
           "slug": "midas-mhyper"
@@ -6520,6 +7531,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "arb_usdai",
+              "protocol_display": "USD.AI",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6527,7 +7541,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 86,
@@ -6551,6 +7569,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "curve",
+              "protocol_display": "Curve",
+              "protocol_category": "lp",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6558,7 +7579,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 89,
@@ -6582,6 +7607,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "ethstrat",
+              "protocol_display": "STRATEGY",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6589,14 +7617,18 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 93,
               "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
               "chain": "eth",
               "protocol_id": "pendle2",
-              "protocol_name": "Pendle V2",
+              "protocol_name": "Pendle",
               "position_type": "Liquidity Pool",
               "strategy": "lend",
               "yield_source": "Pendle V2",
@@ -6611,8 +7643,11 @@
               "borrow": [],
               "rewards": [],
               "discovery_type": "onchain",
-              "source_type": "debank",
+              "source_type": "fallback",
               "source_name": "fetch",
+              "protocol_canonical": "pendle",
+              "protocol_display": "Pendle",
+              "protocol_category": "yield-splitting",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6620,14 +7655,20 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "pendle_status": "fallback",
+              "asset_type": "Pendle Fallback",
+              "source_priority": 40,
+              "confidence": "low",
+              "normalization_status": "unresolved",
+              "exposure_class": "bundled_protocol_fallback"
             },
             {
               "id": 87,
               "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
               "chain": "arb",
               "protocol_id": "arb_pendle2",
-              "protocol_name": "Pendle V2",
+              "protocol_name": "Pendle",
               "position_type": "Deposit",
               "strategy": "lend",
               "yield_source": "Pendle V2",
@@ -6642,8 +7683,11 @@
               "borrow": [],
               "rewards": [],
               "discovery_type": "onchain",
-              "source_type": "debank",
+              "source_type": "fallback",
               "source_name": "fetch",
+              "protocol_canonical": "pendle",
+              "protocol_display": "Pendle",
+              "protocol_category": "yield-splitting",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6651,7 +7695,13 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "pendle_status": "fallback",
+              "asset_type": "Pendle Fallback",
+              "source_priority": 40,
+              "confidence": "low",
+              "normalization_status": "unresolved",
+              "exposure_class": "bundled_protocol_fallback"
             }
           ],
           "slug": "midas-mmev"
@@ -6672,7 +7722,7 @@
               "wallet": "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
               "chain": "eth",
               "protocol_id": "aave-v3",
-              "protocol_name": "Aave v3",
+              "protocol_name": "Aave V3",
               "position_type": "supply",
               "strategy": "lend",
               "yield_source": null,
@@ -6705,6 +7755,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 4.17166,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6712,7 +7765,11 @@
               "apy_net": 4.17166,
               "leverage": 1,
               "apy_reward": null,
-              "supply_tokens_display": "sUSDe"
+              "supply_tokens_display": "sUSDe",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 94,
@@ -6736,6 +7793,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6743,7 +7803,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 104,
@@ -6799,6 +7863,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 4.59088,
               "apy_cost": 15.027379849977303,
               "bonus_borrow": 1.36086272442857,
@@ -6806,7 +7873,11 @@
               "apy_net": -24.7680189468905,
               "leverage": 3.8130982004425893,
               "apy_reward": null,
-              "supply_tokens_display": "syrupUSDT"
+              "supply_tokens_display": "syrupUSDT",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 127,
@@ -6830,6 +7901,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "sky",
+              "protocol_display": "Sky",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6837,7 +7911,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 96,
@@ -6923,6 +8001,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 2.119939939063303,
               "apy_cost": 15.0273798499773,
               "bonus_borrow": 1.22602865642312,
@@ -6930,7 +8011,11 @@
               "apy_net": -114.51406283308567,
               "leverage": 10.036184059515016,
               "apy_reward": null,
-              "supply_tokens_display": "sUSDe, USDe, WMNT"
+              "supply_tokens_display": "sUSDe, USDe, WMNT",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 115,
@@ -6954,6 +8039,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6961,7 +8049,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 98,
@@ -6985,6 +8077,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "bsc_venusflux",
+              "protocol_display": "Venus Flux",
+              "protocol_category": null,
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -6992,7 +8087,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 95,
@@ -7048,6 +8147,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 4.17166,
               "apy_cost": 11.7134646543374,
               "bonus_supply": null,
@@ -7055,7 +8157,11 @@
               "apy_net": -72.68964244195993,
               "leverage": 11.19136744648456,
               "apy_reward": null,
-              "supply_tokens_display": "sUSDe"
+              "supply_tokens_display": "sUSDe",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 116,
@@ -7111,6 +8217,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": 4.17166,
               "apy_cost": 7.875505271390301,
               "bonus_supply": null,
@@ -7118,14 +8227,18 @@
               "apy_net": -38.36526544835227,
               "leverage": 12.484530894668099,
               "apy_reward": null,
-              "supply_tokens_display": "sUSDe"
+              "supply_tokens_display": "sUSDe",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 200,
               "wallet": "0x0fe15b65136ab92a3f9ce83cceb9e0663f1efaa6",
               "chain": "eth",
               "protocol_id": "aave-v3",
-              "protocol_name": "Aave v3",
+              "protocol_name": "Aave V3",
               "position_type": "borrow",
               "strategy": "borrow",
               "yield_source": null,
@@ -7158,6 +8271,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": 16.6645872335564,
               "bonus_supply": null,
@@ -7165,7 +8281,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             }
           ],
           "slug": "midas-mapollo"
@@ -7202,6 +8322,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "aave-scanner",
+          "protocol_canonical": "aave",
+          "protocol_display": "Aave V3",
+          "protocol_category": "lending",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -7209,7 +8332,11 @@
           "apy_net": null,
           "leverage": null,
           "apy_reward": null,
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 170,
@@ -7249,6 +8376,9 @@
           "discovery_type": "onchain",
           "source_type": "scanner",
           "source_name": "morpho-scanner",
+          "protocol_canonical": "morpho",
+          "protocol_display": "Morpho",
+          "protocol_category": "lending",
           "apy_base": 6.46193744971122,
           "apy_cost": null,
           "bonus_supply": 0.385184567114868,
@@ -7256,7 +8386,11 @@
           "apy_net": 6.009314407925962,
           "leverage": 1,
           "apy_reward": null,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 100,
+          "confidence": "high",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         }
       ],
       "is_multi_vault": true,
@@ -7291,6 +8425,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "aave-scanner",
+              "protocol_canonical": "aave",
+              "protocol_display": "Aave V3",
+              "protocol_category": "lending",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -7298,7 +8435,11 @@
               "apy_net": null,
               "leverage": null,
               "apy_reward": null,
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 170,
@@ -7338,6 +8479,9 @@
               "discovery_type": "onchain",
               "source_type": "scanner",
               "source_name": "morpho-scanner",
+              "protocol_canonical": "morpho",
+              "protocol_display": "Morpho",
+              "protocol_category": "lending",
               "apy_base": 6.46193744971122,
               "apy_cost": null,
               "bonus_supply": 0.385184567114868,
@@ -7345,7 +8489,11 @@
               "apy_net": 6.009314407925962,
               "leverage": 1,
               "apy_reward": null,
-              "supply_tokens_display": "USDC"
+              "supply_tokens_display": "USDC",
+              "source_priority": 100,
+              "confidence": "high",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             }
           ],
           "slug": "flagship-usdc-supervault"
@@ -7395,16 +8543,23 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
-          "apy_base": 4.21494,
+          "protocol_canonical": "ethena",
+          "protocol_display": "Ethena",
+          "protocol_category": "staking",
+          "apy_base": 4.4635,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 4.21494,
+          "apy_net": 4.4635,
           "leverage": null,
           "apy_reward": null,
           "asset_type": "Ethena",
-          "apy_current": 4.21494,
-          "supply_tokens_display": "-"
+          "apy_current": 4.4635,
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 121,
@@ -7428,16 +8583,23 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
-          "apy_base": 4.21494,
+          "protocol_canonical": "ethena",
+          "protocol_display": "Ethena",
+          "protocol_category": "staking",
+          "apy_base": 4.4635,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 4.21494,
+          "apy_net": 4.4635,
           "leverage": null,
           "apy_reward": null,
           "asset_type": "Ethena",
-          "apy_current": 4.21494,
-          "supply_tokens_display": "-"
+          "apy_current": 4.4635,
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 122,
@@ -7461,16 +8623,23 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
-          "apy_base": 4.21494,
+          "protocol_canonical": "ethena",
+          "protocol_display": "Ethena",
+          "protocol_category": "staking",
+          "apy_base": 4.4635,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 4.21494,
+          "apy_net": 4.4635,
           "leverage": null,
           "apy_reward": null,
           "asset_type": "Ethena",
-          "apy_current": 4.21494,
-          "supply_tokens_display": "-"
+          "apy_current": 4.4635,
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 120,
@@ -7494,6 +8663,9 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
+          "protocol_canonical": "curve",
+          "protocol_display": "Curve",
+          "protocol_category": "lp",
           "apy_base": null,
           "apy_cost": null,
           "bonus_supply": null,
@@ -7502,7 +8674,11 @@
           "leverage": null,
           "apy_reward": null,
           "asset_type": "Curve",
-          "supply_tokens_display": "-"
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "id": 123,
@@ -7526,16 +8702,23 @@
           "discovery_type": "onchain",
           "source_type": "debank",
           "source_name": "fetch",
-          "apy_base": 4.21494,
+          "protocol_canonical": "ethena",
+          "protocol_display": "Ethena",
+          "protocol_category": "staking",
+          "apy_base": 4.4635,
           "apy_cost": null,
           "bonus_supply": null,
           "bonus_borrow": null,
-          "apy_net": 4.21494,
+          "apy_net": 4.4635,
           "leverage": null,
           "apy_reward": null,
           "asset_type": "Ethena",
-          "apy_current": 4.21494,
-          "supply_tokens_display": "-"
+          "apy_current": 4.4635,
+          "supply_tokens_display": "-",
+          "source_priority": 40,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "direct_position"
         },
         {
           "wallet": "off-chain",
@@ -7575,7 +8758,11 @@
           "discovery_type": "offchain",
           "apy_net": 6.08,
           "asset_type": "Reinsurance",
-          "supply_tokens_display": "USD"
+          "supply_tokens_display": "USD",
+          "source_priority": 70,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         }
       ],
       "is_multi_vault": true,
@@ -7623,16 +8810,23 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
-              "apy_base": 4.21494,
+              "protocol_canonical": "ethena",
+              "protocol_display": "Ethena",
+              "protocol_category": "staking",
+              "apy_base": 4.4635,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 4.21494,
+              "apy_net": 4.4635,
               "leverage": null,
               "apy_reward": null,
               "asset_type": "Ethena",
-              "apy_current": 4.21494,
-              "supply_tokens_display": "-"
+              "apy_current": 4.4635,
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 121,
@@ -7656,16 +8850,23 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
-              "apy_base": 4.21494,
+              "protocol_canonical": "ethena",
+              "protocol_display": "Ethena",
+              "protocol_category": "staking",
+              "apy_base": 4.4635,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 4.21494,
+              "apy_net": 4.4635,
               "leverage": null,
               "apy_reward": null,
               "asset_type": "Ethena",
-              "apy_current": 4.21494,
-              "supply_tokens_display": "-"
+              "apy_current": 4.4635,
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 122,
@@ -7689,16 +8890,23 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
-              "apy_base": 4.21494,
+              "protocol_canonical": "ethena",
+              "protocol_display": "Ethena",
+              "protocol_category": "staking",
+              "apy_base": 4.4635,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 4.21494,
+              "apy_net": 4.4635,
               "leverage": null,
               "apy_reward": null,
               "asset_type": "Ethena",
-              "apy_current": 4.21494,
-              "supply_tokens_display": "-"
+              "apy_current": 4.4635,
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 120,
@@ -7722,6 +8930,9 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
+              "protocol_canonical": "curve",
+              "protocol_display": "Curve",
+              "protocol_category": "lp",
               "apy_base": null,
               "apy_cost": null,
               "bonus_supply": null,
@@ -7730,7 +8941,11 @@
               "leverage": null,
               "apy_reward": null,
               "asset_type": "Curve",
-              "supply_tokens_display": "-"
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             },
             {
               "id": 123,
@@ -7754,16 +8969,23 @@
               "discovery_type": "onchain",
               "source_type": "debank",
               "source_name": "fetch",
-              "apy_base": 4.21494,
+              "protocol_canonical": "ethena",
+              "protocol_display": "Ethena",
+              "protocol_category": "staking",
+              "apy_base": 4.4635,
               "apy_cost": null,
               "bonus_supply": null,
               "bonus_borrow": null,
-              "apy_net": 4.21494,
+              "apy_net": 4.4635,
               "leverage": null,
               "apy_reward": null,
               "asset_type": "Ethena",
-              "apy_current": 4.21494,
-              "supply_tokens_display": "-"
+              "apy_current": 4.4635,
+              "supply_tokens_display": "-",
+              "source_priority": 40,
+              "confidence": "medium",
+              "normalization_status": "canonical",
+              "exposure_class": "direct_position"
             }
           ],
           "slug": "re-protocol"
@@ -7818,7 +9040,11 @@
           "source_name": "fetch-anzen",
           "discovery_type": "offchain",
           "apy_net": 5,
-          "supply_tokens_display": "MMZ20240501ZZZ500"
+          "supply_tokens_display": "MMZ20240501ZZZ500",
+          "source_priority": 70,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -7860,7 +9086,11 @@
           "source_name": "fetch-anzen",
           "discovery_type": "offchain",
           "apy_net": 13,
-          "supply_tokens_display": "HLF20270521ZZZ1300"
+          "supply_tokens_display": "HLF20270521ZZZ1300",
+          "source_priority": 70,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -7902,7 +9132,11 @@
           "source_name": "fetch-anzen",
           "discovery_type": "offchain",
           "apy_net": 16.75,
-          "supply_tokens_display": "BYZ20260506ZZZ1675"
+          "supply_tokens_display": "BYZ20260506ZZZ1675",
+          "source_priority": 70,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -7944,7 +9178,11 @@
           "source_name": "fetch-anzen",
           "discovery_type": "offchain",
           "apy_net": 20,
-          "supply_tokens_display": "ICM260627BBB2000"
+          "supply_tokens_display": "ICM260627BBB2000",
+          "source_priority": 70,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -7986,7 +9224,11 @@
           "source_name": "fetch-anzen",
           "discovery_type": "offchain",
           "apy_net": 13,
-          "supply_tokens_display": "SPR20260501ZZZ1300"
+          "supply_tokens_display": "SPR20260501ZZZ1300",
+          "source_priority": 70,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -8028,7 +9270,11 @@
           "source_name": "fetch-anzen",
           "discovery_type": "offchain",
           "apy_net": 3.42,
-          "supply_tokens_display": "SPS20250217ZZZ0405"
+          "supply_tokens_display": "SPS20250217ZZZ0405",
+          "source_priority": 70,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         }
       ],
       "is_multi_vault": false,
@@ -8081,7 +9327,11 @@
           "source_name": "fetch-pareto",
           "discovery_type": "mixed",
           "apy_net": 0,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -8122,7 +9372,11 @@
           "source_name": "fetch-pareto",
           "discovery_type": "mixed",
           "apy_net": 0,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -8163,7 +9417,11 @@
           "source_name": "fetch-pareto",
           "discovery_type": "mixed",
           "apy_net": 0,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         },
         {
           "wallet": "off-chain",
@@ -8204,7 +9462,11 @@
           "source_name": "fetch-pareto",
           "discovery_type": "mixed",
           "apy_net": 0,
-          "supply_tokens_display": "USDC"
+          "supply_tokens_display": "USDC",
+          "source_priority": 80,
+          "confidence": "medium",
+          "normalization_status": "canonical",
+          "exposure_class": "manual_offchain"
         }
       ],
       "is_multi_vault": false,
