@@ -10,6 +10,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') }
 const path = require('path');
 const Database = require('better-sqlite3');
 const { loadActiveWalletChains, loadWhaleWalletMap, hasProtocolHint } = require('./recon-helpers');
+const { decomposeAaveFromDebank } = require('./aave-decompose');
 
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const AAVE_GRAPHQL = 'https://api.v3.aave.com/graphql';
@@ -157,18 +158,28 @@ function buildCombinedRow(wallet, label, chainId, supplies, borrows, meritAPRs, 
   };
 }
 
-async function scanWallet(wallet, label, chainId) {
-  const markets = MARKETS[chainId] || [];
-  if (!markets.length) return null;
-  const [supplies, borrows, meritAPRs, state] = await Promise.all([
-    getUserSupplies(wallet, chainId),
-    getUserBorrows(wallet, chainId),
-    getMeritAPRs(wallet),
-    getUserMarketState(wallet, markets[0], chainId),
-  ]);
+async function scanWallet(wallet, label, chainIds) {
+  const out = [];
+  for (const chainId of (Array.isArray(chainIds) ? chainIds : [chainIds])) {
+    const markets = MARKETS[chainId] || [];
+    if (!markets.length) continue;
+    const [supplies, borrows, meritAPRs, state] = await Promise.all([
+      getUserSupplies(wallet, chainId),
+      getUserBorrows(wallet, chainId),
+      getMeritAPRs(wallet),
+      getUserMarketState(wallet, markets[0], chainId),
+    ]);
 
-  if ((!supplies || supplies.length === 0) && (!borrows || borrows.length === 0)) return null;
-  return buildCombinedRow(wallet, label, chainId, supplies || [], borrows || [], meritAPRs || {}, state || null);
+    if ((!supplies || supplies.length === 0) && (!borrows || borrows.length === 0)) continue;
+    out.push(buildCombinedRow(wallet, label, chainId, supplies || [], borrows || [], meritAPRs || {}, state || null));
+  }
+  const filtered = out.filter(r => Math.abs(r.net_usd || 0) >= 50000);
+  const decomposed = [];
+  for (const row of filtered) {
+    const expanded = decomposeAaveFromDebank(row.wallet, row.chain, row);
+    decomposed.push(...expanded);
+  }
+  return decomposed;
 }
 
 function savePositions(db, rows) {
@@ -189,20 +200,24 @@ function savePositions(db, rows) {
     INSERT INTO position_tokens (position_id, role, symbol, address, amount, value_usd, apy_base, bonus_supply_apy)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `);
-  const deleteOldRows = db.prepare(`SELECT id FROM positions WHERE lower(wallet) = lower(?) AND protocol_id IN ('aave-v3','aave3','base_aave3','plasma_aave3','mnt_aave3','ink_aave3')`);
+  const deleteOldRows = db.prepare(`SELECT id, chain, position_index FROM positions WHERE lower(wallet) = lower(?) AND protocol_id IN ('aave-v3','aave3','base_aave3','plasma_aave3','mnt_aave3','ink_aave3')`);
   const deletePos = db.prepare(`DELETE FROM positions WHERE id = ?`);
 
   const tx = db.transaction(() => {
     const seenWalletChain = new Set();
+    const keepKeys = new Set(rows.map(r => `${r.wallet.toLowerCase()}|${r.chain}|${r.position_index}`));
     for (const row of rows) {
       const walletKey = `${row.wallet.toLowerCase()}`;
       if (!seenWalletChain.has(walletKey)) {
         seenWalletChain.add(walletKey);
         const old = deleteOldRows.all(row.wallet);
         for (const r of old) {
-          clearMarkets.run(r.id);
-          clearTokens.run(r.id);
-          deletePos.run(r.id);
+          const staleKey = `${row.wallet.toLowerCase()}|${r.chain}|${r.position_index}`;
+          if (!keepKeys.has(staleKey)) {
+            clearMarkets.run(r.id);
+            clearTokens.run(r.id);
+            deletePos.run(r.id);
+          }
         }
       }
 
@@ -252,10 +267,12 @@ async function main() {
   console.log(`Scanning ${walletMap.length} wallet+chain pairs\n`);
 
   for (const w of walletMap) {
-    const row = await scanWallet(w.addr, w.label, w.chainId);
-    if (!row) continue;
-    console.log(`  ${w.label} ${w.addr.slice(0,10)} ${row.chain}: $${(row.net_usd/1e6).toFixed(2)}M net | supply ${row.supply.length} | borrow ${row.borrow.length}`);
-    rows.push(row);
+    const walletRows = await scanWallet(w.addr, w.label, [w.chainId || 1]);
+    if (!walletRows || walletRows.length === 0) continue;
+    for (const row of walletRows) {
+      console.log(`  ${w.label} ${w.addr.slice(0,10)} ${row.chain}: $${(row.net_usd/1e6).toFixed(2)}M net | supply ${row.supply.length} | borrow ${row.borrow.length}`);
+      rows.push(row);
+    }
   }
 
   savePositions(db, rows);

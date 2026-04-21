@@ -47,6 +47,7 @@ async function scanWallets(wallets, label) {
 
         // Clear old positions for this wallet before scanning
         db.prepare('DELETE FROM position_tokens WHERE position_id IN (SELECT id FROM positions WHERE wallet = ?)').run(addr);
+        db.prepare('DELETE FROM position_markets WHERE position_id IN (SELECT id FROM positions WHERE wallet = ?)').run(addr);
         db.prepare('DELETE FROM positions WHERE wallet = ?').run(addr);
 
         const chains = await api(`/v1/user/used_chain_list?id=${addr}`);

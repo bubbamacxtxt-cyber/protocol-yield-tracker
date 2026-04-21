@@ -95,12 +95,34 @@ async function scanWallet(wallet, label, allowedChains = null) {
     if (!rows.has(key)) rows.set(key, { wallet, label, chain, chainId: Number(chainId), supply: [], borrow: [], health_rate: item.healthFactor || null });
     const row = rows.get(key);
     const marketApy = await getMarketAPY(market.uniqueKey, market.chainId || 1);
+
+    const collateralAsset = market.collateralAsset || {};
+    const collateralUsd = Number(item.collateralUsd || 0);
+    if (collateralUsd > 0 && collateralAsset.address) {
+      const existingSupply = row.supply.find(s => String(s.address).toLowerCase() === String(collateralAsset.address).toLowerCase());
+      if (existingSupply) {
+        existingSupply.value_usd = Math.max(Number(existingSupply.value_usd || 0), collateralUsd);
+      } else {
+        row.supply.push({
+          symbol: collateralAsset.symbol || '?',
+          address: collateralAsset.address || '',
+          amount: Number(item.collateral || 0),
+          value_usd: collateralUsd,
+          apy_base: marketApy?.supplyApy || null,
+          bonus_supply_apy: null,
+        });
+      }
+    }
+
     row.borrow.push({
       symbol: market.loanAsset?.symbol || '?',
       address: market.uniqueKey || market.marketId || '',
       amount: Number(item.borrowShares || 0),
       value_usd: Number(item.borrowAssetsUsd || 0),
       apy_base: marketApy?.borrowApy || null,
+      collateral_address: collateralAsset.address || '',
+      collateral_symbol: collateralAsset.symbol || '?',
+      collateral_usd: collateralUsd,
     });
     if (item.healthFactor != null) row.health_rate = item.healthFactor;
   }
@@ -110,15 +132,53 @@ async function scanWallet(wallet, label, allowedChains = null) {
     const asset_usd = row.supply.reduce((s, t) => s + (t.value_usd || 0), 0);
     const debt_usd = row.borrow.reduce((s, t) => s + (t.value_usd || 0), 0);
 
-    // Group by supply/borrow pairing so wallets can carry multiple independent Morpho exposures on one chain.
-    if (row.supply.length > 0) {
-      for (const s of row.supply) {
-        // Pair by closest borrow magnitude when borrow exists, otherwise pure supply row.
-        let pairedBorrow = null;
-        if (row.borrow.length > 0) {
-          pairedBorrow = row.borrow.slice().sort((a,b) => Math.abs((a.value_usd||0) - (s.value_usd||0)) - Math.abs((b.value_usd||0) - (s.value_usd||0)))[0];
+    // Group by explicit collateral asset first; borrow endpoint carries the collateral leg even when earn endpoint is empty.
+    if (row.borrow.length > 0) {
+      const borrowGroups = new Map();
+      for (const b of row.borrow) {
+        const k = String(b.collateral_address || '').toLowerCase() || 'no-collateral';
+        if (!borrowGroups.has(k)) borrowGroups.set(k, []);
+        borrowGroups.get(k).push(b);
+      }
+
+      const usedSupply = new Set();
+      for (const [collateralKey, borrows] of borrowGroups.entries()) {
+        let supply = row.supply.find(s => String(s.address || '').toLowerCase() === collateralKey) || null;
+        if (!supply && borrows[0]?.collateral_address) {
+          supply = {
+            symbol: borrows[0].collateral_symbol || '?',
+            address: borrows[0].collateral_address || '',
+            amount: 0,
+            value_usd: Math.max(...borrows.map(b => Number(b.collateral_usd || 0))),
+            apy_base: null,
+            bonus_supply_apy: null,
+          };
         }
-        const debt = pairedBorrow ? Number(pairedBorrow.value_usd || 0) : 0;
+        if (supply) usedSupply.add(String(supply.address || '').toLowerCase());
+        const debt = borrows.reduce((sum, b) => sum + Number(b.value_usd || 0), 0);
+        const asset = Number(supply?.value_usd || 0);
+        out.push({
+          wallet: row.wallet,
+          label: row.label,
+          chain: row.chain,
+          chainId: row.chainId,
+          protocol_name: 'Morpho',
+          protocol_id: 'morpho',
+          position_type: supply ? 'supply' : 'borrow',
+          strategy: supply ? 'lend' : 'borrow',
+          position_index: `${row.wallet.toLowerCase()}|${row.chain}|${collateralKey}|${borrows.map(b => String(b.address || b.symbol).toLowerCase()).join('+')}`,
+          health_rate: row.health_rate,
+          net_usd: asset - debt,
+          asset_usd: asset,
+          debt_usd: debt,
+          supply: supply ? [supply] : [],
+          borrow: borrows.map(({ collateral_address, collateral_symbol, collateral_usd, ...rest }) => rest),
+        });
+      }
+
+      for (const s of row.supply) {
+        const key = String(s.address || '').toLowerCase();
+        if (usedSupply.has(key)) continue;
         out.push({
           wallet: row.wallet,
           label: row.label,
@@ -128,34 +188,35 @@ async function scanWallet(wallet, label, allowedChains = null) {
           protocol_id: 'morpho',
           position_type: 'supply',
           strategy: 'lend',
-          position_index: `${row.wallet.toLowerCase()}|${row.chain}|${String(s.address || s.symbol).toLowerCase()}|${pairedBorrow ? String(pairedBorrow.address || pairedBorrow.symbol).toLowerCase() : 'noborrow'}`,
+          position_index: `${row.wallet.toLowerCase()}|${row.chain}|${key}|noborrow`,
           health_rate: row.health_rate,
-          net_usd: Number(s.value_usd || 0) - debt,
+          net_usd: Number(s.value_usd || 0),
           asset_usd: Number(s.value_usd || 0),
-          debt_usd: debt,
+          debt_usd: 0,
           supply: [s],
-          borrow: pairedBorrow ? [pairedBorrow] : [],
+          borrow: [],
         });
       }
-    } else if (row.borrow.length > 0) {
-      // Only emit pure-borrow row when there is truly no supply leg at all.
-      out.push({
-        wallet: row.wallet,
-        label: row.label,
-        chain: row.chain,
-        chainId: row.chainId,
-        protocol_name: 'Morpho',
-        protocol_id: 'morpho',
-        position_type: 'borrow',
-        strategy: 'borrow',
-        position_index: `${row.wallet.toLowerCase()}|${row.chain}|borrow-only`,
-        health_rate: row.health_rate,
-        net_usd: -debt_usd,
-        asset_usd: 0,
-        debt_usd,
-        supply: [],
-        borrow: row.borrow,
-      });
+    } else if (row.supply.length > 0) {
+      for (const s of row.supply) {
+        out.push({
+          wallet: row.wallet,
+          label: row.label,
+          chain: row.chain,
+          chainId: row.chainId,
+          protocol_name: 'Morpho',
+          protocol_id: 'morpho',
+          position_type: 'supply',
+          strategy: 'lend',
+          position_index: `${row.wallet.toLowerCase()}|${row.chain}|${String(s.address || s.symbol).toLowerCase()}|noborrow`,
+          health_rate: row.health_rate,
+          net_usd: Number(s.value_usd || 0),
+          asset_usd: Number(s.value_usd || 0),
+          debt_usd: 0,
+          supply: [s],
+          borrow: [],
+        });
+      }
     }
   }
   return out.filter(r => r.asset_usd > 0 || r.debt_usd > 0);

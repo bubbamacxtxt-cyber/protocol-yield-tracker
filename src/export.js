@@ -29,6 +29,7 @@ function applyProtocolRegistry(position, registry) {
             p.protocol_canonical = key;
             p.protocol_display = entry.display_name || p.protocol_name;
             p.protocol_category = entry.category || null;
+            if (entry.canonical_id) p.protocol_id = entry.canonical_id;
             if (entry.display_name) p.protocol_name = entry.display_name;
 
             // Normalize certain protocol display names that still arrive through legacy rows.
@@ -53,6 +54,7 @@ function finalizeSourceMeta(position) {
         if (p.source_type === 'scanner') p.source_priority = 100;
         else if (p.source_type === 'protocol_api') p.source_priority = 80;
         else if (p.source_type === 'manual') p.source_priority = 70;
+        else if (p.source_type === 'wallet') p.source_priority = 60;
         else if (p.source_type === 'debank' || p.source_type === 'fallback') p.source_priority = 40;
         else p.source_priority = 50;
     }
@@ -61,6 +63,7 @@ function finalizeSourceMeta(position) {
         else if (p.source_type === 'scanner') p.confidence = 'high';
         else if (p.source_type === 'protocol_api') p.confidence = 'high';
         else if (p.source_type === 'manual') p.confidence = 'medium';
+        else if (p.source_type === 'wallet') p.confidence = 'high';
         else p.confidence = 'medium';
     }
     if (!p.normalization_status) {
@@ -70,6 +73,7 @@ function finalizeSourceMeta(position) {
     if (!p.exposure_class) {
         if (p.pendle_status === 'fallback') p.exposure_class = 'bundled_protocol_fallback';
         else if (p.wallet === 'off-chain') p.exposure_class = 'manual_offchain';
+        else if (p.source_type === 'wallet' || String(p.protocol_id || '').toLowerCase() === 'wallet-held') p.exposure_class = 'wallet_holding';
         else p.exposure_class = 'direct_position';
     }
     return p;
@@ -155,7 +159,9 @@ function normalizeSourceMeta(position) {
     if (!p.source_type) {
         const protocol = String(p.protocol_name || '').toLowerCase();
         const protocolId = String(p.protocol_id || '').toLowerCase();
-        if (protocol.includes('aave') || protocol.includes('morpho') || protocol.includes('euler') || protocol.includes('fluid') || protocolId.includes('aave') || protocolId.includes('morpho') || protocolId.includes('euler') || protocolId.includes('fluid')) {
+        if (protocolId === 'wallet-held' || protocol === 'wallet') {
+            p.source_type = 'wallet';
+        } else if (protocol.includes('aave') || protocol.includes('morpho') || protocol.includes('euler') || protocol.includes('fluid') || protocolId.includes('aave') || protocolId.includes('morpho') || protocolId.includes('euler') || protocolId.includes('fluid')) {
             p.source_type = 'scanner';
         } else {
             p.source_type = 'debank';
@@ -174,6 +180,8 @@ function normalizeSourceMeta(position) {
             p.source_name = 'fetch';
         } else if (p.source_type === 'manual') {
             p.source_name = 'manual';
+        } else if (p.source_type === 'wallet') {
+            p.source_name = 'wallet-scan';
         } else if (p.source_type === 'protocol_api') {
             p.source_name = 'protocol_api';
         }
@@ -194,6 +202,73 @@ function findYbsToken(stables, symbol, address) {
         if (String(s.name || '').toUpperCase() === sym) return true;
         return (s.aliases || []).some(a => String(a || '').toUpperCase() === sym);
     }) || null;
+}
+
+function normalizeTokenCluster(tokens = []) {
+    return (tokens || [])
+        .map(t => ({
+            symbol: String(t?.symbol || '').toLowerCase(),
+            address: String(t?.address || '').toLowerCase(),
+            value: Math.round(Number(t?.value_usd || 0))
+        }))
+        .sort((a, b) => {
+            if (a.address !== b.address) return a.address.localeCompare(b.address);
+            if (a.symbol !== b.symbol) return a.symbol.localeCompare(b.symbol);
+            return a.value - b.value;
+        })
+        .map(t => `${t.symbol}:${t.address}:${t.value}`)
+        .join('|');
+}
+
+function clusterKey(position) {
+    return [
+        String(position.wallet || '').toLowerCase(),
+        String(position.chain || '').toLowerCase(),
+        String(position.protocol_canonical || position.protocol_id || position.protocol_name || '').toLowerCase(),
+        normalizeTokenCluster(position.supply || []),
+        normalizeTokenCluster(position.borrow || []),
+    ].join('||');
+}
+
+function sourceRank(position) {
+    const sourceType = String(position.source_type || '').toLowerCase();
+    if (sourceType === 'scanner') return 500;
+    if (sourceType === 'protocol_api') return 400;
+    if (sourceType === 'manual') return 300;
+    if (sourceType === 'wallet') return 200;
+    if (sourceType === 'debank' || sourceType === 'fallback') return 100;
+    return Number(position.source_priority || 0);
+}
+
+function mergePreferredRow(best, candidate) {
+    const keep = { ...best };
+    if ((keep.apy_base == null || keep.apy_base === 0) && candidate.apy_base != null) keep.apy_base = candidate.apy_base;
+    if ((keep.apy_cost == null || keep.apy_cost === 0) && candidate.apy_cost != null) keep.apy_cost = candidate.apy_cost;
+    if ((keep.health_rate == null || keep.health_rate === 0) && candidate.health_rate != null) keep.health_rate = candidate.health_rate;
+    if ((!keep.rewards || keep.rewards.length === 0) && candidate.rewards?.length) keep.rewards = candidate.rewards;
+    if ((!keep.supply || keep.supply.length === 0) && candidate.supply?.length) keep.supply = candidate.supply;
+    if ((!keep.borrow || keep.borrow.length === 0) && candidate.borrow?.length) keep.borrow = candidate.borrow;
+    return keep;
+}
+
+function dedupCanonicalClusters(positions) {
+    const byKey = new Map();
+    for (const p of positions) {
+        const key = clusterKey(p);
+        const existing = byKey.get(key);
+        if (!existing) {
+            byKey.set(key, p);
+            continue;
+        }
+        const existingRank = sourceRank(existing);
+        const nextRank = sourceRank(p);
+        if (nextRank > existingRank) {
+            byKey.set(key, mergePreferredRow(p, existing));
+        } else {
+            byKey.set(key, mergePreferredRow(existing, p));
+        }
+    }
+    return [...byKey.values()];
 }
 
 // Whale definitions loaded from data/whales.json
@@ -669,6 +744,7 @@ async function main() {
 
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
         const positions = filtered.filter(p => !p._drop && walletSet.has(p.wallet.toLowerCase()));
+        const dedupedBySignature = dedupCanonicalClusters(positions);
 
         // No entity-level chain suppression here.
         // Only remove rows when they are structurally duplicate/fragment/enrichment leakage,
@@ -677,13 +753,13 @@ async function main() {
         // Remove standalone canonical issued-asset rows when a scanner-owned venue row already exists
         // for the same wallet+chain and the issued asset is just part of that venue exposure.
         const scannerContext = new Set(
-            positions
+            dedupedBySignature
                 .filter(p => p.source_type === 'scanner')
                 .map(p => `${String(p.wallet || '').toLowerCase()}|${String(p.chain || '').toLowerCase()}`)
         );
-        const cleanedPositions = positions.filter(p => !p._drop).filter(p => {
+        const cleanedPositions = dedupedBySignature.filter(p => !p._drop).filter(p => {
             const walletChain = `${String(p.wallet || '').toLowerCase()}|${String(p.chain || '').toLowerCase()}`;
-            const scannerRowsSameWalletChain = positions.filter(x => `${String(x.wallet || '').toLowerCase()}|${String(x.chain || '').toLowerCase()}` === walletChain && (x.source_type === 'scanner' || String(x.source_name || '') === 'aave-scanner' || String(x.source_name || '') === 'morpho-scanner' || String(x.source_name || '') === 'euler-scanner' || String(x.source_name || '') === 'pendle-portfolio' || String(x.source_name || '') === 'pendle-balanceof'));
+            const scannerRowsSameWalletChain = dedupedBySignature.filter(x => `${String(x.wallet || '').toLowerCase()}|${String(x.chain || '').toLowerCase()}` === walletChain && (x.source_type === 'scanner' || String(x.source_name || '') === 'aave-scanner' || String(x.source_name || '') === 'morpho-scanner' || String(x.source_name || '') === 'euler-scanner' || String(x.source_name || '') === 'pendle-portfolio' || String(x.source_name || '') === 'pendle-balanceof'));
             const scannerContextForSuppression = scannerRowsSameWalletChain.filter(x => (x.asset_usd || 0) > 0 || (x.debt_usd || 0) > 0);
             const isCanonicalYieldRow = p.source_type === 'protocol_api'
                 && (p.exposure_class === 'yield_bearing_stable' || p.exposure_class === 'vault_position');
@@ -759,6 +835,21 @@ async function main() {
                     String(x.protocol_canonical || x.protocol_name || x.protocol_id || '').toLowerCase() === String(p.protocol_canonical || p.protocol_name || p.protocol_id || '').toLowerCase()
                 );
                 if (sameFamilyScanner) return false;
+            }
+
+            const isWalletLikeRow = String(p.protocol_id || '').toLowerCase() === 'wallet-held'
+                || String(p.protocol_name || '').toLowerCase() === 'wallet'
+                || String(p.source_type || '').toLowerCase() === 'wallet';
+            if (isWalletLikeRow && scannerContextForSuppression.length > 0) {
+                const heldAddrs = (p.supply || []).map(t => String(t.address || '').toLowerCase()).filter(Boolean);
+                const heldSyms = (p.supply || []).map(t => String(t.symbol || '').toLowerCase()).filter(Boolean);
+                const overlapsScanner = scannerContextForSuppression.some(x => {
+                    const tokens = [...(x.supply || []), ...(x.borrow || [])];
+                    const tokenAddrs = tokens.map(t => String(t.address || '').toLowerCase()).filter(Boolean);
+                    const tokenSyms = tokens.map(t => String(t.symbol || '').toLowerCase()).filter(Boolean);
+                    return heldAddrs.some(a => tokenAddrs.includes(a)) || heldSyms.some(s => tokenSyms.includes(s));
+                });
+                if (overlapsScanner) return false;
             }
 
             return true;
