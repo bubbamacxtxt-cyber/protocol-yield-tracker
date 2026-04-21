@@ -19,6 +19,7 @@ const { Contract } = require('ethers');
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const { JsonRpcProvider } = require('ethers');
 const { getProvider, scanAaveForkWallet, ERC20_ABI } = require('./aave-fork-rpc');
+const { loadActiveWalletChains, loadWhaleWalletMap } = require('./recon-helpers');
 
 const POOL_ADDRESSES_PROVIDER = '0x02C3eA4e34C0cBd694D2adFa2c690EECbC1793eE';
 
@@ -218,11 +219,22 @@ async function enrichSavingsAPY(positions) {
 
 async function main() {
   const fs = require('fs');
-  const whales = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
-  const walletMap = [];
-  for (const [label, config] of Object.entries(whales)) {
-    const addrs = Array.isArray(config) ? config : (config.vaults ? Object.values(config.vaults).flat() : []);
-    for (const addr of addrs) walletMap.push({ addr, label });
+  let walletMap = [];
+  const active = loadActiveWalletChains();
+  if (active && active.length > 0) {
+    const labelByWallet = new Map(loadWhaleWalletMap().map(w => [w.addr, w.label]));
+    const seen = new Set();
+    for (const row of active) {
+      if (seen.has(row.wallet)) continue;
+      seen.add(row.wallet);
+      walletMap.push({ addr: row.wallet, label: labelByWallet.get(row.wallet) || row.whale || 'Unknown' });
+    }
+  } else {
+    const whales = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
+    for (const [label, config] of Object.entries(whales)) {
+      const addrs = Array.isArray(config) ? config : (config.vaults ? Object.values(config.vaults).flat() : []);
+      for (const addr of addrs) walletMap.push({ addr, label });
+    }
   }
 
   const provider = getProvider();

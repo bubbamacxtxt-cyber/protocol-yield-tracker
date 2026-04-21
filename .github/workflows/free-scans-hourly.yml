@@ -1,0 +1,60 @@
+name: Hourly Free Scans
+
+on:
+  schedule:
+    - cron: '15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  scans:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Build Alchemy recon from active wallet+chain pairs
+        run: node src/build-alchemy-recon.js
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+      - name: Build canonical token matches
+        run: node src/build-canonical-token-matches.js
+      - name: Scan Aave positions
+        run: node src/aave-scanner.js
+      - name: Scan Morpho positions
+        run: node src/morpho-scanner.js
+      - name: Scan Euler positions
+        run: node src/euler-scanner.js
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+      - name: Scan Spark positions
+        run: node src/spark-scanner.js
+        env:
+          ALCHEMY_RPC_URL: ${{ secrets.ALCHEMY_RPC_URL }}
+      - name: Scan Pendle positions
+        run: node src/pendle-scanner.js
+      - name: Enrich positions with market/vault info
+        run: node src/enrich-markets.js
+      - name: Fetch base APY rates
+        run: node src/fetch-base-apy.js
+      - name: Fetch Merkl incentives
+        run: node src/fetch-merkl.js || node src/fetch-merkl.js || echo 'Merkl failed after 3 attempts'
+      - name: Fix Morpho collateral labels
+        run: node src/fix-morpho-tokens.js yield-tracker.db --apply
+      - name: Export to data.json
+        run: node src/export.js
+      - name: Build source audit
+        run: node src/source-audit.js
+      - name: Check regression fixtures
+        run: node src/check-fixtures.js
+      - name: Validate data
+        run: node src/validate.js
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Hourly free scans ${{ github.run_number }}"
+          file_pattern: data/recon/alchemy-token-discovery.json data/recon/canonical-token-matches.json data/source-audit.json data.json data/total-history.json yield-tracker.db

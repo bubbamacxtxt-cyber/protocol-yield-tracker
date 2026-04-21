@@ -11,6 +11,7 @@ const Database = require('better-sqlite3');
 const fs = require('fs');
 const path = require('path');
 const { fetchJSON } = require('./fetch-helper');
+const { loadActiveWalletChains, loadWhaleWalletMap } = require('./recon-helpers');
 
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const ALCHEMY_KEY = process.env.ALCHEMY_API_KEY;
@@ -160,14 +161,24 @@ async function scanWallet(db, wallet, label, vaultsByChain) {
 
 async function main() {
   const db = new Database(DB_PATH);
-  const whales = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
-  const walletMap = [];
-
-  for (const [name, config] of Object.entries(whales)) {
-    const wallets = Array.isArray(config)
-      ? config
-      : (config.vaults ? Object.values(config.vaults).flat() : []);
-    for (const w of wallets) walletMap.push({ addr: w.toLowerCase(), label: name });
+  let walletMap = [];
+  const active = loadActiveWalletChains();
+  if (active && active.length > 0) {
+    const labelByWallet = new Map(loadWhaleWalletMap().map(w => [w.addr, w.label]));
+    const seen = new Set();
+    for (const row of active) {
+      if (seen.has(row.wallet)) continue;
+      seen.add(row.wallet);
+      walletMap.push({ addr: row.wallet, label: labelByWallet.get(row.wallet) || row.whale || 'Unknown' });
+    }
+  } else {
+    const whales = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
+    for (const [name, config] of Object.entries(whales)) {
+      const wallets = Array.isArray(config)
+        ? config
+        : (config.vaults ? Object.values(config.vaults).flat() : []);
+      for (const w of wallets) walletMap.push({ addr: w.toLowerCase(), label: name });
+    }
   }
 
   console.log('=== Euler v2 Scanner ===');

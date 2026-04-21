@@ -1,0 +1,32 @@
+name: Daily DeBank Recon
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Build wallet inventory
+        run: node src/build-wallet-inventory.js
+      - name: DeBank wallet recon
+        run: node src/build-debank-recon.js
+        env:
+          DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
+      - name: Reconcile gaps against latest modeled data
+        run: node src/reconcile-gaps.js
+      - name: Commit recon artifacts
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Daily DeBank recon ${{ github.run_number }}"
+          file_pattern: data/recon/wallet-inventory.json data/recon/debank-wallet-summary.json data/recon/debank-wallet-positions.json data/recon/gap-report.json
