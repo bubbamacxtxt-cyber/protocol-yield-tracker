@@ -105,27 +105,60 @@ async function scanWallet(wallet, label, allowedChains = null) {
     if (item.healthFactor != null) row.health_rate = item.healthFactor;
   }
 
-  return [...rows.values()].map(row => {
+  const out = [];
+  for (const row of rows.values()) {
     const asset_usd = row.supply.reduce((s, t) => s + (t.value_usd || 0), 0);
     const debt_usd = row.borrow.reduce((s, t) => s + (t.value_usd || 0), 0);
-    return {
-      wallet: row.wallet,
-      label: row.label,
-      chain: row.chain,
-      chainId: row.chainId,
-      protocol_name: 'Morpho',
-      protocol_id: 'morpho',
-      position_type: asset_usd > 0 ? 'supply' : 'borrow',
-      strategy: asset_usd > 0 ? 'lend' : 'borrow',
-      position_index: `${row.wallet.toLowerCase()}|${row.chain}`,
-      health_rate: row.health_rate,
-      net_usd: asset_usd - debt_usd,
-      asset_usd,
-      debt_usd,
-      supply: row.supply,
-      borrow: row.borrow,
-    };
-  }).filter(r => r.asset_usd > 0 || r.debt_usd > 0);
+
+    // Group by supply/borrow pairing so wallets can carry multiple independent Morpho exposures on one chain.
+    if (row.supply.length > 0) {
+      for (const s of row.supply) {
+        // Pair by closest borrow magnitude when borrow exists, otherwise pure supply row.
+        let pairedBorrow = null;
+        if (row.borrow.length > 0) {
+          pairedBorrow = row.borrow.slice().sort((a,b) => Math.abs((a.value_usd||0) - (s.value_usd||0)) - Math.abs((b.value_usd||0) - (s.value_usd||0)))[0];
+        }
+        const debt = pairedBorrow ? Number(pairedBorrow.value_usd || 0) : 0;
+        out.push({
+          wallet: row.wallet,
+          label: row.label,
+          chain: row.chain,
+          chainId: row.chainId,
+          protocol_name: 'Morpho',
+          protocol_id: 'morpho',
+          position_type: 'supply',
+          strategy: 'lend',
+          position_index: `${row.wallet.toLowerCase()}|${row.chain}|${String(s.address || s.symbol).toLowerCase()}|${pairedBorrow ? String(pairedBorrow.address || pairedBorrow.symbol).toLowerCase() : 'noborrow'}`,
+          health_rate: row.health_rate,
+          net_usd: Number(s.value_usd || 0) - debt,
+          asset_usd: Number(s.value_usd || 0),
+          debt_usd: debt,
+          supply: [s],
+          borrow: pairedBorrow ? [pairedBorrow] : [],
+        });
+      }
+    } else if (row.borrow.length > 0) {
+      // Only emit pure-borrow row when there is truly no supply leg at all.
+      out.push({
+        wallet: row.wallet,
+        label: row.label,
+        chain: row.chain,
+        chainId: row.chainId,
+        protocol_name: 'Morpho',
+        protocol_id: 'morpho',
+        position_type: 'borrow',
+        strategy: 'borrow',
+        position_index: `${row.wallet.toLowerCase()}|${row.chain}|borrow-only`,
+        health_rate: row.health_rate,
+        net_usd: -debt_usd,
+        asset_usd: 0,
+        debt_usd,
+        supply: [],
+        borrow: row.borrow,
+      });
+    }
+  }
+  return out.filter(r => r.asset_usd > 0 || r.debt_usd > 0);
 }
 
 function savePositions(db, rows) {

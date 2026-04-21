@@ -607,7 +607,7 @@ async function main() {
         }
     }
 
-    // Filter dust positions (< $100) and fix bogus health/health_factor values
+    // Filter dust positions (< $100), clean token fragments, and fix bogus health/health_factor values
     const filtered = deduped.filter(p => {
         const totalUsd = Math.abs(p.asset_usd || 0) + Math.abs(p.debt_usd || 0);
         if (totalUsd < 50) return false;
@@ -615,6 +615,25 @@ async function main() {
     });
     
     for (const p of filtered) {
+        // Drop tiny token fragments inside otherwise valid combined rows.
+        const dropDustTokens = (tokens = [], totalUsd = 0) => {
+            return tokens.filter(t => {
+                const v = Math.abs(Number(t.value_usd || 0));
+                if (v === 0) return false;
+                if (v < 1) return false;
+                if (totalUsd > 0 && v / totalUsd < 0.001) return false; // <0.1% of row
+                return true;
+            });
+        };
+        p.supply = dropDustTokens(p.supply || [], Math.abs(p.asset_usd || 0));
+        p.borrow = dropDustTokens(p.borrow || [], Math.abs(p.debt_usd || 0));
+
+        // Recompute display-side supply/debt after token dust cleanup where meaningful.
+        const supplyAfter = (p.supply || []).reduce((sum, t) => sum + (t.value_usd || 0), 0);
+        const borrowAfter = (p.borrow || []).reduce((sum, t) => sum + (t.value_usd || 0), 0);
+        if (supplyAfter > 0) p.asset_usd = supplyAfter;
+        if (borrowAfter > 0) p.debt_usd = borrowAfter;
+        if (p.asset_usd > 0 || p.debt_usd > 0) p.net_usd = p.asset_usd - p.debt_usd;
         // Normalize to health_rate only
         if (p.health_rate == null && p.health_factor != null) p.health_rate = p.health_factor;
 
@@ -651,18 +670,9 @@ async function main() {
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
         const positions = filtered.filter(p => !p._drop && walletSet.has(p.wallet.toLowerCase()));
 
-        // Entity-specific trust overrides where DeBank+scanner noise is known to be misleading.
-        if (name === 'Avant') {
-            for (const p of positions) {
-                const w = String(p.wallet || '').toLowerCase();
-                // Treat these chain exposures as out-of-scope noise for the tracked Avant view.
-                if ((w === '0xc468315a2df54f9c076bd5cfe5002ba211f74ca6' && ['plasma','mnt','ink'].includes(String(p.chain || '').toLowerCase()))
-                 || (w === '0x920eefbcf1f5756109952e6ff6da1cab950c64d7' && String(p.chain || '').toLowerCase() !== 'eth')
-                 || (w === '0x7bee8d37fba61a6251a08b957d502c56e2a50fab' && String(p.protocol_name || '') === 'Aave V3')) {
-                    p._drop = true;
-                }
-            }
-        }
+        // No entity-level chain suppression here.
+        // Only remove rows when they are structurally duplicate/fragment/enrichment leakage,
+        // not because we guessed a chain should be out-of-scope.
 
         // Remove standalone canonical issued-asset rows when a scanner-owned venue row already exists
         // for the same wallet+chain and the issued asset is just part of that venue exposure.
