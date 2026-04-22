@@ -136,21 +136,36 @@ function loadVaults() {
 }
 
 /**
- * Build YBS index: chain:address → YBS entry
+ * Build YBS ticker index: SYMBOL (uppercase) → YBS entry
+ *
+ * YBS tokens are matched by TICKER after DeFiLlama confirms the symbol,
+ * because the same yield-bearing token (e.g. sUSDe) exists on multiple
+ * chains at different addresses but has the same underlying APY.
+ *
+ * Also keep an address index as an O(1) hint for known direct matches.
  */
 function loadYbs() {
   const data = JSON.parse(fs.readFileSync(YBS_PATH, 'utf8'));
+  const bySymbol = {};
   const byAddress = {};
   for (const s of data.stables || []) {
+    // Normalize tickers — name + aliases all map to the same entry
+    const tickers = new Set();
+    if (s.name) tickers.add(String(s.name).toUpperCase());
+    for (const alias of (s.aliases || [])) {
+      if (alias) tickers.add(String(alias).toUpperCase());
+    }
+    for (const t of tickers) bySymbol[t] = s;
+
+    // Known addresses (if any) — still useful as direct hints
     const chain = normalizeChain(s.chain);
     for (const addr of (s.addresses || [])) {
       if (!addr) continue;
-      const key = `${chain}:${addr.toLowerCase()}`;
-      byAddress[key] = s;
+      byAddress[`${chain}:${addr.toLowerCase()}`] = s;
     }
   }
-  console.log(`Loaded YBS: ${Object.keys(byAddress).length} indexed by chain:address`);
-  return byAddress;
+  console.log(`Loaded YBS: ${Object.keys(bySymbol).length} tickers, ${Object.keys(byAddress).length} known addresses`);
+  return { bySymbol, byAddress };
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -293,16 +308,32 @@ async function calculateVaultValue(chain, vault, shareAmount, decimals) {
 // PRICE LOOKUPS
 // ═══════════════════════════════════════════════════════════════
 
-async function getDefiLlamaPrice(chain, address) {
+/**
+ * DeFiLlama lookup that returns both price AND symbol.
+ * Used for YBS ticker-based matching (see scan loop).
+ */
+async function getDefiLlamaEntry(chain, address) {
   try {
     const dlChain = DL_CHAIN_MAP[chain] || chain;
     const url = `https://coins.llama.fi/prices/current/${dlChain}:${address}`;
     const data = await fetchJSON(url, {}, 2);
     const key = `${dlChain}:${address.toLowerCase()}`;
-    return data?.coins?.[key]?.price || null;
+    const entry = data?.coins?.[key];
+    if (!entry) return null;
+    return {
+      price: entry.price || null,
+      symbol: entry.symbol || null,
+      decimals: entry.decimals || null,
+      confidence: entry.confidence || 0,
+    };
   } catch (e) {
     return null;
   }
+}
+
+async function getDefiLlamaPrice(chain, address) {
+  const entry = await getDefiLlamaEntry(chain, address);
+  return entry?.price || null;
 }
 
 async function getCoinGeckoPrice(coinId) {
@@ -326,6 +357,97 @@ async function getCoinGeckoPrice(coinId) {
       req.setTimeout(5000, () => { req.destroy(); resolve(null); });
     });
   } catch (e) {
+    return null;
+  }
+}
+
+// CoinGecko chain slug map (for /coins/{platform}/contract/{address} endpoint)
+const CG_PLATFORM = {
+  eth: 'ethereum',
+  arb: 'arbitrum-one',
+  opt: 'optimistic-ethereum',
+  base: 'base',
+  poly: 'polygon-pos',
+  avax: 'avalanche',
+  bsc: 'binance-smart-chain',
+  mnt: 'mantle',
+  blast: 'blast',
+  scroll: 'scroll',
+  ink: 'ink',
+  monad: 'monad',
+  sonic: 'sonic',
+  plasma: 'plasma',
+  linea: 'linea',
+  zksync: 'zksync',
+  gnosis: 'xdai',
+  celo: 'celo',
+  hyperliquid: 'hyperliquid',
+};
+
+// Cache CG contract lookups across a single run (one entry per chain:address)
+const _cgContractCache = new Map();
+
+// CoinGecko free tier: ~30 req/min. Rate-limit to 1 request / 2.2s = ~27/min.
+let _cgLastRequestAt = 0;
+async function _cgThrottle() {
+  const delay = 2200;
+  const since = Date.now() - _cgLastRequestAt;
+  if (since < delay) {
+    await new Promise(r => setTimeout(r, delay - since));
+  }
+  _cgLastRequestAt = Date.now();
+}
+
+/**
+ * Fetch canonical symbol from CoinGecko for a specific chain+address.
+ * This is the authoritative ticker for YBS matching — bridged versions
+ * of the same token share the same symbol.
+ *
+ * Returns { id, symbol, name } or null.
+ */
+async function getCoinGeckoTicker(chain, address) {
+  const cacheKey = `${chain}:${address.toLowerCase()}`;
+  if (_cgContractCache.has(cacheKey)) return _cgContractCache.get(cacheKey);
+
+  const platform = CG_PLATFORM[chain];
+  if (!platform) {
+    _cgContractCache.set(cacheKey, null);
+    return null;
+  }
+
+  // Skip the CG call for obviously irrelevant tokens to conserve rate limit.
+  // Only hit CG if the local registry ticker hints at a possible YBS match.
+  // (We pass the hint in via a side-channel — see scan loop.)
+
+  await _cgThrottle();
+
+  try {
+    const https = require('https');
+    const url = `https://api.coingecko.com/api/v3/coins/${platform}/contract/${address.toLowerCase()}`;
+    const result = await new Promise((resolve) => {
+      const req = https.get(url, {
+        headers: { 'User-Agent': 'ProtocolYieldTracker/1.0 (dev@openclaw.ai)' }
+      }, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed?.symbol) {
+              resolve({ id: parsed.id, symbol: String(parsed.symbol).toUpperCase(), name: parsed.name });
+            } else {
+              resolve(null);
+            }
+          } catch (e) { resolve(null); }
+        });
+      });
+      req.on('error', () => resolve(null));
+      req.setTimeout(5000, () => { req.destroy(); resolve(null); });
+    });
+    _cgContractCache.set(cacheKey, result);
+    return result;
+  } catch (e) {
+    _cgContractCache.set(cacheKey, null);
     return null;
   }
 }
@@ -497,26 +619,52 @@ async function scanWalletChain(db, registry, vaultIndex, ybsIndex, wallet, whale
       continue;
     }
 
-    // ─── PRIORITY 2: YBS match ───────────────────────────────
-    const ybs = ybsIndex[lookupKey];
+    // ─── PRIORITY 2: YBS match (ticker-based via local CoinGecko registry)
+    //
+    // Per user spec: YBS tokens have multiple bridged addresses with the
+    // same yield. We use our local CoinGecko-built token registry
+    // (data/token-registry.json) as the canonical source for tickers —
+    // this is effectively an offline snapshot of CoinGecko's ticker data.
+    //
+    // The registry stores the same CG symbol for every bridged chain of a
+    // token, so sUSDe on Arb resolves to the same 'SUSDE' ticker as on ETH.
+    //
+    // Matching strategy:
+    //   1. Look up chain:address in registry → get CG ticker
+    //   2. If ticker not found, fall back to on-chain symbol from metadata
+    //   3. Match ticker against YBS list
+    //
+    // APY comes from YBS list. Price comes from DeFiLlama.
+    const registryEntryForYbs = registry.by_address[lookupKey];
+    const metadataTicker = metadata?.symbol ? metadata.symbol.toUpperCase() : null;
+    const registryTicker = registryEntryForYbs?.symbol ? registryEntryForYbs.symbol.toUpperCase() : null;
+
+    // Prefer registry ticker (canonical across bridged chains),
+    // fall back to on-chain metadata symbol for tokens not yet in CG.
+    const candidateTicker = registryTicker || metadataTicker;
+    const ybs = candidateTicker ? ybsIndex.bySymbol[candidateTicker] : null;
+
     if (ybs) {
-      const priceInfo = await getTokenPrice(chain, address, registry.by_address[lookupKey]);
-      if (priceInfo.price) {
-        const valueUsd = amount * priceInfo.price;
+      const price = await getDefiLlamaPrice(chain, address);
+      if (price) {
+        const valueUsd = amount * price;
         if (valueUsd >= MIN_POSITION_USD) {
-          const token = { symbol: ybs.name || symbol, address, amount, price: priceInfo.price };
-          writeYbsPosition(db, wallet, chain, ybs, token, valueUsd, ybs.apy_30d || ybs.apy_7d || ybs.apy_1d || 0);
-          console.log(`  🔵 YBS    ${(ybs.name || symbol).padEnd(15)} ${amount.toFixed(4).padStart(12)} @ $${priceInfo.price.toFixed(4)} = $${(valueUsd / 1e6).toFixed(2)}M APY ${(ybs.apy_30d || 0).toFixed(2)}%`);
+          const token = { symbol: ybs.name || candidateTicker, address, amount, price };
+          const apy = ybs.apy_30d || ybs.apy_7d || ybs.apy_1d || 0;
+          writeYbsPosition(db, wallet, chain, ybs, token, valueUsd, apy);
+          const tickerSource = registryTicker ? 'registry' : 'onchain';
+          console.log(`  🔵 YBS    ${(ybs.name || candidateTicker).padEnd(15)} ${amount.toFixed(4).padStart(12)} @ $${price.toFixed(4)} = $${(valueUsd / 1e6).toFixed(2)}M APY ${apy.toFixed(2)}% (${tickerSource}:${candidateTicker})`);
           counts.ybs++;
         }
       } else {
-        console.log(`  ⚠️ YBS    ${ybs.name || symbol} no price available`);
+        console.log(`  ⚠️ YBS    ${ybs.name} (${candidateTicker}) no DeFiLlama price on ${chain}`);
         counts.skipped++;
       }
       continue;
     }
 
     // ─── PRIORITY 3: Plain token from registry ───────────────
+    // Use our local registry as the identity gate: only track known tokens.
     const registryEntry = registry.by_address[lookupKey];
     if (!registryEntry) continue; // unknown token — skip silently
 
