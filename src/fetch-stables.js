@@ -22,7 +22,9 @@ const POOLS = [
   { name: 'upUSDC', pool: '6b6ddb24-adfd-449d-a21e-e029a102e318' },
   { name: 'USD3', pool: 'f8cd444e-d99f-4132-b234-fd3482bf8806' },
   { name: 'gUSDC', pool: '766b4c34-76b3-4a57-bbec-2c972ddf8b86' },
-  { name: 'fUSDT', pool: '4e8cc592-c8d5-4824-8155-128ba521e903' },
+  // fUSDT / fUSDC: Fluid protocol wrappers. Owned by the Fluid scanner.
+  // Per docs/TOKEN-RULES.md, protocol-specific wrappers never enter the YBS list.
+  // { name: 'fUSDT', pool: '4e8cc592-c8d5-4824-8155-128ba521e903' },
   { name: 'sUSDai', pool: '712ce948-bd9e-4f4a-8916-b72c447f7578' },
   { name: 'siUSD', pool: '8fa2e60e-365a-41fc-8d50-fadde5041f94' },
   { name: 'sUSDf', pool: '0f67a08c-3f24-4a4b-963e-541f5a5c0364' },
@@ -33,7 +35,8 @@ const POOLS = [
   { name: 'stcUSD', pool: 'bf6ca887-e357-49ec-8031-0d1a6141c455' },
   { name: 'sUSDa', pool: '282c70ef-5123-4873-a115-a96879183e4e' },
   { name: 'sfrxUSD', pool: '42523cca-14b0-44f6-95fb-4781069520a5' },
-  { name: 'fUSDC', pool: 'a20bf6f8-71af-49c6-a9d7-6f2abe5738c9' },
+  // fUSDC: Fluid protocol wrapper. Owned by the Fluid scanner. See docs/TOKEN-RULES.md.
+  // { name: 'fUSDC', pool: 'a20bf6f8-71af-49c6-a9d7-6f2abe5738c9' },
   { name: 'sUSDS', pool: 'd8c4eff5-c8a9-46fc-a888-057c4c668e72' },
   { name: 'sYUSD', pool: '392e2c0a-a086-46a3-841f-ca4d476eb5e1' },
   { name: 'dUSDC', pool: '20e45c3e-7de7-4d34-89e7-20858ecdf252' },
