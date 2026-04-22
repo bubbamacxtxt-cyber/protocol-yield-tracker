@@ -51,13 +51,10 @@ const RPCS = {
   scroll: `https://scroll-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
 };
 
-// Hardcoded $1 stables (protocol tokens that don't trade on DEXs)
-const DOLLAR_STABLES = new Set([
-  'USDC', 'USDT', 'DAI', 'USDS', 'USDE', 'SUSDE', 'SUSDS', 'SDAI',
-  'SYRUPUSDC', 'SYRUPUSDT', 'STCUSD', 'SIUSD', 'AUSDC', 'AUSDT',
-  'ADAI', 'CUSDC', 'CDAI', 'GUSDC', 'FRAX', 'LUSD', 'CRVUSD',
-  'PYUSD', 'RLUSD', 'GHO', 'SUSDC', 'SUSDC_E', 'WETH', 'WBTC',
-  'WSTETH', 'RETH', 'CBETH', 'ETH', 'BTC',
+// Tokens that are explicitly NOT $1 stables (these have real market prices)
+const NON_STABLES = new Set([
+  'WETH', 'WBTC', 'WSTETH', 'RETH', 'CBETH', 'ETH', 'BTC',
+  'WEETH', 'EZETH', 'RSETH', 'SWETH', 'WOETH',
 ]);
 
 // Load token registry
@@ -167,25 +164,56 @@ async function getDefiLlamaPrice(chain, address) {
   }
 }
 
-// Get price — try DeFiLlama, fallback to $1 for known stables
+// Get price — try DeFiLlama, fallback to CoinGecko, never assume $1
 async function getTokenPrice(chain, address, symbol, registryEntry) {
-  // Check if it's a known stable
-  if (symbol && DOLLAR_STABLES.has(symbol.toUpperCase())) {
-    return { price: 1.0, source: 'hardcoded-stable' };
-  }
-  
-  // Try DeFiLlama
+  // Try DeFiLlama first
   const dlPrice = await getDefiLlamaPrice(chain, address);
   if (dlPrice) {
     return { price: dlPrice, source: 'defillama' };
   }
   
-  // Fallback: if symbol looks like a stable, assume $1
-  if (symbol && /^(USD|ST|A|C)[A-Z]/.test(symbol.toUpperCase())) {
-    return { price: 1.0, source: 'assumed-stable' };
+  // Fallback to CoinGecko if we have the CoinGecko ID
+  if (registryEntry?.id) {
+    const cgPrice = await getCoinGeckoPrice(registryEntry.id);
+    if (cgPrice) {
+      return { price: cgPrice, source: 'coingecko' };
+    }
   }
   
+  // For non-stables with no price, return null (don't assume)
+  if (symbol && NON_STABLES.has(symbol.toUpperCase())) {
+    return { price: null, source: 'no-price-data' };
+  }
+  
+  // For everything else, return null — let caller decide what to do
   return { price: null, source: 'unknown' };
+}
+
+// Get price from CoinGecko by coin ID
+async function getCoinGeckoPrice(coinId) {
+  try {
+    const https = require('https');
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`;
+    
+    return await new Promise((resolve) => {
+      const req = https.get(url, {
+        headers: { 'User-Agent': 'ProtocolYieldTracker/1.0 (dev@openclaw.ai)' }
+      }, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          try {
+            const parsed = JSON.parse(data);
+            resolve(parsed[coinId]?.usd || null);
+          } catch (e) { resolve(null); }
+        });
+      });
+      req.on('error', () => resolve(null));
+      req.setTimeout(5000, () => { req.destroy(); resolve(null); });
+    });
+  } catch (e) {
+    return null;
+  }
 }
 
 // Write position to DB
