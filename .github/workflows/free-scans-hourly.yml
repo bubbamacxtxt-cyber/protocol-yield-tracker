@@ -28,7 +28,15 @@ jobs:
           ALCHEMY_INK_RPC_URL: ${{ secrets.ALCHEMY_INK_RPC_URL }}
       - name: Build canonical token matches
         run: node src/build-canonical-token-matches.js
+      - name: Fetch Morpho vault registry (skip-list for token discovery)
+        run: node src/fetch-morpho-vaults.js || echo "morpho vault fetch failed, continuing"
+      - name: Scan Aave positions
+        run: node src/aave-scanner.js || node src/aave-scanner.js
+      - name: Scan Morpho positions
+        run: node src/morpho-scanner.js || node src/morpho-scanner.js
       - name: Token discovery (Layer 2 — vault / YBS / wallet-held)
+        # Runs AFTER Morpho scanner so it can use the DB-derived Morpho
+        # vault set to skip tokens the Morpho scanner already captured.
         run: node src/token-discovery.js || node src/token-discovery.js
         env:
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
@@ -37,10 +45,6 @@ jobs:
           ALCHEMY_MONAD_RPC_URL: ${{ secrets.ALCHEMY_MONAD_RPC_URL }}
           ALCHEMY_SONIC_RPC_URL: ${{ secrets.ALCHEMY_SONIC_RPC_URL }}
           ALCHEMY_INK_RPC_URL: ${{ secrets.ALCHEMY_INK_RPC_URL }}
-      - name: Scan Aave positions
-        run: node src/aave-scanner.js || node src/aave-scanner.js
-      - name: Scan Morpho positions
-        run: node src/morpho-scanner.js || node src/morpho-scanner.js
       - name: Scan Euler positions (sub-account aware)
         run: node src/euler-scanner.js || node src/euler-scanner.js
         env:

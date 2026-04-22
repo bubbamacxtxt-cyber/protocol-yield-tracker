@@ -35,6 +35,7 @@ const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const REGISTRY_PATH = path.join(__dirname, '..', 'data', 'token-registry.json');
 const VAULTS_PATH = path.join(__dirname, '..', 'data', 'vaults.json');
 const YBS_PATH = path.join(__dirname, '..', 'data', 'stables.json');
+const MORPHO_VAULTS_PATH = path.join(__dirname, '..', 'data', 'morpho-vaults.json');
 
 // $50K minimum per-position threshold (your vision)
 const MIN_POSITION_USD = 50000;
@@ -166,6 +167,64 @@ function loadYbs() {
   }
   console.log(`Loaded YBS: ${Object.keys(bySymbol).length} tickers, ${Object.keys(byAddress).length} known addresses`);
   return { bySymbol, byAddress };
+}
+
+/**
+ * Build a set of Morpho MetaMorpho vault SHARE addresses to skip in Layer 2.
+ *
+ * These are the ERC-4626 wrapper contracts (steakUSDC, gtUSDCp, etc.) — NOT
+ * underlying assets like USDe or sUSDe. When a wallet holds the wrapper,
+ * the Morpho scanner's earn endpoint already returns the correct underlying
+ * USD value. Counting the wrapper's raw ERC-20 balance here would double-count.
+ *
+ * Sources, combined:
+ *   1. data/morpho-vaults.json — Morpho GraphQL whitelisted + non-whitelisted
+ *      vaults, refreshed by fetch-morpho-vaults.js.
+ *   2. DB — token addresses we observed in MORPHO EARN positions (lend
+ *      strategy with NO borrow leg). Morpho's earn endpoint always returns
+ *      vault wrapper addresses, never underlying assets. Morpho borrow
+ *      positions can contain underlying-asset addresses (USDe/sUSDe as
+ *      collateral) — those are NOT added to the skip set.
+ *
+ * The DB source catches non-whitelisted vaults that Morpho's REST sees
+ * but GraphQL doesn't list (e.g. Gauntlet 0x8c106...).
+ */
+function loadMorphoVaultSet(db) {
+  const set = new Set();
+
+  // Source 1: curated JSON
+  try {
+    const data = JSON.parse(fs.readFileSync(MORPHO_VAULTS_PATH, 'utf8'));
+    for (const v of (data.vaults || [])) {
+      if (!v.address || !v.chain) continue;
+      set.add(`${v.chain}:${v.address.toLowerCase()}`);
+    }
+  } catch (e) {
+    // no file — rely on DB source below
+  }
+
+  // Source 2: DB, earn-only Morpho rows (lend + no borrow)
+  if (db) {
+    try {
+      const rows = db.prepare(`
+        SELECT DISTINCT p.chain, lower(pt.address) as addr
+        FROM positions p
+        JOIN position_tokens pt ON pt.position_id = p.id
+        WHERE p.protocol_id = 'morpho'
+          AND p.strategy = 'lend'
+          AND p.debt_usd = 0
+          AND pt.role = 'supply'
+          AND pt.address IS NOT NULL
+          AND pt.address != ''
+      `).all();
+      for (const r of rows) {
+        if (r.chain && r.addr) set.add(`${r.chain}:${r.addr}`);
+      }
+    } catch (e) {}
+  }
+
+  console.log(`Loaded Morpho vault shares to skip: ${set.size}`);
+  return set;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -571,7 +630,7 @@ function writeWalletHeldPosition(db, wallet, chain, token, valueUsd) {
 // MAIN SCAN
 // ═══════════════════════════════════════════════════════════════
 
-async function scanWalletChain(db, registry, vaultIndex, ybsIndex, wallet, whale, chain) {
+async function scanWalletChain(db, registry, vaultIndex, ybsIndex, morphoVaultSet, wallet, whale, chain) {
   const rpc = RPCS[chain];
   if (!rpc) {
     console.log(`  ⚠️ No RPC for ${chain}, skipping`);
@@ -588,6 +647,13 @@ async function scanWalletChain(db, registry, vaultIndex, ybsIndex, wallet, whale
   for (const bal of balances) {
     const address = bal.contractAddress.toLowerCase();
     const lookupKey = `${chain}:${address}`;
+
+    // ─── PRIORITY 0: Skip Morpho vault shares ──────────────
+    // If the token is a Morpho MetaMorpho vault, the morpho-scanner is the
+    // authoritative source. It resolves vault shares to underlying USD
+    // correctly via Morpho API's position data. Counting the ERC-20 wrapper
+    // balance here would double-count.
+    if (morphoVaultSet && morphoVaultSet.has(lookupKey)) continue;
 
     // Get metadata early (needed for amount calc)
     const metadata = await getTokenMetadata(chain, address);
@@ -749,9 +815,11 @@ async function main() {
   console.log('=== Token Discovery v3 ===');
   console.log(`Position threshold: $${MIN_POSITION_USD.toLocaleString()}\n`);
 
+  const db = new Database(DB_PATH);
   const registry = loadRegistry();
   const vaultIndex = loadVaults();
   const ybsIndex = loadYbs();
+  const morphoVaultSet = loadMorphoVaultSet(db);
 
   // Layer 1 gate: only scan wallet+chain pairs DeBank says hold >= $50K
   const activePairs = loadActiveWalletChains(MIN_CHAIN_USD);
@@ -779,8 +847,6 @@ async function main() {
   }
   console.log('');
 
-  const db = new Database(DB_PATH);
-
   // Record the run start so cleanup can drop any row not refreshed this run.
   const runStartIso = new Date(Date.now() - 5000).toISOString().slice(0, 19).replace('T', ' ');
 
@@ -788,7 +854,7 @@ async function main() {
 
   for (const pair of scanPairs) {
     try {
-      const counts = await scanWalletChain(db, registry, vaultIndex, ybsIndex, pair.wallet, pair.whale, pair.chain);
+      const counts = await scanWalletChain(db, registry, vaultIndex, ybsIndex, morphoVaultSet, pair.wallet, pair.whale, pair.chain);
       totals.vault += counts.vault;
       totals.ybs += counts.ybs;
       totals.wallet += counts.wallet;
