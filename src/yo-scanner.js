@@ -31,21 +31,15 @@ const RPCS = {
   arb: 'https://arb-mainnet.g.alchemy.com/v2/' + process.env.ALCHEMY_API_KEY,
 };
 
-// Vault addresses mirror defillama/projects/yo/index.js.
-// Same address appears on multiple chains (CREATE2 deployed).
+// Only yoUSD for now. Other YO vaults (yoETH, yoBTC, yoEURC, yoGOLD) are
+// documented in defillama/projects/yo/index.js and can be re-enabled if
+// we want to track them as separate whales later.
 const VAULTS = {
   eth: [
     { address: '0x0000000f2eB9f69274678c76222B35eEc7588a65', name: 'yoUSD' },
-    { address: '0x3a43aec53490cb9fa922847385d82fe25d0e9de7', name: 'yoETH' },
-    { address: '0xbCbc8cb4D1e8ED048a6276a5E94A3e952660BcbC', name: 'yoBTC' },
-    { address: '0x50c749aE210D3977ADC824AE11F3c7fd10c871e9', name: 'yoEURC' },
-    { address: '0x586675A3a46B008d8408933cf42d8ff6c9CC61a1', name: 'yoGOLD' },
   ],
   base: [
     { address: '0x0000000f2eB9f69274678c76222B35eEc7588a65', name: 'yoUSD' },
-    { address: '0x3a43aec53490cb9fa922847385d82fe25d0e9de7', name: 'yoETH' },
-    { address: '0xbCbc8cb4D1e8ED048a6276a5E94A3e952660BcbC', name: 'yoBTC' },
-    { address: '0x50c749aE210D3977ADC824AE11F3c7fd10c871e9', name: 'yoEURC' },
   ],
   arb: [],
 };
@@ -131,10 +125,8 @@ async function scanVault(chain, vault, prices) {
 }
 
 function savePositions(db, results) {
-  // Each YO vault contract is its own "wallet" in our tracker. The vault
-  // ADDRESS is the wallet, and its totalAssets() is a single yo-protocol
-  // position on that chain. This mirrors how DefiLlama values the protocol
-  // and matches DeBank's view of each individual vault address.
+  // yoUSD vault address is the single whale wallet we track. One
+  // yo-protocol position per chain, with totalAssets() as its value.
 
   // Clean all existing YO-protocol rows first (FK-safe order)
   const oldIds = db.prepare(`SELECT id FROM positions WHERE protocol_id = 'yo-protocol'`).all();
@@ -145,7 +137,7 @@ function savePositions(db, results) {
 
   const upsertPos = db.prepare(`
     INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, net_usd, asset_usd, debt_usd, position_index, scanned_at)
-    VALUES (?, ?, 'yo-protocol', 'YO Protocol', 'Lending', 'lend', ?, ?, 0, ?, datetime('now'))
+    VALUES (?, ?, 'yo-protocol', 'yoUSD', 'Lending', 'lend', ?, ?, 0, ?, datetime('now'))
     ON CONFLICT(wallet, chain, protocol_id, position_index) DO UPDATE SET
       net_usd = excluded.net_usd, asset_usd = excluded.asset_usd, scanned_at = datetime('now')
   `);

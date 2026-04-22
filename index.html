@@ -599,9 +599,14 @@ async function render() {
   document.getElementById('totalPositions').textContent = fmtNum(totalPositions);
   document.getElementById('activeWhales').textContent = activeWhales;
   
-  // Last updated + daily/weekly change
-  const genAt = DATA.summary?.generated_at || new Date().toISOString();
-  let changeText = 'Last updated: ' + new Date(genAt).toLocaleString();
+  // Last updated + daily/weekly change.
+  // data.json writes generated_at at the TOP level, not under summary.
+  // Kept the summary fallback for backward compat, and the Date.now
+  // fallback only as a last resort if data.json is missing the field.
+  const genAt = DATA.generated_at || DATA.summary?.generated_at || null;
+  let changeText = genAt
+    ? 'Last updated: ' + new Date(genAt).toLocaleString()
+    : 'Last updated: (unknown)';
   try {
     const history = JSON.parse(await (await fetch('data/total-history.json?t=' + Date.now())).text());
     if (history.length >= 2) {
