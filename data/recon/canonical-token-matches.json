@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-22T16:31:27.963Z",
+  "generated_at": "2026-04-22T16:55:06.100Z",
   "matches": [
     {
       "wallet": "0x3207363359ca0c11d11073ad48301e8c958b7910",
@@ -51,6 +51,54 @@
     },
     {
       "wallet": "0x7bee8d37fba61a6251a08b957d502c56e2a50fab",
+      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "kind": "ybs",
+      "match": {
+        "name": "USD3",
+        "protocol": "3jane-lending",
+        "apr": "7.21%",
+        "aprValue": 7.21241,
+        "apy_1d": 7.21241,
+        "apy_7d": 3.4433184615384613,
+        "apy_30d": 2.61799,
+        "chain": "Ethereum",
+        "tvl": "$11M",
+        "tvlNum": 11108919,
+        "source": "defillama",
+        "addresses": [
+          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        ],
+        "aliases": [
+          "USD3"
+        ]
+      }
+    },
+    {
+      "wallet": "0x920eefbcf1f5756109952e6ff6da1cab950c64d7",
+      "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
+      "kind": "ybs",
+      "match": {
+        "name": "wsrUSD",
+        "protocol": "reservoir-protocol",
+        "apr": "4.65%",
+        "aprValue": 4.65326,
+        "apy_1d": 4.65326,
+        "apy_7d": 4.65326,
+        "apy_30d": 4.72512,
+        "chain": "Ethereum",
+        "tvl": "$127M",
+        "tvlNum": 127253020,
+        "source": "defillama",
+        "addresses": [
+          "0x09D4214C03D01F49544C0448DBE3A27f768F2b34"
+        ],
+        "aliases": [
+          "wsrUSD"
+        ]
+      }
+    },
+    {
+      "wallet": "0x920eefbcf1f5756109952e6ff6da1cab950c64d7",
       "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
       "kind": "ybs",
       "match": {
