@@ -27,14 +27,24 @@ const EULER_CHAINS = {
   bera: { chainId: 80085, alchemy: 'https://berachain-mainnet.g.alchemy.com/v2/' },
 };
 
+// Pace Alchemy RPC calls to avoid 429s. ~200ms/call = 5 req/s sustained.
+let _lastRpcAt = 0;
+async function _rpcThrottle() {
+  const gap = 200;
+  const wait = gap - (Date.now() - _lastRpcAt);
+  if (wait > 0) await new Promise(r => setTimeout(r, wait));
+  _lastRpcAt = Date.now();
+}
+
 async function alchemy(method, params, chain) {
   const cfg = EULER_CHAINS[chain];
   if (!cfg?.alchemy || !ALCHEMY_KEY) return null;
+  await _rpcThrottle();
   const res = await fetchJSON(`${cfg.alchemy}${ALCHEMY_KEY}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
-  }, 1);
+  }, 3);
   return res?.result;
 }
 
@@ -43,27 +53,99 @@ async function getBalances(wallet, chain) {
   return result?.tokenBalances || [];
 }
 
+// DeFiLlama chain slug for price lookups
+const DL_CHAIN = {
+  eth: 'ethereum', base: 'base', arb: 'arbitrum', sonic: 'sonic',
+  op: 'optimism', monad: 'monad', bera: 'berachain',
+};
+
+async function getDefiLlamaPrice(chain, address) {
+  try {
+    const dlChain = DL_CHAIN[chain] || chain;
+    const url = `https://coins.llama.fi/prices/current/${dlChain}:${address.toLowerCase()}`;
+    const data = await fetchJSON(url, {}, 2);
+    const key = `${dlChain}:${address.toLowerCase()}`;
+    return data?.coins?.[key]?.price || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+// ERC-4626 convertToAssets(shares) — returns underlying asset amount
+async function convertToAssets(chain, vaultAddress, sharesHex) {
+  const selector = '0x07a2d13a'; // convertToAssets(uint256)
+  // sharesHex is "0x..." — strip 0x, pad left to 64 chars
+  const shares = sharesHex.replace(/^0x/, '').padStart(64, '0');
+  const data = selector + shares;
+  const result = await alchemy('eth_call', [{ to: vaultAddress, data }, 'latest'], chain);
+  if (!result || result === '0x') return null;
+  try { return BigInt(result); } catch (e) { return null; }
+}
+
+/**
+ * Compute USD value of an Euler vault balance.
+ * Flow: shares → convertToAssets() → underlying amount → × price → USD
+ */
+async function computeVaultValue(chain, vault, sharesHex, vaultDecimals, underlyingDecimals) {
+  const underlyingRaw = await convertToAssets(chain, vault.vault, sharesHex);
+  if (!underlyingRaw) return { value_usd: 0, method: 'convert-failed', amount: 0 };
+
+  const uDec = underlyingDecimals ?? vaultDecimals ?? 18;
+  const underlyingAmount = Number(underlyingRaw) / Math.pow(10, uDec);
+  if (!vault.asset) return { value_usd: 0, method: 'no-asset', amount: underlyingAmount };
+
+  const price = await getDefiLlamaPrice(chain, vault.asset);
+  if (price == null) return { value_usd: 0, method: 'no-price', amount: underlyingAmount };
+
+  return { value_usd: underlyingAmount * price, method: 'erc4626', amount: underlyingAmount, price };
+}
+
+// Cached underlying decimals (one call per unique asset)
+const _decimalsCache = new Map();
+async function getDecimals(chain, address) {
+  const key = `${chain}:${address.toLowerCase()}`;
+  if (_decimalsCache.has(key)) return _decimalsCache.get(key);
+  const meta = await alchemy('alchemy_getTokenMetadata', [address], chain);
+  const decimals = meta?.decimals ?? 18;
+  _decimalsCache.set(key, decimals);
+  return decimals;
+}
+
 async function fetchEulerVaults() {
   const byChain = {};
 
   for (const [chain, cfg] of Object.entries(EULER_CHAINS)) {
     try {
-      const data = await fetchJSON(`https://indexer.euler.finance/v2/vault/list?chainId=${cfg.chainId}&take=1000`, {}, 2);
-      const items = data?.items || [];
+      // Indexer caps each page at 50 items, uses `page` for pagination
+      // (NOT `skip`). Paginate until we've pulled all vaults or hit a hard cap.
       const map = {};
-      for (const v of items) {
-        const vault = String(v.vault || '').toLowerCase();
-        if (!vault) continue;
-        map[vault] = {
-          vault,
-          symbol: v.vaultSymbol || v.assetSymbol || `e${vault.slice(2, 8)}`,
-          asset: String(v.asset || '').toLowerCase(),
-          assetSymbol: v.assetSymbol || 'Unknown',
-          decimals: v.vaultDecimals || 18,
-        };
+      const MAX_PAGES = 30; // 30 × 50 = 1500 vaults per chain (plenty)
+      let total = 0;
+      let totalKnown = null;
+      for (let page = 1; page <= MAX_PAGES; page++) {
+        const data = await fetchJSON(`https://indexer.euler.finance/v2/vault/list?chainId=${cfg.chainId}&page=${page}`, {}, 2);
+        const items = data?.items || [];
+        if (!items.length) break;
+        for (const v of items) {
+          const vault = String(v.vault || '').toLowerCase();
+          if (!vault) continue;
+          map[vault] = {
+            vault,
+            symbol: v.vaultSymbol || v.assetSymbol || `e${vault.slice(2, 8)}`,
+            asset: String(v.asset || '').toLowerCase(),
+            assetSymbol: v.assetSymbol || 'Unknown',
+            decimals: v.vaultDecimals || 18,
+            assetDecimals: v.assetDecimals || null,
+            supplyApy: typeof v.supplyApy === 'number' ? v.supplyApy * 100 : null,
+          };
+        }
+        total += items.length;
+        totalKnown = data?.pagination?.total ?? totalKnown;
+        if (totalKnown != null && total >= totalKnown) break;
+        if (items.length < 50) break; // last page
       }
       byChain[chain] = map;
-      console.log(`  Euler ${chain}: ${items.length} vaults`);
+      console.log(`  Euler ${chain}: ${Object.keys(map).length} vaults${totalKnown != null ? ` (of ${totalKnown})` : ''}`);
     } catch (e) {
       byChain[chain] = null;
       console.log(`  Euler ${chain}: ${e.message}`);
@@ -73,8 +155,12 @@ async function fetchEulerVaults() {
   return byChain;
 }
 
-function upsertVaultPosition(db, wallet, chain, vault) {
+function upsertVaultPosition(db, wallet, chain, vault, valueInfo) {
   const walletLc = wallet.toLowerCase();
+  const valueUsd = Number(valueInfo?.value_usd || 0);
+  const underlyingAmount = Number(valueInfo?.amount || 0);
+  const underlyingPrice = valueInfo?.price != null ? Number(valueInfo.price) : null;
+
   const existing = db.prepare(`
     SELECT id FROM positions
     WHERE lower(wallet) = ? AND chain = ? AND protocol_name = 'Euler' AND position_index = ?
@@ -88,23 +174,24 @@ function upsertVaultPosition(db, wallet, chain, vault) {
     db.prepare(`
       UPDATE positions
       SET protocol_id = 'euler2', position_type = 'Lending', strategy = 'lend',
-          net_usd = 0, asset_usd = 0, debt_usd = 0, scanned_at = datetime('now')
+          net_usd = ?, asset_usd = ?, debt_usd = 0, scanned_at = datetime('now')
       WHERE id = ?
-    `).run(positionId);
+    `).run(valueUsd, valueUsd, positionId);
   } else {
     const result = db.prepare(`
       INSERT INTO positions (
         wallet, chain, protocol_id, protocol_name, position_type, strategy,
         net_usd, asset_usd, debt_usd, position_index, scanned_at
-      ) VALUES (?, ?, 'euler2', 'Euler', 'Lending', 'lend', 0, 0, 0, ?, datetime('now'))
-    `).run(walletLc, chain, vault.vault);
+      ) VALUES (?, ?, 'euler2', 'Euler', 'Lending', 'lend', ?, ?, 0, ?, datetime('now'))
+    `).run(walletLc, chain, valueUsd, valueUsd, vault.vault);
     positionId = result.lastInsertRowid;
   }
 
+  const apyBase = valueInfo?.apy_base != null ? Number(valueInfo.apy_base) : 0;
   db.prepare(`
-    INSERT INTO position_tokens (position_id, role, symbol, address, value_usd, apy_base)
-    VALUES (?, 'supply', ?, ?, 0, 0)
-  `).run(positionId, vault.symbol, vault.asset || vault.vault);
+    INSERT INTO position_tokens (position_id, role, symbol, address, amount, price_usd, value_usd, apy_base)
+    VALUES (?, 'supply', ?, ?, ?, ?, ?, ?)
+  `).run(positionId, vault.symbol, vault.asset || vault.vault, underlyingAmount, underlyingPrice, valueUsd, apyBase);
 }
 
 function cleanupWallet(db, wallet, scannedChains, seenKeys) {
@@ -140,15 +227,26 @@ async function scanWallet(db, wallet, label, vaultsByChain) {
 
     for (const bal of balances) {
       const amountHex = bal.tokenBalance;
-      if (!amountHex || amountHex === '0x0' || amountHex === '0x00') continue;
+      // Robust zero-balance check — Alchemy returns padded zeros like 0x000...000
+      if (!amountHex || amountHex === '0x' || /^0x0+$/.test(amountHex)) continue;
       const addr = String(bal.contractAddress || '').toLowerCase();
       const vault = vaultMap[addr];
       if (!vault) continue;
 
-      upsertVaultPosition(db, wallet, chain, vault);
+      // ERC-4626: convert shares → underlying → USD
+      // Use indexer-provided decimals when available, else fetch via RPC.
+      const underlyingDecimals = vault.assetDecimals
+        ?? (vault.asset ? await getDecimals(chain, vault.asset) : vault.decimals || 18);
+      const valueInfo = await computeVaultValue(chain, vault, amountHex, vault.decimals, underlyingDecimals);
+      // Attach supply APY from indexer if we have it
+      if (vault.supplyApy != null) valueInfo.apy_base = vault.supplyApy;
+
+      upsertVaultPosition(db, wallet, chain, vault, valueInfo);
       seenKeys.add(`${chain}:${vault.vault}`);
       count++;
-      console.log(`  ${chain} ${vault.symbol} (${vault.assetSymbol})`);
+      const usdStr = valueInfo.value_usd > 0 ? `$${(valueInfo.value_usd / 1e6).toFixed(2)}M` : `[${valueInfo.method}]`;
+      const apyStr = vault.supplyApy != null ? ` APY ${vault.supplyApy.toFixed(2)}%` : '';
+      console.log(`  ${chain} ${vault.symbol.padEnd(20)} (${vault.assetSymbol}) ${usdStr}${apyStr}`);
     }
   }
 
