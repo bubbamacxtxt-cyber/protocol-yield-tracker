@@ -58,6 +58,10 @@ jobs:
           ALCHEMY_PLASMA_RPC_URL: ${{ secrets.ALCHEMY_PLASMA_RPC_URL }}
       - name: Scan Pendle positions
         run: node src/pendle-scanner.js || node src/pendle-scanner.js
+      - name: Scan Ethena cooldowns (Locked USDe)
+        run: node src/ethena-scanner.js || node src/ethena-scanner.js
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
       - name: Enrich positions with market/vault info
         run: node src/enrich-markets.js
       - name: Fetch base APY rates

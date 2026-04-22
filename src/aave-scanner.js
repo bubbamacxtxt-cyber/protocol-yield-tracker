@@ -178,7 +178,7 @@ async function scanWallet(wallet, label, chainIds) {
   return decomposed;
 }
 
-function savePositions(db, rows) {
+function savePositions(db, rows, allScannedWallets = []) {
   const upsertPos = db.prepare(`
     INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, health_rate, net_usd, asset_usd, debt_usd, position_index, scanned_at)
     VALUES (?, ?, 'aave-v3', 'Aave V3', 'Lending', 'lend', ?, ?, ?, ?, ?, datetime('now'))
@@ -200,23 +200,24 @@ function savePositions(db, rows) {
   const deletePos = db.prepare(`DELETE FROM positions WHERE id = ?`);
 
   const tx = db.transaction(() => {
-    const seenWalletChain = new Set();
+    // Cleanup scope: ALL wallets the scanner considered this run, not just
+    // ones that produced a non-zero row. This is how we drop stale rows
+    // when a wallet closes all their Aave positions.
     const keepKeys = new Set(rows.map(r => `${r.wallet.toLowerCase()}|${r.chain}|${r.position_index}`));
-    for (const row of rows) {
-      const walletKey = `${row.wallet.toLowerCase()}`;
-      if (!seenWalletChain.has(walletKey)) {
-        seenWalletChain.add(walletKey);
-        const old = deleteOldRows.all(row.wallet);
-        for (const r of old) {
-          const staleKey = `${row.wallet.toLowerCase()}|${r.chain}|${r.position_index}`;
-          if (!keepKeys.has(staleKey)) {
-            clearMarkets.run(r.id);
-            clearTokens.run(r.id);
-            deletePos.run(r.id);
-          }
+    const cleanupWallets = new Set(allScannedWallets.map(w => w.toLowerCase()));
+    for (const w of cleanupWallets) {
+      const old = deleteOldRows.all(w);
+      for (const r of old) {
+        const staleKey = `${w}|${r.chain}|${r.position_index}`;
+        if (!keepKeys.has(staleKey)) {
+          clearMarkets.run(r.id);
+          clearTokens.run(r.id);
+          deletePos.run(r.id);
         }
       }
+    }
 
+    for (const row of rows) {
       upsertPos.run(row.wallet, row.chain, row.health_rate, row.net_usd, row.asset_usd, row.debt_usd, row.position_index);
       const pos = findPos.get(row.wallet, row.chain, row.position_index);
       if (!pos) continue;
@@ -275,7 +276,10 @@ async function main() {
     }
   }
 
-  savePositions(db, rows);
+  // Pass ALL scanned wallet addresses so cleanup can drop stale rows for
+  // wallets that closed all their Aave positions since last scan.
+  const allScannedWallets = [...new Set(walletMap.map(w => w.addr.toLowerCase()))];
+  savePositions(db, rows, allScannedWallets);
   console.log(`\n=== Summary ===`);
   console.log(`Total combined Aave rows: ${rows.length}`);
   db.close();

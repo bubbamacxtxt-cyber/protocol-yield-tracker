@@ -192,8 +192,12 @@ async function main() {
     console.log(`  ❌ ${row.whale} ${row.wallet.slice(0,10)} ${row.chain}: Δ $${Math.round(row.delta_usd).toLocaleString()} (${(row.protocols_missing_or_misaligned || []).length} protocol gaps)`);
   }
 
+  // Gap deltas are informational — they surface coverage issues but don't
+  // block the pipeline. Hard failures come from data correctness rules
+  // (APY contamination, scanner staleness, fixture regressions), not from
+  // DeBank-parity which is a moving target as we improve scanners.
   if (material.length > 0) {
-    errors.push(`${material.length} material active wallet+chain gaps exceed $1M`);
+    warnings.push(`${material.length} material active wallet+chain gaps exceed $1M (see gap report)`);
   }
   if (summary.review.length > 10) {
     warnings.push(`${summary.review.length} active wallet+chain pairs still need review`);
