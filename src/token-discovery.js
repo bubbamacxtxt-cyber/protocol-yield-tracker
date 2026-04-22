@@ -1,20 +1,21 @@
 #!/usr/bin/env node
 /**
- * Token Discovery v2
- * 
- * Uses Alchemy to scan wallet token balances, matches against CoinGecko registry,
- * and writes identified wallet-held positions to DB.
- * 
- * Flow:
- * 1. Load whale wallets from data/whales.json
- * 2. For each wallet+chain pair:
- *    - Call alchemy_getTokenBalances
- *    - Filter out zero balances
- *    - Match contract addresses against token registry
- *    - Call alchemy_getTokenMetadata for decimals
- *    - Compute USD value (price from DeFiLlama or hardcoded $1 for stables)
- * 3. Filter to positions > $50K
- * 4. Write to DB as wallet-held source type
+ * Token Discovery v3 — Layer 2 of the v3 architecture
+ *
+ * Uses Alchemy to scan wallet token balances. Each token is matched in
+ * priority order against three lists:
+ *
+ *   1. VAULT LIST  (data/vaults.json)  → write as vault position with vault APY
+ *   2. YBS LIST    (data/stables.json) → write as yield-bearing position with YBS APY
+ *   3. TOKEN LIST  (data/token-registry.json) → write as wallet-held position
+ *
+ * Gated by the DeBank recon output: only wallet+chain pairs that DeBank
+ * says hold >= $50K are scanned. This is Layer 1's job, we just consume it.
+ *
+ * No hardcoded prices. Prices come from DeFiLlama or CoinGecko.
+ * No price → position is skipped with a warning (caller decides how to handle).
+ *
+ * Position minimum: $50K value. Below that, we don't create a line.
  */
 
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
@@ -22,6 +23,7 @@ const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
 const { fetchJSON } = require('./fetch-helper');
+const { loadActiveWalletChains } = require('./recon-helpers');
 
 const ALCHEMY_KEY = process.env.ALCHEMY_API_KEY;
 if (!ALCHEMY_KEY) {
@@ -31,7 +33,13 @@ if (!ALCHEMY_KEY) {
 
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const REGISTRY_PATH = path.join(__dirname, '..', 'data', 'token-registry.json');
-const MIN_VALUE_USD = 1000;
+const VAULTS_PATH = path.join(__dirname, '..', 'data', 'vaults.json');
+const YBS_PATH = path.join(__dirname, '..', 'data', 'stables.json');
+
+// $50K minimum per-position threshold (your vision)
+const MIN_POSITION_USD = 50000;
+// $50K minimum per-chain threshold (Layer 1 filter)
+const MIN_CHAIN_USD = 50000;
 
 // Alchemy RPC endpoints
 const RPCS = {
@@ -57,52 +65,101 @@ const RPCS = {
   gnosis: `https://gnosis-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
   celo: `https://celo-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
   polygonzkevm: `https://polygonzkevm-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
-  hyperliquid: `https://hyperliquid-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`, // Chain ID 999
-  hyperevm: '', // No Alchemy RPC yet
+  hyperliquid: `https://hyperliquid-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
 };
 
-// Tokens that are explicitly NOT $1 stables (these have real market prices)
-const NON_STABLES = new Set([
-  'WETH', 'WBTC', 'WSTETH', 'RETH', 'CBETH', 'ETH', 'BTC',
-  'WEETH', 'EZETH', 'RSETH', 'SWETH', 'WOETH',
-]);
+// Chain name aliases (DeBank → Alchemy/registry)
+const CHAIN_ALIAS = {
+  ethereum: 'eth',
+  arbitrum: 'arb',
+  optimism: 'opt',
+  polygon: 'poly',
+  avalanche: 'avax',
+  mantle: 'mnt',
+  hyper: 'hyperliquid',
+  hyperevm: 'hyperliquid',
+};
 
-// Load token registry
-function loadRegistry() {
-  try {
-    const data = JSON.parse(fs.readFileSync(REGISTRY_PATH, 'utf8'));
-    console.log(`Loaded registry: ${data.tokens_with_addresses} tokens with addresses`);
-    return data;
-  } catch (e) {
-    console.error('Failed to load token registry:', e.message);
-    process.exit(1);
-  }
+function normalizeChain(chain) {
+  const lower = String(chain || '').toLowerCase();
+  return CHAIN_ALIAS[lower] || lower;
 }
 
-// Load whale wallets
-function loadWallets() {
-  const whalesPath = path.join(__dirname, '..', 'data', 'whales.json');
-  const whales = JSON.parse(fs.readFileSync(whalesPath, 'utf8'));
-  const wallets = [];
-  
-  for (const [name, config] of Object.entries(whales)) {
-    if (Array.isArray(config)) {
-      for (const w of config) wallets.push({ whale: name, wallet: w.toLowerCase() });
-    } else if (config.vaults) {
-      for (const [vault, list] of Object.entries(config.vaults)) {
-        for (const w of list) wallets.push({ whale: name, wallet: w.toLowerCase(), vault });
-      }
+// Chain → DeFiLlama slug
+const DL_CHAIN_MAP = {
+  eth: 'ethereum',
+  base: 'base',
+  arb: 'arbitrum',
+  mnt: 'mantle',
+  opt: 'optimism',
+  avax: 'avalanche',
+  bsc: 'bsc',
+  poly: 'polygon',
+  blast: 'blast',
+  scroll: 'scroll',
+  plasma: 'plasma',
+  ink: 'ink',
+  monad: 'monad',
+  sonic: 'sonic',
+  linea: 'linea',
+  zksync: 'era',
+  gnosis: 'xdai',
+  celo: 'celo',
+  hyperliquid: 'hyperliquid',
+};
+
+// ═══════════════════════════════════════════════════════════════
+// LOADERS
+// ═══════════════════════════════════════════════════════════════
+
+function loadRegistry() {
+  const data = JSON.parse(fs.readFileSync(REGISTRY_PATH, 'utf8'));
+  console.log(`Loaded registry: ${data.tokens_with_addresses} tokens with addresses`);
+  return data;
+}
+
+/**
+ * Build vault index: chain:address → vault entry
+ * Uses the chain alias table since data/vaults.json uses mixed casing.
+ */
+function loadVaults() {
+  const data = JSON.parse(fs.readFileSync(VAULTS_PATH, 'utf8'));
+  const byAddress = {};
+  for (const v of data.vaults || []) {
+    if (!v.address) continue;
+    const chain = normalizeChain(v.chain);
+    const key = `${chain}:${v.address.toLowerCase()}`;
+    byAddress[key] = v;
+  }
+  console.log(`Loaded vaults: ${Object.keys(byAddress).length} indexed by chain:address`);
+  return byAddress;
+}
+
+/**
+ * Build YBS index: chain:address → YBS entry
+ */
+function loadYbs() {
+  const data = JSON.parse(fs.readFileSync(YBS_PATH, 'utf8'));
+  const byAddress = {};
+  for (const s of data.stables || []) {
+    const chain = normalizeChain(s.chain);
+    for (const addr of (s.addresses || [])) {
+      if (!addr) continue;
+      const key = `${chain}:${addr.toLowerCase()}`;
+      byAddress[key] = s;
     }
   }
-  
-  return wallets;
+  console.log(`Loaded YBS: ${Object.keys(byAddress).length} indexed by chain:address`);
+  return byAddress;
 }
 
-// Alchemy RPC call
+// ═══════════════════════════════════════════════════════════════
+// ALCHEMY RPC
+// ═══════════════════════════════════════════════════════════════
+
 async function alchemyRpc(chain, method, params) {
   const url = RPCS[chain];
   if (!url) return null;
-  
   try {
     const res = await fetchJSON(url, {
       method: 'POST',
@@ -116,55 +173,129 @@ async function alchemyRpc(chain, method, params) {
   }
 }
 
-// Get token balances for a wallet
 async function getTokenBalances(wallet, chain) {
   const result = await alchemyRpc(chain, 'alchemy_getTokenBalances', [wallet]);
   if (!result?.tokenBalances) return [];
-  
   return result.tokenBalances.filter(t => {
     const bal = t.tokenBalance;
     return bal && bal !== '0x0' && !/^0x0+$/.test(bal);
   });
 }
 
-// Get token metadata
 async function getTokenMetadata(chain, address) {
   return await alchemyRpc(chain, 'alchemy_getTokenMetadata', [address]);
 }
 
-// Convert hex balance to decimal
 function hexToDecimal(hex) {
   return parseInt(hex, 16);
 }
 
-// Format amount with decimals
 function formatAmount(rawBalance, decimals) {
   if (!decimals || decimals === 0) return rawBalance;
   return rawBalance / Math.pow(10, decimals);
 }
 
-// Get price from DeFiLlama
+// ═══════════════════════════════════════════════════════════════
+// ERC-4626 VAULT VALUE CALCULATION
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * For an ERC-4626 vault, call convertToAssets(shares) via RPC.
+ * Function selector: 0x07a2d13a convertToAssets(uint256)
+ * Returns: uint256 assets
+ */
+async function convertToAssets(chain, vaultAddress, shares) {
+  // Encode call: selector + uint256 padded
+  const selector = '0x07a2d13a';
+  const paddedShares = BigInt(Math.floor(shares)).toString(16).padStart(64, '0');
+  const data = selector + paddedShares;
+
+  const result = await alchemyRpc(chain, 'eth_call', [
+    { to: vaultAddress, data },
+    'latest'
+  ]);
+
+  if (!result || result === '0x') return null;
+  try {
+    return BigInt(result).toString();
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Try to get the underlying asset address from an ERC-4626 vault.
+ * Function selector: 0x38d52e0f asset()
+ */
+async function getVaultAsset(chain, vaultAddress) {
+  const result = await alchemyRpc(chain, 'eth_call', [
+    { to: vaultAddress, data: '0x38d52e0f' },
+    'latest'
+  ]);
+  if (!result || result === '0x') return null;
+  // Address is last 40 hex chars
+  return '0x' + result.slice(-40).toLowerCase();
+}
+
+/**
+ * Calculate USD value of a vault position.
+ * Priority:
+ *   1. ERC-4626: convertToAssets(shares) × price(underlying)
+ *   2. Fallback: shares × TVL / totalSupply  (shares as fraction of vault)
+ *   3. Last resort: null (flagged for review)
+ */
+async function calculateVaultValue(chain, vault, shareAmount, decimals) {
+  // Method 1: ERC-4626
+  try {
+    const rawShares = Math.floor(shareAmount * Math.pow(10, decimals));
+    const underlyingRaw = await convertToAssets(chain, vault.address, rawShares);
+    if (underlyingRaw) {
+      const underlyingAddr = await getVaultAsset(chain, vault.address);
+      if (underlyingAddr) {
+        // Get decimals of underlying (assume 6 for USD stables, 18 for ETH)
+        const meta = await getTokenMetadata(chain, underlyingAddr);
+        const uDecimals = meta?.decimals ?? 18;
+        const underlyingAmount = Number(BigInt(underlyingRaw)) / Math.pow(10, uDecimals);
+        const price = await getDefiLlamaPrice(chain, underlyingAddr);
+        if (price) {
+          return {
+            value_usd: underlyingAmount * price,
+            method: 'erc4626',
+            underlying_address: underlyingAddr,
+            underlying_amount: underlyingAmount,
+            underlying_price: price,
+          };
+        }
+      }
+    }
+  } catch (e) {
+    // fall through
+  }
+
+  // Method 2: TVL proportion — but we don't have totalSupply locally,
+  // so skip unless the vault entry provides share price hints.
+  // For Upshift/IPOR, TVL alone is fine if there's only one wallet holding it,
+  // but that's not safe. Skip.
+
+  // Method 3: Use share_price field if available
+  if (vault.share_price && vault.share_price > 0) {
+    return {
+      value_usd: shareAmount * vault.share_price,
+      method: 'share_price',
+    };
+  }
+
+  // Last resort: null value, flag for review
+  return { value_usd: null, method: 'unknown' };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PRICE LOOKUPS
+// ═══════════════════════════════════════════════════════════════
+
 async function getDefiLlamaPrice(chain, address) {
   try {
-    const cgChainMap = {
-      eth: 'ethereum',
-      base: 'base',
-      arb: 'arbitrum',
-      mnt: 'mantle',
-      opt: 'optimism',
-      avax: 'avalanche',
-      bsc: 'bsc',
-      poly: 'polygon',
-      ftm: 'fantom',
-      blast: 'blast',
-      scroll: 'scroll',
-      plasma: 'plasma',
-      ink: 'ink',
-      monad: 'monad',
-      sonic: 'sonic',
-    };
-    
-    const dlChain = cgChainMap[chain] || chain;
+    const dlChain = DL_CHAIN_MAP[chain] || chain;
     const url = `https://coins.llama.fi/prices/current/${dlChain}:${address}`;
     const data = await fetchJSON(url, {}, 2);
     const key = `${dlChain}:${address.toLowerCase()}`;
@@ -174,37 +305,10 @@ async function getDefiLlamaPrice(chain, address) {
   }
 }
 
-// Get price — try DeFiLlama, fallback to CoinGecko, never assume $1
-async function getTokenPrice(chain, address, symbol, registryEntry) {
-  // Try DeFiLlama first
-  const dlPrice = await getDefiLlamaPrice(chain, address);
-  if (dlPrice) {
-    return { price: dlPrice, source: 'defillama' };
-  }
-  
-  // Fallback to CoinGecko if we have the CoinGecko ID
-  if (registryEntry?.id) {
-    const cgPrice = await getCoinGeckoPrice(registryEntry.id);
-    if (cgPrice) {
-      return { price: cgPrice, source: 'coingecko' };
-    }
-  }
-  
-  // For non-stables with no price, return null (don't assume)
-  if (symbol && NON_STABLES.has(symbol.toUpperCase())) {
-    return { price: null, source: 'no-price-data' };
-  }
-  
-  // For everything else, return null — let caller decide what to do
-  return { price: null, source: 'unknown' };
-}
-
-// Get price from CoinGecko by coin ID
 async function getCoinGeckoPrice(coinId) {
   try {
     const https = require('https');
     const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`;
-    
     return await new Promise((resolve) => {
       const req = https.get(url, {
         headers: { 'User-Agent': 'ProtocolYieldTracker/1.0 (dev@openclaw.ai)' }
@@ -226,179 +330,299 @@ async function getCoinGeckoPrice(coinId) {
   }
 }
 
-// Write position to DB
-function writeWalletPosition(db, wallet, chain, token, valueUsd) {
-  const positionIndex = `${chain}:${token.address}`;
-  
-  // Check if position already exists
+async function getTokenPrice(chain, address, registryEntry) {
+  const dlPrice = await getDefiLlamaPrice(chain, address);
+  if (dlPrice) return { price: dlPrice, source: 'defillama' };
+
+  if (registryEntry?.id) {
+    const cgPrice = await getCoinGeckoPrice(registryEntry.id);
+    if (cgPrice) return { price: cgPrice, source: 'coingecko' };
+  }
+
+  return { price: null, source: 'none' };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DB WRITERS
+// ═══════════════════════════════════════════════════════════════
+
+function writeVaultPosition(db, wallet, chain, vault, token, valueUsd, apy) {
+  const positionIndex = `${chain}:vault:${token.address}`;
   const existing = db.prepare(`
-    SELECT id FROM positions 
+    SELECT id FROM positions
+    WHERE wallet = ? AND chain = ? AND protocol_id = 'vault' AND position_index = ?
+  `).get(wallet, chain, positionIndex);
+
+  let posId;
+  if (existing) {
+    db.prepare(`
+      UPDATE positions
+      SET asset_usd = ?, net_usd = ?, protocol_name = ?, yield_source = ?, scanned_at = datetime('now')
+      WHERE id = ?
+    `).run(valueUsd, valueUsd, vault.protocol || 'Vault', `vault:${vault.symbol}`, existing.id);
+    posId = existing.id;
+    db.prepare(`DELETE FROM position_tokens WHERE position_id = ?`).run(posId);
+  } else {
+    const result = db.prepare(`
+      INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy,
+        net_usd, asset_usd, debt_usd, position_index, yield_source, scanned_at)
+      VALUES (?, ?, 'vault', ?, 'supply', 'vault', ?, ?, 0, ?, ?, datetime('now'))
+    `).run(wallet, chain, vault.protocol || 'Vault', valueUsd, valueUsd, positionIndex, `vault:${vault.symbol}`);
+    posId = result.lastInsertRowid;
+  }
+
+  db.prepare(`
+    INSERT INTO position_tokens (position_id, role, symbol, address, amount, price_usd, value_usd, apy_base)
+    VALUES (?, 'supply', ?, ?, ?, ?, ?, ?)
+  `).run(posId, vault.symbol || token.symbol, token.address, token.amount, token.price || 0, valueUsd, apy || 0);
+
+  return posId;
+}
+
+function writeYbsPosition(db, wallet, chain, ybs, token, valueUsd, apy) {
+  const positionIndex = `${chain}:ybs:${token.address}`;
+  const existing = db.prepare(`
+    SELECT id FROM positions
+    WHERE wallet = ? AND chain = ? AND protocol_id = 'ybs' AND position_index = ?
+  `).get(wallet, chain, positionIndex);
+
+  let posId;
+  if (existing) {
+    db.prepare(`
+      UPDATE positions
+      SET asset_usd = ?, net_usd = ?, protocol_name = ?, yield_source = ?, scanned_at = datetime('now')
+      WHERE id = ?
+    `).run(valueUsd, valueUsd, ybs.protocol || 'YBS', `ybs:${ybs.name}`, existing.id);
+    posId = existing.id;
+    db.prepare(`DELETE FROM position_tokens WHERE position_id = ?`).run(posId);
+  } else {
+    const result = db.prepare(`
+      INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy,
+        net_usd, asset_usd, debt_usd, position_index, yield_source, scanned_at)
+      VALUES (?, ?, 'ybs', ?, 'supply', 'ybs', ?, ?, 0, ?, ?, datetime('now'))
+    `).run(wallet, chain, ybs.protocol || 'YBS', valueUsd, valueUsd, positionIndex, `ybs:${ybs.name}`);
+    posId = result.lastInsertRowid;
+  }
+
+  db.prepare(`
+    INSERT INTO position_tokens (position_id, role, symbol, address, amount, price_usd, value_usd, apy_base)
+    VALUES (?, 'supply', ?, ?, ?, ?, ?, ?)
+  `).run(posId, ybs.name || token.symbol, token.address, token.amount, token.price || 0, valueUsd, apy || 0);
+
+  return posId;
+}
+
+function writeWalletHeldPosition(db, wallet, chain, token, valueUsd) {
+  const positionIndex = `${chain}:wallet:${token.address}`;
+  const existing = db.prepare(`
+    SELECT id FROM positions
     WHERE wallet = ? AND chain = ? AND protocol_id = 'wallet-held' AND position_index = ?
   `).get(wallet, chain, positionIndex);
-  
+
+  let posId;
   if (existing) {
-    // Update existing
     db.prepare(`
-      UPDATE positions 
+      UPDATE positions
       SET asset_usd = ?, net_usd = ?, scanned_at = datetime('now')
       WHERE id = ?
     `).run(valueUsd, valueUsd, existing.id);
-    
-    // Update token
-    db.prepare(`
-      UPDATE position_tokens 
-      SET value_usd = ?, amount = ?
-      WHERE position_id = ? AND role = 'supply'
-    `).run(valueUsd, token.amount, existing.id);
-    
-    return existing.id;
+    posId = existing.id;
+    db.prepare(`DELETE FROM position_tokens WHERE position_id = ?`).run(posId);
   } else {
-    // Insert new position
     const result = db.prepare(`
-      INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, 
+      INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy,
         net_usd, asset_usd, debt_usd, position_index, scanned_at)
       VALUES (?, ?, 'wallet-held', 'Wallet', 'Wallet', 'hold', ?, ?, 0, ?, datetime('now'))
     `).run(wallet, chain, valueUsd, valueUsd, positionIndex);
-    
-    const posId = result.lastInsertRowid;
-    
-    // Insert token
-    db.prepare(`
-      INSERT INTO position_tokens (position_id, role, symbol, address, amount, price_usd, value_usd)
-      VALUES (?, 'supply', ?, ?, ?, ?, ?)
-    `).run(posId, token.symbol, token.address, token.amount, token.price, valueUsd);
-    
-    return posId;
+    posId = result.lastInsertRowid;
   }
+
+  db.prepare(`
+    INSERT INTO position_tokens (position_id, role, symbol, address, amount, price_usd, value_usd)
+    VALUES (?, 'supply', ?, ?, ?, ?, ?)
+  `).run(posId, token.symbol, token.address, token.amount, token.price || 0, valueUsd);
+
+  return posId;
 }
 
-// Main scan
-async function scanWallet(db, registry, wallet, whale, chain) {
-  console.log(`\nScanning ${whale} ${wallet.slice(0, 12)}... on ${chain}`);
-  
-  const balances = await getTokenBalances(wallet, chain);
-  if (!balances.length) {
-    console.log('  No token balances');
-    return 0;
+// ═══════════════════════════════════════════════════════════════
+// MAIN SCAN
+// ═══════════════════════════════════════════════════════════════
+
+async function scanWalletChain(db, registry, vaultIndex, ybsIndex, wallet, whale, chain) {
+  const rpc = RPCS[chain];
+  if (!rpc) {
+    console.log(`  ⚠️ No RPC for ${chain}, skipping`);
+    return { vault: 0, ybs: 0, wallet: 0, skipped: 0 };
   }
-  
-  console.log(`  Found ${balances.length} token balances`);
-  
-  let foundCount = 0;
-  let totalValue = 0;
-  
+
+  const balances = await getTokenBalances(wallet, chain);
+  if (!balances.length) return { vault: 0, ybs: 0, wallet: 0, skipped: 0 };
+
+  console.log(`\n  [${chain}] ${whale} ${wallet.slice(0, 12)}... (${balances.length} token balances)`);
+
+  const counts = { vault: 0, ybs: 0, wallet: 0, skipped: 0 };
+
   for (const bal of balances) {
     const address = bal.contractAddress.toLowerCase();
     const lookupKey = `${chain}:${address}`;
-    const registryEntry = registry.by_address[lookupKey];
-    
-    // Skip if not in registry (unknown token)
-    if (!registryEntry) continue;
-    
-    // Get metadata for decimals
+
+    // Get metadata early (needed for amount calc)
     const metadata = await getTokenMetadata(chain, address);
     const decimals = metadata?.decimals || 18;
-    const symbol = metadata?.symbol || registryEntry.symbol;
-    
-    // Calculate amount
+    const symbol = metadata?.symbol || 'UNKNOWN';
     const rawBalance = hexToDecimal(bal.tokenBalance);
     const amount = formatAmount(rawBalance, decimals);
-    
-    // Skip dust amounts
+
     if (amount < 0.01) continue;
-    
-    // Get price
-    const priceInfo = await getTokenPrice(chain, address, symbol, registryEntry);
-    
-    if (!priceInfo.price) {
-      console.log(`  ⚠️ ${symbol}: no price, skipping`);
+
+    // ─── PRIORITY 1: Vault match ─────────────────────────────
+    const vault = vaultIndex[lookupKey];
+    if (vault) {
+      const result = await calculateVaultValue(chain, vault, amount, decimals);
+      if (result.value_usd && result.value_usd >= MIN_POSITION_USD) {
+        const token = {
+          symbol: vault.symbol || symbol,
+          address,
+          amount,
+          price: result.underlying_price || null,
+        };
+        writeVaultPosition(db, wallet, chain, vault, token, result.value_usd, vault.apy_30d || vault.apy_7d || 0);
+        console.log(`  🟡 VAULT  ${(vault.symbol || symbol).padEnd(15)} ${amount.toFixed(4).padStart(12)} = $${(result.value_usd / 1e6).toFixed(2)}M APY ${(vault.apy_30d || 0).toFixed(2)}% (${result.method})`);
+        counts.vault++;
+      } else if (result.value_usd === null) {
+        console.log(`  ⚠️ VAULT  ${vault.symbol || symbol} value unknown (flagged for review)`);
+        counts.skipped++;
+      }
       continue;
     }
-    
-    // Calculate USD value
+
+    // ─── PRIORITY 2: YBS match ───────────────────────────────
+    const ybs = ybsIndex[lookupKey];
+    if (ybs) {
+      const priceInfo = await getTokenPrice(chain, address, registry.by_address[lookupKey]);
+      if (priceInfo.price) {
+        const valueUsd = amount * priceInfo.price;
+        if (valueUsd >= MIN_POSITION_USD) {
+          const token = { symbol: ybs.name || symbol, address, amount, price: priceInfo.price };
+          writeYbsPosition(db, wallet, chain, ybs, token, valueUsd, ybs.apy_30d || ybs.apy_7d || ybs.apy_1d || 0);
+          console.log(`  🔵 YBS    ${(ybs.name || symbol).padEnd(15)} ${amount.toFixed(4).padStart(12)} @ $${priceInfo.price.toFixed(4)} = $${(valueUsd / 1e6).toFixed(2)}M APY ${(ybs.apy_30d || 0).toFixed(2)}%`);
+          counts.ybs++;
+        }
+      } else {
+        console.log(`  ⚠️ YBS    ${ybs.name || symbol} no price available`);
+        counts.skipped++;
+      }
+      continue;
+    }
+
+    // ─── PRIORITY 3: Plain token from registry ───────────────
+    const registryEntry = registry.by_address[lookupKey];
+    if (!registryEntry) continue; // unknown token — skip silently
+
+    const priceInfo = await getTokenPrice(chain, address, registryEntry);
+    if (!priceInfo.price) continue;
+
     const valueUsd = amount * priceInfo.price;
-    
-    // Skip below threshold
-    if (valueUsd < MIN_VALUE_USD) continue;
-    
-    // Write to DB
-    const token = {
-      symbol,
-      address,
-      amount,
-      price: priceInfo.price,
-    };
-    
-    const posId = writeWalletPosition(db, wallet, chain, token, valueUsd);
-    
-    console.log(`  ✅ ${symbol.padEnd(10)} ${amount.toFixed(4).padStart(12)} @ $${priceInfo.price.toFixed(4)} = $${(valueUsd/1e6).toFixed(2)}M (${priceInfo.source})`);
-    
-    foundCount++;
-    totalValue += valueUsd;
+    if (valueUsd < MIN_POSITION_USD) continue;
+
+    const token = { symbol, address, amount, price: priceInfo.price };
+    writeWalletHeldPosition(db, wallet, chain, token, valueUsd);
+    console.log(`  ⚪ WALLET ${symbol.padEnd(15)} ${amount.toFixed(4).padStart(12)} @ $${priceInfo.price.toFixed(4)} = $${(valueUsd / 1e6).toFixed(2)}M`);
+    counts.wallet++;
   }
-  
-  console.log(`  Found ${foundCount} positions, total $${(totalValue/1e6).toFixed(2)}M`);
-  return foundCount;
+
+  return counts;
 }
 
-// Cleanup old wallet-held positions for scanned wallets
-function cleanupOldPositions(db, scannedWallets) {
-  const walletList = scannedWallets.map(w => w.toLowerCase());
-  const placeholders = walletList.map(() => '?').join(',');
-  
-  const oldIds = db.prepare(`
-    SELECT id FROM positions 
-    WHERE protocol_id = 'wallet-held' 
-    AND lower(wallet) IN (${placeholders})
-    AND scanned_at < datetime('now', '-1 hour')
-  `).all(...walletList).map(r => r.id);
-  
-  if (oldIds.length > 0) {
-    const idPlaceholders = oldIds.map(() => '?').join(',');
-    db.prepare(`DELETE FROM position_tokens WHERE position_id IN (${idPlaceholders})`).run(...oldIds);
-    db.prepare(`DELETE FROM positions WHERE id IN (${idPlaceholders})`).run(...oldIds);
-    console.log(`\nCleaned ${oldIds.length} old wallet-held positions`);
+// ═══════════════════════════════════════════════════════════════
+// CLEANUP
+// ═══════════════════════════════════════════════════════════════
+
+function cleanupStale(db, activePairs) {
+  // Remove vault/ybs/wallet-held rows not refreshed in this run
+  const kinds = ['vault', 'ybs', 'wallet-held'];
+  let removed = 0;
+  for (const kind of kinds) {
+    const result = db.prepare(`
+      DELETE FROM position_tokens
+      WHERE position_id IN (
+        SELECT id FROM positions
+        WHERE protocol_id = ? AND scanned_at < datetime('now', '-2 hour')
+      )
+    `).run(kind);
+    const result2 = db.prepare(`
+      DELETE FROM positions
+      WHERE protocol_id = ? AND scanned_at < datetime('now', '-2 hour')
+    `).run(kind);
+    removed += result2.changes;
   }
+  if (removed > 0) console.log(`\nCleaned ${removed} stale vault/ybs/wallet-held rows`);
 }
+
+// ═══════════════════════════════════════════════════════════════
+// MAIN
+// ═══════════════════════════════════════════════════════════════
 
 async function main() {
-  console.log('=== Token Discovery v2 ===\n');
-  
+  console.log('=== Token Discovery v3 ===');
+  console.log(`Position threshold: $${MIN_POSITION_USD.toLocaleString()}\n`);
+
   const registry = loadRegistry();
-  const wallets = loadWallets();
-  const db = new Database(DB_PATH);
-  
-  console.log(`Scanning ${wallets.length} wallets\n`);
-  
-  // Get unique chains from registry that we have RPCs for
-  const availableChains = Object.keys(RPCS).filter(c => RPCS[c]);
-  console.log('Available chains:', availableChains.join(', '));
-  
-  let totalFound = 0;
-  const scannedWallets = [];
-  
-  for (const { whale, wallet, vault } of wallets) {
-    // Scan all available chains for each wallet
-    for (const chain of availableChains) {
-      try {
-        const found = await scanWallet(db, registry, wallet, whale, chain);
-        totalFound += found;
-        if (found > 0) scannedWallets.push(wallet);
-      } catch (e) {
-        console.error(`  Error scanning ${wallet} on ${chain}:`, e.message);
-      }
-      
-      // Small delay to avoid rate limits
-      await new Promise(r => setTimeout(r, 100));
+  const vaultIndex = loadVaults();
+  const ybsIndex = loadYbs();
+
+  // Layer 1 gate: only scan wallet+chain pairs DeBank says hold >= $50K
+  const activePairs = loadActiveWalletChains(MIN_CHAIN_USD);
+  if (!activePairs) {
+    console.error('ERROR: debank-wallet-summary.json missing. Run build-debank-recon.js first.');
+    process.exit(1);
+  }
+
+  // Normalize chain names and filter to chains we have RPCs for
+  const scanPairs = [];
+  const skippedByChain = {};
+  for (const p of activePairs) {
+    const chain = normalizeChain(p.chain);
+    if (!RPCS[chain]) {
+      skippedByChain[p.chain] = (skippedByChain[p.chain] || 0) + 1;
+      continue;
     }
+    scanPairs.push({ ...p, chain });
   }
-  
-  // Cleanup old positions
-  if (scannedWallets.length > 0) {
-    cleanupOldPositions(db, [...new Set(scannedWallets)]);
+
+  console.log(`Active wallet+chain pairs from DeBank recon: ${activePairs.length}`);
+  console.log(`Scannable (have RPC): ${scanPairs.length}`);
+  if (Object.keys(skippedByChain).length > 0) {
+    console.log('Skipped chains (no RPC):', JSON.stringify(skippedByChain));
   }
-  
-  console.log(`\n=== Done: ${totalFound} wallet-held positions ===`);
+  console.log('');
+
+  const db = new Database(DB_PATH);
+
+  const totals = { vault: 0, ybs: 0, wallet: 0, skipped: 0 };
+
+  for (const pair of scanPairs) {
+    try {
+      const counts = await scanWalletChain(db, registry, vaultIndex, ybsIndex, pair.wallet, pair.whale, pair.chain);
+      totals.vault += counts.vault;
+      totals.ybs += counts.ybs;
+      totals.wallet += counts.wallet;
+      totals.skipped += counts.skipped;
+    } catch (e) {
+      console.error(`  ERROR scanning ${pair.wallet} on ${pair.chain}:`, e.message);
+    }
+    await new Promise(r => setTimeout(r, 100));
+  }
+
+  cleanupStale(db, scanPairs);
+
+  console.log(`\n=== Token Discovery v3 Complete ===`);
+  console.log(`  🟡 Vault positions:  ${totals.vault}`);
+  console.log(`  🔵 YBS positions:    ${totals.ybs}`);
+  console.log(`  ⚪ Wallet-held:      ${totals.wallet}`);
+  console.log(`  ⚠️ Skipped (no value/price): ${totals.skipped}`);
+
   db.close();
 }
 
