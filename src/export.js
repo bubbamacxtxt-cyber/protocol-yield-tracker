@@ -745,6 +745,9 @@ async function main() {
         if (supplyAfter > 0) p.asset_usd = supplyAfter;
         if (borrowAfter > 0) p.debt_usd = borrowAfter;
         if (p.asset_usd > 0 || p.debt_usd > 0) p.net_usd = p.asset_usd - p.debt_usd;
+        // Phase 0: ensure position.value_usd is set (frontend reads this).
+        // For supply-only, value_usd = asset_usd. For leveraged/borrow, value_usd = net_usd.
+        p.value_usd = p.net_usd != null ? p.net_usd : (p.asset_usd || 0);
         // Normalize to health_rate only
         if (p.health_rate == null && p.health_factor != null) p.health_rate = p.health_factor;
 

@@ -32,12 +32,8 @@ function allowedAaveChainFromRecon(row) {
   if (aaveUsd < 50000) return false;
   if (!protocols.some(x => x.includes('aave'))) return false;
 
-  // Trust rules: only keep sidechains when Aave exposure there is meaningfully large.
-  if (chain === 'mnt' && aaveUsd < 10000000) return false;
-  if (chain === 'ink' && aaveUsd < 10000000) return false;
-  if (chain === 'plasma' && aaveUsd < 10000000) return false;
-  if (chain === 'base' && aaveUsd < 10000000) return false;
-
+  // Scan any chain where DeBank shows Aave exposure >= $50K.
+  // Chain-gating is owned by loadActiveWalletChains(50000).
   return true;
 }
 
