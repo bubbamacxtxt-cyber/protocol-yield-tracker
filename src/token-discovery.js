@@ -57,7 +57,7 @@ const RPCS = {
   gnosis: `https://gnosis-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
   celo: `https://celo-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
   polygonzkevm: `https://polygonzkevm-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`,
-  hyperliquid: '', // No Alchemy RPC yet - custom chain
+  hyperliquid: `https://hyperliquid-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`, // Chain ID 999
   hyperevm: '', // No Alchemy RPC yet
 };
 
