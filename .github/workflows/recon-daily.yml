@@ -23,10 +23,17 @@ jobs:
         run: node src/build-debank-recon.js
         env:
           DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
+      - name: Import DeBank positions for protocols without a scanner
+        # Brings Dolomite / Curvance / Gearbox / Venus / LFJ / ethstrat /
+        # Yuzu Money into the DB once per day. See src/debank-import.js for
+        # the protocol allowlist. These rows are marked source_type='debank'
+        # and expire after 48h via purge-stale-positions.js Tier 2 if a
+        # later DeBank recon stops reporting them.
+        run: node src/debank-import.js
       - name: Reconcile gaps against latest modeled data
         run: node src/reconcile-gaps.js
       - name: Commit recon artifacts
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Daily DeBank recon ${{ github.run_number }}"
-          file_pattern: data/recon/wallet-inventory.json data/recon/debank-wallet-summary.json data/recon/debank-wallet-positions.json data/recon/gap-report.json
+          file_pattern: data/recon/wallet-inventory.json data/recon/debank-wallet-summary.json data/recon/debank-wallet-positions.json data/recon/gap-report.json yield-tracker.db

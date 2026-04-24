@@ -45,23 +45,25 @@ const SCANNER_PROTOCOLS = [
 // quickly. Drop any >48h old (regardless of size) so stale sells/closes
 // don't linger in the whale totals.
 const DEBANK_ONLY_PROTOCOLS = [
-  // Curve now has a scanner (curve-scanner.js). Legacy chain-prefixed rows
-  // (arb_curve, plasma_curve) stay here until they age out — the scanner
-  // writes canonical protocol_id = 'curve' so old rows won't be rewritten
-  // and they'll fall off naturally via the 48h window.
-  'arb_curve', 'plasma_curve',
-  'convex',
-  'capapp',
-  'upshift',
-  'sky',
+  // Legacy chain-prefixed variants of protocols we now scan canonically.
+  // Scanners write their canonical protocol_id; these old rows age out
+  // via the 48h rule.
+  'arb_curve', 'plasma_curve',     // curve-scanner writes 'curve'
+  'capapp',                        // stcUSD captured as YBS via token-discovery
+  'upshift',                       // upshift vaults captured as vault-probed
+  'sky',                           // sUSDS captured as YBS
+  'convex',                        // TODO: needs dedicated scanner
+  'arb_usdai', 'usd-ai',           // sUSDai captured as YBS
+  'infinifixyz',                   // siUSD + LIUSD captured as YBS
+
+  // Protocols imported daily via debank-import.js. Rows are refreshed
+  // every 24h; 48h window means a single missed recon won't purge them.
   'dolomite',
   'gearbox', 'monad_gearbox',
   'curvance', 'monad_curvance',
   'traderjoe', 'avax_traderjoexyz', 'monad_traderjoexyz',
   'venusflux', 'bsc_venusflux',
-  'arb_usdai', 'usd-ai',
   'ethstrat',
-  'infinifixyz',
   'yuzumoney', 'plasma_yuzumoney',
 ];
 
