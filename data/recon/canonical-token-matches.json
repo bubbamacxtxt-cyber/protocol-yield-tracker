@@ -1,150 +1,6 @@
 {
-  "generated_at": "2026-04-24T19:36:31.230Z",
+  "generated_at": "2026-04-24T22:02:54.722Z",
   "matches": [
-    {
-      "wallet": "0x887fd380c1e4cc28e119917015fe7fb0062c5d67",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0x7bee8d37fba61a6251a08b957d502c56e2a50fab",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0x920eefbcf1f5756109952e6ff6da1cab950c64d7",
-      "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
-      "kind": "ybs",
-      "match": {
-        "name": "wsrUSD",
-        "protocol": "reservoir-protocol",
-        "apr": "4.65%",
-        "aprValue": 4.65326,
-        "apy_1d": 4.65326,
-        "apy_7d": 4.65326,
-        "apy_30d": 4.71714,
-        "chain": "Ethereum",
-        "tvl": "$101M",
-        "tvlNum": 101273101,
-        "source": "defillama",
-        "addresses": [
-          "0x09D4214C03D01F49544C0448DBE3A27f768F2b34"
-        ],
-        "aliases": [
-          "wsrUSD"
-        ]
-      }
-    },
-    {
-      "wallet": "0x920eefbcf1f5756109952e6ff6da1cab950c64d7",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0xc468315a2df54f9c076bd5cfe5002ba211f74ca6",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
-      "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
-      "kind": "ybs",
-      "match": {
-        "name": "wsrUSD",
-        "protocol": "reservoir-protocol",
-        "apr": "4.65%",
-        "aprValue": 4.65326,
-        "apy_1d": 4.65326,
-        "apy_7d": 4.65326,
-        "apy_30d": 4.71714,
-        "chain": "Ethereum",
-        "tvl": "$101M",
-        "tvlNum": 101273101,
-        "source": "defillama",
-        "addresses": [
-          "0x09D4214C03D01F49544C0448DBE3A27f768F2b34"
-        ],
-        "aliases": [
-          "wsrUSD"
-        ]
-      }
-    },
     {
       "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
       "address": "0x12b004719fb632f1e7c010c6f5d6009fb4258442",
@@ -152,14 +8,14 @@
       "match": {
         "name": "LIUSD-1W",
         "protocol": "infinifi",
-        "apr": "6.58%",
-        "aprValue": 6.57534,
-        "apy_1d": 6.57534,
-        "apy_7d": null,
-        "apy_30d": 5.99082,
+        "apr": "6.09%",
+        "aprValue": 6.09221,
+        "apy_1d": 6.09221,
+        "apy_7d": 6.4545575,
+        "apy_30d": 5.99222,
         "chain": "Ethereum",
         "tvl": "$6M",
-        "tvlNum": 5864875,
+        "tvlNum": 5865031,
         "source": "defillama",
         "addresses": [
           "0x12b004719fb632f1e7c010c6f5d6009fb4258442"
@@ -170,98 +26,26 @@
       }
     },
     {
-      "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
       "wallet": "0x815f5bb257e88b67216a344c7c83a3ea4ee74748",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+      "address": "0x88887be419578051ff9f4eb6c858a951921d8888",
       "kind": "ybs",
       "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
+        "name": "stcUSD",
+        "protocol": "cap",
+        "apr": "5.44%",
+        "aprValue": 5.4374,
+        "apy_1d": 5.4374,
+        "apy_7d": 6.427726451612903,
+        "apy_30d": 5.65038,
         "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
+        "tvl": "$96M",
+        "tvlNum": 96278077,
         "source": "defillama",
         "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
+          "0x88887be419578051ff9f4eb6c858a951921d8888"
         ],
         "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0x015cc48cc8bc37d80aaff4e43061dbaf94192308",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
+          "stcUSD"
         ]
       }
     },
@@ -272,14 +56,14 @@
       "match": {
         "name": "sUSDe",
         "protocol": "ethena-usde",
-        "apr": "5.19%",
-        "aprValue": 5.18598,
-        "apy_1d": 5.18598,
-        "apy_7d": 4.551431034482759,
-        "apy_30d": 3.78217,
+        "apr": "5.80%",
+        "aprValue": 5.8032,
+        "apy_1d": 5.8032,
+        "apy_7d": 4.661226451612903,
+        "apy_30d": 3.78993,
         "chain": "Ethereum",
-        "tvl": "$2212M",
-        "tvlNum": 2212178974,
+        "tvl": "$2192M",
+        "tvlNum": 2192433307,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
@@ -290,170 +74,26 @@
       }
     },
     {
-      "wallet": "0x502d222e8e4daef69032f55f0c1a999effd78fb3",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0xb6cbe8b123392ef6aa72897bb85bd6515d2e8db7",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0xb6cbe8b123392ef6aa72897bb85bd6515d2e8db7",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0xfaa7744b9ed973290a36ee815b5acc76856583a0",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0x99a95a9e38e927486fc878f41ff8b118eb632b10",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
       "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
-      "address": "0x48f9e38f3070ad8945dfeae3fa70987722e3d89c",
+      "address": "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb",
       "kind": "ybs",
       "match": {
         "name": "siUSD",
         "protocol": "infinifi",
-        "apr": "6.13%",
-        "aprValue": 6.12784,
-        "apy_1d": 6.12784,
-        "apy_7d": 6.289114482758621,
-        "apy_30d": 5.79263,
+        "apr": "6.02%",
+        "aprValue": 6.02448,
+        "apy_1d": 6.02448,
+        "apy_7d": 6.294251612903226,
+        "apy_30d": 5.79443,
         "chain": "Ethereum",
         "tvl": "$40M",
-        "tvlNum": 40250586,
+        "tvlNum": 40170788,
         "source": "defillama",
         "addresses": [
-          "0x48f9e38f3070AD8945DFEae3FA70987722E3D89c"
+          "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb"
         ],
         "aliases": [
           "siUSD"
-        ]
-      }
-    },
-    {
-      "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
         ]
       }
     },
@@ -464,14 +104,14 @@
       "match": {
         "name": "LIUSD-4W",
         "protocol": "infinifi",
-        "apr": "7.94%",
-        "aprValue": 7.94138,
-        "apy_1d": 7.94138,
-        "apy_7d": null,
-        "apy_30d": 7.23163,
+        "apr": "7.35%",
+        "aprValue": 7.35447,
+        "apy_1d": 7.35447,
+        "apy_7d": 7.7946525,
+        "apy_30d": 7.23333,
         "chain": "Ethereum",
         "tvl": "$11M",
-        "tvlNum": 10871130,
+        "tvlNum": 10871478,
         "source": "defillama",
         "addresses": [
           "0x66bcf6151d5558afb47c38b20663589843156078"
@@ -482,80 +122,8 @@
       }
     },
     {
-      "wallet": "0xd1a1c248b253f1fc60eacd90777b9a63f8c8c1bc",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0xf014ef13a3e0372582f44a667e144a4f2e439ea7",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0x9f1a1479191af103ff82fead23e950b6b3b2bd1a",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0x9f1a1479191af103ff82fead23e950b6b3b2bd1a",
-      "address": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
+      "wallet": "0xbeef123217647014429b7670329782e210884e89",
+      "address": "0xa3931d71877c0e7a3148cb7eb4463524fec27fbd",
       "kind": "ybs",
       "match": {
         "name": "sUSDS",
@@ -563,14 +131,14 @@
         "apr": "3.65%",
         "aprValue": 3.65,
         "apy_1d": 3.65,
-        "apy_7d": 3.7051724137931035,
-        "apy_30d": 3.74265,
+        "apy_7d": 3.698387096774194,
+        "apy_30d": 3.74223,
         "chain": "Ethereum",
-        "tvl": "$5267M",
-        "tvlNum": 5266900701,
+        "tvl": "$5271M",
+        "tvlNum": 5271250941,
         "source": "defillama",
         "addresses": [
-          "0xdC035D45d973E3EC169d2276DDab16f1e407384F"
+          "0xa3931d71877c0e7a3148cb7eb4463524fec27fbd"
         ],
         "aliases": [
           "sUSDS"
@@ -578,32 +146,8 @@
       }
     },
     {
-      "wallet": "0x6f64630a0c12c60813a80a215fb9a31e52528820",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0x6f64630a0c12c60813a80a215fb9a31e52528820",
-      "address": "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
+      "wallet": "0x9f1a1479191af103ff82fead23e950b6b3b2bd1a",
+      "address": "0xa3931d71877c0e7a3148cb7eb4463524fec27fbd",
       "kind": "ybs",
       "match": {
         "name": "sUSDS",
@@ -611,41 +155,17 @@
         "apr": "3.65%",
         "aprValue": 3.65,
         "apy_1d": 3.65,
-        "apy_7d": 3.7051724137931035,
-        "apy_30d": 3.74265,
+        "apy_7d": 3.698387096774194,
+        "apy_30d": 3.74223,
         "chain": "Ethereum",
-        "tvl": "$5267M",
-        "tvlNum": 5266900701,
+        "tvl": "$5271M",
+        "tvlNum": 5271250941,
         "source": "defillama",
         "addresses": [
-          "0xdC035D45d973E3EC169d2276DDab16f1e407384F"
+          "0xa3931d71877c0e7a3148cb7eb4463524fec27fbd"
         ],
         "aliases": [
           "sUSDS"
-        ]
-      }
-    },
-    {
-      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
-      "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
-      "kind": "ybs",
-      "match": {
-        "name": "wsrUSD",
-        "protocol": "reservoir-protocol",
-        "apr": "4.65%",
-        "aprValue": 4.65326,
-        "apy_1d": 4.65326,
-        "apy_7d": 4.65326,
-        "apy_30d": 4.71714,
-        "chain": "Ethereum",
-        "tvl": "$101M",
-        "tvlNum": 101273101,
-        "source": "defillama",
-        "addresses": [
-          "0x09D4214C03D01F49544C0448DBE3A27f768F2b34"
-        ],
-        "aliases": [
-          "wsrUSD"
         ]
       }
     },
@@ -659,11 +179,11 @@
         "apr": "5.01%",
         "aprValue": 5.01119,
         "apy_1d": 5.01119,
-        "apy_7d": 4.797681034482759,
-        "apy_30d": 4.52437,
+        "apy_7d": 4.828685806451612,
+        "apy_30d": 4.52742,
         "chain": "Solana",
         "tvl": "$2M",
-        "tvlNum": 2295421,
+        "tvlNum": 2337562,
         "source": "defillama",
         "addresses": [
           "0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b"
@@ -674,122 +194,26 @@
       }
     },
     {
-      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
-        ]
-      }
-    },
-    {
-      "wallet": "0x70ac345ab736ce145e0d4b5deced7a8bcb0e4033",
-      "address": "0xe556aba6fe6036275ec1f87eda296be72c811bce",
-      "kind": "ybs",
-      "match": {
-        "name": "jrNUSD",
-        "protocol": "strata-markets",
-        "apr": "8.57%",
-        "aprValue": 8.56591,
-        "apy_1d": 8.56591,
-        "apy_7d": 8.490855862068965,
-        "apy_30d": 9.6629,
-        "chain": "Ethereum",
-        "tvl": "$6M",
-        "tvlNum": 5860093,
-        "source": "defillama",
-        "addresses": [
-          "0xE556ABa6fe6036275Ec1f87eda296BE72C811BCE"
-        ],
-        "aliases": [
-          "jrNUSD"
-        ]
-      }
-    },
-    {
       "wallet": "0xd6c757043e7d59088969b188923c62fa960afe9b",
-      "address": "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
+      "address": "0xad55aebc9b8c03fc43cd9f62260391c13c23e7c0",
       "kind": "ybs",
       "match": {
-        "name": "wsrUSD",
-        "protocol": "reservoir-protocol",
-        "apr": "4.65%",
-        "aprValue": 4.65326,
-        "apy_1d": 4.65326,
-        "apy_7d": 4.65326,
-        "apy_30d": 4.71714,
+        "name": "cUSDO",
+        "protocol": "usdo",
+        "apr": "3.75%",
+        "aprValue": 3.75278,
+        "apy_1d": 3.75278,
+        "apy_7d": 4.00602,
+        "apy_30d": 3.89745,
         "chain": "Ethereum",
-        "tvl": "$101M",
-        "tvlNum": 101273101,
+        "tvl": "$1M",
+        "tvlNum": 1407541,
         "source": "defillama",
         "addresses": [
-          "0x09D4214C03D01F49544C0448DBE3A27f768F2b34"
+          "0xad55aebc9b8c03fc43cd9f62260391c13c23e7c0"
         ],
         "aliases": [
-          "wsrUSD"
-        ]
-      }
-    },
-    {
-      "wallet": "0xd6c757043e7d59088969b188923c62fa960afe9b",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0x41a9eb398518d2487301c61d2b33e4e966a9f1dd",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "kind": "ybs",
-      "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
-        "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
-        "source": "defillama",
-        "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-        ],
-        "aliases": [
-          "USD3"
+          "cUSDO"
         ]
       }
     },
@@ -800,14 +224,14 @@
       "match": {
         "name": "sUSDe",
         "protocol": "ethena-usde",
-        "apr": "5.19%",
-        "aprValue": 5.18598,
-        "apy_1d": 5.18598,
-        "apy_7d": 4.551431034482759,
-        "apy_30d": 3.78217,
+        "apr": "5.80%",
+        "aprValue": 5.8032,
+        "apy_1d": 5.8032,
+        "apy_7d": 4.661226451612903,
+        "apy_30d": 3.78993,
         "chain": "Ethereum",
-        "tvl": "$2212M",
-        "tvlNum": 2212178974,
+        "tvl": "$2192M",
+        "tvlNum": 2192433307,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
@@ -824,14 +248,14 @@
       "match": {
         "name": "LIUSD-1W",
         "protocol": "infinifi",
-        "apr": "6.58%",
-        "aprValue": 6.57534,
-        "apy_1d": 6.57534,
-        "apy_7d": null,
-        "apy_30d": 5.99082,
+        "apr": "6.09%",
+        "aprValue": 6.09221,
+        "apy_1d": 6.09221,
+        "apy_7d": 6.4545575,
+        "apy_30d": 5.99222,
         "chain": "Ethereum",
         "tvl": "$6M",
-        "tvlNum": 5864875,
+        "tvlNum": 5865031,
         "source": "defillama",
         "addresses": [
           "0x12b004719fb632f1e7c010c6f5d6009fb4258442"
@@ -843,49 +267,25 @@
     },
     {
       "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
-      "address": "0x48f9e38f3070ad8945dfeae3fa70987722e3d89c",
+      "address": "0x5086bf358635b81d8c47c66d1c8b9e567db70c72",
       "kind": "ybs",
       "match": {
-        "name": "siUSD",
-        "protocol": "infinifi",
-        "apr": "6.13%",
-        "aprValue": 6.12784,
-        "apy_1d": 6.12784,
-        "apy_7d": 6.289114482758621,
-        "apy_30d": 5.79263,
+        "name": "reUSD",
+        "protocol": "re-protocol",
+        "apr": "9.20%",
+        "aprValue": 9.20214,
+        "apy_1d": 9.20214,
+        "apy_7d": 9.026571612903226,
+        "apy_30d": 8.35414,
         "chain": "Ethereum",
-        "tvl": "$40M",
-        "tvlNum": 40250586,
+        "tvl": "$7M",
+        "tvlNum": 6714920,
         "source": "defillama",
         "addresses": [
-          "0x48f9e38f3070AD8945DFEae3FA70987722E3D89c"
+          "0x5086bf358635b81d8c47c66d1c8b9e567db70c72"
         ],
         "aliases": [
-          "siUSD"
-        ]
-      }
-    },
-    {
-      "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
+          "reUSD"
         ]
       }
     },
@@ -896,14 +296,14 @@
       "match": {
         "name": "LIUSD-4W",
         "protocol": "infinifi",
-        "apr": "7.94%",
-        "aprValue": 7.94138,
-        "apy_1d": 7.94138,
-        "apy_7d": null,
-        "apy_30d": 7.23163,
+        "apr": "7.35%",
+        "aprValue": 7.35447,
+        "apy_1d": 7.35447,
+        "apy_7d": 7.7946525,
+        "apy_30d": 7.23333,
         "chain": "Ethereum",
         "tvl": "$11M",
-        "tvlNum": 10871130,
+        "tvlNum": 10871478,
         "source": "defillama",
         "addresses": [
           "0x66bcf6151d5558afb47c38b20663589843156078"
@@ -920,14 +320,14 @@
       "match": {
         "name": "sUSDe",
         "protocol": "ethena-usde",
-        "apr": "5.19%",
-        "aprValue": 5.18598,
-        "apy_1d": 5.18598,
-        "apy_7d": 4.551431034482759,
-        "apy_30d": 3.78217,
+        "apr": "5.80%",
+        "aprValue": 5.8032,
+        "apy_1d": 5.8032,
+        "apy_7d": 4.661226451612903,
+        "apy_30d": 3.78993,
         "chain": "Ethereum",
-        "tvl": "$2212M",
-        "tvlNum": 2212178974,
+        "tvl": "$2192M",
+        "tvlNum": 2192433307,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
@@ -939,25 +339,49 @@
     },
     {
       "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
-      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "address": "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb",
       "kind": "ybs",
       "match": {
-        "name": "USD3",
-        "protocol": "3jane-lending",
-        "apr": "10.34%",
-        "aprValue": 10.33676,
-        "apy_1d": 10.33676,
-        "apy_7d": 5.976725862068966,
-        "apy_30d": 3.16353,
+        "name": "siUSD",
+        "protocol": "infinifi",
+        "apr": "6.02%",
+        "aprValue": 6.02448,
+        "apy_1d": 6.02448,
+        "apy_7d": 6.294251612903226,
+        "apy_30d": 5.79443,
         "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11108868,
+        "tvl": "$40M",
+        "tvlNum": 40170788,
         "source": "defillama",
         "addresses": [
-          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb"
         ],
         "aliases": [
-          "USD3"
+          "siUSD"
+        ]
+      }
+    },
+    {
+      "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
+      "address": "0xf68b95b7e851170c0e5123a3249dd1ca46215085",
+      "kind": "ybs",
+      "match": {
+        "name": "LIUSD-8W",
+        "protocol": "infinifi",
+        "apr": "8.31%",
+        "aprValue": 8.311,
+        "apy_1d": 8.311,
+        "apy_7d": 8.810785,
+        "apy_30d": 8.17375,
+        "chain": "Ethereum",
+        "tvl": "$7M",
+        "tvlNum": 7401970,
+        "source": "defillama",
+        "addresses": [
+          "0xf68b95b7e851170c0e5123a3249dd1ca46215085"
+        ],
+        "aliases": [
+          "liUSD-8W"
         ]
       }
     },
@@ -968,14 +392,14 @@
       "match": {
         "name": "sUSDe",
         "protocol": "ethena-usde",
-        "apr": "5.19%",
-        "aprValue": 5.18598,
-        "apy_1d": 5.18598,
-        "apy_7d": 4.551431034482759,
-        "apy_30d": 3.78217,
+        "apr": "5.80%",
+        "aprValue": 5.8032,
+        "apy_1d": 5.8032,
+        "apy_7d": 4.661226451612903,
+        "apy_30d": 3.78993,
         "chain": "Ethereum",
-        "tvl": "$2212M",
-        "tvlNum": 2212178974,
+        "tvl": "$2192M",
+        "tvlNum": 2192433307,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
@@ -987,43 +411,19 @@
     },
     {
       "wallet": "0xd4374008c88321eb2e59abd311156c44b25831e9",
-      "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
-      "kind": "ybs",
-      "match": {
-        "name": "srUSDe",
-        "protocol": "strata-markets",
-        "apr": "4.04%",
-        "aprValue": 4.03778,
-        "apy_1d": 4.03778,
-        "apy_7d": 4.660048965517241,
-        "apy_30d": 3.15533,
-        "chain": "Ethereum",
-        "tvl": "$55M",
-        "tvlNum": 54579483,
-        "source": "defillama",
-        "addresses": [
-          "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
-        ],
-        "aliases": [
-          "srUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0xd4374008c88321eb2e59abd311156c44b25831e9",
       "address": "0x9d39a5de30e57443bff2a8307a4256c8797a3497",
       "kind": "ybs",
       "match": {
         "name": "sUSDe",
         "protocol": "ethena-usde",
-        "apr": "5.19%",
-        "aprValue": 5.18598,
-        "apy_1d": 5.18598,
-        "apy_7d": 4.551431034482759,
-        "apy_30d": 3.78217,
+        "apr": "5.80%",
+        "aprValue": 5.8032,
+        "apy_1d": 5.8032,
+        "apy_7d": 4.661226451612903,
+        "apy_30d": 3.78993,
         "chain": "Ethereum",
-        "tvl": "$2212M",
-        "tvlNum": 2212178974,
+        "tvl": "$2192M",
+        "tvlNum": 2192433307,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
