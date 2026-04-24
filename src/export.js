@@ -201,7 +201,8 @@ function normalizeSourceMeta(position) {
             p.source_type = 'vault-probed';
         } else if (protocolId === 'ybs') {
             p.source_type = 'ybs';
-        } else if (protocol.includes('aave') || protocol.includes('morpho') || protocol.includes('euler') || protocol.includes('fluid') || protocolId.includes('aave') || protocolId.includes('morpho') || protocolId.includes('euler') || protocolId.includes('fluid')) {
+        } else if (protocol.includes('aave') || protocol.includes('morpho') || protocol.includes('euler') || protocol.includes('fluid') || protocol.includes('compound') || protocol.includes('curve')
+            || protocolId.includes('aave') || protocolId.includes('morpho') || protocolId.includes('euler') || protocolId.includes('fluid') || protocolId === 'compound3' || protocolId === 'curve') {
             p.source_type = 'scanner';
         } else {
             p.source_type = 'debank';
@@ -215,6 +216,8 @@ function normalizeSourceMeta(position) {
             else if (protocol.includes('morpho')) p.source_name = 'morpho-scanner';
             else if (protocol.includes('euler')) p.source_name = 'euler-scanner';
             else if (protocol.includes('fluid')) p.source_name = 'fluid-scanner';
+            else if (protocol.includes('compound')) p.source_name = 'compound-scanner';
+            else if (protocol.includes('curve')) p.source_name = 'curve-scanner';
             else p.source_name = 'scanner';
         } else if (p.source_type === 'debank') {
             p.source_name = 'fetch';

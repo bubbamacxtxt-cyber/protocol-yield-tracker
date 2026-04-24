@@ -33,6 +33,7 @@ const SCANNER_PROTOCOLS = [
   'ethena-cooldown',
   'yo-protocol',
   'curve',
+  'compound3',
   'wallet-held',
   'vault',
   'vault-probed',

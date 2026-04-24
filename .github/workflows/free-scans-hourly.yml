@@ -70,6 +70,13 @@ jobs:
         # Reads alchemy-token-discovery.json + curve_pools table. No RPC calls.
         # Curve pool catalogue is refreshed by the vaults workflow every 2h.
         run: node src/curve-scanner.js
+      - name: Scan Compound V3 (Comet) positions
+        # Iterates hardcoded Comet markets; batches balanceOf + borrowBalanceOf
+        # per market. Native APY from getSupplyRate/getBorrowRate.
+        run: node src/compound-scanner.js
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+          DRPC_API_KEY: ${{ secrets.DRPC_API_KEY }}
       - name: Scan Ethena cooldowns (Locked USDe)
         run: node src/ethena-scanner.js || node src/ethena-scanner.js
         env:
