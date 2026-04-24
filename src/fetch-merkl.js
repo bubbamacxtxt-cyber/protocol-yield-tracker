@@ -74,9 +74,14 @@ function parseCampaignRules(campaign) {
     morphoMarketId: null, // For MORPHOBORROW/MORPHOSUPPLY: the specific market ID
   };
 
-  // For Morpho campaigns, the identifier is the market ID
-  // Only positions in THIS specific market should get the bonus
-  if (campaign.type === 'MORPHOBORROW' || campaign.type === 'MORPHOSUPPLY' || campaign.type === 'MORPHOVAULT' || campaign.type === 'MORPHOSUPPLY_SINGLETOKEN') {
+  // For Morpho market-specific campaigns, the identifier is the market
+  // hash. Only positions in THIS specific market should get the bonus.
+  //
+  // NOTE: MORPHOSUPPLY_SINGLETOKEN campaigns are different — their
+  // identifier is a token address, not a market hash, and they apply to
+  // any supply of that token on any Morpho market. We leave
+  // morphoMarketId null for those so the token-symbol check governs.
+  if (campaign.type === 'MORPHOBORROW' || campaign.type === 'MORPHOSUPPLY' || campaign.type === 'MORPHOVAULT') {
     rules.morphoMarketId = campaign.identifier?.toLowerCase();
   }
 
@@ -136,11 +141,20 @@ function matchesPosition(campaign, rules, position, allPositions) {
   // Vault campaigns don't match our underlying-token positions
   if (rules.isVaultCampaign) return false;
 
-  // For Morpho: match by market ID if specified
-  // position_index contains the market ID for Morpho positions
+  // For Morpho: match by market ID if the campaign specifies one.
+  // Morpho borrow positions store the market hash directly in position_index
+  // (format: 0x<64 hex chars>). Morpho supply positions store a composite
+  // 'wallet|chain|vault|borrow' format; for those, match on the last
+  // pipe-separated segment (which is the market hash for borrow-paired
+  // supplies, or 'noborrow' for pure earn positions).
   if (rules.morphoMarketId && position.protocol_name === 'Morpho') {
-    const posMarketId = position.position_index?.toLowerCase();
-    if (posMarketId !== rules.morphoMarketId) return false;
+    const pi = (position.position_index || '').toLowerCase();
+    // Extract the trailing market hash if the position_index is composite.
+    const lastSegment = pi.split('|').pop();
+    const marketHash = /^0x[0-9a-f]{64}$/.test(pi) ? pi
+      : /^0x[0-9a-f]{64}$/.test(lastSegment) ? lastSegment
+      : null;
+    if (!marketHash || marketHash !== rules.morphoMarketId) return false;
   }
 
   // For Aave: match by market name from campaign title
@@ -156,14 +170,20 @@ function matchesPosition(campaign, rules, position, allPositions) {
     if (campaignName.includes('Lido') && !marketName.includes('Lido')) return false;
   }
 
-  // For Euler: match by vault address (identifier)
+  // For Euler: match by vault address. Euler positions store the vault
+  // symbol in position_tokens.symbol (eUSDC-80, ePYUSD-6, etc.) and the
+  // vault address in position_tokens.address.
   if (campaign.protocol?.id === 'euler' && rules.morphoMarketId) {
-    if (!position.market_id || position.market_id.toLowerCase() !== rules.morphoMarketId) return false;
+    const posVault = (position.address || '').toLowerCase();
+    const mid = rules.morphoMarketId.toLowerCase();
+    if (posVault !== mid && (position.market_id || '').toLowerCase() !== mid) return false;
   }
 
-  // For Fluid: match by vault address (identifier)
+  // For Fluid: match by vault address
   if (campaign.protocol?.id === 'fluid' && rules.morphoMarketId) {
-    if (!position.market_id || position.market_id.toLowerCase() !== rules.morphoMarketId) return false;
+    const posVault = (position.address || '').toLowerCase();
+    const mid = rules.morphoMarketId.toLowerCase();
+    if (posVault !== mid && (position.market_id || '').toLowerCase() !== mid) return false;
   }
 
   // Token symbol match

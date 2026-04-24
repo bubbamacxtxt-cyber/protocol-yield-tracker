@@ -343,6 +343,23 @@ async function main() {
   console.log('6. Euler v2 APY (Indexer API)...');
   const eulerApy = await fetchEulerApy();
 
+  // Force-reset APY for positions that can't generate yield on their own,
+  // regardless of what prior runs wrote. Holding USDe / USDC / USDS in a
+  // wallet earns nothing. Ethena's 7-day cooldown also earns nothing.
+  // Without this reset a stale 'aave_supply_ref' value would stick around
+  // since the main loop only touches rows with apy_base IS NULL.
+  console.log('\n5a. Resetting APY for non-yielding positions...');
+  const resetResult = db.prepare(`
+    UPDATE position_tokens
+    SET apy_base = 0, apy_base_source = 'non-yield'
+    WHERE role = 'supply'
+      AND position_id IN (
+        SELECT id FROM positions
+        WHERE protocol_id IN ('wallet-held', 'ethena-cooldown')
+      )
+  `).run();
+  console.log(`   Reset ${resetResult.changes} wallet-held / ethena-cooldown rows to 0% APY`);
+
   // ── Apply supply APY ──────────────────────────────────────────
   console.log('\n6. Applying supply APY...');
 
@@ -423,14 +440,17 @@ async function main() {
       apy = eulerApy.supply[row.symbol][cid]; source = 'euler_supply'; eulerApplied++;
       bonusApy = eulerApy.reward?.[row.symbol]?.[cid] || 0;
     } else if (nonYieldStables.has(row.symbol)) {
-      // Try Aave reference rate first
-      if (aaveApy.supply[row.symbol]?.[cid] != null) {
-        apy = aaveApy.supply[row.symbol][cid]; source = 'aave_supply_ref'; aaveApplied++;
-      } else if (aaveApy.supply[row.symbol]?.[1] != null) {
-        apy = aaveApy.supply[row.symbol][1]; source = 'aave_supply_ref'; aaveApplied++;
-      } else {
-        apy = 0; source = 'non-yield'; zeroCount++;
-      }
+      // Plain stablecoin (USDe, USDC, USDT, etc.) with no protocol wrapping.
+      // Rule: if the token is just sitting in a wallet (protocol = 'Wallet' /
+      // protocol_id = 'wallet-held'), it's NOT earning yield — set APY to 0.
+      // If the token is supplied to Aave / Morpho / Euler / etc. we never
+      // reach this branch (handled above). For anything else (curve LP base
+      // asset, unrecognised wrapper), treat as zero yield too.
+      //
+      // Previously this branch applied 'aave_supply_ref' — using Aave's rate
+      // as a proxy — which was wrong: holding USDe in your wallet does NOT
+      // earn Aave's 11% supply rate.
+      apy = 0; source = 'non-yield'; zeroCount++;
     }
 
     if (apy != null) {
