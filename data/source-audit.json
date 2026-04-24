@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-24T15:47:29.795Z",
+  "generated_at": "2026-04-24T17:21:46.759Z",
   "summary": {
     "total_positions": 156,
     "unresolved_fallback_positions": 0,
@@ -8,11 +8,11 @@
   "by_source_type": {
     "fallback": {
       "positions": 48,
-      "net_usd": 231327257.90999812
+      "net_usd": 231402046.0833326
     },
     "scanner": {
       "positions": 108,
-      "net_usd": 276945239.955989
+      "net_usd": 276966753.08098924
     }
   },
   "by_protocol": {
@@ -74,27 +74,27 @@
     },
     "aave": {
       "positions": 19,
-      "net_usd": 63221637.09441093
+      "net_usd": 63239600.971642025
     },
     "morpho": {
       "positions": 58,
-      "net_usd": 166952553.25746918
+      "net_usd": 166950884.18794245
     },
     "pendle": {
       "positions": 7,
-      "net_usd": 3905335.576807449
+      "net_usd": 3905911.1205392624
     },
     "wallet-held": {
       "positions": 11,
-      "net_usd": 31499257.10667456
+      "net_usd": 31498064.536780477
     },
     "ybs": {
       "positions": 5,
-      "net_usd": 77483115.48668137
+      "net_usd": 77470754.94275115
     },
     "spark": {
       "positions": 3,
-      "net_usd": 5485690.743206726
+      "net_usd": 5587646.188499038
     },
     "spark-savings-legacy": {
       "positions": 1,
@@ -102,19 +102,19 @@
     },
     "euler": {
       "positions": 20,
-      "net_usd": 40059494.27269219
+      "net_usd": 40064332.56012179
     },
     "fluid": {
       "positions": 4,
-      "net_usd": 2806219.7546093375
+      "net_usd": 2806024.2407437456
     },
     "ethena": {
       "positions": 5,
-      "net_usd": 56266612.207116626
+      "net_usd": 56265462.00670873
     },
     "yo-protocol": {
       "positions": 2,
-      "net_usd": 23658741.287074026
+      "net_usd": 23646277.329348333
     }
   },
   "by_protocol_source": [
@@ -122,49 +122,49 @@
       "protocol": "morpho",
       "source_type": "scanner",
       "positions": 58,
-      "net_usd": 166952553.25746918,
+      "net_usd": 166950884.18794245,
       "normalization_status": "canonical"
     },
     {
       "protocol": "ybs",
       "source_type": "fallback",
       "positions": 5,
-      "net_usd": 77483115.48668137,
+      "net_usd": 77470754.94275115,
       "normalization_status": "partial"
     },
     {
       "protocol": "aave",
       "source_type": "scanner",
       "positions": 19,
-      "net_usd": 63221637.09441093,
+      "net_usd": 63239600.971642025,
       "normalization_status": "canonical"
     },
     {
       "protocol": "ethena",
       "source_type": "fallback",
       "positions": 5,
-      "net_usd": 56266612.207116626,
+      "net_usd": 56265462.00670873,
       "normalization_status": "partial"
     },
     {
       "protocol": "euler",
       "source_type": "scanner",
       "positions": 20,
-      "net_usd": 40059494.27269219,
+      "net_usd": 40064332.56012179,
       "normalization_status": "canonical"
     },
     {
       "protocol": "wallet-held",
       "source_type": "fallback",
       "positions": 11,
-      "net_usd": 31499257.10667456,
+      "net_usd": 31498064.536780477,
       "normalization_status": "partial"
     },
     {
       "protocol": "yo-protocol",
       "source_type": "fallback",
       "positions": 2,
-      "net_usd": 23658741.287074026,
+      "net_usd": 23646277.329348333,
       "normalization_status": "partial"
     },
     {
@@ -178,7 +178,7 @@
       "protocol": "spark",
       "source_type": "fallback",
       "positions": 3,
-      "net_usd": 5485690.743206726,
+      "net_usd": 5587646.188499038,
       "normalization_status": "partial"
     },
     {
@@ -213,7 +213,7 @@
       "protocol": "pendle",
       "source_type": "scanner",
       "positions": 7,
-      "net_usd": 3905335.576807449,
+      "net_usd": 3905911.1205392624,
       "normalization_status": "canonical"
     },
     {
@@ -227,7 +227,7 @@
       "protocol": "fluid",
       "source_type": "scanner",
       "positions": 4,
-      "net_usd": 2806219.7546093375,
+      "net_usd": 2806024.2407437456,
       "normalization_status": "canonical"
     },
     {
