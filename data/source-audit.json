@@ -1,64 +1,64 @@
 {
-  "generated_at": "2026-04-25T13:52:42.390Z",
+  "generated_at": "2026-04-25T15:15:49.362Z",
   "summary": {
-    "total_positions": 146,
+    "total_positions": 156,
     "unresolved_fallback_positions": 0,
     "unresolved_fallback_usd": 0
   },
   "by_source_type": {
     "scanner": {
       "positions": 106,
-      "net_usd": 268104596.7206388
+      "net_usd": 268113705.71654966
     },
     "fallback": {
-      "positions": 40,
-      "net_usd": 145261917.41258392
+      "positions": 50,
+      "net_usd": 229974280.33711824
     }
   },
   "by_protocol": {
     "aave": {
       "positions": 19,
-      "net_usd": 73672759.46534614
+      "net_usd": 73671902.12033658
     },
     "morpho": {
       "positions": 55,
-      "net_usd": 144628001.80451983
+      "net_usd": 144634669.56062952
     },
     "pendle": {
       "positions": 7,
-      "net_usd": 3906344.9507648787
+      "net_usd": 3906455.8533652057
     },
     "wallet-held": {
       "positions": 13,
-      "net_usd": 28272220.52789142
+      "net_usd": 28304294.84225446
     },
     "ybs": {
       "positions": 6,
-      "net_usd": 86247306.77037635
+      "net_usd": 86251775.97968048
     },
     "spark": {
       "positions": 3,
-      "net_usd": 38351.1956649072
+      "net_usd": 38351.6319857207
     },
     "spark-savings-legacy": {
       "positions": 1,
-      "net_usd": 0.06929139871791609
+      "net_usd": 0.06929367443804904
     },
     "euler": {
       "positions": 21,
-      "net_usd": 43090404.19851767
+      "net_usd": 43093570.23648804
     },
     "fluid": {
       "positions": 4,
-      "net_usd": 2807086.3014902705
+      "net_usd": 2807107.9457304026
     },
     "curve": {
       "positions": 2,
       "net_usd": 2957897.1620512903
     },
     "ethena": {
-      "positions": 1,
-      "net_usd": 9945494.374177475
+      "positions": 2,
+      "net_usd": 29589998.655260526
     },
     "yuzumoney": {
       "positions": 1,
@@ -89,12 +89,12 @@
       "net_usd": 1053394.7400384862
     },
     "vault-probed": {
-      "positions": 2,
-      "net_usd": 1801157.9759728776
+      "positions": 10,
+      "net_usd": 47239272.60719299
     },
     "yo-protocol": {
-      "positions": 1,
-      "net_usd": 3765599.245256499
+      "positions": 2,
+      "net_usd": 23358799.29749741
     }
   },
   "by_protocol_source": [
@@ -102,42 +102,56 @@
       "protocol": "morpho",
       "source_type": "scanner",
       "positions": 55,
-      "net_usd": 144628001.80451983,
+      "net_usd": 144634669.56062952,
       "normalization_status": "canonical"
     },
     {
       "protocol": "ybs",
       "source_type": "fallback",
       "positions": 6,
-      "net_usd": 86247306.77037635,
+      "net_usd": 86251775.97968048,
       "normalization_status": "partial"
     },
     {
       "protocol": "aave",
       "source_type": "scanner",
       "positions": 19,
-      "net_usd": 73672759.46534614,
+      "net_usd": 73671902.12033658,
       "normalization_status": "canonical"
+    },
+    {
+      "protocol": "vault-probed",
+      "source_type": "fallback",
+      "positions": 10,
+      "net_usd": 47239272.60719299,
+      "normalization_status": "partial"
     },
     {
       "protocol": "euler",
       "source_type": "scanner",
       "positions": 21,
-      "net_usd": 43090404.19851767,
+      "net_usd": 43093570.23648804,
       "normalization_status": "canonical"
+    },
+    {
+      "protocol": "ethena",
+      "source_type": "fallback",
+      "positions": 2,
+      "net_usd": 29589998.655260526,
+      "normalization_status": "partial"
     },
     {
       "protocol": "wallet-held",
       "source_type": "fallback",
       "positions": 13,
-      "net_usd": 28272220.52789142,
+      "net_usd": 28304294.84225446,
       "normalization_status": "partial"
     },
     {
-      "protocol": "ethena",
+      "protocol": "yo-protocol",
       "source_type": "fallback",
-      "positions": 1,
-      "net_usd": 9945494.374177475,
+      "positions": 2,
+      "net_usd": 23358799.29749741,
       "normalization_status": "partial"
     },
     {
@@ -151,15 +165,8 @@
       "protocol": "pendle",
       "source_type": "scanner",
       "positions": 7,
-      "net_usd": 3906344.9507648787,
+      "net_usd": 3906455.8533652057,
       "normalization_status": "canonical"
-    },
-    {
-      "protocol": "yo-protocol",
-      "source_type": "fallback",
-      "positions": 1,
-      "net_usd": 3765599.245256499,
-      "normalization_status": "partial"
     },
     {
       "protocol": "curve",
@@ -172,15 +179,8 @@
       "protocol": "fluid",
       "source_type": "scanner",
       "positions": 4,
-      "net_usd": 2807086.3014902705,
+      "net_usd": 2807107.9457304026,
       "normalization_status": "canonical"
-    },
-    {
-      "protocol": "vault-probed",
-      "source_type": "fallback",
-      "positions": 2,
-      "net_usd": 1801157.9759728776,
-      "normalization_status": "partial"
     },
     {
       "protocol": "dolomite",
@@ -228,14 +228,14 @@
       "protocol": "spark",
       "source_type": "fallback",
       "positions": 3,
-      "net_usd": 38351.1956649072,
+      "net_usd": 38351.6319857207,
       "normalization_status": "partial"
     },
     {
       "protocol": "spark-savings-legacy",
       "source_type": "fallback",
       "positions": 1,
-      "net_usd": 0.06929139871791609,
+      "net_usd": 0.06929367443804904,
       "normalization_status": "partial"
     }
   ]
