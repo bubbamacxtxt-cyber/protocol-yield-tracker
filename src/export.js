@@ -871,6 +871,31 @@ async function main() {
                 );
             if (isStandaloneCanonicalYield && scannerContextForSuppression.length > 0) return false;
 
+            // Suppress vault-probed rows whose vault share token is already held INSIDE a scanner
+            // venue row for the same wallet+chain. This catches the case where the generic ERC-4626
+            // probe in token-discovery detects a wallet balance of the vault share (e.g. eRLUSD-7)
+            // at the same moment the Euler/Morpho scanner has already credited that vault position
+            // under the host protocol. Without this filter the same deposit is counted twice.
+            // Match rule: vault-probed token address must appear either as a scanner token address
+            // OR inside the scanner position_index (which encodes wallet|vault for Euler/Morpho).
+            if (p.source_type === 'vault-probed' && scannerRowsSameWalletChain.length > 0) {
+                const probedAddrs = (p.supply || []).map(t => String(t.address || '').toLowerCase()).filter(Boolean);
+                if (probedAddrs.length) {
+                    const scannerVaultAddrs = new Set();
+                    for (const x of scannerRowsSameWalletChain) {
+                        for (const t of (x.supply || [])) {
+                            const a = String(t.address || '').toLowerCase();
+                            if (a) scannerVaultAddrs.add(a);
+                        }
+                        const idx = String(x.position_index || '').toLowerCase();
+                        for (const part of idx.split(/[|:]/)) {
+                            if (/^0x[a-f0-9]{40}$/.test(part)) scannerVaultAddrs.add(part);
+                        }
+                    }
+                    if (probedAddrs.some(a => scannerVaultAddrs.has(a))) return false;
+                }
+            }
+
             // NOTE: Ethena rows are NOT suppressed here. A direct USDe holding (Ethena issuer)
             // is a separate economic position from Aave collateral. Both should appear.
             // The generic dedup (clusterKey) will catch true duplicates.
