@@ -300,7 +300,7 @@ function updateView() {
   const data = filterPositions();
   renderCards(data);
   renderTable(data);
-  renderLookthroughCards(WHALE_INFO);
+  renderExposureSection(WHALE_INFO, data);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -378,81 +378,9 @@ function showDetail(p) {
       '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
       '<div style="font-size:28px;font-weight:700;color:' + ((p.apy_net || 0) > 0 ? 'var(--accent-green)' : '#f85149') + '">' + (p.apy_net || 0).toFixed(2) + '%</div>' +
     '</div>' +
-    renderExposureTreeSection(p) +
     '</div>';
   modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
   modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
-}
-
-// ═══════════════════════════════════════════════════════════════
-// EXPOSURE TREE (secondary risk lookthrough)
-// ═══════════════════════════════════════════════════════════════
-function renderExposureTreeSection(p) {
-  const tree = p.exposure_tree || [];
-  if (!tree.length) return '';
-
-  const root = tree.find(r => r.depth === 0) || tree[0];
-  const children = tree.filter(r => r.parent_id === root.id);
-  if (!children.length && tree.length === 1) return '';
-
-  const confColor = (c) => c === 'high' ? 'var(--accent-green)' : c === 'medium' ? 'var(--accent-orange)' : '#f85149';
-  const kindLabel = (k) => ({
-    primary_asset: 'primary',
-    market_exposure: 'market',
-    pool_share: 'pool',
-    ybs_strategy: 'strategy',
-    lp_underlying: 'LP leg',
-    pendle_underlying: 'pendle',
-    opaque_offchain: 'opaque',
-    unknown: 'unknown',
-  })[k] || k;
-
-  const row = (r, indent = 0) => {
-    const pct = r.pct_of_parent != null ? r.pct_of_parent.toFixed(1) + '%' : '';
-    const label = r.asset_symbol || r.venue || '?';
-    const isOpaque = r.kind === 'opaque_offchain' || r.kind === 'unknown';
-    const fillColor = isOpaque ? 'var(--accent-orange)' : 'var(--accent-blue)';
-    return (
-      '<div style="display:grid;grid-template-columns:14px 1fr 90px 60px 90px;gap:10px;align-items:center;padding:5px 0;border-top:1px solid rgba(48,54,61,0.4);padding-left:' + (indent * 18) + 'px;font-family:\'JetBrains Mono\', monospace;font-size:11px">' +
-        '<span style="font-size:8px;color:' + confColor(r.confidence) + ';font-weight:600" title="' + r.confidence + ' ' + r.source + '">\u25CF</span>' +
-        '<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' +
-          '<span style="color:var(--text-primary);font-weight:500">' + label + '</span>' +
-          '<span style="color:var(--text-secondary);font-size:9px;margin-left:6px;text-transform:uppercase;letter-spacing:0.3px">' + kindLabel(r.kind) + '</span>' +
-        '</div>' +
-        '<div style="color:var(--accent-green);text-align:right;font-weight:600">' + fmtUsd(r.usd) + '</div>' +
-        '<div style="color:var(--text-secondary);text-align:right">' + pct + '</div>' +
-        '<div style="background:rgba(48,54,61,0.5);border-radius:2px;height:4px;overflow:hidden">' +
-          (r.pct_of_parent != null ? '<div style="width:' + Math.min(100, r.pct_of_parent).toFixed(1) + '%;height:100%;background:' + fillColor + '"></div>' : '') +
-        '</div>' +
-      '</div>'
-    );
-  };
-
-  // Render rows in tree order: children of each node, recursively, sorted by usd desc
-  const lines = [];
-  const renderChildren = (parentId, depth) => {
-    const kids = tree.filter(r => r.parent_id === parentId).sort((a, b) => b.usd - a.usd);
-    for (const k of kids) {
-      lines.push(row(k, depth));
-      renderChildren(k.id, depth + 1);
-    }
-  };
-  renderChildren(root.id, 0);
-
-  const rootLabel = root.venue || root.asset_symbol || 'position';
-  const confBadge = '<span style="display:inline-block;padding:2px 6px;border-radius:3px;background:rgba(74,222,128,0.1);color:' + confColor(root.confidence) + ';font-size:9px;font-family:\'Space Grotesk\',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;margin-left:8px">' + root.confidence + '</span>';
-  const asOf = root.as_of ? ' · as_of ' + new Date(root.as_of).toLocaleString() : '';
-
-  return (
-    '<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
-      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">' +
-        '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-secondary)">Final market exposure' + confBadge + '</div>' +
-        '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-secondary)">' + rootLabel + asOf + '</div>' +
-      '</div>' +
-      lines.join('') +
-      '<div style="margin-top:10px;font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-secondary);text-align:right">adapter: ' + (root.adapter || '?') + ' · source: ' + (root.source || '?') + '</div>' +
-    '</div>'
-  );
 }
 
 function fmtUsd(v) {
@@ -463,41 +391,241 @@ function fmtUsd(v) {
   return '$' + Math.round(v);
 }
 
-function renderLookthroughCards(whale) {
-  const section = document.getElementById('lookthrough-section');
+// ═══════════════════════════════════════════════════════════════
+// EXPOSURE SECTION (per-whale, per-position lookthrough)
+// Driven by w.exposure_rollup + p.exposure_tree from src/exposure/.
+// ═══════════════════════════════════════════════════════════════
+const EXPOSURE_PALETTE = [
+  '#4facfe', '#00f2fe', '#4ade80', '#a371f7',
+  '#d29922', '#f093fb', '#58a6ff', '#43e97b',
+  '#f85149', '#bc8cff', '#5a9eda', '#22d3ee',
+];
+
+function renderExposureSection(whale, filteredPositions) {
+  const section = document.getElementById('exposure-section') || document.getElementById('lookthrough-section');
   if (!section) return;
 
-  const exp = whale?.secondary_exposure;
-  if (!exp || !exp.by_token || exp.by_token.length === 0) {
-    section.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:40px">No secondary exposure data available for this whale.</p>';
+  const rollup = whale?.exposure_rollup;
+  const positions = (whale?.positions || []).filter(p => (p.exposure_tree || []).length > 0);
+
+  if (!rollup || positions.length === 0) {
+    section.innerHTML = '<div class="exposure-empty">No exposure decomposition available yet. Next pipeline run will populate this.</div>';
     return;
   }
 
-  const total = exp.total_pro_rata || 0;
-  const top10 = exp.by_token.slice(0, 10);
+  // Total decomposed across leaves (sum of pct_of_parent at depth 1)
+  const totalUsd = (rollup.by_token || []).reduce((s, t) => s + (t.usd || 0), 0);
+  const totalPositionsUsd = (whale.positions || []).reduce((s, p) => s + (p.net_usd || 0), 0);
+  const proRataPct = totalPositionsUsd > 0 ? (totalUsd / totalPositionsUsd) * 100 : 0;
+  const asOf = (positions[0]?.exposure_tree || []).find(r => r.as_of)?.as_of;
 
-  let cardRows = '';
-  for (const t of top10) {
-    const val = fmtShort(t.pro_rata_usd);
-    const pct = t.pct.toFixed(1);
-    const barW = Math.max(5, t.pct);
-    cardRows += `<div class="exposure-row">
-      <span class="exposure-symbol">${t.symbol}</span>
-      <span class="exposure-bar"><div class="exposure-bar-fill" style="width:${barW}%"></div></span>
-      <span class="exposure-value">$${val}</span>
-      <span class="exposure-pct">${pct}%</span>
-    </div>`;
+  section.innerHTML = [
+    '<div class="exposure-section-header">',
+      '<div>',
+        '<div class="tag"><span class="dot"></span> secondary-risk lookthrough</div>',
+        '<h2>Final market exposure</h2>',
+      '</div>',
+      '<div class="meta">', asOf ? ('as of ' + new Date(asOf).toLocaleString()) : ('decomposed ' + fmtUsd(totalUsd) + ' / ' + fmtUsd(totalPositionsUsd)), ' · ', proRataPct.toFixed(1), '%</div>',
+    '</div>',
+    renderExposureDonuts(rollup),
+    renderExposurePositions(positions, filteredPositions),
+  ].join('');
+
+  // Draw canvases after insertion
+  requestAnimationFrame(() => {
+    drawDonut('exp-donut-proto',  rollup.by_protocol  || [], 'label', 'usd');
+    drawDonut('exp-donut-token',  rollup.by_token     || [], 'label', 'usd');
+    drawDonut('exp-donut-market', rollup.by_market    || [], 'label', 'usd');
+  });
+}
+
+function renderExposureDonuts(rollup) {
+  const card = (id, title, rows) => {
+    const top = rows.slice(0, 8);
+    const total = rows.reduce((s, r) => s + (r.usd || 0), 0);
+    const legend = top.map((r, i) => {
+      const color = EXPOSURE_PALETTE[i % EXPOSURE_PALETTE.length];
+      const pct = total > 0 ? (r.usd / total * 100) : 0;
+      return (
+        '<div class="exposure-donut-legend-row">' +
+          '<span class="exposure-donut-legend-swatch" style="background:' + color + '"></span>' +
+          '<span class="exposure-donut-legend-label" title="' + escapeHtml(r.label) + '">' + escapeHtml(r.label) + '</span>' +
+          '<span class="exposure-donut-legend-usd">' + fmtUsd(r.usd) + '</span>' +
+          '<span class="exposure-donut-legend-pct">' + pct.toFixed(1) + '%</span>' +
+        '</div>'
+      );
+    }).join('');
+    return (
+      '<div class="exposure-donut-card">' +
+        '<div class="exposure-donut-title">' + title + '</div>' +
+        '<div class="exposure-donut-canvas-wrap"><canvas id="' + id + '" width="200" height="200"></canvas></div>' +
+        '<div class="exposure-donut-legend">' + (legend || '<div class="exposure-donut-legend-row" style="color:var(--text-secondary)">No data</div>') + '</div>' +
+      '</div>'
+    );
+  };
+  return (
+    '<div class="exposure-donuts">' +
+      card('exp-donut-proto',  'by protocol', rollup.by_protocol || []) +
+      card('exp-donut-token',  'by token',    rollup.by_token || []) +
+      card('exp-donut-market', 'by market',   rollup.by_market || []) +
+    '</div>'
+  );
+}
+
+function renderExposurePositions(positions, filteredPositions) {
+  // Only show exposure cards for positions visible in current filter.
+  const visibleIds = new Set((filteredPositions || []).map(p => p.id));
+  const show = positions.filter(p => !visibleIds.size || visibleIds.has(p.id));
+  if (!show.length) {
+    return '<div class="exposure-empty">No positions match current filter.</div>';
   }
 
-  section.innerHTML = `
-    <div class="section-header">
-      <h3>Final Market Exposure (pro-rata ${(total / whale.positions.reduce((s,p) => s + (p.net_usd||0), 0) * 100 || 0).toFixed(1)}%)</h3>
-      <span style="color:var(--text-secondary);font-size:13px">Total: $${fmtShort(total)}</span>
-    </div>
-    <div class="lookthrough-list">
-      ${cardRows}
-    </div>
-  `;
+  const totalWhaleUsd = positions.reduce((s, p) => s + (p.net_usd || 0), 0);
+
+  const cards = show
+    .sort((a, b) => (b.net_usd || 0) - (a.net_usd || 0))
+    .map(p => renderPositionExposureCard(p, totalWhaleUsd))
+    .filter(Boolean)
+    .join('');
+
+  return '<div class="exposure-positions-grid">' + cards + '</div>';
+}
+
+function renderPositionExposureCard(p, totalWhaleUsd) {
+  const tree = p.exposure_tree || [];
+  if (!tree.length) return '';
+  const root = tree.find(r => r.depth === 0) || tree[0];
+  const leaves = tree.filter(r => r.parent_id === root.id);
+
+  const confClass = 'exposure-conf-' + (root.confidence || 'low');
+  const pctOfWhale = totalWhaleUsd > 0 ? (p.net_usd / totalWhaleUsd * 100) : 0;
+
+  // Build leg rows — flat list of depth-1 children sorted by USD desc.
+  // For opaque root rows (no children), show the root itself as a single leg.
+  const legSource = leaves.length ? leaves : [root];
+  const legsSorted = legSource
+    .filter(r => (r.usd || 0) > 0)
+    .sort((a, b) => (b.usd || 0) - (a.usd || 0));
+
+  const legRows = legsSorted.map(leg => {
+    const pct = leg.pct_of_parent != null ? leg.pct_of_parent : (p.net_usd > 0 ? (leg.usd / p.net_usd * 100) : 0);
+    const barW = Math.max(1, Math.min(100, pct));
+    const barClass = (leg.kind === 'opaque_offchain' || leg.kind === 'unknown') ? 'opaque' : '';
+    const kindClass = 'kind-' + leg.kind;
+    const label = leg.asset_symbol || leg.venue || '?';
+    return (
+      '<div class="exposure-leg-row ' + kindClass + '">' +
+        '<div class="leg-label" title="' + escapeHtml(label) + '">' + escapeHtml(label) + '</div>' +
+        '<div class="leg-usd">' + fmtUsd(leg.usd) + '</div>' +
+        '<div class="leg-pct">' + pct.toFixed(1) + '%</div>' +
+        '<div class="exposure-leg-bar"><div class="exposure-leg-bar-fill ' + barClass + '" style="width:' + barW.toFixed(1) + '%"></div></div>' +
+      '</div>'
+    );
+  }).join('');
+
+  const chain = p.chain || '';
+  const source = root.adapter + (root.source ? (' · ' + root.source) : '');
+  const subtitle = root.venue || p.protocol_name;
+
+  // Position title — if venue has vault name, use it. Else protocol + supply tokens.
+  const supplyDisp = p.supply_tokens_display && p.supply_tokens_display !== '-' ? p.supply_tokens_display : '';
+  const headerName = subtitle && subtitle !== p.protocol_name ? subtitle : (supplyDisp || p.protocol_name);
+
+  return (
+    '<div class="exposure-position-card">' +
+      '<div class="exposure-position-head">' +
+        '<div class="exposure-position-proto">' + escapeHtml(p.protocol_name || '') + '</div>' +
+        '<div class="exposure-position-name">' +
+          '<span>' + escapeHtml(headerName) + '</span>' +
+          (chain ? '<span class="exposure-position-chain">' + escapeHtml(chain) + '</span>' : '') +
+          '<span class="exposure-conf-badge ' + confClass + '">' + (root.confidence || 'low') + '</span>' +
+        '</div>' +
+        '<div class="exposure-position-value">' + fmtUsd(p.net_usd) +
+          '<span class="pct-of-whale">(' + pctOfWhale.toFixed(1) + '% of whale)</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="exposure-position-body">' +
+        '<div class="exposure-position-body-title">' + (legs_title(root) || 'final market exposure') + '</div>' +
+        legRows +
+      '</div>' +
+      '<div class="exposure-position-footer">' + escapeHtml(source) + '</div>' +
+    '</div>'
+  );
+}
+
+function legs_title(root) {
+  if (!root) return 'final market exposure';
+  if (root.kind === 'opaque_offchain') return 'denomination · opaque counterparty';
+  if (root.kind === 'unknown') return 'undecomposed';
+  if (root.kind === 'ybs_strategy') return 'protocol backing composition';
+  if (root.kind === 'lp_underlying') return 'LP underlying tokens';
+  if (root.kind === 'pendle_underlying') return 'pendle underlying';
+  return 'final market exposure';
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DONUT (vanilla canvas — no Chart.js dep to avoid page weight)
+// ═══════════════════════════════════════════════════════════════
+function drawDonut(canvasId, rows, labelKey, usdKey) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const cssSize = 180;
+  canvas.width = cssSize * dpr;
+  canvas.height = cssSize * dpr;
+  canvas.style.width = cssSize + 'px';
+  canvas.style.height = cssSize + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, cssSize, cssSize);
+
+  const cx = cssSize / 2, cy = cssSize / 2;
+  const outerR = cssSize / 2 - 6;
+  const innerR = outerR * 0.62;
+
+  const total = rows.reduce((s, r) => s + (r[usdKey] || 0), 0);
+  if (total <= 0) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(48, 54, 61, 0.4)';
+    ctx.fill();
+    return;
+  }
+
+  let start = -Math.PI / 2;
+  rows.slice(0, 8).forEach((r, i) => {
+    const val = r[usdKey] || 0;
+    if (val <= 0) return;
+    const angle = (val / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, outerR, start, start + angle);
+    ctx.closePath();
+    ctx.fillStyle = EXPOSURE_PALETTE[i % EXPOSURE_PALETTE.length];
+    ctx.fill();
+    start += angle;
+  });
+
+  // Donut hole
+  ctx.beginPath();
+  ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+  ctx.fillStyle = '#1c2128';
+  ctx.fill();
+
+  // Center label: total USD
+  ctx.fillStyle = '#c9d1d9';
+  ctx.font = '600 9px "Space Grotesk", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('TOTAL', cx, cy - 10);
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 14px "JetBrains Mono", monospace';
+  ctx.fillText(fmtUsd(total), cx, cy + 6);
 }
 
 // ═══════════════════════════════════════════════════════════════

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="whale-common.css?v=202604271453">
+<link rel="stylesheet" href="whale-common.css?v=202604272200">
 </head>
 <body>
 <div class="container">
@@ -75,11 +75,8 @@ function fmtShort(n) {
 document.addEventListener('DOMContentLoaded', loadVaults);
 </script>
 
-<section id="lookthrough-section" style="max-width:1200px;margin:40px auto;padding:0 24px;">
-  <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;color:var(--text-primary);margin-bottom:16px;">Secondary Risk — Final Market Exposure</h3>
-  <div class="lookthrough-content" style="text-align:center;padding:40px;color:var(--text-secondary);font-size:14px;">Loading...</div>
-</section>
-<script src="whale-common.js?v=202604271453"></script>
+<section id="exposure-section" style="max-width:1200px;margin:40px auto;padding:0 24px;"></section>
+<script src="whale-common.js?v=202604272200"></script>
 <script>
   // Render lookthrough after page loads
   setTimeout(() => {
@@ -87,7 +84,7 @@ document.addEventListener('DOMContentLoaded', loadVaults);
       .then(r => r.json())
       .then(data => {
         const whale = data.whales['Midas'];
-        if (window.renderLookthroughCards && whale) renderLookthroughCards(whale);
+        if (window.renderExposureSection && whale) renderExposureSection(whale, whale.positions || []);
       });
   }, 500);
 </script>

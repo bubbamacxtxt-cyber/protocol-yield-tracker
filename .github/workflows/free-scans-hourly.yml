@@ -80,10 +80,6 @@ jobs:
       - name: Exposure adapter smoke tests
         # Pure-JS: validates registry + row shapes. Fast, no external calls.
         run: node test/exposure/smoke.test.js
-      - name: Build position lookthrough (secondary risk)
-        # Computes pro-rata exposure to collateral for vault-based positions.
-        # Covers Aave V3, Spark Lend, and Morpho vaults via live REST/RPC APIs.
-        run: node src/build-lookthrough.js || echo 'Lookthrough build failed — non-blocking'
       - name: Scan Ethena cooldowns (Locked USDe)
         run: node src/ethena-scanner.js || node src/ethena-scanner.js
         env:
@@ -104,6 +100,17 @@ jobs:
         run: node src/fetch-merkl.js || node src/fetch-merkl.js || echo 'Merkl failed after 3 attempts'
       - name: Fix Morpho collateral labels
         run: node src/fix-morpho-tokens.js yield-tracker.db --apply
+      - name: Build exposure decomposition (secondary risk)
+        # Runs all adapters (aave, morpho, euler, fluid, spark, compound, curve,
+        # ybs, pendle, wallet, single-venue, offchain, unknown) and writes the
+        # exposure_decomposition table. Requires positions to already exist.
+        run: node src/build-exposure.js
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+          ALCHEMY_RPC_URL: ${{ secrets.ALCHEMY_RPC_URL }}
+          BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          ARB_RPC_URL: ${{ secrets.ARB_RPC_URL }}
+          DEBANK_API_KEY: ${{ secrets.DEBANK_API_KEY }}
       - name: Export to data.json
         run: node src/export.js
       - name: Build source audit

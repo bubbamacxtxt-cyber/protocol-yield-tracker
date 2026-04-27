@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-<link rel="stylesheet" href="whale-common.css?v=202604271453">
+<link rel="stylesheet" href="whale-common.css?v=202604272200">
 </head>
 <body>
 <div class="container">
@@ -21,6 +21,7 @@
   <p class="subtitle">Wallet positions and yield strategies</p>
   <div class="cards" id="summaryCards"></div>
   <div class="proto-summary" id="protoSummary"></div>
+  <section id="exposure-section"></section>
   <div class="filters">
     <div class="filter-group"><label>Chain:</label><select id="chainFilter"><option value="all">All chains</option></select></div>
     <div class="filter-group"><label>Protocol:</label><select id="protoFilter"><option value="all">All protocols</option></select></div>
@@ -32,16 +33,10 @@
       <thead><tr id="tableHeader"></tr></thead>
       <tbody id="positionsBody"></tbody>
     </table>
-  </div><section id="lookthrough-section" style="margin-top: 24px;">
-    <h3 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-primary); margin-bottom: 16px;">Secondary Risk — Final Market Exposure</h3>
-    <div class="lookthrough-content" style="text-align: center; padding: 40px; color: var(--text-secondary); font-size: 14px;">
-      Loading secondary exposure data...
-    </div>
-  </section>
+  </div>
 </div>
-<div id="detail-modal">
 <div id="detail-modal"></div>
-<script src="whale-common.js?v=202604271453"></script>
+<script src="whale-common.js?v=202604272200"></script>
 <script>
   WHALE_NAME = 'Anzen';
   VAULT_NAME = null;

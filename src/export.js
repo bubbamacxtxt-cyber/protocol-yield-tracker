@@ -337,69 +337,6 @@ function dedupCanonicalClusters(positions) {
     return [...byKey.values()];
 }
 
-/**
- * Compute secondary exposure per whale from position_lookthrough table.
- * This is called once after all positions are assembled to enrich each
- * whale with per-whale lookthrough aggregations.
- * @param {Object} db - better-sqlite3 handle
- * @param {Object} whales - whales dict keyed by name
- */
-function computeSecondaryExposure(db, whales) {
-  // Build wallet-to-whale mapping
-  const walletToWhale = new Map();
-  for (const [name, whale] of Object.entries(whales)) {
-    for (const wallet of (whale.wallets || [])) {
-      walletToWhale.set(wallet.toLowerCase(), name);
-    }
-  }
-
-  // Query all lookthrough rows joined with positions
-  const rows = db.prepare(`
-    SELECT pl.*, p.wallet, p.chain, p.protocol_id
-    FROM position_lookthrough pl
-    JOIN positions p ON pl.position_id = p.id
-    WHERE pl.pro_rata_usd > 0
-    ORDER BY pl.pro_rata_usd DESC
-  `).all();
-
-  // Aggregate by whale
-  const whaleExposures = new Map();
-  for (const r of rows) {
-    const whaleName = walletToWhale.get((r.wallet || '').toLowerCase());
-    if (!whaleName) continue;
-
-    if (!whaleExposures.has(whaleName)) {
-      whaleExposures.set(whaleName, { by_token: [], total_pro_rata: 0 });
-    }
-    const exp = whaleExposures.get(whaleName);
-    exp.total_pro_rata += r.pro_rata_usd;
-
-    // Aggregate by collateral symbol
-    const tokenKey = r.collateral_symbol || '???';
-    if (!exp.by_token_map) exp.by_token_map = new Map();
-    const existing = exp.by_token_map.get(tokenKey);
-    if (existing) {
-      existing.pro_rata_usd += r.pro_rata_usd;
-    } else {
-      exp.by_token_map.set(tokenKey, { symbol: tokenKey, pro_rata_usd: r.pro_rata_usd });
-    }
-  }
-
-  // Convert to arrays sorted by pro_rata
-  for (const [name, exp] of whaleExposures) {
-    const total = exp.total_pro_rata;
-    exp.by_token = [...exp.by_token_map.values()]
-      .sort((a, b) => b.pro_rata_usd - a.pro_rata_usd)
-      .map(t => ({ symbol: t.symbol, pro_rata_usd: t.pro_rata_usd, pct: total > 0 ? t.pro_rata_usd / total * 100 : 0 }));
-    delete exp.by_token_map;
-
-    // Attach to whale
-    if (whales[name]) {
-      whales[name].secondary_exposure = exp;
-    }
-  }
-}
-
 // Whale definitions loaded from data/whales.json
 const WHALES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
 
@@ -1312,10 +1249,48 @@ async function main() {
             if (!byPosition.has(r.position_id)) byPosition.set(r.position_id, []);
             byPosition.get(r.position_id).push(r);
         }
+        // Fallback lookup for manual positions that don't carry a DB id in
+        // whale JSON (they're loaded from manual-positions.json and merged in
+        // after the DB read). Key by (wallet, chain, protocol_id, position_index)
+        // matching the upsert key in build-exposure's upsertManualPositions.
+        const manualPosIds = db.prepare(`
+            SELECT id, wallet, chain, protocol_id, position_index
+            FROM positions
+            WHERE wallet = 'off-chain' OR position_index LIKE '%|off-chain|%'
+               OR (wallet IS NOT NULL AND wallet NOT LIKE '0x%')
+        `).all();
+        const manualIdMap = new Map();
+        for (const r of manualPosIds) {
+            const key = `${String(r.wallet || '').toLowerCase()}|${r.chain}|${r.protocol_id}|${r.position_index || ''}`;
+            manualIdMap.set(key, r.id);
+            // Also index by (whale-derived) protocol_name pattern. We use a
+            // simpler fallback: `${wallet}|${chain}|${protocol_id}` without
+            // position_index suffix.
+            manualIdMap.set(`${String(r.wallet || '').toLowerCase()}|${r.chain}|${r.protocol_id}`, r.id);
+        }
+        function resolvePositionId(p) {
+            if (p.id) return p.id;
+            const wallet = String(p.wallet || 'off-chain').toLowerCase();
+            const chain = p.chain || 'off-chain';
+            const pid = p.protocol_id || p.protocol_name;
+            // Try position_index + broader keys
+            const candidates = [
+                `${wallet}|${chain}|${pid}|${p.position_index || ''}`,
+                `${wallet}|${chain}|${pid}|${wallet}|${chain}|${pid}`,
+                `${wallet}|${chain}|${pid}`,
+            ];
+            for (const k of candidates) {
+                const hit = manualIdMap.get(k);
+                if (hit) return hit;
+            }
+            return null;
+        }
         for (const w of Object.values(whales)) {
             const secondary = { by_protocol: new Map(), by_token: new Map(), by_market: new Map(), by_confidence: { high: 0, medium: 0, low: 0 } };
             for (const p of w.positions) {
-                const rows = byPosition.get(p.id) || [];
+                const posId = resolvePositionId(p);
+                const rows = posId ? (byPosition.get(posId) || []) : [];
+                if (posId && !p.id) p.id = posId;
                 p.exposure_tree = rows.map(r => ({
                     id: r.id,
                     parent_id: r.parent_id,
@@ -1384,7 +1359,6 @@ async function main() {
     }
 
     // Compute secondary exposure for each whale
-    computeSecondaryExposure(db, whales);
 
     // Global systemic exposure: top N final-asset exposures across all whales
     let globalSystemic = null;
