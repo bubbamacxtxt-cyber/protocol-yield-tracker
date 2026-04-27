@@ -62,7 +62,7 @@ h1 {
   transition: transform 0.2s, border-color 0.2s;
 }
 .card:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
-.card-label { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.card-label { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
 .card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .card-value.green { background: var(--gradient-teal); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .card-value.red { color: #f85149; }
