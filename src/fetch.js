@@ -120,6 +120,28 @@ function initDB(dbPath) {
             last_checked TEXT DEFAULT (datetime('now')),
             PRIMARY KEY (address, chain)
         );
+        CREATE TABLE IF NOT EXISTS position_lookthrough (
+            id INTEGER PRIMARY KEY,
+            position_id INTEGER REFERENCES positions(id) ON DELETE CASCADE,
+            kind TEXT NOT NULL,          -- 'morpho_vault' | 'euler_cluster' | 'aave_pool' | 'dolomite'
+            market_key TEXT,             -- morpho uniqueKey / euler vault addr / aave reserve addr
+            collateral_symbol TEXT,
+            collateral_address TEXT,
+            loan_symbol TEXT,
+            loan_address TEXT,
+            chain TEXT,
+            total_supply_usd REAL,       -- vault's allocation or reserve total
+            total_borrow_usd REAL,
+            utilization REAL,            -- 0..1
+            pro_rata_usd REAL,           -- what the whale "owns" of this exposure
+            share_pct REAL,              -- whale's share of the parent pool (0..100)
+            rank_order INTEGER,          -- 1-based rank within this position
+            metadata_json TEXT,          -- optional extra data
+            computed_at TEXT DEFAULT (datetime('now')),
+            UNIQUE(position_id, kind, market_key, collateral_address)
+        );
+        CREATE INDEX IF NOT EXISTS idx_lookthrough_position ON position_lookthrough(position_id);
+        CREATE INDEX IF NOT EXISTS idx_lookthrough_market ON position_lookthrough(kind, market_key);
     `);
     return db;
 }

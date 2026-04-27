@@ -77,6 +77,10 @@ jobs:
         env:
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           DRPC_API_KEY: ${{ secrets.DRPC_API_KEY }}
+      - name: Build position lookthrough (secondary risk)
+        # Computes pro-rata exposure to collateral for vault-based positions.
+        # Phase 1: Morpho vaults only. More protocols in subsequent phases.
+        run: node src/build-lookthrough.js || echo 'Lookthrough build failed — non-blocking'
       - name: Scan Ethena cooldowns (Locked USDe)
         run: node src/ethena-scanner.js || node src/ethena-scanner.js
         env:

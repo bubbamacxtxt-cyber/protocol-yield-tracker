@@ -211,6 +211,87 @@ tr:hover td { background: var(--bg-secondary); }
 }
 #detail-modal .modal-content { animation: slideIn 0.2s ease; }
 @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* Lookthrough section styles */
+.exposure-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 12px 12px 0 0;
+}
+.exposure-header h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin: 0;
+}
+.exposure-total {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--accent-green);
+}
+.lookthrough-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.exposure-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.exposure-row:last-child {
+  border-bottom: none;
+}
+.exposure-symbol {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--text-primary);
+  min-width: 80px;
+}
+.exposure-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.exposure-bar-fill {
+  height: 100%;
+  background: var(--gradient-teal);
+  border-radius: 4px;
+}
+.exposure-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-primary);
+  min-width: 80px;
+  text-align: right;
+}
+.exposure-value {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.exposure-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-secondary);
+  min-width: 50px;
+  text-align: right;
+}
 </style>
 <div id="detail-modal"></div>
 </head>
@@ -271,6 +352,13 @@ tr:hover td { background: var(--bg-secondary); }
             <tbody id="positionsBody"></tbody>
         </table>
     </div>
+
+    <section id="lookthrough-section" style="margin-top: 24px;">
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 18px; color: var(--text-primary); margin-bottom: 16px;">Secondary Risk — Final Market Exposure</h3>
+        <div class="lookthrough-content" style="text-align: center; padding: 40px; color: var(--text-secondary); font-size: 14px;">
+            Loading secondary exposure data...
+        </div>
+    </section>
 </div>
 
 <script>

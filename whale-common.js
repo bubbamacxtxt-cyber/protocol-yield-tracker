@@ -300,6 +300,7 @@ function updateView() {
   const data = filterPositions();
   renderCards(data);
   renderTable(data);
+  renderLookthroughCards(WHALE_INFO);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -379,6 +380,43 @@ function showDetail(p) {
     '</div></div>';
   modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
   modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+}
+
+function renderLookthroughCards(whale) {
+  const section = document.getElementById('lookthrough-section');
+  if (!section) return;
+
+  const exp = whale?.secondary_exposure;
+  if (!exp || !exp.by_token || exp.by_token.length === 0) {
+    section.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:40px">No secondary exposure data available for this whale.</p>';
+    return;
+  }
+
+  const total = exp.total_pro_rata || 0;
+  const top10 = exp.by_token.slice(0, 10);
+
+  let cardRows = '';
+  for (const t of top10) {
+    const val = fmtShort(t.pro_rata_usd);
+    const pct = t.pct.toFixed(1);
+    const barW = Math.max(5, t.pct);
+    cardRows += `<div class="exposure-row">
+      <span class="exposure-symbol">${t.symbol}</span>
+      <span class="exposure-bar"><div class="exposure-bar-fill" style="width:${barW}%"></div></span>
+      <span class="exposure-value">$${val}</span>
+      <span class="exposure-pct">${pct}%</span>
+    </div>`;
+  }
+
+  section.innerHTML = `
+    <div class="section-header">
+      <h3>Final Market Exposure (pro-rata ${(total / whale.positions.reduce((s,p) => s + (p.net_usd||0), 0) * 100 || 0).toFixed(1)}%)</h3>
+      <span style="color:var(--text-secondary);font-size:13px">Total: $${fmtShort(total)}</span>
+    </div>
+    <div class="lookthrough-list">
+      ${cardRows}
+    </div>
+  `;
 }
 
 // ═══════════════════════════════════════════════════════════════

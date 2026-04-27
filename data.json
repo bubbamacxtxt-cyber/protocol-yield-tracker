@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-27T14:38:33.132Z",
+  "generated_at": "2026-04-27T17:50:16.479Z",
   "summary": {
     "total_positions": 124,
     "total_value": 757084673.166836,
@@ -542,7 +542,342 @@
         }
       ],
       "is_multi_vault": false,
-      "vaults": null
+      "vaults": null,
+      "secondary_exposure": {
+        "by_token": [
+          {
+            "symbol": "WETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "wstETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "WBTC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "USDC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "DAI",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "LINK",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "AAVE",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "cbETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "USDT",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "rETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "LUSD",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "CRV",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "UNKNOWN",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "SNX",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "BAL",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "UNI",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "LDO",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "ENS",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "1INCH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "FRAX",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "GHO",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "RPL",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "sDAI",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "STG",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "KNC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "FXS",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "crvUSD",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PYUSD",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "weETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "osETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "USDe",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "ETHx",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "sUSDe",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "tBTC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "cbBTC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "USDS",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "rsETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "LBTC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "eBTC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "RLUSD",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-eUSDE-29MAY2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-sUSDE-31JUL2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "USDtb",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-USDe-31JUL2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-eUSDE-14AUG2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "eUSDe",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "FBTC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "EURC",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-sUSDE-25SEP2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-USDe-25SEP2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "tETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "ezETH",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "XAUt",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-sUSDE-27NOV2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-USDe-27NOV2025",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-USDe-5FEB2026",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-sUSDE-5FEB2026",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "mUSD",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "syrupUSDT",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "USDG",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-USDe-7MAY2026",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-sUSDE-7MAY2026",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-srUSDe-2APR2026",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "BTC.b",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-srUSDe-25JUN2026",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          },
+          {
+            "symbol": "PT-USDG-28MAY2026",
+            "pro_rata_usd": 997621.516696997,
+            "pct": 1.5151515151515154
+          }
+        ],
+        "total_pro_rata": 65843020.10200179
+      }
     },
     "yoUSD": {
       "name": "yoUSD",
@@ -784,7 +1119,342 @@
         }
       ],
       "is_multi_vault": false,
-      "vaults": null
+      "vaults": null,
+      "secondary_exposure": {
+        "by_token": [
+          {
+            "symbol": "WETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "wstETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "WBTC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "USDC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "DAI",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "LINK",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "AAVE",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "cbETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "USDT",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "rETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "LUSD",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "CRV",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "UNKNOWN",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "SNX",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "BAL",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "UNI",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "LDO",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "ENS",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "1INCH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "FRAX",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "GHO",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "RPL",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "sDAI",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "STG",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "KNC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "FXS",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "crvUSD",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PYUSD",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "weETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "osETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "USDe",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "ETHx",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "sUSDe",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "tBTC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "cbBTC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "USDS",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "rsETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "LBTC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "eBTC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "RLUSD",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-eUSDE-29MAY2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-sUSDE-31JUL2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "USDtb",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-USDe-31JUL2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-eUSDE-14AUG2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "eUSDe",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "FBTC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "EURC",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-sUSDE-25SEP2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-USDe-25SEP2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "tETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "ezETH",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "XAUt",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-sUSDE-27NOV2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-USDe-27NOV2025",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-USDe-5FEB2026",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-sUSDE-5FEB2026",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "mUSD",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "syrupUSDT",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "USDG",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-USDe-7MAY2026",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-sUSDE-7MAY2026",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-srUSDe-2APR2026",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "BTC.b",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-srUSDe-25JUN2026",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          },
+          {
+            "symbol": "PT-USDG-28MAY2026",
+            "pro_rata_usd": 1.2463088568896294,
+            "pct": 1.5151515151515167
+          }
+        ],
+        "total_pro_rata": 82.25638455471545
+      }
     },
     "Yuzu": {
       "name": "Yuzu",
@@ -849,10 +1519,10 @@
           "normalization_status": "canonical",
           "exposure_class": "direct_position",
           "apy_base": 6.81857585263417,
-          "bonus_supply": 3.99184,
+          "bonus_supply": 3.9918,
           "apy_cost": null,
           "bonus_borrow": null,
-          "apy_net": 6.81856,
+          "apy_net": 6.81852,
           "leverage": 1,
           "apy_reward": null,
           "value_usd": 7724188.5950641,
@@ -2511,7 +3181,357 @@
         }
       ],
       "is_multi_vault": false,
-      "vaults": null
+      "vaults": null,
+      "secondary_exposure": {
+        "by_token": [
+          {
+            "symbol": "WETH",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "wstETH",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "USDC",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "AAVE",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "cbETH",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "GHO",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "weETH",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "tBTC",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "cbBTC",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "LBTC",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "EURC",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "ezETH",
+            "pro_rata_usd": 1406973.232804008,
+            "pct": 1.9814512495081933
+          },
+          {
+            "symbol": "WBTC",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "DAI",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "LINK",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "USDT",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "rETH",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "LUSD",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "CRV",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "UNKNOWN",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "SNX",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "BAL",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "UNI",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "LDO",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "ENS",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "1INCH",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "FRAX",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "RPL",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "sDAI",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "STG",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "KNC",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "FXS",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "crvUSD",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PYUSD",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "osETH",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "USDe",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "ETHx",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "sUSDe",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "USDS",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "rsETH",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "eBTC",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "RLUSD",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-eUSDE-29MAY2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-sUSDE-31JUL2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "USDtb",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-USDe-31JUL2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-eUSDE-14AUG2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "eUSDe",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "FBTC",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-sUSDE-25SEP2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-USDe-25SEP2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "tETH",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "XAUt",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-sUSDE-27NOV2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-USDe-27NOV2025",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-USDe-5FEB2026",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-sUSDE-5FEB2026",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "mUSD",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "syrupUSDT",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "USDG",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-USDe-7MAY2026",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-sUSDE-7MAY2026",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-srUSDe-2APR2026",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "BTC.b",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-srUSDe-25JUN2026",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "PT-USDG-28MAY2026",
+            "pro_rata_usd": 978482.5617822752,
+            "pct": 1.3780045344583645
+          },
+          {
+            "symbol": "USDbC",
+            "pro_rata_usd": 428490.6710217328,
+            "pct": 0.6034467150498287
+          },
+          {
+            "symbol": "wrsETH",
+            "pro_rata_usd": 428490.6710217328,
+            "pct": 0.6034467150498287
+          },
+          {
+            "symbol": "syrupUSDC",
+            "pro_rata_usd": 428490.6710217328,
+            "pct": 0.6034467150498287
+          }
+        ],
+        "total_pro_rata": 71007209.14295653
+      }
     },
     "Reservoir": {
       "name": "Reservoir",
@@ -2570,10 +3590,10 @@
           "normalization_status": "canonical",
           "exposure_class": "direct_position",
           "apy_base": 5.93463157467616,
-          "bonus_supply": 3.96136,
+          "bonus_supply": 3.95859,
           "apy_cost": null,
           "bonus_borrow": null,
-          "apy_net": 5.93737,
+          "apy_net": 5.92182,
           "leverage": 1,
           "apy_reward": null,
           "value_usd": 33021635.6453054,
@@ -4378,6 +5398,341 @@
           ],
           "slug": "steakhouse-usd"
         }
+      },
+      "secondary_exposure": {
+        "by_token": [
+          {
+            "symbol": "WETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "wstETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "WBTC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "USDC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "DAI",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "LINK",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "AAVE",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "cbETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "USDT",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "rETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "LUSD",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "CRV",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "UNKNOWN",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "SNX",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "BAL",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "UNI",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "LDO",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "ENS",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "1INCH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "FRAX",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "GHO",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "RPL",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "sDAI",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "STG",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "KNC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "FXS",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "crvUSD",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PYUSD",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "weETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "osETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "USDe",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "ETHx",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "sUSDe",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "tBTC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "cbBTC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "USDS",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "rsETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "LBTC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "eBTC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "RLUSD",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-eUSDE-29MAY2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-sUSDE-31JUL2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "USDtb",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-USDe-31JUL2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-eUSDE-14AUG2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "eUSDe",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "FBTC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "EURC",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-sUSDE-25SEP2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-USDe-25SEP2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "tETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "ezETH",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "XAUt",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-sUSDE-27NOV2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-USDe-27NOV2025",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-USDe-5FEB2026",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-sUSDE-5FEB2026",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "mUSD",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "syrupUSDT",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "USDG",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-USDe-7MAY2026",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-sUSDE-7MAY2026",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-srUSDe-2APR2026",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "BTC.b",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-srUSDe-25JUN2026",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          },
+          {
+            "symbol": "PT-USDG-28MAY2026",
+            "pro_rata_usd": 15345.638008494245,
+            "pct": 1.515151515151514
+          }
+        ],
+        "total_pro_rata": 1012812.1085606209
       }
     },
     "InfiniFi": {
@@ -4833,7 +6188,342 @@
         }
       ],
       "is_multi_vault": false,
-      "vaults": null
+      "vaults": null,
+      "secondary_exposure": {
+        "by_token": [
+          {
+            "symbol": "WETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "wstETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "WBTC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "USDC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "DAI",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "LINK",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "AAVE",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "cbETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "USDT",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "rETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "LUSD",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "CRV",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "UNKNOWN",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "SNX",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "BAL",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "UNI",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "LDO",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "ENS",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "1INCH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "FRAX",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "GHO",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "RPL",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "sDAI",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "STG",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "KNC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "FXS",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "crvUSD",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PYUSD",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "weETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "osETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "USDe",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "ETHx",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "sUSDe",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "tBTC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "cbBTC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "USDS",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "rsETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "LBTC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "eBTC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "RLUSD",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-eUSDE-29MAY2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-sUSDE-31JUL2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "USDtb",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-USDe-31JUL2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-eUSDE-14AUG2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "eUSDe",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "FBTC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "EURC",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-sUSDE-25SEP2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-USDe-25SEP2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "tETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "ezETH",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "XAUt",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-sUSDE-27NOV2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-USDe-27NOV2025",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-USDe-5FEB2026",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-sUSDE-5FEB2026",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "mUSD",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "syrupUSDT",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "USDG",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-USDe-7MAY2026",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-sUSDE-7MAY2026",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-srUSDe-2APR2026",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "BTC.b",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-srUSDe-25JUN2026",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          },
+          {
+            "symbol": "PT-USDG-28MAY2026",
+            "pro_rata_usd": 7720.7750887729,
+            "pct": 1.5151515151515171
+          }
+        ],
+        "total_pro_rata": 509571.15585901076
+      }
     },
     "Upshift": {
       "name": "Upshift",
@@ -7053,10 +8743,10 @@
           "normalization_status": "canonical",
           "exposure_class": "direct_position",
           "apy_base": 5.93463157467616,
-          "bonus_supply": 3.96136,
+          "bonus_supply": 3.95859,
           "apy_cost": null,
           "bonus_borrow": null,
-          "apy_net": 5.937369999999999,
+          "apy_net": 5.92182,
           "leverage": 1,
           "apy_reward": null,
           "value_usd": 8947311.07172551,
@@ -7338,10 +9028,10 @@
           "normalization_status": "canonical",
           "exposure_class": "direct_position",
           "apy_base": 6.81857585263417,
-          "bonus_supply": 3.99184,
+          "bonus_supply": 3.9918,
           "apy_cost": null,
           "bonus_borrow": null,
-          "apy_net": 6.81856,
+          "apy_net": 6.81852,
           "leverage": 1,
           "apy_reward": null,
           "value_usd": 2306735.25232516,
@@ -7452,10 +9142,10 @@
           "normalization_status": "canonical",
           "exposure_class": "direct_position",
           "apy_base": 6.81857585263417,
-          "bonus_supply": 3.99184,
+          "bonus_supply": 3.9918,
           "apy_cost": null,
           "bonus_borrow": null,
-          "apy_net": 6.81856,
+          "apy_net": 6.81852,
           "leverage": 1,
           "apy_reward": null,
           "value_usd": 1999849.36376649,
@@ -9009,10 +10699,10 @@
               "normalization_status": "canonical",
               "exposure_class": "direct_position",
               "apy_base": 6.81857585263417,
-              "bonus_supply": 3.99184,
+              "bonus_supply": 3.9918,
               "apy_cost": null,
               "bonus_borrow": null,
-              "apy_net": 6.81856,
+              "apy_net": 6.81852,
               "leverage": 1,
               "apy_reward": null,
               "value_usd": 1999849.36376649,
@@ -9509,10 +11199,10 @@
               "normalization_status": "canonical",
               "exposure_class": "direct_position",
               "apy_base": 5.93463157467616,
-              "bonus_supply": 3.96136,
+              "bonus_supply": 3.95859,
               "apy_cost": null,
               "bonus_borrow": null,
-              "apy_net": 5.937369999999999,
+              "apy_net": 5.92182,
               "leverage": 1,
               "apy_reward": null,
               "value_usd": 8947311.07172551,
@@ -9566,10 +11256,10 @@
               "normalization_status": "canonical",
               "exposure_class": "direct_position",
               "apy_base": 6.81857585263417,
-              "bonus_supply": 3.99184,
+              "bonus_supply": 3.9918,
               "apy_cost": null,
               "bonus_borrow": null,
-              "apy_net": 6.81856,
+              "apy_net": 6.81852,
               "leverage": 1,
               "apy_reward": null,
               "value_usd": 2306735.25232516,
@@ -11878,7 +13568,7 @@
           "apy_current": 0,
           "apy_gross": 0,
           "apy_avg": 0,
-          "apy_base": 3.73366,
+          "apy_base": 3.73322,
           "apy_rewards": 0,
           "apy_fee": 0,
           "maturity": null,

@@ -337,6 +337,69 @@ function dedupCanonicalClusters(positions) {
     return [...byKey.values()];
 }
 
+/**
+ * Compute secondary exposure per whale from position_lookthrough table.
+ * This is called once after all positions are assembled to enrich each
+ * whale with per-whale lookthrough aggregations.
+ * @param {Object} db - better-sqlite3 handle
+ * @param {Object} whales - whales dict keyed by name
+ */
+function computeSecondaryExposure(db, whales) {
+  // Build wallet-to-whale mapping
+  const walletToWhale = new Map();
+  for (const [name, whale] of Object.entries(whales)) {
+    for (const wallet of (whale.wallets || [])) {
+      walletToWhale.set(wallet.toLowerCase(), name);
+    }
+  }
+
+  // Query all lookthrough rows joined with positions
+  const rows = db.prepare(`
+    SELECT pl.*, p.wallet, p.chain, p.protocol_id
+    FROM position_lookthrough pl
+    JOIN positions p ON pl.position_id = p.id
+    WHERE pl.pro_rata_usd > 0
+    ORDER BY pl.pro_rata_usd DESC
+  `).all();
+
+  // Aggregate by whale
+  const whaleExposures = new Map();
+  for (const r of rows) {
+    const whaleName = walletToWhale.get((r.wallet || '').toLowerCase());
+    if (!whaleName) continue;
+
+    if (!whaleExposures.has(whaleName)) {
+      whaleExposures.set(whaleName, { by_token: [], total_pro_rata: 0 });
+    }
+    const exp = whaleExposures.get(whaleName);
+    exp.total_pro_rata += r.pro_rata_usd;
+
+    // Aggregate by collateral symbol
+    const tokenKey = r.collateral_symbol || '???';
+    if (!exp.by_token_map) exp.by_token_map = new Map();
+    const existing = exp.by_token_map.get(tokenKey);
+    if (existing) {
+      existing.pro_rata_usd += r.pro_rata_usd;
+    } else {
+      exp.by_token_map.set(tokenKey, { symbol: tokenKey, pro_rata_usd: r.pro_rata_usd });
+    }
+  }
+
+  // Convert to arrays sorted by pro_rata
+  for (const [name, exp] of whaleExposures) {
+    const total = exp.total_pro_rata;
+    exp.by_token = [...exp.by_token_map.values()]
+      .sort((a, b) => b.pro_rata_usd - a.pro_rata_usd)
+      .map(t => ({ symbol: t.symbol, pro_rata_usd: t.pro_rata_usd, pct: total > 0 ? t.pro_rata_usd / total * 100 : 0 }));
+    delete exp.by_token_map;
+
+    // Attach to whale
+    if (whales[name]) {
+      whales[name].secondary_exposure = exp;
+    }
+  }
+}
+
 // Whale definitions loaded from data/whales.json
 const WHALES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'whales.json'), 'utf8'));
 
@@ -1249,6 +1312,9 @@ async function main() {
             allProtos.add(p.protocol_name);
         }
     }
+
+    // Compute secondary exposure for each whale
+    computeSecondaryExposure(db, whales);
 
     const data = {
         generated_at: new Date().toISOString(),
