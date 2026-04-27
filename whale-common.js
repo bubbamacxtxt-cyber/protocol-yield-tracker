@@ -29,7 +29,6 @@ const CARDS = [
   { label: 'Total Value', field: 'net_usd',    aggregate: 'sum',     format: 'usd_short', color: 'green', subtitle: d => d.length + ' positions' },
   { label: 'Net APY',     field: 'apy_net',    aggregate: 'wavg',    weight: 'asset_usd', format: 'pct', color: 'blue', subtitle: () => 'weighted avg' },
   { label: 'Health Factor', field: 'health_rate', aggregate: 'avg', filter: p => p.health_rate > 0 && p.health_rate < 1000, format: 'num', render_class: v => hfClass(v), color: 'purple', subtitle: d => { const valid = d.filter(p => p.health_rate > 0 && p.health_rate < 1000); const avg = valid.length ? valid.reduce((s,p) => s + p.health_rate, 0) / valid.length : 0; return avg >= 1.1 ? 'Safe' : '⚠️ Below 1.1'; } },
-  { label: 'Wallets',     field: 'wallet',     aggregate: 'count_unique', format: 'none', subtitle: () => 'active' },
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -377,6 +376,7 @@ async function loadData() {
 
     WHALE_DATA.forEach(p => { p.bonus_total = (p.bonus_supply || 0) + (p.bonus_borrow || 0); });
     positions = WHALE_DATA;
+    renderWalletCards(whale);
     protocolCol = COLUMNS.find(c => c.key === 'protocol');
     chains = [...new Set(positions.map(p => p.chain))].sort();
     protos = [...new Set(positions.map(p => getFieldValue(p, protocolCol)))].sort();
@@ -385,6 +385,51 @@ async function loadData() {
   } catch (e) {
     document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
   }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// WALLET CARDS — debank links, green/red status, no API calls
+// ═══════════════════════════════════════════════════════════════
+// Build a set of wallet addresses that have positions in the current
+// filtered view.  Wallets with ANY position value > 0 are "active".
+function renderWalletCards(whaleData) {
+  const container = document.getElementById('walletCards');
+  if (!container) return;
+
+  const allWallets = whaleData.wallets || [];
+  const positions = whaleData.positions || [];
+
+  // Deduplicate — some whales list the same address twice
+  const unique = [...new Set(allWallets.map(w => w.toLowerCase()))];
+
+  // Compute value per wallet from current positions
+  const walletValue = {};
+  positions.forEach(p => {
+    const addr = (p.wallet || '').toLowerCase();
+    walletValue[addr] = (walletValue[addr] || 0) + (p.net_usd || 0);
+  });
+
+  // Threshold: $50k = active (green), else inactive (red)
+  const THRESHOLD = 50000;
+
+  container.innerHTML = unique.map(addr => {
+    const val = walletValue[addr] || 0;
+    const active = val >= THRESHOLD;
+    const color = active ? 'var(--accent-green)' : '#f85149';
+    const label = shortWallet(addr);
+    const valStr = active ? '$' + fmtShort(val) : '';
+    return '<a href="https://debank.com/profile/' + addr + '" target="_blank" '
+      + 'style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;'
+      + 'background:' + color + '18;border:1px solid ' + color + '40;'
+      + 'font-size:13px;color:' + color + ';text-decoration:none;white-space:nowrap;transition:opacity .15s" '
+      + 'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">'
+      + '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';flex-shrink:0"></span>'
+      + label
+      + (valStr ? '<span style="opacity:0.7;font-size:11px">' + valStr + '</span>' : '')
+      + '</a>';
+  }).join('');
+
+  container.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;padding:8px 0';
 }
 
 // Call this from each page's DOMContentLoaded
