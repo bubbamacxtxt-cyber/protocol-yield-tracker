@@ -63,7 +63,7 @@ h1 {
 }
 .card:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
 .card-label { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
-.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.card-value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; font-family: 'JetBrains Mono', monospace; }
 .card-value.green { background: var(--gradient-teal); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .card-value.red { color: #f85149; }
 .card-value.blue { background: var(--gradient-teal); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -96,7 +96,7 @@ th {
   letter-spacing: 1px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; position: sticky; top: 0;
 }
 th:nth-child(n+9) { text-align: right; }
-td { padding: 12px 16px; border-top: 1px solid #21262d; }
+td { padding: 12px 16px; border-top: 1px solid #21262d; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
 td:nth-child(n+9) { text-align: right; font-variant-numeric: tabular-nums; }
 tr:hover td { background: var(--bg-secondary); }
 
@@ -145,7 +145,7 @@ tr:hover td { background: var(--bg-secondary); }
 }
 .vault-stat:last-child { border-bottom: none; }
 .vault-stat .label { color: var(--text-secondary); font-size: 14px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
-.vault-stat .value { font-weight: 600; font-size: 15px; }
+.vault-stat .value { font-weight: 600; font-size: 15px; font-family: 'JetBrains Mono', monospace; }
 .vault-stat .value.money { color: var(--accent-green); }
 
 /* scrollbar — matches home page YBS list */
