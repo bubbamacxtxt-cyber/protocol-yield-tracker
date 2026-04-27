@@ -197,7 +197,7 @@ function renderCards(data) {
 
   // Render wallet card as an additional .card in the grid
   let walletCardHtml = '';
-  const whale = data.whales[WHALE_NAME];
+  const whale = WHALE_INFO;
   if (whale && whale.wallets && whale.wallets.length) {
     const allWallets = whale.wallets;
     const unique = [...new Set(allWallets.map(w => w.toLowerCase()))];
@@ -388,6 +388,7 @@ function showDetail(p) {
 let WHALE_NAME = '';
 let VAULT_NAME = null;  // null = all positions, string = specific vault
 let WHALE_DATA = [];
+let WHALE_INFO = null;  // full whale object from data.json (for wallet card)
 let positions = [];
 let protocolCol = null;
 let chains = [];
@@ -400,6 +401,7 @@ async function loadData() {
     const data = await res.json();
     const whale = data.whales[WHALE_NAME];
     if (!whale) throw new Error('Whale ' + WHALE_NAME + ' not found');
+    WHALE_INFO = whale;
 
     if (VAULT_NAME && whale.vaults && whale.vaults[VAULT_NAME]) {
       // Vault detail page — only this vault's positions
