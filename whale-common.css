@@ -136,7 +136,7 @@ tr:hover td { background: var(--bg-secondary); }
   height: 40px;
   background: linear-gradient(to bottom, transparent, var(--bg-card));
 }
-.vault-card-header h3 { font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; }
+.vault-card-header h3 { font-size: 18px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; color: white; margin-bottom: 4px; }
 .vault-card-header .chain-count { font-size: 12px; color: rgba(255,255,255,0.8); }
 .vault-card-body { padding: 20px; }
 .vault-stat {
@@ -144,7 +144,7 @@ tr:hover td { background: var(--bg-secondary); }
   padding: 12px 0; border-bottom: 1px solid var(--border);
 }
 .vault-stat:last-child { border-bottom: none; }
-.vault-stat .label { color: var(--text-secondary); font-size: 14px; }
+.vault-stat .label { color: var(--text-secondary); font-size: 14px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
 .vault-stat .value { font-weight: 600; font-size: 15px; }
 .vault-stat .value.money { color: var(--accent-green); }
 
