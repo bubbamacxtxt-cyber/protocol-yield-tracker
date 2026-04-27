@@ -409,27 +409,29 @@ function renderWalletCards(whaleData) {
     walletValue[addr] = (walletValue[addr] || 0) + (p.net_usd || 0);
   });
 
-  // Threshold: $50k = active (green), else inactive (red)
   const THRESHOLD = 50000;
 
-  container.innerHTML = unique.map(addr => {
+  const items = unique.map(addr => {
     const val = walletValue[addr] || 0;
     const active = val >= THRESHOLD;
-    const color = active ? 'var(--accent-green)' : '#f85149';
-    const label = shortWallet(addr);
-    const valStr = active ? '$' + fmtShort(val) : '';
+    const dotColor = active ? 'var(--accent-green)' : '#f85149';
+    const valStr = active ? '$' + fmtShort(val) : 'no positions';
     return '<a href="https://debank.com/profile/' + addr + '" target="_blank" '
-      + 'style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;'
-      + 'background:' + color + '18;border:1px solid ' + color + '40;'
-      + 'font-size:13px;color:' + color + ';text-decoration:none;white-space:nowrap;transition:opacity .15s" '
-      + 'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">'
-      + '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';flex-shrink:0"></span>'
-      + label
-      + (valStr ? '<span style="opacity:0.7;font-size:11px">' + valStr + '</span>' : '')
+      + 'style="display:flex;align-items:center;gap:8px;padding:8px 12px;'
+      + 'text-decoration:none;color:var(--text-primary);font-size:13px;white-space:nowrap" '
+      + 'onmouseover="this.style.background=\'rgba(255,255,255,0.04)\'" '
+      + 'onmouseout="this.style.background=\'transparent\'"'>
+      + '<span style="width:8px;height:8px;border-radius:50%;background:' + dotColor + ';flex-shrink:0"></span>'
+      + '<span style="font-family:monospace">' + shortWallet(addr) + '</span>'
+      + '<span style="color:var(--text-secondary);margin-left:auto">' + valStr + '</span>'
       + '</a>';
   }).join('');
 
-  container.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;padding:8px 0';
+  container.innerHTML = '<div style="background:var(--surface-secondary,var(--bg-secondary,#161b22));border:1px solid var(--border-default,rgba(255,255,255,0.08));border-radius:10px;overflow:hidden">'
+    + '<div style="padding:10px 14px;font-size:12px;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border-default,rgba(255,255,255,0.08))">Wallets (' + unique.length + ')</div>'
+    + '<div style="max-height:160px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.15) transparent">'
+    + items
+    + '</div></div>';
 }
 
 // Call this from each page's DOMContentLoaded
