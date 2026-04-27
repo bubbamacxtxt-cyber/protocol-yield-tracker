@@ -1,195 +1,147 @@
 /**
- * Morpho MetaMorpho Vault Lookthrough
+ * Morpho Vault Exposure Lookthrough (v2 - REST API)
  *
- * For every scanner-detected Morpho position (supply side), fetch the vault's
- * allocation to underlying markets and compute the depositor's pro-rata exposure
- * to each collateral.
+ * For every scanner-detected Morpho position, fetch the vault's collateral
+ * exposure data from the public REST API and compute pro-rata exposure.
  *
- * Data sources:
- *   - REST API: /api/positions/earn to get vault addresses per wallet
- *   - GraphQL: vaultByAddress to get allocation data
- *
- * NOTE: Morpho removed per-allocation USD amounts from the API (assetsUsd removed
- * from VaultAllocation type). We approximate using supplyCap proportions.
+ * Data source: https://app.morpho.org/api/vaults (public, no auth)
  *
  * Returns lookthrough rows keyed by position_id.
  */
 
-const MORPHO_REST = 'https://app.morpho.org/api';
-const MORPHO_GRAPHQL = 'https://app.morpho.org/api/graphql';
+const MORPHO_VAULTS_API = 'https://app.morpho.org/api/vaults';
 
-const ALL_CHAINS = [1, 8453, 42161, 137, 130, 747474, 999, 10, 143, 988, 480];
-
-async function getEarnPositions(userAddress) {
-  const url = `${MORPHO_REST}/positions/earn?userAddress=${userAddress}&limit=500&skip=0&chainIds=${ALL_CHAINS.join(',')}&orderBy=assetsUsd&orderDirection=DESC`;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return [];
-    return (await res.json()).items || [];
-  } catch { return []; }
-}
-
-async function getVaultAllocation(vaultAddress, chainId) {
-  const query = `
-  {
-    vaultByAddress(address: "${vaultAddress}", chainId: ${chainId}) {
-      name
-      address
-      symbol
-      asset { symbol address decimals }
-      allocation {
-        market {
-          uniqueKey
-          collateralAsset { symbol address }
-          loanAsset { symbol address }
-        }
-        supplyCap
-      }
-      state {
-        totalAssetsUsd
-      }
-    }
-  }
-  `;
-
-  const res = await fetch(MORPHO_GRAPHQL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query }),
-  });
-  const data = await res.json();
-  
-  // Debug: log the raw response for troubleshooting
-  if (data.errors) {
-    console.log(`[lookthrough] gql error: ${data.errors[0]?.message}`);
-  }
-  
-  return data?.data?.vaultByAddress || null;
-}
+// Cache for vault exposure data keyed by vault address (lowercase)
+let vaultExposureCache = null;
+let lastFetch = 0;
+const CACHE_TTL_MS = 2 * 60 * 60 * 1000; // 2 hours
 
 /**
- * Compute lookthrough rows for all Morpho scanner positions.
- * @param {Array} positions - rows from positions table where protocol_id = 'morpho'
- * @param {Object} db - better-sqlite3 db handle
- * @returns {Array} lookthrough rows to insert
+ * Fetch all vaults and build exposure lookup map.
+ * Returns Map<vaultAddressLowercase -> { asset, totalAssetsUsd, exposure[] }>
  */
-async function compute(positions, db) {
-  console.time('[lookthrough] morpho');
-
-  // Chain ID mapping
-  const chainIdMap = { eth: 1, base: 8453, arb: 42161, poly: 137, opt: 10, mnt: 5000, blast: 81457, scroll: 534352, sonic: 146, plasma: 9745, uni: 130, wct: 747474, monad: 143, ink: 999, abstract: 2741 };
-
-  // Get vault addresses from the DB (position_tokens.address for supply role)
-  const vaultByPosition = new Map(); // position_id -> { vaultAddress, chainId }
-  for (const pos of positions) {
-    // Query position_tokens to get the vault address for this position
-    const tokens = db.prepare(`
-      SELECT address FROM position_tokens 
-      WHERE position_id = ? AND role = 'supply' AND address LIKE '0x%' 
-      LIMIT 1
-    `).get(pos.id);
-    
-    if (tokens && tokens.address) {
-      const chainId = chainIdMap[pos.chain.toLowerCase()] || 1;
-      vaultByPosition.set(pos.id, { vaultAddress: tokens.address, chainId });
-    }
+async function fetchVaultExposures() {
+  if (vaultExposureCache && (Date.now() - lastFetch) < CACHE_TTL_MS) {
+    return vaultExposureCache;
   }
-  
-  console.log(`[lookthrough] morpho: ${positions.length} positions, ${vaultByPosition.size} with vault addresses`);
 
-  // Group by vault and fetch allocation data
-  const vaultCache = new Map(); // key: vaultAddr|chainId -> vaultData
-  const rows = [];
+  console.log('[lookthrough] morpho-rest: fetching vault exposure data...');
+  const allVaults = [];
+  let skip = 0;
+  const limit = 100;
 
-  for (const [posId, vaultInfo] of vaultByPosition) {
-    const vaultKey = `${vaultInfo.vaultAddress.toLowerCase()}|${vaultInfo.chainId}`;
-
-    // Fetch vault allocation if not cached
-    if (!vaultCache.has(vaultKey)) {
-      console.log(`[lookthrough] morpho: fetching vault addr=${vaultInfo.vaultAddress} chain=${vaultInfo.chainId}`);
-      try {
-        const vaultData = await getVaultAllocation(vaultInfo.vaultAddress, vaultInfo.chainId);
-        console.log(`[lookthrough] morpho:   -> ${vaultData ? `OK (${vaultData.symbol})` : 'NULL (not found)'}`);
-        vaultCache.set(vaultKey, vaultData);
-      } catch (e) {
-        console.error(`[lookthrough] morpho: GraphQL failed for ${vaultInfo.vaultAddress}: ${e.message}`);
-        vaultCache.set(vaultKey, null);
-      }
+  while (true) {
+    const url = `${MORPHO_VAULTS_API}?skip=${skip}&limit=${limit}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      console.error(`[lookthrough] morpho-rest: API error ${res.status} at skip=${skip}`);
+      break;
     }
+    const data = await res.json();
+    const items = data.items || [];
+    const pageInfo = data.pageInfo || {};
+    const countTotal = pageInfo.countTotal || items.length;
+    
+    allVaults.push(...items);
+    console.log(`  [fetched page skip=${skip}, got ${items.length}/${countTotal} total]`);
+    
+    if (allVaults.length >= countTotal || items.length === 0) break;
+    skip += items.length;
+  }
 
-    const vaultData = vaultCache.get(vaultKey);
-    if (!vaultData) continue;
+  console.log(`[lookthrough] morpho-rest: fetched ${allVaults.length} vaults total`);
 
-    const pos = positions.find(p => p.id === posId);
-    if (!pos) continue;
-
-    const totalAssetsUsd = vaultData.state?.totalAssetsUsd || 0;
-    if (totalAssetsUsd === 0) continue;
-
-    const depositorAmount = pos.asset_usd;
-    if (depositorAmount === 0) continue;
-
-    const share = depositorAmount / totalAssetsUsd;
-
-    // Parse supplyCap proportions
-    const allocations = vaultData.allocation || [];
-    let totalSupplyCap = 0;
-    const allocsWithCap = [];
-    for (const alloc of allocations) {
-      const capRaw = alloc.supplyCap;
-      if (!capRaw) continue;
+  // Build lookup by address
+  const cache = new Map();
+  for (const v of allVaults) {
+    const key = v.address?.toLowerCase();
+    if (key) {
+      // Filter out idle exposures (null collateralAsset or 0%)
+      const activeExposure = (v.exposure || []).filter(e => 
+        e.collateralAsset && e.exposurePercent > 0.001
+      );
       
-      // supplyCap is a share-denominated cap (1e18 fixed-point or numeric)
-      let cap;
-      if (typeof capRaw === 'string') {
-        const num = parseFloat(capRaw);
-        cap = isFinite(num) ? num / 1e18 : 0;
-      } else {
-        cap = Number(capRaw) / 1e18;
-      }
-      
-      if (!isFinite(cap) || cap <= 0) continue;
-      allocsWithCap.push({ alloc, cap });
-      totalSupplyCap += cap;
-    }
-
-    if (totalSupplyCap === 0) continue;
-
-    let rankOrder = 0;
-    for (const { alloc, cap } of allocsWithCap) {
-      const market = alloc.market;
-      if (!market || !market.collateralAsset) continue;
-
-      const allocationProportion = cap / totalSupplyCap;
-      const proRataUsd = depositorAmount * allocationProportion;
-
-      rankOrder++;
-
-      rows.push({
-        position_id: pos.id,
-        kind: 'morpho_vault',
-        market_key: market.uniqueKey || `${market.collateralAsset.symbol || '?'}-${market.loanAsset?.symbol || '?'}`,
-        collateral_symbol: market.collateralAsset.symbol || '?',
-        collateral_address: market.collateralAsset.address || '',
-        loan_symbol: market.loanAsset?.symbol || '?',
-        loan_address: market.loanAsset?.address || '',
-        chain: pos.chain,
-        total_supply_usd: totalAssetsUsd * allocationProportion,
-        total_borrow_usd: 0,
-        utilization: 0,
-        pro_rata_usd: proRataUsd,
-        share_pct: share * 100,
-        rank_order: rankOrder,
+      cache.set(key, {
+        symbol: v.symbol || '???',
+        asset: v.asset?.symbol || '???',
+        totalAssetsUsd: v.totalAssetsUsd || 0,
+        exposure: activeExposure,
       });
     }
   }
 
-  const vaultsCount = vaultCache.size;
-  const vaultsSuccess = [...vaultCache.values()].filter(Boolean).length;
-  console.log(`[lookthrough] morpho: ${vaultsCount} unique vaults, ${vaultsSuccess} fetched, ${rows.length} lookthrough rows`);
-  console.timeEnd('[lookthrough] morpho');
+  vaultExposureCache = cache;
+  lastFetch = Date.now();
+  return cache;
+}
+
+/**
+ * Compute lookthrough rows for Morpho positions.
+ */
+async function compute(positions, db) {
+  console.time('[lookthrough] morpho-rest');
+
+  const vaultMap = await fetchVaultExposures();
+  const rows = [];
+  let matched = 0;
+  let missed = 0;
+
+  // Build position-to-vault mapping from position_tokens
+  for (const pos of positions) {
+    const tokens = db.prepare(`
+      SELECT DISTINCT address FROM position_tokens 
+      WHERE position_id = ? AND role = 'supply' AND address LIKE '0x%'
+    `).all(pos.id);
+
+    let vaultFound = false;
+    for (const token of tokens) {
+      const vaultKey = token.address.toLowerCase();
+      const vaultData = vaultMap.get(vaultKey);
+      
+      if (!vaultData) continue;
+      vaultFound = true;
+      matched++;
+
+      const depositorAmount = pos.asset_usd;
+      if (depositorAmount <= 0) continue;
+
+      // Compute pro-rata exposure for each collateral in the vault
+      let rankOrder = 0;
+      for (const exp of vaultData.exposure) {
+        rankOrder++;
+        const proRataUsd = depositorAmount * exp.exposurePercent;
+
+        rows.push({
+          position_id: pos.id,
+          kind: 'morpho_vault',
+          market_key: `${exp.collateralAsset.address}-${pos.chain}`,
+          collateral_symbol: exp.collateralAsset.symbol || '???',
+          collateral_address: exp.collateralAsset.address || '',
+          loan_symbol: vaultData.asset || '???',
+          loan_address: '',
+          chain: pos.chain,
+          total_supply_usd: exp.exposureUSD || 0,
+          total_borrow_usd: 0,
+          utilization: 0,
+          pro_rata_usd: proRataUsd,
+          share_pct: vaultData.totalAssetsUsd > 0 
+            ? (depositorAmount / vaultData.totalAssetsUsd) * 100 
+            : 0,
+          rank_order: rankOrder,
+        });
+      }
+      break; // First matching vault is enough
+    }
+
+    if (!vaultFound) {
+      missed++;
+    }
+  }
+
+  console.log(`[lookthrough] morpho-rest: ${matched} positions matched, ${missed} vaults not found, ${rows.length} lookthrough rows`);
+  console.timeEnd('[lookthrough] morpho-rest');
 
   return rows;
 }
 
-module.exports = { compute, getVaultAllocation };
+module.exports = { compute, fetchVaultExposures };
