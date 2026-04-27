@@ -1296,6 +1296,76 @@ async function main() {
         }
     }
 
+    // Attach exposure decomposition tree to each position and compute per-whale rollups.
+    // Fails soft: if exposure_decomposition table isn't present or has no rows,
+    // positions just carry an empty tree.
+    try {
+        const expRows = db.prepare(`
+            SELECT id, position_id, parent_id, depth, kind, venue, venue_address, chain,
+                   asset_symbol, asset_address, usd, pct_of_parent, pct_of_root, utilization,
+                   adapter, source, confidence, as_of, attestation_url, evidence_json
+            FROM exposure_decomposition
+            ORDER BY position_id, depth, usd DESC
+        `).all();
+        const byPosition = new Map();
+        for (const r of expRows) {
+            if (!byPosition.has(r.position_id)) byPosition.set(r.position_id, []);
+            byPosition.get(r.position_id).push(r);
+        }
+        for (const w of Object.values(whales)) {
+            const secondary = { by_protocol: new Map(), by_token: new Map(), by_market: new Map(), by_confidence: { high: 0, medium: 0, low: 0 } };
+            for (const p of w.positions) {
+                const rows = byPosition.get(p.id) || [];
+                p.exposure_tree = rows.map(r => ({
+                    id: r.id,
+                    parent_id: r.parent_id,
+                    depth: r.depth,
+                    kind: r.kind,
+                    venue: r.venue,
+                    venue_address: r.venue_address,
+                    chain: r.chain,
+                    asset_symbol: r.asset_symbol,
+                    asset_address: r.asset_address,
+                    usd: r.usd,
+                    pct_of_parent: r.pct_of_parent,
+                    pct_of_root: r.pct_of_root,
+                    utilization: r.utilization,
+                    adapter: r.adapter,
+                    source: r.source,
+                    confidence: r.confidence,
+                    as_of: r.as_of,
+                    attestation_url: r.attestation_url,
+                }));
+                // Leaves for rollup = non-root rows with asset_symbol. Root rows are the full position.
+                const leaves = rows.filter(r => r.depth > 0 && r.asset_symbol);
+                const rootSum = rows.filter(r => r.depth === 0).reduce((s, r) => s + r.usd, 0) || p.net_usd;
+                if (!leaves.length && rows.length) {
+                    // Position decomposed to a single root row — treat root as its own leaf.
+                    const root = rows.find(r => r.depth === 0);
+                    if (root) leaves.push(root);
+                }
+                for (const leaf of leaves) {
+                    const proto = p.protocol_name;
+                    const tok = leaf.asset_symbol || '?';
+                    const market = leaf.venue || proto;
+                    secondary.by_protocol.set(proto, (secondary.by_protocol.get(proto) || 0) + leaf.usd);
+                    secondary.by_token.set(tok,    (secondary.by_token.get(tok) || 0) + leaf.usd);
+                    secondary.by_market.set(market,(secondary.by_market.get(market) || 0) + leaf.usd);
+                    secondary.by_confidence[leaf.confidence] = (secondary.by_confidence[leaf.confidence] || 0) + leaf.usd;
+                }
+            }
+            const toSortedArray = (m) => [...m.entries()].map(([k, v]) => ({ label: k, usd: v })).sort((a, b) => b.usd - a.usd);
+            w.exposure_rollup = {
+                by_protocol:   toSortedArray(secondary.by_protocol),
+                by_token:      toSortedArray(secondary.by_token),
+                by_market:     toSortedArray(secondary.by_market),
+                by_confidence: secondary.by_confidence,
+            };
+        }
+    } catch (err) {
+        console.warn('[export] exposure decomposition attach skipped:', err.message);
+    }
+
     // Global summary
     let totalPositions = 0, totalValue = 0, totalAssets = 0, totalDebt = 0, totalWallets = 0, totalActive = 0;
     const allChains = new Set(), allProtos = new Set();
@@ -1316,6 +1386,23 @@ async function main() {
     // Compute secondary exposure for each whale
     computeSecondaryExposure(db, whales);
 
+    // Global systemic exposure: top N final-asset exposures across all whales
+    let globalSystemic = null;
+    try {
+        const top = db.prepare(`
+            SELECT asset_symbol, chain, SUM(usd) as total_usd, COUNT(*) as row_count
+            FROM exposure_decomposition
+            WHERE asset_symbol IS NOT NULL
+              AND kind IN ('primary_asset', 'market_exposure', 'lp_underlying', 'pendle_underlying', 'ybs_strategy')
+            GROUP BY asset_symbol, chain
+            ORDER BY total_usd DESC
+            LIMIT 25
+        `).all();
+        globalSystemic = top.map(r => ({ asset: r.asset_symbol, chain: r.chain, usd: Number(r.total_usd || 0), rows: r.row_count }));
+    } catch (err) {
+        console.warn('[export] global systemic rollup skipped:', err.message);
+    }
+
     const data = {
         generated_at: new Date().toISOString(),
         summary: {
@@ -1327,7 +1414,8 @@ async function main() {
             total_wallets: totalWallets,
             total_active: totalActive,
             chains: [...allChains],
-            protocols: [...allProtos]
+            protocols: [...allProtos],
+            systemic_exposure: globalSystemic,
         },
         whales
     };

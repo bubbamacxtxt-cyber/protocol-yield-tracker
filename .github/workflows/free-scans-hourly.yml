@@ -77,10 +77,15 @@ jobs:
         env:
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           DRPC_API_KEY: ${{ secrets.DRPC_API_KEY }}
-      - name: Build position lookthrough (secondary risk)
-        # Computes pro-rata exposure to collateral for vault-based positions.
-        # Phase 1: Morpho vaults only. More protocols in subsequent phases.
-        run: node src/build-lookthrough.js || echo 'Lookthrough build failed — non-blocking'
+      - name: Exposure adapter smoke tests
+        # Pure-JS: validates registry + row shapes. Fast, no external calls.
+        run: node test/exposure/smoke.test.js
+      - name: Build exposure decomposition (secondary risk lookthrough)
+        # Runs adapters against every position and writes
+        # exposure_decomposition table. See docs/secondary-risk-coverage-plan.md.
+        # Non-blocking on per-position errors — each becomes an `unknown` row
+        # which the audit step will flag.
+        run: node src/build-exposure.js
       - name: Scan Ethena cooldowns (Locked USDe)
         run: node src/ethena-scanner.js || node src/ethena-scanner.js
         env:
@@ -105,6 +110,11 @@ jobs:
         run: node src/export.js
       - name: Build source audit
         run: node src/source-audit.js
+      - name: Build exposure coverage audit
+        # Writes data/exposure-audit.json used by audit.html and the CI gate.
+        # Non-strict here so we don't fail the pipeline during rollout; once
+        # coverage is stable we'll switch to --strict to gate merges.
+        run: node src/audit-exposure.js
       - name: Check regression fixtures (non-blocking)
         run: node src/check-fixtures.js || echo "⚠️ fixtures failed — review but continuing"
       - name: Validate data
@@ -122,7 +132,7 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          OUT_FILES="data.json data/recon/alchemy-token-discovery.json data/recon/canonical-token-matches.json data/source-audit.json data/total-history.json yield-tracker.db"
+          OUT_FILES="data.json data/recon/alchemy-token-discovery.json data/recon/canonical-token-matches.json data/source-audit.json data/exposure-audit.json data/total-history.json yield-tracker.db"
           # Save our regenerated outputs outside the repo so rebase can't touch them
           mkdir -p /tmp/scan-output
           for f in $OUT_FILES; do
@@ -147,4 +157,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Hourly free scans ${{ github.run_number }}"
-          file_pattern: data/recon/alchemy-token-discovery.json data/recon/canonical-token-matches.json data/source-audit.json data.json data/total-history.json yield-tracker.db
+          file_pattern: data/recon/alchemy-token-discovery.json data/recon/canonical-token-matches.json data/source-audit.json data/exposure-audit.json data.json data/total-history.json yield-tracker.db

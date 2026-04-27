@@ -377,9 +377,90 @@ function showDetail(p) {
     '<div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
       '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
       '<div style="font-size:28px;font-weight:700;color:' + ((p.apy_net || 0) > 0 ? 'var(--accent-green)' : '#f85149') + '">' + (p.apy_net || 0).toFixed(2) + '%</div>' +
-    '</div></div>';
+    '</div>' +
+    renderExposureTreeSection(p) +
+    '</div>';
   modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
   modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXPOSURE TREE (secondary risk lookthrough)
+// ═══════════════════════════════════════════════════════════════
+function renderExposureTreeSection(p) {
+  const tree = p.exposure_tree || [];
+  if (!tree.length) return '';
+
+  const root = tree.find(r => r.depth === 0) || tree[0];
+  const children = tree.filter(r => r.parent_id === root.id);
+  if (!children.length && tree.length === 1) return '';
+
+  const confColor = (c) => c === 'high' ? 'var(--accent-green)' : c === 'medium' ? 'var(--accent-orange)' : '#f85149';
+  const kindLabel = (k) => ({
+    primary_asset: 'primary',
+    market_exposure: 'market',
+    pool_share: 'pool',
+    ybs_strategy: 'strategy',
+    lp_underlying: 'LP leg',
+    pendle_underlying: 'pendle',
+    opaque_offchain: 'opaque',
+    unknown: 'unknown',
+  })[k] || k;
+
+  const row = (r, indent = 0) => {
+    const pct = r.pct_of_parent != null ? r.pct_of_parent.toFixed(1) + '%' : '';
+    const label = r.asset_symbol || r.venue || '?';
+    const isOpaque = r.kind === 'opaque_offchain' || r.kind === 'unknown';
+    const fillColor = isOpaque ? 'var(--accent-orange)' : 'var(--accent-blue)';
+    return (
+      '<div style="display:grid;grid-template-columns:14px 1fr 90px 60px 90px;gap:10px;align-items:center;padding:5px 0;border-top:1px solid rgba(48,54,61,0.4);padding-left:' + (indent * 18) + 'px;font-family:\'JetBrains Mono\', monospace;font-size:11px">' +
+        '<span style="font-size:8px;color:' + confColor(r.confidence) + ';font-weight:600" title="' + r.confidence + ' ' + r.source + '">\u25CF</span>' +
+        '<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' +
+          '<span style="color:var(--text-primary);font-weight:500">' + label + '</span>' +
+          '<span style="color:var(--text-secondary);font-size:9px;margin-left:6px;text-transform:uppercase;letter-spacing:0.3px">' + kindLabel(r.kind) + '</span>' +
+        '</div>' +
+        '<div style="color:var(--accent-green);text-align:right;font-weight:600">' + fmtUsd(r.usd) + '</div>' +
+        '<div style="color:var(--text-secondary);text-align:right">' + pct + '</div>' +
+        '<div style="background:rgba(48,54,61,0.5);border-radius:2px;height:4px;overflow:hidden">' +
+          (r.pct_of_parent != null ? '<div style="width:' + Math.min(100, r.pct_of_parent).toFixed(1) + '%;height:100%;background:' + fillColor + '"></div>' : '') +
+        '</div>' +
+      '</div>'
+    );
+  };
+
+  // Render rows in tree order: children of each node, recursively, sorted by usd desc
+  const lines = [];
+  const renderChildren = (parentId, depth) => {
+    const kids = tree.filter(r => r.parent_id === parentId).sort((a, b) => b.usd - a.usd);
+    for (const k of kids) {
+      lines.push(row(k, depth));
+      renderChildren(k.id, depth + 1);
+    }
+  };
+  renderChildren(root.id, 0);
+
+  const rootLabel = root.venue || root.asset_symbol || 'position';
+  const confBadge = '<span style="display:inline-block;padding:2px 6px;border-radius:3px;background:rgba(74,222,128,0.1);color:' + confColor(root.confidence) + ';font-size:9px;font-family:\'Space Grotesk\',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;margin-left:8px">' + root.confidence + '</span>';
+  const asOf = root.as_of ? ' · as_of ' + new Date(root.as_of).toLocaleString() : '';
+
+  return (
+    '<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">' +
+        '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-secondary)">Final market exposure' + confBadge + '</div>' +
+        '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-secondary)">' + rootLabel + asOf + '</div>' +
+      '</div>' +
+      lines.join('') +
+      '<div style="margin-top:10px;font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-secondary);text-align:right">adapter: ' + (root.adapter || '?') + ' · source: ' + (root.source || '?') + '</div>' +
+    '</div>'
+  );
+}
+
+function fmtUsd(v) {
+  if (v == null) return '-';
+  if (v >= 1e9) return '$' + (v / 1e9).toFixed(2) + 'B';
+  if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
+  if (v >= 1e3) return '$' + (v / 1e3).toFixed(0) + 'K';
+  return '$' + Math.round(v);
 }
 
 function renderLookthroughCards(whale) {
