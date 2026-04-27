@@ -172,7 +172,7 @@ tr:hover td { background: var(--bg-secondary); }
 .view-details-btn:hover { background: linear-gradient(135deg, #2a4a6f 0%, #1a3a5f 100%); border-color: #3d6a9f; }
 
 @media (max-width: 768px) {
-  .container, .exposure-section { padding: 16px; }
+  .container { padding: 16px; }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .table-wrap { font-size: 12px; }
   th, td { padding: 8px 10px; }
@@ -185,7 +185,7 @@ tr:hover td { background: var(--bg-secondary); }
 /* ═══════════════════════════════════════════════════════════════
    EXPOSURE SECTION (per-whale lookthrough)
    ═══════════════════════════════════════════════════════════════ */
-.exposure-section { max-width: 1400px; margin: 40px auto 32px; padding: 0 24px; }
+.exposure-section { margin-top: 40px; margin-bottom: 32px; }
 .exposure-section-header {
   display: flex; align-items: baseline; justify-content: space-between;
   margin-bottom: 20px; gap: 16px; flex-wrap: wrap;
