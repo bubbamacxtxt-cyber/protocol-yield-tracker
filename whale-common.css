@@ -39,6 +39,7 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
   border-radius: 8px; color: var(--text-secondary); text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 500;
   font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
 .home-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
@@ -49,7 +50,7 @@ h1 {
   background: var(--gradient-teal); -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; background-clip: text;
 }
-.subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
+.subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; font-family: 'Space Grotesk', sans-serif; }
 
 .cards {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -68,7 +69,7 @@ h1 {
 .card-value.red { color: #f85149; }
 .card-value.blue { background: var(--gradient-teal); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .card-value.purple { background: var(--gradient-teal); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
+.card-sub { color: var(--text-secondary); font-size: 12px; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
 
 .proto-summary { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .proto-chip { padding: 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
@@ -76,13 +77,15 @@ h1 {
 
 .filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
 .filter-group { display: flex; align-items: center; gap: 6px; }
-.filter-group label { color: var(--text-secondary); font-size: 13px; }
+.filter-group label { color: var(--text-secondary); font-size: 13px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
 .filter-group select, .filter-group input {
   background: var(--bg-secondary); border: 1px solid var(--border);
   color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
 }
 .download-btn {
   margin-left: auto; padding: 8px 16px; background: var(--gradient-btn);
+  font-family: 'Space Grotesk', sans-serif; font-weight: 500;
   border: 1px solid #2d4a6f; border-radius: 8px; color: white; cursor: pointer;
   font-size: 13px; font-weight: 600; transition: background 0.2s, border-color 0.2s;
 }
