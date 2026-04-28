@@ -473,9 +473,29 @@ async function main() {
         }
         p.chain = chainStr;
 
-        // Normalize position_type to strategy
+        // Normalize position_type to strategy, then refine.
         const typeToStrategy = { 'Lending': 'lend', 'supply': 'lend', 'borrow': 'borrow', 'Borrow': 'borrow' };
-        p.strategy = typeToStrategy[p.position_type] || typeToStrategy[p.position_type?.toLowerCase()] || 'lend';
+        p.strategy = String(typeToStrategy[p.position_type] || typeToStrategy[p.position_type?.toLowerCase()] || p.strategy || 'lend').toLowerCase();
+
+        // ── Refine: Loop, LP, RWA detection ─────────────────────────────
+        // (0) Force RWA to lowercase
+        if (p.strategy === 'rwa') p.strategy = 'rwa'; // already lowercase
+        // (1) A lending position with debt is a Loop.
+        if (p.strategy === 'lend' && (p.debt_usd || 0) > 0 && (p.borrow || []).length > 0) {
+            p.strategy = 'loop';
+        }
+        // (2) Curve / Pendle LP / generic AMM positions.
+        const lpSignal = (
+            String(p.protocol_id || '').includes('curve') ||
+            String(p.yield_source || '').includes('curve-') ||
+            (p.supply || []).some(t => /curve|gauge|lp\b/i.test(String(t.symbol) + ' ' + String(t.address) + ' ' + (t.real_symbol || ''))) ||
+            /pendle.*lp|lp.*pendle/i.test(String(p.position_index || ''))
+        );
+        if (lpSignal && !['rwa', 'stake'].includes(p.strategy)) {
+            p.strategy = 'lp';
+        }
+        // (4) Force all strategies to lowercase.
+        p.strategy = String(p.strategy || '').toLowerCase();
         
         // Enrich Euler positions with DeFiLlama APYs
         if (p.protocol_name === 'Euler' && eulerApys) {
@@ -1275,6 +1295,14 @@ async function main() {
             }
             promoteCanonicalYieldRows(p, stables, vaults);
             finalizeSourceMeta(p);
+        }
+    }
+
+    // Final pass: force all strategies lowercase, normalise any scanner / manual
+    // rows that slipped through with mixed-case (e.g. RWA vs rwa).
+    for (const w of Object.values(whales)) {
+        for (const p of w.positions) {
+            p.strategy = String(p.strategy || '').toLowerCase();
         }
     }
 
