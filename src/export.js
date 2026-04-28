@@ -656,9 +656,21 @@ async function main() {
     };
     for (const p of filteredPositions) {
         let supplySymbol = (p.supply?.[0]?.symbol || p.borrow?.[0]?.symbol || p.position_index || '').toLowerCase();
-        // For Euler scanner positions, use underlying address as key
+        // For Euler scanner positions, merge key includes sub-account so that
+        // distinct sub-accounts on the same underlying aren't collapsed into
+        // one row. Euler's position_index format is
+        //   '<sub-account address>|<vault address>'
+        // (see src/euler-scanner.js). Sub-accounts are independent economic
+        // containers on-chain, so merging them would overstate exposure
+        // concentration and lose collateral/debt separation.
+        let eulerSubAccount = null;
         if (p.protocol_id === 'euler2') {
-            const addr = (p.position_index || '').toLowerCase();
+            const pi = String(p.position_index || '').toLowerCase();
+            const parts = pi.split('|');
+            if (parts.length >= 2 && /^0x[0-9a-f]{40}$/.test(parts[0])) {
+                eulerSubAccount = parts[0];
+            }
+            const addr = (parts[1] || pi).toLowerCase();
             if (vaultToUnderlying[addr]) {
                 supplySymbol = vaultToUnderlying[addr];
             } else if (p.supply?.[0]?.symbol) {
@@ -680,7 +692,13 @@ async function main() {
             ? `${String(p.wallet || '').toLowerCase()}|${p.chain}|morpho|${String(p.position_index || '').toLowerCase()}`
             : null;
         
-        const key = aaveMergeKey || morphoMergeKey || `${String(p.wallet || '').toLowerCase()}|${p.chain}|${p.protocol_id}|${supplySymbol}`;
+        // Euler: merge supply + borrow fragments of the SAME sub-account into
+        // one row (so leverage is visible as asset+debt+net), but keep
+        // different sub-accounts separate.
+        const eulerMergeKey = (p.protocol_id === 'euler2' && eulerSubAccount)
+            ? `${String(p.wallet || '').toLowerCase()}|${p.chain}|euler2|${eulerSubAccount}`
+            : null;
+        const key = aaveMergeKey || morphoMergeKey || eulerMergeKey || `${String(p.wallet || '').toLowerCase()}|${p.chain}|${p.protocol_id}|${supplySymbol}`;
         
         if (posMap.has(key)) {
             const existing = posMap.get(key);
@@ -844,7 +862,59 @@ async function main() {
         }
 
         const walletSet = new Set(walletList.map(w => w.toLowerCase()));
-        const positions = filtered.filter(p => !p._drop && walletSet.has(p.wallet.toLowerCase()));
+        const dbPositions = filtered.filter(p => !p._drop && walletSet.has(p.wallet.toLowerCase()));
+
+        // Merge manual/protocol_api positions into the dedup pool BEFORE
+        // cross-source dedup runs, so DeBank vs protocol_api rows collapse
+        // on identifier overlap (fasanara-gdaf, sGHO, etc.).
+        // Post-dedup, the same manual rows that survive will not be re-pushed.
+        const manualForWhale = Array.isArray(manualPositions[name]) ? manualPositions[name] : [];
+        const normalizedManualForWhale = [];
+        for (const mp of manualForWhale) {
+            if (!mp.source_type) {
+                if (name === 'InfiniFi') {
+                    mp.manual = false;
+                    mp.source_type = 'protocol_api';
+                    mp.source_name = 'fetch-infinifi';
+                    mp.discovery_type = 'onchain';
+                } else if (name === 'Pareto') {
+                    mp.manual = false;
+                    mp.source_type = 'protocol_api';
+                    mp.source_name = 'fetch-pareto';
+                    mp.discovery_type = 'mixed';
+                } else if (name === 'Anzen') {
+                    mp.manual = true;
+                    mp.source_type = 'manual';
+                    mp.source_name = 'fetch-anzen';
+                    mp.discovery_type = 'offchain';
+                } else if (name === 'Re Protocol' && mp.wallet === 'off-chain') {
+                    mp.manual = true;
+                    mp.source_type = 'manual';
+                    mp.source_name = 'fetch-re';
+                    mp.discovery_type = 'offchain';
+                }
+            }
+            if (mp.apy_net == null && mp.apy_base != null) {
+                const bonusSupply = mp.apy_rewards || 0;
+                const baseYield = (mp.apy_base + bonusSupply) * (mp.asset_usd || 0);
+                mp.apy_net = mp.net_usd > 0 ? baseYield / mp.net_usd : mp.apy_base;
+            }
+            normalizeSourceMeta(mp);
+            if (mp.spark_exposure_type === 'indirect_strategy') {
+                mp.strategy = mp.strategy || 'spark-strategy-indirect';
+                mp.yield_source = 'spark';
+            }
+            mp._fromManual = true;
+            normalizedManualForWhale.push(mp);
+        }
+        // Only include manual rows that belong to this whale's wallets
+        // (same filter used for DB rows). Off-chain manual rows bypass the
+        // wallet set since their wallet is typically a pseudo-id.
+        const manualMatchingWallets = normalizedManualForWhale.filter(mp => {
+            const w = String(mp.wallet || '').toLowerCase();
+            return walletSet.has(w) || w === 'off-chain' || !/^0x[a-f0-9]{40}$/.test(w);
+        });
+        const positions = [...dbPositions, ...manualMatchingWallets];
 
         // Cross-source value-overlap dedup: when two rows on the same wallet+chain
         // have near-identical net_usd values (within 1%) AND overlapping identifiers
@@ -886,16 +956,29 @@ async function main() {
                     const a = rows[i], b = rows[j];
                     if (crossSourceDropped.has(a) || crossSourceDropped.has(b)) continue;
                     const va = a.net_usd || 0, vb = b.net_usd || 0;
-                    if (va < 50000 || vb < 50000) continue;
-                    if (Math.abs(va - vb) / Math.max(va, vb) >= 0.01) continue;
-                    // Must share at least one identifier: address OR symbol
+                    // Identifier strength determines how strict the value-similarity gate is.
                     const aAddrs = extractHexAddrs(a);
                     const bAddrs = extractHexAddrs(b);
                     const sharedAddr = [...aAddrs].some(x => bAddrs.has(x));
                     const aSyms = extractSymbols(a);
                     const bSyms = extractSymbols(b);
                     const sharedSym = [...aSyms].some(x => bSyms.has(x));
-                    if (!sharedAddr && !sharedSym) continue;
+                    const aProto = String(a.protocol_canonical || a.protocol_id || a.protocol_name || '').toLowerCase();
+                    const bProto = String(b.protocol_canonical || b.protocol_id || b.protocol_name || '').toLowerCase();
+                    const sharedProto = aProto && aProto === bProto;
+                    if (!sharedAddr && !sharedSym && !sharedProto) continue;
+                    // Strong identifier (address or canonical protocol id): tolerate any magnitude
+                    // including $0/$0 matches. Symbol-only matches still need the $50K floor and
+                    // 1% ratio to avoid unrelated fragments colliding (e.g. two USDC positions).
+                    const strongIdentifier = sharedAddr || sharedProto;
+                    if (!strongIdentifier) {
+                        if (va < 50000 || vb < 50000) continue;
+                        if (Math.abs(va - vb) / Math.max(va, vb) >= 0.01) continue;
+                    } else {
+                        // For strong identifiers, still require values to agree within 5% once above
+                        // the dust floor. Below-dust both-sided rows are allowed to collapse.
+                        if (va > 1000 && vb > 1000 && Math.abs(va - vb) / Math.max(va, vb) >= 0.05) continue;
+                    }
                     // Drop the lower-ranked row. Ties: keep the one with more populated tokens.
                     const ra = sourceRank(a), rb = sourceRank(b);
                     let drop;
@@ -1067,48 +1150,10 @@ async function main() {
         // Any new per-whale fixes must be added to the project-wide rules
         // (docs/TOKEN-RULES.md), not as case-by-case patches here.
 
-        // Merge manual positions if they exist for this whale
-        if (manualPositions[name]) {
-            for (const mp of manualPositions[name]) {
-                // Backfill source metadata for older manual-positions.json entries
-                if (!mp.source_type) {
-                    if (name === 'InfiniFi') {
-                        mp.manual = false;
-                        mp.source_type = 'protocol_api';
-                        mp.source_name = 'fetch-infinifi';
-                        mp.discovery_type = 'onchain';
-                    } else if (name === 'Pareto') {
-                        mp.manual = false;
-                        mp.source_type = 'protocol_api';
-                        mp.source_name = 'fetch-pareto';
-                        mp.discovery_type = 'mixed';
-                    } else if (name === 'Anzen') {
-                        mp.manual = true;
-                        mp.source_type = 'manual';
-                        mp.source_name = 'fetch-anzen';
-                        mp.discovery_type = 'offchain';
-                    } else if (name === 'Re Protocol' && mp.wallet === 'off-chain') {
-                        mp.manual = true;
-                        mp.source_type = 'manual';
-                        mp.source_name = 'fetch-re';
-                        mp.discovery_type = 'offchain';
-                    }
-                }
-                // Calculate apy_net for manual positions (they have apy_base but no token data)
-                if (mp.apy_net == null && mp.apy_base != null) {
-                    const bonusSupply = mp.apy_rewards || 0;
-                    const baseYield = (mp.apy_base + bonusSupply) * (mp.asset_usd || 0);
-                    const costYield = 0; // Manual positions typically have no borrow
-                    mp.apy_net = mp.net_usd > 0 ? baseYield / mp.net_usd : mp.apy_base;
-                }
-                normalizeSourceMeta(mp);
-                if (mp.spark_exposure_type === 'indirect_strategy') {
-                    mp.strategy = mp.strategy || 'spark-strategy-indirect';
-                    mp.yield_source = 'spark';
-                }
-                cleanedPositions.push(mp);
-            }
-        }
+        // NOTE: manual / protocol_api rows for this whale were already merged
+        // into `positions` BEFORE cross-source dedup above, so they're part
+        // of cleanedPositions already. No second push here — that was the
+        // cause of InfiniFi duplicate rows (DeBank + protocol_api both surviving).
 
         // If multi-vault, build vault breakdown
         let vaultData = null;
