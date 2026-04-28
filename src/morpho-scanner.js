@@ -189,7 +189,7 @@ async function scanWallet(wallet, label, allowedChains = null) {
           position_type: 'supply',
           strategy: 'lend',
           position_index: `${row.wallet.toLowerCase()}|${row.chain}|${key}|noborrow`,
-          health_rate: row.health_rate,
+          health_rate: null,           // supply-only: no liquidation risk
           net_usd: Number(s.value_usd || 0),
           asset_usd: Number(s.value_usd || 0),
           debt_usd: 0,
@@ -209,7 +209,7 @@ async function scanWallet(wallet, label, allowedChains = null) {
           position_type: 'supply',
           strategy: 'lend',
           position_index: `${row.wallet.toLowerCase()}|${row.chain}|${String(s.address || s.symbol).toLowerCase()}|noborrow`,
-          health_rate: row.health_rate,
+          health_rate: null,           // supply-only: no liquidation risk
           net_usd: Number(s.value_usd || 0),
           asset_usd: Number(s.value_usd || 0),
           debt_usd: 0,

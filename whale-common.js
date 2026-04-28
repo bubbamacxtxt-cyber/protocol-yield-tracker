@@ -357,26 +357,51 @@ function showDetail(p) {
     return info;
   }).join('<br>');
 
+  // Leverage display — useful for vault positions with supply + borrow
+  const supplyUsd = p.asset_usd || 0;
+  const debtUsd = p.debt_usd || 0;
+  const equity = supplyUsd - debtUsd;
+  const lev = (supplyUsd > 0 && debtUsd > 0 && equity > 0) ? (supplyUsd / equity).toFixed(2) + 'x' : '-';
+  const hf = p.health_rate ? fmtHF(p.health_rate) : '-';
+  const isLeveraged = supplyUsd > 0 && debtUsd > 0 && equity > 0;
+  const baseApy = p.apy_base || 0;
+  const bonusApy = p.bonus_supply || 0;
+  const costApy = p.apy_cost || 0;
+  const netApy = p.apy_net || 0;
+  // For leveraged positions: show spread & leverage breakdown above APYs
+  const leverageBreakdown = isLeveraged
+    ? '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;padding:10px 14px;background:rgba(79,172,254,0.1);border-radius:8px;margin-bottom:16px;font-size:12px">'
+      + '<div><div style="color:var(--text-secondary)">Supply $</div><div style="font-weight:600">' + fmtShort(supplyUsd) + '</div></div>'
+      + '<div><div style="color:var(--text-secondary)">Borrow $</div><div style="font-weight:600">' + fmtShort(debtUsd) + '</div></div>'
+      + '<div><div style="color:var(--text-secondary)">Leverage</div><div style="font-weight:600">' + lev + '</div></div>'
+      + '<div><div style="color:var(--text-secondary)">Sup APY</div><div style="font-weight:600">' + (baseApy + bonusApy).toFixed(2) + '%</div></div>'
+      + '<div><div style="color:var(--text-secondary)">Bor APY</div><div style="font-weight:600">' + costApy.toFixed(2) + '%</div></div>'
+      + '<div><div style="color:var(--text-secondary)">Spread</div><div style="font-weight:600">' + ((baseApy + bonusApy) - costApy).toFixed(2) + '%</div></div>'
+      + '<div style="grid-column:1/-1;color:var(--text-secondary);font-size:11px">' + (baseApy + bonusApy).toFixed(2) + '% spread ' + ((baseApy + bonusApy) - costApy >= 0 ? '+' : '') + ((baseApy + bonusApy) - costApy).toFixed(2) + '% × ' + lev + ' = <b>' + netApy.toFixed(2) + '% net</b></div>'
+      + '</div>'
+    : '';
+
   modal.innerHTML =
     '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:600px;margin:50px auto">' +
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
       '<h3 style="margin:0">' + getFieldValue(p, protocolCol) + ' \u2014 ' + (p.supply ? p.supply.map(t => t.symbol).join('/') : (p.symbol || '')) + '</h3>' +
-      '<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">' + (p.source_type || 'unknown') + ' · ' + (p.normalization_status || 'unknown') + (p.exposure_class ? ' · ' + p.exposure_class : '') + '</div>' +
+      '<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">' + (p.source_type || 'unknown') + ' \u00b7 ' + (p.normalization_status || 'unknown') + (p.exposure_class ? ' \u00b7 ' + p.exposure_class : '') + '</div>' +
       '<button onclick="document.getElementById(&quot;detail-modal&quot;).style.display=&quot;none&quot;" style="background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer;">\u00d7</button>' +
     '</div>' +
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Supply</div><div style="font-size:13px">' + (supplyDetail || '-') + '</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Borrow</div><div style="font-size:13px">' + (borrowDetail || '-') + '</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Supply tokens</div><div style="font-size:13px">' + (supplyDetail || '-') + '</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Borrow tokens</div><div style="font-size:13px">' + (borrowDetail || '-') + '</div></div>' +
     '</div>' +
-    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Base APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_base || 0).toFixed(2) + '%</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">+' + (p.bonus_supply || 0).toFixed(2) + '%</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Cost APY</div><div style="font-size:18px;font-weight:600">' + (p.apy_cost || 0).toFixed(2) + '%</div></div>' +
-      '<div><div style="color:var(--text-secondary);font-size:12px">Health</div><div style="font-size:18px;font-weight:600">' + (p.health_rate ? fmtHF(p.health_rate) : '-') + '</div></div>' +
+    leverageBreakdown +
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center;margin-bottom:16px">' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Base APY</div><div style="font-size:18px;font-weight:600">' + baseApy.toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Bonus Supply</div><div style="font-size:18px;font-weight:600;color:var(--accent-green)">+' + bonusApy.toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Cost APY</div><div style="font-size:18px;font-weight:600">' + costApy.toFixed(2) + '%</div></div>' +
+      '<div><div style="color:var(--text-secondary);font-size:12px">Health</div><div style="font-size:18px;font-weight:600">' + hf + '</div></div>' +
     '</div>' +
     '<div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
       '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
-      '<div style="font-size:28px;font-weight:700;color:' + ((p.apy_net || 0) > 0 ? 'var(--accent-green)' : '#f85149') + '">' + (p.apy_net || 0).toFixed(2) + '%</div>' +
+      '<div style="font-size:28px;font-weight:700;color:' + (netApy > 0 ? 'var(--accent-green)' : '#f85149') + '">' + netApy.toFixed(2) + '%</div>' +
     '</div>' +
     '</div>';
   modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
