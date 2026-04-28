@@ -1121,7 +1121,7 @@ async function main() {
                     name: vaultName,
                     wallets: vaultWallets,
                     total_wallets: vaultWallets.length,
-                    active_wallets: [...new Set(vPositions.map(p => p.wallet))].length,
+                    active_wallets: [...new Set(vPositions.map(p => String(p.wallet || '').toLowerCase()))].length,
                     positions: vPositions,
                     slug: vaultName.toLowerCase().replace(/[^a-z0-9]/g, '-')
                 };
@@ -1132,7 +1132,7 @@ async function main() {
             name,
             wallets: walletList,
             total_wallets: walletList.length,
-            active_wallets: [...new Set(cleanedPositions.map(p => p.wallet))].length,
+            active_wallets: [...new Set(cleanedPositions.map(p => String(p.wallet || '').toLowerCase()))].length,
             positions: cleanedPositions,
             is_multi_vault: !!vaults,
             vaults: vaultData
