@@ -252,6 +252,21 @@ function normalizeSourceMeta(position) {
     return p;
 }
 
+
+/**
+ * Normalise token symbols to canonical labels so USDe/USDE, wbtc/WBTC etc.
+ * collapse into a single donut slice.
+ */
+const TOKEN_ALIASES = {
+    'usde': 'USDe', 'usdtb': 'USDTB', 'xaut0': 'XAUt0', 'xaut': 'XAUt',
+    'wmnt': 'MNT', 'fbtc': 'FBTC', 'cbeth': 'cbETH', 'wbtc': 'WBTC',
+    'weth': 'WETH', 'wsteth': 'wstETH', 'weeth': 'weETH',
+};
+function normaliseTokenSymbol(raw) {
+    const key = String(raw || '').toLowerCase().trim();
+    return TOKEN_ALIASES[key] || raw;
+}
+
 function findYbsToken(stables, symbol, address) {
     const addr = String(address || '').toLowerCase();
     if (addr) {
@@ -1425,8 +1440,8 @@ async function main() {
                 }
                 for (const leaf of leaves) {
                     const proto = p.protocol_name;
-                    const tok = leaf.asset_symbol || '?';
-                    const market = leaf.venue || proto;
+                    const tok = normaliseTokenSymbol(leaf.asset_symbol || '?');
+                    const market = normaliseTokenSymbol(leaf.venue || proto);
                     secondary.by_protocol.set(proto, (secondary.by_protocol.get(proto) || 0) + leaf.usd);
                     secondary.by_token.set(tok,    (secondary.by_token.get(tok) || 0) + leaf.usd);
                     secondary.by_market.set(market,(secondary.by_market.get(market) || 0) + leaf.usd);

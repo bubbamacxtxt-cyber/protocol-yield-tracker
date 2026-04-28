@@ -362,6 +362,7 @@ function showDetail(p) {
   const debtUsd = p.debt_usd || 0;
   const equity = supplyUsd - debtUsd;
   const lev = (supplyUsd > 0 && debtUsd > 0 && equity > 0) ? (supplyUsd / equity).toFixed(2) + 'x' : '-';
+  const leverageNum = supplyUsd > 0 && equity > 0 ? supplyUsd / equity : 0;
   const hf = p.health_rate ? fmtHF(p.health_rate) : '-';
   const isLeveraged = supplyUsd > 0 && debtUsd > 0 && equity > 0;
   const baseApy = p.apy_base || 0;
@@ -377,7 +378,7 @@ function showDetail(p) {
       + '<div><div style="color:var(--text-secondary)">Sup APY</div><div style="font-weight:600">' + (baseApy + bonusApy).toFixed(2) + '%</div></div>'
       + '<div><div style="color:var(--text-secondary)">Bor APY</div><div style="font-weight:600">' + costApy.toFixed(2) + '%</div></div>'
       + '<div><div style="color:var(--text-secondary)">Spread</div><div style="font-weight:600">' + ((baseApy + bonusApy) - costApy).toFixed(2) + '%</div></div>'
-      + '<div style="grid-column:1/-1;color:var(--text-secondary);font-size:11px">' + (baseApy + bonusApy).toFixed(2) + '% spread ' + ((baseApy + bonusApy) - costApy >= 0 ? '+' : '') + ((baseApy + bonusApy) - costApy).toFixed(2) + '% × ' + lev + ' = <b>' + netApy.toFixed(2) + '% net</b></div>'
+      + '<div style="grid-column:1/-1;color:var(--text-secondary);font-size:11px">' + (baseApy + bonusApy).toFixed(2) + '% × ' + lev + ' − ' + costApy.toFixed(2) + '% × ' + (leverageNum - 1).toFixed(2) + ' = <b>' + netApy.toFixed(2) + '% net</b></div>'
       + '</div>'
     : '';
 
@@ -417,6 +418,26 @@ function fmtUsd(v) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// TOKEN LABEL NORMALISATION (de-dup USDe/USDE etc. on donuts)
+// ═══════════════════════════════════════════════════════════════
+const TOKEN_ALIAS_MAP = {
+  'usde': 'USDe',     // Aave vs DeFiLlama casing
+  'usdtb': 'USDTB',
+  'xaut0': 'XAUt0',
+  'wmnt': 'MNT',
+  'fbtc': 'FBTC',
+  'cbeth': 'cbETH',
+  'wbtc': 'WBTC',
+  'weth': 'WETH',
+  'wsteth': 'wstETH',
+  'weeth': 'weETH',
+};
+function normaliseTokenLabel(label) {
+  const key = String(label || '').toLowerCase().trim();
+  return TOKEN_ALIAS_MAP[key] || label;
+}
+
+// ═══════════════════════════════════════════════════════════════
 // EXPOSURE SECTION (per-whale, per-position lookthrough)
 // Driven by w.exposure_rollup + p.exposure_tree from src/exposure/.
 // ═══════════════════════════════════════════════════════════════
@@ -434,9 +455,31 @@ function computeExposureRollupFromPositions(positions) {
   const byProto = new Map();
   const byToken = new Map();
   const byMarket = new Map();
+  // ── Token name normalisation (de-dup USDe/USDE, XAUt/XAUt0, etc.) ──
+  const canonicalTokenName = (() => {
+    const map = {
+      'usde': 'USDe',
+      'usdtb': 'USDTB',
+      'xaut0': 'XAUt0',
+      'xaut': 'XAUt',
+      'wmnt': 'MNT',
+      'fbtc': 'FBTC',
+      'cbeth': 'cbETH',
+      'wbtc': 'WBTC',
+      'weth': 'WETH',
+      'wsteth': 'wstETH',
+      'weeth': 'weETH',
+    };
+    return label => {
+      const key = label.toLowerCase();
+      return map[key] || label;
+    };
+  })();
+
   const add = (map, label, usd) => {
     if (!label || !usd) return;
-    map.set(label, (map.get(label) || 0) + usd);
+    const key = normaliseTokenLabel(label);
+    map.set(key, (map.get(key) || 0) + usd);
   };
   for (const p of positions) {
     const tree = p.exposure_tree || [];
@@ -560,7 +603,21 @@ function renderExposurePositions(positions, filteredPositions) {
     .filter(Boolean)
     .join('');
 
-  return '<div class="exposure-positions-grid">' + cards + '</div>';
+  // Show a pool-address hint above the grid when there are Aave/Spark positions
+  const poolPositions = show.filter(p => p.protocol_id?.toLowerCase().includes('aave'));
+  const uniquePools = new Map();
+  for (const p of poolPositions) {
+    const root = (p.exposure_tree || []).find(r => r.depth === 0);
+    if (root?.venue_address) uniquePools.set(root.venue, root.venue_address);
+  }
+  const poolLinks = [...uniquePools].map(([name, addr]) =>
+    '<span style="font-size:12px;color:var(--text-secondary)" title="' + escapeHtml(addr) + '">'
+    + escapeHtml(name) + ' <a href="https://etherscan.io/address/' + addr + '" target="_blank" rel="noopener" style="color:var(--accent-blue);text-decoration:none">' + addr.slice(0, 6).toLowerCase() + '..' + addr.slice(-4) + '</a>'
+    + '</span>'
+  ).join('<br>');
+
+  return (poolLinks ? '<div class="exposure-pool-addr" style="margin-bottom:12px">' + poolLinks + '</div>' : '')
+    + '<div class="exposure-positions-grid">' + cards + '</div>';
 }
 
 // Strategy badge colour classes (reuse table badges from whale-common.css)
@@ -583,6 +640,12 @@ function renderPositionExposureCard(p, totalWhaleUsd) {
 
   const confClass = 'exposure-conf-' + (root.confidence || 'low');
   const pctOfWhale = totalWhaleUsd > 0 ? (p.net_usd / totalWhaleUsd * 100) : 0;
+
+  // Pool address for verification
+  const poolAddr = root.venue_address || '';
+  const poolAddrHtml = poolAddr && poolAddr.startsWith('0x')
+    ? ' <a href="https://etherscan.io/address/' + poolAddr + '" target="_blank" rel="noopener" style="color:var(--accent-blue);text-decoration:none;font-size:10px" title="Look up on Etherscan">' + poolAddr.slice(0, 6).toLowerCase() + '…' + poolAddr.slice(-4) + '</a>'
+    : '';
 
   // Pull pool metadata from root evidence (promoted by adapters in this
   // redesign so the UI doesn't have to guess).
@@ -637,6 +700,10 @@ function renderPositionExposureCard(p, totalWhaleUsd) {
     const barClass = (leg.kind === 'opaque_offchain' || leg.kind === 'unknown') ? 'opaque' : '';
     const kindClass = 'kind-' + leg.kind;
     const label = leg.asset_symbol || leg.venue || '?';
+    const addr = leg.asset_address || leg.venue_address || '';
+    const addrHtml = addr && addr.startsWith('0x')
+      ? ' <a href="https://etherscan.io/address/' + addr + '" target="_blank" rel="noopener" style="color:var(--accent-blue);text-decoration:none;font-size:11px" title="View on Etherscan">[chain↗]</a>'
+      : '';
     const poolUsd = Number(legEv.pool_reserve_total_supply_usd || 0);
     const availUsd = Number(legEv.pool_reserve_available_usd || legEv.pool_reserve_available || 0);
 
