@@ -737,6 +737,7 @@ function renderPositionExposureCard(p, totalWhaleUsd) {
   const source = root.source || '?';
   const asOf = root.as_of ? new Date(root.as_of).toLocaleString() : '';
   const stratClass = strategyBadgeClass(strategy);
+  const isolatedBadge = isolatedView ? '<span class="badge badge-illiquid" title="isolated Morpho Blue market — one collateral, one loan, no pooled risk across assets">isolated</span>' : '';
   const walletShort = walletAddr && walletAddr.startsWith('0x')
     ? (walletAddr.slice(0, 6) + '…' + walletAddr.slice(-4))
     : walletAddr;
@@ -750,6 +751,7 @@ function renderPositionExposureCard(p, totalWhaleUsd) {
         '<div class="exposure-position-proto-row">' +
           '<span class="exposure-position-proto">' + escapeHtml(p.protocol_name || '') + '</span>' +
           '<span class="badge ' + stratClass + '" title="strategy">' + escapeHtml(strategy) + '</span>' +
+          isolatedBadge +
           '<span class="exposure-conf-badge ' + confClass + '" title="confidence">' + (root.confidence || 'low') + '</span>' +
         '</div>' +
         '<div class="exposure-position-name">' +
