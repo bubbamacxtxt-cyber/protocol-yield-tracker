@@ -9,4 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Netlify deploy
-        run: curl -s -X POST "https://api.netlify.com/hooks/69f20ae03924370c961b6064" -d '{}'
+        env:
+          NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK_URL" ]; then
+            echo "::error::NETLIFY_BUILD_HOOK_URL secret not set — see CLAUDE.md / repo settings"
+            exit 1
+          fi
+          curl -sS -X POST "$NETLIFY_BUILD_HOOK_URL" -d '{}'

@@ -1,6 +1,12 @@
 node_modules/
+.claude/
 .env
+.env.*
+!.env.example
 *.db-shm
 *.db-wal
 yield-tracker.db*
 tmp/
+*.bak
+*.backup
+*.bak-*

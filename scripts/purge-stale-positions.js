@@ -2,14 +2,20 @@
 /**
  * Purge stale positions.
  *
- * Two categories of cleanup:
+ * Three categories of cleanup:
  *
- *   1. Scanner-protocol ghosts (>6h old, >$1K): protocols where we have a
+ *   1. Scanner-protocol ghosts (>10h old, >$1K): protocols where we have a
  *      dedicated scanner that runs every cycle. If the scanner ran but
  *      didn't emit a row for a (wallet, chain) pair, the old row is a
  *      ghost and should be deleted.
  *
- *   2. DeBank-only protocols (>48h old, any size): protocols we don't
+ *   2. Scanner-protocol dust ghosts (>24h old, any size): tiny stale rows
+ *      below Tier 1's $1K threshold. Scanners run every 4h, so a row that
+ *      hasn't been refreshed in 24h (6 missed cycles) is a ghost regardless
+ *      of size. Without this tier, sub-$1K dust accumulates indefinitely
+ *      (e.g. yoUSD's $82 RLUSD on Aave that survived 9 days).
+ *
+ *   3. DeBank-only protocols (>48h old, any size): protocols we don't
  *      have a native scanner for — rows were written by the old fetch.js
  *      pipeline and never refreshed after we removed fetch.js from the
  *      hourly cycle. These rows are 8+ days old and giving false-positive
@@ -95,7 +101,28 @@ function main() {
     }
   }
 
-  // --- Tier 2: DeBank-only stale orphans (>48h, any size) --------
+  // --- Tier 2: scanner dust ghosts (>24h, any size) -------------
+  // Catches rows below Tier 1's $1K threshold that scanners stopped
+  // refreshing. 24h = 6 missed 4h cycles, comfortably past any
+  // transient scanner failure.
+  {
+    const placeholders = SCANNER_PROTOCOLS.map(() => '?').join(',');
+    const rows = db.prepare(`
+      SELECT id, wallet, chain, protocol_id, net_usd, scanned_at
+      FROM positions
+      WHERE scanned_at < datetime('now', '-24 hours')
+        AND protocol_id IN (${placeholders})
+    `).all(...SCANNER_PROTOCOLS);
+
+    console.log(`[Tier 2] Stale scanner-protocol dust rows >24h: ${rows.length}`);
+    for (const r of rows) {
+      console.log(` #${r.id} ${r.wallet.slice(0,12)} ${r.chain} ${r.protocol_id} $${(r.net_usd||0).toFixed(2)} ${r.scanned_at}`);
+      delTok.run(r.id); delMkt.run(r.id); delPos.run(r.id);
+      totalRemoved++; totalUsd += r.net_usd || 0;
+    }
+  }
+
+  // --- Tier 3: DeBank-only stale orphans (>48h, any size) --------
   {
     const placeholders = DEBANK_ONLY_PROTOCOLS.map(() => '?').join(',');
     const rows = db.prepare(`
@@ -105,7 +132,7 @@ function main() {
         AND protocol_id IN (${placeholders})
     `).all(...DEBANK_ONLY_PROTOCOLS);
 
-    console.log(`[Tier 2] Stale DeBank-only rows >48h: ${rows.length}`);
+    console.log(`[Tier 3] Stale DeBank-only rows >48h: ${rows.length}`);
     for (const r of rows) {
       console.log(` #${r.id} ${r.wallet.slice(0,12)} ${r.chain} ${r.protocol_id} $${((r.net_usd||0)/1e6).toFixed(2)}M ${r.scanned_at}`);
       delTok.run(r.id); delMkt.run(r.id); delPos.run(r.id);
