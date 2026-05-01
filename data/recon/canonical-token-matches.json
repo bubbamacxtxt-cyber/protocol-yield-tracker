@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30T21:19:09.513Z",
+  "generated_at": "2026-05-01T04:19:20.317Z",
   "matches": [
     {
       "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
@@ -8,21 +8,46 @@
       "match": {
         "name": "LIUSD-1W",
         "protocol": "infinifi",
-        "apr": "5.95%",
-        "aprValue": 5.94988,
-        "apy_1d": 5.94988,
-        "apy_7d": 6.216145384615384,
-        "apy_30d": 6.02842,
+        "apr": "6.07%",
+        "aprValue": 6.07016,
+        "apy_1d": 6.07016,
+        "apy_7d": 6.225397692307693,
+        "apy_30d": 6.0276,
         "pool": "fef01bce-008a-43b0-85f9-5377a56411c4",
         "chain": "Ethereum",
         "tvl": "$5M",
-        "tvlNum": 5395639,
+        "tvlNum": 5395789,
         "source": "defillama",
         "addresses": [
           "0x12b004719fb632f1e7c010c6f5d6009fb4258442"
         ],
         "aliases": [
           "liUSD-1W"
+        ]
+      }
+    },
+    {
+      "wallet": "0x289c204b35859bfb924b9c0759a4fe80f610671c",
+      "address": "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb",
+      "kind": "ybs",
+      "match": {
+        "name": "siUSD",
+        "protocol": "infinifi",
+        "apr": "5.67%",
+        "aprValue": 5.67167,
+        "apy_1d": 5.67167,
+        "apy_7d": 6.059726666666666,
+        "apy_30d": 5.84743,
+        "pool": "8fa2e60e-365a-41fc-8d50-fadde5041f94",
+        "chain": "Ethereum",
+        "tvl": "$41M",
+        "tvlNum": 40584617,
+        "source": "defillama",
+        "addresses": [
+          "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb"
+        ],
+        "aliases": [
+          "siUSD"
         ]
       }
     },
@@ -36,12 +61,12 @@
         "apr": "3.65%",
         "aprValue": 3.65,
         "apy_1d": 3.65,
-        "apy_7d": 3.65,
-        "apy_30d": 3.72271,
+        "apy_7d": 3.6500000000000004,
+        "apy_30d": 3.72216,
         "pool": "d8c4eff5-c8a9-46fc-a888-057c4c668e72",
         "chain": "Ethereum",
-        "tvl": "$5487M",
-        "tvlNum": 5486949299,
+        "tvl": "$5544M",
+        "tvlNum": 5544379562,
         "source": "defillama",
         "addresses": [
           "0xa3931d71877c0e7a3148cb7eb4463524fec27fbd"
@@ -97,12 +122,12 @@
         "apr": "3.65%",
         "aprValue": 3.65,
         "apy_1d": 3.65,
-        "apy_7d": 3.65,
-        "apy_30d": 3.72271,
+        "apy_7d": 3.6500000000000004,
+        "apy_30d": 3.72216,
         "pool": "d8c4eff5-c8a9-46fc-a888-057c4c668e72",
         "chain": "Ethereum",
-        "tvl": "$5487M",
-        "tvlNum": 5486949299,
+        "tvl": "$5544M",
+        "tvlNum": 5544379562,
         "source": "defillama",
         "addresses": [
           "0xa3931d71877c0e7a3148cb7eb4463524fec27fbd"
@@ -122,18 +147,43 @@
         "apr": "4.94%",
         "aprValue": 4.93772,
         "apy_1d": 4.93772,
-        "apy_7d": 5.0371889473684215,
-        "apy_30d": 4.65412,
+        "apy_7d": 5.036883333333333,
+        "apy_30d": 4.65604,
         "pool": "f22d2f92-347c-4be4-89e8-5b8735853d96",
         "chain": "Solana",
         "tvl": "$2M",
-        "tvlNum": 2289470,
+        "tvlNum": 2290136,
         "source": "defillama",
         "addresses": [
           "0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b"
         ],
         "aliases": [
           "syrupUSDC"
+        ]
+      }
+    },
+    {
+      "wallet": "0xd6c757043e7d59088969b188923c62fa960afe9b",
+      "address": "0xad55aebc9b8c03fc43cd9f62260391c13c23e7c0",
+      "kind": "ybs",
+      "match": {
+        "name": "cUSDO",
+        "protocol": "usdo",
+        "apr": "3.29%",
+        "aprValue": 3.28614,
+        "apy_1d": 3.28614,
+        "apy_7d": 3.814276111111111,
+        "apy_30d": 3.90212,
+        "pool": "b2ebf3c0-a173-4d61-959b-23405b7d4edb",
+        "chain": "Ethereum",
+        "tvl": "$493K",
+        "tvlNum": 492899,
+        "source": "defillama",
+        "addresses": [
+          "0xad55aebc9b8c03fc43cd9f62260391c13c23e7c0"
+        ],
+        "aliases": [
+          "cUSDO"
         ]
       }
     },
@@ -145,14 +195,14 @@
         "name": "sUSDe",
         "protocol": "ethena-usde",
         "apr": "5.45%",
-        "aprValue": 5.45233,
-        "apy_1d": 5.45233,
-        "apy_7d": 5.332112631578948,
-        "apy_30d": 4.13909,
+        "aprValue": 5.45253,
+        "apy_1d": 5.45253,
+        "apy_7d": 5.312205555555555,
+        "apy_30d": 4.1496,
         "pool": "66985a81-9c51-46ca-9977-42b4fe7bc6df",
         "chain": "Ethereum",
         "tvl": "$2107M",
-        "tvlNum": 2106743751,
+        "tvlNum": 2106669535,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
@@ -169,15 +219,15 @@
       "match": {
         "name": "LIUSD-1W",
         "protocol": "infinifi",
-        "apr": "5.95%",
-        "aprValue": 5.94988,
-        "apy_1d": 5.94988,
-        "apy_7d": 6.216145384615384,
-        "apy_30d": 6.02842,
+        "apr": "6.07%",
+        "aprValue": 6.07016,
+        "apy_1d": 6.07016,
+        "apy_7d": 6.225397692307693,
+        "apy_30d": 6.0276,
         "pool": "fef01bce-008a-43b0-85f9-5377a56411c4",
         "chain": "Ethereum",
         "tvl": "$5M",
-        "tvlNum": 5395639,
+        "tvlNum": 5395789,
         "source": "defillama",
         "addresses": [
           "0x12b004719fb632f1e7c010c6f5d6009fb4258442"
@@ -194,15 +244,15 @@
       "match": {
         "name": "reUSD",
         "protocol": "re-protocol",
-        "apr": "8.66%",
-        "aprValue": 8.66394,
-        "apy_1d": 8.66394,
-        "apy_7d": 9.08028842105263,
-        "apy_30d": 8.17014,
+        "apr": "8.68%",
+        "aprValue": 8.67916,
+        "apy_1d": 8.67916,
+        "apy_7d": 9.091159444444445,
+        "apy_30d": 8.17227,
         "pool": "cca4dedb-569c-49ab-b053-d48d8d41dfd4",
         "chain": "Ethereum",
         "tvl": "$6M",
-        "tvlNum": 5724042,
+        "tvlNum": 5728390,
         "source": "defillama",
         "addresses": [
           "0x5086bf358635b81d8c47c66d1c8b9e567db70c72"
@@ -219,15 +269,15 @@
       "match": {
         "name": "LIUSD-4W",
         "protocol": "infinifi",
-        "apr": "7.18%",
-        "aprValue": 7.18166,
-        "apy_1d": 7.18166,
-        "apy_7d": 7.505036153846154,
-        "apy_30d": 7.27729,
+        "apr": "7.33%",
+        "aprValue": 7.32769,
+        "apy_1d": 7.32769,
+        "apy_7d": 7.516269230769231,
+        "apy_30d": 7.2763,
         "pool": "a83398f6-9f44-4046-8e30-12bae393e54d",
         "chain": "Ethereum",
-        "tvl": "$11M",
-        "tvlNum": 11048175,
+        "tvl": "$10M",
+        "tvlNum": 9607236,
         "source": "defillama",
         "addresses": [
           "0x66bcf6151d5558afb47c38b20663589843156078"
@@ -245,70 +295,20 @@
         "name": "sUSDe",
         "protocol": "ethena-usde",
         "apr": "5.45%",
-        "aprValue": 5.45233,
-        "apy_1d": 5.45233,
-        "apy_7d": 5.332112631578948,
-        "apy_30d": 4.13909,
+        "aprValue": 5.45253,
+        "apy_1d": 5.45253,
+        "apy_7d": 5.312205555555555,
+        "apy_30d": 4.1496,
         "pool": "66985a81-9c51-46ca-9977-42b4fe7bc6df",
         "chain": "Ethereum",
         "tvl": "$2107M",
-        "tvlNum": 2106743751,
+        "tvlNum": 2106669535,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
         ],
         "aliases": [
           "sUSDe"
-        ]
-      }
-    },
-    {
-      "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
-      "address": "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb",
-      "kind": "ybs",
-      "match": {
-        "name": "siUSD",
-        "protocol": "infinifi",
-        "apr": "5.81%",
-        "aprValue": 5.81219,
-        "apy_1d": 5.81219,
-        "apy_7d": 6.056952631578947,
-        "apy_30d": 5.84779,
-        "pool": "8fa2e60e-365a-41fc-8d50-fadde5041f94",
-        "chain": "Ethereum",
-        "tvl": "$40M",
-        "tvlNum": 40203890,
-        "source": "defillama",
-        "addresses": [
-          "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb"
-        ],
-        "aliases": [
-          "siUSD"
-        ]
-      }
-    },
-    {
-      "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
-      "address": "0xf68b95b7e851170c0e5123a3249dd1ca46215085",
-      "kind": "ybs",
-      "match": {
-        "name": "LIUSD-8W",
-        "protocol": "infinifi",
-        "apr": "8.11%",
-        "aprValue": 8.11488,
-        "apy_1d": 8.11488,
-        "apy_7d": 8.481966923076923,
-        "apy_30d": 8.22365,
-        "pool": "cda362c2-3822-4d0f-bc56-383bdc5ed3fc",
-        "chain": "Ethereum",
-        "tvl": "$7M",
-        "tvlNum": 7317285,
-        "source": "defillama",
-        "addresses": [
-          "0xf68b95b7e851170c0e5123a3249dd1ca46215085"
-        ],
-        "aliases": [
-          "liUSD-8W"
         ]
       }
     },
@@ -320,14 +320,14 @@
         "name": "sUSDe",
         "protocol": "ethena-usde",
         "apr": "5.45%",
-        "aprValue": 5.45233,
-        "apy_1d": 5.45233,
-        "apy_7d": 5.332112631578948,
-        "apy_30d": 4.13909,
+        "aprValue": 5.45253,
+        "apy_1d": 5.45253,
+        "apy_7d": 5.312205555555555,
+        "apy_30d": 4.1496,
         "pool": "66985a81-9c51-46ca-9977-42b4fe7bc6df",
         "chain": "Ethereum",
         "tvl": "$2107M",
-        "tvlNum": 2106743751,
+        "tvlNum": 2106669535,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
@@ -345,14 +345,14 @@
         "name": "sUSDe",
         "protocol": "ethena-usde",
         "apr": "5.45%",
-        "aprValue": 5.45233,
-        "apy_1d": 5.45233,
-        "apy_7d": 5.332112631578948,
-        "apy_30d": 4.13909,
+        "aprValue": 5.45253,
+        "apy_1d": 5.45253,
+        "apy_7d": 5.312205555555555,
+        "apy_30d": 4.1496,
         "pool": "66985a81-9c51-46ca-9977-42b4fe7bc6df",
         "chain": "Ethereum",
         "tvl": "$2107M",
-        "tvlNum": 2106743751,
+        "tvlNum": 2106669535,
         "source": "defillama",
         "addresses": [
           "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497"
