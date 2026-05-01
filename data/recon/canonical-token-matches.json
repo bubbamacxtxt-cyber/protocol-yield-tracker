@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-01T17:17:47.496Z",
+  "generated_at": "2026-05-01T21:10:15.479Z",
   "matches": [
     {
       "wallet": "0x0000000f2eb9f69274678c76222b35eec7588a65",
@@ -316,6 +316,31 @@
         ],
         "aliases": [
           "sUSDe"
+        ]
+      }
+    },
+    {
+      "wallet": "0x295f67fdb21255a3db82964445628a706fbe689e",
+      "address": "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb",
+      "kind": "ybs",
+      "match": {
+        "name": "siUSD",
+        "protocol": "infinifi",
+        "apr": "5.57%",
+        "aprValue": 5.57115,
+        "apy_1d": 5.57115,
+        "apy_7d": 5.935359333333333,
+        "apy_30d": 5.84395,
+        "pool": "8fa2e60e-365a-41fc-8d50-fadde5041f94",
+        "chain": "Ethereum",
+        "tvl": "$41M",
+        "tvlNum": 40790730,
+        "source": "defillama",
+        "addresses": [
+          "0xdbdc1ef57537e34680b898e1febd3d68c7389bcb"
+        ],
+        "aliases": [
+          "siUSD"
         ]
       }
     },
