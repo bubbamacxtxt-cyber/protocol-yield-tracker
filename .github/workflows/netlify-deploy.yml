@@ -8,5 +8,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Netlify deploy
-        run: curl -s -X POST "https://api.netlify.com/hooks/69f20ae03924370c961b6064" -d '{}'
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 31b1f319-b117-42e7-b491-6ca79da24197
+        run: npx netlify-cli deploy --prod --dir=. --message="${{ github.event.head_commit.message }}"
