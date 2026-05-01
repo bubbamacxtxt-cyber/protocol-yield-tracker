@@ -163,3 +163,9 @@ jobs:
         with:
           commit_message: "Hourly free scans ${{ github.run_number }}"
           file_pattern: data/recon/alchemy-token-discovery.json data/recon/canonical-token-matches.json data/source-audit.json data/exposure-audit.json data.json data/total-history.json yield-tracker.db
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 31b1f319-b117-42e7-b491-6ca79da24197
+        run: npx netlify-cli deploy --prod --dir=. --message="Hourly free scans ${{ github.run_number }}"
