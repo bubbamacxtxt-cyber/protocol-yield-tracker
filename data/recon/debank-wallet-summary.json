@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30T09:21:41.319Z",
+  "generated_at": "2026-05-01T09:05:41.656Z",
   "wallets": [
     {
       "whale": "Avant",
@@ -8,12 +8,12 @@
       "chains": [
         {
           "chain": "avax",
-          "total_usd": 0.000028933262040797158,
+          "total_usd": 0.000028841120167787254,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "avax_merkl",
-              "total_usd": 0.000028933262040797158,
+              "total_usd": 0.000028841120167787254,
               "chain": "avax"
             }
           ],
@@ -22,12 +22,12 @@
         },
         {
           "chain": "eth",
-          "total_usd": 0.0018681750846291142,
+          "total_usd": 0.0018846462942865615,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 0.0018681750846291142,
+              "total_usd": 0.0018846462942865615,
               "chain": "eth"
             }
           ],
@@ -43,18 +43,18 @@
       "chains": [
         {
           "chain": "avax",
-          "total_usd": 487.092135045334,
+          "total_usd": 485.49499608453795,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "avax_aave3",
-              "total_usd": 0.11603444167055428,
+              "total_usd": 0.11553843367344083,
               "chain": "avax"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "avax_merkl",
-              "total_usd": 486.97610060366344,
+              "total_usd": 485.3794576508645,
               "chain": "avax"
             }
           ],
@@ -63,18 +63,18 @@
         },
         {
           "chain": "eth",
-          "total_usd": 14.867231291751219,
+          "total_usd": 15.209944650819843,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 14.858143685614948,
+              "total_usd": 15.20081799043634,
               "chain": "eth"
             },
             {
               "protocol_name": "Silo",
               "protocol_id": "silo",
-              "total_usd": 0.009087606136271882,
+              "total_usd": 0.009126660383503621,
               "chain": "eth"
             }
           ],
@@ -110,12 +110,12 @@
         },
         {
           "chain": "eth",
-          "total_usd": 0.0053951621796339165,
+          "total_usd": 0.005424462321559475,
           "protocols": [
             {
               "protocol_name": "AUTO Finance",
               "protocol_id": "tokemak",
-              "total_usd": 0.0053951621796339165,
+              "total_usd": 0.005424462321559475,
               "chain": "eth"
             }
           ],
@@ -137,18 +137,18 @@
       "chains": [
         {
           "chain": "bera",
-          "total_usd": 2.7467045279323252,
+          "total_usd": 2.746757835192105,
           "protocols": [
             {
               "protocol_name": "Dolomite",
               "protocol_id": "bera_dolomite",
-              "total_usd": 2.7281519621625945,
+              "total_usd": 2.7282071250500763,
               "chain": "bera"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "bera_euler2",
-              "total_usd": 0.018552565769730918,
+              "total_usd": 0.018550710142028404,
               "chain": "bera"
             }
           ],
@@ -157,12 +157,12 @@
         },
         {
           "chain": "eth",
-          "total_usd": 1.1393788136440932e-18,
+          "total_usd": 1.1394067413482696e-18,
           "protocols": [
             {
               "protocol_name": "Reservoir",
               "protocol_id": "reservoirxyz",
-              "total_usd": 1.1393788136440932e-18,
+              "total_usd": 1.1394067413482696e-18,
               "chain": "eth"
             }
           ],
@@ -184,12 +184,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 1.2305511687530684,
+          "total_usd": 1.2765794185766564,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 1.2305511687530684,
+              "total_usd": 1.2765794185766564,
               "chain": "eth"
             }
           ],
@@ -205,12 +205,12 @@
       "chains": [
         {
           "chain": "bsc",
-          "total_usd": 3.836885521940836,
+          "total_usd": 3.902148913138314,
           "protocols": [
             {
               "protocol_name": "Solv",
               "protocol_id": "bsc_solv",
-              "total_usd": 3.836885521940836,
+              "total_usd": 3.902148913138314,
               "chain": "bsc"
             }
           ],
@@ -219,18 +219,18 @@
         },
         {
           "chain": "eth",
-          "total_usd": 88.43737575610315,
+          "total_usd": 91.74533866606426,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 88.43737575610315,
+              "total_usd": 91.74533866606426,
               "chain": "eth"
             },
             {
               "protocol_name": "LIDO",
               "protocol_id": "lido",
-              "total_usd": 2.2571e-15,
+              "total_usd": 2.28443e-15,
               "chain": "eth"
             }
           ],
@@ -246,12 +246,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 9.808152264089827,
+          "total_usd": 10.175022081601583,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 9.808152264089827,
+              "total_usd": 10.175022081601583,
               "chain": "eth"
             }
           ],
@@ -260,12 +260,12 @@
         },
         {
           "chain": "mnt",
-          "total_usd": 8482908.465119347,
+          "total_usd": 8475077.46317494,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "mnt_aave3",
-              "total_usd": 8482908.465119347,
+              "total_usd": 8475077.46317494,
               "chain": "mnt"
             }
           ],
@@ -281,12 +281,12 @@
       "chains": [
         {
           "chain": "arb",
-          "total_usd": 281.98381376243685,
+          "total_usd": 279.9712409441483,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "arb_merkl",
-              "total_usd": 281.98381376243685,
+              "total_usd": 279.9712409441483,
               "chain": "arb"
             }
           ],
@@ -295,12 +295,12 @@
         },
         {
           "chain": "bera",
-          "total_usd": 16.584876560893598,
+          "total_usd": 16.563302737724957,
           "protocols": [
             {
               "protocol_name": "Dolomite",
               "protocol_id": "bera_dolomite",
-              "total_usd": 16.584876560893598,
+              "total_usd": 16.563302737724957,
               "chain": "bera"
             }
           ],
@@ -309,36 +309,36 @@
         },
         {
           "chain": "eth",
-          "total_usd": 4138283.734909254,
+          "total_usd": 4145312.7491816715,
           "protocols": [
             {
               "protocol_name": "Ethereal",
               "protocol_id": "ethereal",
-              "total_usd": 0.06809962675913492,
+              "total_usd": 0.06807918869588188,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 43.23449844850448,
+              "total_usd": 44.85166671108212,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 38.319978414,
+              "total_usd": 38.308488165600004,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 4138201.0934193637,
+              "total_usd": 4145228.5023559947,
               "chain": "eth"
             },
             {
               "protocol_name": "Silo",
               "protocol_id": "silo",
-              "total_usd": 1.018913401463676,
+              "total_usd": 1.0185916115961875,
               "chain": "eth"
             }
           ],
@@ -347,12 +347,12 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 7.5116619218349205,
+          "total_usd": 7.651681935728773,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
-              "total_usd": 7.5116619218349205,
+              "total_usd": 7.651681935728773,
               "chain": "plasma"
             }
           ],
@@ -361,12 +361,12 @@
         },
         {
           "chain": "sei",
-          "total_usd": 10.780559453978134,
+          "total_usd": 10.781891906417487,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "sei_morphoblue",
-              "total_usd": 10.780559453978134,
+              "total_usd": 10.781891906417487,
               "chain": "sei"
             }
           ],
@@ -382,24 +382,24 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 69.82324186867694,
+          "total_usd": 71.65887047730374,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 49.817123330934024,
+              "total_usd": 51.65475283491947,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 0.00011673720276533488,
+              "total_usd": 0.00011684222423923413,
               "chain": "eth"
             },
             {
               "protocol_name": "Mantle Bridge",
               "protocol_id": "mntbridge",
-              "total_usd": 20.00600180054016,
+              "total_usd": 20.004000800160032,
               "chain": "eth"
             }
           ],
@@ -407,13 +407,27 @@
           "scan_threshold_usd": 50000
         },
         {
+          "chain": "megaeth",
+          "total_usd": 36033578.115538135,
+          "protocols": [
+            {
+              "protocol_name": "Aave V3",
+              "protocol_id": "megaeth_aave3",
+              "total_usd": 36033578.115538135,
+              "chain": "megaeth"
+            }
+          ],
+          "active_for_position_scan": true,
+          "scan_threshold_usd": 50000
+        },
+        {
           "chain": "mnt",
-          "total_usd": 1.9369923840405505,
+          "total_usd": 1.9318509033297957,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "mnt_aave3",
-              "total_usd": 1.9369923840405505,
+              "total_usd": 1.9318509033297957,
               "chain": "mnt"
             }
           ],
@@ -429,18 +443,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 31.62273745373107,
+          "total_usd": 32.757290509491604,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 0.00013413788983636659,
+              "total_usd": 0.00013577697515300475,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 31.622603315841232,
+              "total_usd": 32.75715473251645,
               "chain": "eth"
             }
           ],
@@ -462,12 +476,12 @@
       "chains": [
         {
           "chain": "sonic",
-          "total_usd": 568.1627495046098,
+          "total_usd": 571.3250653645613,
           "protocols": [
             {
               "protocol_name": "Sonic Airdrop",
               "protocol_id": "sonic_sonicairdrop",
-              "total_usd": 568.1627495046098,
+              "total_usd": 571.3250653645613,
               "chain": "sonic"
             }
           ],
@@ -483,12 +497,12 @@
       "chains": [
         {
           "chain": "avax",
-          "total_usd": 5.501555091672012e-14,
+          "total_usd": 5.4832570885311024e-14,
           "protocols": [
             {
               "protocol_name": "Stable Jack",
               "protocol_id": "avax_stablejack",
-              "total_usd": 5.501555091672012e-14,
+              "total_usd": 5.4832570885311024e-14,
               "chain": "avax"
             }
           ],
@@ -510,18 +524,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 8287307.883052417,
+          "total_usd": 12264829.917327836,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 8287307.767453156,
+              "total_usd": 12264829.797581121,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 0.11559926056927712,
+              "total_usd": 0.11974671495611376,
               "chain": "eth"
             }
           ],
@@ -530,12 +544,12 @@
         },
         {
           "chain": "hyper",
-          "total_usd": 5.668392673024134e-11,
+          "total_usd": 5.667142938615255e-11,
           "protocols": [
             {
               "protocol_name": "Upshift",
               "protocol_id": "hyper_upshift",
-              "total_usd": 5.668392673024134e-11,
+              "total_usd": 5.667142938615255e-11,
               "chain": "hyper"
             }
           ],
@@ -544,12 +558,12 @@
         },
         {
           "chain": "ink",
-          "total_usd": 6250.6546201224555,
+          "total_usd": 6227.223349197127,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "ink_aave3",
-              "total_usd": 6250.6546201224555,
+              "total_usd": 6227.223349197127,
               "chain": "ink"
             }
           ],
@@ -557,13 +571,33 @@
           "scan_threshold_usd": 50000
         },
         {
+          "chain": "megaeth",
+          "total_usd": 4904091.163523093,
+          "protocols": [
+            {
+              "protocol_name": "Aave V3",
+              "protocol_id": "megaeth_aave3",
+              "total_usd": 4904091.163523093,
+              "chain": "megaeth"
+            }
+          ],
+          "active_for_position_scan": true,
+          "scan_threshold_usd": 50000
+        },
+        {
           "chain": "plasma",
-          "total_usd": 12679394.18733643,
+          "total_usd": 17643537.96786864,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "plasma_aave3",
-              "total_usd": 12679394.18733643,
+              "total_usd": 17643537.96786864,
+              "chain": "plasma"
+            },
+            {
+              "protocol_name": "Merkl",
+              "protocol_id": "plasma_merkl",
+              "total_usd": 0,
               "chain": "plasma"
             }
           ],
@@ -579,12 +613,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 0.022354732756884203,
+          "total_usd": 0.022354930048490776,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 0.022354732756884203,
+              "total_usd": 0.022354930048490776,
               "chain": "eth"
             }
           ],
@@ -606,42 +640,42 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 3123173.3708766485,
+          "total_usd": 3123555.191614712,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 355.0630494592659,
+              "total_usd": 355.17455372370756,
               "chain": "eth"
             },
             {
               "protocol_name": "Convex",
               "protocol_id": "convex",
-              "total_usd": 5.373399615163939,
+              "total_usd": 5.374166226111489,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 86.68435495280238,
+              "total_usd": 89.78309230880306,
               "chain": "eth"
             },
             {
               "protocol_name": "Fluid",
               "protocol_id": "fluid",
-              "total_usd": 2.1145506768152447,
+              "total_usd": 2.1161371050882183,
               "chain": "eth"
             },
             {
               "protocol_name": "infiniFi",
               "protocol_id": "infinifixyz",
-              "total_usd": 8.283637545290042e-7,
+              "total_usd": 8.282149679668362e-7,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 3122724.135521116,
+              "total_usd": 3123102.7436645203,
               "chain": "eth"
             }
           ],
@@ -650,24 +684,24 @@
         },
         {
           "chain": "arb",
-          "total_usd": 0.731628388604633,
+          "total_usd": 0.731680241322298,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "arb_merkl",
-              "total_usd": 9.003581590424575e-7,
+              "total_usd": 9.054551246128074e-7,
               "chain": "arb"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "arb_morphoblue",
-              "total_usd": 0.0741892567770331,
+              "total_usd": 0.07418883776755351,
               "chain": "arb"
             },
             {
               "protocol_name": "Revert",
               "protocol_id": "arb_revert",
-              "total_usd": 0.6574382314694408,
+              "total_usd": 0.6574904980996199,
               "chain": "arb"
             }
           ],
@@ -676,54 +710,54 @@
         },
         {
           "chain": "base",
-          "total_usd": 143.275547488692,
+          "total_usd": 142.69898954655864,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "base_aave3",
-              "total_usd": 39.900685119855225,
+              "total_usd": 39.90000574445659,
               "chain": "base"
             },
             {
               "protocol_name": "Arcadia Finance",
               "protocol_id": "base_arcadia",
-              "total_usd": 0.3530490274873402,
+              "total_usd": 0.3530619405598953,
               "chain": "base"
             },
             {
               "protocol_name": "Avantis",
               "protocol_id": "base_avantisfi",
-              "total_usd": 0.009736921076322895,
+              "total_usd": 0.009738947789557912,
               "chain": "base"
             },
             {
               "protocol_name": "Harvest",
               "protocol_id": "base_harvest",
-              "total_usd": 0.0000013115454636390918,
+              "total_usd": 0.0000013114142828565714,
               "chain": "base"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "base_merkl",
-              "total_usd": 1.9839432725905475,
+              "total_usd": 1.9943184433595496,
               "chain": "base"
             },
             {
               "protocol_name": "Moonwell",
               "protocol_id": "base_moonwell",
-              "total_usd": 97.84138281142971,
+              "total_usd": 97.2551008065083,
               "chain": "base"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "base_morphoblue",
-              "total_usd": 1.2492767830349105,
+              "total_usd": 1.249153830766153,
               "chain": "base"
             },
             {
               "protocol_name": "YO",
               "protocol_id": "base_yoxyz",
-              "total_usd": 1.9374722416725016,
+              "total_usd": 1.9376085217043408,
               "chain": "base"
             }
           ],
@@ -732,18 +766,18 @@
         },
         {
           "chain": "hyper",
-          "total_usd": 179.38180579951637,
+          "total_usd": 179.2769228234425,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "hyper_merkl",
-              "total_usd": 179.00936443700962,
+              "total_usd": 178.90461997816655,
               "chain": "hyper"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "hyper_morphoblue",
-              "total_usd": 0.3724413625067389,
+              "total_usd": 0.37230284527596014,
               "chain": "hyper"
             }
           ],
@@ -752,12 +786,12 @@
         },
         {
           "chain": "op",
-          "total_usd": 253.25022240620243,
+          "total_usd": 254.08949406289238,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "op_merkl",
-              "total_usd": 253.25022240620243,
+              "total_usd": 254.08949406289238,
               "chain": "op"
             }
           ],
@@ -766,24 +800,24 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 4.246470403445902,
+          "total_usd": 4.24749152669313,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "plasma_euler2",
-              "total_usd": 0.15263633814,
+              "total_usd": 0.15264550026,
               "chain": "plasma"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
-              "total_usd": 0.01266513558743742,
+              "total_usd": 0.012909654155801309,
               "chain": "plasma"
             },
             {
               "protocol_name": "Plasma",
               "protocol_id": "plasma_plasmato",
-              "total_usd": 4.081168929718465,
+              "total_usd": 4.081936372277329,
               "chain": "plasma"
             }
           ],
@@ -792,24 +826,24 @@
         },
         {
           "chain": "uni",
-          "total_usd": 5.583102287755251,
+          "total_usd": 5.6628554274457965,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "uni_euler2",
-              "total_usd": 2.1275286576435195,
+              "total_usd": 2.2068769880584793,
               "chain": "uni"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "uni_merkl",
-              "total_usd": 0.026569970991297386,
+              "total_usd": 0.026567313462692536,
               "chain": "uni"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "uni_morphoblue",
-              "total_usd": 3.4290036591204345,
+              "total_usd": 3.429411125924625,
               "chain": "uni"
             }
           ],
@@ -825,48 +859,48 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 7330104.240996048,
+          "total_usd": 7900856.167781148,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 1528830.4714010837,
+              "total_usd": 1529009.5414274859,
               "chain": "eth"
             },
             {
               "protocol_name": "Ethereal",
               "protocol_id": "ethereal",
-              "total_usd": 0.39295612076279895,
+              "total_usd": 0.39283818675296617,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 2837806.8219071073,
+              "total_usd": 4150941.375494445,
               "chain": "eth"
             },
             {
               "protocol_name": "Fluid",
               "protocol_id": "fluid",
-              "total_usd": 4.34131543131,
+              "total_usd": 4.342005863190001,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 2963434.611430008,
+              "total_usd": 2220872.876945585,
               "chain": "eth"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "pendle2",
-              "total_usd": 27.601985870054428,
+              "total_usd": 27.63906915613252,
               "chain": "eth"
             },
             {
               "protocol_name": "Terminal",
               "protocol_id": "terminal",
-              "total_usd": 4.268587007219345e-7,
+              "total_usd": 4.26730788066921e-7,
               "chain": "eth"
             }
           ],
@@ -875,12 +909,12 @@
         },
         {
           "chain": "arb",
-          "total_usd": 454470.55616438715,
+          "total_usd": 454208.7411924321,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "arb_morphoblue",
-              "total_usd": 454470.55616438715,
+              "total_usd": 454208.7411924321,
               "chain": "arb"
             }
           ],
@@ -889,12 +923,12 @@
         },
         {
           "chain": "base",
-          "total_usd": 706734.7986111054,
+          "total_usd": 709791.6411422202,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "base_aave3",
-              "total_usd": 706734.7986111054,
+              "total_usd": 709791.6411422202,
               "chain": "base"
             }
           ],
@@ -903,32 +937,38 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 0.0000019028865934187561,
+          "total_usd": 1468284.2030543513,
           "protocols": [
+            {
+              "protocol_name": "Aave V3",
+              "protocol_id": "plasma_aave3",
+              "total_usd": 1468284.203052448,
+              "chain": "plasma"
+            },
             {
               "protocol_name": "Gearbox",
               "protocol_id": "plasma_gearbox",
-              "total_usd": 9.9957e-7,
+              "total_usd": 9.9963e-7,
               "chain": "plasma"
             },
             {
               "protocol_name": "Yuzu Money",
               "protocol_id": "plasma_yuzumoney",
-              "total_usd": 9.033165934187563e-7,
+              "total_usd": 9.03546690284135e-7,
               "chain": "plasma"
             }
           ],
-          "active_for_position_scan": false,
+          "active_for_position_scan": true,
           "scan_threshold_usd": 50000
         },
         {
           "chain": "uni",
-          "total_usd": 0.000017005101530459137,
+          "total_usd": 0.000017003400680136025,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "uni_merkl",
-              "total_usd": 0.000017005101530459137,
+              "total_usd": 0.000017003400680136025,
               "chain": "uni"
             }
           ],
@@ -944,18 +984,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 5762.363328814496,
+          "total_usd": 5760.656873391167,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 5756.1832062359135,
+              "total_usd": 5754.478008435345,
               "chain": "eth"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "pendle2",
-              "total_usd": 6.180122578581883,
+              "total_usd": 6.178864955821805,
               "chain": "eth"
             }
           ],
@@ -964,12 +1004,12 @@
         },
         {
           "chain": "mnt",
-          "total_usd": 483446.23335909285,
+          "total_usd": 483008.2474142527,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "mnt_aave3",
-              "total_usd": 483446.23335909285,
+              "total_usd": 483008.2474142527,
               "chain": "mnt"
             }
           ],
@@ -978,18 +1018,18 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 1.351783276691272,
+          "total_usd": 1.3520300359736572,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "plasma_aave3",
-              "total_usd": 0.41255752395,
+              "total_usd": 0.4126272714,
               "chain": "plasma"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "plasma_pendle2",
-              "total_usd": 0.9392257527412721,
+              "total_usd": 0.9394027645736572,
               "chain": "plasma"
             }
           ],
@@ -1005,24 +1045,24 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 1960777.3241681915,
+          "total_usd": 10785919.223840011,
           "protocols": [
             {
               "protocol_name": "Ethena",
               "protocol_id": "ethena",
-              "total_usd": 6.722973707710681e-8,
+              "total_usd": 8823336.671307137,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 1958731.5759780463,
+              "total_usd": 1960537.1704492103,
               "chain": "eth"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "pendle2",
-              "total_usd": 2045.7481900780253,
+              "total_usd": 2045.3820836637817,
               "chain": "eth"
             }
           ],
@@ -1031,32 +1071,32 @@
         },
         {
           "chain": "megaeth",
-          "total_usd": 0.9998800000021643,
+          "total_usd": 1709135.0493135322,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "megaeth_aave3",
-              "total_usd": 0.9998800000021643,
+              "total_usd": 1709135.0493135322,
               "chain": "megaeth"
             }
           ],
-          "active_for_position_scan": false,
+          "active_for_position_scan": true,
           "scan_threshold_usd": 50000
         },
         {
           "chain": "mnt",
-          "total_usd": 2718814.298126988,
+          "total_usd": 3128166.94226295,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "mnt_aave3",
-              "total_usd": 2717949.8423866667,
+              "total_usd": 3126457.199834183,
               "chain": "mnt"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "mnt_merkl",
-              "total_usd": 864.4557403211978,
+              "total_usd": 1709.7424287668678,
               "chain": "mnt"
             }
           ],
@@ -1065,14 +1105,8 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 1315165.9745385628,
+          "total_usd": 0,
           "protocols": [
-            {
-              "protocol_name": "Aave V3",
-              "protocol_id": "plasma_aave3",
-              "total_usd": 1315165.9745385628,
-              "chain": "plasma"
-            },
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
@@ -1080,7 +1114,7 @@
               "chain": "plasma"
             }
           ],
-          "active_for_position_scan": true,
+          "active_for_position_scan": false,
           "scan_threshold_usd": 50000
         }
       ]
@@ -1092,18 +1126,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 1403442.1232491357,
+          "total_usd": 4184644.79312897,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 1403439.019265933,
+              "total_usd": 4184641.6897774115,
               "chain": "eth"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "pendle2",
-              "total_usd": 3.103983202748157,
+              "total_usd": 3.1033515583312314,
               "chain": "eth"
             }
           ],
@@ -1112,18 +1146,18 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 880768.8284573696,
+          "total_usd": 885426.9826842439,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "plasma_aave3",
-              "total_usd": 880757.0092210211,
+              "total_usd": 885414.9431331828,
               "chain": "plasma"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
-              "total_usd": 11.819236348502915,
+              "total_usd": 12.039551061139482,
               "chain": "plasma"
             }
           ],
@@ -1139,18 +1173,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 6275707.949602069,
+          "total_usd": 3963390.6136628673,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 6275276.739508674,
+              "total_usd": 3962959.4466750063,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 431.2100933955957,
+              "total_usd": 431.1669878612516,
               "chain": "eth"
             }
           ],
@@ -1166,24 +1200,24 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 6031449.842517654,
+          "total_usd": 6023363.313613465,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 943626.5532533271,
+              "total_usd": 936048.9084548679,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 0.001954134614333495,
+              "total_usd": 0.0019539571185242053,
               "chain": "eth"
             },
             {
               "protocol_name": "Upshift",
               "protocol_id": "upshift",
-              "total_usd": 5087823.287310192,
+              "total_usd": 5087314.40320464,
               "chain": "eth"
             }
           ],
@@ -1199,12 +1233,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 4.167459710912966e-12,
+          "total_usd": 4.169959195045099e-12,
           "protocols": [
             {
               "protocol_name": "OpenEden",
               "protocol_id": "openeden",
-              "total_usd": 4.167459710912966e-12,
+              "total_usd": 4.169959195045099e-12,
               "chain": "eth"
             }
           ],
@@ -1220,18 +1254,18 @@
       "chains": [
         {
           "chain": "plasma",
-          "total_usd": 409456.3701680153,
+          "total_usd": 409546.35127919994,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "plasma_aave3",
-              "total_usd": 408373.8203994263,
+              "total_usd": 408443.62240308244,
               "chain": "plasma"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
-              "total_usd": 1082.5497685890066,
+              "total_usd": 1102.7288761175296,
               "chain": "plasma"
             }
           ],
@@ -1247,16 +1281,16 @@
       "chains": [
         {
           "chain": "plasma",
-          "total_usd": 2.8212863249999813,
+          "total_usd": 150283.59553221072,
           "protocols": [
             {
               "protocol_name": "Yuzu Money",
               "protocol_id": "plasma_yuzumoney",
-              "total_usd": 2.8212863249999813,
+              "total_usd": 150283.59553221072,
               "chain": "plasma"
             }
           ],
-          "active_for_position_scan": false,
+          "active_for_position_scan": true,
           "scan_threshold_usd": 50000
         }
       ]
@@ -1268,18 +1302,18 @@
       "chains": [
         {
           "chain": "monad",
-          "total_usd": 1019.1587678594714,
+          "total_usd": 1019.2302221553036,
           "protocols": [
             {
               "protocol_name": "Accountable",
               "protocol_id": "monad_accountable",
-              "total_usd": 1006.0602392161107,
+              "total_usd": 1006.1289241937386,
               "chain": "monad"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "monad_morphoblue",
-              "total_usd": 13.098528643360638,
+              "total_usd": 13.101297961565006,
               "chain": "monad"
             }
           ],
@@ -1288,24 +1322,24 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 1050583.1640388079,
+          "total_usd": 1050669.7336635492,
           "protocols": [
             {
               "protocol_name": "Curve",
               "protocol_id": "plasma_curve",
-              "total_usd": 799583.7237988823,
+              "total_usd": 799640.8589866612,
               "chain": "plasma"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "plasma_pendle2",
-              "total_usd": 250999.4402398362,
+              "total_usd": 251028.87467679853,
               "chain": "plasma"
             },
             {
               "protocol_name": "Yuzu Money",
               "protocol_id": "plasma_yuzumoney",
-              "total_usd": 8.944921608280886e-8,
+              "total_usd": 8.945458534455518e-8,
               "chain": "plasma"
             }
           ],
@@ -1321,12 +1355,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 45562.682278792316,
+          "total_usd": 45558.439620128534,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 45562.682278792316,
+              "total_usd": 45558.439620128534,
               "chain": "eth"
             }
           ],
@@ -1348,18 +1382,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 62553172.90632739,
+          "total_usd": 62556702.05211242,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 5984631.322738691,
+              "total_usd": 5990015.337314168,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 56568541.5835887,
+              "total_usd": 56566686.71479826,
               "chain": "eth"
             }
           ],
@@ -1368,12 +1402,12 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 0.00002814779956070775,
+          "total_usd": 0.000028641079728255748,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
-              "total_usd": 0.00002814779956070775,
+              "total_usd": 0.000028641079728255748,
               "chain": "plasma"
             }
           ],
@@ -1389,18 +1423,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 30782383.144450784,
+          "total_usd": 30783913.489236567,
           "protocols": [
             {
               "protocol_name": "infiniFi",
               "protocol_id": "infinifixyz",
-              "total_usd": 9.59171388015084e-7,
+              "total_usd": 9.58988276610671e-7,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 30782383.144449826,
+              "total_usd": 30783913.48923561,
               "chain": "eth"
             }
           ],
@@ -1409,12 +1443,12 @@
         },
         {
           "chain": "katana",
-          "total_usd": 5003396.55993398,
+          "total_usd": 5003059.9904320855,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "katana_morphoblue",
-              "total_usd": 5003396.55993398,
+              "total_usd": 5003059.9904320855,
               "chain": "katana"
             }
           ],
@@ -1423,12 +1457,12 @@
         },
         {
           "chain": "mnt",
-          "total_usd": 3.4636692199051957,
+          "total_usd": 3.5159026013023684,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "mnt_merkl",
-              "total_usd": 3.4636692199051957,
+              "total_usd": 3.5159026013023684,
               "chain": "mnt"
             }
           ],
@@ -1437,12 +1471,12 @@
         },
         {
           "chain": "monad",
-          "total_usd": 6002002.800594101,
+          "total_usd": 6007194.605020775,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "monad_morphoblue",
-              "total_usd": 6002002.800594101,
+              "total_usd": 6007194.605020775,
               "chain": "monad"
             }
           ],
@@ -1458,24 +1492,24 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 6844518.186034806,
+          "total_usd": 6847991.713362895,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 2636744.59473534,
+              "total_usd": 2638870.000913559,
               "chain": "eth"
             },
             {
               "protocol_name": "infiniFi",
               "protocol_id": "infinifixyz",
-              "total_usd": 1441700.4760975386,
+              "total_usd": 1441304.2050088611,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 2766073.1152019277,
+              "total_usd": 2767817.507440475,
               "chain": "eth"
             }
           ],
@@ -1491,12 +1525,12 @@
       "chains": [
         {
           "chain": "base",
-          "total_usd": 1510249.511173352,
+          "total_usd": 1510402.108645729,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "base_morphoblue",
-              "total_usd": 1510249.511173352,
+              "total_usd": 1510402.108645729,
               "chain": "base"
             }
           ],
@@ -1505,18 +1539,18 @@
         },
         {
           "chain": "eth",
-          "total_usd": 6349769.956071907,
+          "total_usd": 6350631.922662356,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 6314699.817025912,
+              "total_usd": 6315557.207838001,
               "chain": "eth"
             },
             {
               "protocol_name": "Sky",
               "protocol_id": "sky",
-              "total_usd": 35070.13904599482,
+              "total_usd": 35074.714824355535,
               "chain": "eth"
             }
           ],
@@ -1538,18 +1572,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 3518293.3430689205,
+          "total_usd": 3518532.854506901,
           "protocols": [
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 4460.361489446834,
+              "total_usd": 4691.366810362072,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 3513832.9815794737,
+              "total_usd": 3513841.487696539,
               "chain": "eth"
             }
           ],
@@ -1583,12 +1617,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 2711.1751455522995,
+          "total_usd": 2713.6142275504976,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 2711.1751455522995,
+              "total_usd": 2713.6142275504976,
               "chain": "eth"
             }
           ],
@@ -1604,12 +1638,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 11632343.211859558,
+          "total_usd": 10368453.108385677,
           "protocols": [
             {
               "protocol_name": "Spark",
               "protocol_id": "spark",
-              "total_usd": 11632343.211859558,
+              "total_usd": 10368453.108385677,
               "chain": "eth"
             }
           ],
@@ -1625,12 +1659,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 969332.0308332499,
+          "total_usd": 863966.4003230646,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 969332.0308332499,
+              "total_usd": 863966.4003230646,
               "chain": "eth"
             }
           ],
@@ -1646,12 +1680,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 0.07870861258377514,
+          "total_usd": 0.07870074014802961,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 0.07870861258377514,
+              "total_usd": 0.07870074014802961,
               "chain": "eth"
             }
           ],
@@ -1667,30 +1701,30 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 9486631.812825045,
+          "total_usd": 9442559.679543138,
           "protocols": [
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 19.06367901463753,
+              "total_usd": 19.747643070887882,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 0.028631533660491017,
+              "total_usd": 0.02929186452689514,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 9433763.815984137,
+              "total_usd": 9389696.284025487,
               "chain": "eth"
             },
             {
               "protocol_name": "Upshift",
               "protocol_id": "upshift",
-              "total_usd": 52848.904530359105,
+              "total_usd": 52843.61858271654,
               "chain": "eth"
             }
           ],
@@ -1706,30 +1740,36 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 19488511.19737894,
+          "total_usd": 20729360.489369586,
           "protocols": [
             {
               "protocol_name": "Backed",
               "protocol_id": "backedfi",
-              "total_usd": 51.155695802724146,
+              "total_usd": 51.92093594696066,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 257.121469340655,
+              "total_usd": 385.47031390407295,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 19488202.827262267,
+              "total_usd": 20728884.806118365,
               "chain": "eth"
             },
             {
               "protocol_name": "Sky",
               "protocol_id": "sky",
-              "total_usd": 0.09295153049987986,
+              "total_usd": 0.09296056410604589,
+              "chain": "eth"
+            },
+            {
+              "protocol_name": "Upshift",
+              "protocol_id": "upshift",
+              "total_usd": 38.19904080816163,
               "chain": "eth"
             }
           ],
@@ -1738,30 +1778,24 @@
         },
         {
           "chain": "monad",
-          "total_usd": 14109400.653787568,
+          "total_usd": 13359541.518459491,
           "protocols": [
             {
               "protocol_name": "Curvance",
               "protocol_id": "monad_curvance",
-              "total_usd": 4696577.50993729,
-              "chain": "monad"
-            },
-            {
-              "protocol_name": "Gearbox",
-              "protocol_id": "monad_gearbox",
-              "total_usd": 454284.0403561068,
+              "total_usd": 4400381.547143165,
               "chain": "monad"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "monad_merkl",
-              "total_usd": 2.3423157950323343,
+              "total_usd": 2.6692267273339914,
               "chain": "monad"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "monad_morphoblue",
-              "total_usd": 8958536.761178376,
+              "total_usd": 8959157.302089598,
               "chain": "monad"
             }
           ],
@@ -1777,26 +1811,32 @@
       "chains": [
         {
           "chain": "avax",
-          "total_usd": 4.0614814114e-14,
+          "total_usd": 503595.1306778085,
           "protocols": [
             {
               "protocol_name": "BENQI",
               "protocol_id": "avax_benqi",
-              "total_usd": 4.0614814114e-14,
+              "total_usd": 4.0528694724000005e-14,
+              "chain": "avax"
+            },
+            {
+              "protocol_name": "LFJ",
+              "protocol_id": "avax_traderjoexyz",
+              "total_usd": 503595.1306778085,
               "chain": "avax"
             }
           ],
-          "active_for_position_scan": false,
+          "active_for_position_scan": true,
           "scan_threshold_usd": 50000
         },
         {
           "chain": "eth",
-          "total_usd": 1670785.9427618468,
+          "total_usd": 1471092.8959739753,
           "protocols": [
             {
               "protocol_name": "Dolomite",
               "protocol_id": "dolomite",
-              "total_usd": 1670785.9427618468,
+              "total_usd": 1471092.8959739753,
               "chain": "eth"
             }
           ],
@@ -1805,18 +1845,18 @@
         },
         {
           "chain": "monad",
-          "total_usd": 835214.0214308548,
+          "total_usd": 835889.9626020237,
           "protocols": [
             {
               "protocol_name": "Curvance",
               "protocol_id": "monad_curvance",
-              "total_usd": 2.969954785000675e-8,
+              "total_usd": 3.270657443740717e-8,
               "chain": "monad"
             },
             {
               "protocol_name": "LFJ",
               "protocol_id": "monad_traderjoexyz",
-              "total_usd": 835214.0214308251,
+              "total_usd": 835889.962601991,
               "chain": "monad"
             }
           ],
@@ -1825,18 +1865,18 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 558700.8606885449,
+          "total_usd": 562780.9485727228,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "plasma_aave3",
-              "total_usd": 558700.2871673871,
+              "total_usd": 562780.3650008109,
               "chain": "plasma"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
-              "total_usd": 0.5735211578176856,
+              "total_usd": 0.5835719119524971,
               "chain": "plasma"
             }
           ],
@@ -1852,54 +1892,48 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 12178163.558144901,
+          "total_usd": 5101017.402161071,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 0.010003999999999999,
+              "total_usd": 0.010013000000000001,
               "chain": "eth"
             },
             {
               "protocol_name": "Curve",
               "protocol_id": "curve",
-              "total_usd": 17.393836790062124,
+              "total_usd": 17.392325276928652,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 3022566.7707665083,
+              "total_usd": 3021828.3559172163,
               "chain": "eth"
             },
             {
               "protocol_name": "LIDO",
               "protocol_id": "lido",
-              "total_usd": 2.2573000000000002e-15,
+              "total_usd": 2.28444e-15,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 13.141574331587481,
+              "total_usd": 767.8719941535709,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 38530.46809542862,
-              "chain": "eth"
-            },
-            {
-              "protocol_name": "Neutrl",
-              "protocol_id": "neutrl",
-              "total_usd": 7316855.987466787,
+              "total_usd": 677929.7909391879,
               "chain": "eth"
             },
             {
               "protocol_name": "Sky",
               "protocol_id": "sky",
-              "total_usd": 1800179.7864010567,
+              "total_usd": 1400473.9809722363,
               "chain": "eth"
             }
           ],
@@ -1908,30 +1942,30 @@
         },
         {
           "chain": "arb",
-          "total_usd": 10876288.511941278,
+          "total_usd": 10878178.34600967,
           "protocols": [
             {
               "protocol_name": "Fluid",
               "protocol_id": "arb_fluid",
-              "total_usd": 295240.6017246638,
+              "total_usd": 295635.664694484,
               "chain": "arb"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "arb_merkl",
-              "total_usd": 5.096896545121223,
+              "total_usd": 5.128493337441904,
               "chain": "arb"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "arb_pendle2",
-              "total_usd": 3.013034990028467,
+              "total_usd": 3.012935715446857,
               "chain": "arb"
             },
             {
               "protocol_name": "USD.AI",
               "protocol_id": "arb_usdai",
-              "total_usd": 10581039.800285079,
+              "total_usd": 10582534.539886134,
               "chain": "arb"
             }
           ],
@@ -1940,30 +1974,30 @@
         },
         {
           "chain": "hyper",
-          "total_usd": 0.5908269618039192,
+          "total_usd": 0.5911526253607836,
           "protocols": [
             {
               "protocol_name": "Hyperbeat",
               "protocol_id": "hyper_hyperbeat",
-              "total_usd": 0.004972207677732531,
+              "total_usd": 0.005128144887444149,
               "chain": "hyper"
             },
             {
               "protocol_name": "HyperLend",
               "protocol_id": "hyper_hyperlend",
-              "total_usd": 0.5816206167,
+              "total_usd": 0.58174267554,
               "chain": "hyper"
             },
             {
               "protocol_name": "Kinetiq",
               "protocol_id": "hyper_kinetiq",
-              "total_usd": 3.36983503214926e-8,
+              "total_usd": 3.474349184933474e-8,
               "chain": "hyper"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "hyper_morphoblue",
-              "total_usd": 0.004234103727836363,
+              "total_usd": 0.004281770189847552,
               "chain": "hyper"
             }
           ],
@@ -1972,32 +2006,32 @@
         },
         {
           "chain": "megaeth",
-          "total_usd": 1.9992360327975502,
+          "total_usd": 917435.564434139,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "megaeth_aave3",
-              "total_usd": 1.9992360327975502,
+              "total_usd": 917435.564434139,
               "chain": "megaeth"
             }
           ],
-          "active_for_position_scan": false,
+          "active_for_position_scan": true,
           "scan_threshold_usd": 50000
         },
         {
           "chain": "monad",
-          "total_usd": 2154990.1462875702,
+          "total_usd": 2155046.6260361644,
           "protocols": [
             {
               "protocol_name": "Monad Staking",
               "protocol_id": "monad_monadstaking",
-              "total_usd": 0.0000026850382480839367,
+              "total_usd": 0.000002957494630745378,
               "chain": "monad"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "monad_morphoblue",
-              "total_usd": 2154990.1462848852,
+              "total_usd": 2155046.626033207,
               "chain": "monad"
             }
           ],
@@ -2006,18 +2040,24 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 129259.87962355514,
+          "total_usd": 129289.23909409622,
           "protocols": [
             {
               "protocol_name": "Fluid",
               "protocol_id": "plasma_fluid",
-              "total_usd": 129259.8795143756,
+              "total_usd": 129284.1347116076,
+              "chain": "plasma"
+            },
+            {
+              "protocol_name": "Merkl",
+              "protocol_id": "plasma_merkl",
+              "total_usd": 5.104273264983496,
               "chain": "plasma"
             },
             {
               "protocol_name": "MIDAS",
               "protocol_id": "plasma_midas",
-              "total_usd": 0.00010917954859812,
+              "total_usd": 0.00010922363429706002,
               "chain": "plasma"
             }
           ],
@@ -2033,18 +2073,18 @@
       "chains": [
         {
           "chain": "arb",
-          "total_usd": 4808953.953406925,
+          "total_usd": 4809973.880362494,
           "protocols": [
             {
               "protocol_name": "Curve",
               "protocol_id": "arb_curve",
-              "total_usd": 1549660.1868811238,
+              "total_usd": 1549916.974674237,
               "chain": "arb"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "arb_pendle2",
-              "total_usd": 3259293.7665258017,
+              "total_usd": 3260056.905688257,
               "chain": "arb"
             }
           ],
@@ -2053,12 +2093,12 @@
         },
         {
           "chain": "avax",
-          "total_usd": 73.34410371878948,
+          "total_usd": 73.18378873798339,
           "protocols": [
             {
               "protocol_name": "LFJ",
               "protocol_id": "avax_traderjoexyz",
-              "total_usd": 73.34410371878948,
+              "total_usd": 73.18378873798339,
               "chain": "avax"
             }
           ],
@@ -2067,12 +2107,12 @@
         },
         {
           "chain": "base",
-          "total_usd": 1002724.7038094997,
+          "total_usd": 1002890.9965069807,
           "protocols": [
             {
               "protocol_name": "Fluid",
               "protocol_id": "base_fluid",
-              "total_usd": 1002724.7038094997,
+              "total_usd": 1002890.9965069807,
               "chain": "base"
             }
           ],
@@ -2081,7 +2121,7 @@
         },
         {
           "chain": "eth",
-          "total_usd": 10413653.527845884,
+          "total_usd": 10414185.727303851,
           "protocols": [
             {
               "protocol_name": "STRATEGY",
@@ -2092,43 +2132,43 @@
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 2001872.1763672484,
+              "total_usd": 2001424.6633756969,
               "chain": "eth"
             },
             {
               "protocol_name": "King Protocol",
               "protocol_id": "kingprotocol",
-              "total_usd": 167.13995184917422,
+              "total_usd": 167.69991908896313,
               "chain": "eth"
             },
             {
               "protocol_name": "Maple",
               "protocol_id": "maple",
-              "total_usd": 0.005817745323597079,
+              "total_usd": 0.005818163632726545,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 1233.9701805443672,
+              "total_usd": 1913.0074143392524,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 7288594.932477742,
+              "total_usd": 7288870.995679135,
               "chain": "eth"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "pendle2",
-              "total_usd": 400126.03745666775,
+              "total_usd": 400150.08949583257,
               "chain": "eth"
             },
             {
               "protocol_name": "YieldNest",
               "protocol_id": "yieldnest",
-              "total_usd": 0.014943483044913473,
+              "total_usd": 0.014950990198039606,
               "chain": "eth"
             }
           ],
@@ -2137,12 +2177,12 @@
         },
         {
           "chain": "monad",
-          "total_usd": 1652868.1950367556,
+          "total_usd": 1654320.0887428422,
           "protocols": [
             {
               "protocol_name": "Morpho",
               "protocol_id": "monad_morphoblue",
-              "total_usd": 1652868.1950367556,
+              "total_usd": 1654320.0887428422,
               "chain": "monad"
             }
           ],
@@ -2151,24 +2191,24 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 1013976.8220281648,
+          "total_usd": 1014277.8077801279,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "plasma_aave3",
-              "total_usd": 12.153020049590666,
+              "total_usd": 12.144449686648963,
               "chain": "plasma"
             },
             {
               "protocol_name": "Fluid",
               "protocol_id": "plasma_fluid",
-              "total_usd": 1013637.9671388441,
+              "total_usd": 1013879.9815782715,
               "chain": "plasma"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "plasma_merkl",
-              "total_usd": 326.7018692711627,
+              "total_usd": 385.6817521696883,
               "chain": "plasma"
             }
           ],
@@ -2211,18 +2251,18 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 0.00000404202797147814,
+          "total_usd": 0.000004041135439801693,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 0.000003543889328899248,
+              "total_usd": 0.0000035430727203529948,
               "chain": "eth"
             },
             {
               "protocol_name": "Strata",
               "protocol_id": "stratamoney",
-              "total_usd": 4.981386425788921e-7,
+              "total_usd": 4.980627194486981e-7,
               "chain": "eth"
             }
           ],
@@ -2238,12 +2278,12 @@
       "chains": [
         {
           "chain": "arb",
-          "total_usd": 0.010162026759461006,
+          "total_usd": 0.010166180506169546,
           "protocols": [
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "arb_pendle2",
-              "total_usd": 0.010162026759461006,
+              "total_usd": 0.010166180506169546,
               "chain": "arb"
             }
           ],
@@ -2252,12 +2292,12 @@
         },
         {
           "chain": "bsc",
-          "total_usd": 3272734.738057864,
+          "total_usd": 2141629.166901274,
           "protocols": [
             {
               "protocol_name": "Venus Flux",
               "protocol_id": "bsc_venusflux",
-              "total_usd": 3272734.738057864,
+              "total_usd": 2141629.166901274,
               "chain": "bsc"
             }
           ],
@@ -2266,54 +2306,54 @@
         },
         {
           "chain": "eth",
-          "total_usd": 7876358.773669826,
+          "total_usd": 9015348.000108361,
           "protocols": [
             {
               "protocol_name": "Compound V3",
               "protocol_id": "compound3",
-              "total_usd": 28.30665552,
+              "total_usd": 29.149533599999998,
               "chain": "eth"
             },
             {
               "protocol_name": "dHEDGE",
               "protocol_id": "dhedge",
-              "total_usd": 3.2133191972651765,
+              "total_usd": 3.2147407834372728,
               "chain": "eth"
             },
             {
               "protocol_name": "Ethereal",
               "protocol_id": "ethereal",
-              "total_usd": 1.4668372797205835,
+              "total_usd": 1.4663970524457572,
               "chain": "eth"
             },
             {
               "protocol_name": "Euler",
               "protocol_id": "euler2",
-              "total_usd": 5163009.096379766,
+              "total_usd": 5163229.906688146,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 7881.140397796422,
+              "total_usd": 8703.861950495815,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 2705435.4442976397,
+              "total_usd": 3843380.2949793744,
               "chain": "eth"
             },
             {
               "protocol_name": "OpenEden",
               "protocol_id": "openeden",
-              "total_usd": 0.039592640579546805,
+              "total_usd": 0.03961638915822949,
               "chain": "eth"
             },
             {
               "protocol_name": "Sky",
               "protocol_id": "sky",
-              "total_usd": 0.06618998558119694,
+              "total_usd": 0.0662025197006495,
               "chain": "eth"
             }
           ],
@@ -2322,12 +2362,12 @@
         },
         {
           "chain": "plasma",
-          "total_usd": 0.011119510440482469,
+          "total_usd": 0.011123889109924312,
           "protocols": [
             {
               "protocol_name": "MIDAS",
               "protocol_id": "plasma_midas",
-              "total_usd": 0.011119510440482469,
+              "total_usd": 0.011123889109924312,
               "chain": "plasma"
             }
           ],
@@ -2343,30 +2383,30 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 12068354.63877654,
+          "total_usd": 12491908.171637217,
           "protocols": [
             {
               "protocol_name": "Aave V3",
               "protocol_id": "aave3",
-              "total_usd": 0.45950885265579666,
+              "total_usd": 0.459507901580316,
               "chain": "eth"
             },
             {
               "protocol_name": "Merkl",
               "protocol_id": "merkl",
-              "total_usd": 971.5729619000704,
+              "total_usd": 1012.9901540840847,
               "chain": "eth"
             },
             {
               "protocol_name": "Morpho",
               "protocol_id": "morphoblue",
-              "total_usd": 12067382.606119836,
+              "total_usd": 12490894.72178936,
               "chain": "eth"
             },
             {
               "protocol_name": "Pendle V2",
               "protocol_id": "pendle2",
-              "total_usd": 0.00018595245206763346,
+              "total_usd": 0.000185870792207645,
               "chain": "eth"
             }
           ],
@@ -2382,12 +2422,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 41500181.529606596,
+          "total_usd": 41491598.09715432,
           "protocols": [
             {
               "protocol_name": "Ethena",
               "protocol_id": "ethena",
-              "total_usd": 41500181.529606596,
+              "total_usd": 41491598.09715432,
               "chain": "eth"
             }
           ],
@@ -2403,12 +2443,12 @@
       "chains": [
         {
           "chain": "base",
-          "total_usd": 38.42236035505401,
+          "total_usd": 38.42660960644038,
           "protocols": [
             {
               "protocol_name": "Aerodrome",
               "protocol_id": "base_aerodrome",
-              "total_usd": 38.42236035505401,
+              "total_usd": 38.42660960644038,
               "chain": "base"
             }
           ],
@@ -2417,24 +2457,24 @@
         },
         {
           "chain": "eth",
-          "total_usd": 22066981.343169022,
+          "total_usd": 22064273.959713932,
           "protocols": [
             {
               "protocol_name": "Curve",
               "protocol_id": "curve",
-              "total_usd": 1411409.3522048537,
+              "total_usd": 1411265.975439918,
               "chain": "eth"
             },
             {
               "protocol_name": "Ethena",
               "protocol_id": "ethena",
-              "total_usd": 20655571.990962736,
+              "total_usd": 20653007.98427258,
               "chain": "eth"
             },
             {
               "protocol_name": "infiniFi",
               "protocol_id": "infinifixyz",
-              "total_usd": 0.0000014349611849639324,
+              "total_usd": 0.0000014347310876312803,
               "chain": "eth"
             }
           ],
@@ -2450,12 +2490,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 2704424.4756774493,
+          "total_usd": 2219108.969251493,
           "protocols": [
             {
               "protocol_name": "Ethena",
               "protocol_id": "ethena",
-              "total_usd": 2704424.4756774493,
+              "total_usd": 2219108.969251493,
               "chain": "eth"
             }
           ],
@@ -2471,12 +2511,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 1627182.640995261,
+          "total_usd": 1626846.1253342275,
           "protocols": [
             {
               "protocol_name": "Ethena",
               "protocol_id": "ethena",
-              "total_usd": 1627182.640995261,
+              "total_usd": 1626846.1253342275,
               "chain": "eth"
             }
           ],
@@ -2516,12 +2556,12 @@
       "chains": [
         {
           "chain": "eth",
-          "total_usd": 258.76447594134885,
+          "total_usd": 258.71158212197656,
           "protocols": [
             {
               "protocol_name": "Ethena",
               "protocol_id": "ethena",
-              "total_usd": 258.76447594134885,
+              "total_usd": 258.71158212197656,
               "chain": "eth"
             }
           ],
