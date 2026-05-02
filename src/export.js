@@ -440,7 +440,7 @@ function detectWhaleMovements(prevWhales, currWhales, prevGeneratedAt) {
             }
         }
 
-        if (outflows.length === 0 && inflows.length === 0) continue;
+        if (outflows.length === 0 || inflows.length === 0) continue;
 
         outflows.sort((a, b) => a.delta_usd - b.delta_usd);
         inflows.sort((a, b) => b.delta_usd - a.delta_usd);
