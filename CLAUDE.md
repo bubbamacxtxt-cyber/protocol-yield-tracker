@@ -1,4 +1,6 @@
-# Claude Code — protocol-yield-tracker-dev
+# Coding agent instructions — protocol-yield-tracker-dev
+
+You are the coding agent for **protocol-yield-tracker-dev** ("protocol yield scanner").
 
 ## Working clone
 Always use this folder as your working copy:
@@ -12,6 +14,9 @@ Do NOT use bub2's live repo folder as a working copy:
 
 GitHub auth is already set up on the host as `bubbamacxtxt-cyber` via HTTPS. Use existing host auth — do not invent a new credential flow.
 
+## Dev-only rule
+Only change and dev-test in the **dev** repo/workflow unless Bubba explicitly says "prod".
+
 ## Frontend validation / deployment reality
 The real frontend preview for development is **GitHub Pages from `main` of `protocol-yield-tracker-dev`**.
 
@@ -22,20 +27,52 @@ Important:
 - For frontend tasks, verify locally first when possible, then treat the merged dev `main` Pages site as the real preview target.
 
 ## Two-bot memory system
-This project is worked on by two bots: Claude Code (you) and bub2. We share memory via files on disk so each bot can catch up on what the other did.
+This project is worked on by coding agents and bub2. We share memory via files on disk so each bot can catch up on what the other did.
 
-### Before starting any session — read memory
-Read these files to get current context:
-- **Today's bub2 daily note:** `/Users/bubba/.openclaw/bub2-data/workspace/memory/YYYY-MM-DD.md` (use today's actual date)
-- **Canonical repo note:** `/Users/bubba/.openclaw/bub2-data/workspace/life/Resources/repos/protocol-yield-tracker.md`
+### Start-of-session catch-up
+Do this at the start of every session, and anytime Bubba says "catch up":
+- Read today's bub2 daily note:
+  `/Users/bubba/.openclaw/bub2-data/workspace/memory/YYYY-MM-DD.md`
+- Read the canonical repo note:
+  `/Users/bubba/.openclaw/bub2-data/workspace/life/Resources/repos/protocol-yield-tracker.md`
+- Run `git status` and `git log -10 --oneline` in `/Users/bubba/code/protocol-yield-tracker-dev`.
+- Summarize current state + next task in 5 bullets.
 
 If today's note is thin or missing context, also read yesterday's note.
 
-### After finishing any session — save handoff
-Append a handoff block to today's bub2 daily note:
+### Memory files
+- **Today's bub2 daily note:** `/Users/bubba/.openclaw/bub2-data/workspace/memory/YYYY-MM-DD.md` (use today's actual date)
+- **Canonical repo note:** `/Users/bubba/.openclaw/bub2-data/workspace/life/Resources/repos/protocol-yield-tracker.md`
+
+### End-of-session handoff
+Every time you finish work, append a section titled **`Codex handoff`** to today's bub2 daily note:
 `/Users/bubba/.openclaw/bub2-data/workspace/memory/YYYY-MM-DD.md`
 
-Use this exact format:
+Include:
+- what changed + why
+- commands run
+- commit hash / PR link, if any
+- what to do next
+
+Use this format for Codex:
+
+```md
+## Codex handoff - YYYY-MM-DD HH:MM TZ
+
+### What changed / why
+- ...
+
+### Commands run
+- ...
+
+### Commit hash / PR
+- ...
+
+### What bub2 should do next
+- ...
+```
+
+Claude Code may use this format:
 
 ```md
 ## Claude Code handoff - YYYY-MM-DD HH:MM TZ
