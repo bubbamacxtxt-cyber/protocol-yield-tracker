@@ -348,6 +348,118 @@ body {
   border-color: #3d6a9f;
 }
 
+/* Movements */
+.movements-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.movement-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.movement-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #1a2a4a 0%, #0d1a2e 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.movement-card-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.movement-card-header h3 a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.movement-card-header h3 a:hover { text-decoration: underline; }
+
+.movement-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-secondary);
+}
+
+.movement-net {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.movement-net.positive { color: #4ade80; }
+.movement-net.negative { color: #f85149; }
+.movement-net.neutral { color: var(--text-secondary); }
+
+.movement-card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.movement-column {
+  padding: 16px 20px;
+}
+
+.movement-column:first-child {
+  border-right: 1px solid var(--border);
+}
+
+.movement-column-title {
+  font-size: 11px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.movement-column-title.out { color: #f85149; }
+.movement-column-title.in { color: #4ade80; }
+
+.movement-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.movement-row .proto-chain {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.movement-row .proto-chain strong {
+  color: var(--text-primary);
+}
+
+.movement-row .amount {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.movement-row .amount.out { color: #f85149; }
+.movement-row .amount.in { color: #4ade80; }
+
+.movement-empty {
+  color: #555;
+  font-size: 12px;
+  font-style: italic;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .charts-grid { grid-template-columns: repeat(2, 1fr); }
@@ -358,6 +470,8 @@ body {
   .charts-grid { grid-template-columns: 1fr; }
   .whales-grid { grid-template-columns: 1fr; }
   .header h1 { font-size: 22px; }
+  .movement-card-body { grid-template-columns: 1fr; }
+  .movement-column:first-child { border-right: none; border-bottom: 1px solid var(--border); }
 }
 </style>
 </head>
@@ -442,6 +556,14 @@ body {
       <h2>Whales</h2>
     </div>
     <div class="whales-grid" id="whalesGrid"></div>
+  </div>
+
+  <!-- Whale Movements -->
+  <div class="whales-section" id="movementsSection" style="display:none">
+    <div class="section-header">
+      <h2>Whale Movements</h2>
+    </div>
+    <div id="movementsGrid" class="movements-grid"></div>
   </div>
 </div>
 
@@ -698,7 +820,89 @@ async function render() {
   });
 }
 
+async function loadMovements() {
+  try {
+    const res = await fetch('data/whale-movements.json?t=' + Date.now());
+    const events = await res.json();
+    if (!Array.isArray(events) || events.length === 0) return;
+
+    const section = document.getElementById('movementsSection');
+    const grid = document.getElementById('movementsGrid');
+    section.style.display = '';
+
+    const sorted = events.slice().reverse();
+
+    for (const ev of sorted) {
+      const card = document.createElement('div');
+      card.className = 'movement-card';
+
+      const slug = ev.whale.toLowerCase().replace(/\s+/g, '-');
+      const ts = ev.detected_at ? new Date(ev.detected_at).toLocaleString() : '';
+      const netAbs = Math.abs(ev.net_flow || 0);
+      let netLabel, netClass;
+      if (netAbs < 1000) {
+        netLabel = '~$0 (rebalance)';
+        netClass = 'neutral';
+      } else {
+        const sign = ev.net_flow >= 0 ? '+' : '-';
+        netLabel = 'Net: ' + sign + fmt(netAbs);
+        netClass = ev.net_flow >= 0 ? 'positive' : 'negative';
+      }
+
+      const prevFmt = fmt(Math.abs(ev.whale_total_previous || 0));
+      const currFmt = fmt(Math.abs(ev.whale_total_current || 0));
+
+      let outHtml = '';
+      if (ev.outflows && ev.outflows.length > 0) {
+        for (const o of ev.outflows) {
+          const delta = fmt(Math.abs(o.delta_usd));
+          const prev = o.previous_usd ? fmt(Math.abs(o.previous_usd)) : '$0';
+          const curr = o.current_usd ? fmt(Math.abs(o.current_usd)) : '$0';
+          outHtml += '<div class="movement-row">' +
+            '<span class="proto-chain"><strong>' + (o.protocol || '-') + '</strong> · ' + (o.chain || '-') + '<br><span style="font-size:11px;color:#888">' + (o.tokens || '-') + ' · ' + prev + ' → ' + curr + '</span></span>' +
+            '<span class="amount out">-' + delta + '</span></div>';
+        }
+      } else {
+        outHtml = '<div class="movement-empty">None</div>';
+      }
+
+      let inHtml = '';
+      if (ev.inflows && ev.inflows.length > 0) {
+        for (const i of ev.inflows) {
+          const delta = fmt(Math.abs(i.delta_usd));
+          const prev = i.previous_usd ? fmt(Math.abs(i.previous_usd)) : '$0';
+          const curr = i.current_usd ? fmt(Math.abs(i.current_usd)) : '$0';
+          inHtml += '<div class="movement-row">' +
+            '<span class="proto-chain"><strong>' + (i.protocol || '-') + '</strong> · ' + (i.chain || '-') + '<br><span style="font-size:11px;color:#888">' + (i.tokens || '-') + ' · ' + prev + ' → ' + curr + '</span></span>' +
+            '<span class="amount in">+' + delta + '</span></div>';
+        }
+      } else {
+        inHtml = '<div class="movement-empty">None</div>';
+      }
+
+      card.innerHTML =
+        '<div class="movement-card-header">' +
+          '<h3><a href="' + slug + '.html">' + ev.whale + '</a></h3>' +
+          '<div class="movement-meta">' +
+            '<span>' + prevFmt + ' → ' + currFmt + '</span>' +
+            '<span class="movement-net ' + netClass + '">' + netLabel + '</span>' +
+            '<span>' + ts + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="movement-card-body">' +
+          '<div class="movement-column"><div class="movement-column-title out">Outflows</div>' + outHtml + '</div>' +
+          '<div class="movement-column"><div class="movement-column-title in">Inflows</div>' + inHtml + '</div>' +
+        '</div>';
+
+      grid.appendChild(card);
+    }
+  } catch(e) {
+    console.log('Movements not available:', e.message);
+  }
+}
+
 loadData();
+loadMovements();
 </script>
 </body>
 </html>

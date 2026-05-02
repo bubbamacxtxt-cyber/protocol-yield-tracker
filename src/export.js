@@ -379,7 +379,93 @@ function fetchEulerAPYs() {
     });
 }
 
+const MOVEMENTS_PATH = path.join(__dirname, '..', 'data', 'whale-movements.json');
+const MOVEMENTS_CAP = 20;
+const MOVEMENT_THRESHOLD_PCT = 5;
+
+function positionMatchKey(p) {
+    const wallet = String(p.wallet || '').toLowerCase();
+    const chain = String(p.chain || '').toLowerCase();
+    const proto = String(p.protocol_canonical || p.protocol_id || p.protocol_name || '').toLowerCase();
+    const idx = String(p.position_index || '').toLowerCase();
+    const supply = String(p.supply_tokens_display || '').toLowerCase();
+    return idx ? `${wallet}|${chain}|${proto}|${idx}` : `${wallet}|${chain}|${proto}|${supply}`;
+}
+
+function detectWhaleMovements(prevWhales, currWhales, prevGeneratedAt) {
+    const events = [];
+    const now = new Date().toISOString();
+
+    for (const [name, currWhale] of Object.entries(currWhales)) {
+        const prevWhale = prevWhales[name];
+        const currPositions = currWhale.positions || [];
+        const prevPositions = prevWhale ? (prevWhale.positions || []) : [];
+
+        const currTotal = currPositions.reduce((s, p) => s + (p.net_usd || 0), 0);
+        const prevTotal = prevPositions.reduce((s, p) => s + (p.net_usd || 0), 0);
+        const threshold = Math.max(currTotal, prevTotal) * (MOVEMENT_THRESHOLD_PCT / 100);
+
+        if (threshold <= 0) continue;
+
+        const prevByKey = new Map();
+        for (const p of prevPositions) prevByKey.set(positionMatchKey(p), p);
+        const currByKey = new Map();
+        for (const p of currPositions) currByKey.set(positionMatchKey(p), p);
+
+        const outflows = [];
+        const inflows = [];
+
+        for (const [key, prev] of prevByKey) {
+            const curr = currByKey.get(key);
+            const prevVal = prev.net_usd || 0;
+            if (!curr) {
+                if (Math.abs(prevVal) >= threshold)
+                    outflows.push({ protocol: prev.protocol_name || prev.protocol_id, chain: prev.chain, tokens: prev.supply_tokens_display || '-', previous_usd: prevVal, current_usd: 0, delta_usd: -prevVal });
+            } else {
+                const currVal = curr.net_usd || 0;
+                const delta = currVal - prevVal;
+                if (Math.abs(delta) >= threshold) {
+                    const entry = { protocol: curr.protocol_name || curr.protocol_id, chain: curr.chain, tokens: curr.supply_tokens_display || '-', previous_usd: prevVal, current_usd: currVal, delta_usd: delta };
+                    if (delta < 0) outflows.push(entry);
+                    else inflows.push(entry);
+                }
+            }
+        }
+
+        for (const [key, curr] of currByKey) {
+            if (!prevByKey.has(key)) {
+                const currVal = curr.net_usd || 0;
+                if (Math.abs(currVal) >= threshold)
+                    inflows.push({ protocol: curr.protocol_name || curr.protocol_id, chain: curr.chain, tokens: curr.supply_tokens_display || '-', previous_usd: 0, current_usd: currVal, delta_usd: currVal });
+            }
+        }
+
+        if (outflows.length === 0 && inflows.length === 0) continue;
+
+        outflows.sort((a, b) => a.delta_usd - b.delta_usd);
+        inflows.sort((a, b) => b.delta_usd - a.delta_usd);
+
+        const netFlow = [...outflows, ...inflows].reduce((s, e) => s + e.delta_usd, 0);
+
+        events.push({
+            whale: name,
+            detected_at: now,
+            previous_snapshot_at: prevGeneratedAt || null,
+            whale_total_previous: Math.round(prevTotal),
+            whale_total_current: Math.round(currTotal),
+            net_flow: Math.round(netFlow),
+            outflows,
+            inflows,
+        });
+    }
+
+    return events;
+}
+
 async function main() {
+    let previousData = null;
+    try { previousData = JSON.parse(fs.readFileSync(OUT_PATH, 'utf8')); } catch {}
+
     const db = new Database(DB_PATH, { readonly: true });
     let eulerApys = {};
     const protocolRegistry = loadProtocolRegistry();
@@ -1514,6 +1600,28 @@ async function main() {
     };
 
     fs.writeFileSync(OUT_PATH, JSON.stringify(data, null, 2));
+
+    // Detect whale movements by diffing against previous snapshot
+    if (previousData && previousData.whales) {
+        const newEvents = detectWhaleMovements(previousData.whales, whales, previousData.generated_at);
+        let movements = [];
+        try { movements = JSON.parse(fs.readFileSync(MOVEMENTS_PATH, 'utf8')); } catch {}
+        if (!Array.isArray(movements)) movements = [];
+        movements.push(...newEvents);
+        movements = movements.slice(-MOVEMENTS_CAP);
+        fs.writeFileSync(MOVEMENTS_PATH, JSON.stringify(movements, null, 2));
+        if (newEvents.length > 0) {
+            console.log(`[movements] ${newEvents.length} whale movement event(s) detected`);
+            for (const e of newEvents) {
+                console.log(`  ${e.whale}: ${e.outflows.length} outflows, ${e.inflows.length} inflows, net ${e.net_flow >= 0 ? '+' : ''}$${(e.net_flow/1e6).toFixed(2)}M`);
+            }
+        } else {
+            console.log('[movements] No significant movements this cycle');
+        }
+    } else {
+        console.log('[movements] No previous snapshot — skipping movement detection (first run)');
+        if (!fs.existsSync(MOVEMENTS_PATH)) fs.writeFileSync(MOVEMENTS_PATH, '[]');
+    }
 
     // Save historical totals for daily/weekly change tracking
     const historyPath = path.join(__dirname, '..', 'data', 'total-history.json');
