@@ -201,7 +201,15 @@ function loadYbs() {
 function loadMorphoVaultSet(db) {
   const set = new Set();
 
-  // Source 1: curated JSON
+  // Source: curated morpho-vaults.json — built from Morpho's vault registry,
+  // contains only MetaMorpho ERC-4626 vault wrappers (e.g. steakUSDC, gtUSDCp).
+  //
+  // We previously also derived this from the positions DB (any Morpho lend
+  // row's supply token), but that was wrong: Morpho also stores direct market
+  // supply (not vault-wrapped) and collateral tokens like sUSDS in the same
+  // table. Those underlying tokens are themselves YBS share tokens, and
+  // adding them to the skip set caused token-discovery to silently drop
+  // legitimate YBS positions for ALL wallets holding them in their wallet.
   try {
     const data = JSON.parse(fs.readFileSync(MORPHO_VAULTS_PATH, 'utf8'));
     for (const v of (data.vaults || [])) {
@@ -209,27 +217,7 @@ function loadMorphoVaultSet(db) {
       set.add(`${v.chain}:${v.address.toLowerCase()}`);
     }
   } catch (e) {
-    // no file — rely on DB source below
-  }
-
-  // Source 2: DB, earn-only Morpho rows (lend + no borrow)
-  if (db) {
-    try {
-      const rows = db.prepare(`
-        SELECT DISTINCT p.chain, lower(pt.address) as addr
-        FROM positions p
-        JOIN position_tokens pt ON pt.position_id = p.id
-        WHERE p.protocol_id = 'morpho'
-          AND p.strategy = 'lend'
-          AND p.debt_usd = 0
-          AND pt.role = 'supply'
-          AND pt.address IS NOT NULL
-          AND pt.address != ''
-      `).all();
-      for (const r of rows) {
-        if (r.chain && r.addr) set.add(`${r.chain}:${r.addr}`);
-      }
-    } catch (e) {}
+    console.warn('Could not load morpho-vaults.json:', e.message);
   }
 
   console.log(`Loaded Morpho vault shares to skip: ${set.size}`);
