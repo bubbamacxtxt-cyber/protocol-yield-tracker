@@ -124,10 +124,54 @@ async function scanVault(chain, vault, prices) {
   };
 }
 
-function savePositions(db, results) {
-  // yoUSD vault address is the single whale wallet we track. One
-  // yo-protocol position per chain, with totalAssets() as its value.
+// Fetch the latest allocation breakdown from the yo.xyz public API.
+// The API returns the GLOBAL allocation (same for all chains) — yoUSD
+// has a master vault on Base and a secondary vault on ETH that bridges
+// funds, so the deployments live in one shared strategy registry.
+async function fetchYoAllocations(network, vaultAddr) {
+  const url = `https://api.yo.xyz/api/v1/vault/allocations/timeseries/${network}/${vaultAddr}`;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'accept': 'application/json, text/plain, */*',
+        'origin': 'https://app.yo.xyz',
+        'referer': 'https://app.yo.xyz/',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+      },
+    });
+    if (!res.ok) return null;
+    const d = await res.json();
+    const items = d.data || [];
+    return items[items.length - 1] || null;  // latest snapshot
+  } catch { return null; }
+}
 
+// Heuristic: parse strategy name → chain. The yo.xyz API doesn't tell us
+// which chain each strategy lives on, so we infer from the name suffix.
+function strategyChain(name) {
+  if (/Unichain/i.test(name)) return 'uni';
+  if (/Base$/i.test(name) || /baseUSD/i.test(name)) return 'base';
+  // ETH-only markets per yo.xyz UI confirmation:
+  if (/wstETH\/USDT/i.test(name)) return 'eth';
+  // Bare USDT line (small idle balance) sits on ETH per UI
+  if (/^USDT$/i.test(name)) return 'eth';
+  // Default: master vault chain
+  return 'base';
+}
+
+// Heuristic: parse strategy name → primary supply token symbol.
+function strategyToken(name) {
+  // "Morpho cbBTC/USDC Market Base" → cbBTC + USDC
+  // "Morpho WETH/USDC Market" → WETH + USDC
+  // "Aave sGHO" → sGHO; "Resolv RLP" → RLP
+  const slashMatch = name.match(/([A-Za-z0-9]+)\/([A-Za-z0-9]+)/);
+  if (slashMatch) return slashMatch[1] + '+' + slashMatch[2];
+  if (/^USDT$/i.test(name)) return 'USDT';
+  const lastWord = name.split(/\s+/).pop();
+  return lastWord || 'USDC';
+}
+
+function savePositions(db, results, allocation) {
   // Clean all existing YO-protocol rows first (FK-safe order)
   const oldIds = db.prepare(`SELECT id FROM positions WHERE protocol_id = 'yo-protocol'`).all();
   const delTok = db.prepare(`DELETE FROM position_tokens WHERE position_id = ?`);
@@ -135,13 +179,11 @@ function savePositions(db, results) {
   const delPos = db.prepare(`DELETE FROM positions WHERE id = ?`);
   for (const r of oldIds) { delTok.run(r.id); delMkt.run(r.id); delPos.run(r.id); }
 
-  // position_type 'Vault' (not 'Lending') because yoUSD is an aggregator vault
-  // that deploys USDC into Morpho/Aave/Euler strategies. Calling it "Lend" in
-  // the UI is misleading — the protocol isn't supplying USDC to itself.
   const upsertPos = db.prepare(`
     INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, net_usd, asset_usd, debt_usd, position_index, scanned_at)
-    VALUES (?, ?, 'yo-protocol', 'yoUSD', 'Vault', 'vault', ?, ?, 0, ?, datetime('now'))
+    VALUES (?, ?, 'yo-protocol', ?, 'Vault', 'vault', ?, ?, 0, ?, datetime('now'))
     ON CONFLICT(wallet, chain, protocol_id, position_index) DO UPDATE SET
+      protocol_name = excluded.protocol_name,
       position_type = 'Vault', strategy = 'vault',
       net_usd = excluded.net_usd, asset_usd = excluded.asset_usd, scanned_at = datetime('now')
   `);
@@ -151,13 +193,45 @@ function savePositions(db, results) {
     VALUES (?, 'supply', ?, ?, ?, ?, NULL, NULL)
   `);
 
-  for (const r of results) {
-    const wallet = r.vault_address.toLowerCase();
-    const idx = `${r.chain}|${r.vault_name}|totalAssets`;
-    upsertPos.run(wallet, r.chain, r.value_usd, r.value_usd, idx);
-    const pos = findPos.get(wallet, r.chain, idx);
-    if (pos?.id) {
-      insertToken.run(pos.id, r.underlying_symbol, r.underlying_address, r.amount, r.value_usd);
+  // Total TVL across all yo vault chains (master + secondary)
+  const totalUsd = results.reduce((s, r) => s + r.value_usd, 0);
+  const wallet = results[0]?.vault_address.toLowerCase();
+  const underlying = results[0]?.underlying_address;
+
+  if (allocation && allocation.protocols && totalUsd > 0) {
+    // Per-strategy breakdown rows from yo.xyz API
+    let allocatedPct = 0;
+    for (const [protoName, pctStr] of Object.entries(allocation.protocols)) {
+      const pct = parseFloat(pctStr);
+      if (!isFinite(pct) || pct <= 0) continue;
+      allocatedPct += pct;
+      const chain = strategyChain(protoName);
+      const valueUsd = totalUsd * pct / 100;
+      const tokenSymbol = strategyToken(protoName);
+      const idx = `yoUSD|${protoName}`;
+      const protocolName = `yoUSD → ${protoName}`;
+      upsertPos.run(wallet, chain, protocolName, valueUsd, valueUsd, idx);
+      const pos = findPos.get(wallet, chain, idx);
+      if (pos?.id) {
+        insertToken.run(pos.id, tokenSymbol, underlying, null, valueUsd);
+      }
+    }
+    // Idle USDC = remainder (allocations from yo.xyz API don't sum to 100%)
+    const idlePct = 100 - allocatedPct;
+    if (idlePct > 0.01) {
+      const idleUsd = totalUsd * idlePct / 100;
+      const idx = `yoUSD|Idle USDC`;
+      upsertPos.run(wallet, 'base', 'yoUSD → Idle USDC', idleUsd, idleUsd, idx);
+      const pos = findPos.get(wallet, 'base', idx);
+      if (pos?.id) insertToken.run(pos.id, 'USDC', underlying, null, idleUsd);
+    }
+  } else {
+    // Fallback: no allocation API — keep the per-chain totalAssets rows
+    for (const r of results) {
+      const idx = `${r.chain}|${r.vault_name}|totalAssets`;
+      upsertPos.run(wallet, r.chain, r.vault_name, r.value_usd, r.value_usd, idx);
+      const pos = findPos.get(wallet, r.chain, idx);
+      if (pos?.id) insertToken.run(pos.id, r.underlying_symbol, r.underlying_address, r.amount, r.value_usd);
     }
   }
 }
@@ -189,10 +263,25 @@ async function main() {
   const total = results.reduce((s, r) => s + r.value_usd, 0);
   console.log(`\n=== Total YO TVL: $${(total/1e6).toFixed(2)}M ===`);
 
+  // Fetch the strategy allocation breakdown from yo.xyz API.
+  // Same allocation applies to base + ETH master/secondary vaults.
+  const allocation = results[0]
+    ? await fetchYoAllocations('base', results[0].vault_address)
+    : null;
+  if (allocation?.protocols) {
+    console.log('\nAllocation breakdown:');
+    for (const [k, v] of Object.entries(allocation.protocols)) {
+      console.log(`  ${k.padEnd(40)} ${v}% = $${(total * parseFloat(v) / 100 / 1e6).toFixed(2)}M`);
+    }
+  } else {
+    console.log('\nNo allocation breakdown — falling back to single-row per chain');
+  }
+
   const db = new Database(DB_PATH);
-  savePositions(db, results);
+  savePositions(db, results, allocation);
   db.close();
-  console.log(`Saved ${results.length} positions for 0x0000000f... yo-protocol`);
+  const rowCount = allocation?.protocols ? Object.keys(allocation.protocols).length + 1 : results.length;
+  console.log(`Saved ${rowCount} yo-protocol position rows`);
 }
 
 if (require.main === module) {
