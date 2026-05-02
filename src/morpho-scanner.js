@@ -42,6 +42,29 @@ async function getBorrowPositions(userAddress) {
   } catch { return []; }
 }
 
+async function getDirectSupplyPositions(userAddress, chainIds) {
+  const results = [];
+  for (const chainId of chainIds) {
+    try {
+      const res = await fetch(MORPHO_GRAPHQL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: `{ userByAddress(address:"${userAddress}", chainId:${chainId}) { marketPositions { market { uniqueKey loanAsset { symbol address } collateralAsset { symbol address } state { supplyApy } } supplyShares supplyAssets supplyAssetsUsd } } }`
+        })
+      });
+      const data = await res.json();
+      const positions = data?.data?.userByAddress?.marketPositions || [];
+      for (const p of positions) {
+        if (Number(p.supplyAssetsUsd || 0) > 0) {
+          results.push({ ...p, _chainId: chainId });
+        }
+      }
+    } catch {}
+  }
+  return results;
+}
+
 async function getMarketAPY(uniqueKey, chainId) {
   if (!uniqueKey) return null;
   try {
@@ -60,13 +83,18 @@ async function getMarketAPY(uniqueKey, chainId) {
 }
 
 async function scanWallet(wallet, label, allowedChains = null) {
-  const [earnItems, borrowItems] = await Promise.all([
+  const chainAllowed = allowedChains ? new Set(allowedChains.map(String)) : null;
+  const directChainIds = chainAllowed
+    ? ALL_CHAINS.filter(c => chainAllowed.has(String(c)))
+    : ALL_CHAINS;
+
+  const [earnItems, borrowItems, directSupplyItems] = await Promise.all([
     getEarnPositions(wallet),
     getBorrowPositions(wallet),
+    getDirectSupplyPositions(wallet, directChainIds),
   ]);
 
   const rows = new Map();
-  const chainAllowed = allowedChains ? new Set(allowedChains.map(String)) : null;
 
   for (const item of earnItems) {
     const vault = item.vault || {};
@@ -83,6 +111,36 @@ async function scanWallet(wallet, label, allowedChains = null) {
       value_usd: Number(item.assetsUsd || 0),
       apy_base: vault.netApyExcludingRewards != null ? vault.netApyExcludingRewards * 100 : (vault.netApy != null ? vault.netApy * 100 : null),
       bonus_supply_apy: vault.netApy != null && vault.netApyExcludingRewards != null ? (vault.netApy - vault.netApyExcludingRewards) * 100 : null,
+    });
+  }
+
+  // Merge direct market supply positions missed by the REST earn endpoint.
+  // The earn endpoint only returns vault positions; wallets with direct market
+  // supply (no vault wrapper) need the GraphQL userByAddress query.
+  const earnAddresses = new Set(earnItems.map(i => String(i.vault?.address || '').toLowerCase()));
+  for (const item of directSupplyItems) {
+    const market = item.market || {};
+    const chainId = String(item._chainId);
+    const chain = CHAIN_NAMES[item._chainId] || chainId;
+    const key = `${wallet.toLowerCase()}|${chain}`;
+    const supplyUsd = Number(item.supplyAssetsUsd || 0);
+    if (supplyUsd < 1) continue;
+    // Skip if already captured by a vault in the earn endpoint
+    const existingRow = rows.get(key);
+    const loanAddr = String(market.loanAsset?.address || '').toLowerCase();
+    const alreadyCovered = existingRow?.supply.some(s =>
+      String(s.address).toLowerCase() === loanAddr && Math.abs(s.value_usd - supplyUsd) < supplyUsd * 0.1
+    );
+    if (alreadyCovered) continue;
+    if (!rows.has(key)) rows.set(key, { wallet, label, chain, chainId: Number(chainId), supply: [], borrow: [], health_rate: null });
+    const row = rows.get(key);
+    row.supply.push({
+      symbol: market.loanAsset?.symbol || '?',
+      address: market.uniqueKey || loanAddr,
+      amount: Number(item.supplyAssets || 0),
+      value_usd: supplyUsd,
+      apy_base: market.state?.supplyApy != null ? market.state.supplyApy * 100 : null,
+      bonus_supply_apy: null,
     });
   }
 
@@ -280,7 +338,7 @@ async function main() {
       // perfect, which caused us to miss positions in practice.
       const k = row.wallet;
       if (!grouped.has(k)) grouped.set(k, { addr: row.wallet, label: labelByWallet.get(row.wallet) || row.whale || 'Unknown', chains: [] });
-      grouped.get(k).chains.push(Number({ eth:1, base:8453, arb:42161, poly:137, uni:130, wct:747474, ink:999, opt:10, monad:143 }[row.chain] || 0));
+      grouped.get(k).chains.push(Number({ eth:1, base:8453, arb:42161, poly:137, uni:130, wct:747474, katana:747474, ink:999, opt:10, monad:143 }[row.chain] || 0));
     }
     wallets = [...grouped.values()];
   } else {

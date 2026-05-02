@@ -12,9 +12,14 @@ const Database = require('better-sqlite3');
 const { loadActiveWalletChains, loadWhaleWalletMap, hasProtocolHint } = require('./recon-helpers');
 const { decomposeAaveFromDebank } = require('./aave-decompose');
 
+const { JsonRpcProvider, Contract } = require('ethers');
 const DB_PATH = path.join(__dirname, '..', 'yield-tracker.db');
 const AAVE_GRAPHQL = 'https://api.v3.aave.com/graphql';
 const MERIT_API = 'https://apps.aavechan.com/api/merit/aprs';
+
+const STKGHO_ADDRESS = '0x1a88Df1cFe15Af22B3c4c783D4e6F7F9e0C1885d';
+const STKAAVE_ADDRESS = '0x4da27a545c0c5B758a6BA100e3a049001de870f5';
+const ERC20_ABI = ['function balanceOf(address) view returns (uint256)', 'function decimals() view returns (uint8)'];
 
 const CHAIN_NAMES = {
   1: 'eth', 8453: 'base', 42161: 'arb', 137: 'poly',
@@ -154,6 +159,36 @@ function buildCombinedRow(wallet, label, chainId, supplies, borrows, meritAPRs, 
   };
 }
 
+let _ethProvider = null;
+function getEthProvider() {
+  if (!_ethProvider) _ethProvider = new JsonRpcProvider(process.env.ALCHEMY_RPC_URL || process.env.ETH_RPC_URL || 'https://eth.drpc.org');
+  return _ethProvider;
+}
+
+async function getStkBalances(wallet) {
+  const results = [];
+  const provider = getEthProvider();
+  for (const [addr, symbol] of [[STKGHO_ADDRESS, 'stkGHO'], [STKAAVE_ADDRESS, 'stkAAVE']]) {
+    try {
+      const contract = new Contract(addr, ERC20_ABI, provider);
+      const [bal, dec] = await Promise.all([contract.balanceOf(wallet), contract.decimals()]);
+      const amount = Number(bal) / (10 ** Number(dec));
+      if (amount < 1) continue;
+      // stkGHO is pegged 1:1 to GHO ($1); stkAAVE uses AAVE price
+      let price = 1;
+      if (symbol === 'stkAAVE') {
+        try {
+          const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=aave&vs_currencies=usd');
+          const data = await res.json();
+          price = data?.aave?.usd || 180;
+        } catch { price = 180; }
+      }
+      results.push({ symbol, address: addr, amount, value_usd: amount * price });
+    } catch {}
+  }
+  return results;
+}
+
 async function scanWallet(wallet, label, chainIds) {
   const out = [];
   for (const chainId of (Array.isArray(chainIds) ? chainIds : [chainIds])) {
@@ -169,9 +204,30 @@ async function scanWallet(wallet, label, chainIds) {
     if ((!supplies || supplies.length === 0) && (!borrows || borrows.length === 0)) continue;
     out.push(buildCombinedRow(wallet, label, chainId, supplies || [], borrows || [], meritAPRs || {}, state || null));
   }
+
+  // Check stkGHO / stkAAVE (Aave Safety Module) on mainnet
+  const chainList = Array.isArray(chainIds) ? chainIds : [chainIds];
+  if (chainList.includes(1)) {
+    const stkBalances = await getStkBalances(wallet);
+    for (const stk of stkBalances) {
+      if (stk.value_usd < 50000) continue;
+      out.push({
+        wallet, label, chain: 'eth', chainId: 1,
+        protocol_name: 'Aave V3', protocol_id: 'aave-v3',
+        position_type: 'Staked', strategy: 'stake',
+        position_index: `${wallet.toLowerCase()}|eth|${stk.symbol.toLowerCase()}`,
+        health_rate: null,
+        net_usd: stk.value_usd, asset_usd: stk.value_usd, debt_usd: 0,
+        supply: [{ role: 'supply', symbol: stk.symbol, address: stk.address, amount: stk.amount, value_usd: stk.value_usd, apy_base: null, bonus_supply_apy: null }],
+        borrow: [],
+      });
+    }
+  }
+
   const filtered = out.filter(r => Math.abs(r.net_usd || 0) >= 50000);
   const decomposed = [];
   for (const row of filtered) {
+    if (row.position_type === 'Staked') { decomposed.push(row); continue; }
     const expanded = decomposeAaveFromDebank(row.wallet, row.chain, row);
     decomposed.push(...expanded);
   }

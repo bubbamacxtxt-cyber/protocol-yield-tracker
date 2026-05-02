@@ -56,11 +56,7 @@ const DEBANK_ONLY_PROTOCOLS = [
   // via the 48h rule.
   'arb_curve', 'plasma_curve',     // curve-scanner writes 'curve'
   'capapp',                        // stcUSD captured as YBS via token-discovery
-  'upshift',                       // upshift vaults captured as vault-probed
-  'sky',                           // sUSDS captured as YBS
   'convex',                        // TODO: needs dedicated scanner
-  'arb_usdai', 'usd-ai',           // sUSDai captured as YBS
-  'infinifixyz',                   // siUSD + LIUSD captured as YBS
 
   // Protocols imported daily via debank-import.js. Rows are refreshed
   // every 24h; 48h window means a single missed recon won't purge them.
@@ -71,6 +67,12 @@ const DEBANK_ONLY_PROTOCOLS = [
   'venusflux', 'bsc_venusflux',
   'ethstrat',
   'yuzumoney', 'plasma_yuzumoney',
+  'megaeth_aave3',
+  'arb_usdai', 'usd-ai',
+  'upshift',
+  'sky',
+  'infinifixyz',
+  'katana_morphoblue',
 ];
 
 function main() {

@@ -45,6 +45,12 @@ const DEBANK_IMPORT_PROTOCOLS = new Set([
   'monad_traderjoexyz',
   'ethstrat',
   'plasma_yuzumoney',
+  'megaeth_aave3',
+  'arb_usdai',
+  'sky',
+  'upshift',
+  'infinifixyz',
+  'katana_morphoblue',
 ]);
 
 function normalizeProtoName(protoId, dbName) {
