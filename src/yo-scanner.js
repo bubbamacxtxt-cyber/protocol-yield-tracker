@@ -135,10 +135,14 @@ function savePositions(db, results) {
   const delPos = db.prepare(`DELETE FROM positions WHERE id = ?`);
   for (const r of oldIds) { delTok.run(r.id); delMkt.run(r.id); delPos.run(r.id); }
 
+  // position_type 'Vault' (not 'Lending') because yoUSD is an aggregator vault
+  // that deploys USDC into Morpho/Aave/Euler strategies. Calling it "Lend" in
+  // the UI is misleading — the protocol isn't supplying USDC to itself.
   const upsertPos = db.prepare(`
     INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, net_usd, asset_usd, debt_usd, position_index, scanned_at)
-    VALUES (?, ?, 'yo-protocol', 'yoUSD', 'Lending', 'lend', ?, ?, 0, ?, datetime('now'))
+    VALUES (?, ?, 'yo-protocol', 'yoUSD', 'Vault', 'vault', ?, ?, 0, ?, datetime('now'))
     ON CONFLICT(wallet, chain, protocol_id, position_index) DO UPDATE SET
+      position_type = 'Vault', strategy = 'vault',
       net_usd = excluded.net_usd, asset_usd = excluded.asset_usd, scanned_at = datetime('now')
   `);
   const findPos = db.prepare(`SELECT id FROM positions WHERE lower(wallet) = ? AND chain = ? AND protocol_id = 'yo-protocol' AND position_index = ?`);
