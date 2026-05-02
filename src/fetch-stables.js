@@ -144,7 +144,9 @@ const TOKEN_META = {
     protocol: 'fluid-lending',
   },
   sUSDai: {
-    addresses: ['0x46850aD61C2B7d64d08c9C754F45254596696984'],
+    // Staked USDai ERC-4626 vault on Arbitrum. Asset = USDai (0x0a1a1a107e...).
+    // Previous value (0x46850aD6...) was actually PYUSD on Arb — wrong token.
+    addresses: ['0x0b2b2b2076d95dda7817e785989fe353fe955ef9'],
     aliases: ['sUSDai'],
     protocol: 'usd-ai',
   },
