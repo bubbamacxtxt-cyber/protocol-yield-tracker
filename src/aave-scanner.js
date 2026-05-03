@@ -25,10 +25,10 @@ const CHAIN_NAMES = {
   1: 'eth', 8453: 'base', 42161: 'arb', 137: 'poly',
   10: 'opt', 5000: 'mnt', 81457: 'blast', 534352: 'scroll',
   146: 'sonic', 9745: 'plasma', 130: 'uni', 747474: 'wct',
-  143: 'monad', 999: 'ink',
+  143: 'monad', 999: 'ink', 4326: 'megaeth',
 };
 
-const CHAIN_IDS = { eth: 1, base: 8453, arb: 42161, mnt: 5000, plasma: 9745, ink: 999 };
+const CHAIN_IDS = { eth: 1, base: 8453, arb: 42161, mnt: 5000, plasma: 9745, ink: 999, megaeth: 4326 };
 
 function allowedAaveChainFromRecon(row) {
   const chain = String(row.chain || '').toLowerCase();
@@ -54,6 +54,7 @@ const MARKETS = {
   5000: ['0x458F293454fE0d67EC0655f3672301301DD51422'],
   9745: ['0x925a2A7214Ed92428B5b1B090F80b25700095e12'],
   999: ['0x5362dBb1e601AbF2a150D1999Be54a4d308f4F6e'],
+  4326: ['0x7e324AbC5De01d112AfC03a584966ff199741C28'],
 };
 
 async function gql(query) {
