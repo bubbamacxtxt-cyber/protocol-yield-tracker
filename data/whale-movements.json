@@ -1,1 +1,182 @@
-[]
+[
+  {
+    "whale": "yoUSD",
+    "detected_at": "2026-05-02T23:55:04.536Z",
+    "previous_snapshot_at": "2026-05-02T23:35:32.506Z",
+    "whale_total_previous": 22355121,
+    "whale_total_current": 22355121,
+    "net_flow": -15537,
+    "outflows": [
+      {
+        "protocol": "yoUSD",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 18620049.7816084,
+        "current_usd": 0,
+        "delta_usd": -18620049.7816084
+      },
+      {
+        "protocol": "yoUSD",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 3575951.7915904,
+        "current_usd": 0,
+        "delta_usd": -3575951.7915904
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "yoUSD → Morpho cbBTC/USDC Market Base",
+        "chain": "base",
+        "tokens": "cbBTC+USDC",
+        "previous_usd": 0,
+        "current_usd": 14010116.1930031,
+        "delta_usd": 14010116.1930031
+      },
+      {
+        "protocol": "yoUSD → Morpho WETH/USDC Market",
+        "chain": "base",
+        "tokens": "WETH+USDC",
+        "previous_usd": 0,
+        "current_usd": 3959766.68065866,
+        "delta_usd": 3959766.68065866
+      },
+      {
+        "protocol": "yoUSD → Morpho wstETH/USDT Market",
+        "chain": "eth",
+        "tokens": "wstETH+USDT",
+        "previous_usd": 0,
+        "current_usd": 3014217.01364039,
+        "delta_usd": 3014217.01364039
+      },
+      {
+        "protocol": "yoUSD → Idle USDC",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 1196364.48479541,
+        "delta_usd": 1196364.48479541
+      }
+    ]
+  },
+  {
+    "whale": "yoUSD",
+    "detected_at": "2026-05-03T00:29:08.503Z",
+    "previous_snapshot_at": "2026-05-03T00:17:37.475Z",
+    "whale_total_previous": 22355121,
+    "whale_total_current": 22360896,
+    "net_flow": -430371,
+    "outflows": [
+      {
+        "protocol": "Morpho cbBTC/USDC",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 14010116.1930031,
+        "current_usd": 0,
+        "delta_usd": -14010116.1930031
+      },
+      {
+        "protocol": "Morpho WETH/USDC",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 3959766.68065866,
+        "current_usd": 0,
+        "delta_usd": -3959766.68065866
+      },
+      {
+        "protocol": "Morpho wstETH/USDT",
+        "chain": "eth",
+        "tokens": "USDT",
+        "previous_usd": 3014217.01364039,
+        "current_usd": 0,
+        "delta_usd": -3014217.01364039
+      },
+      {
+        "protocol": "Idle USDC",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 1196364.48479541,
+        "current_usd": 0,
+        "delta_usd": -1196364.48479541
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 14520240.3306197,
+        "delta_usd": 14520240.3306197
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 4105584.28395313,
+        "delta_usd": 4105584.28395313
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "USDT",
+        "previous_usd": 0,
+        "current_usd": 3124268.33748753,
+        "delta_usd": 3124268.33748753
+      }
+    ]
+  },
+  {
+    "whale": "yoUSD",
+    "detected_at": "2026-05-03T00:42:13.796Z",
+    "previous_snapshot_at": "2026-05-03T00:36:49.941Z",
+    "whale_total_previous": 22360896,
+    "whale_total_current": 22355121,
+    "net_flow": 445909,
+    "outflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 14520240.3306197,
+        "current_usd": 0,
+        "delta_usd": -14520240.3306197
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 4105584.28395313,
+        "current_usd": 0,
+        "delta_usd": -4105584.28395313
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "USDT",
+        "previous_usd": 3124268.33748753,
+        "current_usd": 0,
+        "delta_usd": -3124268.33748753
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "yoUSD",
+        "chain": "base",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 18620049.78,
+        "delta_usd": 18620049.78
+      },
+      {
+        "protocol": "yoUSD",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 3575951.79,
+        "delta_usd": 3575951.79
+      }
+    ]
+  }
+]

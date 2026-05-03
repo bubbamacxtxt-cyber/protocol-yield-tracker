@@ -1410,6 +1410,15 @@ async function main() {
             // Ensure protocol field is populated for frontend display
             p.protocol = p.protocol_name || p.protocol_id || p.protocol_canonical || p.protocol_display || '-';
 
+            // yo-protocol positions are yoUSD vault deposits INTO Morpho markets.
+            // Display "Morpho" as the protocol (where the funds actually are),
+            // not "Yo Protocol" (the vault itself — it can't deposit into itself).
+            // protocol_name stays 'Yo Protocol' in the DB so the YBS exposure
+            // adapter still fires for secondary-risk lookthrough.
+            if (String(p.protocol_id || '').toLowerCase() === 'yo-protocol') {
+                p.protocol = 'Morpho';
+            }
+
             // Pendle V1: keep direct scanner rows and unresolved fallback rows clearly separated.
             const pid = String(p.protocol_id || '').toLowerCase();
             if (pid === 'pendle-pt' || pid === 'pendle-yt' || pid === 'pendle-lp') {
