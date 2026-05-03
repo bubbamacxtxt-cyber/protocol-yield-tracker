@@ -201,6 +201,13 @@ function normalizeSourceMeta(position) {
             p.source_type = 'vault-probed';
         } else if (protocolId === 'ybs') {
             p.source_type = 'ybs';
+        } else if (protocolId === 'yo-protocol') {
+            // yo-protocol rows come from yo.xyz strategy-allocation API. Treating
+            // them as 'scanner' would let dedupCanonicalClusters collapse the per-
+            // strategy rows (same wallet+chain+protocol_id+supply token = same
+            // cluster key), losing the breakdown. 'protocol_api' adds the name
+            // suffix in clusterKey so each strategy stays distinct.
+            p.source_type = 'protocol_api';
         } else if (protocol.includes('aave') || protocol.includes('morpho') || protocol.includes('euler') || protocol.includes('fluid') || protocol.includes('compound') || protocol.includes('curve')
             || protocolId.includes('aave') || protocolId.includes('morpho') || protocolId.includes('euler') || protocolId.includes('fluid') || protocolId === 'compound3' || protocolId === 'curve') {
             p.source_type = 'scanner';
@@ -833,7 +840,13 @@ async function main() {
         const eulerMergeKey = (p.protocol_id === 'euler2' && eulerSubAccount)
             ? `${String(p.wallet || '').toLowerCase()}|${p.chain}|euler2|${eulerSubAccount}`
             : null;
-        const key = aaveMergeKey || morphoMergeKey || eulerMergeKey || `${String(p.wallet || '').toLowerCase()}|${p.chain}|${p.protocol_id}|${supplySymbol}`;
+        // yo-protocol: each strategy is its own line (Morpho cbBTC/USDC vs
+        // Morpho WETH/USDC vs Idle USDC all on base, all USDC). Without this
+        // the default symbol-based merge key collapses them into one row.
+        const yoMergeKey = (p.protocol_id === 'yo-protocol' && p.position_index)
+            ? `${String(p.wallet || '').toLowerCase()}|${p.chain}|yo-protocol|${String(p.position_index).toLowerCase()}`
+            : null;
+        const key = aaveMergeKey || morphoMergeKey || eulerMergeKey || yoMergeKey || `${String(p.wallet || '').toLowerCase()}|${p.chain}|${p.protocol_id}|${supplySymbol}`;
         
         if (posMap.has(key)) {
             const existing = posMap.get(key);

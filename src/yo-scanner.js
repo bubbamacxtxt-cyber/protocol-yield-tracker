@@ -159,16 +159,23 @@ function strategyChain(name) {
   return 'base';
 }
 
-// Heuristic: parse strategy name → primary supply token symbol.
+// Parse strategy name → loan token symbol that yoUSD actually supplies.
+// In Morpho market naming "X/Y", X is the borrower's collateral and Y is
+// the loan asset — yoUSD as a stable-yield aggregator supplies the loan
+// side (USDC, USDT). Showing collateral here would be misleading.
 function strategyToken(name) {
-  // "Morpho cbBTC/USDC Market Base" → cbBTC + USDC
-  // "Morpho WETH/USDC Market" → WETH + USDC
-  // "Aave sGHO" → sGHO; "Resolv RLP" → RLP
   const slashMatch = name.match(/([A-Za-z0-9]+)\/([A-Za-z0-9]+)/);
-  if (slashMatch) return slashMatch[1] + '+' + slashMatch[2];
+  if (slashMatch) return slashMatch[2];  // loan asset only
   if (/^USDT$/i.test(name)) return 'USDT';
   const lastWord = name.split(/\s+/).pop();
   return lastWord || 'USDC';
+}
+
+// Clean up the strategy name for the Protocol column. Match the convention
+// of other pages: short "Morpho cbBTC/USDC" instead of "yoUSD → Morpho ...
+// Market Base". Strip trailing "Market" / "Base" noise.
+function strategyProtocolName(name) {
+  return name.replace(/\s+Market(\s+Base)?$/i, '').trim();
 }
 
 function savePositions(db, results, allocation) {
@@ -176,8 +183,9 @@ function savePositions(db, results, allocation) {
   const oldIds = db.prepare(`SELECT id FROM positions WHERE protocol_id = 'yo-protocol'`).all();
   const delTok = db.prepare(`DELETE FROM position_tokens WHERE position_id = ?`);
   const delMkt = db.prepare(`DELETE FROM position_markets WHERE position_id = ?`);
+  const delExp = db.prepare(`DELETE FROM exposure_decomposition WHERE position_id = ?`);
   const delPos = db.prepare(`DELETE FROM positions WHERE id = ?`);
-  for (const r of oldIds) { delTok.run(r.id); delMkt.run(r.id); delPos.run(r.id); }
+  for (const r of oldIds) { delExp.run(r.id); delTok.run(r.id); delMkt.run(r.id); delPos.run(r.id); }
 
   const upsertPos = db.prepare(`
     INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, net_usd, asset_usd, debt_usd, position_index, scanned_at)
@@ -191,6 +199,14 @@ function savePositions(db, results, allocation) {
   const insertToken = db.prepare(`
     INSERT INTO position_tokens (position_id, role, symbol, address, amount, value_usd, apy_base, bonus_supply_apy)
     VALUES (?, 'supply', ?, ?, ?, ?, NULL, NULL)
+  `);
+  // Each yo-protocol strategy row IS the leaf exposure (no further lookthrough
+  // needed — yoUSD's USDC has already been resolved to its destination market).
+  // Write a single depth=0 row per position so the whale page's secondary
+  // exposure section can render donuts (by_protocol / by_token / by_market).
+  const insertExp = db.prepare(`
+    INSERT INTO exposure_decomposition (position_id, depth, kind, venue, asset_symbol, asset_address, chain, usd, pct_of_parent, pct_of_root, adapter, source, confidence, as_of)
+    VALUES (?, 0, 'pool_share', ?, ?, ?, ?, ?, 100, 100, 'yo', 'protocol-api', 'high', datetime('now'))
   `);
 
   // Total TVL across all yo vault chains (master + secondary)
@@ -209,11 +225,12 @@ function savePositions(db, results, allocation) {
       const valueUsd = totalUsd * pct / 100;
       const tokenSymbol = strategyToken(protoName);
       const idx = `yoUSD|${protoName}`;
-      const protocolName = `yoUSD → ${protoName}`;
+      const protocolName = strategyProtocolName(protoName);
       upsertPos.run(wallet, chain, protocolName, valueUsd, valueUsd, idx);
       const pos = findPos.get(wallet, chain, idx);
       if (pos?.id) {
         insertToken.run(pos.id, tokenSymbol, underlying, null, valueUsd);
+        insertExp.run(pos.id, protocolName, tokenSymbol, underlying, chain, valueUsd);
       }
     }
     // Idle USDC = remainder (allocations from yo.xyz API don't sum to 100%)
@@ -221,9 +238,12 @@ function savePositions(db, results, allocation) {
     if (idlePct > 0.01) {
       const idleUsd = totalUsd * idlePct / 100;
       const idx = `yoUSD|Idle USDC`;
-      upsertPos.run(wallet, 'base', 'yoUSD → Idle USDC', idleUsd, idleUsd, idx);
+      upsertPos.run(wallet, 'base', 'Idle USDC', idleUsd, idleUsd, idx);
       const pos = findPos.get(wallet, 'base', idx);
-      if (pos?.id) insertToken.run(pos.id, 'USDC', underlying, null, idleUsd);
+      if (pos?.id) {
+        insertToken.run(pos.id, 'USDC', underlying, null, idleUsd);
+        insertExp.run(pos.id, 'Idle USDC', 'USDC', underlying, 'base', idleUsd);
+      }
     }
   } else {
     // Fallback: no allocation API — keep the per-chain totalAssets rows
