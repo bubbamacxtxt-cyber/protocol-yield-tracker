@@ -171,6 +171,14 @@ function strategyToken(name) {
   return lastWord || 'USDC';
 }
 
+// Parse strategy name → collateral token symbol (the X in "X/Y") for
+// Morpho markets. Returned for the secondary-risk donut so users can
+// see what backs the loan even though yoUSD doesn't hold the collateral.
+function strategyCollateral(name) {
+  const slashMatch = name.match(/([A-Za-z0-9]+)\/([A-Za-z0-9]+)/);
+  return slashMatch ? slashMatch[1] : null;
+}
+
 // Clean up the strategy name for the Protocol column. Match the convention
 // of other pages: short "Morpho cbBTC/USDC" instead of "yoUSD → Morpho ...
 // Market Base". Strip trailing "Market" / "Base" noise.
@@ -200,13 +208,17 @@ function savePositions(db, results, allocation) {
     INSERT INTO position_tokens (position_id, role, symbol, address, amount, value_usd, apy_base, bonus_supply_apy)
     VALUES (?, 'supply', ?, ?, ?, ?, NULL, NULL)
   `);
-  // Each yo-protocol strategy row IS the leaf exposure (no further lookthrough
-  // needed — yoUSD's USDC has already been resolved to its destination market).
-  // Write a single depth=0 row per position so the whale page's secondary
-  // exposure section can render donuts (by_protocol / by_token / by_market).
-  const insertExp = db.prepare(`
+  // Two-level decomposition: depth=0 is the strategy "container" (one per
+  // position), depth=1 are the actual asset leaves (loan + collateral for
+  // Morpho markets, or just the loan for idle/standalone). The whale-page
+  // rollup reads depth>0 as the leaves.
+  const insertExpRoot = db.prepare(`
     INSERT INTO exposure_decomposition (position_id, depth, kind, venue, asset_symbol, asset_address, chain, usd, pct_of_parent, pct_of_root, adapter, source, confidence, as_of)
-    VALUES (?, 0, 'pool_share', ?, ?, ?, ?, ?, 100, 100, 'yo', 'protocol-api', 'high', datetime('now'))
+    VALUES (?, 0, 'pool_share', ?, NULL, NULL, ?, ?, 100, 100, 'yo', 'protocol-api', 'high', datetime('now'))
+  `);
+  const insertExpLeaf = db.prepare(`
+    INSERT INTO exposure_decomposition (position_id, parent_id, depth, kind, venue, asset_symbol, asset_address, chain, usd, pct_of_parent, pct_of_root, adapter, source, confidence, as_of)
+    VALUES (?, ?, 1, 'token_leg', ?, ?, ?, ?, ?, ?, ?, 'yo', 'protocol-api', 'high', datetime('now'))
   `);
 
   // Total TVL across all yo vault chains (master + secondary)
@@ -226,11 +238,21 @@ function savePositions(db, results, allocation) {
       const tokenSymbol = strategyToken(protoName);
       const idx = `yoUSD|${protoName}`;
       const protocolName = strategyProtocolName(protoName);
+      const collateralSymbol = strategyCollateral(protoName);
       upsertPos.run(wallet, chain, protocolName, valueUsd, valueUsd, idx);
       const pos = findPos.get(wallet, chain, idx);
       if (pos?.id) {
         insertToken.run(pos.id, tokenSymbol, underlying, null, valueUsd);
-        insertExp.run(pos.id, protocolName, tokenSymbol, underlying, chain, valueUsd);
+        const rootRes = insertExpRoot.run(pos.id, protocolName, chain, valueUsd);
+        const rootId = Number(rootRes.lastInsertRowid);
+        if (collateralSymbol) {
+          // Split 50/50 so per-position USD totals stay consistent (LTVs vary;
+          // without an on-chain query we can't compute the exact ratio).
+          insertExpLeaf.run(pos.id, rootId, protocolName, tokenSymbol, underlying, chain, valueUsd / 2, 50, 50);
+          insertExpLeaf.run(pos.id, rootId, protocolName, collateralSymbol, null, chain, valueUsd / 2, 50, 50);
+        } else {
+          insertExpLeaf.run(pos.id, rootId, protocolName, tokenSymbol, underlying, chain, valueUsd, 100, 100);
+        }
       }
     }
     // Idle USDC = remainder (allocations from yo.xyz API don't sum to 100%)
@@ -242,7 +264,9 @@ function savePositions(db, results, allocation) {
       const pos = findPos.get(wallet, 'base', idx);
       if (pos?.id) {
         insertToken.run(pos.id, 'USDC', underlying, null, idleUsd);
-        insertExp.run(pos.id, 'Idle USDC', 'USDC', underlying, 'base', idleUsd);
+        const rootRes = insertExpRoot.run(pos.id, 'Idle USDC', 'base', idleUsd);
+        const rootId = Number(rootRes.lastInsertRowid);
+        insertExpLeaf.run(pos.id, rootId, 'Idle USDC', 'USDC', underlying, 'base', idleUsd, 100, 100);
       }
     }
   } else {
