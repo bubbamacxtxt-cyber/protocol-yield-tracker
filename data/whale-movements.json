@@ -1,1 +1,1111 @@
-[]
+[
+  {
+    "whale": "Yuzu",
+    "detected_at": "2026-04-28T21:03:08Z",
+    "previous_snapshot_at": "2026-04-28T21:02:50Z",
+    "whale_total_previous": 46596010,
+    "whale_total_current": 43976242,
+    "net_flow": -2667104,
+    "outflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "sUSDe, USDe",
+        "previous_usd": 6162920.7154785395,
+        "current_usd": 0,
+        "delta_usd": -6162920.7154785395
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "PYUSD",
+        "previous_usd": 4325848.50058373,
+        "current_usd": 0,
+        "delta_usd": -4325848.50058373
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "mnt",
+        "tokens": "sUSDe",
+        "previous_usd": 7270044.487436704,
+        "current_usd": 3435631.9500963055,
+        "delta_usd": -3834412.537340399
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "RLUSD",
+        "previous_usd": 3315863.23551085,
+        "current_usd": 0,
+        "delta_usd": -3315863.23551085
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "sUSDe",
+        "previous_usd": 0,
+        "current_usd": 8601995.32265998,
+        "delta_usd": 8601995.32265998
+      },
+      {
+        "protocol": "Wallet",
+        "chain": "plasma",
+        "tokens": "UNKNOWN",
+        "previous_usd": 0,
+        "current_usd": 6369945.63291261,
+        "delta_usd": 6369945.63291261
+      }
+    ]
+  },
+  {
+    "whale": "Makina",
+    "detected_at": "2026-04-28T21:03:08Z",
+    "previous_snapshot_at": "2026-04-28T21:02:50Z",
+    "whale_total_previous": 12156613,
+    "whale_total_current": 13201712,
+    "net_flow": 1012849,
+    "outflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "UNKNOWN",
+        "previous_usd": 777122.298595666,
+        "current_usd": 0,
+        "delta_usd": -777122.298595666
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "UNKNOWN, UNKNOWN",
+        "previous_usd": 0,
+        "current_usd": 1789970.9792336351,
+        "delta_usd": 1789970.9792336351
+      }
+    ]
+  },
+  {
+    "whale": "Avant",
+    "detected_at": "2026-04-29T04:16:01Z",
+    "previous_snapshot_at": "2026-04-28T21:13:38Z",
+    "whale_total_previous": 86805608,
+    "whale_total_current": 83809142,
+    "net_flow": -3542068,
+    "outflows": [
+      {
+        "protocol": "Ethena",
+        "chain": "eth",
+        "tokens": "USDe",
+        "previous_usd": 11052401.4495375,
+        "current_usd": 0,
+        "delta_usd": -11052401.4495375
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "eth",
+        "tokens": "USDe",
+        "previous_usd": 20083587.370496638,
+        "current_usd": 17696567.601472154,
+        "delta_usd": -2387019.769024484
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "USDe",
+        "previous_usd": 36704383.83214989,
+        "current_usd": 46601736.6322245,
+        "delta_usd": 9897352.800074607
+      }
+    ]
+  },
+  {
+    "whale": "Yuzu",
+    "detected_at": "2026-04-29T14:47:44Z",
+    "previous_snapshot_at": "2026-04-29T10:34:57Z",
+    "whale_total_previous": 41139745,
+    "whale_total_current": 29855771,
+    "net_flow": -10784852,
+    "outflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "plasma",
+        "tokens": "USDe",
+        "previous_usd": 6373140.16817089,
+        "current_usd": 0,
+        "delta_usd": -6373140.16817089
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "sUSDe",
+        "previous_usd": 5066423.0798697,
+        "current_usd": 654711.5419236599,
+        "delta_usd": -4411711.53794604
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Midas",
+    "detected_at": "2026-04-29T14:47:44Z",
+    "previous_snapshot_at": "2026-04-29T10:34:57Z",
+    "whale_total_previous": 52077393,
+    "whale_total_current": 53743281,
+    "net_flow": 1799705,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Spark Savings Legacy",
+        "chain": "eth",
+        "tokens": "stUSDS",
+        "previous_usd": 0,
+        "current_usd": 1799705.26175831,
+        "delta_usd": 1799705.26175831
+      }
+    ]
+  },
+  {
+    "whale": "Makina",
+    "detected_at": "2026-04-29T18:05:23Z",
+    "previous_snapshot_at": "2026-04-29T14:47:44Z",
+    "whale_total_previous": 15129387,
+    "whale_total_current": 12243271,
+    "net_flow": -2933753,
+    "outflows": [
+      {
+        "protocol": "bbqAUSDturbo",
+        "chain": "eth",
+        "tokens": "bbqAUSDturbo",
+        "previous_usd": 1600313.37444798,
+        "current_usd": 0,
+        "delta_usd": -1600313.37444798
+      },
+      {
+        "protocol": "bbqAUSDterm",
+        "chain": "eth",
+        "tokens": "bbqAUSDterm",
+        "previous_usd": 1005259.76398845,
+        "current_usd": 0,
+        "delta_usd": -1005259.76398845
+      },
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "CRVUSD",
+        "previous_usd": 777146.227399429,
+        "current_usd": 0,
+        "delta_usd": -777146.227399429
+      },
+      {
+        "protocol": "bbqUSDCturbo",
+        "chain": "eth",
+        "tokens": "bbqUSDCturbo",
+        "previous_usd": 328076.986853596,
+        "current_usd": 0,
+        "delta_usd": -328076.986853596
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "UNKNOWN",
+        "previous_usd": 0,
+        "current_usd": 777043.263128208,
+        "delta_usd": 777043.263128208
+      }
+    ]
+  },
+  {
+    "whale": "yoUSD",
+    "detected_at": "2026-04-29T18:05:23Z",
+    "previous_snapshot_at": "2026-04-29T14:47:44Z",
+    "whale_total_previous": 23238978,
+    "whale_total_current": 22646242,
+    "net_flow": -554650,
+    "outflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 922914.76871495,
+        "current_usd": 368264.839012094,
+        "delta_usd": -554649.9297028559
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Reservoir",
+    "detected_at": "2026-04-29T18:05:23Z",
+    "previous_snapshot_at": "2026-04-29T14:47:44Z",
+    "whale_total_previous": 89275761,
+    "whale_total_current": 96275473,
+    "net_flow": 6998444,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "eRLUSD-7, ePYUSD-6",
+        "previous_usd": 41037384.85529255,
+        "current_usd": 46036187.173906,
+        "delta_usd": 4998802.318613447
+      },
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 1999642.01514652,
+        "delta_usd": 1999642.01514652
+      }
+    ]
+  },
+  {
+    "whale": "Upshift",
+    "detected_at": "2026-04-29T18:05:23Z",
+    "previous_snapshot_at": "2026-04-29T14:47:44Z",
+    "whale_total_previous": 45200971,
+    "whale_total_current": 44799159,
+    "net_flow": 7422525,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "AUSD",
+        "previous_usd": 362949.481212737,
+        "current_usd": 7785474.69805133,
+        "delta_usd": 7422525.216838593
+      }
+    ]
+  },
+  {
+    "whale": "InfiniFi",
+    "detected_at": "2026-04-29T21:36:57Z",
+    "previous_snapshot_at": "2026-04-29T18:05:23Z",
+    "whale_total_previous": 39697439,
+    "whale_total_current": 51073557,
+    "net_flow": 11127288,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "sUSDC",
+        "chain": "eth",
+        "tokens": "sUSDC",
+        "previous_usd": 0,
+        "current_usd": 11127287.9221244,
+        "delta_usd": 11127287.9221244
+      }
+    ]
+  },
+  {
+    "whale": "Avant",
+    "detected_at": "2026-04-30T04:19:17Z",
+    "previous_snapshot_at": "2026-04-29T21:36:57Z",
+    "whale_total_previous": 83798290,
+    "whale_total_current": 54127880,
+    "net_flow": -29690031,
+    "outflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "USDe",
+        "previous_usd": 56272905.89184402,
+        "current_usd": 26582874.928599,
+        "delta_usd": -29690030.96324502
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Reservoir",
+    "detected_at": "2026-04-30T04:19:17Z",
+    "previous_snapshot_at": "2026-04-29T21:36:57Z",
+    "whale_total_previous": 99282504,
+    "whale_total_current": 99285470,
+    "net_flow": -1509657,
+    "outflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "monad",
+        "tokens": "AUSD",
+        "previous_usd": 13004498.8675526,
+        "current_usd": 6002674.86590588,
+        "delta_usd": -7001824.001646721
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "eRLUSD-7, ePYUSD-6",
+        "previous_usd": 51040551.4515912,
+        "current_usd": 56532718.7939962,
+        "delta_usd": 5492167.342404999
+      }
+    ]
+  },
+  {
+    "whale": "Makina",
+    "detected_at": "2026-04-30T04:19:17Z",
+    "previous_snapshot_at": "2026-04-29T21:36:57Z",
+    "whale_total_previous": 14671656,
+    "whale_total_current": 11708648,
+    "net_flow": -2940664,
+    "outflows": [
+      {
+        "protocol": "bbqAUSDturbo",
+        "chain": "eth",
+        "tokens": "bbqAUSDturbo",
+        "previous_usd": 1600363.70263948,
+        "current_usd": 0,
+        "delta_usd": -1600363.70263948
+      },
+      {
+        "protocol": "bbqAUSDterm",
+        "chain": "eth",
+        "tokens": "bbqAUSDterm",
+        "previous_usd": 1005324.89684941,
+        "current_usd": 0,
+        "delta_usd": -1005324.89684941
+      },
+      {
+        "protocol": "bbqUSDCturbo",
+        "chain": "eth",
+        "tokens": "bbqUSDCturbo",
+        "previous_usd": 334975.863226363,
+        "current_usd": 0,
+        "delta_usd": -334975.863226363
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "InfiniFi",
+    "detected_at": "2026-04-30T14:40:12Z",
+    "previous_snapshot_at": "2026-04-30T10:37:23Z",
+    "whale_total_previous": 51713717,
+    "whale_total_current": 49709215,
+    "net_flow": -1850886,
+    "outflows": [
+      {
+        "protocol": "Spark",
+        "chain": "eth",
+        "tokens": "sUSDC",
+        "previous_usd": 11697257.5241741,
+        "current_usd": 9846371.61806145,
+        "delta_usd": -1850885.9061126504
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Yuzu",
+    "detected_at": "2026-04-30T18:00:37Z",
+    "previous_snapshot_at": "2026-04-30T14:40:12Z",
+    "whale_total_previous": 25756312,
+    "whale_total_current": 33772374,
+    "net_flow": 8011781,
+    "outflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "sUSDe",
+        "previous_usd": 1333133.3245136999,
+        "current_usd": 524998.3978728699,
+        "delta_usd": -808134.92664083
+      },
+      {
+        "protocol": "yzUSDUSDT0",
+        "chain": "plasma",
+        "tokens": "yzUSDUSDT0",
+        "previous_usd": 799672.614268982,
+        "current_usd": 0,
+        "delta_usd": -799672.614268982
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Ethena",
+        "chain": "eth",
+        "tokens": "USDe",
+        "previous_usd": 0,
+        "current_usd": 8819953.60392286,
+        "delta_usd": 8819953.60392286
+      },
+      {
+        "protocol": "UNKNOWN",
+        "chain": "plasma",
+        "tokens": "UNKNOWN",
+        "previous_usd": 0,
+        "current_usd": 799635.061361583,
+        "delta_usd": 799635.061361583
+      }
+    ]
+  },
+  {
+    "whale": "Upshift",
+    "detected_at": "2026-04-30T18:00:37Z",
+    "previous_snapshot_at": "2026-04-30T14:40:12Z",
+    "whale_total_previous": 44144121,
+    "whale_total_current": 45774022,
+    "net_flow": -6046606,
+    "outflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "AUSD",
+        "previous_usd": 7791217.85360207,
+        "current_usd": 1744612.19063394,
+        "delta_usd": -6046605.662968131
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Midas",
+    "detected_at": "2026-04-30T21:32:10Z",
+    "previous_snapshot_at": "2026-04-30T18:00:37Z",
+    "whale_total_previous": 54380238,
+    "whale_total_current": 45549487,
+    "net_flow": -8950685,
+    "outflows": [
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "eUSDC-70",
+        "previous_usd": 10057658.5686306,
+        "current_usd": 1106974.0200737398,
+        "delta_usd": -8950684.54855686
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "yoUSD",
+    "detected_at": "2026-04-30T21:32:10Z",
+    "previous_snapshot_at": "2026-04-30T18:00:37Z",
+    "whale_total_previous": 22666796,
+    "whale_total_current": 18973074,
+    "net_flow": -3692913,
+    "outflows": [
+      {
+        "protocol": "yoUSD",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 3692912.89655971,
+        "current_usd": 0,
+        "delta_usd": -3692912.89655971
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Avant",
+    "detected_at": "2026-05-01T10:12:28Z",
+    "previous_snapshot_at": "2026-05-01T04:32:24Z",
+    "whale_total_previous": 37833470,
+    "whale_total_current": 42816408,
+    "net_flow": 4996503,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "USDe",
+        "previous_usd": 12681886.417007402,
+        "current_usd": 17678389.9011496,
+        "delta_usd": 4996503.484142199
+      }
+    ]
+  },
+  {
+    "whale": "Yuzu",
+    "detected_at": "2026-05-01T10:12:28Z",
+    "previous_snapshot_at": "2026-05-01T04:32:24Z",
+    "whale_total_previous": 33520927,
+    "whale_total_current": 44226777,
+    "net_flow": 11687305,
+    "outflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "eth",
+        "tokens": "sUSDe, USTB, VBILL",
+        "previous_usd": 6273014.816422701,
+        "current_usd": 0,
+        "delta_usd": -6273014.816422701
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "mnt",
+        "tokens": "sUSDe",
+        "previous_usd": 2739638.3903108984,
+        "current_usd": 7340907.427212097,
+        "delta_usd": 4601269.036901198
+      },
+      {
+        "protocol": "ethena-usde",
+        "chain": "mnt",
+        "tokens": "sUSDe",
+        "previous_usd": 0,
+        "current_usd": 4175947.68336766,
+        "delta_usd": 4175947.68336766
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "eth",
+        "tokens": "USTB, VBILL",
+        "previous_usd": 0,
+        "current_usd": 3968899.6144434996,
+        "delta_usd": 3968899.6144434996
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "sUSDe",
+        "previous_usd": 1388059.5213212203,
+        "current_usd": 4158796.2486350983,
+        "delta_usd": 2770736.727313878
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "syrupUSDT",
+        "previous_usd": 0,
+        "current_usd": 1474158.6447359007,
+        "delta_usd": 1474158.6447359007
+      },
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "eUSDC-80",
+        "previous_usd": 1046732.7314040307,
+        "current_usd": 2016040.3560184985,
+        "delta_usd": 969307.6246144678
+      }
+    ]
+  },
+  {
+    "whale": "InfiniFi",
+    "detected_at": "2026-05-01T14:08:38Z",
+    "previous_snapshot_at": "2026-05-01T10:12:28Z",
+    "whale_total_previous": 39911765,
+    "whale_total_current": 50302656,
+    "net_flow": 10390921,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "sUSDC",
+        "chain": "eth",
+        "tokens": "sUSDC",
+        "previous_usd": 0,
+        "current_usd": 10390921.1699505,
+        "delta_usd": 10390921.1699505
+      }
+    ]
+  },
+  {
+    "whale": "Makina",
+    "detected_at": "2026-05-01T17:29:48Z",
+    "previous_snapshot_at": "2026-05-01T14:08:38Z",
+    "whale_total_previous": 13445389,
+    "whale_total_current": 10306851,
+    "net_flow": -2940998,
+    "outflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "stkGHO",
+        "previous_usd": 1623560.48240041,
+        "current_usd": 0,
+        "delta_usd": -1623560.48240041
+      },
+      {
+        "protocol": "bbqAUSDturbo",
+        "chain": "eth",
+        "tokens": "bbqAUSDturbo",
+        "previous_usd": 1600528.55246883,
+        "current_usd": 0,
+        "delta_usd": -1600528.55246883
+      },
+      {
+        "protocol": "bbqAUSDterm",
+        "chain": "eth",
+        "tokens": "bbqAUSDterm",
+        "previous_usd": 1005468.551172,
+        "current_usd": 0,
+        "delta_usd": -1005468.551172
+      },
+      {
+        "protocol": "bbqUSDCturbo",
+        "chain": "eth",
+        "tokens": "bbqUSDCturbo",
+        "previous_usd": 335058.053537419,
+        "current_usd": 0,
+        "delta_usd": -335058.053537419
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "UNKNOWN",
+        "previous_usd": 0,
+        "current_usd": 1623617.38568406,
+        "delta_usd": 1623617.38568406
+      }
+    ]
+  },
+  {
+    "whale": "Midas",
+    "detected_at": "2026-05-01T17:29:48Z",
+    "previous_snapshot_at": "2026-05-01T14:08:38Z",
+    "whale_total_previous": 47509805,
+    "whale_total_current": 44499493,
+    "net_flow": -3020478,
+    "outflows": [
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "eUSDC-70",
+        "previous_usd": 1621781.3855542988,
+        "current_usd": 0,
+        "delta_usd": -1621781.3855542988
+      },
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "eRLUSD-7",
+        "previous_usd": 1398696.6053973995,
+        "current_usd": 0,
+        "delta_usd": -1398696.6053973995
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Upshift",
+    "detected_at": "2026-05-01T17:29:48Z",
+    "previous_snapshot_at": "2026-05-01T14:08:38Z",
+    "whale_total_previous": 46455918,
+    "whale_total_current": 43263482,
+    "net_flow": -3170519,
+    "outflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "upGAMMAusdc",
+        "previous_usd": 8561985.7567892,
+        "current_usd": 5391467.0386405,
+        "delta_usd": -3170518.7181487
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "yoUSD",
+    "detected_at": "2026-05-01T21:27:09Z",
+    "previous_snapshot_at": "2026-05-01T17:29:48Z",
+    "whale_total_previous": 18910982,
+    "whale_total_current": 22593536,
+    "net_flow": 3685955,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "yoUSD",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 3685954.82409621,
+        "delta_usd": 3685954.82409621
+      }
+    ]
+  },
+  {
+    "whale": "Reservoir",
+    "detected_at": "2026-05-01T21:27:09Z",
+    "previous_snapshot_at": "2026-05-01T17:29:48Z",
+    "whale_total_previous": 99305790,
+    "whale_total_current": 99312659,
+    "net_flow": 568,
+    "outflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "UNKNOWN",
+        "previous_usd": 5980737.56482323,
+        "current_usd": 0,
+        "delta_usd": -5980737.56482323
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "stkGHO",
+        "previous_usd": 0,
+        "current_usd": 5981305.38263103,
+        "delta_usd": 5981305.38263103
+      }
+    ]
+  },
+  {
+    "whale": "Makina",
+    "detected_at": "2026-05-02T04:09:09Z",
+    "previous_snapshot_at": "2026-05-01T21:27:09Z",
+    "whale_total_previous": 10303601,
+    "whale_total_current": 13207032,
+    "net_flow": 2941511,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "bbqAUSDturbo",
+        "chain": "eth",
+        "tokens": "bbqAUSDturbo",
+        "previous_usd": 0,
+        "current_usd": 1600803.53099121,
+        "delta_usd": 1600803.53099121
+      },
+      {
+        "protocol": "bbqAUSDterm",
+        "chain": "eth",
+        "tokens": "bbqAUSDterm",
+        "previous_usd": 0,
+        "current_usd": 1005607.17607239,
+        "delta_usd": 1005607.17607239
+      },
+      {
+        "protocol": "bbqUSDCturbo",
+        "chain": "eth",
+        "tokens": "bbqUSDCturbo",
+        "previous_usd": 0,
+        "current_usd": 335100.534963282,
+        "delta_usd": 335100.534963282
+      }
+    ]
+  },
+  {
+    "whale": "Yuzu",
+    "detected_at": "2026-05-02T09:36:13Z",
+    "previous_snapshot_at": "2026-05-02T06:35:21Z",
+    "whale_total_previous": 27697762,
+    "whale_total_current": 41073508,
+    "net_flow": 13615378,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "PYUSD",
+        "previous_usd": 0,
+        "current_usd": 9070449.36107292,
+        "delta_usd": 9070449.36107292
+      },
+      {
+        "protocol": "Spark",
+        "chain": "eth",
+        "tokens": "sUSDS",
+        "previous_usd": 0,
+        "current_usd": 3017251.89058429,
+        "delta_usd": 3017251.89058429
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "eth",
+        "tokens": "USDG",
+        "previous_usd": 0,
+        "current_usd": 1527676.341066,
+        "delta_usd": 1527676.341066
+      }
+    ]
+  },
+  {
+    "whale": "Midas",
+    "detected_at": "2026-05-02T09:36:13Z",
+    "previous_snapshot_at": "2026-05-02T06:35:21Z",
+    "whale_total_previous": 47523243,
+    "whale_total_current": 52761131,
+    "net_flow": 5241129,
+    "outflows": [
+      {
+        "protocol": "Venus Flux",
+        "chain": "bsc",
+        "tokens": "USDT",
+        "previous_usd": 1426707.091657,
+        "current_usd": 0,
+        "delta_usd": -1426707.091657
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Fluid",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 6667835.94623095,
+        "delta_usd": 6667835.94623095
+      }
+    ]
+  },
+  {
+    "whale": "InfiniFi",
+    "detected_at": "2026-05-02T14:06:26Z",
+    "previous_snapshot_at": "2026-05-02T09:36:13Z",
+    "whale_total_previous": 59805422,
+    "whale_total_current": 39919738,
+    "net_flow": -19995518,
+    "outflows": [
+      {
+        "protocol": "sUSDC",
+        "chain": "eth",
+        "tokens": "sUSDC",
+        "previous_usd": 10526417.2993943,
+        "current_usd": 0,
+        "delta_usd": -10526417.2993943
+      },
+      {
+        "protocol": "Spark",
+        "chain": "eth",
+        "tokens": "sUSDC",
+        "previous_usd": 9469100.79291086,
+        "current_usd": 0,
+        "delta_usd": -9469100.79291086
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "yoUSD",
+    "detected_at": "2026-05-03T04:27:40Z",
+    "previous_snapshot_at": "2026-05-02T21:17:11Z",
+    "whale_total_previous": 22355121,
+    "whale_total_current": 25483344,
+    "net_flow": 3124370,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Morpho",
+        "chain": "eth",
+        "tokens": "USDT",
+        "previous_usd": 0,
+        "current_usd": 3124370.08988173,
+        "delta_usd": 3124370.08988173
+      }
+    ]
+  },
+  {
+    "whale": "InfiniFi",
+    "detected_at": "2026-05-03T04:27:40Z",
+    "previous_snapshot_at": "2026-05-02T21:17:11Z",
+    "whale_total_previous": 39895224,
+    "whale_total_current": 51364217,
+    "net_flow": 11367188,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Spark",
+        "chain": "eth",
+        "tokens": "sUSDC",
+        "previous_usd": 0,
+        "current_usd": 11367188.2228693,
+        "delta_usd": 11367188.2228693
+      }
+    ]
+  },
+  {
+    "whale": "Makina",
+    "detected_at": "2026-05-03T06:57:15Z",
+    "previous_snapshot_at": "2026-05-03T04:27:40Z",
+    "whale_total_previous": 11625323,
+    "whale_total_current": 8683552,
+    "net_flow": -2942224,
+    "outflows": [
+      {
+        "protocol": "bbqAUSDturbo",
+        "chain": "eth",
+        "tokens": "bbqAUSDturbo",
+        "previous_usd": 1601216.73513237,
+        "current_usd": 0,
+        "delta_usd": -1601216.73513237
+      },
+      {
+        "protocol": "bbqAUSDterm",
+        "chain": "eth",
+        "tokens": "bbqAUSDterm",
+        "previous_usd": 1005780.74809071,
+        "current_usd": 0,
+        "delta_usd": -1005780.74809071
+      },
+      {
+        "protocol": "bbqUSDCturbo",
+        "chain": "eth",
+        "tokens": "bbqUSDCturbo",
+        "previous_usd": 335226.571927692,
+        "current_usd": 0,
+        "delta_usd": -335226.571927692
+      }
+    ],
+    "inflows": []
+  },
+  {
+    "whale": "Avant",
+    "detected_at": "2026-05-03T09:31:56+01:00",
+    "previous_snapshot_at": "2026-05-03T06:57:15Z",
+    "whale_total_previous": 32587502,
+    "whale_total_current": 42826958,
+    "net_flow": 10238825,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "eth",
+        "tokens": "USDe",
+        "previous_usd": 7060070.220676899,
+        "current_usd": 12297377.80954729,
+        "delta_usd": 5237307.588870391
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "plasma",
+        "tokens": "USDe",
+        "previous_usd": 12674360.09782669,
+        "current_usd": 17675877.7672275,
+        "delta_usd": 5001517.669400811
+      }
+    ]
+  },
+  {
+    "whale": "Yuzu",
+    "detected_at": "2026-05-03T09:54:40Z",
+    "previous_snapshot_at": "2026-05-03T09:31:56+01:00",
+    "whale_total_previous": 37738665,
+    "whale_total_current": 46784079,
+    "net_flow": 9870362,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Upshift",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 5086805.62088609,
+        "delta_usd": 5086805.62088609
+      },
+      {
+        "protocol": "Sky",
+        "chain": "eth",
+        "tokens": "USDS",
+        "previous_usd": 0,
+        "current_usd": 3017092.9596341,
+        "delta_usd": 3017092.9596341
+      },
+      {
+        "protocol": "Aave V3",
+        "chain": "megaeth",
+        "tokens": "USDe",
+        "previous_usd": 0,
+        "current_usd": 1766463.650398001,
+        "delta_usd": 1766463.650398001
+      }
+    ]
+  },
+  {
+    "whale": "Upshift",
+    "detected_at": "2026-05-03T09:54:40Z",
+    "previous_snapshot_at": "2026-05-03T09:31:56+01:00",
+    "whale_total_previous": 42909208,
+    "whale_total_current": 46659727,
+    "net_flow": 3011845,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Upshift",
+        "chain": "eth",
+        "tokens": "USDC",
+        "previous_usd": 0,
+        "current_usd": 3011845.25741374,
+        "delta_usd": 3011845.25741374
+      }
+    ]
+  },
+  {
+    "whale": "Midas",
+    "detected_at": "2026-05-03T14:06:38Z",
+    "previous_snapshot_at": "2026-05-03T09:54:40Z",
+    "whale_total_previous": 49829051,
+    "whale_total_current": 54816217,
+    "net_flow": 3419091,
+    "outflows": [],
+    "inflows": [
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "ePYUSD-6",
+        "previous_usd": 0,
+        "current_usd": 2308252.31315155,
+        "delta_usd": 2308252.31315155
+      },
+      {
+        "protocol": "Euler",
+        "chain": "eth",
+        "tokens": "eUSDC-70",
+        "previous_usd": 0,
+        "current_usd": 1110838.6423364095,
+        "delta_usd": 1110838.6423364095
+      }
+    ]
+  },
+  {
+    "whale": "Reservoir",
+    "detected_at": "2026-05-03T20:58:22+01:00",
+    "previous_snapshot_at": "2026-05-03T17:22:56Z",
+    "whale_total_previous": 109360195,
+    "whale_total_current": 99322604,
+    "net_flow": -10016766,
+    "outflows": [
+      {
+        "protocol": "Aave V3",
+        "chain": "eth",
+        "tokens": "stkGHO",
+        "previous_usd": 5982238.41807282,
+        "current_usd": 0,
+        "delta_usd": -5982238.41807282
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "wct",
+        "tokens": "vbUSDC",
+        "previous_usd": 5012245.68501614,
+        "current_usd": 0,
+        "delta_usd": -5012245.68501614
+      },
+      {
+        "protocol": "Morpho",
+        "chain": "katana",
+        "tokens": "vbUSDC",
+        "previous_usd": 5002879.78724472,
+        "current_usd": 0,
+        "delta_usd": -5002879.78724472
+      }
+    ],
+    "inflows": [
+      {
+        "protocol": "Wallet",
+        "chain": "eth",
+        "tokens": "stkGHO",
+        "previous_usd": 0,
+        "current_usd": 5980597.89349244,
+        "delta_usd": 5980597.89349244
+      }
+    ]
+  }
+]
