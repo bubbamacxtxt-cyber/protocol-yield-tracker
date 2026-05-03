@@ -100,8 +100,18 @@ Claude Code may use this format:
 - **"Read the memory file"** → read today's bub2 daily note + canonical repo note to catch up
 - **"Save to memory"** → append the Claude Code handoff block to today's bub2 daily note
 
+## Pre-flight checklist (MANDATORY before any code change)
+Before writing ANY code, do ALL of these:
+
+1. **Check what already works.** Look at the live site / current data.json / current output FIRST. Don't assume something is broken or missing without verifying.
+2. **Say it back.** Tell Bubba in plain English: "The fix is [X], I'm changing [Y file], it's ~[N] lines." Wait for confirmation before writing code.
+3. **If the fix is more than ~30 lines, stop.** Ask Bubba if that scope seems right. A "label change" should not turn into an architecture redesign.
+4. **Minimal change bias.** The default is ALWAYS the smallest possible fix. If you think you need a new API integration, new data pipeline, or architectural change — that's a red flag. Raise it with Bubba first, don't just go build it.
+5. **Listen to what Bubba is actually asking.** If he says "the label is wrong," fix the label. Don't redesign the system that produces the label. Re-read the request if you're unsure.
+
 ## Hard rules
 - Do NOT write directly to `/Users/bubba/.openclaw/bub2-data/workspace/MEMORY.md` unless explicitly asked
 - Do NOT use bub2's live repo folder as your normal working copy
 - Do NOT treat chat history as the durable source of truth — always read the memory files
 - Do NOT skip reading memory + commits before starting if continuity matters
+- Do NOT build new integrations or pipelines without explicit approval — fix with what's already there first
