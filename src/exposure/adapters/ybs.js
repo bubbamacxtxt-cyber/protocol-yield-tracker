@@ -154,6 +154,15 @@ module.exports = {
 
     if (backing && backing.composition?.length) {
       const userUsd = position.net_usd;
+      // Lending-aggregator YBS protocols (yoUSD, etc.) deploy a stable into
+      // borrow markets where third-party collateral backs the loan. Render
+      // their backing as a lending_pool: stables → borrowable column,
+      // non-stables → collateral column, matching how Aave/Morpho positions
+      // display in the rest of the UI.
+      const STABLE_SYMS = new Set(['USDC', 'USDT', 'USDS', 'DAI', 'PYUSD', 'RLUSD', 'USDC.E', 'USD₮0', 'USDT0', 'EURC', 'EUROC', 'USDE', 'GHO', 'FRAX', 'TUSD', 'LUSD']);
+      const isLendingAggregator = /yousd|yoeth|yobtc|yoeur|yogold|usd-?ai|sky/i.test(String(position.protocol_name || ''));
+      const layout = isLendingAggregator ? 'lending_pool' : 'ybs_backing';
+
       return [{
         kind: 'ybs_strategy',
         venue: position.protocol_name,
@@ -165,7 +174,7 @@ module.exports = {
         confidence,
         as_of: backing.as_of,
         evidence: {
-          layout: 'ybs_backing',
+          layout,
           strategy: position.strategy || 'stake',
           llama_slug: slug,
           leg_count: backing.composition.length,
@@ -177,22 +186,29 @@ module.exports = {
           user_net_usd: userUsd,
           wallet: position.wallet,
         },
-        children: backing.composition.map(b => ({
-          kind: 'ybs_strategy',
-          venue: position.protocol_name,
-          asset_symbol: b.symbol,
-          chain: position.chain,
-          usd: userUsd * (b.pct / 100),
-          pct_of_parent: b.pct,
-          source,
-          confidence,
-          as_of: backing.as_of,
-          evidence: {
-            pool_reserve_total_supply_usd: b.usd,
-            is_collateral: true,
-            is_borrowable: false,
-          },
-        })),
+        children: backing.composition.map(b => {
+          const symUpper = String(b.symbol || '').toUpperCase();
+          const isStable = STABLE_SYMS.has(symUpper);
+          return {
+            kind: 'ybs_strategy',
+            venue: position.protocol_name,
+            asset_symbol: b.symbol,
+            chain: position.chain,
+            usd: userUsd * (b.pct / 100),
+            pct_of_parent: b.pct,
+            source,
+            confidence,
+            as_of: backing.as_of,
+            evidence: {
+              pool_reserve_total_supply_usd: b.usd,
+              // For lending aggregators: stables are the lent (borrowable)
+              // asset; non-stables are the borrower-posted collateral.
+              // For other YBS (Ethena etc.) keep all-collateral semantics.
+              is_collateral: isLendingAggregator ? !isStable : true,
+              is_borrowable: isLendingAggregator ? isStable : false,
+            },
+          };
+        }),
       }];
     }
 
