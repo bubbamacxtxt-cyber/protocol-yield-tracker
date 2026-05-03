@@ -387,7 +387,7 @@ function fetchEulerAPYs() {
 }
 
 const MOVEMENTS_PATH = path.join(__dirname, '..', 'data', 'whale-movements.json');
-const MOVEMENTS_CAP = 20;
+const MOVEMENTS_CAP = 50;
 const MOVEMENT_THRESHOLD_PCT = 5;
 
 function positionMatchKey(p) {
@@ -395,7 +395,10 @@ function positionMatchKey(p) {
     const chain = String(p.chain || '').toLowerCase();
     const proto = String(p.protocol_canonical || p.protocol_id || p.protocol_name || '').toLowerCase();
     const idx = String(p.position_index || '').toLowerCase();
-    const supply = String(p.supply_tokens_display || '').toLowerCase();
+    // Sort tokens alphabetically to avoid false diffs from order changes
+    // (e.g. "USDC, WETH" vs "WETH, USDC" should match the same position).
+    const supply = String(p.supply_tokens_display || '').toLowerCase()
+        .split(/,\s*/).sort().join(',');
     return idx ? `${wallet}|${chain}|${proto}|${idx}` : `${wallet}|${chain}|${proto}|${supply}`;
 }
 
@@ -1630,7 +1633,21 @@ async function main() {
         let movements = [];
         try { movements = JSON.parse(fs.readFileSync(MOVEMENTS_PATH, 'utf8')); } catch {}
         if (!Array.isArray(movements)) movements = [];
-        movements.push(...newEvents);
+        // Same-day dedup: if a new event matches an existing whale+day, keep
+        // the one with the larger absolute net_flow (avoids duplicate cards
+        // from price oscillations or multiple CI cycles on the same day).
+        for (const ne of newEvents) {
+            const neDay = ne.detected_at.slice(0, 10);
+            const existIdx = movements.findIndex(m => m.whale === ne.whale && (m.detected_at || '').slice(0, 10) === neDay);
+            if (existIdx >= 0) {
+                if (Math.abs(ne.net_flow) >= Math.abs(movements[existIdx].net_flow)) {
+                    movements[existIdx] = ne;
+                }
+                // else keep existing (it was bigger)
+            } else {
+                movements.push(ne);
+            }
+        }
         movements = movements.slice(-MOVEMENTS_CAP);
         fs.writeFileSync(MOVEMENTS_PATH, JSON.stringify(movements, null, 2));
         if (newEvents.length > 0) {
