@@ -393,7 +393,7 @@ const MOVEMENT_THRESHOLD_PCT = 5;
 function positionMatchKey(p) {
     const wallet = String(p.wallet || '').toLowerCase();
     const chain = String(p.chain || '').toLowerCase();
-    const proto = String(p.protocol_canonical || p.protocol_id || p.protocol_name || '').toLowerCase();
+    const proto = String(p.protocol_id || p.protocol_name || '').toLowerCase();
     const idx = String(p.position_index || '').toLowerCase();
     // Sort tokens alphabetically to avoid false diffs from order changes
     // (e.g. "USDC, WETH" vs "WETH, USDC" should match the same position).
