@@ -12,7 +12,7 @@ const MERKL_BASE = 'https://api.merkl.xyz/v4';
 
 const CHAINS = {
   eth: 1, arb: 42161, base: 8453, plasma: 9745,
-  mnt: 5000, sonic: 146, bsc: 56, monad: 143, hyper: 999, ink: 57073,
+  mnt: 5000, sonic: 146, bsc: 56, monad: 143, hyper: 999, ink: 57073, megaeth: 4326,
 };
 
 const PROTOCOL_MAP = {
