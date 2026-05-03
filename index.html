@@ -21,6 +21,7 @@
   --accent-green: #4ade80;
   --accent-purple: #a371f7;
   --accent-orange: #d29922;
+  --accent-red: #f85149;
   --gradient-1: linear-gradient(135deg, #0D47A1 0%, #00E5FF 100%);
   --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -407,8 +408,8 @@ body {
   font-size: 13px;
 }
 
-.movement-net.positive { color: #4ade80; }
-.movement-net.negative { color: #f85149; }
+.movement-net.positive { color: var(--accent-green); }
+.movement-net.negative { color: var(--accent-red); }
 .movement-net.neutral { color: var(--text-secondary); }
 
 .movement-card-body {
@@ -434,8 +435,8 @@ body {
   margin-bottom: 12px;
 }
 
-.movement-column-title.out { color: #f85149; }
-.movement-column-title.in { color: #4ade80; }
+.movement-column-title.out { color: var(--accent-red); }
+.movement-column-title.in { color: var(--accent-green); }
 
 .movement-row {
   display: flex;
@@ -460,11 +461,11 @@ body {
   white-space: nowrap;
 }
 
-.movement-row .amount.out { color: #f85149; }
-.movement-row .amount.in { color: #4ade80; }
+.movement-row .amount.out { color: var(--accent-red); }
+.movement-row .amount.in { color: var(--accent-green); }
 
 .movement-empty {
-  color: #555;
+  color: var(--text-secondary);
   font-size: 12px;
   font-style: italic;
 }
@@ -588,7 +589,7 @@ async function loadData() {
     renderStables();
   } catch (e) {
     console.error('Load failed:', e);
-    document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data.json</h2><p style="color:#c9d1d9;margin-top:8px">' + e.message + '</p></div>';
+    document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:var(--accent-red)"><h2>Failed to load data.json</h2><p style="color:var(--text-secondary);margin-top:8px">' + e.message + '</p></div>';
   }
 }
 
@@ -627,13 +628,13 @@ function sortStables(field) {
   const tbody = document.getElementById('stablesList');
   let h = '';
   for (const s of data) {
-    const apy1 = s.apy_1d != null && s.apy_1d !== 0 ? '<span style="color:' + (s.apy_1d > 0 ? '#4ade80' : s.apy_1d < 0 ? '#f85149' : '#c9d1d9') + '">' + s.apy_1d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
-    const apy7 = s.apy_7d != null && s.apy_7d !== 0 ? '<span style="color:' + (s.apy_7d > 0 ? '#4ade80' : s.apy_7d < 0 ? '#f85149' : '#c9d1d9') + '">' + s.apy_7d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
-    const apy30 = s.apy_30d != null && s.apy_30d !== 0 ? '<span style="color:' + (s.apy_30d > 0 ? '#4ade80' : s.apy_30d < 0 ? '#f85149' : '#c9d1d9') + '">' + s.apy_30d.toFixed(2) + '%</span>' : '<span style="color:#555">-</span>';
+    const apy1 = s.apy_1d != null && s.apy_1d !== 0 ? '<span style="color:' + (s.apy_1d > 0 ? 'var(--accent-green)' : s.apy_1d < 0 ? 'var(--accent-red)' : 'var(--text-secondary)') + '">' + s.apy_1d.toFixed(2) + '%</span>' : '<span style="color:var(--text-secondary)">-</span>';
+    const apy7 = s.apy_7d != null && s.apy_7d !== 0 ? '<span style="color:' + (s.apy_7d > 0 ? 'var(--accent-green)' : s.apy_7d < 0 ? 'var(--accent-red)' : 'var(--text-secondary)') + '">' + s.apy_7d.toFixed(2) + '%</span>' : '<span style="color:var(--text-secondary)">-</span>';
+    const apy30 = s.apy_30d != null && s.apy_30d !== 0 ? '<span style="color:' + (s.apy_30d > 0 ? 'var(--accent-green)' : s.apy_30d < 0 ? 'var(--accent-red)' : 'var(--text-secondary)') + '">' + s.apy_30d.toFixed(2) + '%</span>' : '<span style="color:var(--text-secondary)">-</span>';
     h += '<tr>' +
       '<td style="color:var(--text-primary)"><strong>' + (s.protocol || '-') + '</strong></td>' +
       '<td style="color:var(--text-primary)">' + s.name + '</td>' +
-      '<td style="text-align:right;color:#e8e8e8">' + s.tvl + '</td>' +
+      '<td style="text-align:right;color:var(--text-primary)">' + s.tvl + '</td>' +
       '<td style="text-align:right">' + apy1 + '</td>' +
       '<td style="text-align:right">' + apy7 + '</td>' +
       '<td style="text-align:right">' + apy30 + '</td>' +
@@ -658,8 +659,8 @@ async function loadVaults() {
 }
 
 function fmtApy(v) {
-  if (v == null || v === 0) return '<span style="color:#555">-</span>';
-  const color = v > 0 ? '#4ade80' : v < 0 ? '#f85149' : '#c9d1d9';
+  if (v == null || v === 0) return '<span style="color:var(--text-secondary)">-</span>';
+  const color = v > 0 ? 'var(--accent-green)' : v < 0 ? 'var(--accent-red)' : 'var(--text-secondary)';
   return '<span style="color:' + color + '">' + v.toFixed(2) + '%</span>';
 }
 
@@ -685,7 +686,7 @@ function sortVaults(field) {
     h += '<tr>' +
       '<td style="color:var(--text-primary)"><strong>' + v.protocol + '</strong></td>' +
       '<td style="color:var(--text-primary)">' + v.name + '</td>' +
-      '<td style="text-align:right;color:#e8e8e8">' + fmtTvl(v.tvl_usd) + '</td>' +
+      '<td style="text-align:right;color:var(--text-primary)">' + fmtTvl(v.tvl_usd) + '</td>' +
       '<td style="text-align:right">' + fmtApy(v.apy_1d) + '</td>' +
       '<td style="text-align:right">' + fmtApy(v.apy_7d) + '</td>' +
       '<td style="text-align:right">' + fmtApy(v.apy_30d) + '</td>' +
@@ -765,14 +766,14 @@ async function render() {
       const prev = history[history.length - 2];
       const dailyChange = ((totalValue - prev.total) / prev.total * 100);
       const dailySign = dailyChange >= 0 ? '+' : '';
-      const dailyColor = dailyChange >= 0 ? '#4ade80' : '#f85149';
+      const dailyColor = dailyChange >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
       changeText += ` · <span style="color:${dailyColor}">${dailySign}${dailyChange.toFixed(2)}% day</span>`;
     }
     if (history.length >= 7) {
       const weekAgo = history[history.length - 7];
       const weeklyChange = ((totalValue - weekAgo.total) / weekAgo.total * 100);
       const weeklySign = weeklyChange >= 0 ? '+' : '';
-      const weeklyColor = weeklyChange >= 0 ? '#4ade80' : '#f85149';
+      const weeklyColor = weeklyChange >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
       changeText += ` · <span style="color:${weeklyColor}">${weeklySign}${weeklyChange.toFixed(2)}% week</span>`;
     }
   } catch(e) {}
@@ -871,7 +872,7 @@ async function loadMovements() {
           const prev = o.previous_usd ? fmt(Math.abs(o.previous_usd)) : '$0';
           const curr = o.current_usd ? fmt(Math.abs(o.current_usd)) : '$0';
           outHtml += '<div class="movement-row">' +
-            '<span class="proto-chain"><strong>' + (o.protocol || '-') + '</strong> · ' + (o.chain || '-') + '<br><span style="font-size:11px;color:#888">' + (o.tokens || '-') + ' · ' + prev + ' → ' + curr + '</span></span>' +
+            '<span class="proto-chain"><strong>' + (o.protocol || '-') + '</strong> · ' + (o.chain || '-') + '<br><span style="font-size:11px;color:var(--text-secondary)">' + (o.tokens || '-') + ' · ' + prev + ' → ' + curr + '</span></span>' +
             '<span class="amount out">-' + delta + '</span></div>';
         }
       } else {
@@ -885,7 +886,7 @@ async function loadMovements() {
           const prev = i.previous_usd ? fmt(Math.abs(i.previous_usd)) : '$0';
           const curr = i.current_usd ? fmt(Math.abs(i.current_usd)) : '$0';
           inHtml += '<div class="movement-row">' +
-            '<span class="proto-chain"><strong>' + (i.protocol || '-') + '</strong> · ' + (i.chain || '-') + '<br><span style="font-size:11px;color:#888">' + (i.tokens || '-') + ' · ' + prev + ' → ' + curr + '</span></span>' +
+            '<span class="proto-chain"><strong>' + (i.protocol || '-') + '</strong> · ' + (i.chain || '-') + '<br><span style="font-size:11px;color:var(--text-secondary)">' + (i.tokens || '-') + ' · ' + prev + ' → ' + curr + '</span></span>' +
             '<span class="amount in">+' + delta + '</span></div>';
         }
       } else {

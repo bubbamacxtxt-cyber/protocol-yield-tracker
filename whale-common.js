@@ -126,7 +126,7 @@ function renderTable(data) {
       if (c.color === 'green') style.push('color:var(--accent-green)');
       if (c.color === 'blue') style.push('color:var(--accent-blue)');
       if (c.color_dynamic) {
-        const nc = val > 0 ? 'var(--accent-green)' : val < 0 ? '#f85149' : 'var(--text-secondary)';
+        const nc = val > 0 ? 'var(--accent-green)' : val < 0 ? 'var(--accent-red)' : 'var(--text-secondary)';
         style.push('color:' + nc);
       }
       if (c.compute_class) style.push(c.compute_class(p));
@@ -215,11 +215,11 @@ function renderCards(data) {
     const items = sorted.map(addr => {
       const val = walletValue[addr]||0;
       const active = val >= THRESHOLD;
-      const color = active ? 'var(--accent-green)' : '#f85149';
+      const color = active ? 'var(--accent-green)' : 'var(--accent-red)';
       return '<a href="https://debank.com/profile/'+addr+'" target="_blank" style="'
         +'display:flex;align-items:center;gap:6px;padding:6px 0;text-decoration:none;font-size:13px;">'
         +'<span style="width:8px;height:8px;border-radius:50%;background:'+color+';flex-shrink:0"></span>'
-        +'<span style="color:var(--text-primary);font-family:monospace">'+shortWallet(addr)+'</span>'
+        +'<span style="color:var(--text-primary);font-family:\'JetBrains Mono\', monospace">'+shortWallet(addr)+'</span>'
         +'<span style="color:var(--text-secondary);margin-left:auto;font-size:12px">'+(active?'$'+fmtShort(val):'—')+'</span>'
         +'</a>';
     }).join('');
@@ -402,7 +402,7 @@ function showDetail(p) {
     '</div>' +
     '<div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
       '<div style="color:var(--text-secondary);font-size:12px">Net APY</div>' +
-      '<div style="font-size:28px;font-weight:700;color:' + (netApy > 0 ? 'var(--accent-green)' : '#f85149') + '">' + netApy.toFixed(2) + '%</div>' +
+      '<div style="font-size:28px;font-weight:700;color:' + (netApy > 0 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + netApy.toFixed(2) + '%</div>' +
     '</div>' +
     '</div>';
   modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:start;justify-content:center;background:rgba(0,0,0,0.7)';
@@ -442,9 +442,9 @@ function normaliseTokenLabel(label) {
 // Driven by w.exposure_rollup + p.exposure_tree from src/exposure/.
 // ═══════════════════════════════════════════════════════════════
 const EXPOSURE_PALETTE = [
-  '#4facfe', '#00f2fe', '#4ade80', '#a371f7',
-  '#d29922', '#f093fb', '#58a6ff', '#43e97b',
-  '#f85149', '#bc8cff', '#5a9eda', '#22d3ee',
+  '#58a6ff', '#00f2fe', '#4ade80', '#a371f7',
+  '#d29922', '#f093fb', '#4facfe', '#43e97b',
+  '#f85149', '#a371f7', '#5a9eda', '#22d3ee',
 ];
 
 // When a sub-vault page is active (VAULT_NAME set), recompute the exposure
@@ -655,7 +655,7 @@ function renderPositionExposureCard(p, totalWhaleUsd) {
     ? poolAddr.slice(0, 6).toLowerCase() + '…' + poolAddr.slice(-4)
     : '';
   const poolAddrRow = poolExplorerUrl
-    ? '<div class="exposure-position-pool" style="font-size:11px;color:var(--text-secondary);margin-top:2px;font-family:monospace">pool <a href="' + poolExplorerUrl + '" target="_blank" rel="noopener" style="color:var(--accent-blue);text-decoration:none" title="' + escapeHtml(poolAddr) + '">' + poolAddrShort + ' ↗</a></div>'
+    ? '<div class="exposure-position-pool" style="font-size:11px;color:var(--text-secondary);margin-top:2px;font-family:\'JetBrains Mono\', monospace">pool <a href="' + poolExplorerUrl + '" target="_blank" rel="noopener" style="color:var(--accent-blue);text-decoration:none" title="' + escapeHtml(poolAddr) + '">' + poolAddrShort + ' ↗</a></div>'
     : '';
 
   // Pull pool metadata from root evidence (promoted by adapters in this
@@ -836,7 +836,7 @@ function renderPositionExposureCard(p, totalWhaleUsd) {
             '</div>' +
             (userBorrow > 0 ? '<div class="exposure-leg-row kind-market_exposure">' +
               '<div class="leg-label" style="color:var(--accent-orange)">Your borrow</div>' +
-              '<div class="leg-usd" style="color:#f85149">' + fmtUsd(userBorrow) + '</div>' +
+              '<div class="leg-usd" style="color:var(--accent-red)">' + fmtUsd(userBorrow) + '</div>' +
             '</div>' : '') +
           '</div>' +
         '</div>' +
@@ -1044,7 +1044,7 @@ async function loadData() {
     buildFilters();
     updateView();
   } catch (e) {
-    document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:#f85149"><h2>Failed to load data</h2><p style="color:#8b949e;margin-top:8px">' + e.message + '</p></div>';
+    document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:80px;color:var(--accent-red)"><h2>Failed to load data</h2><p style="color:var(--text-secondary);margin-top:8px">' + e.message + '</p></div>';
   }
 }
 
