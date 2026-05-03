@@ -86,13 +86,17 @@ function savePositions(db, results) {
   const delPos = db.prepare(`DELETE FROM positions WHERE id = ?`);
   for (const r of oldIds) { delExp.run(r.id); delTok.run(r.id); delMkt.run(r.id); delPos.run(r.id); }
 
-  // protocol_name='yoUSD' is required for the YBS exposure adapter to fire.
-  // position_type='Vault' (not 'Lending') so the strategy badge reads "VAULT".
+  // protocol_name='Yo Protocol' (the parent protocol) — NOT 'yoUSD' (the
+  // vault token). The whale IS the yoUSD vault contract; showing "yoUSD"
+  // as its protocol read circularly ("yoUSD wallet has yoUSD position").
+  // The YBS adapter LLAMA_SLUGS map includes 'yo protocol' so the
+  // secondary-exposure lookthrough still fires.
+  // position_type='Vault' so the strategy badge reads "VAULT" not "LEND".
   const upsertPos = db.prepare(`
     INSERT INTO positions (wallet, chain, protocol_id, protocol_name, position_type, strategy, net_usd, asset_usd, debt_usd, position_index, scanned_at)
-    VALUES (?, ?, 'yo-protocol', 'yoUSD', 'Vault', 'vault', ?, ?, 0, ?, datetime('now'))
+    VALUES (?, ?, 'yo-protocol', 'Yo Protocol', 'Vault', 'vault', ?, ?, 0, ?, datetime('now'))
     ON CONFLICT(wallet, chain, protocol_id, position_index) DO UPDATE SET
-      protocol_name = 'yoUSD', position_type = 'Vault', strategy = 'vault',
+      protocol_name = 'Yo Protocol', position_type = 'Vault', strategy = 'vault',
       net_usd = excluded.net_usd, asset_usd = excluded.asset_usd, scanned_at = datetime('now')
   `);
   const findPos = db.prepare(`SELECT id FROM positions WHERE lower(wallet) = ? AND chain = ? AND protocol_id = 'yo-protocol' AND position_index = ?`);

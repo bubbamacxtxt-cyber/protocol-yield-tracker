@@ -33,6 +33,7 @@ const { opaqueRow } = require('./_base');
 const LLAMA_SLUGS = {
   // protocol_name (lowercased, trimmed)      \u2192 llama slug
   'yousd':              'yo-protocol',
+  'yo protocol':        'yo-protocol',
   'cap':                'cap-finance',
   'cap stcusd':         'cap-finance',
   'ethena-usde':        'ethena',
@@ -122,7 +123,7 @@ function ageHours(isoString) {
 module.exports = {
   id: 'ybs',
   protocol_names: [
-    'yoUSD', 'Cap stcUSD', 'cap', 'Cap', 'ethena-usde', 'infinifi', 'InfiniFi',
+    'yoUSD', 'Yo Protocol', 'Cap stcUSD', 'cap', 'Cap', 'ethena-usde', 'infinifi', 'InfiniFi',
     'infinifiUSD Autopool', 'Sky', 'usd-ai', 'Yuzu Money', 'yzUSDUSDT0',
   ],
   confidence: 'high',
@@ -160,7 +161,7 @@ module.exports = {
       // non-stables → collateral column, matching how Aave/Morpho positions
       // display in the rest of the UI.
       const STABLE_SYMS = new Set(['USDC', 'USDT', 'USDS', 'DAI', 'PYUSD', 'RLUSD', 'USDC.E', 'USD₮0', 'USDT0', 'EURC', 'EUROC', 'USDE', 'GHO', 'FRAX', 'TUSD', 'LUSD']);
-      const isLendingAggregator = /yousd|yoeth|yobtc|yoeur|yogold|usd-?ai|sky/i.test(String(position.protocol_name || ''));
+      const isLendingAggregator = /yousd|yoeth|yobtc|yoeur|yogold|yo protocol|usd-?ai|sky/i.test(String(position.protocol_name || ''));
       const layout = isLendingAggregator ? 'lending_pool' : 'ybs_backing';
 
       return [{
