@@ -1417,6 +1417,7 @@ async function main() {
             // adapter still fires for secondary-risk lookthrough.
             if (String(p.protocol_id || '').toLowerCase() === 'yo-protocol') {
                 p.protocol = 'Morpho';
+                p.protocol_name = 'Morpho';
             }
 
             // Pendle V1: keep direct scanner rows and unresolved fallback rows clearly separated.
