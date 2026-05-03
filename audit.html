@@ -40,13 +40,10 @@ body {
 .generated { color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
 
 .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
-.summary-card { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: transform 0.2s, border-color 0.2s; }
-.summary-card:hover { transform: translateY(-2px); border-color: var(--accent-blue); }
+.summary-card { background: linear-gradient(175deg, #2a5a9a 0%, #1e4a8a 5%, #244888a0 50%, #0e2a4a 100%); border: 1px solid var(--border); box-shadow: inset 0 1px 0 rgba(200,220,255,0.25), inset 0 2px 2px rgba(100,160,230,0.1), inset 0 -2px 6px rgba(0,0,0,0.5), 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2); border-radius: 12px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+.summary-card:hover { transform: translateY(-4px); border-color: var(--accent-blue); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
 .summary-card .label { color: var(--text-secondary); font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
 .summary-card .value { font-size: 28px; font-weight: 700; font-family: 'JetBrains Mono', monospace; background: var(--gradient-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.summary-card .value.red { background: none; -webkit-text-fill-color: var(--accent-red); color: var(--accent-red); }
-.summary-card .value.orange { background: none; -webkit-text-fill-color: var(--accent-orange); color: var(--accent-orange); }
-.summary-card .value.green { background: none; -webkit-text-fill-color: var(--accent-green); color: var(--accent-green); }
 .summary-card .sub { color: var(--text-secondary); font-size: 11px; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
 
 .gate { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -57,8 +54,13 @@ body {
 .section { margin-bottom: 32px; }
 .section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 16px; }
 
-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-thead { background: var(--bg-secondary); }
+.table-wrap { background: linear-gradient(175deg, #1a3a6a 0%, #224e82 20%, #2a5a9a 45%, #3468a4 55%, #2a5a9a 70%, #224e82 85%, #1a3a6a 100%); border: 1px solid var(--border); box-shadow: inset 0 2px 3px rgba(100,180,255,0.2), inset 0 -3px 8px rgba(0,20,60,0.5), 0 6px 20px rgba(0,0,0,0.5), 0 1px 6px rgba(80,140,220,0.2); border-radius: 12px; padding: 20px; transition: transform 0.2s, border-color 0.2s; }
+.table-wrap:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
+.table-wrap h2 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
+.table-wrap p { margin-bottom: 12px; }
+
+table { width: 100%; border-collapse: collapse; background: rgba(13, 17, 23, 0.4); border-radius: 8px; overflow: hidden; border: 1px solid rgba(48, 54, 61, 0.5); }
+thead { background: #0d2137; }
 th { padding: 12px; text-align: left; color: var(--text-secondary); font-size: 11px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
 th.right { text-align: right; }
 td { padding: 10px 12px; border-top: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
@@ -94,66 +96,76 @@ tr:hover td { background: rgba(88, 166, 255, 0.04); }
   <div class="summary-grid" id="summary"></div>
 
   <div class="section">
-    <h2>Coverage by Adapter</h2>
-    <table id="adapterTable">
-      <thead><tr>
-        <th>Adapter</th>
-        <th>Positions</th>
-        <th class="right">Value</th>
-        <th>Distribution</th>
-        <th class="right">Confidence Mix</th>
-      </tr></thead>
-      <tbody id="adapterBody"><tr><td colspan="5" class="loading">Loading…</td></tr></tbody>
-    </table>
+    <div class="table-wrap">
+      <h2>Coverage by Adapter</h2>
+      <table id="adapterTable">
+        <thead><tr>
+          <th>Adapter</th>
+          <th>Positions</th>
+          <th class="right">Value</th>
+          <th>Distribution</th>
+          <th class="right">Confidence Mix</th>
+        </tr></thead>
+        <tbody id="adapterBody"><tr><td colspan="5" class="loading">Loading…</td></tr></tbody>
+      </table>
+    </div>
   </div>
 
   <div class="section">
-    <h2>Top Systemic Exposures</h2>
-    <p style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;">
-      After recursion, what the tracked capital is actually exposed to.
-    </p>
-    <table id="exposuresTable">
-      <thead><tr>
-        <th>Asset</th>
-        <th>Chain</th>
-        <th class="right">Pro-rata USD</th>
-        <th class="right">Positions</th>
-      </tr></thead>
-      <tbody id="exposuresBody"><tr><td colspan="4" class="loading">Loading…</td></tr></tbody>
-    </table>
+    <div class="table-wrap">
+      <h2>Top Systemic Exposures</h2>
+      <p style="color:var(--text-secondary);font-size:12px;font-family:'JetBrains Mono',monospace;">
+        After recursion, what the tracked capital is actually exposed to.
+      </p>
+      <table id="exposuresTable">
+        <thead><tr>
+          <th>Asset</th>
+          <th>Chain</th>
+          <th class="right">Pro-rata USD</th>
+          <th class="right">Positions</th>
+        </tr></thead>
+        <tbody id="exposuresBody"><tr><td colspan="4" class="loading">Loading…</td></tr></tbody>
+      </table>
+    </div>
   </div>
 
   <div class="section">
-    <h2>Adapter Health</h2>
-    <table id="healthTable">
-      <thead><tr>
-        <th>Adapter</th>
-        <th>Status</th>
-        <th>Last Success</th>
-        <th>Last Error</th>
-        <th class="right">Positions</th>
-        <th class="right">Errors</th>
-      </tr></thead>
-      <tbody id="healthBody"><tr><td colspan="6" class="loading">Loading…</td></tr></tbody>
-    </table>
+    <div class="table-wrap">
+      <h2>Adapter Health</h2>
+      <table id="healthTable">
+        <thead><tr>
+          <th>Adapter</th>
+          <th>Status</th>
+          <th>Last Success</th>
+          <th>Last Error</th>
+          <th class="right">Positions</th>
+          <th class="right">Errors</th>
+        </tr></thead>
+        <tbody id="healthBody"><tr><td colspan="6" class="loading">Loading…</td></tr></tbody>
+      </table>
+    </div>
   </div>
 
   <div class="section" id="staleSection" style="display:none">
-    <h2 style="color:var(--accent-orange)">⚠ Stale YBS Feeds</h2>
-    <p style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;">
-      Yield-bearing stable backing data older than 72h. Decomposition relies on cached snapshot.
-    </p>
-    <table><thead><tr><th>Token</th><th>Chain</th><th class="right">Age (h)</th><th>Last Fresh</th></tr></thead>
-      <tbody id="staleBody"></tbody></table>
+    <div class="table-wrap">
+      <h2 style="color:var(--accent-orange)">⚠ Stale YBS Feeds</h2>
+      <p style="color:var(--text-secondary);font-size:12px;font-family:'JetBrains Mono',monospace;">
+        Yield-bearing stable backing data older than 72h. Decomposition relies on cached snapshot.
+      </p>
+      <table><thead><tr><th>Token</th><th>Chain</th><th class="right">Age (h)</th><th>Last Fresh</th></tr></thead>
+        <tbody id="staleBody"></tbody></table>
+    </div>
   </div>
 
   <div class="section" id="unknownSection" style="display:none">
-    <h2 style="color:var(--accent-red)">⚠ Unknown Positions</h2>
-    <p style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;">
-      Positions without any registered adapter. Write one in <code>src/exposure/adapters/</code>.
-    </p>
-    <table><thead><tr><th>Position</th><th>Protocol</th><th class="right">Value</th></tr></thead>
-      <tbody id="unknownBody"></tbody></table>
+    <div class="table-wrap">
+      <h2 style="color:var(--accent-red)">⚠ Unknown Positions</h2>
+      <p style="color:var(--text-secondary);font-size:12px;font-family:'JetBrains Mono',monospace;">
+        Positions without any registered adapter. Write one in <code>src/exposure/adapters/</code>.
+      </p>
+      <table><thead><tr><th>Position</th><th>Protocol</th><th class="right">Value</th></tr></thead>
+        <tbody id="unknownBody"></tbody></table>
+    </div>
   </div>
 </div>
 
@@ -194,25 +206,25 @@ async function load() {
     </div>
     <div class="summary-card">
       <div class="label">Decomposed</div>
-      <div class="value green">${fmt(audit.decomposed_value)}</div>
+      <div class="value">${fmt(audit.decomposed_value)}</div>
       <div class="sub">across tree rows ${fmt(audit.decomposition_rows_usd)}</div>
     </div>
     <div class="summary-card">
       <div class="label">Opaque Off-chain</div>
-      <div class="value orange">${fmt(audit.opaque_offchain_value)}</div>
+      <div class="value">${fmt(audit.opaque_offchain_value)}</div>
       <div class="sub">labeled, non-decomposable</div>
     </div>
     <div class="summary-card">
       <div class="label">Unknown</div>
-      <div class="value ${audit.unknown_value > 0 ? 'red' : 'green'}">${fmt(audit.unknown_value)}</div>
+      <div class="value">${fmt(audit.unknown_value)}</div>
       <div class="sub">${audit.unknown_positions.length} positions</div>
     </div>
     <div class="summary-card">
       <div class="label">Confidence Mix</div>
-      <div class="value" style="font-size:16px;line-height:1.4;-webkit-text-fill-color:var(--text-primary);background:none">
-        <span style="color:var(--accent-green)">H ${fmt(conf.high)}</span><br>
-        <span style="color:var(--accent-orange)">M ${fmt(conf.medium)}</span><br>
-        <span style="color:var(--accent-red)">L ${fmt(conf.low)}</span>
+      <div class="value" style="font-size:16px;line-height:1.4">
+        H ${fmt(conf.high)}<br>
+        M ${fmt(conf.medium)}<br>
+        L ${fmt(conf.low)}
       </div>
     </div>
   `;
@@ -251,7 +263,7 @@ async function load() {
   const health = audit.adapter_health || [];
   const statusColor = s =>
     s === 'healthy' ? 'var(--accent-green)' :
-    s === 'recovered' ? 'var(--accent-yellow, #d9c87a)' :
+    s === 'recovered' ? 'var(--accent-orange)' :
     s === 'failing' ? 'var(--accent-red)' : 'var(--text-secondary)';
   const statusLabel = s =>
     s === 'healthy' ? 'healthy' :
