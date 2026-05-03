@@ -835,14 +835,14 @@ async function loadMovements() {
     const events = await res.json();
     if (!Array.isArray(events) || events.length === 0) return;
 
-    const rotations = events.filter(ev => ev.outflows && ev.outflows.length > 0 && ev.inflows && ev.inflows.length > 0);
-    if (rotations.length === 0) return;
+    const meaningful = events.filter(ev => (ev.outflows && ev.outflows.length > 0) || (ev.inflows && ev.inflows.length > 0));
+    if (meaningful.length === 0) return;
 
     const section = document.getElementById('movementsSection');
     const grid = document.getElementById('movementsGrid');
     section.style.display = '';
 
-    const sorted = rotations.slice().reverse();
+    const sorted = meaningful.slice().reverse();
 
     for (const ev of sorted) {
       const card = document.createElement('div');
